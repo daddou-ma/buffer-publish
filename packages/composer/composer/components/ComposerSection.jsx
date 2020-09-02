@@ -34,9 +34,7 @@ const ComposerComponent = ({
   shouldEnableFacebookAutocomplete,
   shouldShowInlineSubprofileDropdown,
   composerPosition,
-  hasIGLocationTaggingFeature,
   canStartProTrial,
-  hasIGDirectVideoFlip,
   hasShopgridFlip,
   hasUserTagFeature,
   isFreeUser,
@@ -80,9 +78,7 @@ const ComposerComponent = ({
       shouldShowInlineSubprofileDropdown={shouldShowInlineSubprofileDropdown}
       composerPosition={composerPosition}
       forceEditorFocus={forceEditorInstanceFocus}
-      hasIGLocationTaggingFeature={hasIGLocationTaggingFeature}
       canStartProTrial={canStartProTrial}
-      hasIGDirectVideoFlip={hasIGDirectVideoFlip}
       hasShopgridFlip={hasShopgridFlip}
       hasUserTagFeature={hasUserTagFeature}
       isFreeUser={isFreeUser}
@@ -123,8 +119,6 @@ class ComposerSection extends React.Component {
       shouldShowInlineSubprofileDropdown,
       isOmniboxEnabled,
       composerPosition,
-      hasIGLocationTaggingFeature,
-      hasIGDirectVideoFlip,
       isFreeUser,
       isBusinessUser,
       canStartProTrial,
@@ -177,9 +171,7 @@ class ComposerSection extends React.Component {
               shouldEnableFacebookAutocomplete,
               shouldShowInlineSubprofileDropdown,
               composerPosition,
-              hasIGLocationTaggingFeature,
               canStartProTrial,
-              hasIGDirectVideoFlip,
               hasShopgridFlip,
               hasUserTagFeature,
               isFreeUser,
@@ -209,9 +201,7 @@ class ComposerSection extends React.Component {
                 shouldEnableFacebookAutocomplete,
                 shouldShowInlineSubprofileDropdown,
                 composerPosition,
-                hasIGLocationTaggingFeature,
                 canStartProTrial,
-                hasIGDirectVideoFlip,
                 hasShopgridFlip,
                 hasUserTagFeature,
                 isFreeUser,
@@ -235,9 +225,7 @@ ComposerSection.propTypes = {
   selectedProfiles: PropTypes.array,
   isOmniboxEnabled: PropTypes.bool,
   composerPosition: PropTypes.object,
-  hasIGLocationTaggingFeature: PropTypes.bool.isRequired,
   canStartProTrial: PropTypes.bool.isRequired,
-  hasIGDirectVideoFlip: PropTypes.bool.isRequired,
   isFreeUser: PropTypes.bool.isRequired,
   hasShopgridFlip: PropTypes.bool,
   hasUserTagFeature: PropTypes.bool,

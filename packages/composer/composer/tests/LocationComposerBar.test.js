@@ -20,8 +20,6 @@ import LocationFinder from '../utils/LocationFinder';
 const showLocationBar = {
   selectedProfiles: [{ instagramDirectEnabled: true }],
   isInstagram: true,
-  hasIGLocationTaggingFeature: true,
-  hasIGDirectVideoFlip: true,
   hasVideo: true,
   withMediaAttachment: false,
 };
