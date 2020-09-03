@@ -39,6 +39,16 @@ export default ({ dispatch, getState }) => next => action => {
       dispatch({ type: actionTypes.FULLSTORY, result: action.result });
       dispatch({ type: actionTypes.APPCUES, result: action.result });
       dispatch({ type: actionTypes.ITERATE, result: action.result });
+      dispatch({ type: actionTypes.BUGSNAG, result: action.result });
+      break;
+
+    case actionTypes.BUGSNAG:
+      if (window && window.bugsnagClient) {
+        window.bugsnagClient.user = {
+          id: action.result.id,
+          adminLink: `https://buffer.com/admin/user/${action.result.id}`,
+        };
+      }
       break;
 
     case actionTypes.ITERATE:
