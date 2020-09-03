@@ -22,7 +22,6 @@ const getHtml = ({
   userId,
   modalKey,
   modalValue,
-  user,
 }) => {
   return fs
     .readFileSync(join(__dirname, '..', 'index.html'), 'utf8')
