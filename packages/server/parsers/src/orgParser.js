@@ -20,4 +20,5 @@ module.exports = orgData => ({
 
   // Plan Features
   hasCampaignsFeature: orgData.planBase !== 'free',
+  hasAnalyticsFeature: orgData.planBase === 'business',
 });

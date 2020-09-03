@@ -27,15 +27,19 @@ const AnalyticsList = ({
   isAnalyticsSupported,
   isLockedProfile,
   canStartBusinessTrial,
-  isBusinessAccount,
+  hasAnalyticsFeature,
   isInstagramBusiness,
   fetchProfiles,
   selectProfile,
   linkShortening,
   hasBitlyPosts,
 }) => {
-  // user is either a free or pro and is not a team member
-  if (!isBusinessAccount && (features.isProUser() || features.isFreeUser())) {
+  if (isLockedProfile) {
+    return <LockedProfileNotification />;
+  }
+
+  // org has analytics plan feature
+  if (!hasAnalyticsFeature) {
     const startTrial = () =>
       window.location.assign(
         `${getURL.getStartTrialURL({
@@ -72,10 +76,6 @@ const AnalyticsList = ({
     );
   }
 
-  if (isLockedProfile) {
-    return <LockedProfileNotification />;
-  }
-
   if (isAnalyticsSupported) {
     return (
       <ErrorBoundary>
@@ -108,7 +108,7 @@ AnalyticsList.propTypes = {
   isAnalyticsSupported: PropTypes.bool,
   profile: PropTypes.shape(ProfileHeader.propTypes),
   isLockedProfile: PropTypes.bool,
-  isBusinessAccount: PropTypes.bool.isRequired,
+  hasAnalyticsFeature: PropTypes.bool.isRequired,
   isInstagramBusiness: PropTypes.bool.isRequired,
   fetchProfiles: PropTypes.func.isRequired,
   selectProfile: PropTypes.func.isRequired,

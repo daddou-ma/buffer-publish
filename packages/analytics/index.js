@@ -4,7 +4,7 @@ import Analytics from './components/Analytics';
 const mapStateToProps = state => ({
   profile: state.profileSidebar.selectedProfile,
   isLockedProfile: state.profileSidebar.isLockedProfile,
-  isBusinessAccount: state.profileSidebar.selectedProfile.business,
+  hasAnalyticsFeature: state.organizations.selected.hasAnalyticsFeature,
   isInstagramBusiness: state.profileSidebar.selectedProfile.isInstagramBusiness,
   isAnalyticsSupported:
     state.profileSidebar.selectedProfile.isAnalyticsSupported,
