@@ -45,7 +45,9 @@ const merged = merge.strategy({
       chunkFilename: '[name].css',
     }),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NamedModulesPlugin(),
+    new webpack.EnvironmentPlugin({
+      NODE_ENV: 'development',
+    }),
   ],
   resolve: {
     alias: {

@@ -61,7 +61,7 @@ export default ({ dispatch, getState }) => next => action => {
       break;
 
     case actionTypes.FULLSTORY:
-      if (!action.result.isFreeUser) {
+      if (!action.result.isFreeUser && process.env.NODE_ENV === 'production') {
         FullStory.init({ orgId: '9F6GW' });
         const { id } = action.result;
         const {
