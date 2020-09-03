@@ -1,12 +1,11 @@
 // /* global FS, Appcues */
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
+import * as FullStory from '@fullstory/browser';
 import { actionTypes } from './reducer';
 
 import middleware from './middleware';
 
-global.FS = {
-  identify: jest.fn(),
-};
+jest.mock('@fullstory/browser');
 
 global.Appcues = {
   identify: jest.fn(),
@@ -38,11 +37,18 @@ const mockFreeUser = {
   tags: [],
 };
 
-beforeEach(() => {
-  jest.clearAllMocks();
-});
-
 describe('middleware', () => {
+  const OLD_ENV = process.env;
+  beforeEach(() => {
+    jest.resetModules();
+    jest.clearAllMocks();
+
+    // Some third party scripts only run in production, so simulate the env
+    process.env = { ...OLD_ENV, NODE_ENV: 'production' }; // make a copy
+  });
+  afterAll(() => {
+    process.env = OLD_ENV; // restore old env
+  });
   const next = jest.fn();
   const store = {
     dispatch: jest.fn(),
@@ -80,7 +86,7 @@ describe('middleware', () => {
       result: mockFreeUser,
     };
     middleware(store)(next)(action);
-    expect(global.FS.identify).not.toHaveBeenCalled();
+    expect(FullStory.identify).not.toHaveBeenCalled();
   });
   it('identifies the user with Fullstory', () => {
     const action = {
@@ -88,7 +94,7 @@ describe('middleware', () => {
       result: mockUser,
     };
     middleware(store)(next)(action);
-    expect(global.FS.identify).toHaveBeenCalledWith(mockUser.id, {
+    expect(FullStory.identify).toHaveBeenCalledWith(mockUser.id, {
       pricingPlan_str: 'business',
     });
   });

@@ -6,6 +6,8 @@ import {
 } from '@bufferapp/publish-analytics-middleware/utils/Pathname';
 import { LOCATION_CHANGE } from 'connected-react-router';
 import { actions as modalReducers } from '@bufferapp/publish-modals/reducer';
+import * as FullStory from '@fullstory/browser';
+
 import { actionTypes } from './reducer';
 
 const checkExtensionInstalled = () => {
@@ -59,20 +61,20 @@ export default ({ dispatch, getState }) => next => action => {
       break;
 
     case actionTypes.FULLSTORY:
-      if (!action.result.isFreeUser) {
-        if (window) {
-          if (window.FS && window.FS.identify) {
-            const { id } = action.result;
-            const {
-              productFeatures: { planName },
-            } = getState();
-            if (planName !== 'free') {
-              window.FS.identify(id, {
-                pricingPlan_str: planName,
-              });
-            }
-          }
-        }
+      if (!action.result.isFreeUser && process.env.NODE_ENV === 'production') {
+        FullStory.init({
+          orgId: '9F6GW',
+          debug: !!window.location.href.match(
+            /(local\.buffer)|(dev\.buffer\.com)/
+          ),
+        });
+        const { id } = action.result;
+        const {
+          productFeatures: { planName },
+        } = getState();
+        FullStory.identify(id, {
+          pricingPlan_str: planName,
+        });
       }
       break;
 

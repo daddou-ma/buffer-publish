@@ -6,7 +6,6 @@ const getStripeScript = require('./embeds/stripe');
 const getNotificationScript = require('./embeds/notification');
 const getModalScript = require('./embeds/modal');
 const getAppcuesScript = require('./embeds/appcues');
-const getFullstoryScript = require('./embeds/fullstory');
 const getIterateScript = require('./embeds/iterate');
 const getBugsnagScript = require('./embeds/bugsnag');
 const getBundleReminderHtml = require('./embeds/bundleReminder');
@@ -23,7 +22,6 @@ const getHtml = ({
   userId,
   modalKey,
   modalValue,
-  user,
 }) => {
   return fs
     .readFileSync(join(__dirname, '..', 'index.html'), 'utf8')
@@ -47,10 +45,6 @@ const getHtml = ({
     .replace(
       '{{{bugsnagScript}}}',
       getBugsnagScript({ userId, isProduction, isStandalone })
-    )
-    .replace(
-      '{{{fullStoryScript}}}',
-      getFullstoryScript({ user, isProduction, isStandalone })
     )
     .replace(
       '{{{bundleReminder}}}',
