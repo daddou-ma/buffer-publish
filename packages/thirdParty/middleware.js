@@ -62,7 +62,12 @@ export default ({ dispatch, getState }) => next => action => {
 
     case actionTypes.FULLSTORY:
       if (!action.result.isFreeUser && process.env.NODE_ENV === 'production') {
-        FullStory.init({ orgId: '9F6GW' });
+        FullStory.init({
+          orgId: '9F6GW',
+          debug: !!window.location.href.match(
+            /(local\.buffer)|(dev\.buffer\.com)/
+          ),
+        });
         const { id } = action.result;
         const {
           productFeatures: { planName },
