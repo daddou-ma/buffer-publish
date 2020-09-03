@@ -1688,6 +1688,11 @@
   resolved "https://registry.yarnpkg.com/@emotion/weak-memoize/-/weak-memoize-0.2.5.tgz#8eed982e2ee6f7f4e44c253e12962980791efd46"
   integrity sha512-6U71C2Wp7r5XtFtQzYrW5iKFT67OixrSxjI4MptCHzdSVlgabczzqLe0ZSgnub/5Kp4hSbpDB1tMytZY9pwxxA==
 
+"@fullstory/browser@^1.4.5":
+  version "1.4.5"
+  resolved "https://registry.yarnpkg.com/@fullstory/browser/-/browser-1.4.5.tgz#a8f48c65bdd0a0d53cc5b3b678b02c715156fd96"
+  integrity sha512-a1EnuwRMa9p8aNauM8rrjH+lqhX2RCo1bHOG3DGcEHXtzV+r8TDeiO8HB8kU1IjE/EXpzAGtQ2F0JMWZhvoaYg==
+
 "@hot-loader/react-dom@16.9.0":
   version "16.9.0"
   resolved "https://registry.yarnpkg.com/@hot-loader/react-dom/-/react-dom-16.9.0.tgz#7782cec9d78172f3e4c86a317ba7a73bd0271acd"

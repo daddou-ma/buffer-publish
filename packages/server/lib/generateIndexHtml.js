@@ -6,7 +6,6 @@ const getStripeScript = require('./embeds/stripe');
 const getNotificationScript = require('./embeds/notification');
 const getModalScript = require('./embeds/modal');
 const getAppcuesScript = require('./embeds/appcues');
-const getFullstoryScript = require('./embeds/fullstory');
 const getIterateScript = require('./embeds/iterate');
 const getBundleReminderHtml = require('./embeds/bundleReminder');
 const getDatadogRumScript = require('./embeds/datadogRum');
@@ -21,7 +20,6 @@ const getHtml = ({
   notification,
   modalKey,
   modalValue,
-  user,
 }) => {
   return fs
     .readFileSync(join(__dirname, '..', 'index.html'), 'utf8')
@@ -42,10 +40,6 @@ const getHtml = ({
     )
     .replace('{{{favicon}}}', getFaviconCode({ cacheBust: 'v1' }))
     .replace('{{{segmentScript}}}', getSegmentScript({ isProduction }))
-    .replace(
-      '{{{fullStoryScript}}}',
-      getFullstoryScript({ user, isProduction, isStandalone })
-    )
     .replace(
       '{{{bundleReminder}}}',
       getBundleReminderHtml({ isProduction, isStandalone })

@@ -5,6 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 
 const common = require('./webpack.config.common.js');
+const webpack = require('webpack');
 
 /**
  * When we build and run the app in CI / GitHub Actions for testing
@@ -38,13 +39,12 @@ const plugins = [
   new ManifestPlugin({
     fileName: 'webpackAssets.json',
   }),
+  new webpack.EnvironmentPlugin({
+    NODE_ENV: 'production',
+  }),
 ];
 
 let devtool = 'source-map';
-
-const optimization = {
-  nodeEnv: 'production',
-};
 
 // `yarn run build:analyze` to visually inspect the bundle
 // when building locally, also disable some optimizations
@@ -57,7 +57,6 @@ if (process.env.ANALYZE_BUNDLE) {
 const merged = merge(common, {
   mode: 'production',
   devtool,
-  optimization,
   plugins,
   output: {
     publicPath,
