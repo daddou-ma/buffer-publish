@@ -8,7 +8,6 @@ const getModalScript = require('./embeds/modal');
 const getAppcuesScript = require('./embeds/appcues');
 const getFullstoryScript = require('./embeds/fullstory');
 const getIterateScript = require('./embeds/iterate');
-const getBugsnagScript = require('./embeds/bugsnag');
 const getBundleReminderHtml = require('./embeds/bundleReminder');
 const getDatadogRumScript = require('./embeds/datadogRum');
 
@@ -20,7 +19,6 @@ const getHtml = ({
   isProduction,
   isStandalone,
   notification,
-  userId,
   modalKey,
   modalValue,
   user,
@@ -44,10 +42,6 @@ const getHtml = ({
     )
     .replace('{{{favicon}}}', getFaviconCode({ cacheBust: 'v1' }))
     .replace('{{{segmentScript}}}', getSegmentScript({ isProduction }))
-    .replace(
-      '{{{bugsnagScript}}}',
-      getBugsnagScript({ userId, isProduction, isStandalone })
-    )
     .replace(
       '{{{fullStoryScript}}}',
       getFullstoryScript({ user, isProduction, isStandalone })
