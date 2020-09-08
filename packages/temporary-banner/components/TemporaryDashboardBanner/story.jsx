@@ -38,4 +38,13 @@ storiesOf('TemporaryDashboardBanner', module)
   .add(
     'should not show TemporaryDashboardBanner if enabledApplication is null',
     () => <TemporaryDashboardBanner enabledApplicationModes={null} />
+  )
+  .add(
+    'should show TemporaryDashboardBanner if displayIGRetirementBanner is true',
+    () => (
+      <TemporaryDashboardBanner
+        enabledApplicationModes={null}
+        displayIGRetirementBanner
+      />
+    )
   );

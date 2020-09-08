@@ -30,6 +30,7 @@ const TopBanner = ({
 const TemporaryDashboardBanner = ({
   enabledApplicationModes,
   displayRemindersBanner,
+  shouldDisplayIGRetirementBanner,
   usernamesRemindersList,
 }) => {
   const [hidden, hideBanner] = useState(false);
@@ -41,7 +42,11 @@ const TemporaryDashboardBanner = ({
   const getEnabledApplicationMode = tag =>
     enabledApplicationModes.filter(mode => mode.tag === tag)[0];
 
-  if (!enabledApplicationModes && !displayRemindersBanner) {
+  if (
+    !enabledApplicationModes &&
+    !displayRemindersBanner &&
+    !shouldDisplayIGRetirementBanner
+  ) {
     return null;
   }
 
@@ -51,6 +56,16 @@ const TemporaryDashboardBanner = ({
     return TopBanner({
       status: hidden,
       content,
+      onCloseBanner: onCloseBannerClick,
+    });
+  }
+  // Displays temporary banner for Retiring IG personal profiles. Should remove in Oct.
+  if (shouldDisplayIGRetirementBanner) {
+    return TopBanner({
+      status: hidden,
+      content: `Beginning in October, we’ll no longer support personal Instagram
+          accounts. Learn how to convert
+          <a href="https://support.buffer.com/hc/en-us/articles/360052978413-Deprecating-Instagram-Personal-Profiles">to business here.</a>`,
       onCloseBanner: onCloseBannerClick,
     });
   }
@@ -76,11 +91,13 @@ TemporaryDashboardBanner.propTypes = {
     PropTypes.objectOf(PropTypes.string)
   ),
   displayRemindersBanner: PropTypes.bool,
+  shouldDisplayIGRetirementBanner: PropTypes.bool,
   usernamesRemindersList: PropTypes.string,
 };
 
 TemporaryDashboardBanner.defaultProps = {
   enabledApplicationModes: [],
+  shouldDisplayIGRetirementBanner: false,
 };
 
 export default TemporaryDashboardBanner;
