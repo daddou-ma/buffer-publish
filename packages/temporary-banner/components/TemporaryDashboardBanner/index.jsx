@@ -42,14 +42,6 @@ const TemporaryDashboardBanner = ({
   const getEnabledApplicationMode = tag =>
     enabledApplicationModes.filter(mode => mode.tag === tag)[0];
 
-  if (
-    !enabledApplicationModes &&
-    !displayRemindersBanner &&
-    !shouldDisplayIGRetirementBanner
-  ) {
-    return null;
-  }
-
   // Displays Temporary Banner With Admin Message.
   if (enabledApplicationModes && getEnabledApplicationMode(dashboardBanner)) {
     const { content } = getEnabledApplicationMode(dashboardBanner);
