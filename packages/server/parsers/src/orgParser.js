@@ -22,4 +22,7 @@ module.exports = orgData => ({
   hasCampaignsFeature: orgData.planBase !== 'free',
   hasAnalyticsFeature: orgData.planBase === 'business',
   hasBitlyFeature: orgData.planBase !== 'free',
+  has30DaySentPostsLimitFeature: orgData.planBase === 'free',
+  hasCalendarFeature: orgData.planBase !== 'free',
+  hasShareAgainFeature: orgData.planBase !== 'free',
 });
