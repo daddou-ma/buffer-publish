@@ -33,7 +33,7 @@ const BitlyClickNotification = ({
   marginAfter = false,
 }) => {
   return hasBitlyPosts && !isFreeUser() && !isBitlyConnected ? (
-    <BitlyNotification marginAfter={marginAfter}/>
+    <BitlyNotification marginAfter={marginAfter} />
   ) : null;
 };
 

@@ -5,6 +5,7 @@ const mapStateToProps = state => ({
   profile: state.profileSidebar.selectedProfile,
   isLockedProfile: state.profileSidebar.isLockedProfile,
   hasAnalyticsFeature: state.organizations.selected.hasAnalyticsFeature,
+  hasBitlyFeature: state.organizations.selected.hasBitlyFeature,
   isInstagramBusiness: state.profileSidebar.selectedProfile.isInstagramBusiness,
   isAnalyticsSupported:
     state.profileSidebar.selectedProfile.isAnalyticsSupported,

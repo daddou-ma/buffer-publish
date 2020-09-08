@@ -2,7 +2,6 @@ import React, { lazy, Suspense } from 'react';
 import PropTypes from 'prop-types';
 
 import { BusinessTrialOrUpgradeCard } from '@bufferapp/publish-shared-components';
-import { WithFeatureLoader } from '@bufferapp/product-features';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
@@ -22,12 +21,12 @@ const LazyAnalyticsList = lazy(() =>
 const ErrorBoundary = getErrorBoundary(true);
 
 const AnalyticsList = ({
-  features,
   profile,
   isAnalyticsSupported,
   isLockedProfile,
   canStartBusinessTrial,
   hasAnalyticsFeature,
+  hasBitlyFeature,
   isInstagramBusiness,
   fetchProfiles,
   selectProfile,
@@ -81,11 +80,11 @@ const AnalyticsList = ({
       <ErrorBoundary>
         <Suspense fallback={<div>Loading...</div>}>
           <LazyAnalyticsList
+            hasBitlyFeature={hasBitlyFeature}
             profile={profile}
             isInstagramBusiness={isInstagramBusiness}
             fetchProfiles={fetchProfiles}
             selectProfile={selectProfile}
-            features={features}
             linkShortening={linkShortening}
             hasBitlyPosts={hasBitlyPosts}
           />
@@ -103,7 +102,7 @@ const AnalyticsList = ({
 };
 
 AnalyticsList.propTypes = {
-  features: PropTypes.object.isRequired, // eslint-disable-line
+  hasBitlyFeature: PropTypes.bool.isRequired,
   canStartBusinessTrial: PropTypes.bool.isRequired,
   isAnalyticsSupported: PropTypes.bool,
   profile: PropTypes.shape(ProfileHeader.propTypes),
@@ -124,4 +123,4 @@ AnalyticsList.defaultProps = {
   isLockedProfile: false,
 };
 
-export default WithFeatureLoader(AnalyticsList);
+export default AnalyticsList;

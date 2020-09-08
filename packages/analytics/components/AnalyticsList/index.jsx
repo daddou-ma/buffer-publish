@@ -14,11 +14,11 @@ import './analytics.css';
 import './store'; // Injects reducers and middlewares
 
 const AnalyticsList = ({
+  hasBitlyFeature,
   profile,
   isInstagramBusiness,
   fetchProfiles,
   selectProfile,
-  features,
   linkShortening,
   hasBitlyPosts,
 }) => {
@@ -39,16 +39,16 @@ const AnalyticsList = ({
       <BitlyClickNotification
         hasBitlyPosts={hasBitlyPosts}
         isBitlyConnected={!!linkShortening.isBitlyConnected}
-        isFreeUser={features.isFreeUser}
+        isFreeUser={hasBitlyFeature}
         marginAfter
       />
       {!isInstagramBusiness && <SummaryTable />}
       <CompareChart />
       {!isInstagramBusiness && (
-        <React.Fragment>
+        <>
           <AverageTable />
           <PostsTable />
-        </React.Fragment>
+        </>
       )}
     </div>
   );
@@ -59,9 +59,7 @@ AnalyticsList.propTypes = {
   isInstagramBusiness: PropTypes.bool.isRequired,
   fetchProfiles: PropTypes.func.isRequired,
   selectProfile: PropTypes.func.isRequired,
-  features: PropTypes.shape({
-    isFreeUser: PropTypes.func,
-  }).isRequired,
+  hasBitlyFeature: PropTypes.bool.isRequired,
   linkShortening: PropTypes.shape({
     isBitlyConnected: PropTypes.bool,
   }).isRequired,
