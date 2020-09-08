@@ -3,8 +3,6 @@ const { join } = require('path');
 
 const getSegmentScript = require('./embeds/segment');
 const getStripeScript = require('./embeds/stripe');
-const getNotificationScript = require('./embeds/notification');
-const getModalScript = require('./embeds/modal');
 const getAppcuesScript = require('./embeds/appcues');
 const getIterateScript = require('./embeds/iterate');
 const getBundleReminderHtml = require('./embeds/bundleReminder');
@@ -13,14 +11,7 @@ const getDatadogRumScript = require('./embeds/datadogRum');
 const { getFaviconCode } = require('./favicon');
 const { getRuntimeScript } = require('./assets');
 
-const getHtml = ({
-  staticAssets,
-  isProduction,
-  isStandalone,
-  notification,
-  modalKey,
-  modalValue,
-}) => {
+const getHtml = ({ staticAssets, isProduction, isStandalone }) => {
   return fs
     .readFileSync(join(__dirname, '..', 'index.html'), 'utf8')
     .replace(
@@ -31,8 +22,6 @@ const getHtml = ({
     .replace('{{{bundle}}}', staticAssets['bundle.js'])
     .replace('{{{bundle-css}}}', staticAssets['bundle.css'])
     .replace('{{{stripeScript}}}', getStripeScript())
-    .replace('{{{notificationScript}}}', getNotificationScript(notification))
-    .replace('{{{showModalScript}}}', getModalScript(modalKey, modalValue))
     .replace('{{{appcues}}}', getAppcuesScript({ isProduction, isStandalone }))
     .replace(
       '{{{iterateScript}}}',
