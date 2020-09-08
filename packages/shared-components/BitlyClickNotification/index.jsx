@@ -27,18 +27,18 @@ BitlyNotification.propTypes = {
 };
 
 const BitlyClickNotification = ({
-  isFreeUser,
+  hasBitlyFeature,
   isBitlyConnected,
   hasBitlyPosts,
   marginAfter = false,
 }) => {
-  return hasBitlyPosts && !isFreeUser() && !isBitlyConnected ? (
+  return hasBitlyPosts && hasBitlyFeature && !isBitlyConnected ? (
     <BitlyNotification marginAfter={marginAfter} />
   ) : null;
 };
 
 BitlyClickNotification.propTypes = {
-  isFreeUser: PropTypes.func.isRequired,
+  hasBitlyFeature: PropTypes.bool.isRequired,
   isBitlyConnected: PropTypes.bool.isRequired,
   hasBitlyPosts: PropTypes.bool.isRequired,
   marginAfter: PropTypes.bool,

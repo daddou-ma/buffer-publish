@@ -47,9 +47,9 @@ export default connect(
         analyzeCrossSale: state.user.analyzeCrossSale,
         hasFirstCommentFlip: state.user.hasFirstCommentFeature,
         hasCampaignsFeature: state.user.hasCampaignsFeature,
+        hasBitlyFeature: state.organizations.selected.hasBitlyFeature,
         linkShortening: state.generalSettings.linkShortening,
         hasBitlyPosts: currentProfile.hasBitlyPosts,
-        shouldDisplayBitly: !state?.productFeatures?.isFreeUser,
       };
     }
     return {};

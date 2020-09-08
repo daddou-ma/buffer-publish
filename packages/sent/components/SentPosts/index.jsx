@@ -91,6 +91,7 @@ const SentPosts = ({
   features,
   hasFirstCommentFlip,
   hasCampaignsFeature,
+  hasBitlyFeature,
   moreToLoad,
   tabId,
   profileId,
@@ -154,7 +155,7 @@ const SentPosts = ({
             <BitlyClickNotification
               hasBitlyPosts={hasBitlyPosts}
               isBitlyConnected={!!linkShortening.isBitlyConnected}
-              isFreeUser={features.isFreeUser}
+              hasBitlyFeature={hasBitlyFeature}
             />
             <div style={topBarContainerStyle}>
               {showComposer && !editMode && (
@@ -206,6 +207,7 @@ SentPosts.propTypes = {
   loading: PropTypes.bool,
   moreToLoad: PropTypes.bool, // eslint-disable-line
   page: PropTypes.number, // eslint-disable-line
+  hasBitlyFeature: PropTypes.bool.isRequired,
   features: PropTypes.object.isRequired, // eslint-disable-line
   items: PropTypes.arrayOf(
     PropTypes.shape({

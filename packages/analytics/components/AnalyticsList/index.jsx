@@ -39,7 +39,7 @@ const AnalyticsList = ({
       <BitlyClickNotification
         hasBitlyPosts={hasBitlyPosts}
         isBitlyConnected={!!linkShortening.isBitlyConnected}
-        isFreeUser={hasBitlyFeature}
+        hasBitlyFeature={hasBitlyFeature}
         marginAfter
       />
       {!isInstagramBusiness && <SummaryTable />}
