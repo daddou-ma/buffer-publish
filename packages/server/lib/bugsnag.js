@@ -5,7 +5,6 @@ const { join } = require('path');
 const { BUGSNAG_KEY, HOSTNAME, RELEASE_STAGE } = process.env;
 
 const APP_TYPE_SERVER = 'express-server';
-const APP_TYPE_FRONTEND = 'frontend';
 
 /**
  * Get the current `releaseStage` for Bugsnag
@@ -49,29 +48,12 @@ const getBugsnagConfig = (appType, userId) => ({
 });
 
 /**
- * Generate a script tag for passing Bugsnag config to our React app.
- */
-const getBugsnagScript = ({ userId, isProduction, isStandalone }) => {
-  if (isProduction && !isStandalone) {
-    return `
-    <script type="text/javascript">
-      window._bugsnagConfig = ${JSON.stringify(
-        getBugsnagConfig(APP_TYPE_FRONTEND, userId)
-      )};
-    </script>
-    `;
-  }
-  return '';
-};
-
-/**
  * Create a Bugsnag client for our Node/express server
  */
 const getBugsnagClient = () => Bugsnag(getBugsnagConfig(APP_TYPE_SERVER));
 
 module.exports = {
   getBugsnagClient,
-  getBugsnagScript,
   getBugsnagConfig,
   getAppVersion,
 };

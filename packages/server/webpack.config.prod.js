@@ -3,9 +3,9 @@ const merge = require('webpack-merge');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
+const webpack = require('webpack');
 
 const common = require('./webpack.config.common.js');
-const webpack = require('webpack');
 
 /**
  * When we build and run the app in CI / GitHub Actions for testing
@@ -41,6 +41,8 @@ const plugins = [
   }),
   new webpack.EnvironmentPlugin({
     NODE_ENV: 'production',
+    // overwritten with git hash via env var during webpack build (see pre-build.sh)
+    BUGSNAG_APP_VERSION: 'development',
   }),
 ];
 

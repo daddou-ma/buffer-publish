@@ -18,7 +18,7 @@ yarn install --frozen-lockfile --non-interactive --production
 yarn run bugsnag:release
 
 # Build the bundle and it's assets (CSS, chunks, source maps)
-yarn run build
+BUGSNAG_APP_VERSION=$GIT_COMMIT yarn run build
 
 echo "WEBPACK ASSETS:"
 cat ./webpackAssets.json

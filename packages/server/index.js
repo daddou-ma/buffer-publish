@@ -40,12 +40,6 @@ const apiError = require('./middlewares/apiError');
 const controller = require('./lib/controller');
 const makeRPCHandler = require('./rpc');
 const checkToken = require('./rpc/checkToken');
-const PublishAPI = require('./publishAPI');
-const userParser = require('./parsers/src/userParser');
-const userMethod = require('./rpc/user/index');
-const orgParser = require('./parsers/src/orgParser');
-const orgsMethod = require('./rpc/organizations/index');
-const profilesMethod = require('./rpc/profiles/index');
 const pusherAuth = require('./lib/pusher');
 const maintenanceHandler = require('./lib/maintenanceHandler');
 const verifyAccessToken = require('./middlewares/verifyAccessToken');
@@ -160,7 +154,6 @@ const getNotificationFromQuery = query => {
  */
 app.get('*', (req, res) => {
   const notification = getNotificationFromQuery(req.query);
-  const userId = req.session.publish.foreignKey;
   const modalKey = req.query.mk ? req.query.mk : null;
   const modalValue = req.query.mv ? req.query.mv : null;
 
@@ -170,7 +163,6 @@ app.get('*', (req, res) => {
       isStandalone,
       staticAssets,
       notification,
-      userId,
       modalKey,
       modalValue,
     })

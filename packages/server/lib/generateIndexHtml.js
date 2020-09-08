@@ -7,7 +7,6 @@ const getNotificationScript = require('./embeds/notification');
 const getModalScript = require('./embeds/modal');
 const getAppcuesScript = require('./embeds/appcues');
 const getIterateScript = require('./embeds/iterate');
-const getBugsnagScript = require('./embeds/bugsnag');
 const getBundleReminderHtml = require('./embeds/bundleReminder');
 const getDatadogRumScript = require('./embeds/datadogRum');
 
@@ -19,7 +18,6 @@ const getHtml = ({
   isProduction,
   isStandalone,
   notification,
-  userId,
   modalKey,
   modalValue,
 }) => {
@@ -42,10 +40,6 @@ const getHtml = ({
     )
     .replace('{{{favicon}}}', getFaviconCode({ cacheBust: 'v1' }))
     .replace('{{{segmentScript}}}', getSegmentScript({ isProduction }))
-    .replace(
-      '{{{bugsnagScript}}}',
-      getBugsnagScript({ userId, isProduction, isStandalone })
-    )
     .replace(
       '{{{bundleReminder}}}',
       getBundleReminderHtml({ isProduction, isStandalone })
