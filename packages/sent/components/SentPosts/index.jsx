@@ -10,7 +10,6 @@ import { Divider, Text } from '@bufferapp/components';
 import { Button } from '@bufferapp/ui';
 import ComposerPopover from '@bufferapp/publish-composer-popover';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
-import { WithFeatureLoader } from '@bufferapp/product-features';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 import ProfilesDisconnectedBanner from '@bufferapp/publish-profiles-disconnected-banner';
 
@@ -41,7 +40,7 @@ const loadMoreButtonStyle = {
   paddingBottom: '3rem',
 };
 
-const NoPostsPublished = ({ total, isBusinessAccount, features }) => {
+const NoPostsPublished = ({ total, has30DaySentPostsLimitFeature }) => {
   if (typeof total === 'undefined' || total > 0) {
     return null;
   }
@@ -50,9 +49,9 @@ const NoPostsPublished = ({ total, isBusinessAccount, features }) => {
       <EmptyState
         height="initial"
         title={
-          isBusinessAccount || !features.isFreeUser()
-            ? 'You haven’t published any posts with this account!'
-            : 'You haven’t published any posts with this account in the past 30 days!'
+          has30DaySentPostsLimitFeature
+            ? 'You haven’t published any posts with this account in the past 30 days!'
+            : 'You haven’t published any posts with this account!'
         }
         subtitle="Once a post has gone live via Buffer, you can track its performance here to learn what works best with your audience!"
         heroImg="https://s3.amazonaws.com/buffer-publish/images/empty-sent2x.png"
@@ -64,14 +63,12 @@ const NoPostsPublished = ({ total, isBusinessAccount, features }) => {
 
 NoPostsPublished.propTypes = {
   total: PropTypes.number,
-  isBusinessAccount: PropTypes.bool,
-  features: PropTypes.shape({ isFreeUser: PropTypes.func }),
+  has30DaySentPostsLimitFeature: PropTypes.bool,
 };
 
 NoPostsPublished.defaultProps = {
   total: undefined,
-  isBusinessAccount: false,
-  features: {},
+  has30DaySentPostsLimitFeature: true,
 };
 
 const SentPosts = ({
@@ -88,7 +85,7 @@ const SentPosts = ({
   isLockedProfile,
   isDisconnectedProfile,
   isBusinessAccount,
-  features,
+  has30DaySentPostsLimitFeature,
   hasFirstCommentFlip,
   hasCampaignsFeature,
   hasBitlyFeature,
@@ -130,16 +127,14 @@ const SentPosts = ({
     loadMore({ profileId, page, tabId });
   };
 
-  const header =
-    isBusinessAccount || !features.isFreeUser()
-      ? 'Your sent posts'
-      : 'Your sent posts for the last 30 days';
+  const header = has30DaySentPostsLimitFeature
+    ? 'Your sent posts for the last 30 days'
+    : 'Your sent posts';
   return (
     <ErrorBoundary>
       {isDisconnectedProfile && <ProfilesDisconnectedBanner />}
       <NoPostsPublished
-        features={features}
-        isBusinessAccount={isBusinessAccount}
+        has30DaySentPostsLimitFeature={has30DaySentPostsLimitFeature}
         total={total}
       />
 
@@ -208,7 +203,7 @@ SentPosts.propTypes = {
   moreToLoad: PropTypes.bool, // eslint-disable-line
   page: PropTypes.number, // eslint-disable-line
   hasBitlyFeature: PropTypes.bool.isRequired,
-  features: PropTypes.object.isRequired, // eslint-disable-line
+  has30DaySentPostsLimitFeature: PropTypes.bool.isRequired,
   items: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,
@@ -265,4 +260,4 @@ SentPosts.defaultProps = {
   },
 };
 
-export default WithFeatureLoader(SentPosts);
+export default SentPosts;

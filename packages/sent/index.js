@@ -47,6 +47,8 @@ export default connect(
         analyzeCrossSale: state.user.analyzeCrossSale,
         hasFirstCommentFlip: state.user.hasFirstCommentFeature,
         hasCampaignsFeature: state.user.hasCampaignsFeature,
+        has30DaySentPostsLimitFeature:
+          state.organizations.selected.has30DaySentPostsLimitFeature,
         hasBitlyFeature: state.organizations.selected.hasBitlyFeature,
         linkShortening: state.generalSettings.linkShortening,
         hasBitlyPosts: currentProfile.hasBitlyPosts,
