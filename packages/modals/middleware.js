@@ -18,6 +18,20 @@ import {
 export default ({ dispatch, getState }) => next => action => {
   next(action);
   switch (action.type) {
+    case 'APP_INIT': {
+      let modal = null;
+      const { queryParams: query } = action;
+      const modalKey = query.get('mk');
+      const modalValue = query.get('mv');
+      if (modalKey) {
+        modal = { key: modalKey };
+        if (modalValue) {
+          modal.value = modalValue;
+        }
+      }
+      window._showModal = modal;
+      break;
+    }
     case lockedProfileActionTypes.UPGRADE:
       if (action.plan === 'free') {
         dispatch(

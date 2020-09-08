@@ -8,8 +8,15 @@ import './components/i18n';
 import App from './components/App';
 import getErrorBoundary from './components/ErrorBoundary';
 
+function getQueryParams() {
+  const url = new URL(window.location.href);
+  const params = new URLSearchParams(url.search);
+  return params;
+}
+
 store.dispatch({
   type: 'APP_INIT',
+  queryParams: getQueryParams(),
 });
 
 const ErrorBoundary = getErrorBoundary();
