@@ -11,7 +11,7 @@ import Draft from '../../Draft';
 import PostDragWrapper from '../../PostDragWrapper';
 import PostActionButtons from '../../PostActionButtons';
 import BannerAdvancedAnalytics from '../../BannerAdvancedAnalytics';
-import { PostWrapper } from '../styles';
+import PostWrapper from '../styles';
 
 const ErrorBoundary = getErrorBoundary(true);
 
@@ -222,9 +222,9 @@ const PostContent = ({
   shouldShowAnalyzeBanner,
   ...postProps
 }) => {
-  const { isSent, isPastReminder, isManager, isUserPaid } = postProps;
+  const { isSent, isPastReminder, isManager } = postProps;
   const isPastPost = isSent || isPastReminder;
-  const shouldShowShareAgain = showShareAgainButton && isPastPost && isUserPaid;
+  const shouldShowShareAgain = showShareAgainButton && isPastPost;
   const shouldShowSendToMobile =
     showSendToMobile && isPastReminder && isManager;
 

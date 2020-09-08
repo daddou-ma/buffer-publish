@@ -88,6 +88,7 @@ const SentPosts = ({
   has30DaySentPostsLimitFeature,
   hasFirstCommentFlip,
   hasCampaignsFeature,
+  hasShareAgainFeature,
   hasBitlyFeature,
   moreToLoad,
   tabId,
@@ -173,7 +174,7 @@ const SentPosts = ({
               isManager={isManager}
               isBusinessAccount={isBusinessAccount}
               isSent
-              showShareAgainButton
+              showShareAgainButton={hasShareAgainFeature}
               hasFirstCommentFlip={hasFirstCommentFlip}
               hasCampaignsFeature={hasCampaignsFeature}
               showAnalyzeBannerAfterFirstPost={showAnalyzeBannerAfterFirstPost}
@@ -204,6 +205,7 @@ SentPosts.propTypes = {
   page: PropTypes.number, // eslint-disable-line
   hasBitlyFeature: PropTypes.bool.isRequired,
   has30DaySentPostsLimitFeature: PropTypes.bool.isRequired,
+  hasShareAgainFeature: PropTypes.bool,
   items: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,
@@ -249,6 +251,7 @@ SentPosts.defaultProps = {
   isBusinessAccount: false,
   hasFirstCommentFlip: false,
   hasCampaignsFeature: false,
+  hasShareAgainFeature: false,
   isLockedProfile: false,
   isDisconnectedProfile: false,
   hasBitlyPosts: false,

@@ -97,6 +97,7 @@ const PastRemindersPosts = ({
   isDisconnectedProfile,
   onClosePreviewClick,
   fetchCampaignsIfNeeded,
+  hasShareAgainFeature,
 }) => {
   if (loading) {
     return (
@@ -137,7 +138,7 @@ const PastRemindersPosts = ({
         <QueueItems
           items={items}
           onEditClick={onEditClick}
-          showShareAgainButton
+          showShareAgainButton={hasShareAgainFeature}
           showSendToMobile
           onShareAgainClick={post => onShareAgainClick(post, viewType)}
           onMobileClick={post => onMobileClick(post, viewType)}
@@ -167,6 +168,7 @@ PastRemindersPosts.propTypes = {
       hasCommentEnabled: PropTypes.bool,
     })
   ),
+  hasShareAgainFeature: PropTypes.bool,
   total: PropTypes.number,
   showComposer: PropTypes.bool,
   editMode: PropTypes.bool,
@@ -193,6 +195,7 @@ PastRemindersPosts.defaultProps = {
   loading: true,
   moreToLoad: false,
   page: 1,
+  hasShareAgainFeature: false,
   total: 0,
   showComposer: false,
   showStoriesComposer: false,

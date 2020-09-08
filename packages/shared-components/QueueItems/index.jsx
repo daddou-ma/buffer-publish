@@ -6,9 +6,6 @@ import Header from './Header';
 import EmptySlot from './EmptySlot';
 import PostContent from './PostContent';
 
-const isPaidUser = ({ features, isBusinessAccount }) =>
-  !features.isFreeUser() || isBusinessAccount;
-
 const QueueItems = ({
   items,
   type,
@@ -23,7 +20,6 @@ const QueueItems = ({
 }) => {
   return items.map((item, index) => {
     const { queueItemType, slot, ...rest } = item;
-    const isUserPaid = isPaidUser({ features, isBusinessAccount });
 
     let QueueSection = null;
 
@@ -49,7 +45,6 @@ const QueueItems = ({
             index={index}
             post={rest}
             queueType={type}
-            isUserPaid={isUserPaid}
             isBusinessAccount={isBusinessAccount}
             shouldShowAnalyzeBanner={shouldShowAnalyzeBanner}
             // eslint-disable-next-line react/jsx-props-no-spreading
