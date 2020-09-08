@@ -40,7 +40,7 @@ storiesOf('TemporaryDashboardBanner', module)
     () => <TemporaryDashboardBanner enabledApplicationModes={null} />
   )
   .add(
-    'should show TemporaryDashboardBanner if displayIGRetirementBanner is true',
+    'should show IGRetirementBanner if displayIGRetirementBanner is true',
     () => (
       <TemporaryDashboardBanner
         enabledApplicationModes={null}
