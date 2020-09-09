@@ -15,12 +15,15 @@ const TopBanner = ({
   content,
   onCloseBanner,
   themeColor = 'orange',
+  actionButton,
 }) => (
   <div style={getContainerStyle(status)}>
     <Banner
       themeColor={themeColor}
-      customHTML={{ __html: content }}
       onCloseBanner={onCloseBanner}
+      actionButton={actionButton}
+      customHTML={actionButton ? null : { __html: content }}
+      text={actionButton ? content : null}
     />
   </div>
 );
@@ -53,12 +56,20 @@ const TemporaryDashboardBanner = ({
   }
   // Displays temporary banner for Retiring IG personal profiles. Should remove in Oct.
   if (shouldDisplayIGRetirementBanner) {
+    const actionButton = {
+      label: 'Follow our guide',
+      action: () => {
+        window.location.assign(
+          'https://support.buffer.com/hc/en-us/articles/360052978413-Deprecating-Instagram-Personal-Profiles'
+        );
+      },
+    };
     return TopBanner({
       status: hidden,
-      content: `Beginning in October, we’ll no longer support personal Instagram
-          accounts. Learn how to convert
-          <a href="https://support.buffer.com/hc/en-us/articles/360052978413-Deprecating-Instagram-Personal-Profiles">to business here.</a>`,
+      content:
+        'From October 2020, we will no longer be able to support Instagram accounts where Direct Scheduling is not enabled.',
       onCloseBanner: onCloseBannerClick,
+      actionButton,
     });
   }
 
