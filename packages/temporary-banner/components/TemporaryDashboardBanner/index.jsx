@@ -57,7 +57,7 @@ const TemporaryDashboardBanner = ({
   // Displays temporary banner for Retiring IG personal profiles. Should remove in Oct.
   if (shouldDisplayIGRetirementBanner) {
     const actionButton = {
-      label: 'Follow our guide',
+      label: 'Enable Direct Scheduling',
       action: () => {
         window.location.assign(
           'https://support.buffer.com/hc/en-us/articles/360052978413-Deprecating-Instagram-Personal-Profiles'
