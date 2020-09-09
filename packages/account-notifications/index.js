@@ -4,14 +4,10 @@ import { actions } from './reducer';
 
 export default connect(
   state => ({
-    bufferEmpty: state.accountNotifications.bufferEmpty,
-    bufferTips: state.accountNotifications.bufferTips,
-    celebrations: state.accountNotifications.celebrations,
-    updateSuccesses: state.accountNotifications.updateSuccesses,
-    weeklyDigests: state.accountNotifications.weeklyDigests,
-    updateFailures: state.accountNotifications.updateFailures,
-    newContributions: state.accountNotifications.newContributions,
-    postMovedBackToDrafts: state.accountNotifications.postMovedBackToDrafts,
+    collaboration: state.accountNotifications.collaborationNotifications,
+    queue: state.accountNotifications.queueNotifications,
+    newsletter: state.accountNotifications.newsletterNotifications,
+    milestones: state.accountNotifications.milestonesNotifications,
   }),
   dispatch => ({
     onToggleClick: (newToggleValue, type) => {

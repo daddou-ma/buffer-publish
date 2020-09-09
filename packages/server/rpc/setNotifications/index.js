@@ -6,7 +6,7 @@ module.exports = method(
   'set notifications',
   ({ notifications }, { session }) =>
     rp({
-      uri: `${process.env.API_ADDR}/1/user/notifications.json`,
+      uri: `${process.env.API_ADDR}/1/user/cio_notifications.json`,
       method: 'POST',
       strictSSL: !(process.env.NODE_ENV === 'development'),
       form: {

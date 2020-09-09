@@ -7,14 +7,10 @@ import Notification from '../Notification';
 
 const Notifications = ({
   onToggleClick,
-  bufferEmpty,
-  bufferTips,
-  updateFailures,
-  updateSuccesses,
-  weeklyDigests,
-  newContributions,
-  postMovedBackToDrafts,
-  celebrations,
+  collaboration,
+  queue,
+  newsletter,
+  milestones,
 }) => {
   const { t } = useTranslation();
 
@@ -24,67 +20,35 @@ const Notifications = ({
       <Text type="p">{t('preferences.notifications.description')}</Text>
       <Divider />
       <Notification
-        title={t('preferences.notifications.emptyBuffer')}
-        description={t('preferences.notifications.emptyBufferEmail')}
+        title={t('preferences.notifications.queue')}
+        description={t('preferences.notifications.queueEmail')}
         onToggleClick={onToggleClick}
-        toggleisEnabled={bufferEmpty}
-        type="bufferEmpty"
+        toggleIsEnabled={queue}
+        type="queueNotifications"
+      />
+      <Divider />
+      <Notification
+        title={t('preferences.notifications.collaboration')}
+        description={t('preferences.notifications.collaborationEmail')}
+        onToggleClick={onToggleClick}
+        toggleIsEnabled={collaboration}
+        type="collaborationNotifications"
       />
       <Divider />
       <Notification
         title={t('preferences.notifications.newsletter')}
         description={t('preferences.notifications.newsletterEmail')}
         onToggleClick={onToggleClick}
-        toggleisEnabled={bufferTips}
-        type="bufferTips"
-      />
-      <Divider />
-      <Notification
-        title={t('preferences.notifications.updateFailures')}
-        description={t('preferences.notifications.updateFailuresEmail')}
-        onToggleClick={onToggleClick}
-        toggleisEnabled={updateFailures}
-        type="updateFailures"
-      />
-      <Divider />
-      <Notification
-        title={t('preferences.notifications.updateSuccesses')}
-        description={t('preferences.notifications.updateSuccessesEmail')}
-        onToggleClick={onToggleClick}
-        toggleisEnabled={updateSuccesses}
-        type="updateSuccesses"
-      />
-      <Divider />
-      <Notification
-        title={t('preferences.notifications.weeklyDigests')}
-        description={t('preferences.notifications.weeklyDigestsEmail')}
-        onToggleClick={onToggleClick}
-        toggleisEnabled={weeklyDigests}
-        type="weeklyDigests"
-      />
-      <Divider />
-      <Notification
-        title={t('preferences.notifications.awaitingApproval')}
-        description={t('preferences.notifications.weeklyDigestsEmail')}
-        onToggleClick={onToggleClick}
-        toggleisEnabled={newContributions}
-        type="newContributions"
-      />
-      <Divider />
-      <Notification
-        title={t('preferences.notifications.movedBackToDrafts')}
-        description={t('preferences.notifications.movedBackToDraftsEmail')}
-        onToggleClick={onToggleClick}
-        toggleisEnabled={postMovedBackToDrafts}
-        type="postMovedBackToDrafts"
+        toggleIsEnabled={newsletter}
+        type="newsletterNotifications"
       />
       <Divider />
       <Notification
         title={t('preferences.notifications.celebrations')}
         description={t('preferences.notifications.celebrationsEmail')}
         onToggleClick={onToggleClick}
-        toggleisEnabled={celebrations}
-        type="celebrations"
+        toggleIsEnabled={milestones}
+        type="milestonesNotifications"
       />
     </div>
   );
@@ -92,14 +56,10 @@ const Notifications = ({
 
 Notifications.propTypes = {
   onToggleClick: PropTypes.func.isRequired,
-  bufferEmpty: PropTypes.bool.isRequired,
-  bufferTips: PropTypes.bool.isRequired,
-  updateFailures: PropTypes.bool.isRequired,
-  updateSuccesses: PropTypes.bool.isRequired,
-  weeklyDigests: PropTypes.bool.isRequired,
-  newContributions: PropTypes.bool.isRequired,
-  postMovedBackToDrafts: PropTypes.bool.isRequired,
-  celebrations: PropTypes.bool.isRequired,
+  collaboration: PropTypes.bool.isRequired,
+  queue: PropTypes.bool.isRequired,
+  newsletter: PropTypes.bool.isRequired,
+  milestones: PropTypes.bool.isRequired,
 };
 
 export default Notifications;

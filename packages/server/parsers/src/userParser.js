@@ -20,18 +20,18 @@ module.exports = userData => ({
   twofactor: userData.twofactor,
   profiles_schedules_slots: userData.profiles_schedules_slots,
   hasEmailNotifications: {
-    bufferEmpty: userData.email_notifications.includes('buffer_empty'),
-    bufferTips: userData.email_notifications.includes('buffer_tips'),
-    updateFailures: userData.email_notifications.includes('update_failures'),
-    updateSuccesses: userData.email_notifications.includes('update_successes'),
-    weeklyDigests: userData.email_notifications.includes('weekly_digests'),
-    newContributions: userData.email_notifications.includes(
-      'new_contributions'
+    collaborationNotifications: userData.email_notifications.includes(
+      'collaborationNotifications'
     ),
-    postMovedBackToDrafts: userData.email_notifications.includes(
-      'post_moved_back_to_drafts'
+    queueNotifications: userData.email_notifications.includes(
+      'queueNotifications'
     ),
-    celebrations: userData.email_notifications.includes('celebrations'),
+    newsletterNotifications: userData.email_notifications.includes(
+      'newsletterNotifications'
+    ),
+    milestonesNotifications: userData.email_notifications.includes(
+      'milestonesNotifications'
+    ),
   },
   hasOrgSwitcherFeature: userData.features.includes('org_switcher'),
   hasPublishBeta: userData.features.includes('new_publish_beta'),

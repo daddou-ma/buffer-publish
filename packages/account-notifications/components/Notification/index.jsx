@@ -16,7 +16,7 @@ const Notification = ({
   title,
   description,
   onToggleClick,
-  toggleisEnabled,
+  toggleIsEnabled,
   type,
 }) => {
   const { t } = useTranslation();
@@ -31,9 +31,9 @@ const Notification = ({
         <Toggle
           onText={t('common.enabled')}
           offText={t('common.disabled')}
-          on={toggleisEnabled}
+          on={toggleIsEnabled}
           size="mini"
-          onClick={() => onToggleClick(!toggleisEnabled, type)}
+          onClick={() => onToggleClick(!toggleIsEnabled, type)}
         />
       </div>
     </Row>
@@ -44,7 +44,7 @@ Notification.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string,
   onToggleClick: PropTypes.func.isRequired,
-  toggleisEnabled: PropTypes.bool.isRequired,
+  toggleIsEnabled: PropTypes.bool.isRequired,
   type: PropTypes.string.isRequired,
 };
 
