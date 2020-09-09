@@ -44,9 +44,9 @@ const GeneralSettings = ({
   showModal,
   isLockedProfile,
   isDisconnectedProfile,
-  isBusinessAccount,
   linkShortening,
   linkShorteningEnabled,
+  hasCustomizingUtmParamsFeature,
 }) => {
   if (isLockedProfile) {
     return <LockedProfileNotification />;
@@ -79,9 +79,8 @@ const GeneralSettings = ({
         />
         <Divider />
         <GoogleAnalytics
-          isBusinessAccount={isBusinessAccount}
+          hasCustomizingUtmParamsFeature={hasCustomizingUtmParamsFeature}
           isManager={isManager}
-          features={features}
           onShowGACustomizationFormClick={onShowGACustomizationFormClick}
           showGACustomizationForm={showGACustomizationForm}
           googleAnalyticsIsEnabled={googleAnalyticsIsEnabled}
@@ -135,7 +134,7 @@ GeneralSettings.defaultProps = {
 
 GeneralSettings.propTypes = {
   isManager: PropTypes.bool,
-  isBusinessAccount: PropTypes.bool.isRequired,
+  hasCustomizingUtmParamsFeature: PropTypes.bool.isRequired,
   isInstagramProfile: PropTypes.bool,
   isInstagramBusiness: PropTypes.bool,
   onConnectBitlyURLClick: PropTypes.func.isRequired,

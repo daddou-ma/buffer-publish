@@ -5,7 +5,6 @@ import { action } from '@storybook/addon-actions';
 import { Provider } from 'react-redux';
 import GoogleAnalytics from './index';
 
-const features = { isFreeUser: () => true };
 const storeFake = state => ({
   default: () => {},
   subscribe: () => {},
@@ -21,10 +20,6 @@ const store = storeFake({
   },
   switchPlanModal: {},
   stripe: {},
-  productFeatures: {
-    planName: 'free',
-    features: {},
-  },
 });
 
 const UpgradeModalDecorator = storyFn => (
@@ -44,11 +39,9 @@ storiesOf('GoogleAnalytics', module)
       onChangeUtmCampaign={action('onChangeUtmCampaign')}
       onChangeUtmSource={action('onChangeUtmSource')}
       onChangeUtmMedium={action('onChangeUtmMedium')}
-      utmCampaign={'buffer'}
-      utmSource={'source'}
-      utmMedium={'medium'}
-      onSaveGATrackingSettingsClick={action('onSaveGATrackingSettingsClick')}
-      features={features}
+      utmCampaign="buffer"
+      utmSource="source"
+      utmMedium="medium"
     />
   ))
   .add('is enabled', () => (
@@ -61,11 +54,9 @@ storiesOf('GoogleAnalytics', module)
       onChangeUtmCampaign={action('onChangeUtmCampaign')}
       onChangeUtmSource={action('onChangeUtmSource')}
       onChangeUtmMedium={action('onChangeUtmMedium')}
-      utmCampaign={'buffer'}
-      utmSource={'source'}
-      utmMedium={'medium'}
-      onSaveGATrackingSettingsClick={action('onSaveGATrackingSettingsClick')}
-      features={features}
+      utmCampaign="buffer"
+      utmSource="source"
+      utmMedium="medium"
     />
   ))
   .add('the customisation form is shown', () => (
@@ -78,11 +69,9 @@ storiesOf('GoogleAnalytics', module)
       onChangeUtmCampaign={action('onChangeUtmCampaign')}
       onChangeUtmSource={action('onChangeUtmSource')}
       onChangeUtmMedium={action('onChangeUtmMedium')}
-      utmCampaign={'buffer'}
-      utmSource={'source'}
-      utmMedium={'medium'}
-      onSaveGATrackingSettingsClick={action('onSaveGATrackingSettingsClick')}
-      features={features}
+      utmCampaign="buffer"
+      utmSource="source"
+      utmMedium="medium"
     />
   ))
   .add('is disabled for Contributors', () => (
@@ -95,10 +84,8 @@ storiesOf('GoogleAnalytics', module)
       onChangeUtmCampaign={action('onChangeUtmCampaign')}
       onChangeUtmSource={action('onChangeUtmSource')}
       onChangeUtmMedium={action('onChangeUtmMedium')}
-      utmCampaign={'buffer'}
-      utmSource={'source'}
-      utmMedium={'medium'}
-      onSaveGATrackingSettingsClick={action('onSaveGATrackingSettingsClick')}
-      features={features}
+      utmCampaign="buffer"
+      utmSource="source"
+      utmMedium="medium"
     />
   ));
