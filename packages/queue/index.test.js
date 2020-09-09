@@ -45,6 +45,11 @@ const initialState = {
   campaignsList: {
     campaigns: null,
   },
+  organizations: {
+    selected: {
+      hasCalendarFeature: true,
+    },
+  },
 };
 
 // eslint-disable-next-line react/prop-types

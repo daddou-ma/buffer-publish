@@ -71,6 +71,7 @@ const QueuedPosts = ({
   onSetRemindersClick,
   onCampaignTagClick,
   hasCampaignsFeature,
+  hasCalendarFeature,
   fetchCampaignsIfNeeded,
   shouldDisplaySingleSlots,
   preserveComposerStateOnClose,
@@ -172,7 +173,7 @@ const QueuedPosts = ({
         isBusinessAccount={isBusinessAccount}
         onCampaignTagClick={onCampaignTagClick}
         hasCampaignsFeature={hasCampaignsFeature}
-        shouldRenderCalendarButtons
+        shouldRenderCalendarButtons={hasCalendarFeature}
         pinned={!shouldDisplaySingleSlots}
       />
     </ErrorBoundary>
@@ -226,6 +227,7 @@ QueuedPosts.propTypes = {
   onCalendarClick: PropTypes.func.isRequired,
   isBusinessAccount: PropTypes.bool,
   hasCampaignsFeature: PropTypes.bool,
+  hasCalendarFeature: PropTypes.bool,
   fetchCampaignsIfNeeded: PropTypes.func.isRequired,
   shouldDisplaySingleSlots: PropTypes.bool,
   preserveComposerStateOnClose: PropTypes.bool,
@@ -255,6 +257,7 @@ QueuedPosts.defaultProps = {
   isManager: false,
   isBusinessAccount: false,
   hasCampaignsFeature: false,
+  hasCalendarFeature: false,
   shouldDisplaySingleSlots: false,
   onCampaignTagClick: () => {},
 };
