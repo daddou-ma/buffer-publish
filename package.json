@@ -16,11 +16,10 @@
     "start:standalone": "cd ./packages/server/ && yarn run start:standalone",
     "start:standalone-ci": "cd ./packages/server/ && yarn run start:standalone-ci",
     "storybook": "start-storybook -p 9001",
-    "watch": "webpack-dev-server --config ./packages/server/webpack.config.dev.js --colors --display-error-details --progress",
-    "build": "webpack --config ./packages/server/webpack.config.prod.js --output-path=`pwd`",
-    "build:ci": "USE_PRECOMPILED_BUNDLES=true webpack --config ./packages/server/webpack.config.prod.js --output-path=dist",
-    "build:analyze": "ANALYZE_BUNDLE=true webpack --config ./packages/server/webpack.config.prod.js --output-path=dist --progress",
-    "bugsnag:release": "node ./packages/server/scripts/bugsnag-release.js",
+    "watch": "webpack-dev-server --config ./webpack.config.dev.js --colors --display-error-details --progress --open",
+    "build": "webpack --config ./webpack.config.prod.js",
+    "build:ci": "USE_PRECOMPILED_BUNDLES=true webpack --config ./webpack.config.prod.js --output-path=dist",
+    "build:analyze": "ANALYZE_BUNDLE=true webpack --config ./webpack.config.prod.js --output-path=dist --progress",
     "cypress:setup": "node scripts/setup-cypress.js"
   },
   "repository": {
@@ -79,7 +78,6 @@
     "babel-plugin-require-context-hook": "1.0.0",
     "babel-plugin-styled-components": "^1.10.6",
     "babel-plugin-transform-export-extensions": "6.22.0",
-    "bugsnag-build-reporter": "^1.0.0",
     "connected-react-router": "^5.0.1",
     "core-js": "3.2.1",
     "cors": "2.8.5",
@@ -150,6 +148,7 @@
     "webpack-cli": "3.3.8",
     "webpack-manifest-plugin": "^2.2.0",
     "webpack-merge": "4.2.2",
+    "html-webpack-plugin": "^4.4.1",
     "xss": "1.0.6"
   },
   "devDependencies": {

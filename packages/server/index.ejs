@@ -3,13 +3,11 @@
 
 <head>
   <title>Buffer Publish</title>
-  {{{favicon}}}
   <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
   <link rel="preconnect" href="https://stats.pusher.com/">
   <link rel="preconnect" href="//icons.buffer.com/" crossorigin>
   <link href="https://fonts.googleapis.com/css?family=Poppins:800|Roboto:300,400,500,700&display=swap" rel="stylesheet">
   <link href="//icons.buffer.com/0.16.4/buffer-icons.css" rel="stylesheet" type="text/css" />
-  <link href="{{{bundle-css}}}" rel="stylesheet" type="text/css" />
   <meta name="google" content="notranslate" />
   <style>
     * {
@@ -142,13 +140,25 @@
       color: #168eea;
     }
   </style>
-  {{{datadogRum}}}
+  
+  <!-- Datadog RUM (Front-end Metrics) -->
+  <% if (process.env.NODE_ENV === 'production') { %>
+  <script src="https://www.datadoghq-browser-agent.com/datadog-rum-us.js"></script>
+  <script>
+    window.DD_RUM && window.DD_RUM.init({
+      applicationId: '2b26d0d8-6f30-4cd8-9965-07b8f2695f0c',
+      clientToken: 'pub87d058f9ca90f98992629cb4c470eca5',
+      datacenter: 'us',
+      resourceSampleRate: 5,
+      sampleRate: 5
+    });
+  </script>
+  <% } %>
+
 </head>
 
 <body>
   <div id="root">
-    <!-- Bundle Reminder (local only) -->
-    {{{bundleReminder}}}
     <div style="display: inline-block; width: 100px; height: 100px; position: absolute; top: 50%; left: 50%; margin: -50px 0px 0px -50px;">
       <div style="opacity: 1;position: absolute;top: 0px;left: 0px;animation: 2s ease 0ms infinite normal none running fade;display: block;">
         <svg width="100%" height="100%" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="width: 100px; height: 100px; fill: rgb(89, 98, 106);"><g class="shuttleGray"><path d="M1.10241622,4.34038738 L7.75166358,7.40469806 C7.88821853,7.46764349 8.11178147,7.46764349 8.24833642,7.40469806 L14.8975838,4.34038738 C15.0341387,4.27744195 15.0341387,4.17446518 14.8975838,4.11151975 L8.24833642,1.04720908 C8.11178147,0.984263641 7.88821853,0.984263641 7.75166358,1.04720908 L1.10241622,4.11151975 C0.965861261,4.17446518 0.965861261,4.27744195 1.10241622,4.34038738"></path></g></svg>
@@ -174,8 +184,7 @@
               </span>
               <span style="margin: 0.75rem 0px 1rem;">
                 <span style="font-size: 1rem; font-weight: 400; color: rgb(89, 98, 106);">
-                   Please try <a target='_blank' href="https://www.google.com/chrome/">Google Chrome</a> or <a target='_blank' href="https://www.mozilla.org/en-US/firefox/">Firefox</a> instead.<br />
-                   Alternatively you can <a href="https://buffer.com/back_publish">switch back to classic Buffer</a>.
+                   Please try <a target='_blank' href="https://www.google.com/chrome/">Google Chrome</a> or <a target='_blank' href="https://www.mozilla.org/en-US/firefox/">Firefox</a> instead.
                 </span>
               </span>
             </div>
@@ -184,6 +193,7 @@
       <div style="position: absolute; inset: 0px; background-color: rgba(50, 59, 67, 0.8); z-index: 2000; opacity: 1;"></div>
     </div>
   </div>
+  
   <script type="text/javascript">
     var isIE11orLower = window.navigator.userAgent.match(/(MSIE|Trident)/);
     if (isIE11orLower) {
@@ -191,17 +201,41 @@
       message.style.display = 'block';
     }
   </script>
-  <!-- user + third party scripts -->
-  {{{appcues}}}
-  {{{stripeScript}}}
-  {{{notificationScript}}}
-  {{{showModalScript}}}
-  {{{segmentScript}}}
-  {{{iterateScript}}}
-  <!-- app scripts -->
-  {{{runtime}}}
-  <script crossorigin src="{{{vendor}}}"></script>
-  <script crossorigin src="{{{bundle}}}"></script>
-</body>
+  
+  <!-- AppCues: P -->
+  <% if (process.env.NODE_ENV === 'production') { %>
+  <script id="appcues-js" src="//fast.appcues.com/49463.js" async></script>
+  <% } %>
+  
+  <!-- Stripe: A -->
+  <script id="stripe-js" src="https://js.stripe.com/v3/" async></script>
+  <script type="text/javascript">
+    window.STRIPE_PUBLISHABLE_KEY = '<%= process.env.STRIPE_PUBLISHABLE_KEY %>';
+  </script>
+  
+  <!-- Segment: A -->
+  <script>
+    window.PRODUCT_TRACKING_KEY = 'publish';
+    window.CLIENT_NAME = 'publishWeb';
+    !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t,e){var n=document.createElement("script");n.type="text/javascript";n.async=!0;n.src="https://cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(n,a);analytics._loadOptions=e};analytics.SNIPPET_VERSION="4.1.0";
+      analytics.load("<%= process.env.SEGMENT_KEY %>");
+    }}();
+  </script>
 
+  <!-- Iterate: P -->
+  <% if (process.env.NODE_ENV === 'production') { %>
+  <script>
+    window.iterateSettings = {
+        apiKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb21wYW55X2lkIjoiNWQ1ZjIxMzUxMzU5ZDMwMDAxMDE3N2IxIiwiaWF0IjoxNTY2NTE1NTA5fQ.UPeBAlcqV4aZQ_rJxRIkYWpNC1nDS24O1MG4WIEuuUg'
+    };
+    (function(i,t,e,r,a){if(t.getElementById(r))
+    {return}
+    i.IterateObjectName=a;var z=function()
+    {z.c(arguments)};
+    z.q=[];z.c=function(args){z.q.push(args)};i[a]=z;var js,fjs=t.getElementsByTagName(e)[0];
+    function l() {js=t.createElement(e);js.id=r;js.async=1;js.src="https://platform.iteratehq.com/loader.js";fjs.parentNode.insertBefore(js,fjs)}; if(t.readyState==="complete") {l();} else
+    if(i.attachEvent) {i.attachEvent('onload', l);} else{i.addEventListener('load', l, false);}}(window, document,'script','iterate-js','Iterate'));
+  </script>
+  <% } %>
+</body>
 </html>

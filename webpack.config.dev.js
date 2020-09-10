@@ -20,13 +20,21 @@ const merged = merge.strategy({
     publicPath,
   },
   devServer: {
-    allowedHosts: ['.buffer.com', '.local.buffer.com'],
+    historyApiFallback: true,
+    disableHostCheck: true,
     hot: true,
     publicPath,
     contentBase: false,
     port: 8080,
-    host: 'local.buffer.com',
+    host: 'publish.local.buffer.com',
     headers: { 'Access-Control-Allow-Origin': '*' },
+    proxy: {
+      '/rpc': {
+        target: 'https://publish.local.buffer.com/',
+        changeOrigin: true,
+        secure: false,
+      },
+    },
     https: {
       key: fs.readFileSync(
         '../reverseproxy/certs/local.buffer.com-wildcard.key'
@@ -47,6 +55,8 @@ const merged = merge.strategy({
     new webpack.HotModuleReplacementPlugin(),
     new webpack.EnvironmentPlugin({
       NODE_ENV: 'development',
+      STRIPE_PUBLISHABLE_KEY: 'pk_dGKqAIFsUQonSYGPBM9Rek71IHOcL',
+      SEGMENT_KEY: 'qsP2UfgODyoJB3px9SDkGX5I6wDtdQ6a',
     }),
   ],
   resolve: {

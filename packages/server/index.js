@@ -44,13 +44,13 @@ const pusherAuth = require('./lib/pusher');
 const maintenanceHandler = require('./lib/maintenanceHandler');
 const verifyAccessToken = require('./middlewares/verifyAccessToken');
 
-const { setupFaviconRoutes } = require('./lib/favicon');
 const { getBugsnagClient } = require('./lib/bugsnag');
-const { getStaticAssets } = require('./lib/assets');
-const getHtml = require('./lib/generateIndexHtml');
 
 // No nginx reverseproxy in standalone mode, so we need to do SSL
-const PORT = isStandalone ? 443 : 80;
+// If not standalone, then 80 when running local (Docker) or 3000
+// when running in production.
+// eslint-disable-next-line no-nested-ternary
+const PORT = isStandalone ? 443 : !isProduction ? 80 : 3000;
 
 const app = express();
 const server = isStandalone
@@ -71,13 +71,6 @@ if (!isStandalone) {
   app.use(bufflog.middleware());
 }
 
-// Load our static assets manifest
-const staticAssets = getStaticAssets({
-  isProduction,
-  isStandalone,
-  usePrecompiledBundles,
-});
-
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(helmet.frameguard({ action: 'sameorigin' }));
@@ -91,9 +84,6 @@ app.use('*', (req, res, next) => {
   app.set('analyzeApiAddr', analyzeApiAddr);
   next();
 });
-
-// Favicon
-setupFaviconRoutes(app, isProduction);
 
 if (isStandalone) {
   // Use a static session
@@ -133,41 +123,6 @@ app.post(
   bodyParser.urlencoded({ extended: false }),
   pusherAuth
 );
-
-const getNotificationFromQuery = query => {
-  let notification = null;
-  if (query.nt && query.nk) {
-    notification = {
-      type: query.nt, // Notification Type
-      key: query.nk, // Notification Key
-    };
-    if (query.nv) {
-      notification.variable = query.nv; // Notification Variable
-    }
-  }
-  return notification;
-};
-
-/**
- * Primary Route
- * - Loads the web app, preloaded with some embedded scripts and userdata.
- */
-app.get('*', (req, res) => {
-  const notification = getNotificationFromQuery(req.query);
-  const modalKey = req.query.mk ? req.query.mk : null;
-  const modalValue = req.query.mv ? req.query.mv : null;
-
-  res.send(
-    getHtml({
-      isProduction,
-      isStandalone,
-      staticAssets,
-      notification,
-      modalKey,
-      modalValue,
-    })
-  );
-});
 
 server.listen(PORT, () => {
   if (isStandalone) {

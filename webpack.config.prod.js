@@ -7,20 +7,6 @@ const webpack = require('webpack');
 
 const common = require('./webpack.config.common.js');
 
-/**
- * When we build and run the app in CI / GitHub Actions for testing
- * we will load the bundled JS and other assets from a simple local
- * server and NOT from the S3 CDN. So we change `publicPath` to ensure
- * that is outputted correctly in the output from the
- * `ManifestPlugin` later.
- *
- * See `server/lib/assets.js` for more details.
- */
-const publicPath =
-  process.env.USE_PRECOMPILED_BUNDLES === 'true'
-    ? 'https://local.buffer.com:8080/static/'
-    : 'https://static.buffer.com/publish/';
-
 const plugins = [
   new MiniCssExtractPlugin({
     /**
@@ -41,8 +27,9 @@ const plugins = [
   }),
   new webpack.EnvironmentPlugin({
     NODE_ENV: 'production',
-    // overwritten with git hash via env var during webpack build (see pre-build.sh)
-    BUGSNAG_APP_VERSION: 'development',
+    BUGSNAG_APP_VERSION: 'placeholder', // replaced in CI
+    STRIPE_PUBLISHABLE_KEY: 'pk_qOmHaWApLCX5OoeWKQ3NrArhoyWEi',
+    SEGMENT_KEY: '9Plsiyvw9NEgXEN7eSBwiAGlHD3DHp0A',
   }),
 ];
 
@@ -61,7 +48,6 @@ const merged = merge(common, {
   devtool,
   plugins,
   output: {
-    publicPath,
     filename: '[name].[chunkhash:8].js',
   },
   performance: { hints: false }, // don't warn that the bundles are big, we know ;)

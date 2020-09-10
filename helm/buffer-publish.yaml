@@ -3,8 +3,8 @@ track: stable # stable | canary
 namespace: buffer
 replicaCount: 10
 deploymentUrl: "publish.buffer.com"
-chart: "buffercharts/buffer-service"
-chartVersion: "1.2.0"
+chart: "buffercharts/fast-frontend"
+chartVersion: "0.0.1"
 cdEnabled: true
 cdBranchEnabled: true
 dockerfile: Dockerfile
@@ -22,10 +22,12 @@ resources:
     cpu: 150m
     memory: 80Mi
 extraMainContainerValues:
+  command: ["node"]
+  args: ["./packages/server/index.js"]
   livenessProbe:
     httpGet:
       path: /health-check
-      port: 80
+      port: 3000
     initialDelaySeconds: 15
     periodSeconds: 5
     failureThreshold: 2
@@ -33,7 +35,7 @@ extraMainContainerValues:
   readinessProbe:
     httpGet:
       path: /health-check
-      port: 80
+      port: 3000
     periodSeconds: 5
     failureThreshold: 2
     timeoutSeconds: 1
@@ -113,24 +115,9 @@ env:
         name: buffer-publish-keys
   - name: RELEASE_STAGE
     value: production
-healthcheck: # checkout https://github.com/bufferapp/EKG for complete docs
-  enabled: false
-  config:
-    port: 8086
-    livenessChecks:
-    - name: httpget-check
-      type: httpGetCheck
-      url: http://localhost:3000
-    readinessChecks:
-    - name: httpget-check
-      type: httpGetCheck
-      url: http://localhost:3000
 # enable the ingress open up the service to the public internet
 service:
-  enabled: true
-  externalPort: 80
-  externalTLSPort: 443
-  internalPort: 80
+  internalPort: 3000
   annotations:
     service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
     service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:acm:us-east-1:980620087509:certificate/6b704a93-67de-444c-89fc-9f659bf2dd42

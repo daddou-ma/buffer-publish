@@ -29,22 +29,15 @@ const getAppVersion = () => {
 };
 
 /**
- * Return a Bugsnag config for the frontend or server.
+ * Return a Bugsnag config for the server.
  *
  * @param {String} appType The type of app (server or front-end)
- * @param {String} userId  The Buffer user ID
  */
-const getBugsnagConfig = (appType, userId) => ({
+const getBugsnagConfig = appType => ({
   apiKey: BUGSNAG_KEY,
   releaseStage: getReleaseStage(),
   appVersion: getAppVersion(),
   appType,
-  user: userId
-    ? {
-        id: userId,
-        adminLink: `https://buffer.com/admin/user/${userId}`,
-      }
-    : null,
 });
 
 /**

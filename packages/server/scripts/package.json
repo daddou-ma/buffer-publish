@@ -1,0 +1,12 @@
+{
+  "name": "publish-bugsnag-build-reporter",
+  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "main": "bugsnag-release.js",
+  "author": "Hamish Macpherson <hamstu@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "bugsnag-build-reporter": "^1.0.0"
+  }
+}
