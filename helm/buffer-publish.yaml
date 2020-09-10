@@ -4,7 +4,7 @@ namespace: buffer
 replicaCount: 10
 deploymentUrl: "publish.buffer.com"
 chart: "buffercharts/fast-frontend"
-chartVersion: "0.0.1"
+chartVersion: "0.0.3"
 cdEnabled: true
 cdBranchEnabled: true
 dockerfile: Dockerfile
