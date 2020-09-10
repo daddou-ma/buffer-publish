@@ -15,6 +15,7 @@ image:
   repository: bufferapp/buffer-publish # Override with the docker image
   tag: latest # this will be overriden by the build process
   pullPolicy: IfNotPresent
+reverseproxyImageRepository: bufferapp/publish-frontend
 resources:
   limits:
     memory: 256Mi
