@@ -48,7 +48,7 @@ const merged = merge(common, {
   devtool,
   plugins,
   output: {
-    filename: '[name].[chunkhash:8].js',
+    filename: '[name].[contenthash].js',
   },
   performance: { hints: false }, // don't warn that the bundles are big, we know ;)
 });
