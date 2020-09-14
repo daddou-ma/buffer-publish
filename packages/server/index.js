@@ -103,18 +103,18 @@ if (isStandalone) {
   const rpcHandler = await makeRPCHandler();
   app.post('/rpc/:method?', checkToken, rpcHandler, errorMiddleware);
   app.use(apiError);
-})();
 
-// make sure we have a valid session
-if (!isStandalone) {
-  app.use(
-    validateSessionMiddleware({
-      production: isProduction,
-      requiredSessionKeys: ['publish.accessToken', 'publish.foreignKey'],
-    })
-  );
-  app.use(verifyAccessToken);
-}
+  // make sure we have a valid session
+  if (!isStandalone) {
+    app.use(
+      validateSessionMiddleware({
+        production: isProduction,
+        requiredSessionKeys: ['publish.accessToken', 'publish.foreignKey'],
+      })
+    );
+    app.use(verifyAccessToken);
+  }
+})();
 
 // Pusher Auth
 app.post(
