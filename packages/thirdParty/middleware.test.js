@@ -18,6 +18,7 @@ const mockUser = {
   createdAt: 'date',
   plan: 'business',
   planCode: '100',
+  planBase: 'business',
   trial: {},
   orgUserCount: 2,
   profileCount: 3,
