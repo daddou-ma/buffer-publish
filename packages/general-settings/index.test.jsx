@@ -21,6 +21,11 @@ const store = storeFake({
   profileSidebar: {
     selectedProfile: {},
   },
+  organizations: {
+    selected: {
+      hasCustomizingUtmParamsFeature: true,
+    },
+  },
 });
 
 describe('GeneralSettings', () => {

@@ -112,8 +112,7 @@ const GoogleAnalytics = ({
   utmMedium,
   onChangeUtmMedium,
   isManager,
-  isBusinessAccount,
-  features,
+  hasCustomizingUtmParamsFeature,
   linkShorteningEnabled,
 }) => (
   <div style={googleAnalyticsWrapperStyle}>
@@ -159,10 +158,10 @@ const GoogleAnalytics = ({
       <div style={switchStyle}>
         <Toggle
           disabled={!isManager || !linkShorteningEnabled}
-          onText={'Enabled'}
-          offText={'Disabled'}
+          onText="Enabled"
+          offText="Disabled"
           on={googleAnalyticsIsEnabled && linkShorteningEnabled}
-          size={'small'}
+          size="small"
           onClick={() =>
             onToggleGoogleAnalyticsClick(
               !googleAnalyticsIsEnabled,
@@ -179,10 +178,10 @@ const GoogleAnalytics = ({
             <div style={inputStyle}>
               <Text type="label">Campaign Name</Text>
               <Field
-                name={'utmCampaign'}
+                name="utmCampaign"
                 component={Input}
-                type={'text'}
-                placeholder={'buffer'}
+                type="text"
+                placeholder="buffer"
                 input={{
                   value: utmCampaign,
                   onChange: onChangeUtmCampaign,
@@ -197,8 +196,8 @@ const GoogleAnalytics = ({
                   value: utmSource,
                   onChange: onChangeUtmSource,
                 }}
-                name={'utmSource'}
-                placeholder={'bufferapp.com'}
+                name="utmSource"
+                placeholder="bufferapp.com"
               />
             </div>
             <div style={inputStyle}>
@@ -209,8 +208,8 @@ const GoogleAnalytics = ({
                   value: utmMedium,
                   onChange: onChangeUtmMedium,
                 }}
-                name={'utmMedium'}
-                placeholder={'social'}
+                name="utmMedium"
+                placeholder="social"
                 disabled={!googleAnalyticsIsEnabled}
               />
             </div>
@@ -234,7 +233,7 @@ const GoogleAnalytics = ({
     )}
     {!showGACustomizationForm &&
       googleAnalyticsIsEnabled &&
-      (!features.isFreeUser() || (isBusinessAccount && isManager)) && (
+      hasCustomizingUtmParamsFeature && (
         <div style={customizeButtonStyle}>
           <Button
             disabled={!linkShorteningEnabled}
@@ -267,8 +266,7 @@ GoogleAnalytics.propTypes = {
   utmSource: PropTypes.string,
   utmMedium: PropTypes.string,
   isManager: PropTypes.bool.isRequired,
-  isBusinessAccount: PropTypes.bool.isRequired,
-  features: PropTypes.any.isRequired, // eslint-disable-line
+  hasCustomizingUtmParamsFeature: PropTypes.bool.isRequired,
   linkShorteningEnabled: PropTypes.bool,
 };
 

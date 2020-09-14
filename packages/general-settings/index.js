@@ -19,7 +19,6 @@ export default connect(
     profileName: state.generalSettings.profileName,
     avatarUrl: state.generalSettings.avatarUrl,
     isManager: state.profileSidebar.selectedProfile.isManager,
-    isBusinessAccount: state.profileSidebar.selectedProfile.business,
     showGACustomizationForm: state.generalSettings.showGACustomizationForm,
     googleAnalyticsIsEnabled:
       state.generalSettings.googleAnalyticsEnabled === 'enabled',
@@ -33,6 +32,9 @@ export default connect(
     loadingShuffle: state.generalSettings.loadingShuffle,
     linkShortening: state.generalSettings.linkShortening,
     linkShorteningEnabled: state.generalSettings.linkShorteningEnabled,
+    hasCustomizingUtmParamsFeature:
+      state.organizations.selected.hasCustomizingUtmParamsFeature,
+    hasBitlyFeature: state.organizations.selected.hasBitlyFeature,
   }),
   (dispatch, ownProps) => ({
     onDirectPostingClick: () => {

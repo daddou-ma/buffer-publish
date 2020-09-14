@@ -1,11 +1,10 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {
   GridList,
   EmptyState,
   BufferLoading,
 } from '@bufferapp/publish-shared-components';
-import { WithFeatureLoader } from '@bufferapp/product-features';
 import { Button, Text, Tooltip } from '@bufferapp/ui';
 import CopyIcon from '@bufferapp/ui/Icon/Icons/Copy';
 import InfoIcon from '@bufferapp/ui/Icon/Icons/Info';
@@ -137,14 +136,11 @@ const GridPosts = ({
   onChangePostUrl,
   onSavePostUrl,
   trackPagePreviewed,
-  isManager,
   isLockedProfile,
   isDisconnectedProfile,
-  isBusinessAccount,
   profile,
   handleCopyToClipboard,
   publicGridUrl,
-  features,
   customLinksDetails,
   onUpdateCustomLinks,
   onUpdateCustomLinksColor,
@@ -173,20 +169,14 @@ const GridPosts = ({
     return <LockedProfileNotification />;
   }
 
-  if (features.isFreeUser() && !isBusinessAccount) {
-    return <div />;
-  }
-
   if (!isDisconnectedProfile && total < 1) {
     return (
-      <Fragment>
-        <EmptyState
-          title="You haven’t published any posts to this Instagram account yet."
-          subtitle="Once you’ve posted to your Instagram feed, use Shop Grid as your link in bio tool to drive traffic from Instagram to anywhere you’d like — your online store, articles, events, and more!"
-          heroImg="https://s3.amazonaws.com/buffer-publish/images/empty-sent2x.png"
-          heroImgSize={{ width: '270px', height: '150px' }}
-        />
-      </Fragment>
+      <EmptyState
+        title="You haven’t published any posts to this Instagram account yet."
+        subtitle="Once you’ve posted to your Instagram feed, use Shop Grid as your link in bio tool to drive traffic from Instagram to anywhere you’d like — your online store, articles, events, and more!"
+        heroImg="https://s3.amazonaws.com/buffer-publish/images/empty-sent2x.png"
+        heroImgSize={{ width: '270px', height: '150px' }}
+      />
     );
   }
 
@@ -308,9 +298,6 @@ GridPosts.propTypes = {
   onImageClose: PropTypes.func,
   handleCopyToClipboard: PropTypes.func,
   trackPagePreviewed: PropTypes.func.isRequired,
-  features: PropTypes.object.isRequired, // eslint-disable-line
-  isManager: PropTypes.bool,
-  isBusinessAccount: PropTypes.bool,
   publicGridUrl: PropTypes.string,
   isLockedProfile: PropTypes.bool,
   isDisconnectedProfile: PropTypes.bool,
@@ -318,6 +305,7 @@ GridPosts.propTypes = {
     service: PropTypes.string,
     avatar_https: PropTypes.string,
     timezone: PropTypes.string,
+    handle: PropTypes.string,
   }),
   customLinksDetails: PropTypes.shape({
     customLinks: PropTypes.array,
@@ -333,8 +321,6 @@ GridPosts.defaultProps = {
   total: 0,
   gridPosts: [],
   publicGridUrl: '',
-  isManager: false,
-  isBusinessAccount: false,
   isLockedProfile: false,
   isDisconnectedProfile: false,
   onChangePostUrl: () => {},
@@ -352,4 +338,4 @@ GridPosts.defaultProps = {
   },
 };
 
-export default WithFeatureLoader(GridPosts);
+export default GridPosts;

@@ -5,8 +5,6 @@ import { action } from '@storybook/addon-actions';
 import { Provider } from 'react-redux';
 import GeneralSettings from './index';
 
-const features = { isFreeUser: () => true };
-
 const storeFake = state => ({
   default: () => {},
   subscribe: () => {},
@@ -15,16 +13,17 @@ const storeFake = state => ({
 });
 
 const store = storeFake({
-  productFeatures: {
-    planName: 'free',
-    features: {},
-  },
   user: {
     id: 'id1',
   },
   profileSidebar: {
     selectedProfile: {
       ownerId: 'id2',
+    },
+  },
+  organizations: {
+    selected: {
+      hasBitlyFeature: true,
     },
   },
 });
@@ -41,13 +40,13 @@ storiesOf('GeneralSettings', module)
       isInstagramProfile={false}
       isInstagramBusiness={false}
       onSetUpDirectPostingClick={action('onSetUpDirectPosting')}
-      features={features}
+      hasBitlyFeature
       onChangeUtmCampaign={action('onChangeUtmCampaign')}
       onChangeUtmSource={action('onChangeUtmSource')}
       onChangeUtmMedium={action('onChangeUtmMedium')}
-      utmCampaign={'buffer'}
-      utmSource={'source'}
-      utmMedium={'medium'}
+      utmCampaign="buffer"
+      utmSource="source"
+      utmMedium="medium"
       onSaveGATrackingSettingsClick={action('onSaveGATrackingSettingsClick')}
     />
   ))
@@ -56,13 +55,13 @@ storiesOf('GeneralSettings', module)
       isInstagramProfile
       isInstagramBusiness
       onSetUpDirectPostingClick={action('onSetUpDirectPosting')}
-      features={features}
+      hasBitlyFeature
       onChangeUtmCampaign={action('onChangeUtmCampaign')}
       onChangeUtmSource={action('onChangeUtmSource')}
       onChangeUtmMedium={action('onChangeUtmMedium')}
-      utmCampaign={'buffer'}
-      utmSource={'source'}
-      utmMedium={'medium'}
+      utmCampaign="buffer"
+      utmSource="source"
+      utmMedium="medium"
       onSaveGATrackingSettingsClick={action('onSaveGATrackingSettingsClick')}
     />
   ))
@@ -71,14 +70,15 @@ storiesOf('GeneralSettings', module)
       isInstagramProfile
       isInstagramBusiness
       googleAnalyticsIsEnabled
+      linkShorteningEnabled
       onSetUpDirectPostingClick={action('onSetUpDirectPosting')}
-      features={features}
+      hasBitlyFeature
       onChangeUtmCampaign={action('onChangeUtmCampaign')}
       onChangeUtmSource={action('onChangeUtmSource')}
       onChangeUtmMedium={action('onChangeUtmMedium')}
-      utmCampaign={'buffer'}
-      utmSource={'source'}
-      utmMedium={'medium'}
+      utmCampaign="buffer"
+      utmSource="source"
+      utmMedium="medium"
       onToggleGoogleAnalyticsClick={action('onToggleGoogleAnalyticsClick')}
       onSaveGATrackingSettingsClick={action('onSaveGATrackingSettingsClick')}
     />
@@ -88,13 +88,13 @@ storiesOf('GeneralSettings', module)
       isInstagramProfile
       isInstagramBusiness
       onSetUpDirectPostingClick={action('onSetUpDirectPosting')}
-      features={features}
+      hasBitlyFeature
       onChangeUtmCampaign={action('onChangeUtmCampaign')}
       onChangeUtmSource={action('onChangeUtmSource')}
       onChangeUtmMedium={action('onChangeUtmMedium')}
-      utmCampaign={'buffer'}
-      utmSource={'source'}
-      utmMedium={'medium'}
+      utmCampaign="buffer"
+      utmSource="source"
+      utmMedium="medium"
       onToggleGoogleAnalyticsClick={action('onToggleGoogleAnalyticsClick')}
       onSaveGATrackingSettingsClick={action('onSaveGATrackingSettingsClick')}
       isLockedProfile
@@ -107,13 +107,13 @@ storiesOf('GeneralSettings', module)
       onSetUpDirectPostingClick={action('onSetUpDirectPosting')}
       showGACustomizationForm
       googleAnalyticsIsEnabled
-      features={features}
+      hasBitlyFeature
       onChangeUtmCampaign={action('onChangeUtmCampaign')}
       onChangeUtmSource={action('onChangeUtmSource')}
       onChangeUtmMedium={action('onChangeUtmMedium')}
-      utmCampaign={'buffer'}
-      utmSource={'source'}
-      utmMedium={'medium'}
+      utmCampaign="buffer"
+      utmSource="source"
+      utmMedium="medium"
       onToggleGoogleAnalyticsClick={action('onToggleGoogleAnalyticsClick')}
       onSaveGATrackingSettingsClick={action('onSaveGATrackingSettingsClick')}
     />
@@ -123,13 +123,13 @@ storiesOf('GeneralSettings', module)
       isInstagramProfile={false}
       isInstagramBusiness={false}
       onSetUpDirectPostingClick={action('onSetUpDirectPosting')}
-      features={features}
+      hasBitlyFeature
       onChangeUtmCampaign={action('onChangeUtmCampaign')}
       onChangeUtmSource={action('onChangeUtmSource')}
       onChangeUtmMedium={action('onChangeUtmMedium')}
-      utmCampaign={'buffer'}
-      utmSource={'source'}
-      utmMedium={'medium'}
+      utmCampaign="buffer"
+      utmSource="source"
+      utmMedium="medium"
       onSaveGATrackingSettingsClick={action('onSaveGATrackingSettingsClick')}
       isManager={false}
     />
