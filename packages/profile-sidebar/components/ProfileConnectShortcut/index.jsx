@@ -1,28 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Text } from '@bufferapp/components';
-import { WithFeatureLoader } from '@bufferapp/product-features';
 import { ProfileBadgeIcon } from '../ProfileBadge';
 
 const handleProfileLimitReached = (
-  features,
+  showUpgradeToProCta,
   showSwitchPlanModal,
   goToConnectSocialAccount
-) =>
-  features.isFreeUser() ? showSwitchPlanModal() : goToConnectSocialAccount();
+) => (showUpgradeToProCta ? showSwitchPlanModal() : goToConnectSocialAccount());
 
 const handleClick = (
   network,
   url,
   profiles,
   profileLimit,
-  features,
+  showUpgradeToProCta,
   showSwitchPlanModal,
   goToConnectSocialAccount
 ) => {
   if (profiles.length >= profileLimit) {
     handleProfileLimitReached(
-      features,
+      showUpgradeToProCta,
       showSwitchPlanModal,
       goToConnectSocialAccount
     );
@@ -76,7 +74,7 @@ class ProfileConnectShortcut extends React.Component {
       url,
       profiles,
       profileLimit,
-      features,
+      showUpgradeToProCta,
       showSwitchPlanModal,
       goToConnectSocialAccount,
     } = this.props;
@@ -94,7 +92,7 @@ class ProfileConnectShortcut extends React.Component {
             url,
             profiles,
             profileLimit,
-            features,
+            showUpgradeToProCta,
             showSwitchPlanModal,
             goToConnectSocialAccount
           )
@@ -121,9 +119,9 @@ ProfileConnectShortcut.propTypes = {
     })
   ).isRequired,
   profileLimit: PropTypes.number.isRequired,
-  features: PropTypes.object.isRequired, // eslint-disable-line
+  showUpgradeToProCta: PropTypes.bool.isRequired,
   goToConnectSocialAccount: PropTypes.func.isRequired,
   showSwitchPlanModal: PropTypes.func.isRequired,
 };
 
-export default WithFeatureLoader(ProfileConnectShortcut);
+export default ProfileConnectShortcut;

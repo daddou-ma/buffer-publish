@@ -68,12 +68,9 @@ export default ({ dispatch, getState }) => next => action => {
             /(local\.buffer)|(dev\.buffer\.com)/
           ),
         });
-        const { id } = action.result;
-        const {
-          productFeatures: { planName },
-        } = getState();
+        const { id, planBase } = action.result;
         FullStory.identify(id, {
-          pricingPlan_str: planName,
+          pricingPlan_str: planBase,
         });
       }
       break;

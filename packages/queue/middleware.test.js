@@ -7,18 +7,6 @@ import {
 import { actionTypes, actions } from './reducer';
 import middleware from './middleware';
 
-const getStateWithPaidUser = () => ({
-  user: {
-    isFreeUser: false,
-  },
-  profileSidebar: {
-    selectedProfileId: 'id1',
-    selectedProfile: {
-      service_type: 'profile',
-    },
-  },
-});
-
 describe('middleware', () => {
   const next = jest.fn();
   const dispatch = jest.fn();
@@ -34,7 +22,7 @@ describe('middleware', () => {
         id: 'id1',
       },
     };
-    middleware({ dispatch, getState: getStateWithPaidUser })(next)(action);
+    middleware({ dispatch })(next)(action);
     expect(next).toBeCalledWith(action);
     expect(dispatch).toBeCalledWith(
       dataFetchActions.fetch({
@@ -55,7 +43,7 @@ describe('middleware', () => {
         profileId: 'id1',
       },
     };
-    middleware({ dispatch, getState: getStateWithPaidUser })(next)(action);
+    middleware({ dispatch })(next)(action);
     expect(next).toBeCalledWith(action);
     expect(dispatch).toBeCalledWith(
       dataFetchActions.fetch({
@@ -76,7 +64,7 @@ describe('middleware', () => {
         profileId: 'id1',
       },
     };
-    middleware({ dispatch, getState: getStateWithPaidUser })(next)(action);
+    middleware({ dispatch })(next)(action);
     expect(next).toBeCalledWith(action);
     expect(dispatch).toBeCalledWith(
       dataFetchActions.fetch({
@@ -117,7 +105,7 @@ describe('middleware', () => {
         profileId: 'id1',
       },
     });
-    middleware({ dispatch, getState: getStateWithPaidUser })(next)(action);
+    middleware({ dispatch })(next)(action);
     expect(next).toBeCalledWith(action);
     expect(dispatch).toBeCalledWith(
       dataFetchActions.fetch({

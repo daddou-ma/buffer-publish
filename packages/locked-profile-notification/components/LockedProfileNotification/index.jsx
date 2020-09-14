@@ -1,5 +1,4 @@
 import React from 'react';
-import { WithFeatureLoader } from '@bufferapp/product-features';
 import { Card } from '@bufferapp/components';
 import { Text, Button } from '@bufferapp/ui';
 import WarningIcon from '@bufferapp/ui/Icon/Icons/Warning';
@@ -85,27 +84,23 @@ const renderButton = ({ type, onClickUpgrade }) => {
   );
 };
 
-const selectedLockedType = (isOwner, features) => {
+const selectedLockedType = (isOwner, planBase) => {
   if (!isOwner) {
     return 'teamMember';
-  } else if (features.isFreeUser()) {
-    return 'free';
-  } else if (features.isProUser()) {
-    return 'pro';
   }
-  return 'business';
+  return planBase;
 };
 
 /* eslint-enable react/prop-types */
 
 const LockedProfileNotification = ({
-  features,
+  planBase,
   isOwner,
   onClickUpgrade,
   profileLimit,
   ownerEmail,
 }) => {
-  const type = selectedLockedType(isOwner, features);
+  const type = selectedLockedType(isOwner, planBase);
 
   return (
     <Card reducedPadding>
@@ -123,7 +118,7 @@ const LockedProfileNotification = ({
 };
 
 LockedProfileNotification.propTypes = {
-  features: PropTypes.object.isRequired, // eslint-disable-line
+  planBase: PropTypes.string.isRequired, // eslint-disable-line
   onClickUpgrade: PropTypes.func,
   profileLimit: PropTypes.number,
   isOwner: PropTypes.bool.isRequired,
@@ -134,4 +129,4 @@ LockedProfileNotification.defaultProps = {
   ownerEmail: 'the owner',
 };
 
-export default WithFeatureLoader(LockedProfileNotification);
+export default LockedProfileNotification;
