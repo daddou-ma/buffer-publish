@@ -28,7 +28,7 @@ const GeneralSettings = ({
   onConnectBitlyURLClick,
   onDisconnectBitlyURLClick,
   isManager,
-  features,
+  hasBitlyFeature,
   onDirectPostingClick,
   utmCampaign,
   onChangeUtmCampaign,
@@ -75,7 +75,7 @@ const GeneralSettings = ({
           linkShorteners={linkShortening.linkShorteners}
           onOptionSelect={onLinkShortenerOptionSelect}
           selectedShortener={linkShortening.selectedShortener}
-          features={features}
+          hasBitlyFeature={hasBitlyFeature}
         />
         <Divider />
         <GoogleAnalytics
@@ -162,9 +162,7 @@ GeneralSettings.propTypes = {
   googleAnalyticsIsEnabled: PropTypes.bool,
   onToggleGoogleAnalyticsClick: PropTypes.func.isRequired,
   onSaveGATrackingSettingsClick: PropTypes.func.isRequired,
-  features: PropTypes.shape({
-    isFreeUser: PropTypes.func,
-  }).isRequired,
+  hasBitlyFeature: PropTypes.bool.isRequired,
   onDirectPostingClick: PropTypes.func.isRequired,
   utmCampaign: PropTypes.string,
   onChangeUtmCampaign: PropTypes.func.isRequired,

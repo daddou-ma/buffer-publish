@@ -34,6 +34,7 @@ export default connect(
     linkShorteningEnabled: state.generalSettings.linkShorteningEnabled,
     hasCustomizingUtmParamsFeature:
       state.organizations.selected.hasCustomizingUtmParamsFeature,
+    hasBitlyFeature: state.organizations.selected.hasBitlyFeature,
   }),
   (dispatch, ownProps) => ({
     onDirectPostingClick: () => {
