@@ -27,4 +27,5 @@ module.exports = orgData => ({
   hasShareAgainFeature: orgData.planBase !== 'free',
   hasCustomizingUtmParamsFeature:
     orgData.planBase === 'business' && orgData.isOwner,
+  showUpgradeToProCta: orgData.planBase === 'free',
 });
