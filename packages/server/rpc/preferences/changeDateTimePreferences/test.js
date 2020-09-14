@@ -18,6 +18,7 @@ const mockUser = {
   email_notifications: [],
   feature_trials: [],
   tags: [],
+  id: 'id1',
 };
 describe('rpc/changeDateTimePreferences', () => {
   beforeEach(() => {
@@ -54,6 +55,6 @@ describe('rpc/changeDateTimePreferences', () => {
       },
       { session }
     );
-    expect(response.isFreeUser).toBeTruthy();
+    expect(response).toHaveProperty('id', 'id1');
   });
 });
