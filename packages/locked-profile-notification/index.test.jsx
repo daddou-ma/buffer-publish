@@ -23,6 +23,7 @@ const store = storeFake({
     selected: {
       isOwner: false,
       ownerEmail: '',
+      planBase: 'free',
     },
   },
 });
