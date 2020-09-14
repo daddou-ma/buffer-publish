@@ -184,7 +184,7 @@ const ProfileSidebar = ({
               )}
               {canSeeIGPersonalProfileConnect && (
                 <ProfileConnectShortcut
-                  label="Connect Personal IG"
+                  label="Connect Personal IG (Admin)"
                   network="instagram"
                   url="https://buffer.com/oauth/instagram"
                   profileLimit={profileLimit}
