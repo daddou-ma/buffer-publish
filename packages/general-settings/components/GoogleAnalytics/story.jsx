@@ -48,6 +48,7 @@ storiesOf('GoogleAnalytics', module)
     <GoogleAnalytics
       isManager
       googleAnalyticsIsEnabled
+      linkShorteningEnabled
       showGACustomizationForm={false}
       onShowGACustomizationFormClick={action('onShowGACustomizationFormClick')}
       onToggleGoogleAnalyticsClick={action('onToggleGoogleAnalyticsClick')}

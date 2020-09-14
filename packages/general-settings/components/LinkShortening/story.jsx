@@ -9,15 +9,12 @@ const linkListMulti = [
   { domain: 'option2', name: 'option2', selected: false },
 ];
 
-const features = { isFreeUser: () => true };
-const featuresNotFree = { isFreeUser: () => false };
-
 storiesOf('LinkShortener', module)
   .addDecorator(withA11y)
-  .add('default', () => <LinkShortener features={features} />)
+  .add('default', () => <LinkShortener hasBitlyFeature={false} />)
   .add('Show single shortener option', () => (
     <LinkShortener
-      features={features}
+      hasBitlyFeature={false}
       onConnectBitlyURLClick={() => {}}
       onDisconnectBitlyURLClick={() => {}}
       linkShorteners={linkList}
@@ -27,7 +24,7 @@ storiesOf('LinkShortener', module)
   ))
   .add('Show single shortener option with Connect Bitly button', () => (
     <LinkShortener
-      features={featuresNotFree}
+      hasBitlyFeature
       onConnectBitlyURLClick={() => {}}
       onDisconnectBitlyURLClick={() => {}}
       linkShorteners={linkList}
@@ -37,7 +34,7 @@ storiesOf('LinkShortener', module)
   ))
   .add('Show multiple shortener options', () => (
     <LinkShortener
-      features={features}
+      hasBitlyFeature={false}
       onConnectBitlyURLClick={() => {}}
       onDisconnectBitlyURLClick={() => {}}
       linkShorteners={linkListMulti}
@@ -47,7 +44,7 @@ storiesOf('LinkShortener', module)
   ))
   .add('Show multiple shortener options with Connect Bitly button', () => (
     <LinkShortener
-      features={featuresNotFree}
+      hasBitlyFeature
       onConnectBitlyURLClick={() => {}}
       onDisconnectBitlyURLClick={() => {}}
       linkShorteners={linkListMulti}
@@ -56,11 +53,11 @@ storiesOf('LinkShortener', module)
     />
   ))
   .add('Show pinterest message', () => (
-    <LinkShortener features={features} profileService="pinterest" />
+    <LinkShortener hasBitlyFeature={false} profileService="pinterest" />
   ))
   .add('Options disabled if isContributor', () => (
     <LinkShortener
-      features={features}
+      hasBitlyFeature={false}
       onConnectBitlyURLClick={() => {}}
       onDisconnectBitlyURLClick={() => {}}
       linkShorteners={linkList}
