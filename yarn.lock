@@ -1151,13 +1151,6 @@
   resolved "https://registry.yarnpkg.com/@bufferapp/async-data-fetch/-/async-data-fetch-1.9.3.tgz#ad0cddb56e609e2ae6b06ed5f7736af66e17d601"
   integrity sha512-dKbDSpi5paujKOwQdZ3T0lFPLMyv5V/wtRbPoRw0w+93D26QPSQ926He8SzUxLvi48mNx7Vufvzr9cDTDDbh9w==
 
-"@bufferapp/async-data-fetch@1.9.4":
-  version "1.9.4"
-  resolved "https://registry.yarnpkg.com/@bufferapp/async-data-fetch/-/async-data-fetch-1.9.4.tgz#186a15efd7280d403065ae313aa3707ad9066bcc"
-  integrity sha512-uSWWtngPYGP5MAE2rLtWhacOjqIs6VBWFHyR+XdTRxwLACH+BeNwGVoj+5QFJS8AQgE/a0/HD3Px7JGyrYCkrA==
-  dependencies:
-    micro-rpc-client "^0.1.4"
-
 "@bufferapp/async-data-fetch@2.0.0":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@bufferapp/async-data-fetch/-/async-data-fetch-2.0.0.tgz#2726d879fa5729906421951bc4c3f337598e2aa9"
@@ -1311,14 +1304,6 @@
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/@bufferapp/dragme/-/dragme-0.2.2.tgz#84944ff6d77809c07e465daf9359442b184f9764"
   integrity sha1-hJRP9td4CcB+Rl2vk1lEKxhPl2Q=
-
-"@bufferapp/environment@1.9.4":
-  version "1.9.4"
-  resolved "https://registry.yarnpkg.com/@bufferapp/environment/-/environment-1.9.4.tgz#af2d0ff45bdf91a3028fdea35c50abd630343b25"
-  integrity sha512-hZMTT4utcgEPQl9mvovdDGnNsjKaoCtcF5vQ8Cmjemp4dcXIgC4h0DQhzk6Koo3eL8G+WVM8iYm4FNm/WYiPWA==
-  dependencies:
-    "@bufferapp/async-data-fetch" "1.9.4"
-    "@bufferapp/session-manager" "0.7.1"
 
 "@bufferapp/keywrapper@0.2.0":
   version "0.2.0"

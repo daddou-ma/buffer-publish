@@ -17,7 +17,7 @@
     "@bufferapp/async-data-fetch": "2.0.0",
     "@bufferapp/average-table": "1.11.0",
     "@bufferapp/compare-chart": "1.11.0",
-    "@bufferapp/environment": "1.9.4",
+    "@bufferapp/publish-environment": "2.0.0",
     "@bufferapp/maintenance-redirect": "2.0.0",
     "@bufferapp/manage-apps-extras": "2.0.0",
     "@bufferapp/notifications": "1.9.4",

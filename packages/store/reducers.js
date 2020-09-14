@@ -16,7 +16,7 @@ import clientAccessReducer from '@bufferapp/client-access/reducer';
 import productFeaturesReducer from '@bufferapp/product-features/reducer';
 import asyncDataFetchReducer from '@bufferapp/async-data-fetch/lib/reducer';
 import notificationsReducer from '@bufferapp/notifications/lib/reducer';
-import environmentReducer from '@bufferapp/environment/lib/reducer';
+import environmentReducer from '@bufferapp/publish-environment/reducer';
 import switchPlanModalReducer from '@bufferapp/publish-switch-plan-modal/reducer';
 import stripeReducer from '@bufferapp/stripe/reducer';
 import modalsReducer from '@bufferapp/publish-modals/reducer';

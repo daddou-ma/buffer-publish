@@ -1,0 +1,17 @@
+{
+  "name": "@bufferapp/publish-environment",
+  "version": "2.0.0",
+  "description": "Provides current environment (NODE_ENV) into Redux.",
+  "main": "reducer.js",
+  "scripts": {
+    "lint": "eslint . --ignore-pattern coverage node_modules"
+  },
+  "author": "Hamish Macpherson <hamstu@gmail.com>",
+  "dependencies": {
+  },
+  "devDependencies": {
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
