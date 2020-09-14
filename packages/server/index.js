@@ -124,6 +124,13 @@ app.post(
   pusherAuth
 );
 
+if (!isProduction) {
+  // handle redirect from publish.local.buffer.com -> publish.local.buffer.com:8080
+  app.get('/', (req, res) => {
+    res.redirect('https://publish.local.buffer.com:8080');
+  });
+}
+
 server.listen(PORT, () => {
   if (isStandalone) {
     standalone.onBoot({ usePrecompiledBundles });
