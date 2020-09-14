@@ -5,8 +5,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const common = require('./webpack.config.common.js');
 
-const publicPath = 'https://publish.local.buffer.com:8080/static/';
-
 const merged = merge.strategy({
   plugins: 'prepend',
   'entry.bundle': 'prepend',
@@ -15,16 +13,11 @@ const merged = merge.strategy({
   entry: {
     bundle: ['react-hot-loader/patch'],
   },
-  devtool: 'source-map',
-  output: {
-    publicPath,
-  },
+  devtool: 'inline-source-map',
   devServer: {
     historyApiFallback: true,
     disableHostCheck: true,
     hot: true,
-    publicPath,
-    contentBase: false,
     port: 8080,
     host: 'publish.local.buffer.com',
     headers: { 'Access-Control-Allow-Origin': '*' },
