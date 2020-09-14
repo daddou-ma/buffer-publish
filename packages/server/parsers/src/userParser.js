@@ -111,6 +111,6 @@ module.exports = userData => ({
 
   // Org owner data
   features: userData.features,
-  // add temporarily way for buffer admin to connect personal ig profile
+  // add temporary way for buffer admin to connect personal ig profile
   canSeeIGPersonalProfileConnect: userData.is_admin,
 });

@@ -106,7 +106,7 @@ const ProfileSidebar = ({
   onCampaignsButtonClick,
   isCampaignsSelected,
   showUpgradeToProCta,
-  // temp allows buffer admin to connect personal ig profiles
+  // temporarily allows buffer admin to connect personal ig profiles
   canSeeIGPersonalProfileConnect,
 }) => {
   const { t } = useTranslation();
