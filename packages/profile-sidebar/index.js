@@ -33,6 +33,8 @@ export default hot(
           route: campaignsPage.route,
         }),
         showUpgradeToProCta: state.organizations.selected?.showUpgradeToProCta,
+        canSeeIGPersonalProfileConnect:
+          state.user.canSeeIGPersonalProfileConnect,
       };
     },
     (dispatch, ownProps) => ({
