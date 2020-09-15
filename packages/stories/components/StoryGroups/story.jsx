@@ -50,7 +50,6 @@ storiesOf('Stories|StoryGroups', module)
       total={2}
       loading={false}
       isManager
-      isBusinessAccount
       storyGroups={storyGroups}
       isLockedProfile={false}
       showStoriesComposer={action('showStoriesComposer')}

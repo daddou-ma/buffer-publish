@@ -95,7 +95,6 @@ const StoryGroups = ({
   onDeleteConfirmClick,
   onComposerPlaceholderClick,
   hasFirstCommentFlip,
-  isBusinessAccount,
   onShareNowClick,
   onCalendarClick,
   onPreviewClick,
@@ -176,7 +175,6 @@ const StoryGroups = ({
           draggable={false}
           type="stories"
           hasFirstCommentFlip={hasFirstCommentFlip}
-          isBusinessAccount={isBusinessAccount}
           onPreviewClick={onPreviewClick}
           serviceId={serviceId}
           userData={userData}
@@ -199,7 +197,6 @@ StoryGroups.propTypes = {
   hasPushNotifications: PropTypes.bool,
   onSetRemindersClick: PropTypes.func.isRequired,
   hasFirstCommentFlip: PropTypes.bool,
-  isBusinessAccount: PropTypes.bool,
   onEmptySlotClick: PropTypes.func.isRequired,
   onEditClick: PropTypes.func,
   onDeleteConfirmClick: PropTypes.func,
@@ -231,7 +228,6 @@ StoryGroups.defaultProps = {
   isDisconnectedProfile: false,
   showStoriesComposer: false,
   hasFirstCommentFlip: false,
-  isBusinessAccount: false,
   storyGroups: [],
   showStoryPreview: false,
   onEditClick: () => {},
