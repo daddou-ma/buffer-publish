@@ -106,6 +106,8 @@ const ProfileSidebar = ({
   onCampaignsButtonClick,
   isCampaignsSelected,
   showUpgradeToProCta,
+  // temporarily allows buffer admin to connect personal ig profiles
+  canSeeIGPersonalProfileConnect,
 }) => {
   const { t } = useTranslation();
 
@@ -173,6 +175,18 @@ const ProfileSidebar = ({
                   label={t('profile-sidebar.connectInstagram')}
                   network="instagram"
                   url={`https://${getURL.getBaseURL()}/oauth/instagram/choose_business?cta=publish-app-sidebar-addProfile-1`}
+                  profileLimit={profileLimit}
+                  profiles={profiles}
+                  showSwitchPlanModal={showSwitchPlanModal}
+                  goToConnectSocialAccount={goToConnectSocialAccount}
+                  showUpgradeToProCta={showUpgradeToProCta}
+                />
+              )}
+              {canSeeIGPersonalProfileConnect && (
+                <ProfileConnectShortcut
+                  label="Connect Personal IG (Admin)"
+                  network="instagram"
+                  url="https://buffer.com/oauth/instagram"
                   profileLimit={profileLimit}
                   profiles={profiles}
                   showSwitchPlanModal={showSwitchPlanModal}
@@ -249,6 +263,7 @@ ProfileSidebar.propTypes = {
   onCampaignsButtonClick: PropTypes.func,
   ownerEmail: PropTypes.string,
   showUpgradeToProCta: PropTypes.bool,
+  canSeeIGPersonalProfileConnect: PropTypes.bool,
 };
 
 ProfileSidebar.defaultProps = {
@@ -266,6 +281,7 @@ ProfileSidebar.defaultProps = {
   isCampaignsSelected: false,
   ownerEmail: 'the owner',
   showUpgradeToProCta: true,
+  canSeeIGPersonalProfileConnect: false,
 };
 
 export default ProfileSidebar;
