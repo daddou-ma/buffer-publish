@@ -40,7 +40,6 @@ storiesOf('Tabs|TabNavigation', module)
     <TabNavigation
       selectedTabId="queue"
       onTabClick={action('tab-click')}
-      isBusinessAccount={false}
       isManager={false}
       shouldShowNestedSettingsTab
       selectedChildTabId="general-settings"
@@ -55,7 +54,6 @@ storiesOf('Tabs|TabNavigation', module)
     <TabNavigation
       selectedTabId="queue"
       onTabClick={action('tab-click')}
-      isBusinessAccount={false}
       isManager={false}
       isInstagramProfile
       shouldShowNestedSettingsTab
@@ -71,7 +69,6 @@ storiesOf('Tabs|TabNavigation', module)
     <TabNavigation
       selectedTabId="grid"
       onTabClick={action('tab-click')}
-      isBusinessAccount
       isManager={false}
       isInstagramProfile
       shouldShowNestedSettingsTab={false}
@@ -79,13 +76,13 @@ storiesOf('Tabs|TabNavigation', module)
       shouldShowUpgradeCta
       onUpgradeButtonClick={action('on-upgrade-button-click')}
       onProTrial
+      hasGridFeature
     />
   ))
   .add('isContributor', () => (
     <TabNavigation
       selectedTabId="queue"
       onTabClick={action('tab-click')}
-      isBusinessAccount
       isManager={false}
       shouldShowNestedSettingsTab
       selectedChildTabId="general-settings"
@@ -94,13 +91,16 @@ storiesOf('Tabs|TabNavigation', module)
       shouldShowUpgradeCta={false}
       onUpgradeButtonClick={action('on-upgrade-button-click')}
       onProTrial
+      hasApprovalFeature
+      hasDraftsFeature
+      hasGridFeature
+      hasStoriesFeature
     />
   ))
-  .add('isManager, isBusinessAccount', () => (
+  .add('isManager', () => (
     <TabNavigation
       selectedTabId="queue"
       onTabClick={action('tab-click')}
-      isBusinessAccount
       isManager
       shouldShowNestedSettingsTab
       selectedChildTabId="general-settings"
@@ -109,5 +109,9 @@ storiesOf('Tabs|TabNavigation', module)
       shouldShowUpgradeCta={false}
       onUpgradeButtonClick={action('on-upgrade-button-click')}
       onProTrial
+      hasApprovalFeature
+      hasDraftsFeature
+      hasGridFeature
+      hasStoriesFeature
     />
   ));

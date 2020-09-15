@@ -84,7 +84,6 @@ const SentPosts = ({
   isManager,
   isLockedProfile,
   isDisconnectedProfile,
-  isBusinessAccount,
   has30DaySentPostsLimitFeature,
   hasFirstCommentFlip,
   hasCampaignsFeature,
@@ -103,6 +102,8 @@ const SentPosts = ({
   fetchCampaignsIfNeeded,
   profileServiceType,
   profileService,
+  hasAnalyticsOnPosts,
+  hasTwitterImpressions,
 }) => {
   useEffect(() => {
     fetchSentPosts();
@@ -172,7 +173,6 @@ const SentPosts = ({
               onShareAgainClick={onShareAgainClick}
               onCampaignTagClick={onCampaignTagClick}
               isManager={isManager}
-              isBusinessAccount={isBusinessAccount}
               isSent
               showShareAgainButton={hasShareAgainFeature}
               hasFirstCommentFlip={hasFirstCommentFlip}
@@ -181,6 +181,8 @@ const SentPosts = ({
               analyzeCrossSale={analyzeCrossSale}
               profileServiceType={profileServiceType}
               profileService={profileService}
+              hasAnalyticsOnPosts={hasAnalyticsOnPosts}
+              hasTwitterImpressions={hasTwitterImpressions}
             />
           </div>
           {moreToLoad && (
@@ -226,7 +228,6 @@ SentPosts.propTypes = {
   onShareAgainClick: PropTypes.func,
   onCampaignTagClick: PropTypes.func,
   isManager: PropTypes.bool,
-  isBusinessAccount: PropTypes.bool,
   isLockedProfile: PropTypes.bool,
   isDisconnectedProfile: PropTypes.bool,
   hasFirstCommentFlip: PropTypes.bool,
@@ -236,6 +237,8 @@ SentPosts.propTypes = {
   }),
   hasBitlyPosts: PropTypes.bool,
   fetchCampaignsIfNeeded: PropTypes.func.isRequired,
+  hasAnalyticsOnPosts: PropTypes.bool,
+  hasTwitterImpressions: PropTypes.bool,
 };
 
 SentPosts.defaultProps = {
@@ -248,7 +251,6 @@ SentPosts.defaultProps = {
   analyzeCrossSale: false,
   editMode: false,
   isManager: true,
-  isBusinessAccount: false,
   hasFirstCommentFlip: false,
   hasCampaignsFeature: false,
   hasShareAgainFeature: false,
@@ -261,6 +263,8 @@ SentPosts.defaultProps = {
   linkShortening: {
     isBitlyConnected: false,
   },
+  hasAnalyticsOnPosts: false,
+  hasTwitterImpressions: false,
 };
 
 export default SentPosts;

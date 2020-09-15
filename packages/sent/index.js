@@ -38,7 +38,6 @@ export default connect(
         showComposer: state.sent.showComposer,
         editMode: state.sent.editMode,
         isManager: state.profileSidebar.selectedProfile.isManager,
-        isBusinessAccount: state.profileSidebar.selectedProfile.business,
         showAnalyzeBannerAfterFirstPost:
           state.profileSidebar.selectedProfile.shouldHideAdvancedAnalytics,
         isLockedProfile: state.profileSidebar.isLockedProfile,
@@ -53,6 +52,9 @@ export default connect(
         hasBitlyFeature: state.organizations.selected.hasBitlyFeature,
         linkShortening: state.generalSettings.linkShortening,
         hasBitlyPosts: currentProfile.hasBitlyPosts,
+        hasAnalyticsOnPosts: state.organizations.selected.hasAnalyticsOnPosts,
+        hasTwitterImpressions:
+          state.organizations.selected.hasTwitterImpressions,
       };
     }
     return {};

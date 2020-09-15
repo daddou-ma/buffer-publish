@@ -35,6 +35,8 @@ export default connect(
       campaignId: ownProps.match?.params?.id || state.campaign?.campaignId,
       page: state.campaign.page,
       hasCampaignsFlip: state.user.hasCampaignsFeature,
+      hasAnalyticsOnPosts: state.organizations.selected.hasAnalyticsOnPosts,
+      hasTwitterImpressions: state.organizations.selected.hasTwitterImpressions,
     };
   },
 
