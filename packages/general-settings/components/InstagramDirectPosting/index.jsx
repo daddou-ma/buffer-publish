@@ -22,7 +22,7 @@ const InstagramDirectPosting = ({ onDirectPostingClick }) => (
   <div>
     <div style={instagramDirectPostingStyle}>
       <div style={textStyle}>
-        <Text type="h3">Enable direct scheduling</Text>
+        <Text type="h3">Enable Direct Scheduling</Text>
         <Text type="p">
           Buffer can now post directly to Instagram, all you need to have is an
           Instagram Business Profile.
