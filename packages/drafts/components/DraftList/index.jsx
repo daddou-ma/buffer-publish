@@ -7,7 +7,6 @@ import {
   ComposerInput,
 } from '@bufferapp/publish-shared-components';
 import ComposerPopover from '@bufferapp/publish-composer-popover';
-import { WithFeatureLoader } from '@bufferapp/product-features';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
@@ -39,7 +38,6 @@ const containerStyle = {
 };
 
 const DraftList = ({
-  features,
   loading,
   postLists,
   manager,
@@ -60,8 +58,9 @@ const DraftList = ({
   hasFirstCommentFlip,
   onComposerOverlayClick,
   preserveComposerStateOnClose,
+  planBase,
 }) => {
-  if (features.isProUser()) {
+  if (planBase === 'pro') {
     const startTrial = () =>
       window.location.assign(
         `${getURL.getStartTrialURL({
@@ -171,6 +170,7 @@ DraftList.propTypes = {
       text: PropTypes.string,
     })
   ),
+  planBase: PropTypes.string.isRequired,
   manager: PropTypes.bool.isRequired,
   onApproveClick: PropTypes.func.isRequired,
   onDeleteConfirmClick: PropTypes.func.isRequired,
@@ -202,4 +202,4 @@ DraftList.defaultProps = {
   hasFirstCommentFlip: false,
 };
 
-export default WithFeatureLoader(DraftList);
+export default DraftList;

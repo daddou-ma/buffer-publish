@@ -1,14 +1,9 @@
 import { connect } from 'react-redux';
-import { WithFeatureLoader } from '@bufferapp/product-features';
 import { profileTabPages } from '@bufferapp/publish-routes';
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 import { actions as modalsActions } from '@bufferapp/publish-modals';
 import { actions } from './reducer';
 import GeneralSettings from './components/GeneralSettings';
-
-export const GeneralSettingsWithFeatureLoader = WithFeatureLoader(
-  GeneralSettings
-);
 
 export default connect(
   state => ({
@@ -148,7 +143,7 @@ export default connect(
       dispatch(actions.handleCloseModal());
     },
   })
-)(GeneralSettingsWithFeatureLoader);
+)(GeneralSettings);
 
 export reducer, { actions, actionTypes } from './reducer';
 export middleware from './middleware';

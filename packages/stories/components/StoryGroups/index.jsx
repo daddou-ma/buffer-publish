@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { WithFeatureLoader } from '@bufferapp/product-features';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
 import PreviewPopover from '@bufferapp/publish-story-preview';
@@ -240,4 +239,4 @@ StoryGroups.defaultProps = {
   userData: {},
 };
 
-export default WithFeatureLoader(StoryGroups);
+export default StoryGroups;

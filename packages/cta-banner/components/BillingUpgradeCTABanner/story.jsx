@@ -55,9 +55,10 @@ const fakeUser = {
 
 function createMockStore(business, onTrial) {
   return storeFake({
-    productFeatures: {
-      planName: business ? 'business' : 'pro',
-      features: {},
+    organizations: {
+      selected: {
+        plan: business ? 'business' : 'pro',
+      },
     },
     user: {
       ...fakeUser,
@@ -76,7 +77,7 @@ i18n.changeLanguage(fakeUser.language);
 
 storiesOf('BillingUpgradeCTABanner', module)
   .addDecorator(withA11y)
-  .add('default', () => (
+  .add('user without trial', () => (
     <Provider store={storeBusiness}>
       <BillingUpgradeCTABanner
         onClickStartSubscription={action('startSubscription')}
@@ -91,6 +92,9 @@ storiesOf('BillingUpgradeCTABanner', module)
         onClickStartSubscription={action('startSubscription')}
         trial={userOnTrial}
         profileCount={1}
+        canSeeBillingInfo={false}
+        planBase="pro"
+        plan="pro15"
       />
     </Provider>
   ))
@@ -100,6 +104,9 @@ storiesOf('BillingUpgradeCTABanner', module)
         onClickStartSubscription={action('startSubscription')}
         trial={userOnTrialWithBilling}
         profileCount={1}
+        canSeeBillingInfo
+        planBase="pro"
+        plan="pro15"
       />
     </Provider>
   ))
@@ -130,6 +137,9 @@ storiesOf('BillingUpgradeCTABanner', module)
         onClickStartSubscription={action('startSubscription')}
         trial={userOnTrialWithBilling}
         profileCount={1}
+        canSeeBillingInfo
+        planBase="business"
+        plan="premium_business"
       />
     </Provider>
   ));
