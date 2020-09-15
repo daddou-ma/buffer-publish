@@ -18,8 +18,8 @@
     "storybook": "start-storybook -p 9001",
     "watch": "webpack-dev-server --config ./webpack.config.dev.js --colors --display-error-details --progress --open",
     "build": "webpack --config ./webpack.config.prod.js",
-    "build:ci": "USE_PRECOMPILED_BUNDLES=true webpack --config ./webpack.config.prod.js --output-path=dist",
-    "build:analyze": "ANALYZE_BUNDLE=true webpack --config ./webpack.config.prod.js --output-path=dist --progress",
+    "build:ci": "USE_PRECOMPILED_BUNDLES=true webpack --config ./webpack.config.prod.js",
+    "build:analyze": "ANALYZE_BUNDLE=true webpack --config ./webpack.config.prod.js --progress",
     "cypress:setup": "node scripts/setup-cypress.js"
   },
   "repository": {

@@ -5,7 +5,6 @@ const usePrecompiledBundles = process.env.USE_PRECOMPILED_BUNDLES === 'true';
 const standalone = require('./standalone'); // eslint-disable-line
 if (isStandalone) {
   standalone.loadEnv();
-  standalone.serveStaticAssets();
 }
 
 /**
@@ -129,6 +128,10 @@ if (!isProduction) {
   app.get('/', (req, res) => {
     res.redirect('https://publish.local.buffer.com:8080');
   });
+}
+
+if (isStandalone && usePrecompiledBundles) {
+  standalone.serveStaticAssets(app);
 }
 
 server.listen(PORT, () => {

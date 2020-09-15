@@ -27,6 +27,11 @@ const merged = merge.strategy({
         changeOrigin: true,
         secure: false,
       },
+      '/pusher/auth': {
+        target: 'https://publish.local.buffer.com/',
+        changeOrigin: true,
+        secure: false,
+      },
     },
     https: {
       key: fs.readFileSync(
