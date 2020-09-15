@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Popover, Card, Link } from '@bufferapp/components';
+import { Popover, Card } from '@bufferapp/components';
+import Link from '@bufferapp/ui/Link';
 
 import { Text, Button } from '@bufferapp/ui';
 
@@ -9,8 +10,6 @@ const cardContentStyle = {
   textAlign: 'left',
   margin: '28px',
 };
-
-const textWrapperStyle = {};
 
 const buttonWrapperStyle = {
   display: 'flex',
@@ -29,26 +28,25 @@ const InstagramDirectPostingModal = ({
   onHideInstagramModal,
   profileId,
 }) => (
-  <div>
+  <>
     <Popover>
       <Card noPadding noBorder>
         <div style={cardContentStyle}>
           <Text type="h3">{translations.headline}</Text>
-          <div style={textWrapperStyle}>
-            <Text type="p">{translations.description}</Text>
-          </div>
+          <Text type="p">{translations.description}</Text>
           {!isBusinessOnInstagram && (
-            <div style={textWrapperStyle}>
+            <>
               <Text type="p">
-                {translations.instructions}
+                {translations.instructions1}
                 <Link
                   newTab
-                  href="https://support.buffer.com/hc/en-us/articles/360038534274-Connecting-your-Instagram-account-and-enabling-up-Direct-Scheduling"
+                  href="https://support.buffer.com/hc/en-us/articles/360052978413-Deprecating-Instagram-Personal-Profiles"
                 >
                   {translations.learnMore}
                 </Link>
               </Text>
-            </div>
+              <Text type="p">{translations.instructions2}</Text>
+            </>
           )}
           <div style={buttonWrapperStyle}>
             <Button
@@ -74,7 +72,7 @@ const InstagramDirectPostingModal = ({
         </div>
       </Card>
     </Popover>
-  </div>
+  </>
 );
 
 InstagramDirectPostingModal.propTypes = {
