@@ -32,7 +32,7 @@ const InstagramDirectPosting = ({ onDirectPostingClick }) => (
         <Button
           fullWidth
           type="primary"
-          label="Set up direct scheduling"
+          label="Set up Direct Scheduling"
           onClick={onDirectPostingClick}
         />
       </div>
