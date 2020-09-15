@@ -57,7 +57,7 @@ const TemporaryDashboardBanner = ({
   // Displays temporary banner for Retiring IG personal profiles. Should remove in Oct.
   if (shouldDisplayIGRetirementBanner) {
     const actionButton = {
-      label: 'Enable Direct Scheduling',
+      label: 'Enable direct scheduling',
       action: () => {
         window.location.assign(
           'https://support.buffer.com/hc/en-us/articles/360052978413-Deprecating-Instagram-Personal-Profiles'
@@ -67,7 +67,7 @@ const TemporaryDashboardBanner = ({
     return TopBanner({
       status: hidden,
       content:
-        'From October 2020, we will no longer be able to support Instagram accounts where Direct Scheduling is not enabled.',
+        'From October 2020, we will no longer be able to support Instagram accounts where direct scheduling is not enabled.',
       onCloseBanner: onCloseBannerClick,
       actionButton,
     });

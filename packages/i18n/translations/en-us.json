@@ -411,8 +411,8 @@
     "headline": "Uh-oh, we've lost access to this account! Let's reconnect."
   },
   "retiring-profile-banner": {
-    "title": "From October 2020, we will no longer be able to support Instagram accounts where Direct Scheduling is not enabled.",
-    "body": "If you have a personal profile, you’ll need to convert it to a business account and enable Direct Scheduling. If you already have a business account, please enable Direct Scheduling to keep it connected to Buffer. There’s no extra cost and it should only take a few minutes.",
+    "title": "From October 2020, we will no longer be able to support Instagram accounts where direct scheduling is not enabled.",
+    "body": "Please note that starting in mid-September, your account will be locked until it is converted or removed. If you have a personal profile, you’ll need to convert it to a business account and enable direct scheduling. If you already have a business account, please enable direct scheduling to keep it connected to Buffer. There’s no extra cost and it should only take a few minutes.",
     "action": "Follow our guide here"
   },
   "profiles-disconnected-modal": {

@@ -27,5 +27,11 @@ module.exports = orgData => ({
   hasShareAgainFeature: orgData.planBase !== 'free',
   hasCustomizingUtmParamsFeature:
     orgData.planBase === 'business' && orgData.isOwner,
+  hasApprovalFeature: orgData.planBase === 'business',
+  hasDraftsFeature: orgData.planBase !== 'free',
+  hasGridFeature: orgData.planBase === 'business',
+  hasStoriesFeature: orgData.planBase === 'business',
+
+  // Upgrade/ Trial Paths
   showUpgradeToProCta: orgData.planBase === 'free',
 });
