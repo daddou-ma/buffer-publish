@@ -7,8 +7,6 @@ import { actions } from './reducer';
 // default export = container
 export default connect(
   (state, ownProps) => ({
-    isBusinessAccount: state.profileSidebar.selectedProfile.business,
-    isManager: state.profileSidebar.selectedProfile.isManager,
     selectedTabId: ownProps.tabId,
     selectedChildTabId: ownProps.childTabId,
     shouldShowUpgradeButton: state.user.shouldShowUpgradeButton,
@@ -21,13 +19,18 @@ export default connect(
     profileId: ownProps.profileId,
     isLockedProfile: state.profileSidebar.isLockedProfile,
     isDisconnectedProfile: state.profileSidebar.selectedProfile.isDisconnected,
-    isInstagramProfile: state.generalSettings.isInstagramProfile,
-    selectedProfile: state.profileSidebar.selectedProfile,
-    hasStoriesFlip: state.user.features?.includes('stories_groups') ?? false,
     draftsNeedApprovalCount: state.tabs.draftsNeedApprovalCount,
     draftsCount: state.tabs.draftsCount,
     canReconnectChannels: state.user.canReconnectChannels,
+    hasApprovalFeature: state.organizations?.selected?.hasApprovalFeature,
+    hasDraftsFeature: state.organizations?.selected?.hasDraftsFeature,
+    hasGridFeature: state.organizations?.selected?.hasGridFeature,
+    hasStoriesFeature: state.organizations?.selected?.hasStoriesFeature,
+    isInstagramProfile:
+      state.profileSidebar.selectedProfile.service === 'instagram',
+    isManager: state.profileSidebar.selectedProfile.isManager,
   }),
+
   (dispatch, ownProps) => ({
     onTabClick: tabId => {
       const { profileId } = ownProps;

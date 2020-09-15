@@ -47,17 +47,21 @@ export default hot(
         reducerName = 'drafts';
       if (state?.[reducerName]?.byProfileId?.[profileId]) {
         const currentQueue = state[reducerName].byProfileId[profileId];
-        const { selectedProfile } = state.profileSidebar;
         return {
           loadingMore: currentQueue.loadingMore,
           moreToLoad: currentQueue.moreToLoad,
           page: currentQueue.page,
-          isBusinessAccount: selectedProfile.business,
-          selectedProfile,
-          hasStoriesFlip:
-            state.user.features?.includes('stories_groups') ?? false,
+          hasApprovalFeature: state.organizations?.selected?.hasApprovalFeature,
+          hasDraftsFeature: state.organizations?.selected?.hasDraftsFeature,
+          hasGridFeature: state.organizations?.selected?.hasGridFeature,
+          hasStoriesFeature: state.organizations?.selected?.hasStoriesFeature,
+          isInstagramProfile:
+            state.profileSidebar.selectedProfile.service === 'instagram',
+          isManager: state.profileSidebar.selectedProfile.isManager,
           shouldHideAdvancedAnalytics:
-            selectedProfile?.shouldHideAdvancedAnalytics || false,
+            state.profileSidebar.selectedProfile.type === 'linkedin' ||
+            state.profileSidebar.selectedProfile.type === 'pinterest' ||
+            state.profileSidebar.selectedProfile.shouldHideAdvancedAnalytics,
         };
       }
       return {};
