@@ -7,7 +7,6 @@ import { actions } from './reducer';
 
 export default connect(
   state => ({
-    translations: state.i18n.translations['instagram-direct-posting-modal'],
     profileId: state.profileSidebar.selectedProfileId,
     isBusinessOnInstagram: state.queue.isBusinessOnInstagram,
   }),

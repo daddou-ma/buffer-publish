@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Popover, Card, Link } from '@bufferapp/components';
+import { Popover, Card } from '@bufferapp/components';
+import Link from '@bufferapp/ui/Link';
+import { useTranslation } from 'react-i18next';
 
 import { Text, Button } from '@bufferapp/ui';
 
@@ -9,8 +11,6 @@ const cardContentStyle = {
   textAlign: 'left',
   margin: '28px',
 };
-
-const textWrapperStyle = {};
 
 const buttonWrapperStyle = {
   display: 'flex',
@@ -22,63 +22,68 @@ const buttonWrapperStyle = {
 };
 
 const InstagramDirectPostingModal = ({
-  translations,
   isBusinessOnInstagram,
   onSetUpDirectPostingClick,
   onCheckInstagramBusinessClick,
   onHideInstagramModal,
   profileId,
-}) => (
-  <div>
-    <Popover>
-      <Card noPadding noBorder>
-        <div style={cardContentStyle}>
-          <Text type="h3">{translations.headline}</Text>
-          <div style={textWrapperStyle}>
-            <Text type="p">{translations.description}</Text>
-          </div>
-          {!isBusinessOnInstagram && (
-            <div style={textWrapperStyle}>
-              <Text type="p">
-                {translations.instructions}
-                <Link
-                  newTab
-                  href="https://support.buffer.com/hc/en-us/articles/360038534274-Connecting-your-Instagram-account-and-enabling-up-Direct-Scheduling"
-                >
-                  {translations.learnMore}
-                </Link>
-              </Text>
-            </div>
-          )}
-          <div style={buttonWrapperStyle}>
-            <Button
-              onClick={onHideInstagramModal}
-              type="text"
-              label={translations.dismiss}
-            />
-            {isBusinessOnInstagram && (
-              <Button
-                type="primary"
-                onClick={() => onSetUpDirectPostingClick(profileId)}
-                label={translations.cta1}
-              />
-            )}
+}) => {
+  const { t } = useTranslation();
+  return (
+    <>
+      <Popover>
+        <Card noPadding noBorder>
+          <div style={cardContentStyle}>
+            <Text type="h3">
+              {t('instagram-direct-posting-modal.headline')}
+            </Text>
+            <Text type="p">
+              {t('instagram-direct-posting-modal.description')}
+            </Text>
             {!isBusinessOnInstagram && (
-              <Button
-                type="primary"
-                onClick={() => onCheckInstagramBusinessClick(profileId)}
-                label={translations.cta2}
-              />
+              <>
+                <Text type="p">
+                  {t('instagram-direct-posting-modal.instructions1')}
+                  <Link
+                    newTab
+                    href="https://support.buffer.com/hc/en-us/articles/360052978413-Deprecating-Instagram-Personal-Profiles"
+                  >
+                    {t('instagram-direct-posting-modal.learnMore')}
+                  </Link>
+                </Text>
+                <Text type="p">
+                  {t('instagram-direct-posting-modal.instructions2')}
+                </Text>
+              </>
             )}
+            <div style={buttonWrapperStyle}>
+              <Button
+                onClick={onHideInstagramModal}
+                type="text"
+                label={t('instagram-direct-posting-modal.dismiss')}
+              />
+              {isBusinessOnInstagram && (
+                <Button
+                  type="primary"
+                  onClick={() => onSetUpDirectPostingClick(profileId)}
+                  label={t('instagram-direct-posting-modal.cta1')}
+                />
+              )}
+              {!isBusinessOnInstagram && (
+                <Button
+                  type="primary"
+                  onClick={() => onCheckInstagramBusinessClick(profileId)}
+                  label={t('instagram-direct-posting-modal.cta2')}
+                />
+              )}
+            </div>
           </div>
-        </div>
-      </Card>
-    </Popover>
-  </div>
-);
+        </Card>
+      </Popover>
+    </>
+  );};
 
 InstagramDirectPostingModal.propTypes = {
-  translations: PropTypes.object.isRequired, // eslint-disable-line
   profileId: PropTypes.string.isRequired,
   isBusinessOnInstagram: PropTypes.bool.isRequired,
   onSetUpDirectPostingClick: PropTypes.func.isRequired,
