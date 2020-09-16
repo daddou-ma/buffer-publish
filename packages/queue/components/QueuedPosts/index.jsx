@@ -65,7 +65,6 @@ const QueuedPosts = ({
   shouldDisplayDisconnectedBanner,
   isManager,
   hasFirstCommentFlip,
-  isBusinessAccount,
   hasPushNotifications,
   onComposerOverlayClick,
   onSetRemindersClick,
@@ -170,7 +169,6 @@ const QueuedPosts = ({
         hasFirstCommentFlip={hasFirstCommentFlip}
         hasPushNotifications={hasPushNotifications}
         onSetRemindersClick={onSetRemindersClick}
-        isBusinessAccount={isBusinessAccount}
         onCampaignTagClick={onCampaignTagClick}
         hasCampaignsFeature={hasCampaignsFeature}
         shouldRenderCalendarButtons={hasCalendarFeature}
@@ -225,7 +223,6 @@ QueuedPosts.propTypes = {
   shouldDisplayDisconnectedBanner: PropTypes.bool,
   hasFirstCommentFlip: PropTypes.bool,
   onCalendarClick: PropTypes.func.isRequired,
-  isBusinessAccount: PropTypes.bool,
   hasCampaignsFeature: PropTypes.bool,
   hasCalendarFeature: PropTypes.bool,
   fetchCampaignsIfNeeded: PropTypes.func.isRequired,
@@ -255,7 +252,6 @@ QueuedPosts.defaultProps = {
   hasFirstCommentFlip: false,
   draggingEnabled: false,
   isManager: false,
-  isBusinessAccount: false,
   hasCampaignsFeature: false,
   hasCalendarFeature: false,
   shouldDisplaySingleSlots: false,

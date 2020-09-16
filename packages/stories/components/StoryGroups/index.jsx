@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { WithFeatureLoader } from '@bufferapp/product-features';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
 import PreviewPopover from '@bufferapp/publish-story-preview';
@@ -95,7 +94,6 @@ const StoryGroups = ({
   onDeleteConfirmClick,
   onComposerPlaceholderClick,
   hasFirstCommentFlip,
-  isBusinessAccount,
   onShareNowClick,
   onCalendarClick,
   onPreviewClick,
@@ -176,7 +174,6 @@ const StoryGroups = ({
           draggable={false}
           type="stories"
           hasFirstCommentFlip={hasFirstCommentFlip}
-          isBusinessAccount={isBusinessAccount}
           onPreviewClick={onPreviewClick}
           serviceId={serviceId}
           userData={userData}
@@ -199,7 +196,6 @@ StoryGroups.propTypes = {
   hasPushNotifications: PropTypes.bool,
   onSetRemindersClick: PropTypes.func.isRequired,
   hasFirstCommentFlip: PropTypes.bool,
-  isBusinessAccount: PropTypes.bool,
   onEmptySlotClick: PropTypes.func.isRequired,
   onEditClick: PropTypes.func,
   onDeleteConfirmClick: PropTypes.func,
@@ -231,7 +227,6 @@ StoryGroups.defaultProps = {
   isDisconnectedProfile: false,
   showStoriesComposer: false,
   hasFirstCommentFlip: false,
-  isBusinessAccount: false,
   storyGroups: [],
   showStoryPreview: false,
   onEditClick: () => {},
@@ -244,4 +239,4 @@ StoryGroups.defaultProps = {
   userData: {},
 };
 
-export default WithFeatureLoader(StoryGroups);
+export default StoryGroups;

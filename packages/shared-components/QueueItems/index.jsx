@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { WithFeatureLoader } from '@bufferapp/product-features';
 
 import Header from './Header';
 import EmptySlot from './EmptySlot';
@@ -9,9 +8,7 @@ import PostContent from './PostContent';
 const QueueItems = ({
   items,
   type,
-  features,
   pinned,
-  isBusinessAccount,
   onEmptySlotClick,
   onCalendarClick,
   shouldRenderCalendarButtons,
@@ -45,7 +42,6 @@ const QueueItems = ({
             index={index}
             post={rest}
             queueType={type}
-            isBusinessAccount={isBusinessAccount}
             shouldShowAnalyzeBanner={shouldShowAnalyzeBanner}
             // eslint-disable-next-line react/jsx-props-no-spreading
             {...propsForPosts}
@@ -81,11 +77,7 @@ QueueItems.propTypes = {
       id: PropTypes.string,
     })
   ),
-  features: PropTypes.shape({
-    isFreeUser: () => {},
-  }).isRequired,
   type: PropTypes.string,
-  isBusinessAccount: PropTypes.bool,
   shouldRenderCalendarButtons: PropTypes.bool,
   showAnalyzeBannerAfterFirstPost: PropTypes.bool,
   onEmptySlotClick: PropTypes.func,
@@ -94,11 +86,10 @@ QueueItems.propTypes = {
 
 QueueItems.defaultProps = {
   items: [],
-  isBusinessAccount: false,
   shouldRenderCalendarButtons: false,
   type: 'post',
   onEmptySlotClick: () => {},
   onCalendarClick: () => {},
 };
 
-export default WithFeatureLoader(QueueItems);
+export default QueueItems;

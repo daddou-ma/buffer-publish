@@ -145,6 +145,7 @@ export default connect(
           state.profileSidebar.selectedProfile.isDisconnected,
         canStartBusinessTrial: state.user.canStartBusinessTrial ?? true,
         hasFirstCommentFlip: state.user.hasFirstCommentFeature,
+        planBase: state.organizations?.selected?.planBase,
       };
     }
     return {};

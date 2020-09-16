@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Lightbox from 'react-images';
-import { WithFeatureLoader } from '@bufferapp/product-features';
 import { Link } from '@bufferapp/components';
 import Input from '@bufferapp/ui/Input';
 import ClockIcon from '@bufferapp/ui/Icon/Icons/Clock';
@@ -207,4 +206,4 @@ GridList.defaultProps = {
   onSavePostUrl: () => {},
 };
 
-export default WithFeatureLoader(GridList);
+export default GridList;

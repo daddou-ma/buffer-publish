@@ -61,6 +61,12 @@ const initialState = {
     profileList: profiles,
     profiles,
   },
+  organizations: {
+    selected: {
+      hasAnalyticsOnPosts: false,
+      hasTwitterImpressions: false,
+    },
+  },
 };
 
 const mockApiCalls = () => {

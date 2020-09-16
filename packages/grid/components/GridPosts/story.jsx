@@ -49,7 +49,6 @@ storiesOf('GridPosts', module)
       gridPosts={gridPosts}
       isLockedProfile={false}
       isManager
-      isBusinessAccount
       profile={profile}
       onImageClick={action('onImageClick')}
       onImageClose={action('onImageClose')}
@@ -66,7 +65,6 @@ storiesOf('GridPosts', module)
       gridPosts={gridPosts}
       isLockedProfile={false}
       isManager
-      isBusinessAccount
       profile={profile}
       onImageClick={action('onImageClick')}
       onImageClose={action('onImageClose')}

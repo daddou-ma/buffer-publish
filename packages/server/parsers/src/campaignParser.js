@@ -83,7 +83,6 @@ const campaignItemParser = (item, channels, alreadyParsed) => {
 
   const result = {
     ...itemContent,
-    isBusinessAccount: filteredChannel && filteredChannel.business,
     hasPushNotifications:
       filteredChannel && filteredChannel.hasPushNotifications,
     profileService: filteredChannel && filteredChannel.serviceType,

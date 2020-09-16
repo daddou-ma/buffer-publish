@@ -54,7 +54,6 @@ storiesOf('SentPosts', module)
       loading={false}
       header={header}
       postLists={postLists}
-      isBusinessAccount
       onComposerCreateSuccess={action('onComposerCreateSuccess')}
       onClickUpgrade={action('onClickUpgrade')}
       onShareAgainClick={action('onShareAgainClick')}

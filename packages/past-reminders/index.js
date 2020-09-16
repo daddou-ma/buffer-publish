@@ -40,7 +40,6 @@ export default connect(
         showStoriesComposer: state.pastReminders.showStoriesComposer,
         editMode: state.pastReminders.editMode,
         isManager: state.profileSidebar.selectedProfile.isManager,
-        isBusinessAccount: state.profileSidebar.selectedProfile.business,
         isLockedProfile: state.profileSidebar.isLockedProfile,
         isDisconnectedProfile:
           state.profileSidebar.selectedProfile.isDisconnected,

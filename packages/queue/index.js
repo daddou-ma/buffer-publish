@@ -90,7 +90,6 @@ export default connect(
         isInstagramBusiness: profileData.isInstagramBusiness,
         paused: profileData.paused,
         isManager: profileData.isManager,
-        isBusinessAccount: profileData.business,
         hasPushNotifications: profileData.hasPushNotifications,
         showInstagramDirectPostingModal:
           state.modals.showInstagramDirectPostingModal,

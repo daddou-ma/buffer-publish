@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Button, Text } from '@bufferapp/ui';
 import { white } from '@bufferapp/ui/style/colors';
 import styled from 'styled-components';
-import { WithFeatureLoader } from '@bufferapp/product-features';
 import { Trans, useTranslation } from 'react-i18next';
 
 const Wrapper = styled.div`
@@ -27,7 +26,7 @@ const TextWithStyles = styled(Text)`
 const BannerText = ({ t, trial, plan }) => (
   <TextWrapper>
     {!trial.hasCardDetails ? (
-      <React.Fragment>
+      <>
         <Text type="label" color={white}>
           {t('billing-upgrade-cta-banner.planTrial', {
             plan,
@@ -36,9 +35,9 @@ const BannerText = ({ t, trial, plan }) => (
         <TextWithStyles type="p" color={white}>
           {t('billing-upgrade-cta-banner.completeBilling')}
         </TextWithStyles>
-      </React.Fragment>
+      </>
     ) : (
-      <React.Fragment>
+      <>
         <TextWithStyles type="p" color={white}>
           <Trans i18nKey="billing-upgrade-cta-banner.remainingTrial">
             You have
@@ -53,7 +52,7 @@ const BannerText = ({ t, trial, plan }) => (
             at the end of your trial.
           </Trans>
         </TextWithStyles>
-      </React.Fragment>
+      </>
     )}
   </TextWrapper>
 );
@@ -70,11 +69,11 @@ BannerText.propTypes = {
 
 const BillingUpgradeCTABanner = ({
   trial,
-  isPremiumBusinessPlan,
   onClickStartSubscription,
   profileCount,
-  features,
   canSeeBillingInfo,
+  planBase,
+  plan,
 }) => {
   if (
     !trial ||
@@ -88,10 +87,10 @@ const BillingUpgradeCTABanner = ({
   const { t } = useTranslation();
 
   const getCurrentPlan = () => {
-    if (features.isSupportedPlan('free')) return 'Free';
-    if (features.isSupportedPlan('pro')) return 'Pro';
-    if (features.isSupportedPlan('business'))
-      return isPremiumBusinessPlan ? 'Premium' : 'Business';
+    if (planBase === 'free') return 'Free';
+    if (planBase === 'pro') return 'Pro';
+    if (planBase === 'business')
+      return plan === 'premium_business' ? 'Premium' : 'Business';
 
     return 'Free';
   };
@@ -118,9 +117,9 @@ BillingUpgradeCTABanner.propTypes = {
     trialTimeRemaining: PropTypes.string,
   }).isRequired,
   onClickStartSubscription: PropTypes.func.isRequired,
-  isPremiumBusinessPlan: PropTypes.bool.isRequired,
+  planBase: PropTypes.string.isRequired,
+  plan: PropTypes.string.isRequired,
   profileCount: PropTypes.number,
-  features: PropTypes.object.isRequired, // eslint-disable-line
   canSeeBillingInfo: PropTypes.bool.isRequired,
 };
 
@@ -128,4 +127,4 @@ BillingUpgradeCTABanner.defaultProps = {
   profileCount: 0,
 };
 
-export default WithFeatureLoader(BillingUpgradeCTABanner);
+export default BillingUpgradeCTABanner;

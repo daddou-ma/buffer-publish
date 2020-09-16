@@ -30,6 +30,8 @@ const ViewCampaign = ({
   actions,
   postActions,
   page,
+  hasAnalyticsOnPosts,
+  hasTwitterImpressions,
 }) => {
   const sentView = page === 'sent';
   if (!hasCampaignsFlip) {
@@ -101,6 +103,8 @@ const ViewCampaign = ({
             onRequeueClick={postActions.onRequeueClick}
             type="post"
             isSent={sentView}
+            hasAnalyticsOnPosts={hasAnalyticsOnPosts}
+            hasTwitterImpressions={hasTwitterImpressions}
           />
         )}
       </main>
@@ -140,6 +144,8 @@ ViewCampaign.propTypes = {
     onComposerOverlayClick: PropTypes.func.isRequired,
     fetchCampaignsIfNeeded: PropTypes.func.isRequired,
   }).isRequired,
+  hasAnalyticsOnPosts: PropTypes.bool,
+  hasTwitterImpressions: PropTypes.bool,
   postActions: PropTypes.shape({
     onEditClick: PropTypes.func.isRequired,
     onDeleteConfirmClick: PropTypes.func.isRequired,
@@ -147,6 +153,11 @@ ViewCampaign.propTypes = {
     onShareNowClick: PropTypes.func.isRequired,
     onRequeueClick: PropTypes.func.isRequired,
   }).isRequired,
+};
+
+ViewCampaign.defaultProps = {
+  hasAnalyticsOnPosts: false,
+  hasTwitterImpressions: false,
 };
 
 export default ViewCampaign;

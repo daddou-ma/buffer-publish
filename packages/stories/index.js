@@ -38,7 +38,6 @@ export default connect(
         showStoriesComposer: state.stories.showStoriesComposer,
         showStoryPreview: state.stories.showStoryPreview,
         editMode: state.stories.editMode,
-        isBusinessAccount: profileData.business,
         isLockedProfile: currentProfile.isLockedProfile,
         isDisconnectedProfile: profileData.isDisconnected,
         serviceId: profileData.serviceId,

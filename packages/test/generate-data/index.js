@@ -173,7 +173,6 @@ const buildCampaignItem = build('CampaignItem', {
     user: buildUser(),
     dueAt: 1590838200,
     isManager: true,
-    isBusinessAccount: true,
     hasPushNotifications: true,
   },
 });

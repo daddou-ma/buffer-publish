@@ -31,6 +31,8 @@ module.exports = orgData => ({
   hasDraftsFeature: orgData.planBase !== 'free',
   hasGridFeature: orgData.planBase === 'business',
   hasStoriesFeature: orgData.planBase === 'business',
+  hasTwitterImpressions: orgData.planBase === 'business',
+  hasAnalyticsOnPosts: orgData.planBase !== 'free',
 
   // Upgrade/ Trial Paths
   showUpgradeToProCta: orgData.planBase === 'free',

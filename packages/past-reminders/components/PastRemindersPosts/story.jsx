@@ -80,7 +80,6 @@ storiesOf('PastRemindersPosts', module)
       onComposerCreateSuccess={action('onComposerCreateSuccess')}
       onClickUpgrade={action('onClickUpgrade')}
       fetchCampaignsIfNeeded={action('fetchCampaignsIfNeeded')}
-      isBusinessAccount
       isManager
     />
   ))
@@ -99,7 +98,6 @@ storiesOf('PastRemindersPosts', module)
       onComposerCreateSuccess={action('onComposerCreateSuccess')}
       onClickUpgrade={action('onClickUpgrade')}
       fetchCampaignsIfNeeded={action('fetchCampaignsIfNeeded')}
-      isBusinessAccount
       isManager={false}
     />
   ));
