@@ -19,10 +19,6 @@ const store = storeFake({
   },
   switchPlanModal: {},
   stripe: {},
-  productFeatures: {
-    planName: 'free',
-    features: {},
-  },
   user: {
     trial: {
       onTrial: false,

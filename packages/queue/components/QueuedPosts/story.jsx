@@ -25,10 +25,6 @@ const store = storeFake({
   },
   switchPlanModal: {},
   stripe: {},
-  productFeatures: {
-    planName: 'free',
-    features: {},
-  },
   user: {
     profileLimit: 3,
     id: 'id1',
@@ -36,6 +32,12 @@ const store = storeFake({
   profileSidebar: {
     selectedProfile: {
       ownerId: 'id1',
+    },
+  },
+  organizations: {
+    selected: {
+      isOwner: true,
+      planBase: 'free',
     },
   },
 });

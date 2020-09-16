@@ -54,7 +54,6 @@ describe('middleware', () => {
   const store = {
     dispatch: jest.fn(),
     getState: () => ({
-      productFeatures: { planName: 'business' },
       thirdparty: { appCues: { loaded: true } },
       modals: {},
     }),

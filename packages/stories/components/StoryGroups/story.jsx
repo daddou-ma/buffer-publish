@@ -23,10 +23,6 @@ const store = storeFake({
   },
   switchPlanModal: {},
   stripe: {},
-  productFeatures: {
-    planName: 'free',
-    features: {},
-  },
   user: {
     profileLimit: 3,
     id: 'id1',
@@ -47,12 +43,10 @@ storiesOf('Stories|StoryGroups', module)
   .addDecorator(UpgradeModalDecorator)
   .add('should show stories storyPosts', () => (
     <StoryGroups
-      total={2}
       loading={false}
-      isManager
       storyGroups={storyGroups}
       isLockedProfile={false}
-      showStoriesComposer={action('showStoriesComposer')}
+      showStoriesComposer={false}
       onEmptySlotClick={action('onEmptySlotClick')}
       onEditClick={action('onEditClick')}
       onDeleteConfirmClick={action('onDeleteConfirmClick')}

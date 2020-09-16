@@ -37,9 +37,6 @@ describe('TabNavigation', () => {
     environment: {
       environment: 'production',
     },
-    productFeatures: {
-      planName: 'pro',
-    },
     tabs: {
       draftsNeedApprovalCount: 1,
       draftsCount: 0,

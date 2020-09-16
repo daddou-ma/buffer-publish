@@ -4,7 +4,7 @@ import { withA11y } from '@storybook/addon-a11y';
 import { action } from '@storybook/addon-actions';
 import { Provider } from 'react-redux';
 import PastRemindersPosts from './index';
-import { header, subHeader, postLists } from './postData';
+import { postLists } from './postData';
 
 const storeFake = state => ({
   default: () => {},
@@ -21,10 +21,6 @@ const store = storeFake({
   },
   switchPlanModal: {},
   stripe: {},
-  productFeatures: {
-    planName: 'free',
-    features: {},
-  },
 });
 
 const StoreDecorator = storyFn => (
@@ -38,66 +34,67 @@ storiesOf('PastRemindersPosts', module)
     <PastRemindersPosts
       total={10}
       loading={false}
-      header={header}
-      subHeader={subHeader}
-      postLists={postLists}
-      onDeleteConfirmClick={action('onDeleteConfirmClick')}
-      onEditClick={action('onEditClick')}
-      onShareNowClick={action('onShareNowClick')}
-      onRequeueClick={action('onRequeueClick')}
-      onComposerCreateSuccess={action('onComposerCreateSuccess')}
-      onClickUpgrade={action('onClickUpgrade')}
+      isManager
+      userData={{}}
+      items={postLists}
+      viewType="posts"
+      onPreviewClick={action('onPreviewClick')}
+      showStoryPreview={false}
+      showStoriesComposer={false}
+      isDisconnectedProfile={false}
+      onClosePreviewClick={action('onClosePreviewClick')}
       fetchCampaignsIfNeeded={action('fetchCampaignsIfNeeded')}
+      hasShareAgainFeature
     />
   ))
   .add('loading', () => (
     <PastRemindersPosts
-      total={0}
+      total={10}
       loading
-      header={header}
-      subHeader={subHeader}
-      postLists={postLists}
-      onDeleteConfirmClick={action('onDeleteConfirmClick')}
-      onEditClick={action('onEditClick')}
-      onShareNowClick={action('onShareNowClick')}
-      onRequeueClick={action('onRequeueClick')}
-      onComposerCreateSuccess={action('onComposerCreateSuccess')}
-      onClickUpgrade={action('onClickUpgrade')}
+      isManager
+      userData={{}}
+      items={postLists}
+      viewType="posts"
+      onPreviewClick={action('onPreviewClick')}
+      showStoryPreview={false}
+      showStoriesComposer={false}
+      isDisconnectedProfile={false}
+      onClosePreviewClick={action('onClosePreviewClick')}
+      fetchCampaignsIfNeeded={action('fetchCampaignsIfNeeded')}
+      hasShareAgainFeature
     />
   ))
   .add('if Manager and in Business Account', () => (
     <PastRemindersPosts
       total={5}
       loading={false}
-      header={header}
-      subHeader={subHeader}
-      postLists={postLists}
-      onDeleteConfirmClick={action('onDeleteConfirmClick')}
-      onEditClick={action('onEditClick')}
-      onShareNowClick={action('onShareNowClick')}
-      onRequeueClick={action('onRequeueClick')}
-      onClickSwitchPlan={action('onClickSwitchPlan')}
-      onComposerCreateSuccess={action('onComposerCreateSuccess')}
-      onClickUpgrade={action('onClickUpgrade')}
-      fetchCampaignsIfNeeded={action('fetchCampaignsIfNeeded')}
       isManager
+      userData={{}}
+      items={postLists}
+      viewType="posts"
+      onPreviewClick={action('onPreviewClick')}
+      showStoryPreview={false}
+      showStoriesComposer={false}
+      isDisconnectedProfile={false}
+      onClosePreviewClick={action('onClosePreviewClick')}
+      fetchCampaignsIfNeeded={action('fetchCampaignsIfNeeded')}
+      hasShareAgainFeature
     />
   ))
   .add('if Contributor and in Business Account', () => (
     <PastRemindersPosts
-      total={5}
+      total={10}
       loading={false}
-      header={header}
-      subHeader={subHeader}
-      postLists={postLists}
-      onDeleteConfirmClick={action('onDeleteConfirmClick')}
-      onEditClick={action('onEditClick')}
-      onShareNowClick={action('onShareNowClick')}
-      onRequeueClick={action('onRequeueClick')}
-      onClickSwitchPlan={action('onClickSwitchPlan')}
-      onComposerCreateSuccess={action('onComposerCreateSuccess')}
-      onClickUpgrade={action('onClickUpgrade')}
-      fetchCampaignsIfNeeded={action('fetchCampaignsIfNeeded')}
       isManager={false}
+      userData={{}}
+      items={postLists}
+      viewType="posts"
+      onPreviewClick={action('onPreviewClick')}
+      showStoryPreview={false}
+      showStoriesComposer={false}
+      isDisconnectedProfile={false}
+      onClosePreviewClick={action('onClosePreviewClick')}
+      fetchCampaignsIfNeeded={action('fetchCampaignsIfNeeded')}
+      hasShareAgainFeature
     />
   ));

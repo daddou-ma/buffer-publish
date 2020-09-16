@@ -1,28 +1,9 @@
 import React from 'react';
-import { Provider } from 'react-redux';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
 
 import ViewCampaign from './index';
-
-const storeFake = state => ({
-  default: () => {},
-  subscribe: () => {},
-  dispatch: () => {},
-  getState: () => ({ ...state }),
-});
-
-const store = storeFake({
-  productFeatures: {
-    planName: 'free',
-    features: {},
-  },
-});
-
-const UpgradeModalDecorator = storyFn => (
-  <Provider store={store}>{storyFn()}</Provider>
-);
 
 const campaignDetails = {
   name: '#SaveOurSeasWeek',
@@ -119,7 +100,6 @@ const postActions = {
 
 storiesOf('Campaigns|ViewCampaign', module)
   .addDecorator(withA11y)
-  .addDecorator(UpgradeModalDecorator)
   .add('Campaign view with posts', () => (
     <ViewCampaign
       campaign={campaignDetails}

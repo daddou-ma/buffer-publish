@@ -33,10 +33,6 @@ const store = storeFake({
   switchPlanModal: {},
   stripe: {},
   profile,
-  productFeatures: {
-    planName: 'business',
-    features: {},
-  },
 });
 
 const UpgradeModalDecorator = storyFn => (

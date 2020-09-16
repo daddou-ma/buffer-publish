@@ -33,10 +33,6 @@ const store = storeFake({
   stripe: {},
   publicGridUrl: 'https://shopgr.id/my-brand',
   profile,
-  productFeatures: {
-    planName: 'business',
-    features: {},
-  },
 });
 
 const UpgradeModalDecorator = storyFn => (
