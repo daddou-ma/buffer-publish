@@ -7,8 +7,7 @@
     "lint": "eslint . --ignore-pattern coverage node_modules"
   },
   "author": "hamstu@gmail.com",
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "publishConfig": {
     "access": "public"
   },

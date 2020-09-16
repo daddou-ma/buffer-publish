@@ -11,8 +11,7 @@
     "@bufferapp/publish-profiles-disconnected-modal": "2.0.0",
     "@bufferapp/publish-shared-components": "2.0.0"
   },
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "publishConfig": {
     "access": "public"
   }

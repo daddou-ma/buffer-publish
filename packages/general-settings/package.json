@@ -13,8 +13,7 @@
     "@bufferapp/publish-locked-profile-notification": "2.0.0",
     "@bufferapp/product-features": "2.0.0"
   },
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "publishConfig": {
     "access": "public"
   }
