@@ -2,14 +2,14 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
+import { queueItems } from '@bufferapp/publish-test-utils/mock-ui-data';
 import QueueItems from './index';
-import { postLists, postListsNoHeaders } from './postData';
 
 storiesOf('Queue|QueueItems', module)
   .addDecorator(withA11y)
   .add('default queue', () => (
     <QueueItems
-      items={postLists}
+      items={queueItems({ isSent: false })}
       onRequeueClick={action('onCancelConfirmClick')}
       onDeleteConfirmClick={action('onDeleteConfirmClick')}
       onEditClick={action('onEditClick')}
@@ -21,7 +21,7 @@ storiesOf('Queue|QueueItems', module)
   ))
   .add('no headers type drafts', () => (
     <QueueItems
-      items={postListsNoHeaders}
+      items={queueItems({ isSent: false, isDraft: true })}
       onRequeueClick={action('onCancelConfirmClick')}
       onDeleteConfirmClick={action('onDeleteConfirmClick')}
       onEditClick={action('onEditClick')}

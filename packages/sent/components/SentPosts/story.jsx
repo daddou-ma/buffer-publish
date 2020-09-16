@@ -3,8 +3,8 @@ import { storiesOf } from '@storybook/react';
 import { Provider } from 'react-redux';
 import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
+import { queueItems } from '@bufferapp/publish-test-utils/mock-ui-data';
 import SentPosts from './index';
-import postLists from './postData';
 
 const storeFake = state => ({
   default: () => {},
@@ -34,7 +34,7 @@ storiesOf('SentPosts', module)
     <SentPosts
       total={1}
       loading={false}
-      items={postLists}
+      items={queueItems({ isSent: true, isPastReminder: false })}
       onComposerCreateSuccess={action('onComposerCreateSuccess')}
       onClickUpgrade={action('onClickUpgrade')}
       onShareAgainClick={action('onShareAgainClick')}
@@ -47,7 +47,7 @@ storiesOf('SentPosts', module)
     <SentPosts
       total={1}
       loading={false}
-      items={postLists}
+      items={queueItems({ isSent: true, isPastReminder: false })}
       onComposerCreateSuccess={action('onComposerCreateSuccess')}
       onClickUpgrade={action('onClickUpgrade')}
       onShareAgainClick={action('onShareAgainClick')}

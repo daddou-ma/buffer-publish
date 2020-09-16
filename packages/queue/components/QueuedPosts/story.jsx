@@ -6,9 +6,9 @@ import { withA11y } from '@storybook/addon-a11y';
 
 import TestBackend from 'react-dnd-test-backend';
 import { DragDropContext } from 'react-dnd';
+import { queueItems } from '@bufferapp/publish-test-utils/mock-ui-data';
 
 import QueuedPosts from './index';
-import items from './postData';
 
 const storeFake = state => ({
   default: () => {},
@@ -67,7 +67,7 @@ storiesOf('QueuedPosts', module)
     <QueuedPosts
       total={10}
       loading={false}
-      items={items}
+      items={queueItems({ isSent: false, isPastReminder: false })}
       onDeleteConfirmClick={action('onDeleteConfirmClick')}
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}
@@ -90,7 +90,7 @@ storiesOf('QueuedPosts', module)
     <QueuedPosts
       total={0}
       loading
-      items={items}
+      items={queueItems({ isSent: false, isPastReminder: false })}
       onDeleteConfirmClick={action('onDeleteConfirmClick')}
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}
@@ -112,7 +112,7 @@ storiesOf('QueuedPosts', module)
     <QueuedPosts
       total={10}
       loading={false}
-      items={items}
+      items={queueItems({ isSent: false, isPastReminder: false })}
       onDeleteConfirmClick={action('onDeleteConfirmClick')}
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}
@@ -159,7 +159,7 @@ storiesOf('QueuedPosts', module)
     <QueuedPosts
       total={10}
       loading={false}
-      items={items}
+      items={queueItems({ isSent: false, isPastReminder: false })}
       onDeleteConfirmClick={action('onDeleteConfirmClick')}
       onEditClick={action('onEditClick')}
       onShareNowClick={action('onShareNowClick')}

@@ -2,9 +2,9 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withA11y } from '@storybook/addon-a11y';
 import { action } from '@storybook/addon-actions';
+import { queueItems } from '@bufferapp/publish-test-utils/mock-ui-data';
 import { Provider } from 'react-redux';
 import PastRemindersPosts from './index';
-import { postLists } from './postData';
 
 const storeFake = state => ({
   default: () => {},
@@ -36,7 +36,7 @@ storiesOf('PastRemindersPosts', module)
       loading={false}
       isManager
       userData={{}}
-      items={postLists}
+      items={queueItems({ isSent: false, isPastReminder: true })}
       viewType="posts"
       onPreviewClick={action('onPreviewClick')}
       showStoryPreview={false}
@@ -53,7 +53,7 @@ storiesOf('PastRemindersPosts', module)
       loading
       isManager
       userData={{}}
-      items={postLists}
+      items={queueItems({ isSent: false, isPastReminder: true })}
       viewType="posts"
       onPreviewClick={action('onPreviewClick')}
       showStoryPreview={false}
@@ -70,7 +70,7 @@ storiesOf('PastRemindersPosts', module)
       loading={false}
       isManager
       userData={{}}
-      items={postLists}
+      items={queueItems({ isSent: false, isPastReminder: true })}
       viewType="posts"
       onPreviewClick={action('onPreviewClick')}
       showStoryPreview={false}
@@ -87,7 +87,7 @@ storiesOf('PastRemindersPosts', module)
       loading={false}
       isManager={false}
       userData={{}}
-      items={postLists}
+      items={queueItems({ isSent: false, isPastReminder: true })}
       viewType="posts"
       onPreviewClick={action('onPreviewClick')}
       showStoryPreview={false}

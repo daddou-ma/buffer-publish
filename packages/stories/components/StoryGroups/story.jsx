@@ -4,9 +4,9 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
 import translations from '@bufferapp/publish-i18n/translations/en-us.json';
+import { queueItems } from '@bufferapp/publish-test-utils/mock-ui-data';
 
 import StoryGroups from './index';
-import storyGroups from './storiesData';
 
 const storeFake = state => ({
   default: () => {},
@@ -44,7 +44,11 @@ storiesOf('Stories|StoryGroups', module)
   .add('should show stories storyPosts', () => (
     <StoryGroups
       loading={false}
-      storyGroups={storyGroups}
+      storyGroups={queueItems({
+        isSent: false,
+        isPastReminder: false,
+        isStory: true,
+      })}
       isLockedProfile={false}
       showStoriesComposer={false}
       onEmptySlotClick={action('onEmptySlotClick')}
