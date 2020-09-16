@@ -1,7 +1,7 @@
 const items = [
   {
     queueItemType: 'header',
-    test: 'Today',
+    text: 'Today',
     id: 'header-1',
   },
   {
@@ -13,6 +13,14 @@ const items = [
     imageUrls: [],
     links: [],
     linkAttachment: {},
+    postContent: {
+      imageUrls: [],
+      linkAttachment: {},
+      links: [],
+      retweetCommentLinks: [],
+      text: 'New thing',
+      type: 'text',
+    },
     postDetails: {
       postAction: 'This post is scheduled for May 2nd',
       isRetweet: false,
@@ -32,6 +40,14 @@ const items = [
     imageUrls: [],
     links: [],
     linkAttachment: {},
+    postContent: {
+      imageUrls: [],
+      linkAttachment: {},
+      links: [],
+      retweetCommentLinks: [],
+      text: 'Another thing, that is also new',
+      type: 'text',
+    },
     postDetails: {
       postAction: 'This post is scheduled for May 2nd',
       isRetweet: false,
@@ -44,7 +60,7 @@ const items = [
   },
   {
     queueItemType: 'header',
-    test: 'Tuesday May 3rd',
+    text: 'Tuesday May 3rd',
     id: 'header-2',
   },
   {
@@ -56,6 +72,14 @@ const items = [
     imageUrls: [],
     links: [],
     linkAttachment: {},
+    postContent: {
+      imageUrls: [],
+      linkAttachment: {},
+      links: [],
+      retweetCommentLinks: [],
+      text: 'New thing',
+      type: 'text',
+    },
     postDetails: {
       postAction: 'This post is scheduled for May 3rd',
       isRetweet: false,
@@ -75,6 +99,14 @@ const items = [
     imageUrls: [],
     links: [],
     linkAttachment: {},
+    postContent: {
+      imageUrls: [],
+      linkAttachment: {},
+      links: [],
+      retweetCommentLinks: [],
+      text: 'Another thing, that is also new',
+      type: 'text',
+    },
     postDetails: {
       postAction: 'This post is scheduled for May 3rd',
       isRetweet: false,

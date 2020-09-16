@@ -7,6 +7,7 @@ export const selectedProfile = {
   service: 'twitter',
   type: 'twitter',
   handle: 'joelgascoigne',
+  isManager: true,
   open: false,
   schedules: [],
   loading: false,
