@@ -10,8 +10,7 @@
   "dependencies": {
     "@bufferapp/async-data-fetch": "2.0.0"
   },
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "publishConfig": {
     "access": "public"
   }

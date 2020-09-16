@@ -11,8 +11,7 @@
     "@bufferapp/async-data-fetch": "2.0.0",
     "@bufferapp/notifications": "1.9.4"
   },
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "publishConfig": {
     "access": "public"
   }

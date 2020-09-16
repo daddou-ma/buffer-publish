@@ -19,8 +19,7 @@
     "@bufferapp/publish-queue": "2.0.0",
     "@bufferapp/publish-data-organizations": "2.0.0"
   },
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "publishConfig": {
     "access": "public"
   }

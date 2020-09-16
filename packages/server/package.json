@@ -39,13 +39,12 @@
     "yaml": "1.9.2",
     "dotenv": "8.2.0"
   },
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "publishConfig": {
     "access": "public"
   },
   "workspaces": [
     "packages/constants"
   ],
-  "private":true
+  "private": true
 }
