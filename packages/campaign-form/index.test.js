@@ -56,8 +56,11 @@ describe('CampaignForm | user interaction', () => {
 
     const { input, purpleColor, greenColor, saveButton } = campaignForm();
 
-    expect(screen.getByRole('heading')).toHaveTextContent(/create campaign/i);
+    expect(
+      screen.getByRole('heading', { name: /create campaign/i })
+    ).toBeInTheDocument();
     expect(purpleColor).toBeChecked();
+    expect(greenColor).not.toBeChecked();
     expect(saveButton).toBeDisabled();
 
     await userEvent.type(input, 'Campaign Test');
@@ -95,7 +98,7 @@ describe('CampaignForm | user interaction', () => {
     render(<CampaignForm editMode />, {
       initialState: {
         ...initialState,
-        campaignForm: { campaignId, isLoading: false },
+        campaignForm: { campaignId },
       },
     });
 
@@ -107,8 +110,13 @@ describe('CampaignForm | user interaction', () => {
     expect(rpcCall).toHaveBeenCalledTimes(1);
 
     const { input, greenColor, saveButton } = campaignForm();
-    await waitFor(() => expect(input).toHaveValue('Test Campaign'));
-    await waitFor(() => expect(greenColor).toBeChecked());
+
+    const editHeader = await screen.findByRole('heading', {
+      name: /edit campaign/i,
+    });
+    expect(editHeader).toBeInTheDocument();
+    expect(input).toHaveValue('Test Campaign');
+    expect(greenColor).toBeChecked();
 
     userEvent.clear(input);
     await userEvent.type(input, 'Campaign updated');
@@ -125,6 +133,16 @@ describe('CampaignForm | user interaction', () => {
     expect(rpcCall).toHaveBeenCalledTimes(2);
   });
 
+  test.skip('tests implementation details', () => {
+    const { store } = render(<CampaignForm />);
+    expect(store.getState().campaign.isLoading).toBeTruthy();
+  });
+
+  test.skip('tests behavior', () => {
+    render(<CampaignForm />);
+    expect(screen.queryByText(/loading/i)).toBeInTheDocument();
+  });
+
   test(`update campaign redirects to campaigns view if there's an error fetching the campaign`, async () => {
     const campaignId = '18027';
     const errorResponse = new Error('Campaign not found');
@@ -135,7 +153,7 @@ describe('CampaignForm | user interaction', () => {
     const { history } = render(<CampaignForm editMode />, {
       initialState: {
         ...initialState,
-        campaignForm: { campaignId, isLoading: false },
+        campaignForm: { campaignId },
       },
     });
 
