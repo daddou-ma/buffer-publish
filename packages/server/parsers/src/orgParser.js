@@ -20,4 +20,20 @@ module.exports = orgData => ({
 
   // Plan Features
   hasCampaignsFeature: orgData.planBase !== 'free',
+  hasAnalyticsFeature: orgData.planBase === 'business',
+  hasBitlyFeature: orgData.planBase !== 'free',
+  has30DaySentPostsLimitFeature: orgData.planBase === 'free', // profiles_controller updates_sent() returns only 30 days of sent posts for free users.
+  hasCalendarFeature: orgData.planBase !== 'free',
+  hasShareAgainFeature: orgData.planBase !== 'free',
+  hasCustomizingUtmParamsFeature:
+    orgData.planBase === 'business' && orgData.isOwner,
+  hasApprovalFeature: orgData.planBase === 'business',
+  hasDraftsFeature: orgData.planBase !== 'free',
+  hasGridFeature: orgData.planBase === 'business',
+  hasStoriesFeature: orgData.planBase === 'business',
+  hasTwitterImpressions: orgData.planBase === 'business',
+  hasAnalyticsOnPosts: orgData.planBase !== 'free',
+
+  // Upgrade/ Trial Paths
+  showUpgradeToProCta: orgData.planBase === 'free',
 });

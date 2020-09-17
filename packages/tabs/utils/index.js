@@ -12,31 +12,27 @@ const openBillingWindow = () => {
   window.location.href = `${getBaseURL()}/app/account/receipts?content_only=true`;
 };
 
-// TODO: remove `hasStoriesFlip` paramenter once the Stories is launched
 /**
  * Checks if the user can go the selected tab and returns the proper one in case is invalid
  *
  * @param selectedTab: the new tab trying to be accessed
- * @param isBusinessAccount
- * @param isInstagramProfile
- * @param isManager
- * @param isFreeUser
  *
  * @returns string validTabId with the valid tab, default value is 'queue'
  */
-const getValidTab = (
-  selectedTab,
-  isBusinessAccount,
+const getValidTab = ({
+  tabId,
+  childTabId,
+  hasApprovalFeature,
+  hasDraftsFeature,
+  hasGridFeature,
+  hasStoriesFeature,
   isInstagramProfile,
   isManager,
-  isFreeUser,
-  hasStoriesFlip,
-  childTabId,
-  shouldHideAdvancedAnalytics
-) => {
-  let validTabId = selectedTab;
+  shouldHideAdvancedAnalytics,
+}) => {
+  let validTabId = tabId;
 
-  switch (selectedTab) {
+  switch (tabId) {
     case 'queue':
       validTabId = 'queue';
       break;
@@ -53,27 +49,25 @@ const getValidTab = (
     case 'awaitingApproval':
       /* Team Members who are Managers */
       validTabId =
-        isBusinessAccount && isManager ? 'awaitingApproval' : 'queue';
+        hasApprovalFeature && isManager ? 'awaitingApproval' : 'queue';
       break;
     case 'pendingApproval':
       /* Team Members who are Contributors */
       validTabId =
-        isBusinessAccount && !isManager ? 'pendingApproval' : 'queue';
+        hasApprovalFeature && !isManager ? 'pendingApproval' : 'queue';
       break;
     case 'drafts':
       /* Pro and up users or Team Members */
-      validTabId = !isFreeUser || isBusinessAccount ? 'drafts' : 'queue';
+      validTabId = hasDraftsFeature ? 'drafts' : 'queue';
       break;
     case 'grid':
       /* IG, Business users or Team Members */
-      validTabId = isBusinessAccount && isInstagramProfile ? 'grid' : 'queue';
+      validTabId = hasGridFeature && isInstagramProfile ? 'grid' : 'queue';
       break;
     case 'stories':
       /* IG, Business users or Team Members */
       validTabId =
-        isBusinessAccount && isInstagramProfile && hasStoriesFlip
-          ? 'stories'
-          : 'queue';
+        hasStoriesFeature && isInstagramProfile ? 'stories' : 'queue';
       break;
     case 'settings':
       validTabId = 'settings';

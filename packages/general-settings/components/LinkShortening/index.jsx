@@ -13,7 +13,7 @@ const pinterestSectionStyling = {
 };
 
 const LinkShortening = ({
-  features,
+  hasBitlyFeature,
   onOptionSelect,
   profileService,
   linkShorteners,
@@ -62,7 +62,7 @@ const LinkShortening = ({
   }
   return (
     <LinkShorteningWrapper
-      isFreeUser={features.isFreeUser}
+      hasBitlyFeature={hasBitlyFeature}
       loading={loading}
       startSectionStyles={{
         flex: 1,
@@ -118,9 +118,7 @@ LinkShortening.propTypes = {
   ),
   loading: PropTypes.bool,
   selectedShortener: PropTypes.string,
-  features: PropTypes.shape({
-    isFreeUser: PropTypes.func,
-  }).isRequired,
+  hasBitlyFeature: PropTypes.bool.isRequired,
 };
 
 export default LinkShortening;

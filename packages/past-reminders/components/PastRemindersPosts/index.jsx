@@ -90,13 +90,13 @@ const PastRemindersPosts = ({
   showComposer,
   editMode,
   isManager,
-  isBusinessAccount,
   onPreviewClick,
   showStoryPreview,
   showStoriesComposer,
   isDisconnectedProfile,
   onClosePreviewClick,
   fetchCampaignsIfNeeded,
+  hasShareAgainFeature,
 }) => {
   if (loading) {
     return (
@@ -137,12 +137,11 @@ const PastRemindersPosts = ({
         <QueueItems
           items={items}
           onEditClick={onEditClick}
-          showShareAgainButton
+          showShareAgainButton={hasShareAgainFeature}
           showSendToMobile
           onShareAgainClick={post => onShareAgainClick(post, viewType)}
           onMobileClick={post => onMobileClick(post, viewType)}
           isManager={isManager}
-          isBusinessAccount={isBusinessAccount}
           isSent={false}
           isPastReminder
           userData={userData}
@@ -167,6 +166,7 @@ PastRemindersPosts.propTypes = {
       hasCommentEnabled: PropTypes.bool,
     })
   ),
+  hasShareAgainFeature: PropTypes.bool,
   total: PropTypes.number,
   showComposer: PropTypes.bool,
   editMode: PropTypes.bool,
@@ -179,7 +179,6 @@ PastRemindersPosts.propTypes = {
   onClosePreviewClick: PropTypes.func,
   viewType: PropTypes.string,
   isManager: PropTypes.bool,
-  isBusinessAccount: PropTypes.bool,
   showStoryPreview: PropTypes.bool,
   isDisconnectedProfile: PropTypes.bool,
   userData: PropTypes.shape({
@@ -193,12 +192,12 @@ PastRemindersPosts.defaultProps = {
   loading: true,
   moreToLoad: false,
   page: 1,
+  hasShareAgainFeature: false,
   total: 0,
   showComposer: false,
   showStoriesComposer: false,
   editMode: false,
   isManager: true,
-  isBusinessAccount: false,
   showStoryPreview: false,
   isDisconnectedProfile: false,
   viewType: 'posts',

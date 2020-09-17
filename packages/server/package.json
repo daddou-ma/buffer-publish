@@ -10,7 +10,7 @@
   },
   "author": "hharnisc@gmail.com",
   "dependencies": {
-    "@bufferapp/buffer-rpc": "1.1.0",
+    "@bufferapp/buffer-rpc": "1.2.0",
     "@bufferapp/micro-rpc-client": "1.0.0",
     "@bufferapp/micro-rpc": "0.1.7",
     "@bufferapp/bufflog": "0.0.6",
@@ -39,13 +39,12 @@
     "yaml": "1.9.2",
     "dotenv": "8.2.0"
   },
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "publishConfig": {
     "access": "public"
   },
   "workspaces": [
     "packages/constants"
   ],
-  "private":true
+  "private": true
 }

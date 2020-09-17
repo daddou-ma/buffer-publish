@@ -32,6 +32,9 @@ export default hot(
           pathname: state.router?.location?.pathname,
           route: campaignsPage.route,
         }),
+        showUpgradeToProCta: state.organizations.selected?.showUpgradeToProCta,
+        canSeeIGPersonalProfileConnect:
+          state.user.canSeeIGPersonalProfileConnect,
       };
     },
     (dispatch, ownProps) => ({

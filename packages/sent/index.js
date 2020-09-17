@@ -38,7 +38,6 @@ export default connect(
         showComposer: state.sent.showComposer,
         editMode: state.sent.editMode,
         isManager: state.profileSidebar.selectedProfile.isManager,
-        isBusinessAccount: state.profileSidebar.selectedProfile.business,
         showAnalyzeBannerAfterFirstPost:
           state.profileSidebar.selectedProfile.shouldHideAdvancedAnalytics,
         isLockedProfile: state.profileSidebar.isLockedProfile,
@@ -47,9 +46,15 @@ export default connect(
         analyzeCrossSale: state.user.analyzeCrossSale,
         hasFirstCommentFlip: state.user.hasFirstCommentFeature,
         hasCampaignsFeature: state.user.hasCampaignsFeature,
+        hasShareAgainFeature: state.organizations.selected.hasShareAgainFeature,
+        has30DaySentPostsLimitFeature:
+          state.organizations.selected.has30DaySentPostsLimitFeature,
+        hasBitlyFeature: state.organizations.selected.hasBitlyFeature,
         linkShortening: state.generalSettings.linkShortening,
         hasBitlyPosts: currentProfile.hasBitlyPosts,
-        shouldDisplayBitly: !state?.productFeatures?.isFreeUser,
+        hasAnalyticsOnPosts: state.organizations.selected.hasAnalyticsOnPosts,
+        hasTwitterImpressions:
+          state.organizations.selected.hasTwitterImpressions,
       };
     }
     return {};

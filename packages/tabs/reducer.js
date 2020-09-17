@@ -11,7 +11,6 @@ export const initialState = {
   tabId: 'queue',
   selectedProfileId: '',
   selectedProfile: {},
-  isBusinessAccount: false,
   draftsNeedApprovalCount: null,
   draftsCount: null,
 };

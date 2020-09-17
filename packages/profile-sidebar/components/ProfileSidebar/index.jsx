@@ -105,6 +105,9 @@ const ProfileSidebar = ({
   hasCampaignsFlip,
   onCampaignsButtonClick,
   isCampaignsSelected,
+  showUpgradeToProCta,
+  // temporarily allows buffer admin to connect personal ig profiles
+  canSeeIGPersonalProfileConnect,
 }) => {
   const { t } = useTranslation();
 
@@ -176,6 +179,19 @@ const ProfileSidebar = ({
                   profiles={profiles}
                   showSwitchPlanModal={showSwitchPlanModal}
                   goToConnectSocialAccount={goToConnectSocialAccount}
+                  showUpgradeToProCta={showUpgradeToProCta}
+                />
+              )}
+              {canSeeIGPersonalProfileConnect && (
+                <ProfileConnectShortcut
+                  label="Connect Personal IG (Admin)"
+                  network="instagram"
+                  url="https://buffer.com/oauth/instagram"
+                  profileLimit={profileLimit}
+                  profiles={profiles}
+                  showSwitchPlanModal={showSwitchPlanModal}
+                  goToConnectSocialAccount={goToConnectSocialAccount}
+                  showUpgradeToProCta={showUpgradeToProCta}
                 />
               )}
               {!hasFacebook && (
@@ -187,6 +203,7 @@ const ProfileSidebar = ({
                   profiles={profiles}
                   showSwitchPlanModal={showSwitchPlanModal}
                   goToConnectSocialAccount={goToConnectSocialAccount}
+                  showUpgradeToProCta={showUpgradeToProCta}
                 />
               )}
               {!hasTwitter && (
@@ -198,6 +215,7 @@ const ProfileSidebar = ({
                   profiles={profiles}
                   showSwitchPlanModal={showSwitchPlanModal}
                   goToConnectSocialAccount={goToConnectSocialAccount}
+                  showUpgradeToProCta={showUpgradeToProCta}
                 />
               )}
             </>
@@ -244,6 +262,8 @@ ProfileSidebar.propTypes = {
   isCampaignsSelected: PropTypes.bool,
   onCampaignsButtonClick: PropTypes.func,
   ownerEmail: PropTypes.string,
+  showUpgradeToProCta: PropTypes.bool,
+  canSeeIGPersonalProfileConnect: PropTypes.bool,
 };
 
 ProfileSidebar.defaultProps = {
@@ -260,6 +280,8 @@ ProfileSidebar.defaultProps = {
   hasCampaignsFlip: false,
   isCampaignsSelected: false,
   ownerEmail: 'the owner',
+  showUpgradeToProCta: true,
+  canSeeIGPersonalProfileConnect: false,
 };
 
 export default ProfileSidebar;

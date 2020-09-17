@@ -2,7 +2,6 @@ import React, { lazy, Suspense } from 'react';
 import PropTypes from 'prop-types';
 
 import { BusinessTrialOrUpgradeCard } from '@bufferapp/publish-shared-components';
-import { WithFeatureLoader } from '@bufferapp/product-features';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
@@ -22,20 +21,24 @@ const LazyAnalyticsList = lazy(() =>
 const ErrorBoundary = getErrorBoundary(true);
 
 const AnalyticsList = ({
-  features,
   profile,
   isAnalyticsSupported,
   isLockedProfile,
   canStartBusinessTrial,
-  isBusinessAccount,
+  hasAnalyticsFeature,
+  hasBitlyFeature,
   isInstagramBusiness,
   fetchProfiles,
   selectProfile,
   linkShortening,
   hasBitlyPosts,
 }) => {
-  // user is either a free or pro and is not a team member
-  if (!isBusinessAccount && (features.isProUser() || features.isFreeUser())) {
+  if (isLockedProfile) {
+    return <LockedProfileNotification />;
+  }
+
+  // org has analytics plan feature
+  if (!hasAnalyticsFeature) {
     const startTrial = () =>
       window.location.assign(
         `${getURL.getStartTrialURL({
@@ -72,20 +75,16 @@ const AnalyticsList = ({
     );
   }
 
-  if (isLockedProfile) {
-    return <LockedProfileNotification />;
-  }
-
   if (isAnalyticsSupported) {
     return (
       <ErrorBoundary>
         <Suspense fallback={<div>Loading...</div>}>
           <LazyAnalyticsList
+            hasBitlyFeature={hasBitlyFeature}
             profile={profile}
             isInstagramBusiness={isInstagramBusiness}
             fetchProfiles={fetchProfiles}
             selectProfile={selectProfile}
-            features={features}
             linkShortening={linkShortening}
             hasBitlyPosts={hasBitlyPosts}
           />
@@ -103,12 +102,12 @@ const AnalyticsList = ({
 };
 
 AnalyticsList.propTypes = {
-  features: PropTypes.object.isRequired, // eslint-disable-line
+  hasBitlyFeature: PropTypes.bool.isRequired,
   canStartBusinessTrial: PropTypes.bool.isRequired,
   isAnalyticsSupported: PropTypes.bool,
   profile: PropTypes.shape(ProfileHeader.propTypes),
   isLockedProfile: PropTypes.bool,
-  isBusinessAccount: PropTypes.bool.isRequired,
+  hasAnalyticsFeature: PropTypes.bool.isRequired,
   isInstagramBusiness: PropTypes.bool.isRequired,
   fetchProfiles: PropTypes.func.isRequired,
   selectProfile: PropTypes.func.isRequired,
@@ -124,4 +123,4 @@ AnalyticsList.defaultProps = {
   isLockedProfile: false,
 };
 
-export default WithFeatureLoader(AnalyticsList);
+export default AnalyticsList;

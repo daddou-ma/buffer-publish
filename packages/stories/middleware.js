@@ -6,7 +6,7 @@ import {
 import { actions as notificationActions } from '@bufferapp/notifications';
 import { actionTypes } from './reducer';
 
-export default ({ dispatch, getState }) => next => action => {
+export default ({ dispatch }) => next => action => {
   next(action);
   switch (action.type) {
     case profileActionTypes.SELECT_PROFILE:

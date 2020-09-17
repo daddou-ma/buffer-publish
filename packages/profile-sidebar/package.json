@@ -11,7 +11,6 @@
     "@bufferapp/async-data-fetch": "2.0.0",
     "@bufferapp/keywrapper": "0.2.0",
     "@bufferapp/notifications": "1.9.4",
-    "@bufferapp/product-features": "2.0.0",
     "@bufferapp/publish-routes": "2.0.0",
     "@bufferapp/publish-server": "2.0.0",
     "@bufferapp/publish-constants": "2.0.0",
@@ -19,8 +18,7 @@
     "@bufferapp/publish-queue": "2.0.0",
     "@bufferapp/publish-data-organizations": "2.0.0"
   },
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "publishConfig": {
     "access": "public"
   }

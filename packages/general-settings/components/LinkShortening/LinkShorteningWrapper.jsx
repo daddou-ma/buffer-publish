@@ -36,7 +36,7 @@ const containerStyling = {
 };
 
 const LinkShorteningWrapper = ({
-  isFreeUser,
+  hasBitlyFeature,
   onOptionSelect,
   children,
   linkList,
@@ -68,7 +68,7 @@ const LinkShorteningWrapper = ({
           style={{
             ...wrapperSidebarStyle,
             ...bitlyWrapperSidebarStyle,
-            ...(!showConnectBitly || isFreeUser ? optionOnlyStyle : ''),
+            ...(!showConnectBitly || !hasBitlyFeature ? optionOnlyStyle : ''),
           }}
         >
           <div>
@@ -81,7 +81,7 @@ const LinkShorteningWrapper = ({
             />
           </div>
           <ConnectBitlyToggler
-            isFreeUser={isFreeUser}
+            hasBitlyFeature={hasBitlyFeature}
             showConnectBitly={showConnectBitly}
             isBitlyConnected={isBitlyConnected}
             onConnectBitlyURLClick={onConnectBitlyURLClick}
@@ -125,7 +125,7 @@ LinkShorteningWrapper.propTypes = {
   selectedShortener: PropTypes.string,
   showConnectBitly: PropTypes.bool,
   isBitlyConnected: PropTypes.bool,
-  isFreeUser: PropTypes.func.isRequired,
+  hasBitlyFeature: PropTypes.bool.isRequired,
   isManager: PropTypes.bool.isRequired,
 };
 

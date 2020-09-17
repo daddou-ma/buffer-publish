@@ -10,8 +10,7 @@
   "dependencies": {
     "lodash.clamp": "^4.0.3"
   },
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "publishConfig": {
     "access": "public"
   }

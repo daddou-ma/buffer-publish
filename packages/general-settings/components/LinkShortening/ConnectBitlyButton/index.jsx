@@ -8,14 +8,14 @@ const connectBitlyButton = {
 };
 
 const ConnectBitlyToggler = ({
-  isFreeUser,
+  hasBitlyFeature,
   showConnectBitly,
   isBitlyConnected,
   onDisconnectBitlyURLClick,
   onConnectBitlyURLClick,
 }) => {
   if (showConnectBitly) {
-    if (!isFreeUser()) {
+    if (hasBitlyFeature) {
       if (isBitlyConnected) {
         return (
           <div style={connectBitlyButton}>
@@ -48,6 +48,6 @@ ConnectBitlyToggler.propTypes = {
   showConnectBitly: PropTypes.bool.isRequired,
   onDisconnectBitlyURLClick: PropTypes.func.isRequired,
   onConnectBitlyURLClick: PropTypes.func.isRequired,
-  isFreeUser: PropTypes.func.isRequired,
+  hasBitlyFeature: PropTypes.bool.isRequired,
 };
 export default ConnectBitlyToggler;

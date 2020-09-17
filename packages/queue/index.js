@@ -90,7 +90,6 @@ export default connect(
         isInstagramBusiness: profileData.isInstagramBusiness,
         paused: profileData.paused,
         isManager: profileData.isManager,
-        isBusinessAccount: profileData.business,
         hasPushNotifications: profileData.hasPushNotifications,
         showInstagramDirectPostingModal:
           state.modals.showInstagramDirectPostingModal,
@@ -98,6 +97,7 @@ export default connect(
         isInstagramLoading: state.queue.isInstagramLoading,
         hasFirstCommentFlip: state.user.hasFirstCommentFeature,
         hasCampaignsFeature: state.user.hasCampaignsFeature,
+        hasCalendarFeature: state.organizations.selected.hasCalendarFeature,
         shouldDisplaySingleSlots,
         shouldDisplayDisconnectedBanner:
           !shouldDisplayRetiringProfileBanner && isDisconnected,

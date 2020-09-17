@@ -2,12 +2,6 @@ import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-si
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 import middleware from './middleware';
 
-const getStateWithPaidUser = () => ({
-  user: {
-    isFreeUser: false,
-  },
-});
-
 describe('middleware', () => {
   const next = jest.fn();
   const dispatch = jest.fn();
@@ -23,7 +17,7 @@ describe('middleware', () => {
         id: 'id1',
       },
     };
-    middleware({ dispatch, getState: getStateWithPaidUser })(next)(action);
+    middleware({ dispatch })(next)(action);
     expect(next).toBeCalledWith(action);
     expect(dispatch).toBeCalledWith(
       dataFetchActions.fetch({

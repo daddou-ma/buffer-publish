@@ -10,8 +10,7 @@
   "dependencies": {
     "@bufferapp/keywrapper": "0.2.0"
   },
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "publishConfig": {
     "access": "public"
   }

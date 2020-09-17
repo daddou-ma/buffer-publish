@@ -10,16 +10,6 @@ import * as FullStory from '@fullstory/browser';
 
 import { actionTypes } from './reducer';
 
-const checkExtensionInstalled = () => {
-  /**
-   * We place this marker in the DOM (server/index.html) and the Buffer Extension
-   * will add it's version to it with a data-attribute when present. 👌
-   */
-  const markerEl = document.querySelector('#browser-extension-marker');
-  const version = markerEl.getAttribute('data-version');
-  return !!version;
-};
-
 const shouldIdentifyWithAppcues = ({ isBusinessUser, plan, tags }) => {
   // We identify with Appcues for all Business and Pro users
   if (isBusinessUser || plan === 'pro') {
@@ -78,12 +68,9 @@ export default ({ dispatch, getState }) => next => action => {
             /(local\.buffer)|(dev\.buffer\.com)/
           ),
         });
-        const { id } = action.result;
-        const {
-          productFeatures: { planName },
-        } = getState();
+        const { id, planBase } = action.result;
         FullStory.identify(id, {
-          pricingPlan_str: planName,
+          pricingPlan_str: planBase,
         });
       }
       break;

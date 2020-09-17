@@ -10,7 +10,6 @@ import { Divider, Text } from '@bufferapp/components';
 import { Button } from '@bufferapp/ui';
 import ComposerPopover from '@bufferapp/publish-composer-popover';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
-import { WithFeatureLoader } from '@bufferapp/product-features';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 import ProfilesDisconnectedBanner from '@bufferapp/publish-profiles-disconnected-banner';
 
@@ -41,7 +40,7 @@ const loadMoreButtonStyle = {
   paddingBottom: '3rem',
 };
 
-const NoPostsPublished = ({ total, isBusinessAccount, features }) => {
+const NoPostsPublished = ({ total, has30DaySentPostsLimitFeature }) => {
   if (typeof total === 'undefined' || total > 0) {
     return null;
   }
@@ -50,9 +49,9 @@ const NoPostsPublished = ({ total, isBusinessAccount, features }) => {
       <EmptyState
         height="initial"
         title={
-          isBusinessAccount || !features.isFreeUser()
-            ? 'You haven’t published any posts with this account!'
-            : 'You haven’t published any posts with this account in the past 30 days!'
+          has30DaySentPostsLimitFeature
+            ? 'You haven’t published any posts with this account in the past 30 days!'
+            : 'You haven’t published any posts with this account!'
         }
         subtitle="Once a post has gone live via Buffer, you can track its performance here to learn what works best with your audience!"
         heroImg="https://s3.amazonaws.com/buffer-publish/images/empty-sent2x.png"
@@ -64,14 +63,12 @@ const NoPostsPublished = ({ total, isBusinessAccount, features }) => {
 
 NoPostsPublished.propTypes = {
   total: PropTypes.number,
-  isBusinessAccount: PropTypes.bool,
-  features: PropTypes.shape({ isFreeUser: PropTypes.func }),
+  has30DaySentPostsLimitFeature: PropTypes.bool,
 };
 
 NoPostsPublished.defaultProps = {
   total: undefined,
-  isBusinessAccount: false,
-  features: {},
+  has30DaySentPostsLimitFeature: true,
 };
 
 const SentPosts = ({
@@ -87,10 +84,11 @@ const SentPosts = ({
   isManager,
   isLockedProfile,
   isDisconnectedProfile,
-  isBusinessAccount,
-  features,
+  has30DaySentPostsLimitFeature,
   hasFirstCommentFlip,
   hasCampaignsFeature,
+  hasShareAgainFeature,
+  hasBitlyFeature,
   moreToLoad,
   tabId,
   profileId,
@@ -104,6 +102,8 @@ const SentPosts = ({
   fetchCampaignsIfNeeded,
   profileServiceType,
   profileService,
+  hasAnalyticsOnPosts,
+  hasTwitterImpressions,
 }) => {
   useEffect(() => {
     fetchSentPosts();
@@ -129,16 +129,14 @@ const SentPosts = ({
     loadMore({ profileId, page, tabId });
   };
 
-  const header =
-    isBusinessAccount || !features.isFreeUser()
-      ? 'Your sent posts'
-      : 'Your sent posts for the last 30 days';
+  const header = has30DaySentPostsLimitFeature
+    ? 'Your sent posts for the last 30 days'
+    : 'Your sent posts';
   return (
     <ErrorBoundary>
       {isDisconnectedProfile && <ProfilesDisconnectedBanner />}
       <NoPostsPublished
-        features={features}
-        isBusinessAccount={isBusinessAccount}
+        has30DaySentPostsLimitFeature={has30DaySentPostsLimitFeature}
         total={total}
       />
 
@@ -154,7 +152,7 @@ const SentPosts = ({
             <BitlyClickNotification
               hasBitlyPosts={hasBitlyPosts}
               isBitlyConnected={!!linkShortening.isBitlyConnected}
-              isFreeUser={features.isFreeUser}
+              hasBitlyFeature={hasBitlyFeature}
             />
             <div style={topBarContainerStyle}>
               {showComposer && !editMode && (
@@ -175,15 +173,16 @@ const SentPosts = ({
               onShareAgainClick={onShareAgainClick}
               onCampaignTagClick={onCampaignTagClick}
               isManager={isManager}
-              isBusinessAccount={isBusinessAccount}
               isSent
-              showShareAgainButton
+              showShareAgainButton={hasShareAgainFeature}
               hasFirstCommentFlip={hasFirstCommentFlip}
               hasCampaignsFeature={hasCampaignsFeature}
               showAnalyzeBannerAfterFirstPost={showAnalyzeBannerAfterFirstPost}
               analyzeCrossSale={analyzeCrossSale}
               profileServiceType={profileServiceType}
               profileService={profileService}
+              hasAnalyticsOnPosts={hasAnalyticsOnPosts}
+              hasTwitterImpressions={hasTwitterImpressions}
             />
           </div>
           {moreToLoad && (
@@ -206,7 +205,9 @@ SentPosts.propTypes = {
   loading: PropTypes.bool,
   moreToLoad: PropTypes.bool, // eslint-disable-line
   page: PropTypes.number, // eslint-disable-line
-  features: PropTypes.object.isRequired, // eslint-disable-line
+  hasBitlyFeature: PropTypes.bool.isRequired,
+  has30DaySentPostsLimitFeature: PropTypes.bool.isRequired,
+  hasShareAgainFeature: PropTypes.bool,
   items: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,
@@ -227,7 +228,6 @@ SentPosts.propTypes = {
   onShareAgainClick: PropTypes.func,
   onCampaignTagClick: PropTypes.func,
   isManager: PropTypes.bool,
-  isBusinessAccount: PropTypes.bool,
   isLockedProfile: PropTypes.bool,
   isDisconnectedProfile: PropTypes.bool,
   hasFirstCommentFlip: PropTypes.bool,
@@ -237,6 +237,8 @@ SentPosts.propTypes = {
   }),
   hasBitlyPosts: PropTypes.bool,
   fetchCampaignsIfNeeded: PropTypes.func.isRequired,
+  hasAnalyticsOnPosts: PropTypes.bool,
+  hasTwitterImpressions: PropTypes.bool,
 };
 
 SentPosts.defaultProps = {
@@ -249,9 +251,9 @@ SentPosts.defaultProps = {
   analyzeCrossSale: false,
   editMode: false,
   isManager: true,
-  isBusinessAccount: false,
   hasFirstCommentFlip: false,
   hasCampaignsFeature: false,
+  hasShareAgainFeature: false,
   isLockedProfile: false,
   isDisconnectedProfile: false,
   hasBitlyPosts: false,
@@ -261,6 +263,8 @@ SentPosts.defaultProps = {
   linkShortening: {
     isBitlyConnected: false,
   },
+  hasAnalyticsOnPosts: false,
+  hasTwitterImpressions: false,
 };
 
-export default WithFeatureLoader(SentPosts);
+export default SentPosts;

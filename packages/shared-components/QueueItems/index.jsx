@@ -1,36 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { WithFeatureLoader } from '@bufferapp/product-features';
-import { Button, Text } from '@bufferapp/ui';
 
 import Header from './Header';
 import EmptySlot from './EmptySlot';
 import PostContent from './PostContent';
-import { ShowMorePostsWrapper, ViewCalendarWrapper } from './styles';
-
-const isPaidUser = ({ features, isBusinessAccount }) =>
-  !features.isFreeUser() || isBusinessAccount;
-
-// eslint-disable-next-line react/prop-types
-const ShowMorePosts = ({ onCalendarClick }) => (
-  <ShowMorePostsWrapper>
-    <Text type="p">Looking for your other posts?</Text>
-    <ViewCalendarWrapper>
-      <Button
-        type="primary"
-        label="View Your Calendar"
-        onClick={() => onCalendarClick('month')}
-      />
-    </ViewCalendarWrapper>
-  </ShowMorePostsWrapper>
-);
 
 const QueueItems = ({
   items,
   type,
-  features,
   pinned,
-  isBusinessAccount,
   onEmptySlotClick,
   onCalendarClick,
   shouldRenderCalendarButtons,
@@ -39,7 +17,6 @@ const QueueItems = ({
 }) => {
   return items.map((item, index) => {
     const { queueItemType, slot, ...rest } = item;
-    const isUserPaid = isPaidUser({ features, isBusinessAccount });
 
     let QueueSection = null;
 
@@ -51,9 +28,7 @@ const QueueItems = ({
             item={rest}
             isFirstItem={index === 0}
             onCalendarClick={onCalendarClick}
-            shouldRenderCalendarButtons={
-              shouldRenderCalendarButtons && isUserPaid
-            }
+            shouldRenderCalendarButtons={shouldRenderCalendarButtons}
           />
         );
         break;
@@ -67,9 +42,8 @@ const QueueItems = ({
             index={index}
             post={rest}
             queueType={type}
-            isUserPaid={isUserPaid}
-            isBusinessAccount={isBusinessAccount}
             shouldShowAnalyzeBanner={shouldShowAnalyzeBanner}
+            // eslint-disable-next-line react/jsx-props-no-spreading
             {...propsForPosts}
           />
         );
@@ -89,11 +63,6 @@ const QueueItems = ({
         );
         break;
       }
-      case 'showMorePosts':
-        QueueSection = isUserPaid && (
-          <ShowMorePosts key={rest.id} onCalendarClick={onCalendarClick} />
-        );
-        break;
       default:
         break;
     }
@@ -108,11 +77,7 @@ QueueItems.propTypes = {
       id: PropTypes.string,
     })
   ),
-  features: PropTypes.shape({
-    isFreeUser: () => {},
-  }).isRequired,
   type: PropTypes.string,
-  isBusinessAccount: PropTypes.bool,
   shouldRenderCalendarButtons: PropTypes.bool,
   showAnalyzeBannerAfterFirstPost: PropTypes.bool,
   onEmptySlotClick: PropTypes.func,
@@ -121,11 +86,10 @@ QueueItems.propTypes = {
 
 QueueItems.defaultProps = {
   items: [],
-  isBusinessAccount: false,
   shouldRenderCalendarButtons: false,
   type: 'post',
   onEmptySlotClick: () => {},
   onCalendarClick: () => {},
 };
 
-export default WithFeatureLoader(QueueItems);
+export default QueueItems;

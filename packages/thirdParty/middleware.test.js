@@ -18,6 +18,7 @@ const mockUser = {
   createdAt: 'date',
   plan: 'business',
   planCode: '100',
+  planBase: 'business',
   trial: {},
   orgUserCount: 2,
   profileCount: 3,
@@ -53,7 +54,6 @@ describe('middleware', () => {
   const store = {
     dispatch: jest.fn(),
     getState: () => ({
-      productFeatures: { planName: 'business' },
       thirdparty: { appCues: { loaded: true } },
       modals: {},
     }),

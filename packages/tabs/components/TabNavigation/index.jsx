@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Tabs, Tab } from '@bufferapp/publish-shared-components';
 import { Button } from '@bufferapp/ui';
-import { WithFeatureLoader } from '@bufferapp/product-features';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
 import styled from 'styled-components';
 import { withTranslation } from 'react-i18next';
@@ -40,23 +39,27 @@ class TabNavigation extends React.Component {
 
   isValidTab(tabId) {
     const {
-      features,
-      isBusinessAccount,
-      isManager,
+      hasApprovalFeature,
+      hasDraftsFeature,
+      hasGridFeature,
+      hasStoriesFeature,
       isInstagramProfile,
-      hasStoriesFlip,
+      isManager,
+      shouldHideAdvancedAnalytics,
     } = this.props;
 
     return (
       tabId ===
-      getValidTab(
+      getValidTab({
         tabId,
-        isBusinessAccount,
+        hasApprovalFeature,
+        hasDraftsFeature,
+        hasGridFeature,
+        hasStoriesFeature,
         isInstagramProfile,
         isManager,
-        features.isFreeUser(),
-        hasStoriesFlip
-      )
+        shouldHideAdvancedAnalytics,
+      })
     );
   }
 
@@ -183,18 +186,22 @@ TabNavigation.defaultProps = {
   isLockedProfile: false,
   isDisconnectedProfile: false,
   isInstagramProfile: false,
-  isBusinessAccount: false,
   isManager: false,
-  hasStoriesFlip: false,
   draftsNeedApprovalCount: null,
   draftsCount: null,
   canReconnectChannels: true,
+  hasApprovalFeature: false,
+  hasDraftsFeature: false,
+  hasGridFeature: false,
+  hasStoriesFeature: false,
 };
 
 TabNavigation.propTypes = {
   canReconnectChannels: PropTypes.bool,
-  features: PropTypes.any.isRequired, // eslint-disable-line
-  isBusinessAccount: PropTypes.bool,
+  hasApprovalFeature: PropTypes.bool,
+  hasDraftsFeature: PropTypes.bool,
+  hasGridFeature: PropTypes.bool,
+  hasStoriesFeature: PropTypes.bool,
   isManager: PropTypes.bool,
   selectedTabId: PropTypes.string.isRequired,
   t: PropTypes.func.isRequired,
@@ -209,9 +216,8 @@ TabNavigation.propTypes = {
   isDisconnectedProfile: PropTypes.bool,
   isInstagramProfile: PropTypes.bool,
   shouldShowUpgradeButton: PropTypes.bool,
-  hasStoriesFlip: PropTypes.bool,
   draftsNeedApprovalCount: PropTypes.number,
   draftsCount: PropTypes.number,
 };
 
-export default withTranslation()(WithFeatureLoader(TabNavigation));
+export default withTranslation()(TabNavigation);

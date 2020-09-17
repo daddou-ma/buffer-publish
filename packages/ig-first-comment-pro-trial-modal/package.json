@@ -11,8 +11,7 @@
     "@bufferapp/publish-modals": "2.0.0",
     "@bufferapp/async-data-fetch": "2.0.0"
   },
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "publishConfig": {
     "access": "public"
   }

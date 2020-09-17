@@ -21,8 +21,7 @@
     "@bufferapp/publish-store": "2.0.0",
     "@bufferapp/publish-tabs": "2.0.0"
   },
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "publishConfig": {
     "access": "public"
   }

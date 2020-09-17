@@ -10,6 +10,7 @@ export default connect(
     profileLimit: state.user.profileLimit,
     isOwner: state.organizations.selected?.isOwner,
     ownerEmail: state.organizations.selected?.ownerEmail,
+    planBase: state.organizations.selected?.planBase,
   }),
   dispatch => ({
     onClickUpgrade: plan => {

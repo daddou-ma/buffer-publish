@@ -28,7 +28,7 @@ const GeneralSettings = ({
   onConnectBitlyURLClick,
   onDisconnectBitlyURLClick,
   isManager,
-  features,
+  hasBitlyFeature,
   onDirectPostingClick,
   utmCampaign,
   onChangeUtmCampaign,
@@ -44,9 +44,9 @@ const GeneralSettings = ({
   showModal,
   isLockedProfile,
   isDisconnectedProfile,
-  isBusinessAccount,
   linkShortening,
   linkShorteningEnabled,
+  hasCustomizingUtmParamsFeature,
 }) => {
   if (isLockedProfile) {
     return <LockedProfileNotification />;
@@ -75,13 +75,12 @@ const GeneralSettings = ({
           linkShorteners={linkShortening.linkShorteners}
           onOptionSelect={onLinkShortenerOptionSelect}
           selectedShortener={linkShortening.selectedShortener}
-          features={features}
+          hasBitlyFeature={hasBitlyFeature}
         />
         <Divider />
         <GoogleAnalytics
-          isBusinessAccount={isBusinessAccount}
+          hasCustomizingUtmParamsFeature={hasCustomizingUtmParamsFeature}
           isManager={isManager}
-          features={features}
           onShowGACustomizationFormClick={onShowGACustomizationFormClick}
           showGACustomizationForm={showGACustomizationForm}
           googleAnalyticsIsEnabled={googleAnalyticsIsEnabled}
@@ -135,7 +134,7 @@ GeneralSettings.defaultProps = {
 
 GeneralSettings.propTypes = {
   isManager: PropTypes.bool,
-  isBusinessAccount: PropTypes.bool.isRequired,
+  hasCustomizingUtmParamsFeature: PropTypes.bool.isRequired,
   isInstagramProfile: PropTypes.bool,
   isInstagramBusiness: PropTypes.bool,
   onConnectBitlyURLClick: PropTypes.func.isRequired,
@@ -163,9 +162,7 @@ GeneralSettings.propTypes = {
   googleAnalyticsIsEnabled: PropTypes.bool,
   onToggleGoogleAnalyticsClick: PropTypes.func.isRequired,
   onSaveGATrackingSettingsClick: PropTypes.func.isRequired,
-  features: PropTypes.shape({
-    isFreeUser: PropTypes.func,
-  }).isRequired,
+  hasBitlyFeature: PropTypes.bool.isRequired,
   onDirectPostingClick: PropTypes.func.isRequired,
   utmCampaign: PropTypes.string,
   onChangeUtmCampaign: PropTypes.func.isRequired,

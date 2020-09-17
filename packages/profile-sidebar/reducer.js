@@ -25,7 +25,6 @@ export const initialState = {
   loaded: false,
   selectedProfile: {},
   isLockedProfile: false,
-  isBusinessAccount: false,
   hasInstagram: true,
   hasFacebook: true,
   hasTwitter: true,

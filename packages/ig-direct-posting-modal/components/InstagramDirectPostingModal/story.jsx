@@ -1,7 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import translations from '@bufferapp/publish-i18n/translations/en-us.json';
 import InstagramDirectPostingModal from './index';
 
 storiesOf('InstagramDirectPostingModal', module)
@@ -11,7 +10,6 @@ storiesOf('InstagramDirectPostingModal', module)
       onSetUpDirectPostingClick={action('onSetUpDirectPostingClick')}
       onCheckInstagramBusinessClick={action('onCheckInstagramBusinessClick')}
       onHideInstagramModal={action('onHideInstagramModal')}
-      translations={translations['instagram-direct-posting-modal']}
     />
   ))
   .add('is not IG Business Profile', () => (
@@ -20,6 +18,5 @@ storiesOf('InstagramDirectPostingModal', module)
       onSetUpDirectPostingClick={action('onSetUpDirectPostingClick')}
       onCheckInstagramBusinessClick={action('onCheckInstagramBusinessClick')}
       onHideInstagramModal={action('onHideInstagramModal')}
-      translations={translations['instagram-direct-posting-modal']}
     />
   ));

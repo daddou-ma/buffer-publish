@@ -10,8 +10,7 @@
   "dependencies": {
     "react-stripe-elements": "^4.0.1"
   },
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "publishConfig": {
     "access": "public"
   }

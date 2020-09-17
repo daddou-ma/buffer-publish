@@ -44,10 +44,6 @@ const storeFake = state => ({
 
 function createMockStore(profileList) {
   return storeFake({
-    productFeatures: {
-      planName: 'business',
-      features: {},
-    },
     modals: {
       showInstagramDirectPostingModal: false,
     },

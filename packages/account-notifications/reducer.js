@@ -6,14 +6,10 @@ export const actionTypes = keyWrapper('EMAIL_PREFERENCES', {
 });
 
 export const initialState = {
-  bufferEmpty: null,
-  bufferTips: null,
-  celebrations: null,
-  updateSuccesses: null,
-  weeklyDigests: null,
-  updateFailures: null,
-  newContributions: null,
-  postMovedBackToDrafts: null,
+  collaboration: null,
+  queue: null,
+  newsletter: null,
+  milestones: null,
 };
 
 export default (state = initialState, action) => {

@@ -3,8 +3,8 @@ import { Provider } from 'react-redux';
 import { storiesOf } from '@storybook/react';
 import { withA11y } from '@storybook/addon-a11y';
 import { action } from '@storybook/addon-actions';
+import { gridItems } from '@bufferapp/publish-test-utils/mock-ui-data';
 import GridList from './index';
-import { gridPosts } from './postData';
 
 const storeFake = state => ({
   default: () => {},
@@ -33,10 +33,6 @@ const store = storeFake({
   stripe: {},
   publicGridUrl: 'https://shopgr.id/my-brand',
   profile,
-  productFeatures: {
-    planName: 'business',
-    features: {},
-  },
 });
 
 const UpgradeModalDecorator = storyFn => (
@@ -50,7 +46,7 @@ storiesOf('GridLists', module)
     <GridList
       profileId="abc"
       timezone={profile.timezone}
-      gridPosts={gridPosts}
+      gridPosts={gridItems}
       onChangePostUrl={action('onChangePostUrl')}
       onSavePostUrl={action('onSavePostUrl')}
       onImageClick={action('onImageClick')}

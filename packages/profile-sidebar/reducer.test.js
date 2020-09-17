@@ -17,7 +17,6 @@ describe('reducer', () => {
       selectedProfileId: '',
       userId: null,
       selectedProfile: {},
-      isBusinessAccount: false,
       isLockedProfile: false,
       hasInstagram: true,
       hasFacebook: true,

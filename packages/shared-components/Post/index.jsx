@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { WithFeatureLoader } from '@bufferapp/product-features';
 import PostTag from '../PostTag';
 import PostFooter from '../PostFooter';
 import PostStats from '../PostStats';
@@ -49,7 +48,6 @@ const Post = ({
   serviceLink,
   isSent,
   isManager,
-  isBusinessAccount,
   isPastReminder,
   day,
   dueTime,
@@ -60,7 +58,6 @@ const Post = ({
   hasFirstCommentFlip,
   hasPushNotifications,
   onSetRemindersClick,
-  features,
   basic,
   hasUserTags,
   campaignDetails,
@@ -69,6 +66,8 @@ const Post = ({
   headerDetails,
   postContent,
   shouldShowEditButton,
+  hasAnalyticsOnPosts,
+  hasTwitterImpressions,
 }) => {
   const hasError =
     postDetails && postDetails.error && postDetails.error.length > 0;
@@ -151,29 +150,24 @@ const Post = ({
             hasUserTags={hasUserTags}
             shouldShowEditButton={shouldShowEditButton}
           />
-          {(isBusinessAccount || !features.isFreeUser()) &&
-            isSent &&
-            !postDetails.isRetweet && (
-              <PostStats
-                showTwitterMentions={
-                  !features.isFreeUser() && !features.isProUser()
-                }
-                statistics={statistics}
-                profileService={profileService}
-                profileServiceType={profileServiceType}
-              />
-            )}
+          {hasAnalyticsOnPosts && isSent && !postDetails.isRetweet && (
+            <PostStats
+              showTwitterMentions={hasTwitterImpressions}
+              statistics={statistics}
+              profileService={profileService}
+              profileServiceType={profileServiceType}
+            />
+          )}
         </Card>
       </PostSubContainer>
     </PostContainer>
   );
 };
 
-Post.commonPropTypes = {
+Post.propTypes = {
   isConfirmingDelete: PropTypes.bool,
   isDeleting: PropTypes.bool,
   isWorking: PropTypes.bool,
-  isBusinessAccount: PropTypes.bool,
   onRequeueClick: PropTypes.func,
   onDeleteConfirmClick: PropTypes.func,
   onEditClick: PropTypes.func,
@@ -182,6 +176,7 @@ Post.commonPropTypes = {
     isRetweet: PropTypes.bool,
     postAction: PropTypes.string,
     error: PropTypes.string,
+    isInstagramReminder: PropTypes.string,
   }).isRequired,
   draggable: PropTypes.bool,
   dragging: PropTypes.bool,
@@ -189,6 +184,7 @@ Post.commonPropTypes = {
   onDropPost: PropTypes.func,
   serviceLink: PropTypes.string,
   isSent: PropTypes.bool,
+  isManager: PropTypes.bool,
   isPastReminder: PropTypes.bool,
   day: PropTypes.string,
   dueTime: PropTypes.string,
@@ -198,10 +194,8 @@ Post.commonPropTypes = {
   }),
   basic: PropTypes.bool,
   shouldShowEditButton: PropTypes.bool,
-};
-
-Post.propTypes = {
-  ...Post.commonPropTypes,
+  hasAnalyticsOnPosts: PropTypes.bool,
+  hasTwitterImpressions: PropTypes.bool,
 };
 
 Post.defaultProps = {
@@ -209,7 +203,6 @@ Post.defaultProps = {
   isDeleting: false,
   isWorking: false,
   isSent: false,
-  isBusinessAccount: false,
   isManager: true,
   isPastReminder: false,
   day: null,
@@ -217,6 +210,8 @@ Post.defaultProps = {
   sharedBy: null,
   basic: false,
   shouldShowEditButton: true,
+  hasAnalyticsOnPosts: false,
+  hasTwitterImpressions: false,
 };
 
-export default WithFeatureLoader(Post);
+export default Post;

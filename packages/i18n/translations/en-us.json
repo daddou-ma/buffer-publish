@@ -101,12 +101,13 @@
   },
   "instagram-direct-posting-modal": {
     "cta1": "Yes! Let's do it!",
-    "cta2": "I've Converted It to Business",
-    "description": "Direct Scheduling allows you to post images and videos to Instagram directly from Buffer, just as you can with any other network.",
+    "cta2": "I've Converted to Business",
+    "description": "Direct scheduling allows you to post images and videos to Instagram directly from Buffer.",
     "dismiss": "No thanks, I might do it later",
-    "headline": "Would you like to set up Direct Scheduling for Instagram?",
-    "instructions": "In order to set up Direct Scheduling you need to have an Instagram Business Profile. You can convert any account to a Business Profile through the Instagram mobile app. ",
-    "learnMore": "You can find the Instagram set up guide here."
+    "headline": "Would you like to set up direct scheduling?",
+    "instructions1": "In order to set up direct scheduling, you’ll need to have an Instagram business account set up and properly connected to a Facebook page. ",
+    "instructions2": "Once you’ve completed these steps, click “I’ve converted to business” to continue.",
+    "learnMore": "Learn how to get set up here."
   },
   "instagram-first-comment-modal": {
     "body": "We’ll walk you through this now – It will just take a moment.",
@@ -364,23 +365,15 @@
     },
     "notifications": {
       "title": "Email Notifications",
-      "description": "We can remind you when one of your Buffer is looking a little empty.",
-      "emptyBuffer": "Empty Buffer",
-      "emptyBufferEmail": "Send me an email when one of my Buffers becomes empty.",
+      "description": "Get email alerts and updates to help you manage your Buffer account.",
+      "collaboration": "Collaboration",
+      "collaborationEmail": "Send me emails about contributions from team members. For example, if a post is awaiting approval.",
       "newsletter": "Newsletter",
-      "newsletterEmail": "Send me occasional emails with new Buffer features and tips.",
-      "updateFailures": "Update Failures",
-      "updateFailuresEmail": "Send me emails when an update fails to post.",
-      "updateSuccesses": "Update Successes",
-      "updateSuccessesEmail": "Send me emails when an update successfully posts.",
-      "weeklyDigests": "Weekly Digests",
-      "weeklyDigestsEmail": "Send me weekly emails summarizing my posting activity.",
-      "awaitingApproval": "Awaiting Approval",
-      "awaitingApprovalEmail": "Send me emails when there is a new draft awaiting approval.",
-      "movedBackToDrafts": "Post moved back to drafts",
-      "movedBackToDraftsEmail": "Send me emails when my draft is moved from Pending Approval back to Drafts.",
+      "newsletterEmail": "Send me emails with product updates, tips, and best practices.",
+      "queue": "Post & Queue",
+      "queueEmail": "Send me emails about changes to the status of my queue and scheduled posts. For example, if a post fails or if my queue becomes empty.",
       "celebrations": "Celebrations",
-      "celebrationsEmail": "Send me emails celebrating my posting achievements."
+      "celebrationsEmail": "Send me emails celebrating my social media achievements with Buffer."
     },
     "appsAndExtras": {
       "title": "Buffer Apps & Extras",
@@ -418,8 +411,8 @@
     "headline": "Uh-oh, we've lost access to this account! Let's reconnect."
   },
   "retiring-profile-banner": {
-    "title": "From October 2020, we will no longer be able to support Instagram accounts where Direct Scheduling is not enabled.",
-    "body": "If you have a personal profile, you’ll need to convert it to a business account and enable Direct Scheduling. If you already have a business account, please enable Direct Scheduling to keep it connected to Buffer. There’s no extra cost and it should only take a few minutes.",
+    "title": "From October 2020, we will no longer be able to support Instagram accounts where direct scheduling is not enabled.",
+    "body": "Please note that starting in mid-September, your account will be locked until it is converted or removed. If you have a personal profile, you’ll need to convert it to a business account and enable direct scheduling. If you already have a business account, please enable direct scheduling to keep it connected to Buffer. There’s no extra cost and it should only take a few minutes.",
     "action": "Follow our guide here"
   },
   "profiles-disconnected-modal": {
