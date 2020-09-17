@@ -3,8 +3,8 @@ import { Provider } from 'react-redux';
 import { storiesOf } from '@storybook/react';
 import { withA11y } from '@storybook/addon-a11y';
 import { action } from '@storybook/addon-actions';
+import { gridItems } from '@bufferapp/publish-test-utils/mock-ui-data';
 import GridPosts from './index';
-import { gridPosts } from './postData';
 
 const storeFake = state => ({
   default: () => {},
@@ -46,7 +46,7 @@ storiesOf('GridPosts', module)
     <GridPosts
       total={2}
       loading={false}
-      gridPosts={gridPosts}
+      gridPosts={gridItems}
       isLockedProfile={false}
       isManager
       profile={profile}
@@ -62,7 +62,7 @@ storiesOf('GridPosts', module)
     <GridPosts
       total={2}
       loading={false}
-      gridPosts={gridPosts}
+      gridPosts={gridItems}
       isLockedProfile={false}
       isManager
       profile={profile}

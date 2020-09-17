@@ -1,31 +1,15 @@
 import React from 'react';
-import { Provider } from 'react-redux';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
+import { queueItems } from '@bufferapp/publish-test-utils/mock-ui-data';
 import QueueItems from './index';
-import { postLists, postListsNoHeaders } from './postData';
-
-const storeFake = state => ({
-  default: () => {},
-  subscribe: () => {},
-  dispatch: () => {},
-  getState: () => ({ ...state }),
-});
-
-const store = storeFake({
-  productFeatures: {
-    planName: 'free',
-    features: {},
-  },
-});
 
 storiesOf('Queue|QueueItems', module)
   .addDecorator(withA11y)
-  .addDecorator(getStory => <Provider store={store}>{getStory()}</Provider>)
   .add('default queue', () => (
     <QueueItems
-      items={postLists}
+      items={queueItems({ isSent: false })}
       onRequeueClick={action('onCancelConfirmClick')}
       onDeleteConfirmClick={action('onDeleteConfirmClick')}
       onEditClick={action('onEditClick')}
@@ -37,7 +21,7 @@ storiesOf('Queue|QueueItems', module)
   ))
   .add('no headers type drafts', () => (
     <QueueItems
-      items={postListsNoHeaders}
+      items={queueItems({ isSent: false, isDraft: true })}
       onRequeueClick={action('onCancelConfirmClick')}
       onDeleteConfirmClick={action('onDeleteConfirmClick')}
       onEditClick={action('onEditClick')}
