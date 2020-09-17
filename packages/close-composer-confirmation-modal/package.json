@@ -13,8 +13,7 @@
     "@bufferapp/keywrapper": "0.2.0",
     "@bufferapp/publish-modals": "2.0.0"
   },
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "publishConfig": {
     "access": "public"
   }
