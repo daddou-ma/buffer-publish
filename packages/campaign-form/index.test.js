@@ -64,10 +64,9 @@ describe('CampaignForm | user interaction', () => {
     expect(saveButton).toBeDisabled();
 
     await userEvent.type(input, 'Campaign Test');
-    expect(input).toHaveValue('Campaign Test');
-
     userEvent.click(greenColor);
 
+    expect(input).toHaveValue('Campaign Test');
     expect(purpleColor).not.toBeChecked();
     expect(greenColor).toBeChecked();
     expect(saveButton).not.toBeDisabled();
@@ -117,6 +116,7 @@ describe('CampaignForm | user interaction', () => {
     expect(editHeader).toBeInTheDocument();
     expect(input).toHaveValue('Test Campaign');
     expect(greenColor).toBeChecked();
+    expect(saveButton).toBeDisabled();
 
     userEvent.clear(input);
     await userEvent.type(input, 'Campaign updated');
