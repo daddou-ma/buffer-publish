@@ -188,7 +188,7 @@
     "eslint-plugin-testing-library": "^3.9.0",
     "inquirer": "7.1.0",
     "jest": "24.9.0",
-    "jest-axe": "^3.4.0",
+    "jest-axe": "^3.5.0",
     "jest-styled-components": "^7.0.3",
     "nodemon": "^2.0.3",
     "prettier": "1.18.2",
