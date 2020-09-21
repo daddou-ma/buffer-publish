@@ -14,7 +14,7 @@ EOF
 echo "version.json:"
 cat ./version.json
 
-# Build the bundle and it's assets (CSS, chunks, source maps)	node /src/packages/server/scripts/bugsnag-release.js 
+# Build the bundle and it's assets (CSS, chunks, source maps)
 yarn install --frozen-lockfile --non-interactive --production
 BUGSNAG_APP_VERSION=$GIT_COMMIT yarn run build
 
