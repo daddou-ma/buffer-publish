@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { hot } from 'react-hot-loader/root';
 import { getProfilesParams } from '@bufferapp/publish-routes';
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
+import { actions as modalsActions } from '@bufferapp/publish-modals';
 import { actions } from '@bufferapp/publish-tabs';
 import ProfilePage from './components/ProfilePage';
 
@@ -47,6 +48,7 @@ export default hot(
         reducerName = 'drafts';
       if (state?.[reducerName]?.byProfileId?.[profileId]) {
         const currentQueue = state[reducerName].byProfileId[profileId];
+        const isInstagramProfile = state.profileSidebar.selectedProfile.service === 'instagram';
         return {
           loadingMore: currentQueue.loadingMore,
           moreToLoad: currentQueue.moreToLoad,
@@ -55,8 +57,10 @@ export default hot(
           hasDraftsFeature: state.organizations?.selected?.hasDraftsFeature,
           hasGridFeature: state.organizations?.selected?.hasGridFeature,
           hasStoriesFeature: state.organizations?.selected?.hasStoriesFeature,
-          isInstagramProfile:
-            state.profileSidebar.selectedProfile.service === 'instagram',
+          isInstagramProfile,
+          isInstagramPersonalProfile:
+            isInstagramProfile &&
+            !state.profileSidebar.selectedProfile.isInstagramBusiness,
           isManager: state.profileSidebar.selectedProfile.isManager,
           shouldHideAdvancedAnalytics:
             state.profileSidebar.selectedProfile.type === 'linkedin' ||
@@ -92,6 +96,19 @@ export default hot(
           dataFetchActions.fetch({
             name: getRequestName(tabId),
             args,
+          })
+        );
+      },
+      onDirectPostingClick: profileId => {
+        dispatch(
+          dataFetchActions.fetch({
+            name: 'checkInstagramBusiness',
+            args: {
+              profileId,
+              callbackAction: modalsActions.showInstagramDirectPostingModal({
+                profileId,
+              }),
+            },
           })
         );
       },
