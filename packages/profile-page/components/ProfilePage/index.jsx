@@ -233,6 +233,7 @@ function ProfilePage({
           <IGPersonalProfileNotification
             onDirectPostingClick={onDirectPostingClick}
             profileId={profileId}
+            tabId={tabId}
           />
         </MainWithMargin>
       )}

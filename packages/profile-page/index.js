@@ -1,7 +1,7 @@
 // component vs. container https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0
 import { connect } from 'react-redux';
 import { hot } from 'react-hot-loader/root';
-import { getProfilesParams } from '@bufferapp/publish-routes';
+import { getProfilesParams, profileTabPages } from '@bufferapp/publish-routes';
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 import { actions as modalsActions } from '@bufferapp/publish-modals';
 import { actions } from '@bufferapp/publish-tabs';
@@ -99,7 +99,15 @@ export default hot(
           })
         );
       },
-      onDirectPostingClick: profileId => {
+      onDirectPostingClick: ({ profileId, tabId }) => {
+        if (tabId !== 'queue') {
+          dispatch(
+            profileTabPages.goTo({
+              profileId,
+              tabId: 'queue',
+            })
+          );
+        }
         dispatch(
           dataFetchActions.fetch({
             name: 'checkInstagramBusiness',

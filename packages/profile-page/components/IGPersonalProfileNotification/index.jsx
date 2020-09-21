@@ -40,7 +40,11 @@ const TextWithStyles = styled(Text)`
   margin: 0;
 `;
 
-const IGPersonalProfileNotification = ({ onDirectPostingClick, profileId }) => {
+const IGPersonalProfileNotification = ({
+  onDirectPostingClick,
+  profileId,
+  tabId,
+}) => {
   const { t } = useTranslation();
   return (
     <Card>
@@ -60,7 +64,7 @@ const IGPersonalProfileNotification = ({ onDirectPostingClick, profileId }) => {
         </TextWithStyles>
         <ButtonWithStyles
           type="primary"
-          onClick={() => onDirectPostingClick(profileId)}
+          onClick={() => onDirectPostingClick({ profileId, tabId })}
           label={t('instagram-personal-profile-notification.buttonLabel')}
         />
       </ContentWrapper>
@@ -75,6 +79,7 @@ const IGPersonalProfileNotification = ({ onDirectPostingClick, profileId }) => {
 IGPersonalProfileNotification.propTypes = {
   onDirectPostingClick: PropTypes.func.isRequired,
   profileId: PropTypes.string.isRequired,
+  tabId: PropTypes.string.isRequired,
 };
 
 export default IGPersonalProfileNotification;
