@@ -133,16 +133,6 @@ describe('CampaignForm | user interaction', () => {
     expect(rpcCall).toHaveBeenCalledTimes(2);
   });
 
-  test.skip('tests implementation details', () => {
-    const { store } = render(<CampaignForm />);
-    expect(store.getState().campaign.isLoading).toBeTruthy();
-  });
-
-  test.skip('tests behavior', () => {
-    render(<CampaignForm />);
-    expect(screen.queryByText(/loading/i)).toBeInTheDocument();
-  });
-
   test(`update campaign redirects to campaigns view if there's an error fetching the campaign`, async () => {
     const campaignId = '18027';
     const errorResponse = new Error('Campaign not found');
