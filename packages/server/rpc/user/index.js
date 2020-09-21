@@ -76,7 +76,7 @@ module.exports = method(
           if (hasOrgSwitcher) {
             return {
               ...user,
-              plan: plan === 'pro8' || plan === 'pro15' ? 'pro' : plan,
+              plan,
               planCode,
               planBase,
               features: ownerFeatures,

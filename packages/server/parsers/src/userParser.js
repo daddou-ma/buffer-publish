@@ -76,11 +76,7 @@ module.exports = userData => ({
   canReconnectChannels: true, // temporary value, the important is what's being injected in the rpc
 
   // Org data
-  plan:
-    userData.billing_plan_tier === 'pro8' ||
-    userData.billing_plan_tier === 'pro15'
-      ? 'pro'
-      : userData.billing_plan_tier, // temporary, as we transition from userData.plan. Safe to delete the conditions once we remove the plan ==='pro' checks in the codebase .
+  plan: userData.billing_plan_tier,
   planBase: userData.billing_plan_base,
   planCode: userData.plan_code,
   isBusinessUser: userData.billing_plan_base === 'business',
