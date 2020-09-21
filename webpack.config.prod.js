@@ -49,6 +49,7 @@ const merged = merge(common, {
   plugins,
   output: {
     filename: '[name].[contenthash].js',
+    publicPath: 'https://static.buffer.com/publish/',
   },
   performance: { hints: false }, // don't warn that the bundles are big, we know ;)
 });

@@ -14,6 +14,24 @@ EOF
 echo "version.json:"
 cat ./version.json
 
+# Build the bundle and it's assets (CSS, chunks, source maps)	node /src/packages/server/scripts/bugsnag-release.js 
+yarn install --frozen-lockfile --non-interactive --production
+BUGSNAG_APP_VERSION=$GIT_COMMIT yarn run build
+
+echo "WEBPACK ASSETS:"	
+cat ./webpackAssets.json	
+
+# Upload the static assets to S3	
+UPLOADER="https://github.com/bufferapp/buffer-static-upload/releases/download/0.3.0/buffer-static-upload-`uname -s`"	
+curl -L $UPLOADER > ./buffer-static-upload	
+chmod +x ./buffer-static-upload	
+
+FILES="*.css,*.js,*.map"	
+./buffer-static-upload -files "$FILES" -dir publish -skip-versioning	
+
+echo "STATIC ASSETS:"	
+cat ./staticAssets.json
+
 # Notify Bugsnag of new release
 echo "Notifying new version to Bugsnag"
 cd /src/packages/server/scripts && yarn install --frozen-lockfile --non-interactive
