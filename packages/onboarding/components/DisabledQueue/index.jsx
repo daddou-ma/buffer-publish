@@ -98,13 +98,17 @@ const getCurrentDay = () => moment().format('MMMM D');
 
 const DisabledQueue = ({
   translations,
+  showUpgradeToProCta,
+  profileLimit,
   onManageSocialAccountClick,
   goToConnectSocialAccount,
 }) => (
   <ProfilePage>
     <ProfileSidebarWrapper>
       <ProfileSidebar
+        showUpgradeToProCta={showUpgradeToProCta}
         translations={translations}
+        profileLimit={profileLimit}
         onManageSocialAccountClick={onManageSocialAccountClick}
         goToConnectSocialAccount={goToConnectSocialAccount}
         loading={false}
@@ -208,6 +212,8 @@ DisabledQueue.propTypes = {
     composerInput: PropTypes.string,
     currentDay: PropTypes.string,
   }).isRequired,
+  profileLimit: PropTypes.number.isRequired,
+  showUpgradeToProCta: PropTypes.bool.isRequired,
   onManageSocialAccountClick: PropTypes.func.isRequired,
   goToConnectSocialAccount: PropTypes.func.isRequired,
 };
