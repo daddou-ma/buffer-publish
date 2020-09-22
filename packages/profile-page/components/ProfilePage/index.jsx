@@ -34,10 +34,6 @@ const Main = styled.main`
   height: 100%;
 `;
 
-const MainWithMargin = styled(Main)`
-  margin: 10px;
-`;
-
 /**
  * Verifies if the user can access to the current tabId
  * and changes the tab only if validTabId is different from current tabId
