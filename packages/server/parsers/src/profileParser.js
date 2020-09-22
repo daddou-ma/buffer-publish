@@ -33,6 +33,8 @@ module.exports = profile => ({
   organizationRole: profile.organization_role,
   directPostingEnabled: profile.direct_posting_enabled,
   isInstagramBusiness: profile.is_instagram_business,
+  shouldDisplayIGPersonalNotification:
+    profile.service === 'instagram' && !profile.is_instagram_business,
   googleAnalyticsEnabled: profile.preferences.utm_tracking,
   hasPushNotifications: profile.has_push_notifications,
   isContributor: profile.is_contributor,
