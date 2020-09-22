@@ -240,10 +240,13 @@ const AppActionCreators = {
           // Did we get an error because the user reached a limit and could upgrade?
           // Don't show it as an 'error' in that case
           if (unsuccessfulResponse.code === UpgradeErrorCodes.queueLimit) {
-            const userData = AppStore.getUserData();
-            const { isFreeUser, isBusinessUser, canStartProTrial } = userData;
+            const organizations = AppStore.getOrganizationsData();
+            const {
+              showUpgradeToBusinessCta,
+              showUpgradeToProCta,
+            } = organizations.selected;
             const scope = `${NotificationScopes.PROFILE_QUEUE_LIMIT}-${unsuccessfulResponse.serviceName}`;
-            const source = 'queue_limit';
+
             NotificationActionCreators.queueInfo({
               scope,
               // Remove the <a> from the response message for now until the backend stops returning it
@@ -259,7 +262,7 @@ const AppActionCreators = {
                 label: 'Show Paid Plans',
                 action: () => {
                   const { environment } = AppStore.getMetaData();
-                  if (isFreeUser) {
+                  if (showUpgradeToProCta) {
                     if (AppStore.isExtension()) {
                       window.open(`${bufferOrigins.get(environment)}/pricing`);
                     } else {
@@ -267,7 +270,7 @@ const AppActionCreators = {
                         actionType: ActionTypes.EVENT_SHOW_SWITCH_PLAN_MODAL,
                       });
                     }
-                  } else if (!isBusinessUser) {
+                  } else if (showUpgradeToBusinessCta) {
                     window.open(`${bufferOrigins.get(environment)}/pricing`);
                   } else {
                     window.open(

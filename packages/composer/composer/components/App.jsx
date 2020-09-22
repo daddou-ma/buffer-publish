@@ -30,6 +30,7 @@ function getState() {
     appState: AppStore.getAppState(),
     metaData: AppStore.getMetaData(),
     userData: AppStore.getUserData(),
+    organizations: AppStore.getOrganizationsData(),
     scheduledAt,
     availableSchedulesSlotsForDay: AppStore.getAvailableSchedulesSlotsForDay(
       scheduledAt
@@ -314,6 +315,7 @@ class App extends React.Component {
     const {
       profilesData,
       userData,
+      organizationsData,
       metaData,
       csrfToken,
       draftMode,
@@ -349,6 +351,7 @@ class App extends React.Component {
       AppInitActionCreators.loadInitialData({
         profilesData,
         userData,
+        organizationsData,
         metaData,
         csrfToken,
         draftMode,
@@ -419,6 +422,7 @@ class App extends React.Component {
         appState={this.state.appState}
         profiles={this.state.profiles}
         userData={this.state.userData}
+        organizations={this.state.organizations}
         scheduledAt={this.state.scheduledAt}
         visibleNotifications={this.state.visibleNotifications}
         topLevelNotificationContainerExcludedScopes={

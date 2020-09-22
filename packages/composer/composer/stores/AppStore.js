@@ -22,6 +22,8 @@ const CHANGE_EVENT = 'change';
 const getInitialState = () => ({
   profiles: [], // Data structure in getNewProfile()
 
+  organizations: {},
+
   // Describe the application state
   appState: {
     isLoaded: false,
@@ -77,6 +79,7 @@ const softResetState = () => {
       isOmniboxEnabled,
     },
     userData,
+    organizations,
     metaData,
     options,
     csrfToken,
@@ -97,6 +100,7 @@ const softResetState = () => {
       domainsOwnedByFacebookPages,
       isOmniboxEnabled: reEnableOmnibox || newState.appState.isOmniboxEnabled,
     },
+    organizations,
     userData,
     metaData,
     options,
@@ -191,6 +195,7 @@ const AppStore = Object.assign({}, EventEmitter.prototype, {
     state.metaData.appEnvironment !== AppEnvironments.WEB_DASHBOARD,
   getAppState: () => state.appState,
   getUserData: () => state.userData,
+  getOrganizationsData: () => state.organizationsData,
   getMetaData: () => state.metaData,
   getOptions: () => state.options,
   getCsrfToken: () => state.csrfToken,
@@ -765,6 +770,7 @@ const setImageDimensionsKey = key => (state.imageDimensionsKey = key);
 const setMetaData = metaData => (state.metaData = metaData);
 const setOptions = options => (state.options = options);
 const setCsrfToken = csrfToken => (state.csrfToken = csrfToken);
+const setOrganizationsData = organizationsData => (state.organizationsData = organizationsData);
 
 const setTwitterAutocompleteBootstrapData = (friends, profilesIds) => {
   state.appState.twitterAutocompleBootstrapData = getNewTwitterAutocompleteBootstrapData(
@@ -1144,6 +1150,11 @@ const onDispatchedPayload = payload => {
     case ActionTypes.APP_RECEIVE_USER_DATA:
       setUserData(action.userData);
       break;
+
+    case ActionTypes.APP_RECEIVE_ORGANIZATIONS_DATA:
+      setOrganizationsData(action.organizationsData);
+      break;
+
     case ActionTypes.APP_RECEIVE_IMAGE_DIMENSIONS_KEY:
       setImageDimensionsKey(action.imageDimensionsKey);
       break;

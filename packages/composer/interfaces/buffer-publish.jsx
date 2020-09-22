@@ -18,6 +18,7 @@ let prevSelectedProfileId = null;
 const ComposerWrapper = ({
   userData,
   profiles,
+  organizations,
   enabledApplicationModes,
   environment,
   editMode,
@@ -130,6 +131,7 @@ const ComposerWrapper = ({
     <Composer
       profilesData={formattedData.profilesData}
       userData={formattedData.userData}
+      organizationsData={organizations}
       metaData={formattedData.metaData}
       imageDimensionsKey={formattedData.imageDimensionsKey}
       options={options}
@@ -153,6 +155,7 @@ ComposerWrapper.propTypes = {
     hasShareNextFeature: PropTypes.bool.isRequired,
     imageDimensionsKey: PropTypes.string.isRequired,
   }).isRequired,
+  organizations: PropTypes.shape({}).isRequired,
   profiles: PropTypes.arrayOf(PropTypes.object).isRequired,
   enabledApplicationModes: PropTypes.arrayOf(PropTypes.string).isRequired,
   onSave: PropTypes.func.isRequired,

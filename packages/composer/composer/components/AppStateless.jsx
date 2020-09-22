@@ -169,6 +169,7 @@ class AppStateless extends React.Component {
       visibleNotifications,
       topLevelNotificationContainerExcludedScopes,
       userData,
+      organizations,
       scheduledAt,
       areAllDraftsSaved,
       saveButtons,
@@ -256,6 +257,7 @@ class AppStateless extends React.Component {
             isOmniboxEnabled={omniboxEnabled}
             appState={appState}
             profiles={profiles}
+            organizations={organizations}
             shouldShowInlineSubprofileDropdown={this.shouldShowInlineSubprofileDropdown(
               { canSelectProfiles, profiles }
             )}

@@ -23,6 +23,7 @@ const ComposerComponent = ({
   index,
   state,
   profiles,
+  organizations,
   isOmniboxEnabled,
   enabledDrafts,
   AppStore,
@@ -68,6 +69,7 @@ const ComposerComponent = ({
       enabledDrafts={enabledDrafts}
       draftsSharedData={draftsSharedData}
       profiles={profiles}
+      organizations={organizations}
       expandedComposerId={
         isOmniboxEnabled ? draft.id : appState.expandedComposerId
       }
@@ -112,6 +114,7 @@ class ComposerSection extends React.Component {
     const {
       appState,
       profiles,
+      organizations,
       visibleNotifications,
       areAllDraftsSaved,
       selectedProfiles,
@@ -160,6 +163,7 @@ class ComposerSection extends React.Component {
               state: this.state,
               draft: omniDraft,
               profiles,
+              organizations,
               isOmniboxEnabled,
               enabledDrafts,
               AppStore,
@@ -190,6 +194,7 @@ class ComposerSection extends React.Component {
                 draft,
                 index,
                 profiles,
+                organizations,
                 isOmniboxEnabled,
                 enabledDrafts,
                 AppStore,

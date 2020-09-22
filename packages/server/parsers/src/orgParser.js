@@ -33,7 +33,25 @@ module.exports = orgData => ({
   hasStoriesFeature: orgData.planBase === 'business',
   hasTwitterImpressions: orgData.planBase === 'business',
   hasAnalyticsOnPosts: orgData.planBase !== 'free',
+  hasFirstCommentFeature: orgData.planBase !== 'free',
+  hasShareNextFeature: orgData.planBase !== 'free',
+  hasUserTagFeature: orgData.planBase !== 'free',
+  hasAccessTeamPanel: orgData.planBase === 'business' && orgData.isAdmin,
+
+  // Role Features
+  canManageSocialAccounts: orgData.isAdmin,
+  canSeeCampaignsReport: orgData.isOwner,
+  canModifyCampaigns: orgData.isAdmin,
+  canSeeBillingInfo: orgData.isOwner,
+  canReconnectChannels: orgData.isAdmin,
 
   // Upgrade/ Trial Paths
   showUpgradeToProCta: orgData.planBase === 'free',
+  showUpgradeToBusinessCta: orgData.planBase === 'pro',
+  shouldShowUpgradeButton:
+    orgData.isOwner &&
+    (orgData.planBase === 'free' ||
+      orgData.planBase === 'pro' ||
+      orgData.plan === 'solo_premium_business' ||
+      orgData.plan === 'premium_business'),
 });
