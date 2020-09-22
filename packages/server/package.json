@@ -23,7 +23,7 @@
     "cookie-parser": "1.4.3",
     "dd-trace": "^0.8.0",
     "express": "4.15.4",
-    "helmet": "^3.15.1",
+    "helmet": "^3.23.3",
     "jsonwebtoken": "7.4.1",
     "micro": "9.3.3",
     "moment": "2.22.2",
