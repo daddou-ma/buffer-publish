@@ -7,6 +7,8 @@ export default connect(
   state => ({
     translations: state.i18n.translations['onboarding-page'],
     canSeeOnboardingPage: state.onboarding.canSeeOnboardingPage,
+    showUpgradeToProCta: state.organizations.selected?.showUpgradeToProCta,
+    profileLimit: state.organizations.selected?.profileLimit,
   }),
   dispatch => ({
     onConnectSocialAccountOnboardingClick: () => {

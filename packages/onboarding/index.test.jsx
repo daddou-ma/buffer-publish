@@ -21,6 +21,12 @@ describe('Component', () => {
         'onboarding-page': {},
       },
     },
+    organizations: {
+      selected: {
+        showUpgradeToProCta: false,
+        profileLimit: 8,
+      },
+    },
   };
   test('should render', () => {
     const store = storeFake(state);
