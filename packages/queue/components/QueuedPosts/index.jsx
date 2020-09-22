@@ -7,9 +7,9 @@ import {
   ComposerInput,
   QueueItems,
 } from '@bufferapp/publish-shared-components';
-import InstagramDirectPostingModal from '@bufferapp/publish-ig-direct-posting-modal';
 import ComposerPopover from '@bufferapp/publish-composer-popover';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
+import InstagramPersonalProfileNotification from '@bufferapp/publish-ig-personal-profile-notification';
 import ProfilesDisconnectedBanner from '@bufferapp/publish-profiles-disconnected-banner';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 
@@ -76,6 +76,7 @@ const QueuedPosts = ({
   preserveComposerStateOnClose,
   shouldDisplayRemindersBanner,
   shouldDisplayRetiringProfileBanner,
+  shouldDisplayIGPersonalNotification,
 }) => {
   if (loading) {
     return (
@@ -91,6 +92,10 @@ const QueuedPosts = ({
         <BufferLoading size={64} fullscreen dark />
       </div>
     );
+  }
+
+  if (shouldDisplayIGPersonalNotification) {
+    return <InstagramPersonalProfileNotification />;
   }
 
   if (isLockedProfile) {
@@ -228,6 +233,7 @@ QueuedPosts.propTypes = {
   fetchCampaignsIfNeeded: PropTypes.func.isRequired,
   shouldDisplaySingleSlots: PropTypes.bool,
   preserveComposerStateOnClose: PropTypes.bool,
+  shouldDisplayIGPersonalNotification: PropTypes.bool,
 };
 
 QueuedPosts.defaultProps = {
@@ -256,6 +262,7 @@ QueuedPosts.defaultProps = {
   hasCalendarFeature: false,
   shouldDisplaySingleSlots: false,
   onCampaignTagClick: () => {},
+  shouldDisplayIGPersonalNotification: false,
 };
 
 export default QueuedPosts;

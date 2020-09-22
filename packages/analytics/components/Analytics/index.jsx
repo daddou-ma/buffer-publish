@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import { BusinessTrialOrUpgradeCard } from '@bufferapp/publish-shared-components';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
+import InstagramPersonalProfileNotification from '@bufferapp/publish-ig-personal-profile-notification';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
 import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
@@ -32,7 +33,12 @@ const AnalyticsList = ({
   selectProfile,
   linkShortening,
   hasBitlyPosts,
+  shouldDisplayIGPersonalNotification,
 }) => {
+  if (shouldDisplayIGPersonalNotification) {
+    return <InstagramPersonalProfileNotification />;
+  }
+
   if (isLockedProfile) {
     return <LockedProfileNotification />;
   }
@@ -115,12 +121,14 @@ AnalyticsList.propTypes = {
     isBitlyConnected: PropTypes.bool,
   }).isRequired,
   hasBitlyPosts: PropTypes.bool.isRequired,
+  shouldDisplayIGPersonalNotification: PropTypes.bool,
 };
 
 AnalyticsList.defaultProps = {
   isAnalyticsSupported: null,
   profile: null,
   isLockedProfile: false,
+  shouldDisplayIGPersonalNotification: false,
 };
 
 export default AnalyticsList;

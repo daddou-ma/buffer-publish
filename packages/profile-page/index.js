@@ -1,9 +1,8 @@
 // component vs. container https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0
 import { connect } from 'react-redux';
 import { hot } from 'react-hot-loader/root';
-import { getProfilesParams, profileTabPages } from '@bufferapp/publish-routes';
+import { getProfilesParams } from '@bufferapp/publish-routes';
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
-import { actions as modalsActions } from '@bufferapp/publish-modals';
 import { actions } from '@bufferapp/publish-tabs';
 import ProfilePage from './components/ProfilePage';
 
@@ -48,7 +47,6 @@ export default hot(
         reducerName = 'drafts';
       if (state?.[reducerName]?.byProfileId?.[profileId]) {
         const currentQueue = state[reducerName].byProfileId[profileId];
-        const isInstagramProfile = state.profileSidebar.selectedProfile.service === 'instagram';
         return {
           loadingMore: currentQueue.loadingMore,
           moreToLoad: currentQueue.moreToLoad,
@@ -57,10 +55,8 @@ export default hot(
           hasDraftsFeature: state.organizations?.selected?.hasDraftsFeature,
           hasGridFeature: state.organizations?.selected?.hasGridFeature,
           hasStoriesFeature: state.organizations?.selected?.hasStoriesFeature,
-          isInstagramProfile,
-          isInstagramPersonalProfile:
-            isInstagramProfile &&
-            !state.profileSidebar.selectedProfile.isInstagramBusiness,
+          isInstagramProfile:
+            state.profileSidebar.selectedProfile.service === 'instagram',
           isManager: state.profileSidebar.selectedProfile.isManager,
           shouldHideAdvancedAnalytics:
             state.profileSidebar.selectedProfile.type === 'linkedin' ||
@@ -96,27 +92,6 @@ export default hot(
           dataFetchActions.fetch({
             name: getRequestName(tabId),
             args,
-          })
-        );
-      },
-      onDirectPostingClick: ({ profileId, tabId }) => {
-        if (tabId !== 'queue') {
-          dispatch(
-            profileTabPages.goTo({
-              profileId,
-              tabId: 'queue',
-            })
-          );
-        }
-        dispatch(
-          dataFetchActions.fetch({
-            name: 'checkInstagramBusiness',
-            args: {
-              profileId,
-              callbackAction: modalsActions.showInstagramDirectPostingModal({
-                profileId,
-              }),
-            },
           })
         );
       },

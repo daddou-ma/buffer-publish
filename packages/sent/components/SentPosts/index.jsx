@@ -10,6 +10,7 @@ import { Divider, Text } from '@bufferapp/components';
 import { Button } from '@bufferapp/ui';
 import ComposerPopover from '@bufferapp/publish-composer-popover';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
+import InstagramPersonalProfileNotification from '@bufferapp/publish-ig-personal-profile-notification';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 import ProfilesDisconnectedBanner from '@bufferapp/publish-profiles-disconnected-banner';
 
@@ -104,6 +105,7 @@ const SentPosts = ({
   profileService,
   hasAnalyticsOnPosts,
   hasTwitterImpressions,
+  shouldDisplayIGPersonalNotification,
 }) => {
   useEffect(() => {
     fetchSentPosts();
@@ -112,6 +114,10 @@ const SentPosts = ({
   useEffect(() => {
     fetchCampaignsIfNeeded();
   }, []);
+
+  if (shouldDisplayIGPersonalNotification) {
+    return <InstagramPersonalProfileNotification />;
+  }
 
   if (loading) {
     return (
@@ -239,6 +245,7 @@ SentPosts.propTypes = {
   fetchCampaignsIfNeeded: PropTypes.func.isRequired,
   hasAnalyticsOnPosts: PropTypes.bool,
   hasTwitterImpressions: PropTypes.bool,
+  shouldDisplayIGPersonalNotification: PropTypes.bool,
 };
 
 SentPosts.defaultProps = {
@@ -265,6 +272,7 @@ SentPosts.defaultProps = {
   },
   hasAnalyticsOnPosts: false,
   hasTwitterImpressions: false,
+  shouldDisplayIGPersonalNotification: false,
 };
 
 export default SentPosts;

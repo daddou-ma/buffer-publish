@@ -21,7 +21,6 @@ import {
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 import { getValidTab } from '@bufferapp/publish-tabs/utils';
 import PageWithSidebarWrapper from '@bufferapp/publish-app-pages/components/PageWithSidebarWrapper';
-import IGPersonalProfileNotification from '../IGPersonalProfileNotification';
 
 const ErrorBoundary = getErrorBoundary(true);
 
@@ -201,8 +200,6 @@ function ProfilePage({
   isInstagramProfile,
   isManager,
   shouldHideAdvancedAnalytics,
-  isInstagramPersonalProfile,
-  onDirectPostingClick,
 }) {
   const isQueueTab = tabId === 'queue' || tabId === 'stories';
   const isOtherPostsTab =
@@ -228,56 +225,43 @@ function ProfilePage({
 
   return (
     <PageWithSidebarWrapper profileId={profileId} tabId={tabId}>
-      {isInstagramPersonalProfile && (
-        <MainWithMargin id="main">
-          <IGPersonalProfileNotification
-            onDirectPostingClick={onDirectPostingClick}
-            profileId={profileId}
+      <TabNavigation
+        profileId={profileId}
+        tabId={tabId}
+        childTabId={childTabId}
+      />
+      <ScrollableContainer
+        profileId={profileId}
+        tabId={tabId}
+        growthSpace={1}
+        loadingMore={loadingMore}
+        moreToLoad={moreToLoad}
+        page={page}
+        onReachBottom={onReachBottom}
+      >
+        <Main id="main">
+          <TabContent
             tabId={tabId}
-          />
-        </MainWithMargin>
-      )}
-      {!isInstagramPersonalProfile && (
-        <>
-          <TabNavigation
             profileId={profileId}
-            tabId={tabId}
             childTabId={childTabId}
+            loadMore={onLoadMore}
+            selectedProfile={selectedProfile}
+            hasApprovalFeature={hasApprovalFeature}
+            hasDraftsFeature={hasDraftsFeature}
+            hasGridFeature={hasGridFeature}
+            hasStoriesFeature={hasStoriesFeature}
+            isInstagramProfile={isInstagramProfile}
+            isManager={isManager}
+            onChangeTab={onChangeTab}
+            shouldHideAdvancedAnalytics={shouldHideAdvancedAnalytics}
           />
-          <ScrollableContainer
-            profileId={profileId}
-            tabId={tabId}
-            growthSpace={1}
-            loadingMore={loadingMore}
-            moreToLoad={moreToLoad}
-            page={page}
-            onReachBottom={onReachBottom}
-          >
-            <Main id="main">
-              <TabContent
-                tabId={tabId}
-                profileId={profileId}
-                childTabId={childTabId}
-                loadMore={onLoadMore}
-                selectedProfile={selectedProfile}
-                hasApprovalFeature={hasApprovalFeature}
-                hasDraftsFeature={hasDraftsFeature}
-                hasGridFeature={hasGridFeature}
-                hasStoriesFeature={hasStoriesFeature}
-                isInstagramProfile={isInstagramProfile}
-                isManager={isManager}
-                onChangeTab={onChangeTab}
-                shouldHideAdvancedAnalytics={shouldHideAdvancedAnalytics}
-              />
-              {loadingMore && (
-                <div style={loadingAnimationStyle}>
-                  <BufferLoading size={32} />
-                </div>
-              )}
-            </Main>
-          </ScrollableContainer>
-        </>
-      )}
+          {loadingMore && (
+            <div style={loadingAnimationStyle}>
+              <BufferLoading size={32} />
+            </div>
+          )}
+        </Main>
+      </ScrollableContainer>
     </PageWithSidebarWrapper>
   );
 }
@@ -306,9 +290,7 @@ ProfilePage.propTypes = {
   hasStoriesFeature: PropTypes.bool,
   isManager: PropTypes.bool,
   isInstagramProfile: PropTypes.bool,
-  isInstagramPersonalProfile: PropTypes.bool,
   shouldHideAdvancedAnalytics: PropTypes.bool,
-  onDirectPostingClick: PropTypes.func,
 };
 
 ProfilePage.defaultProps = {
@@ -316,7 +298,6 @@ ProfilePage.defaultProps = {
   moreToLoad: false,
   page: 1,
   onChangeTab: () => {},
-  onDirectPostingClick: () => {},
   selectedProfile: null,
   hasApprovalFeature: false,
   hasDraftsFeature: false,
@@ -325,7 +306,6 @@ ProfilePage.defaultProps = {
   isManager: false,
   isInstagramProfile: false,
   shouldHideAdvancedAnalytics: false,
-  isInstagramPersonalProfile: false,
 };
 
 export default ProfilePage;
