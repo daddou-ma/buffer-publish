@@ -10,9 +10,9 @@ import * as FullStory from '@fullstory/browser';
 
 import { actionTypes } from './reducer';
 
-const shouldIdentifyWithAppcues = ({ isBusinessUser, plan, tags }) => {
+const shouldIdentifyWithAppcues = ({ plan, tags }) => {
   // We identify with Appcues for all Business and Pro users
-  if (isBusinessUser || plan === 'pro') {
+  if (plan !== 'free') {
     return true;
   }
   // We also identify with any team members of migrated Awesome users
@@ -86,30 +86,32 @@ export default ({ dispatch, getState }) => next => action => {
             });
           }
         } else if (window.Appcues) {
+          let { plan } = action.result;
           const {
             id,
             createdAt,
-            plan,
+            planBase,
             planCode,
             trial,
             orgUserCount,
             profileCount,
-            isBusinessUser,
             tags,
             canSeeOrgSwitcher,
           } = action.result; // user
-          if (shouldIdentifyWithAppcues({ isBusinessUser, plan, tags })) {
+          if (shouldIdentifyWithAppcues({ plan, tags })) {
             dispatch({
               type: actionTypes.APPCUES_LOADED,
               loaded: true,
             });
+            // We use the planName (free, pro8, pro5, premium_business, ...) but are expecting to receive the planBase label for pro plans.
+            if (planBase === 'pro') plan = planBase;
 
             const modalsShowing = modalReducers.isShowingModals(getState());
             window.Appcues.identify(id, {
               modalsShowing,
               name: id, // current user's name
               createdAt, // Unix timestamp of user signup date
-              plan, // Current user’s plan type
+              plan, // Current user’s plan name
               planCode, // Current user’s plan tier
               onTrial: trial.onTrial,
               trialLength: trial.trialLength,
