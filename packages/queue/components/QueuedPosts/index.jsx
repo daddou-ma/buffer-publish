@@ -58,7 +58,6 @@ const QueuedPosts = ({
   subprofiles,
   isInstagramProfile,
   isInstagramBusiness,
-  showInstagramDirectPostingModal,
   onDirectPostingClick,
   isInstagramLoading,
   isLockedProfile,
@@ -136,7 +135,6 @@ const QueuedPosts = ({
           onDirectPostingClick={onDirectPostingClick}
         />
       )}
-      {showInstagramDirectPostingModal && <InstagramDirectPostingModal />}
       {!!paused && (
         <QueuePausedBar
           isManager={isManager}
@@ -221,7 +219,6 @@ QueuedPosts.propTypes = {
   hasPushNotifications: PropTypes.bool,
   shouldDisplayRemindersBanner: PropTypes.bool,
   shouldDisplayRetiringProfileBanner: PropTypes.bool,
-  showInstagramDirectPostingModal: PropTypes.bool,
   onDirectPostingClick: PropTypes.func.isRequired,
   isInstagramLoading: PropTypes.bool,
   isLockedProfile: PropTypes.bool,
@@ -251,7 +248,6 @@ QueuedPosts.defaultProps = {
   hasPushNotifications: true,
   shouldDisplayRemindersBanner: false,
   shouldDisplayRetiringProfileBanner: false,
-  showInstagramDirectPostingModal: false,
   isInstagramLoading: false,
   isLockedProfile: false,
   shouldDisplayDisconnectedBanner: false,

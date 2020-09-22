@@ -6,5 +6,9 @@ import IGPersonalProfileNotification from './index';
 storiesOf('IGPersonalProfileNotification', module)
   .addDecorator(withA11y)
   .add('default', () => (
-    <IGPersonalProfileNotification onDirectSchedulingClick={() => {}} />
+    <IGPersonalProfileNotification
+      profileId="123"
+      tabId="queue"
+      onDirectSchedulingClick={() => {}}
+    />
   ));

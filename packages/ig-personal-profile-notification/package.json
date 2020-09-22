@@ -1,0 +1,18 @@
+{
+  "name": "@bufferapp/publish-ig-personal-profile-notification",
+  "version": "2.0.0",
+  "description": "A notification for instagram personal profiles",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint . --ignore-pattern coverage node_modules"
+  },
+  "author": "amylee@buffer.com",
+  "dependencies": {
+    "@bufferapp/async-data-fetch": "2.0.0"
+  },
+  "devDependencies": {
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
