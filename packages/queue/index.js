@@ -95,8 +95,9 @@ export default connect(
           state.modals.showInstagramDirectPostingModal,
         isBusinessOnInstagram: state.queue.isBusinessOnInstagram,
         isInstagramLoading: state.queue.isInstagramLoading,
-        hasFirstCommentFlip: state.user.hasFirstCommentFeature,
-        hasCampaignsFeature: state.user.hasCampaignsFeature,
+        hasFirstCommentFlip:
+          state.organizations.selected?.hasFirstCommentFeature,
+        hasCampaignsFeature: state.organizations.selected?.hasCampaignsFeature,
         hasCalendarFeature: state.organizations.selected.hasCalendarFeature,
         shouldDisplaySingleSlots,
         shouldDisplayDisconnectedBanner:

@@ -44,8 +44,9 @@ export default connect(
         isDisconnectedProfile:
           state.profileSidebar.selectedProfile.isDisconnected,
         analyzeCrossSale: state.user.analyzeCrossSale,
-        hasFirstCommentFlip: state.user.hasFirstCommentFeature,
-        hasCampaignsFeature: state.user.hasCampaignsFeature,
+        hasFirstCommentFlip:
+          state.organizations.selected?.hasFirstCommentFeature,
+        hasCampaignsFeature: state.organizations.selected?.hasCampaignsFeature,
         hasShareAgainFeature: state.organizations.selected.hasShareAgainFeature,
         has30DaySentPostsLimitFeature:
           state.organizations.selected.has30DaySentPostsLimitFeature,

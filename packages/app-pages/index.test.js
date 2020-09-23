@@ -45,6 +45,7 @@ const initialState = {
       hasDraftsFeature: true,
       hasGridFeature: true,
       hasStoriesFeature: true,
+      hasCampaignsFeature: true,
     },
     loaded: true,
   },

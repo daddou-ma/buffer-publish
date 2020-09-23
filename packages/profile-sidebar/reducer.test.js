@@ -176,7 +176,6 @@ describe('reducer', () => {
       const stateAfter = {
         ...profileInitialState,
         userId: '1234',
-        isFreeUser: false,
         isOrganizationSwitcherEnabled: false,
       };
 
@@ -184,7 +183,6 @@ describe('reducer', () => {
         type: `user_${dataFetchActionTypes.FETCH_SUCCESS}`,
         result: {
           id: stateAfter.userId,
-          isFreeUser: stateAfter.isFreeUser,
           hasOrgSwitcherFeature: false,
         },
       };
@@ -199,7 +197,6 @@ describe('reducer', () => {
       const stateAfter = {
         ...profileInitialState,
         userId: '1234',
-        isFreeUser: false,
         isOrganizationSwitcherEnabled: true,
       };
 
@@ -207,7 +204,6 @@ describe('reducer', () => {
         type: `user_${dataFetchActionTypes.FETCH_SUCCESS}`,
         result: {
           id: stateAfter.userId,
-          isFreeUser: stateAfter.isFreeUser,
           hasOrgSwitcherFeature: true,
         },
       };

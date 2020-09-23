@@ -31,7 +31,7 @@ const campaignForm = () => {
 };
 
 const initialState = {
-  user: { hasCampaignsFeature: true },
+  organizations: { selected: { hasCampaignsFeature: true } },
 };
 
 describe('CampaignForm | user interaction', () => {
@@ -172,7 +172,7 @@ describe('CampaignForm | user interaction', () => {
   test('user should not be able to access campaigns without having the feature flip', () => {
     render(<CampaignForm />, {
       initialState: {
-        user: { features: [''] },
+        organizations: { selected: { hasCampaignsFeature: false } },
       },
     });
 
@@ -180,7 +180,9 @@ describe('CampaignForm | user interaction', () => {
   });
 
   test('a11y | campaign form is accessible', async () => {
-    const { container } = render(<CampaignForm />);
+    const { container } = render(<CampaignForm />, {
+      initialState,
+    });
     const results = await axe(container);
     expect(results).toHaveNoViolations();
     cleanup();

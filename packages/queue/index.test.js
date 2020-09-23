@@ -48,6 +48,7 @@ const initialState = {
   organizations: {
     selected: {
       hasCalendarFeature: true,
+      hasCampaignsFeature: true,
     },
   },
 };

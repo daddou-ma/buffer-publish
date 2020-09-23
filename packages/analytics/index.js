@@ -9,7 +9,7 @@ const mapStateToProps = state => ({
   isInstagramBusiness: state.profileSidebar.selectedProfile.isInstagramBusiness,
   isAnalyticsSupported:
     state.profileSidebar.selectedProfile.isAnalyticsSupported,
-  canStartBusinessTrial: state.user.canStartBusinessTrial,
+  canStartBusinessTrial: state.organizations.selected.canStartBusinessTrial,
   linkShortening: state.generalSettings.linkShortening,
   hasBitlyPosts: !!state.sent.byProfileId[
     state.profileSidebar.selectedProfile.id
