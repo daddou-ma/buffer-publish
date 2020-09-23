@@ -16,7 +16,8 @@
     "@bufferapp/publish-composer-popover": "2.0.0",
     "@bufferapp/publish-server": "2.0.0",
     "@bufferapp/product-features": "2.0.0",
-    "@bufferapp/publish-locked-profile-notification": "2.0.0"
+    "@bufferapp/publish-locked-profile-notification": "2.0.0",
+    "@bufferapp/publish-ig-personal-profile-notification": "2.0.0"
   },
   "devDependencies": {
   },
