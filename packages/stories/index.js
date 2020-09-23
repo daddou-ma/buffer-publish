@@ -44,6 +44,8 @@ export default connect(
         userData: state.user,
         hasPushNotifications: profileData.hasPushNotifications,
         translations: state.i18n.translations['story-group-queue'],
+        shouldDisplayIGPersonalNotification:
+          profileData.shouldDisplayIGPersonalNotification,
       };
     }
     return {};

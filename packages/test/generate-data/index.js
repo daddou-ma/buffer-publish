@@ -100,6 +100,7 @@ const buildProfile = build('Profile', {
       'https://pbs.twimg.com/profile_images/1134013946929778693/DFqLN6GR_normal.png',
     shouldShowGridPreview: true,
     shouldHideAdvancedAnalytics: false,
+    shouldDisplayIGPersonalNotification: false,
   },
 });
 

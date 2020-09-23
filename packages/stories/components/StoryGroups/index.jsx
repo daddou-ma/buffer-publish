@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
+import InstagramPersonalProfileNotification from '@bufferapp/publish-ig-personal-profile-notification';
 import PreviewPopover from '@bufferapp/publish-story-preview';
 import StoryGroupPopover from '@bufferapp/publish-story-group-composer';
 import { blue, red } from '@bufferapp/ui/style/colors';
@@ -104,11 +105,16 @@ const StoryGroups = ({
   onSetRemindersClick,
   serviceId,
   translations,
+  shouldDisplayIGPersonalNotification,
 }) => {
   const hasStoriesMobileVersion = userData.tags
     ? userData.tags.includes('has_instagram_stories_mobile')
     : false;
 
+  if (shouldDisplayIGPersonalNotification) {
+    return <InstagramPersonalProfileNotification />;
+  }
+  
   if (loading) {
     return (
       <LoadingContainerStyle>
@@ -140,9 +146,9 @@ const StoryGroups = ({
         <TopBarContainerStyle>
           <ComposerInputStyle>
             {showStoriesComposer && !editMode && (
-              <React.Fragment>
+              <>
                 <StoryGroupPopover type="stories" />
-              </React.Fragment>
+              </>
             )}
             <ComposerInput
               placeholder={translations.inputPlaceholder}
@@ -217,6 +223,7 @@ StoryGroups.propTypes = {
     reminderText: PropTypes.string,
     composerInputText: PropTypes.string,
   }).isRequired,
+  shouldDisplayIGPersonalNotification: PropTypes.bool,
 };
 
 StoryGroups.defaultProps = {
@@ -237,6 +244,7 @@ StoryGroups.defaultProps = {
   onPreviewClick: () => {},
   onClosePreviewClick: () => {},
   userData: {},
+  shouldDisplayIGPersonalNotification: false,
 };
 
 export default StoryGroups;

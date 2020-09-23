@@ -121,9 +121,14 @@ export default connect(
     const { profileId, tabId } = ownProps;
     const currentProfile = state.drafts.byProfileId[profileId];
     if (currentProfile) {
+      const {
+        shouldDisplayIGPersonalNotification,
+        isDisconnected,
+        isManager,
+      } = state.profileSidebar.selectedProfile;
       return {
         preserveComposerStateOnClose: state.drafts.preserveComposerStateOnClose,
-        manager: state.profileSidebar.selectedProfile.isManager,
+        manager: isManager,
         drafts: currentProfile.drafts,
         postLists: formatPostLists(
           state.profileSidebar.selectedProfile,
@@ -141,11 +146,11 @@ export default connect(
         editMode: state.drafts.editMode,
         editingPostId: state.drafts.editingPostId,
         isLockedProfile: state.profileSidebar.isLockedProfile,
-        isDisconnectedProfile:
-          state.profileSidebar.selectedProfile.isDisconnected,
+        isDisconnectedProfile: isDisconnected,
         canStartBusinessTrial: state.user.canStartBusinessTrial ?? true,
         hasFirstCommentFlip: state.user.hasFirstCommentFeature,
         planBase: state.organizations?.selected?.planBase,
+        shouldDisplayIGPersonalNotification,
       };
     }
     return {};

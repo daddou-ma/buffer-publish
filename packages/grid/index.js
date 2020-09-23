@@ -48,6 +48,8 @@ export default connect(
         maxCustomLinks: currentProfile.maxCustomLinks,
         publicGridUrl: `https://shopgr.id/${profile.serviceUsername}`,
         hasWriteAccess: profile.permissions.includes('buffer_write'),
+        shouldDisplayIGPersonalNotification:
+          profile.shouldDisplayIGPersonalNotification,
       };
     }
     return {};
