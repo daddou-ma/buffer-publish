@@ -1,7 +1,7 @@
 /* eslint no-console: "off" */
 
 const fs = require('fs');
-const { join } = require('path');
+const { join, extname } = require('path');
 const express = require('express');
 const https = require('https');
 const cors = require('cors');
@@ -153,6 +153,22 @@ function setStandaloneSessionMiddleware(req, res, next) {
 
 function serveStaticAssets(app) {
   app.use(cors());
+  app.use(function(req, res, next) {
+    const whitelist = [
+      /\/rpc\//,
+      /\/health-check/,
+      /\/maintenance/,
+      /pusher\/auth/,
+    ];
+    const isStaticAsset = extname(req.path).length > 0;
+    const isApiRequest = whitelist.some(r => req.path.match(r));
+    if (isApiRequest || isStaticAsset) {
+      return next();
+    }
+    // should force return `index.html` for any other request
+    req.url = '/index.html';
+    return next();
+  });
   app.use('/', express.static(paths.webpackAssets));
 }
 
