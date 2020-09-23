@@ -132,6 +132,7 @@ if (!isProduction) {
 
 if (isStandalone && usePrecompiledBundles) {
   standalone.serveStaticAssets(app);
+  standalone.setupHttpsRedirect();
 }
 
 server.listen(PORT, () => {

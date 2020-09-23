@@ -4,6 +4,7 @@ const fs = require('fs');
 const { join, extname } = require('path');
 const express = require('express');
 const https = require('https');
+const http = require('http');
 const cors = require('cors');
 const PublishAPI = require('../publishAPI');
 
@@ -203,10 +204,20 @@ async function onBoot({ usePrecompiledBundles }) {
   }
 }
 
+function setupHttpsRedirect() {
+  const app = express();
+  const server = http.createServer(app);
+  app.get('*', function(req, res) {
+    res.redirect(`https://${req.headers.host}${req.url}`);
+  });
+  server.listen(80);
+}
+
 module.exports = {
   loadEnv,
   createServer,
   setStandaloneSessionMiddleware,
   serveStaticAssets,
   onBoot,
+  setupHttpsRedirect,
 };
