@@ -99,6 +99,7 @@ export default connect(
       return {
         userData: state.user,
         profiles: getProfiles(state, selectedProfileId),
+        organizations: state.organizations,
         enabledApplicationModes: state.temporaryBanner.enabledApplicationModes,
         environment: state.environment.environment,
         editMode: false,

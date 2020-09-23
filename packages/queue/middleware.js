@@ -81,10 +81,12 @@ export default ({ dispatch, getState }) => next => action => {
             })
           );
         } else {
+          const message = `Oops! It looks like this account needs some additional setup 
+            before we can enable direct scheduling. Please refer to the guide in the banner.`;
           dispatch(
             notificationActions.createNotification({
               notificationType: 'error',
-              message: "It seems you still don't have a Business Profile",
+              message,
             })
           );
         }

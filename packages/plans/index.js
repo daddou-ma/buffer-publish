@@ -9,7 +9,8 @@ import { actions } from './reducer';
 
 export default connect(
   state => ({
-    currentPlan: state.user.plan,
+    currentPlan: state.organizations?.selected?.plan,
+    currentPlanBase: state.organizations?.selected?.planBase,
     onProTrial:
       state.user.trial?.onTrial &&
       !state.profileSidebar.selectedProfile.business,
@@ -18,7 +19,7 @@ export default connect(
     translations: state.i18n.translations['plans-page'],
     isNonprofit: state.user.isNonprofit,
     selectedPremiumPlan: state.plans.selectedPremiumPlan,
-    shouldSeeSoloPlanOption: state.user.plan === 'pro',
+    shouldSeeSoloPlanOption: state.organizations?.selected?.planBase === 'pro',
   }),
   dispatch => ({
     onPremiumPlanClick: ({ selectedPlan }) => {

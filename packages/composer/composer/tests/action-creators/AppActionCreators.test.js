@@ -55,6 +55,9 @@ describe('AppActionCreators', () => {
     afterEach(() => jest.resetAllMocks());
 
     it('shows an upgrade notice when the profile queue limit is reached', async () => {
+      AppStore.getOrganizationsData.mockReturnValue({
+        selected: { showUpgradeToProCta: true },
+      });
       WebAPIUtils.saveDrafts.mockReturnValue(
         Promise.resolve({
           successfulResponses: [],

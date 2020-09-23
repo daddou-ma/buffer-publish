@@ -5,13 +5,15 @@ import OnboardingPage from '../OnboardingPage';
 
 const OnboardingManager = ({
   canSeeOnboardingPage,
+  showUpgradeToProCta,
+  profileLimit,
   onConnectSocialAccountOnboardingClick,
   onSkipStep,
   onManageSocialAccountClick,
   onConnectSocialAccountSidebarClick,
   translations,
 }) => (
-  <React.Fragment>
+  <>
     {canSeeOnboardingPage && (
       <OnboardingPage
         onConnectSocialAccountClick={onConnectSocialAccountOnboardingClick}
@@ -21,15 +23,19 @@ const OnboardingManager = ({
     )}
     {!canSeeOnboardingPage && (
       <DisabledQueue
+        showUpgradeToProCta={showUpgradeToProCta}
+        profileLimit={profileLimit}
         translations={translations}
         onManageSocialAccountClick={onManageSocialAccountClick}
         goToConnectSocialAccount={onConnectSocialAccountSidebarClick}
       />
     )}
-  </React.Fragment>
+  </>
 );
 
 OnboardingManager.propTypes = {
+  showUpgradeToProCta: PropTypes.bool.isRequired,
+  profileLimit: PropTypes.number.isRequired,
   onConnectSocialAccountOnboardingClick: PropTypes.func.isRequired,
   onSkipStep: PropTypes.func.isRequired,
   onManageSocialAccountClick: PropTypes.func.isRequired,

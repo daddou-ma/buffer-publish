@@ -29,6 +29,7 @@ const ContainerStyle = styled.div`
 const Plans = ({
   onChoosePlanClick,
   currentPlan,
+  currentPlanBase,
   onBackToDashboardClick,
   selectedProfileId,
   profiles,
@@ -38,93 +39,98 @@ const Plans = ({
   selectedPremiumPlan,
   shouldSeeSoloPlanOption,
   onProTrial = false,
-}) => (
-  <ContainerStyle>
-    <ButtonStyle>
-      <Button
-        type="secondary"
-        size="small"
-        icon={<ArrowLeft color={gray} />}
-        label={translations.buttonDashboardText}
-        onClick={() =>
-          onBackToDashboardClick({
-            selectedProfileId,
-            profiles,
-          })
-        }
-      />
-    </ButtonStyle>
-    <div style={{ textAlign: 'center' }}>
-      <HeaderStyle type="h1">{translations.headerText}</HeaderStyle>
-      {!shouldSeeSoloPlanOption && (
-        <ColumnContainerStyle>
-          <PlanColumn
-            {...translations.pro}
-            imageSrc="https://static.buffer.com/marketing/static/illustrations/publish-pricing-pro@2x.jpeg"
-            currentPlan={currentPlan}
-            onChoosePlanClick={onChoosePlanClick}
-            source={getSource({ newPlan: 'pro', currentPlan })}
-            isNonprofit={isNonprofit}
-          />
-          <PlanColumn
-            {...translations.premium}
-            imageSrc="https://static.buffer.com/marketing/static/illustrations/publish-pricing-premium@2x.jpeg"
-            currentPlan={currentPlan}
-            onChoosePlanClick={onChoosePlanClick}
-            source={getSource({ newPlan: 'premium_business', currentPlan })}
-            isNonprofit={isNonprofit}
-          />
-          <PlanColumn
-            {...translations.small}
-            imageSrc="https://static.buffer.com/marketing/static/illustrations/publish-pricing-business@2x.jpeg"
-            currentPlan={currentPlan}
-            onChoosePlanClick={onChoosePlanClick}
-            source={getSource({ newPlan: 'small', currentPlan })}
-            isNonprofit={isNonprofit}
-          />
-        </ColumnContainerStyle>
-      )}
-      {shouldSeeSoloPlanOption && (
-        <ColumnContainerStyle>
-          <PlanColumnWithPremiumSolo
-            {...translations.proExperiment}
-            imageSrc="https://static.buffer.com/marketing/static/illustrations/publish-pricing-pro@2x.jpeg"
-            currentPlan={currentPlan}
-            onChoosePlanClick={onChoosePlanClick}
-            source={getSource({ newPlan: 'pro', currentPlan })}
-            isNonprofit={isNonprofit}
-            onProTrial={onProTrial}
-          />
-          <PlanColumnWithPremiumSolo
-            {...translations.premiumExperiment}
-            imageSrc="https://static.buffer.com/marketing/static/illustrations/publish-pricing-premium@2x.jpeg"
-            currentPlan={currentPlan}
-            onChoosePlanClick={onChoosePlanClick}
-            source={getSource({
-              newPlan:
-                selectedPremiumPlan === 1
-                  ? 'solo_premium_business'
-                  : 'premium_business',
-              currentPlan,
-            })}
-            isNonprofit={isNonprofit}
-            onPremiumPlanClick={onPremiumPlanClick}
-            selectedPremiumPlan={selectedPremiumPlan}
-            onProTrial={onProTrial}
-          />
-        </ColumnContainerStyle>
-      )}
-    </div>
-  </ContainerStyle>
-);
+}) => {
+  // We use the planName (free, pro8, pro5, premium_business, ...) but are expecting to receive the planBase label for pro plans.
+  if (currentPlanBase === 'pro') currentPlan = currentPlanBase;
+  return (
+    <ContainerStyle>
+      <ButtonStyle>
+        <Button
+          type="secondary"
+          size="small"
+          icon={<ArrowLeft color={gray} />}
+          label={translations.buttonDashboardText}
+          onClick={() =>
+            onBackToDashboardClick({
+              selectedProfileId,
+              profiles,
+            })
+          }
+        />
+      </ButtonStyle>
+      <div style={{ textAlign: 'center' }}>
+        <HeaderStyle type="h1">{translations.headerText}</HeaderStyle>
+        {!shouldSeeSoloPlanOption && (
+          <ColumnContainerStyle>
+            <PlanColumn
+              {...translations.pro}
+              imageSrc="https://static.buffer.com/marketing/static/illustrations/publish-pricing-pro@2x.jpeg"
+              currentPlan={currentPlan}
+              onChoosePlanClick={onChoosePlanClick}
+              source={getSource({ newPlan: 'pro', currentPlan })}
+              isNonprofit={isNonprofit}
+            />
+            <PlanColumn
+              {...translations.premium}
+              imageSrc="https://static.buffer.com/marketing/static/illustrations/publish-pricing-premium@2x.jpeg"
+              currentPlan={currentPlan}
+              onChoosePlanClick={onChoosePlanClick}
+              source={getSource({ newPlan: 'premium_business', currentPlan })}
+              isNonprofit={isNonprofit}
+            />
+            <PlanColumn
+              {...translations.small}
+              imageSrc="https://static.buffer.com/marketing/static/illustrations/publish-pricing-business@2x.jpeg"
+              currentPlan={currentPlan}
+              onChoosePlanClick={onChoosePlanClick}
+              source={getSource({ newPlan: 'small', currentPlan })}
+              isNonprofit={isNonprofit}
+            />
+          </ColumnContainerStyle>
+        )}
+        {shouldSeeSoloPlanOption && (
+          <ColumnContainerStyle>
+            <PlanColumnWithPremiumSolo
+              {...translations.proExperiment}
+              imageSrc="https://static.buffer.com/marketing/static/illustrations/publish-pricing-pro@2x.jpeg"
+              currentPlan={currentPlan}
+              onChoosePlanClick={onChoosePlanClick}
+              source={getSource({ newPlan: 'pro', currentPlan })}
+              isNonprofit={isNonprofit}
+              onProTrial={onProTrial}
+            />
+            <PlanColumnWithPremiumSolo
+              {...translations.premiumExperiment}
+              imageSrc="https://static.buffer.com/marketing/static/illustrations/publish-pricing-premium@2x.jpeg"
+              currentPlan={currentPlan}
+              onChoosePlanClick={onChoosePlanClick}
+              source={getSource({
+                newPlan:
+                  selectedPremiumPlan === 1
+                    ? 'solo_premium_business'
+                    : 'premium_business',
+                currentPlan,
+              })}
+              isNonprofit={isNonprofit}
+              onPremiumPlanClick={onPremiumPlanClick}
+              selectedPremiumPlan={selectedPremiumPlan}
+              onProTrial={onProTrial}
+            />
+          </ColumnContainerStyle>
+        )}
+      </div>
+    </ContainerStyle>
+  );
+};
 
 Plans.propTypes = {
   onChoosePlanClick: PropTypes.func.isRequired,
   currentPlan: PropTypes.string.isRequired,
+  currentPlanBase: PropTypes.string.isRequired,
   onBackToDashboardClick: PropTypes.func.isRequired,
   selectedProfileId: ProfileSidebarComponent.propTypes.selectedProfileId,
   profiles: ProfileSidebarComponent.propTypes.profiles.isRequired,
-  translations: PropTypes.object.isRequired,  // eslint-disable-line
+  translations: PropTypes.object.isRequired, // eslint-disable-line
   isNonprofit: PropTypes.bool.isRequired,
 };
 

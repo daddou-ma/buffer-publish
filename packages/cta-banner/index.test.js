@@ -26,10 +26,6 @@ describe('CtaBanner', () => {
           plan: 'premium_business',
           profileCount: 3,
         },
-        productFeatures: {
-          planName: 'business',
-          features: {},
-        },
       });
     });
 

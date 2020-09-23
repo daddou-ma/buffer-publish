@@ -46,8 +46,7 @@
     "@bufferapp/publish-past-reminders": "2.0.0",
     "moment": "^2.22.2"
   },
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "publishConfig": {
     "access": "public"
   }

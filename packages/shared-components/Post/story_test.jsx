@@ -1,24 +1,9 @@
 import React from 'react';
-import { Provider } from 'react-redux';
 import { storiesOf } from '@storybook/react';
 import { linkTo } from '@storybook/addon-links';
 import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
 import Post from './index';
-
-const storeFake = state => ({
-  default: () => {},
-  subscribe: () => {},
-  dispatch: () => {},
-  getState: () => ({ ...state }),
-});
-
-const store = storeFake({
-  productFeatures: {
-    planName: 'free',
-    features: {},
-  },
-});
 
 const postDetails = {
   isRetweet: false,
@@ -100,7 +85,6 @@ const postContentRetweetWithComment = {
 
 storiesOf('Cards|Posts/Post', module)
   .addDecorator(withA11y)
-  .addDecorator(getStory => <Provider store={store}>{getStory()}</Provider>)
   .add('queued post', () => (
     <Post
       postDetails={postDetails}

@@ -4,9 +4,9 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
 import translations from '@bufferapp/publish-i18n/translations/en-us.json';
+import { queueItems } from '@bufferapp/publish-test-utils/mock-ui-data';
 
 import StoryGroups from './index';
-import storyGroups from './storiesData';
 
 const storeFake = state => ({
   default: () => {},
@@ -23,10 +23,6 @@ const store = storeFake({
   },
   switchPlanModal: {},
   stripe: {},
-  productFeatures: {
-    planName: 'free',
-    features: {},
-  },
   user: {
     profileLimit: 3,
     id: 'id1',
@@ -47,12 +43,14 @@ storiesOf('Stories|StoryGroups', module)
   .addDecorator(UpgradeModalDecorator)
   .add('should show stories storyPosts', () => (
     <StoryGroups
-      total={2}
       loading={false}
-      isManager
-      storyGroups={storyGroups}
+      storyGroups={queueItems({
+        isSent: false,
+        isPastReminder: false,
+        isStory: true,
+      })}
       isLockedProfile={false}
-      showStoriesComposer={action('showStoriesComposer')}
+      showStoriesComposer={false}
       onEmptySlotClick={action('onEmptySlotClick')}
       onEditClick={action('onEditClick')}
       onDeleteConfirmClick={action('onDeleteConfirmClick')}

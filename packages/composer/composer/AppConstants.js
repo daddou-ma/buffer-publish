@@ -274,6 +274,7 @@ const ActionTypes = keyMirror({
   APP_RESET: null,
   APP_SOFT_RESET: null,
   APP_RECEIVE_USER_DATA: null,
+  APP_RECEIVE_ORGANIZATIONS_DATA: null,
   APP_RECEIVE_METADATA: null,
   APP_RECEIVE_OPTIONS: null,
   APP_RECEIVE_CSRF_TOKEN: null,

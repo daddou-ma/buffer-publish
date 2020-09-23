@@ -107,6 +107,13 @@ const loadInitialUserData = userData => {
   });
 };
 
+const loadInitialOrganizationsData = organizationsData => {
+  AppDispatcher.handleViewAction({
+    actionType: ActionTypes.APP_RECEIVE_ORGANIZATIONS_DATA,
+    organizationsData,
+  });
+};
+
 const loadInitialImageDimensionsKey = imageDimensionsKey => {
   AppDispatcher.handleViewAction({
     actionType: ActionTypes.APP_RECEIVE_IMAGE_DIMENSIONS_KEY,
@@ -413,6 +420,7 @@ const AppInitActionCreators = {
    */
   loadInitialData: ({
     profilesData,
+    organizationsData,
     userData,
     metaData,
     csrfToken,
@@ -429,6 +437,7 @@ const AppInitActionCreators = {
     loadInitialOptions(clonedOptions);
     loadInitialProfilesData(cloneDeep(profilesData), clonedOptions);
     loadInitialUserData(cloneDeep({ ...userData, onNewPublish }));
+    loadInitialOrganizationsData(cloneDeep(organizationsData));
 
     AppHooks.handleAppLoaded();
   },
