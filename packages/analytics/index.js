@@ -14,6 +14,8 @@ const mapStateToProps = state => ({
   hasBitlyPosts: !!state.sent.byProfileId[
     state.profileSidebar.selectedProfile.id
   ]?.hasBitlyPosts,
+  shouldDisplayIGPersonalNotification:
+    state.profileSidebar.selectedProfile.shouldDisplayIGPersonalNotification,
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -56,15 +56,17 @@ describe('CampaignForm | user interaction', () => {
 
     const { input, purpleColor, greenColor, saveButton } = campaignForm();
 
-    expect(screen.getByRole('heading')).toHaveTextContent(/create campaign/i);
+    expect(
+      screen.getByRole('heading', { name: /create campaign/i })
+    ).toBeInTheDocument();
     expect(purpleColor).toBeChecked();
+    expect(greenColor).not.toBeChecked();
     expect(saveButton).toBeDisabled();
 
     await userEvent.type(input, 'Campaign Test');
-    expect(input).toHaveValue('Campaign Test');
-
     userEvent.click(greenColor);
 
+    expect(input).toHaveValue('Campaign Test');
     expect(purpleColor).not.toBeChecked();
     expect(greenColor).toBeChecked();
     expect(saveButton).not.toBeDisabled();
@@ -95,7 +97,7 @@ describe('CampaignForm | user interaction', () => {
     render(<CampaignForm editMode />, {
       initialState: {
         ...initialState,
-        campaignForm: { campaignId, isLoading: false },
+        campaignForm: { campaignId },
       },
     });
 
@@ -107,8 +109,14 @@ describe('CampaignForm | user interaction', () => {
     expect(rpcCall).toHaveBeenCalledTimes(1);
 
     const { input, greenColor, saveButton } = campaignForm();
-    await waitFor(() => expect(input).toHaveValue('Test Campaign'));
-    await waitFor(() => expect(greenColor).toBeChecked());
+
+    const editHeader = await screen.findByRole('heading', {
+      name: /edit campaign/i,
+    });
+    expect(editHeader).toBeInTheDocument();
+    expect(input).toHaveValue('Test Campaign');
+    expect(greenColor).toBeChecked();
+    expect(saveButton).toBeDisabled();
 
     userEvent.clear(input);
     await userEvent.type(input, 'Campaign updated');
@@ -135,7 +143,7 @@ describe('CampaignForm | user interaction', () => {
     const { history } = render(<CampaignForm editMode />, {
       initialState: {
         ...initialState,
-        campaignForm: { campaignId, isLoading: false },
+        campaignForm: { campaignId },
       },
     });
 

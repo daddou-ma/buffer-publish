@@ -91,8 +91,6 @@ export default connect(
         paused: profileData.paused,
         isManager: profileData.isManager,
         hasPushNotifications: profileData.hasPushNotifications,
-        showInstagramDirectPostingModal:
-          state.modals.showInstagramDirectPostingModal,
         isBusinessOnInstagram: state.queue.isBusinessOnInstagram,
         isInstagramLoading: state.queue.isInstagramLoading,
         hasFirstCommentFlip:
@@ -109,6 +107,8 @@ export default connect(
           !profileData.hasPushNotifications &&
           isInstagramProfile &&
           hasAtLeastOneReminderPost,
+        shouldDisplayIGPersonalNotification:
+          profileData.shouldDisplayIGPersonalNotification,
       };
     }
     return {

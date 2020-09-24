@@ -143,6 +143,13 @@
       "supportBold": " support"
     }
   },
+  "instagram-personal-profile-notification": {
+    "title": "Please enable direct scheduling to continue using Buffer with this Instagram account.",
+    "body": "If you have a personal profile, you’ll need to convert it to a business account and enable direct scheduling. If you already have a business account, please enable direct scheduling to keep it connected to Buffer. If you don't enable direct scheduling this account will no longer appear in your dashboard. There’s no extra cost and it should only take a few minutes.",
+    "buttonLabel": "Enable Direct Scheduling",
+    "linkText": "Follow our guide to get started.",
+    "altText": "Person measuring Instagram post analytics"
+  },
   "language": "Language",
   "onboarding-page": {
     "analyticsTab": "Analytics",

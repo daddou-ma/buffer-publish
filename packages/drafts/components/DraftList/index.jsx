@@ -8,6 +8,8 @@ import {
 } from '@bufferapp/publish-shared-components';
 import ComposerPopover from '@bufferapp/publish-composer-popover';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
+import InstagramPersonalProfileNotification from '@bufferapp/publish-ig-personal-profile-notification';
+
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
 import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
@@ -59,7 +61,12 @@ const DraftList = ({
   onComposerOverlayClick,
   preserveComposerStateOnClose,
   planBase,
+  shouldDisplayIGPersonalNotification,
 }) => {
+  if (shouldDisplayIGPersonalNotification) {
+    return <InstagramPersonalProfileNotification />;
+  }
+
   if (planBase === 'pro') {
     const startTrial = () =>
       window.location.assign(
@@ -188,6 +195,7 @@ DraftList.propTypes = {
   hasFirstCommentFlip: PropTypes.bool,
   onComposerOverlayClick: PropTypes.func.isRequired,
   preserveComposerStateOnClose: PropTypes.bool,
+  shouldDisplayIGPersonalNotification: PropTypes.bool,
 };
 
 DraftList.defaultProps = {
@@ -200,6 +208,7 @@ DraftList.defaultProps = {
   isLockedProfile: false,
   isDisconnectedProfile: false,
   hasFirstCommentFlip: false,
+  shouldDisplayIGPersonalNotification: false,
 };
 
 export default DraftList;

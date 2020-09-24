@@ -10,6 +10,7 @@ import TrialCompleteModal from '@bufferapp/publish-trial-complete-modal';
 import InstagramFirstCommentProTrialModal from '@bufferapp/publish-ig-first-comment-pro-trial-modal';
 import CloseComposerConfirmationModal from '@bufferapp/publish-close-composer-confirmation-modal';
 import DeleteCampaignModal from '@bufferapp/publish-delete-campaign-modal';
+import InstagramDirectPostingModal from '@bufferapp/publish-ig-direct-posting-modal';
 
 const AppModals = ({
   showSwitchPlanModal,
@@ -21,6 +22,7 @@ const AppModals = ({
   showInstagramFirstCommentProTrialModal,
   showCloseComposerConfirmationModal,
   showDeleteCampaignModal,
+  showInstagramDirectPostingModal,
 }) => (
   <>
     {showProfilesDisconnectedModal && <ProfilesDisconnectedModal />}
@@ -34,6 +36,7 @@ const AppModals = ({
     )}
     {showCloseComposerConfirmationModal && <CloseComposerConfirmationModal />}
     {showDeleteCampaignModal && <DeleteCampaignModal />}
+    {showInstagramDirectPostingModal && <InstagramDirectPostingModal />}
   </>
 );
 
@@ -47,6 +50,7 @@ AppModals.propTypes = {
   showInstagramFirstCommentProTrialModal: PropTypes.bool.isRequired,
   showCloseComposerConfirmationModal: PropTypes.bool.isRequired,
   showDeleteCampaignModal: PropTypes.bool.isRequired,
+  showInstagramDirectPostingModal: PropTypes.bool.isRequired,
 };
 
 export default AppModals;

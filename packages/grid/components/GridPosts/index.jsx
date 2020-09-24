@@ -11,6 +11,7 @@ import InfoIcon from '@bufferapp/ui/Icon/Icons/Info';
 import ArrowRightIcon from '@bufferapp/ui/Icon/Icons/ArrowRight';
 import Avatar from '@bufferapp/ui/Avatar';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
+import InstagramPersonalProfileNotification from '@bufferapp/publish-ig-personal-profile-notification';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 import { IconArrowPopover } from '@bufferapp/components';
 import styled from 'styled-components';
@@ -156,6 +157,7 @@ const GridPosts = ({
   onUpdateSingleCustomLink,
   isValidItem,
   hasWriteAccess,
+  shouldDisplayIGPersonalNotification,
 }) => {
   if (loading) {
     return (
@@ -163,6 +165,10 @@ const GridPosts = ({
         <BufferLoading size={64} />
       </StlyedLoadingGridContainer>
     );
+  }
+
+  if (shouldDisplayIGPersonalNotification) {
+    return <InstagramPersonalProfileNotification />;
   }
 
   if (isLockedProfile) {
@@ -314,6 +320,7 @@ GridPosts.propTypes = {
   }),
   isValidItem: PropTypes.func,
   hasWriteAccess: PropTypes.bool,
+  shouldDisplayIGPersonalNotification: PropTypes.bool,
 };
 
 GridPosts.defaultProps = {
@@ -336,6 +343,7 @@ GridPosts.defaultProps = {
     maxCustomLinks: 0,
     buttonColor: null,
   },
+  shouldDisplayIGPersonalNotification: false,
 };
 
 export default GridPosts;

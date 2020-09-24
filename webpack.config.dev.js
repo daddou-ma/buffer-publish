@@ -5,8 +5,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const common = require('./webpack.config.common.js');
 
-const publicPath = 'https://publish.local.buffer.com:8080/static/';
-
 const merged = merge.strategy({
   plugins: 'prepend',
   'entry.bundle': 'prepend',
@@ -15,18 +13,26 @@ const merged = merge.strategy({
   entry: {
     bundle: ['react-hot-loader/patch'],
   },
-  devtool: 'source-map',
-  output: {
-    publicPath,
-  },
+  devtool: 'inline-source-map',
   devServer: {
-    allowedHosts: ['.buffer.com', '.local.buffer.com'],
+    historyApiFallback: true,
+    disableHostCheck: true,
     hot: true,
-    publicPath,
-    contentBase: false,
     port: 8080,
-    host: 'local.buffer.com',
+    host: 'publish.local.buffer.com',
     headers: { 'Access-Control-Allow-Origin': '*' },
+    proxy: {
+      '/rpc': {
+        target: 'https://publish.local.buffer.com/',
+        changeOrigin: true,
+        secure: false,
+      },
+      '/pusher/auth': {
+        target: 'https://publish.local.buffer.com/',
+        changeOrigin: true,
+        secure: false,
+      },
+    },
     https: {
       key: fs.readFileSync(
         '../reverseproxy/certs/local.buffer.com-wildcard.key'
@@ -47,6 +53,8 @@ const merged = merge.strategy({
     new webpack.HotModuleReplacementPlugin(),
     new webpack.EnvironmentPlugin({
       NODE_ENV: 'development',
+      STRIPE_PUBLISHABLE_KEY: 'pk_dGKqAIFsUQonSYGPBM9Rek71IHOcL',
+      SEGMENT_KEY: 'qsP2UfgODyoJB3px9SDkGX5I6wDtdQ6a',
     }),
   ],
   resolve: {

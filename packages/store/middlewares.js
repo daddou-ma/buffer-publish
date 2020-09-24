@@ -21,7 +21,6 @@ import i18nMiddleware from '@bufferapp/publish-i18n/middleware';
 import asyncDataFetchMiddleware from '@bufferapp/async-data-fetch/lib/middleware';
 import pusherSyncMiddleware from '@bufferapp/publish-pusher-sync/middleware';
 import notificationsMiddleware from '@bufferapp/notifications/lib/middleware';
-import environmentMiddleware from '@bufferapp/environment/lib/middleware';
 import unauthorizedRedirectMiddleware from '@bufferapp/unauthorized-redirect/middleware';
 import switchPlanModalMiddleware from '@bufferapp/publish-switch-plan-modal/middleware';
 import stripeMiddleware from '@bufferapp/stripe/middleware';
@@ -84,7 +83,6 @@ const composedMiddlewares = history =>
       languageSettingsMiddleware,
       pusherSyncMiddleware,
       notificationsMiddleware,
-      environmentMiddleware,
       unauthorizedRedirectMiddleware,
       switchPlanModalMiddleware,
       manageAppsMiddleware,
