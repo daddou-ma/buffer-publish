@@ -95,7 +95,6 @@ const PastRemindersPosts = ({
   showStoriesComposer,
   isDisconnectedProfile,
   onClosePreviewClick,
-  fetchCampaignsIfNeeded,
   hasShareAgainFeature,
 }) => {
   if (loading) {
@@ -116,10 +115,6 @@ const PastRemindersPosts = ({
       />
     );
   }
-
-  useEffect(() => {
-    fetchCampaignsIfNeeded();
-  }, []);
 
   return (
     <ErrorBoundary>
@@ -184,7 +179,6 @@ PastRemindersPosts.propTypes = {
   userData: PropTypes.shape({
     tags: PropTypes.arrayOf(PropTypes.string),
   }),
-  fetchCampaignsIfNeeded: PropTypes.func.isRequired,
 };
 
 PastRemindersPosts.defaultProps = {

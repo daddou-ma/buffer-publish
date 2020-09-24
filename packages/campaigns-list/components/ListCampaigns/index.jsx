@@ -53,7 +53,6 @@ const ListCampaigns = ({
   showCampaignActions,
   hideAnalyzeReport,
   hasCampaignsFlip,
-  fetchCampaignsIfNeeded,
   isLoading,
   ownerEmail,
 }) => {
@@ -61,10 +60,6 @@ const ListCampaigns = ({
     window.location = getURL.getPublishUrl();
     return null;
   }
-  // Fetch Data
-  useEffect(() => {
-    fetchCampaignsIfNeeded();
-  }, []);
 
   const { t } = useTranslation();
 
@@ -128,7 +123,6 @@ ListCampaigns.propTypes = {
   showCampaignActions: PropTypes.bool.isRequired,
   hideAnalyzeReport: PropTypes.bool.isRequired,
   hasCampaignsFlip: PropTypes.bool.isRequired,
-  fetchCampaignsIfNeeded: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
   ownerEmail: PropTypes.string,
 };

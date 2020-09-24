@@ -203,9 +203,6 @@ describe('QueuedPosts | user interaction', () => {
       }
     );
 
-    expect(rpcCall).toHaveBeenCalledWith('getCampaignsList', {});
-    expect(rpcCall).toHaveBeenCalledTimes(1);
-
     expect(screen.getByText(post1.postContent.text)).toBeInTheDocument();
     expect(screen.getByText(post1.postDetails.postAction)).toBeInTheDocument();
     expect(screen.getByText(campaign.name)).toBeInTheDocument();
