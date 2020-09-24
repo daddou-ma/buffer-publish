@@ -93,9 +93,10 @@ export default connect(
         hasPushNotifications: profileData.hasPushNotifications,
         isBusinessOnInstagram: state.queue.isBusinessOnInstagram,
         isInstagramLoading: state.queue.isInstagramLoading,
-        hasFirstCommentFlip: state.user.hasFirstCommentFeature,
-        hasCampaignsFeature: state.user.hasCampaignsFeature,
-        hasCalendarFeature: state.organizations.selected.hasCalendarFeature,
+        hasFirstCommentFlip:
+          state.organizations.selected?.hasFirstCommentFeature,
+        hasCampaignsFeature: state.organizations.selected?.hasCampaignsFeature,
+        hasCalendarFeature: state.organizations.selected?.hasCalendarFeature,
         shouldDisplaySingleSlots,
         shouldDisplayDisconnectedBanner:
           !shouldDisplayRetiringProfileBanner && isDisconnected,

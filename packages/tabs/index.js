@@ -9,7 +9,8 @@ export default connect(
   (state, ownProps) => ({
     selectedTabId: ownProps.tabId,
     selectedChildTabId: ownProps.childTabId,
-    shouldShowUpgradeButton: state.user.shouldShowUpgradeButton,
+    shouldShowUpgradeButton:
+      state.organizations.selected?.shouldShowUpgradeButton,
     shouldShowNestedSettingsTab: ownProps.tabId === 'settings',
     shouldShowNestedAnalyticsTab: ownProps.tabId === 'analytics',
     shouldHideAdvancedAnalytics:
@@ -21,7 +22,7 @@ export default connect(
     isDisconnectedProfile: state.profileSidebar.selectedProfile.isDisconnected,
     draftsNeedApprovalCount: state.tabs.draftsNeedApprovalCount,
     draftsCount: state.tabs.draftsCount,
-    canReconnectChannels: state.user.canReconnectChannels,
+    canReconnectChannels: state.organizations.selected?.canReconnectChannels,
     hasApprovalFeature: state.organizations?.selected?.hasApprovalFeature,
     hasDraftsFeature: state.organizations?.selected?.hasDraftsFeature,
     hasGridFeature: state.organizations?.selected?.hasGridFeature,

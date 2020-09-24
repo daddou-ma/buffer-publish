@@ -65,6 +65,9 @@ const initialState = {
     selected: {
       hasAnalyticsOnPosts: false,
       hasTwitterImpressions: false,
+      hasCampaignsFeature: true,
+      canModifyCampaigns: true,
+      canSeeCampaignsReport: true,
     },
   },
 };

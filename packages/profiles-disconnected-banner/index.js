@@ -18,7 +18,7 @@ export default connect(
       profileId: selectedProfile?.id,
       service: selectedProfile?.service,
       displayExtraMessage,
-      canReconnectChannels: state.user.canReconnectChannels,
+      canReconnectChannels: state.organizations.selected?.canReconnectChannels,
       ownerEmail: state.organizations.selected?.ownerEmail,
     };
   },

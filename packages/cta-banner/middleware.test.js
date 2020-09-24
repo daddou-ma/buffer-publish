@@ -13,8 +13,10 @@ describe('middleware', () => {
     const store = {
       dispatch: jest.fn(),
       getState: () => ({
-        user: {
-          plan: 'premium_business',
+        organizations: {
+          selected: {
+            plan: 'premium_business',
+          },
         },
       }),
     };
@@ -34,8 +36,10 @@ describe('middleware', () => {
     const store = {
       dispatch: jest.fn(),
       getState: () => ({
-        user: {
-          plan: 'small',
+        organizations: {
+          selected: {
+            plan: 'small',
+          },
         },
       }),
     };
@@ -55,8 +59,10 @@ describe('middleware', () => {
     const store = {
       dispatch: jest.fn(),
       getState: () => ({
-        user: {
-          plan: 'pro',
+        organizations: {
+          selected: {
+            plan: 'pro',
+          },
         },
       }),
     };

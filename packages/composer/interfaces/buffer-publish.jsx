@@ -47,7 +47,7 @@ const ComposerWrapper = ({
   const saveButtons = getSaveButtons();
 
   // Add Share Next feature to all users except free.
-  const showShareNextFeature = userData.hasShareNextFeature;
+  const showShareNextFeature = organizations.selected?.hasShareNextFeature;
   if (showShareNextFeature && !editMode && !draftMode && !emptySlotMode) {
     saveButtons.splice(2, 2, 'SHARE_NEXT', 'SCHEDULE_POST');
   }

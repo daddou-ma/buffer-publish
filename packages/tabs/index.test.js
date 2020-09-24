@@ -26,6 +26,11 @@ describe('TabNavigation', () => {
       },
       isLockedProfile: false,
     },
+    organizations: {
+      selected: {
+        shouldShowUpgradeButton: false,
+      },
+    },
     user: {
       trial: {
         onTrial: false,

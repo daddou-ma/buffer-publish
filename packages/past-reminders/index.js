@@ -45,7 +45,7 @@ export default connect(
           state.profileSidebar.selectedProfile.isDisconnected,
         userData: state.user,
         showStoryPreview: state.pastReminders.showStoryPreview,
-        hasShareAgainFeature: state.organizations.selected.hasShareAgainFeature,
+        hasShareAgainFeature: state.organizations.selected?.hasShareAgainFeature,
         shouldDisplayIGPersonalNotification:
           profileData.shouldDisplayIGPersonalNotification,
       };

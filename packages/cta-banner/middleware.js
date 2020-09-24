@@ -4,26 +4,26 @@ import { actionTypes } from './reducer';
 
 export default ({ getState, dispatch }) => next => action => {
   // eslint-disable-line
-  const { user } = getState();
+  const { organizations } = getState();
   next(action);
 
   switch (action.type) {
     case actionTypes.START_SUBSCRIPTION:
-      if (user && user.plan === 'premium_business') {
+      if (organizations?.selected?.plan === 'premium_business') {
         dispatch(
           modalsActions.showSwitchPlanModal({
             source: 'cta_banner_upgrade_premium',
             plan: 'premium_business',
           })
         );
-      } else if (user && user.plan === 'small') {
+      } else if (organizations?.selected?.plan === 'small') {
         dispatch(
           modalsActions.showSwitchPlanModal({
             source: 'cta_banner_upgrade_small',
             plan: 'small',
           })
         );
-      } else if (user && user.isBusinessUser) {
+      } else if (organizations?.selected?.planBase === 'business') {
         openBillingWindow();
       } else {
         dispatch(

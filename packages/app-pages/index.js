@@ -50,7 +50,7 @@ export default connect(
     return {
       profiles: filteredProfiles,
       showBusinessTrialistsOnboarding:
-        state.user.showBusinessTrialistsOnboarding,
+        state.organizations.selected?.showBusinessTrialistsOnboarding,
       needsToSetCurrentOrg: selectedOrgId !== currentOrgId,
       currentOrgId,
     };
