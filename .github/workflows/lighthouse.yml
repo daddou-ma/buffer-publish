@@ -44,4 +44,4 @@ jobs:
           LHCI_SERVER_BASE_URL: ${{ secrets.LHCI_SERVER_BASE_URL }}
         run: |
           npm install -g @lhci/cli
-          lhci autorun --collect.token="$LHCI_PUBLISH_BUILD_TOKEN" --collect.githubAppToken="$LHCI_GITHUB_APP_TOKEN" --collect.basicAuth.username="$LHCI_BASIC_AUTH_USERNAME" --collect.basicAuth.password="$LHCI_BASIC_AUTH_PASSWORD" --collect.serverBaseUrl="$LHCI_SERVER_BASE_URL"
+          lhci autorun --upload.token="$LHCI_PUBLISH_BUILD_TOKEN" --upload.githubAppToken="$LHCI_GITHUB_APP_TOKEN" --upload.basicAuth.username="$LHCI_BASIC_AUTH_USERNAME" --upload.basicAuth.password="$LHCI_BASIC_AUTH_PASSWORD" --upload.serverBaseUrl="$LHCI_SERVER_BASE_URL"
