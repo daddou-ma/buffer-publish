@@ -12,7 +12,7 @@ export default connect(
       editMode: ownProps.editMode,
       campaignId:
         ownProps?.match?.params?.id || state?.campaignForm?.campaignId,
-      hasCampaignsFlip: state.organizations.selected.hasCampaignsFeature,
+      hasCampaignsFlip: state.organizations.selected?.hasCampaignsFeature,
     };
   },
   (dispatch, ownProps) => ({

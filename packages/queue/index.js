@@ -96,7 +96,7 @@ export default connect(
         hasFirstCommentFlip:
           state.organizations.selected?.hasFirstCommentFeature,
         hasCampaignsFeature: state.organizations.selected?.hasCampaignsFeature,
-        hasCalendarFeature: state.organizations.selected.hasCalendarFeature,
+        hasCalendarFeature: state.organizations.selected?.hasCalendarFeature,
         shouldDisplaySingleSlots,
         shouldDisplayDisconnectedBanner:
           !shouldDisplayRetiringProfileBanner && isDisconnected,

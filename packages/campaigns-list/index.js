@@ -13,10 +13,10 @@ export default connect(
   state => {
     return {
       campaigns: state.campaignsList.campaigns,
-      showCampaignActions: state.organizations.selected.canModifyCampaigns,
-      hideAnalyzeReport: !state.organizations.selected.canSeeCampaignsReport,
+      showCampaignActions: state.organizations.selected?.canModifyCampaigns,
+      hideAnalyzeReport: !state.organizations.selected?.canSeeCampaignsReport,
       isLoading: state.campaignsList.isLoading,
-      hasCampaignsFlip: state.organizations.selected.hasCampaignsFeature,
+      hasCampaignsFlip: state.organizations.selected?.hasCampaignsFeature,
       ownerEmail: state.organizations.selected?.ownerEmail,
     };
   },
