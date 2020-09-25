@@ -1,0 +1,47 @@
+name: Lighthouse CI
+
+on: [push]
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout branch
+        uses: actions/checkout@v2
+
+      - name: load secrets and keys
+        env:
+          PUSHER_APP_SECRET: ${{ secrets.PUSHER_APP_SECRET }}
+          LOCAL_BUFFER_KEY: ${{ secrets.LOCAL_BUFFER_KEY }}
+          LOCAL_BUFFER_CRT: ${{ secrets.LOCAL_BUFFER_CRT }}
+          STANDALONE_SESSION: ${{ secrets.STANDALONE_SESSION }}
+        run: |
+          printf "\n%s" "PUSHER_APP_SECRET=$PUSHER_APP_SECRET" | tee -a packages/server/standalone/standalone.env
+          echo "$LOCAL_BUFFER_KEY" > packages/server/standalone/local.buffer.com-wildcard.key
+          echo "$LOCAL_BUFFER_CRT" > packages/server/standalone/local.buffer.com-wildcard.crt
+          echo "$STANDALONE_SESSION" > packages/server/standalone/standalone-session.json
+      
+      - name: update /etc/hosts
+        run: |
+          printf '%s\n' '127.0.0.1 publish.local.buffer.com' '127.0.0.1 local.buffer.com' | sudo tee -a /etc/hosts
+      
+      - name: Use Node.js 12.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+
+      - name: yarn install, build
+        run: |
+          yarn install --frozen-lockfile --non-interactive --production
+          yarn run build:ci
+
+      - name: run Lighthouse CI
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+          LHCI_PUBLISH_BUILD_TOKEN: ${{ secrets.LHCI_PUBLISH_BUILD_TOKEN }}
+          LHCI_BASIC_AUTH_USERNAME: ${{ secrets.LHCI_BASIC_AUTH_USERNAME }}
+          LHCI_BASIC_AUTH_PASSWORD: ${{ secrets.LHCI_BASIC_AUTH_PASSWORD }}
+          LHCI_SERVER_BASE_URL: ${{ secrets.LHCI_SERVER_BASE_URL }}
+        run: |
+          npm install -g @lhci/cli
+          lhci autorun --upload.token="$LHCI_PUBLISH_BUILD_TOKEN" --upload.githubAppToken="$LHCI_GITHUB_APP_TOKEN" --upload.basicAuth.username="$LHCI_BASIC_AUTH_USERNAME" --upload.basicAuth.password="$LHCI_BASIC_AUTH_PASSWORD" --upload.serverBaseUrl="$LHCI_SERVER_BASE_URL"
