@@ -9,8 +9,12 @@ jobs:
       - name: checkout branch
         uses: actions/checkout@v2
 
-      - name: Wait for deployment
+      - name: Wait for bufferbotbrains/cicd-buffer-publish
+        id: deploy-status
         uses: hamstu/github-action-wait-for-commit-status@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           status-context: 'bufferbotbrains/cicd-buffer-publish'
+
+      - name: Show the output
+        run: echo "${{ steps.deploy-status.outputs.status }}"
