@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 import { actions as profileSidebarActions } from '@bufferapp/publish-profile-sidebar/reducer';
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 import { actions as modalsActions } from '@bufferapp/publish-modals';
-import { actions as campaignListActions } from '@bufferapp/publish-campaigns-list';
 import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
 
@@ -233,9 +232,6 @@ export default connect(
       if (weekOrMonth === 'week' || weekOrMonth === 'month') {
         openCalendarWindow(ownProps.profileId, weekOrMonth);
       }
-    },
-    fetchCampaignsIfNeeded: () => {
-      dispatch(campaignListActions.fetchCampaignsIfNeeded());
     },
   })
 )(QueuedPosts);

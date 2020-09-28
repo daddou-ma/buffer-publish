@@ -6,7 +6,6 @@ import {
   campaignCreate,
   campaignScheduled,
 } from '@bufferapp/publish-routes';
-import { actions } from './reducer';
 import ListCampaigns from './components/ListCampaigns';
 
 export default connect(
@@ -45,11 +44,8 @@ export default connect(
         );
       }
     },
-    fetchCampaignsIfNeeded: () => {
-      dispatch(actions.fetchCampaignsIfNeeded());
-    },
   })
 )(ListCampaigns);
 
-export reducer, { actions, actionTypes } from './reducer';
+export reducer from './reducer';
 export middleware from './middleware';

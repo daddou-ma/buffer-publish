@@ -100,7 +100,6 @@ const SentPosts = ({
   fetchSentPosts,
   linkShortening,
   hasBitlyPosts,
-  fetchCampaignsIfNeeded,
   profileServiceType,
   profileService,
   hasAnalyticsOnPosts,
@@ -110,10 +109,6 @@ const SentPosts = ({
   useEffect(() => {
     fetchSentPosts();
   }, [profileId]);
-
-  useEffect(() => {
-    fetchCampaignsIfNeeded();
-  }, []);
 
   if (shouldDisplayIGPersonalNotification) {
     return <InstagramPersonalProfileNotification />;
@@ -242,7 +237,6 @@ SentPosts.propTypes = {
     isBitlyConnected: PropTypes.bool,
   }),
   hasBitlyPosts: PropTypes.bool,
-  fetchCampaignsIfNeeded: PropTypes.func.isRequired,
   hasAnalyticsOnPosts: PropTypes.bool,
   hasTwitterImpressions: PropTypes.bool,
   shouldDisplayIGPersonalNotification: PropTypes.bool,

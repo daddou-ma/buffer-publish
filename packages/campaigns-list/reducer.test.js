@@ -171,14 +171,4 @@ describe('reducer', () => {
       expect(reducer(stateBefore, action)).toEqual(stateAfter);
     });
   });
-
-  // Test action creators:
-  describe('action creators', () => {
-    it('creates a FETCH_CAMPAIGNS_IF_NEEDED action', () => {
-      const expectedAction = {
-        type: actionTypes.FETCH_CAMPAIGNS_IF_NEEDED,
-      };
-      expect(actions.fetchCampaignsIfNeeded()).toEqual(expectedAction);
-    });
-  });
 });

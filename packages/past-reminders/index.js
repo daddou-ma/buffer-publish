@@ -1,7 +1,6 @@
 // component vs. container https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0
 import { connect } from 'react-redux';
 import { actions as previewActions } from '@bufferapp/publish-story-preview';
-import { actions as campaignListActions } from '@bufferapp/publish-campaigns-list';
 import { formatPostLists } from '@bufferapp/publish-queue/util';
 // load the presentational component
 import { actions } from './reducer';
@@ -113,9 +112,6 @@ export default connect(
     },
     onClosePreviewClick: () => {
       dispatch(actions.handleClosePreviewClick());
-    },
-    fetchCampaignsIfNeeded: () => {
-      dispatch(campaignListActions.fetchCampaignsIfNeeded());
     },
   })
 )(PastRemindersWrapper);
