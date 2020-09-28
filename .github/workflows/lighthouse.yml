@@ -27,6 +27,7 @@ jobs:
           status-context: 'bufferbotbrains/cicd-buffer-publish'
 
       - name: Wait for HTTP 200
+        if: success()
         env:
           URL: ${{ fromJSON(steps.wait-deploy.outputs.status).target_url }}
         run: /
