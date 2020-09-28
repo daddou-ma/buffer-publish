@@ -44,7 +44,7 @@ const EmptyState = ({
   shouldDisplayLockedCopy,
 }) => {
   const { t } = useTranslation();
-  const noActionsCopy = shouldDisplayLockedCopy
+  const nonActionCopy = shouldDisplayLockedCopy
     ? t('campaigns.emptyState.locked', { email: ownerEmail })
     : t('campaigns.emptyState.permission', { email: ownerEmail });
   return (
@@ -77,7 +77,7 @@ const EmptyState = ({
             </div>
           </>
         ) : (
-          <Text type="p">{noActionsCopy}</Text>
+          <Text type="p">{nonActionCopy}</Text>
         )}
       </Content>
       <Image

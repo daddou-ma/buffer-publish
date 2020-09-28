@@ -65,6 +65,8 @@ const initialState = {
     selected: {
       hasAnalyticsOnPosts: false,
       hasTwitterImpressions: false,
+      planBase: 'business',
+      isOwner: true,
     },
   },
 };
