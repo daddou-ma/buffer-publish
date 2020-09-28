@@ -220,7 +220,7 @@ describe('QueuedPosts | user interaction', () => {
       profileId: profile.id,
       updateId: post1.id,
     });
-    expect(rpcCall).toHaveBeenCalledTimes(2);
+    expect(rpcCall).toHaveBeenCalledTimes(1);
   });
   test('a11y | retiring IG profile banner is accessible', async () => {
     const { container } = render(<RetiringProfileBanner />);
