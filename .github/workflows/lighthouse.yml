@@ -19,6 +19,11 @@ jobs:
       - name: Show deployed URL
         run: echo "${{ fromJSON(steps.wait-deploy.outputs.status).target_url }}"
 
+      - name: Use Node.js 12.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+          
       - name: run Lighthouse CI
         env:
           LHCI_COLLECT_URL: ${{ fromJSON(steps.wait-deploy.outputs.status).target_url }}
