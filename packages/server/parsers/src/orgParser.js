@@ -16,7 +16,14 @@ module.exports = orgData => ({
   usersCount: orgData.usersCount,
   isAdmin: orgData.isAdmin,
   isOwner: orgData.isOwner,
-  trial: orgData.trial,
+  trial: {
+    hasCardDetails: orgData.trial && orgData.trial.hasCardDetails,
+    onTrial: orgData.trial.onTrial,
+    postTrialCost: orgData.trial && orgData.trial.postTrialCost,
+    trialLength: orgData.trial && orgData.trial.length,
+    trialTimeRemaining: orgData.trial && orgData.trial.timeRemaining,
+    trialPlan: orgData.trial && orgData.trial.plan,
+  },
 
   // Plan Features
   hasCampaignsFeature: orgData.planBase !== 'free',
@@ -36,6 +43,7 @@ module.exports = orgData => ({
   hasFirstCommentFeature: orgData.planBase !== 'free',
   hasShareNextFeature: orgData.planBase !== 'free',
   hasUserTagFeature: orgData.planBase !== 'free',
+  hasPinterestFeature: orgData.planBase !== 'free',
   hasAccessTeamPanel: orgData.planBase === 'business' && orgData.isAdmin,
 
   // Role Features
@@ -44,6 +52,10 @@ module.exports = orgData => ({
   canModifyCampaigns: orgData.isAdmin,
   canSeeBillingInfo: orgData.isOwner,
   canReconnectChannels: orgData.isAdmin,
+  canStartBusinessTrial:
+    orgData.trial && orgData.trial.canStartBusinessTrial && orgData.isOwner,
+  canStartProTrial:
+    orgData.trial && orgData.trial.canStartProTrial && orgData.isOwner,
 
   // Upgrade/ Trial Paths
   showUpgradeToProCta: orgData.planBase === 'free',
@@ -54,4 +66,20 @@ module.exports = orgData => ({
       orgData.planBase === 'pro' ||
       orgData.plan === 'solo_premium_business' ||
       orgData.plan === 'premium_business'),
+  shouldShowProTrialExpiredModal:
+    orgData.trial &&
+    orgData.trial.plan === 'pro' &&
+    orgData.trial.onTrial &&
+    orgData.trial.isExpired,
+  shouldShowBusinessTrialExpiredModal:
+    orgData.trial &&
+    orgData.trial.plan !== 'pro' &&
+    orgData.trial.onTrial &&
+    orgData.trial.isExpired &&
+    !orgData.trial.isDone,
+  showBusinessTrialistsOnboarding:
+    orgData.planBase === 'business' &&
+    orgData.trial &&
+    orgData.trial.onTrial &&
+    orgData.isAdmin,
 });

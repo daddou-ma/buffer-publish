@@ -1,14 +1,25 @@
+const path = require('path');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlRuntimePlugin = require('html-webpack-inline-runtime-plugin');
+
 const PostCSSImport = require('postcss-import');
 const PostCSSCustomProperties = require('postcss-custom-properties');
 const PostCSSCalc = require('postcss-calc');
 const PostCSSColorFunction = require('postcss-color-function');
 
+const PATH_HTML = path.resolve(__dirname, 'packages/server/index.ejs');
+const PATH_FAVICON = path.resolve(
+  __dirname,
+  'packages/server/favicons/favicon-32x32.png'
+);
+const PATH_BUILD = path.resolve(__dirname, 'build');
+
 const {
   // analyzePackagesWhitelist,
   analyzeLessLoader,
-} = require('../../analyze.config.js');
+} = require('./analyze.config.js');
 
 module.exports = {
   context: __dirname,
@@ -16,7 +27,7 @@ module.exports = {
     bundle: [
       'core-js/stable',
       'regenerator-runtime/runtime',
-      '../web/index.jsx',
+      './packages/web/index.jsx',
     ],
     // vendor,
   },
@@ -70,11 +81,17 @@ module.exports = {
         ],
       },
     }),
+    new HtmlWebpackPlugin({
+      template: PATH_HTML,
+      filename: 'index.html',
+      inject: true,
+      favicon: PATH_FAVICON,
+    }),
+    new HtmlRuntimePlugin(),
   ],
   optimization: {
-    runtimeChunk: {
-      name: 'runtime',
-    },
+    moduleIds: 'hashed',
+    runtimeChunk: 'single',
     splitChunks: {
       name: false, // don't use dynamic names which could invalidate cache when they change
       cacheGroups: {
@@ -88,7 +105,8 @@ module.exports = {
     },
   },
   output: {
-    path: __dirname,
+    path: PATH_BUILD,
+    publicPath: '/',
     filename: '[name].js',
     sourceMapFilename: '[file].map',
   },

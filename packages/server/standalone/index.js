@@ -7,9 +7,6 @@ const https = require('https');
 const cors = require('cors');
 const PublishAPI = require('../publishAPI');
 
-// Port on which to server static assets for running in CI
-const STATIC_ASSETS_SERVER_PORT = 8080;
-
 const basePath = join(__dirname, '..');
 const paths = {
   standaloneEnv: join(basePath, 'standalone', 'standalone.env'),
@@ -33,8 +30,7 @@ const paths = {
     'local.buffer.com-wildcard.crt'
   ),
   standaloneSession: join(basePath, 'standalone', 'standalone-session.json'),
-  webpackAssets: join(basePath, '..', '..', 'dist'),
-  webpackAssetsJson: join(basePath, '..', '..', 'dist', 'webpackAssets.json'),
+  webpackAssets: join(basePath, '..', '..', 'build'),
 };
 
 function getBufferDevConfig() {
@@ -47,6 +43,9 @@ function getBufferDevConfig() {
       )
     );
   } catch (e) {
+    console.log(
+      'No buffer-dev-config directory found, assuming CI environment.'
+    );
     return null;
   }
 }
@@ -152,12 +151,9 @@ function setStandaloneSessionMiddleware(req, res, next) {
   return next();
 }
 
-function serveStaticAssets() {
-  const app = express();
+function serveStaticAssets(app) {
   app.use(cors());
-  app.use('/static', express.static(paths.webpackAssets));
-  const staticAssetServer = createServer(app);
-  staticAssetServer.listen(STATIC_ASSETS_SERVER_PORT);
+  app.use('/', express.static(paths.webpackAssets));
 }
 
 async function onBoot({ usePrecompiledBundles }) {
@@ -167,8 +163,7 @@ async function onBoot({ usePrecompiledBundles }) {
   const blue = '\x1b[33m';
 
   const precompiledBundlesMessage = `
-📦  Serving precompiled assets${dim} 
-   → https://local.buffer.com:${STATIC_ASSETS_SERVER_PORT}/static${reset}`;
+📦  Serving precompiled assets`;
 
   // Ensure we have a valid session
   const session = getStandaloneSessionData();

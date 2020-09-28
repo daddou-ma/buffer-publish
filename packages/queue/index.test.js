@@ -48,6 +48,7 @@ const initialState = {
   organizations: {
     selected: {
       hasCalendarFeature: true,
+      hasCampaignsFeature: true,
     },
   },
 };
@@ -202,9 +203,6 @@ describe('QueuedPosts | user interaction', () => {
       }
     );
 
-    expect(rpcCall).toHaveBeenCalledWith('getCampaignsList', {});
-    expect(rpcCall).toHaveBeenCalledTimes(1);
-
     expect(screen.getByText(post1.postContent.text)).toBeInTheDocument();
     expect(screen.getByText(post1.postDetails.postAction)).toBeInTheDocument();
     expect(screen.getByText(campaign.name)).toBeInTheDocument();
@@ -222,7 +220,7 @@ describe('QueuedPosts | user interaction', () => {
       profileId: profile.id,
       updateId: post1.id,
     });
-    expect(rpcCall).toHaveBeenCalledTimes(2);
+    expect(rpcCall).toHaveBeenCalledTimes(1);
   });
   test('a11y | retiring IG profile banner is accessible', async () => {
     const { container } = render(<RetiringProfileBanner />);

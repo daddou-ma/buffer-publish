@@ -45,6 +45,7 @@ const initialState = {
       hasDraftsFeature: true,
       hasGridFeature: true,
       hasStoriesFeature: true,
+      hasCampaignsFeature: true,
     },
     loaded: true,
   },
@@ -326,8 +327,7 @@ describe('AppPages | user interaction', () => {
     expect(rpcCall).toHaveBeenCalledWith('gridPosts', {
       profileId: profileIG.id,
     });
-    expect(rpcCall).toHaveBeenCalledWith('getCampaignsList', {});
-    expect(rpcCall).toHaveBeenCalledTimes(12);
+    expect(rpcCall).toHaveBeenCalledTimes(11);
   });
 
   it('navigates to a campaign on tag click from main queue', async () => {
@@ -428,7 +428,7 @@ describe('AppPages | user interaction', () => {
       profileId: profileIG.id,
       isFetchingMore: false,
     });
-    expect(rpcCall).toHaveBeenCalledTimes(13);
+    expect(rpcCall).toHaveBeenCalledTimes(12);
 
     userEvent.click(storiesSubTab);
 
@@ -439,7 +439,7 @@ describe('AppPages | user interaction', () => {
       profileId: profileIG.id,
       isFetchingMore: false,
     });
-    expect(rpcCall).toHaveBeenCalledTimes(14);
+    expect(rpcCall).toHaveBeenCalledTimes(13);
   });
 
   it('navigates to Analytics tab and renders sent posts', async () => {
@@ -470,7 +470,7 @@ describe('AppPages | user interaction', () => {
       profileId: profileIG.id,
       isFetchingMore: false,
     });
-    expect(rpcCall).toHaveBeenCalledTimes(13);
+    expect(rpcCall).toHaveBeenCalledTimes(12);
   });
 
   it('navigates to Drafts tab and renders drafts posts', async () => {

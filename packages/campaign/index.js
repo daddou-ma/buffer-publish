@@ -8,7 +8,6 @@ import {
   campaignSent,
   campaignCreate,
 } from '@bufferapp/publish-routes';
-import { actions as campaignListActions } from '@bufferapp/publish-campaigns-list';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
 import { actions } from './reducer';
 import ViewCampaign from './components/ViewCampaign';
@@ -28,15 +27,15 @@ export default connect(
       showComposer: state.campaign.showComposer,
       editMode: state.campaign.editMode,
       editingPostId: state.campaign.editingPostId,
-      hideAnalyzeReport: !state.user.canSeeCampaignsReport,
-      showCampaignActions: state.user.canModifyCampaigns,
+      hideAnalyzeReport: !state.organizations.selected?.canSeeCampaignsReport,
+      showCampaignActions: state.organizations.selected?.canModifyCampaigns,
       isLoading: state.campaign.isLoading,
       hideSkeletonHeader: state.campaign.hideSkeletonHeader,
       campaignId: ownProps.match?.params?.id || state.campaign?.campaignId,
       page: state.campaign.page,
-      hasCampaignsFlip: state.user.hasCampaignsFeature,
-      hasAnalyticsOnPosts: state.organizations.selected.hasAnalyticsOnPosts,
-      hasTwitterImpressions: state.organizations.selected.hasTwitterImpressions,
+      hasCampaignsFlip: state.organizations.selected?.hasCampaignsFeature,
+      hasAnalyticsOnPosts: state.organizations.selected?.hasAnalyticsOnPosts,
+      hasTwitterImpressions: state.organizations.selected?.hasTwitterImpressions,
     };
   },
 
@@ -84,9 +83,6 @@ export default connect(
       },
       fetchCampaign: ({ campaignId, past }) => {
         dispatch(actions.fetchCampaign({ campaignId, past, fullItems: true }));
-      },
-      fetchCampaignsIfNeeded: () => {
-        dispatch(campaignListActions.fetchCampaignsIfNeeded());
       },
     },
     postActions: {
