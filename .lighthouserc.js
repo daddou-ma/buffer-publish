@@ -17,27 +17,26 @@ const desktopDense4G = {
 module.exports = {
   ci: {
     collect: {
-      url: ['https://publish.local.buffer.com/'],
-      startServerCommand: 'sudo yarn run start:standalone-ci',
-      startServerReadyPattern: /Publish is now running/,
+      // URL added when run in CI (GitHub Actions)
+      // url: ['https://publish.buffer.com/'],
+      
+      // Login to Buffer with Luna Sneakers account
+      puppeteerScript: './lighthouse-puppeteer-login.js',
+
+      // This replaces the dev URL with the regular publish URL, so we can
+      // compare across branches without seeing the URLs as different
+      // https://github.com/GoogleChrome/lighthouse-ci/blob/master/docs/configuration.md#urlreplacementpatterns
+      urlReplacementPatterns: ['s#(//.*?)-publish\\.dev#//publish#'],
+
+      // Emulate a standard desktop
       settings: {
-        chromeFlags: '--ignore-certificate-errors',
         emulatedFormFactor: 'desktop',
         throttling: desktopDense4G,
-        /** The method used to throttle the network. */
-        // throttlingMethod: 'devtools'|'simulate'|'provided';
-        /** The throttling config settings. */
-        // throttling: {} // ThrottlingSettings;
-        /** If present, the run should only conduct this list of audits. */
-        // onlyAudits: string[] | null;
-        /** If present, the run should only conduct this list of categories. */
-        // onlyCategories: string[] | null;
-        /** If present, the run should skip this list of audits. */
-        // skipAudits: string[] | null;
       },
     },
     upload: {
       target: 'lhci',
+      // rest of config passed via CLI params in CI
     },
   },
 };

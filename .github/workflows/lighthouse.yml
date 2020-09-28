@@ -6,15 +6,32 @@ jobs:
   lighthouse:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout branch
+      - name: Checkout branch
         uses: actions/checkout@v2
 
       - name: Wait for bufferbotbrains/cicd-buffer-publish
-        id: deploy-status
+        id: wait-deploy
         uses: hamstu/github-action-wait-for-commit-status@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           status-context: 'bufferbotbrains/cicd-buffer-publish'
 
-      - name: Show the output
-        run: echo "${{ steps.deploy-status.outputs.status }}"
+      - name: Show deployed URL
+        run: echo "${{ fromJSON(steps.wait-deploy.outputs.status).target_url }}"
+
+      - name: run Lighthouse CI
+        env:
+          LHCI_COLLECT_URL: ${{ fromJSON(steps.wait-deploy.outputs.status).target_url }}
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+          LHCI_PUBLISH_BUILD_TOKEN: ${{ secrets.LHCI_PUBLISH_BUILD_TOKEN }}
+          LHCI_BASIC_AUTH_USERNAME: ${{ secrets.LHCI_BASIC_AUTH_USERNAME }}
+          LHCI_BASIC_AUTH_PASSWORD: ${{ secrets.LHCI_BASIC_AUTH_PASSWORD }}
+          LHCI_SERVER_BASE_URL: ${{ secrets.LHCI_SERVER_BASE_URL }}
+          BUFFER_LUNA_SNEAKERS_EMAIL: ${{ secrets.BUFFER_LUNA_SNEAKERS_EMAIL }}
+          BUFFER_LUNA_SNEAKERS_PASSWORD: ${{ secrets.BUFFER_LUNA_SNEAKERS_PASSWORD }}
+        run: |
+          npm install -g @lhci/cli
+          npm install --save puppeteer
+          lhci autorun --collect.url="$LHCI_COLLECT_URL" --upload.token="$LHCI_PUBLISH_BUILD_TOKEN" --upload.githubAppToken="$LHCI_GITHUB_APP_TOKEN" --upload.basicAuth.username="$LHCI_BASIC_AUTH_USERNAME" --upload.basicAuth.password="$LHCI_BASIC_AUTH_PASSWORD" --upload.serverBaseUrl="$LHCI_SERVER_BASE_URL"
+
+
