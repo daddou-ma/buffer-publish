@@ -17,7 +17,7 @@ storiesOf('Campaigns|EmptyState', module)
     <EmptyState
       onOpenCreateCampaignClick={action('createCampaign')}
       showCampaignActions={false}
-      shouldSeeLockedCopy
+      shouldDisplayLockedCopy
       ownerEmail="ana@buffer.com"
     />
   ))

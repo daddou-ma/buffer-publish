@@ -41,10 +41,10 @@ const EmptyState = ({
   onOpenCreateCampaignClick,
   showCampaignActions,
   ownerEmail,
-  shouldSeeLockedCopy,
+  shouldDisplayLockedCopy,
 }) => {
   const { t } = useTranslation();
-  const noActionsCopy = shouldSeeLockedCopy
+  const noActionsCopy = shouldDisplayLockedCopy
     ? t('campaigns.emptyState.locked', { email: ownerEmail })
     : t('campaigns.emptyState.permission', { email: ownerEmail });
   return (
@@ -91,7 +91,7 @@ const EmptyState = ({
 EmptyState.propTypes = {
   onOpenCreateCampaignClick: PropTypes.func.isRequired,
   showCampaignActions: PropTypes.bool.isRequired,
-  shouldSeeLockedCopy: PropTypes.bool.isRequired,
+  shouldDisplayLockedCopy: PropTypes.bool.isRequired,
   ownerEmail: PropTypes.string,
 };
 
