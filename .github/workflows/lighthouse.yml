@@ -15,7 +15,7 @@ jobs:
           node-version: 12.x
 
       - name: Install LHCI and Puppeteer packages
-        run: /
+        run: |
           npm install -g @lhci/cli
           npm install --save puppeteer
 
@@ -27,13 +27,12 @@ jobs:
           status-context: 'bufferbotbrains/cicd-buffer-publish'
 
       - name: Wait for HTTP 200
-        if: success()
         env:
           URL: ${{ fromJSON(steps.wait-deploy.outputs.status).target_url }}
-        run: /
+        run: |
           until $(curl --output /dev/null --silent --head --fail $URL); do
-          printf '.'
-          sleep 5
+            printf '.'
+            sleep 5
           done
 
       - name: run Lighthouse CI
