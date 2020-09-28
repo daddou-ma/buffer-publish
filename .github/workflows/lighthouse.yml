@@ -27,7 +27,7 @@ jobs:
           status-context: 'bufferbotbrains/cicd-buffer-publish'
 
       - name: Wait for HTTP 200 
-        uses: cygnetdigitial/wait_for_response@v2
+        uses: nev7n/wait_for_response@v1
         with:
           url: ${{ fromJSON(steps.wait-deploy.outputs.status).target_url }}
 
