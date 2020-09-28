@@ -26,13 +26,13 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           status-context: 'bufferbotbrains/cicd-buffer-publish'
 
-      - name: Wait for HTTP 200 
+      - name: Wait for HTTP 200
         env:
           URL: ${{ fromJSON(steps.wait-deploy.outputs.status).target_url }}
-        run: \
+        run: /
           until $(curl --output /dev/null --silent --head --fail $URL); do
-            printf '.'
-            sleep 5
+          printf '.'
+          sleep 5
           done
 
       - name: run Lighthouse CI
