@@ -18,13 +18,18 @@ jobs:
         run: /
           npm install -g @lhci/cli
           npm install --save puppeteer
-          
+
       - name: Wait for bufferbotbrains/cicd-buffer-publish
         id: wait-deploy
         uses: hamstu/github-action-wait-for-commit-status@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           status-context: 'bufferbotbrains/cicd-buffer-publish'
+
+      - name: Wait for HTTP 200 
+        uses: cygnetdigitial/wait_for_response@v2
+        with:
+          url: ${{ fromJSON(steps.wait-deploy.outputs.status).target_url }}
 
       - name: run Lighthouse CI
         env:
@@ -38,5 +43,3 @@ jobs:
           BUFFER_LUNA_SNEAKERS_PASSWORD: ${{ secrets.BUFFER_LUNA_SNEAKERS_PASSWORD }}
         run: |
           lhci autorun --collect.url="$LHCI_COLLECT_URL" --upload.token="$LHCI_PUBLISH_BUILD_TOKEN" --upload.githubAppToken="$LHCI_GITHUB_APP_TOKEN" --upload.basicAuth.username="$LHCI_BASIC_AUTH_USERNAME" --upload.basicAuth.password="$LHCI_BASIC_AUTH_PASSWORD" --upload.serverBaseUrl="$LHCI_SERVER_BASE_URL"
-
-
