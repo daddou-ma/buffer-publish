@@ -40,9 +40,6 @@ module.exports = userData => ({
   ),
 
   /* TEMPORARY. TO BE MOVED TO ORGS AFTER ORG SWITCHER ROLLOUT */
-  // Org plan features
-  hasCampaignsFeature: userData.features.includes('campaigns'),
-  hasUserTagFeature: userData.is_pro_and_up_org_user,
 
   // Org roles features
   analyzeCrossSale: userData.is_analyze_customer,
@@ -59,7 +56,6 @@ module.exports = userData => ({
   plan: userData.billing_plan_tier,
   planBase: userData.billing_plan_base,
   planCode: userData.plan_code,
-  isBusinessUser: userData.billing_plan_base === 'business',
   isFreeUser: userData.billing_plan_base === 'free',
   orgUserCount: userData.org_user_count,
   profileCount: userData.profile_usage,

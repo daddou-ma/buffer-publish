@@ -14,7 +14,6 @@ const showShopgridBar = {
     { instagramDirectEnabled: true },
     { instagramDirectEnabled: true },
   ],
-  isBusinessUser: true,
 };
 
 describe('Whole component', () => {
@@ -63,7 +62,7 @@ describe('Whole component', () => {
       .create(
         <ShopgridComposerBar
           {...showShopgridBar}
-          isBusinessUser={false}
+          hasShopgridFlip={false}
           draftId={'123'}
           shopgridLink={undefined}
         />

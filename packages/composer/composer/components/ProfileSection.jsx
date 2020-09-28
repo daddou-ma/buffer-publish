@@ -37,14 +37,21 @@ class ProfileSection extends React.Component {
   scrollHandlers = new Set();
 
   render() {
-    const { appState, profiles, userData, visibleNotifications } = this.props;
-    const { isBusinessUser, profileGroups, onNewPublish } = userData;
+    const {
+      appState,
+      profiles,
+      userData,
+      visibleNotifications,
+      organizations,
+    } = this.props;
+    const { hasProfileGroupsFeature } = organizations?.selected;
+    const { profileGroups, onNewPublish } = userData;
 
     const hasBusinessProfiles = profiles.some(
       profile => profile.isBusinessProfile
     );
     const shouldBeConsideredBusinessUser =
-      isBusinessUser || hasBusinessProfiles;
+      hasProfileGroupsFeature || hasBusinessProfiles;
     const hasEnoughProfiles = profiles.length > 9;
 
     const selectedProfilesIds = this.props.profiles

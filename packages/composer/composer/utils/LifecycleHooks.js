@@ -4,9 +4,8 @@ import events from './Events';
 const AppHooks = {
   handleAppLoaded: () => {
     const { shouldDisplayHelpButton } = AppStore.getMetaData();
-    const { isFreeUser } = AppStore.getUserData();
 
-    events.emit('loaded', { isFreeUser, shouldDisplayHelpButton });
+    events.emit('loaded', { shouldDisplayHelpButton });
   },
 
   handleSavedDrafts: ({ message } = {}) => {

@@ -23,9 +23,6 @@ describe('Grid', () => {
           },
         },
       },
-      user: {
-        isBusinessUser: false,
-      },
       profileSidebar: {
         selectedProfile: {
           isManager: true,

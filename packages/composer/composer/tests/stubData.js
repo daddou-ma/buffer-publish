@@ -31,8 +31,6 @@ export const fakeUserData = {
   s3UploadSignature: {},
   uses24hTime: false,
   profileGroups: [],
-  isFreeUser: true,
-  isBusinessUser: false,
   weekStartsMonday: false,
   shouldAlwaysSkipEmptyTextAlert: false,
   profilesSchedulesSlots: [],

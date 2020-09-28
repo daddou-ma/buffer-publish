@@ -136,7 +136,6 @@ const ComposerWrapper = ({
       imageDimensionsKey={formattedData.imageDimensionsKey}
       options={options}
       onNewPublish
-      isFreeUser={formattedData.userData.isFreeUser}
       csrfToken={csrfToken}
       draftMode={draftMode}
     />
@@ -150,7 +149,6 @@ ComposerWrapper.propTypes = {
     hasTwentyFourHourTimeFormat: PropTypes.bool.isRequired,
     week_starts_monday: PropTypes.bool.isRequired,
     profile_groups: PropTypes.array,
-    isFreeUser: PropTypes.bool.isRequired,
     skip_empty_text_alert: PropTypes.bool.isRequired,
     hasShareNextFeature: PropTypes.bool.isRequired,
     imageDimensionsKey: PropTypes.string.isRequired,
