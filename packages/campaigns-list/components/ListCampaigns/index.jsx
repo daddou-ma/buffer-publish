@@ -56,6 +56,7 @@ const ListCampaigns = ({
   fetchCampaignsIfNeeded,
   isLoading,
   ownerEmail,
+  shouldSeeLockedCopy,
 }) => {
   if (!hasCampaignsFlip) {
     window.location = getURL.getPublishUrl();
@@ -74,6 +75,7 @@ const ListCampaigns = ({
         onOpenCreateCampaignClick={onOpenCreateCampaignClick}
         showCampaignActions={showCampaignActions}
         ownerEmail={ownerEmail}
+        shouldSeeLockedCopy={shouldSeeLockedCopy}
       />
     );
   }
@@ -131,6 +133,7 @@ ListCampaigns.propTypes = {
   fetchCampaignsIfNeeded: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
   ownerEmail: PropTypes.string,
+  shouldSeeLockedCopy: PropTypes.bool.isRequired,
 };
 
 ListCampaigns.defaultProps = {

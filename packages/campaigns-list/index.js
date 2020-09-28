@@ -18,6 +18,7 @@ export default connect(
       isLoading: state.campaignsList.isLoading,
       hasCampaignsFlip: state.user.hasCampaignsFeature,
       ownerEmail: state.organizations.selected?.ownerEmail,
+      shouldSeeLockedCopy: state.org.planBase === 'pro' && !state.org.isOwner,
     };
   },
   (dispatch, ownProps) => ({
