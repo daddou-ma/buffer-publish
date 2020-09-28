@@ -83,7 +83,6 @@ storiesOf('QueuedPosts', module)
       onDirectPostingClick={action('onDirectPostingClick')}
       onCalendarClick={action('onCalendarClick')}
       onEmptySlotClick={action('onEmptySlotClick')}
-      fetchCampaignsIfNeeded={action('fetchCampaignsIfNeeded')}
     />
   ))
   .add('loading', () => (
@@ -129,7 +128,6 @@ storiesOf('QueuedPosts', module)
       onRequeueClick={action('onRequeueClick')}
       onCalendarClick={action('onCalendarClick')}
       onEmptySlotClick={action('onEmptySlotClick')}
-      fetchCampaignsIfNeeded={action('fetchCampaignsIfNeeded')}
     />
   ))
   .add('paused if Contributor', () => (
@@ -152,7 +150,6 @@ storiesOf('QueuedPosts', module)
       onRequeueClick={action('onRequeueClick')}
       onCalendarClick={action('onCalendarClick')}
       onEmptySlotClick={action('onEmptySlotClick')}
-      fetchCampaignsIfNeeded={action('fetchCampaignsIfNeeded')}
     />
   ))
   .add('locked profile', () => (
