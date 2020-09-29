@@ -333,6 +333,7 @@ AppStateless.propTypes = {
   isPinnedToSlot: PropTypes.bool,
   sentPost: PropTypes.bool,
   draftMode: PropTypes.bool,
+  organizations: PropTypes.object, // eslint-disable-line react/forbid-prop-types
 };
 
 AppStateless.defaultProps = {
@@ -341,6 +342,7 @@ AppStateless.defaultProps = {
   isPinnedToSlot: false,
   sentPost: false,
   draftMode: false,
+  organizations: {},
 };
 
 export default AppStateless;
