@@ -1,12 +1,7 @@
-import keyWrapper from '@bufferapp/keywrapper';
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 import { actionTypes as campaignActionTypes } from '@bufferapp/publish-campaign';
 import { campaignParser } from '@bufferapp/publish-server/parsers/src';
 import { sortCampaignsByUpdatedAt } from '@bufferapp/publish-queue/reducer';
-
-export const actionTypes = keyWrapper('CAMPAIGNS_LIST', {
-  FETCH_CAMPAIGNS_IF_NEEDED: 0,
-});
 
 export const initialState = {
   campaigns: null,
@@ -72,10 +67,4 @@ export default (state = initialState, action) => {
     default:
       return state;
   }
-};
-
-export const actions = {
-  fetchCampaignsIfNeeded: () => ({
-    type: actionTypes.FETCH_CAMPAIGNS_IF_NEEDED,
-  }),
 };

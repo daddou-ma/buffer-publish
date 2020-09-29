@@ -34,12 +34,9 @@ module.exports = method(
             planCode,
             planBase,
             plan,
-            isNonProfit,
-            profileLimit,
             profilesCount,
             usersCount,
             ownerFeatures,
-            isAdmin,
             isOwner,
             trial,
           } = orgSelected;
@@ -54,8 +51,6 @@ module.exports = method(
                 trialTimeRemaining: trial && trial.timeRemaining,
                 trialPlan: trial && trial.plan,
               },
-              canStartBusinessTrial:
-                trial && trial.canStartBusinessTrial && isOwner,
               canStartProTrial: trial && trial.canStartProTrial && isOwner,
               shouldShowProTrialExpiredModal:
                 trial &&
@@ -68,8 +63,6 @@ module.exports = method(
                 trial.onTrial &&
                 trial.isExpired &&
                 !trial.isDone,
-              showBusinessTrialistsOnboarding:
-                planBase === 'business' && trial && trial.onTrial && isAdmin,
             };
           }
           // Temporarily injecting org plan data in users. To be removed after org switcher rollout.
@@ -80,32 +73,14 @@ module.exports = method(
               planCode,
               planBase,
               features: ownerFeatures,
-              isNonprofit: isNonProfit,
-              profileLimit,
               profileCount: profilesCount,
               orgUserCount: usersCount,
               hasCampaignsFeature: planBase !== 'free',
-              hasFirstCommentFeature: planBase !== 'free',
               isBusinessUser: planBase === 'business',
               isFreeUser: planBase === 'free',
-              isProUser: planBase === 'pro',
-              canSeeCampaignsReport: isOwner,
-              canModifyCampaigns: isAdmin,
-              showUpgradeToProCta: planBase === 'free' && isOwner,
-              hasShareNextFeature: planBase !== 'free',
               hasUserTagFeature: planBase !== 'free',
               analyzeCrossSale: user.analyzeCrossSale && isOwner,
-              canManageSocialAccounts: isAdmin,
-              hasAccessTeamPanel: planBase === 'business' && isAdmin,
-              canSeeBillingInfo: isOwner,
               canSeeOrgSwitcher: orgs && orgs.length >= 2,
-              canReconnectChannels: isAdmin,
-              shouldShowUpgradeButton:
-                isOwner &&
-                (planBase === 'free' ||
-                  planBase === 'pro' ||
-                  plan === 'solo_premium_business' ||
-                  plan === 'premium_business'),
               ...orgTrialData,
             };
           }

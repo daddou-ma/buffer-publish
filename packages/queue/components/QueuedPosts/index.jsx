@@ -70,7 +70,6 @@ const QueuedPosts = ({
   onCampaignTagClick,
   hasCampaignsFeature,
   hasCalendarFeature,
-  fetchCampaignsIfNeeded,
   shouldDisplaySingleSlots,
   preserveComposerStateOnClose,
   shouldDisplayRemindersBanner,
@@ -100,10 +99,6 @@ const QueuedPosts = ({
   if (isLockedProfile) {
     return <LockedProfileNotification />;
   }
-
-  useEffect(() => {
-    fetchCampaignsIfNeeded();
-  }, []);
 
   return (
     <ErrorBoundary>
@@ -227,7 +222,6 @@ QueuedPosts.propTypes = {
   onCalendarClick: PropTypes.func.isRequired,
   hasCampaignsFeature: PropTypes.bool,
   hasCalendarFeature: PropTypes.bool,
-  fetchCampaignsIfNeeded: PropTypes.func.isRequired,
   shouldDisplaySingleSlots: PropTypes.bool,
   preserveComposerStateOnClose: PropTypes.bool,
   shouldDisplayIGPersonalNotification: PropTypes.bool,

@@ -51,7 +51,12 @@ const moveProfileInArray = (arr, from, to) => {
   return clone;
 };
 
-const handleProfileDropped = (profiles, action, userId, isFreeUser) => {
+const handleProfileDropped = (
+  profiles,
+  action,
+  userId,
+  hasPinterestFeature
+) => {
   const { profileLimit, hoverIndex, dragIndex } = action;
   const reorderedProfiles = moveProfileInArray(profiles, dragIndex, hoverIndex);
   /* The reducer will return an object with 3 properties, each of them an array of profiles.
@@ -68,7 +73,7 @@ const handleProfileDropped = (profiles, action, userId, isFreeUser) => {
       it goes to the blockedProfiles array. */
       if (
         cur.ownerId !== userId ||
-        (cur.service === 'pinterest' && isFreeUser)
+        (cur.service === 'pinterest' && !hasPinterestFeature)
       ) {
         return { ...acc, blockedProfiles: [...acc.blockedProfiles, cur] };
       }
@@ -188,6 +193,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         organization: selectedOrganization,
+        hasPinterestFeature: selectedOrganization.hasPinterestFeature,
         profiles,
       };
     }
@@ -246,7 +252,7 @@ export default (state = initialState, action) => {
             state.profiles,
             action,
             state.userId,
-            state.isFreeUser
+            state.hasPinterestFeature
           ),
         };
       }
@@ -265,7 +271,6 @@ export default (state = initialState, action) => {
       return {
         ...state,
         userId: action.result.id,
-        isFreeUser: action.result.isFreeUser,
         isOrganizationSwitcherEnabled: action.result.hasOrgSwitcherFeature,
         profiles: filterProfilesByOrg(
           state.profileList,

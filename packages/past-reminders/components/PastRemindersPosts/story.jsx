@@ -43,7 +43,6 @@ storiesOf('PastRemindersPosts', module)
       showStoriesComposer={false}
       isDisconnectedProfile={false}
       onClosePreviewClick={action('onClosePreviewClick')}
-      fetchCampaignsIfNeeded={action('fetchCampaignsIfNeeded')}
       hasShareAgainFeature
     />
   ))
@@ -60,7 +59,6 @@ storiesOf('PastRemindersPosts', module)
       showStoriesComposer={false}
       isDisconnectedProfile={false}
       onClosePreviewClick={action('onClosePreviewClick')}
-      fetchCampaignsIfNeeded={action('fetchCampaignsIfNeeded')}
       hasShareAgainFeature
     />
   ))
@@ -77,7 +75,6 @@ storiesOf('PastRemindersPosts', module)
       showStoriesComposer={false}
       isDisconnectedProfile={false}
       onClosePreviewClick={action('onClosePreviewClick')}
-      fetchCampaignsIfNeeded={action('fetchCampaignsIfNeeded')}
       hasShareAgainFeature
     />
   ))
@@ -94,7 +91,6 @@ storiesOf('PastRemindersPosts', module)
       showStoriesComposer={false}
       isDisconnectedProfile={false}
       onClosePreviewClick={action('onClosePreviewClick')}
-      fetchCampaignsIfNeeded={action('fetchCampaignsIfNeeded')}
       hasShareAgainFeature
     />
   ));

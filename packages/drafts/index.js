@@ -147,8 +147,10 @@ export default connect(
         editingPostId: state.drafts.editingPostId,
         isLockedProfile: state.profileSidebar.isLockedProfile,
         isDisconnectedProfile: isDisconnected,
-        canStartBusinessTrial: state.user.canStartBusinessTrial ?? true,
-        hasFirstCommentFlip: state.user.hasFirstCommentFeature,
+        canStartBusinessTrial:
+          state.organizations?.selected?.canStartBusinessTrial,
+        hasFirstCommentFlip:
+          state.organizations?.selected?.hasFirstCommentFeature,
         planBase: state.organizations?.selected?.planBase,
         shouldDisplayIGPersonalNotification,
       };

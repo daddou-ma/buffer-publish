@@ -67,7 +67,13 @@ const initialState = {
       hasTwitterImpressions: false,
       planBase: 'business',
       isOwner: true,
+      hasCampaignsFeature: true,
+      canModifyCampaigns: true,
+      canSeeCampaignsReport: true,
     },
+  },
+  campaignsList: {
+    campaigns,
   },
 };
 
@@ -178,9 +184,6 @@ describe('ViewCampaign | user interaction', () => {
     expect(totalScheduled).toBeInTheDocument();
     expect(totalSent).toBeInTheDocument();
 
-    expect(rpcCall).toHaveBeenCalledWith('getCampaignsList', {});
-    expect(rpcCall).toHaveBeenCalledTimes(1);
-
     /* Campaign queue assertions */
     userEvent.click(viewCampaignBtn);
 
@@ -216,6 +219,6 @@ describe('ViewCampaign | user interaction', () => {
       fullItems: true,
       past: false,
     });
-    expect(rpcCall).toHaveBeenCalledTimes(2);
+    expect(rpcCall).toHaveBeenCalledTimes(1);
   });
 });

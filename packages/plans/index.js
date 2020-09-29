@@ -12,12 +12,12 @@ export default connect(
     currentPlan: state.organizations?.selected?.plan,
     currentPlanBase: state.organizations?.selected?.planBase,
     onProTrial:
-      state.user.trial?.onTrial &&
-      !state.profileSidebar.selectedProfile.business,
+      state.organizations.selected?.trial?.onTrial &&
+      state.organizations.selected?.trial.plan === 'pro',
     profiles: state.profileSidebar.profiles,
     selectedProfileId: state.profileSidebar.selectedProfileId,
     translations: state.i18n.translations['plans-page'],
-    isNonprofit: state.user.isNonprofit,
+    isNonprofit: state.organizations.selected?.isNonProfit,
     selectedPremiumPlan: state.plans.selectedPremiumPlan,
     shouldSeeSoloPlanOption: state.organizations?.selected?.planBase === 'pro',
   }),

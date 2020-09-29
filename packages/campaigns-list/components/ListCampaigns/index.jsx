@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {
   ButtonWithSkeleton,
@@ -53,7 +53,6 @@ const ListCampaigns = ({
   showCampaignActions,
   hideAnalyzeReport,
   hasCampaignsFlip,
-  fetchCampaignsIfNeeded,
   isLoading,
   ownerEmail,
   shouldDisplayLockedCopy,
@@ -62,10 +61,6 @@ const ListCampaigns = ({
     window.location = getURL.getPublishUrl();
     return null;
   }
-  // Fetch Data
-  useEffect(() => {
-    fetchCampaignsIfNeeded();
-  }, []);
 
   const { t } = useTranslation();
 
@@ -130,7 +125,6 @@ ListCampaigns.propTypes = {
   showCampaignActions: PropTypes.bool.isRequired,
   hideAnalyzeReport: PropTypes.bool.isRequired,
   hasCampaignsFlip: PropTypes.bool.isRequired,
-  fetchCampaignsIfNeeded: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
   ownerEmail: PropTypes.string,
   shouldDisplayLockedCopy: PropTypes.bool.isRequired,

@@ -85,7 +85,6 @@ const actions = {
   onCreatePostClick: action('create post'),
   onDeleteCampaignClick: action('delete campaign'),
   onEditCampaignClick: action('edit campaign'),
-  fetchCampaignsIfNeeded: action('fetch campaigns if needed'),
   fetchCampaign: action('fetch campaign'),
   goToAnalyzeReport: action('go to analyze report'),
   onComposerCreateSuccess: action('composer sucess'),

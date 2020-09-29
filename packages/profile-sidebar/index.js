@@ -20,13 +20,14 @@ export default hot(
         selectedProfileId: ownProps.profileId,
         profiles: reorderProfilesByUnlocked(state.profileSidebar.profiles),
         translations: state.i18n.translations['profile-sidebar'],
-        profileLimit: state.user.profileLimit,
+        profileLimit: state.organizations.selected?.profileLimit,
         hasInstagram: state.profileSidebar.hasInstagram,
         hasFacebook: state.profileSidebar.hasFacebook,
         hasTwitter: state.profileSidebar.hasTwitter,
         isSearchPopupVisible: state.profileSidebar.isSearchPopupVisible,
-        hasCampaignsFlip: state.user.hasCampaignsFeature,
-        canManageSocialAccounts: state.user.canManageSocialAccounts,
+        hasCampaignsFlip: state.organizations.selected?.hasCampaignsFeature,
+        canManageSocialAccounts:
+          state.organizations.selected?.canManageSocialAccounts,
         ownerEmail: state.organizations.selected?.ownerEmail,
         isCampaignsSelected: !!getMatch({
           pathname: state.router?.location?.pathname,
