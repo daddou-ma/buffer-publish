@@ -17,6 +17,7 @@ export default connect(
       isLoading: state.campaignsList.isLoading,
       hasCampaignsFlip: state.organizations.selected?.hasCampaignsFeature,
       ownerEmail: state.organizations.selected?.ownerEmail,
+      shouldDisplayLockedCopy: state.organizations.selected?.locked,
     };
   },
   (dispatch, ownProps) => ({

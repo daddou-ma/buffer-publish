@@ -13,6 +13,14 @@ storiesOf('Campaigns|EmptyState', module)
       showCampaignActions
     />
   ))
+  .add('team member on pro', () => (
+    <EmptyState
+      onOpenCreateCampaignClick={action('createCampaign')}
+      showCampaignActions={false}
+      shouldDisplayLockedCopy
+      ownerEmail="ana@buffer.com"
+    />
+  ))
   .add('non-admin', () => (
     <EmptyState
       onOpenCreateCampaignClick={action('createCampaign')}

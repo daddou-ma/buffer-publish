@@ -41,9 +41,12 @@ const EmptyState = ({
   onOpenCreateCampaignClick,
   showCampaignActions,
   ownerEmail,
+  shouldDisplayLockedCopy,
 }) => {
   const { t } = useTranslation();
-
+  const nonActionCopy = shouldDisplayLockedCopy
+    ? t('campaigns.emptyState.locked', { email: ownerEmail })
+    : t('campaigns.emptyState.permission', { email: ownerEmail });
   return (
     <EmptyStateContainer>
       <Content>
@@ -74,11 +77,7 @@ const EmptyState = ({
             </div>
           </>
         ) : (
-          <Text type="p">
-            {t('campaigns.emptyState.permission', {
-              email: ownerEmail,
-            })}
-          </Text>
+          <Text type="p">{nonActionCopy}</Text>
         )}
       </Content>
       <Image
@@ -92,6 +91,7 @@ const EmptyState = ({
 EmptyState.propTypes = {
   onOpenCreateCampaignClick: PropTypes.func.isRequired,
   showCampaignActions: PropTypes.bool.isRequired,
+  shouldDisplayLockedCopy: PropTypes.bool.isRequired,
   ownerEmail: PropTypes.string,
 };
 
