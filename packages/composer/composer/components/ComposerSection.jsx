@@ -50,6 +50,7 @@ const ComposerComponent = ({
       isOmniboxEnabled={isOmniboxEnabled}
     />
   ) : null;
+
   const {
     hasCustomIgVideoCoverFeature,
     hasFirstCommentFeature,
@@ -57,7 +58,7 @@ const ComposerComponent = ({
     hasGridFeature,
     canStartProTrial,
     hasUserTagFeature,
-  } = organizations?.selected;
+  } = organizations?.selected || {};
 
   // When focus should be forced, figure out *which* editor instance to force-focus
   const forceEditorInstanceFocus =
@@ -216,6 +217,7 @@ ComposerSection.propTypes = {
   shouldEnableFacebookAutocomplete: PropTypes.bool.isRequired,
   shouldShowInlineSubprofileDropdown: PropTypes.bool.isRequired,
   profiles: PropTypes.array,
+  organizations: PropTypes.object,
   selectedProfiles: PropTypes.array,
   isOmniboxEnabled: PropTypes.bool,
   composerPosition: PropTypes.object,
@@ -226,6 +228,7 @@ ComposerSection.defaultProps = {
   isOmniboxEnabled: null,
   composerPosition: null,
   draftMode: false,
+  organizations: {},
 };
 
 export default ComposerSection;

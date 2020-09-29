@@ -3,19 +3,14 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
-import Profile from '../components/Profile';
-import ProfileGroups from '../components/ProfileGroups';
-import Button from '../components/shared/Button';
+import Profile from './Profile';
+import ProfileGroups from './ProfileGroups';
+import Button from './shared/Button';
 import styles from './css/ProfileSection.css';
 import AppActionCreators from '../action-creators/AppActionCreators';
 
 class ProfileSection extends React.Component {
-  static propTypes = {
-    profiles: PropTypes.array.isRequired,
-    appState: PropTypes.object.isRequired,
-    userData: PropTypes.object,
-    visibleNotifications: PropTypes.array.isRequired,
-  };
+  scrollHandlers = new Set();
 
   onScroll = e => {
     if (e.target !== this.refs.profilesScrollContainer) return;
@@ -34,8 +29,6 @@ class ProfileSection extends React.Component {
     this.scrollHandlers.delete(handler);
   };
 
-  scrollHandlers = new Set();
-
   render() {
     const {
       appState,
@@ -44,7 +37,7 @@ class ProfileSection extends React.Component {
       visibleNotifications,
       organizations,
     } = this.props;
-    const { hasProfileGroupsFeature } = organizations?.selected;
+    const { hasProfileGroupsFeature } = organizations?.selected || {};
     const { profileGroups, onNewPublish } = userData;
 
     const hasBusinessProfiles = profiles.some(
@@ -113,5 +106,17 @@ class ProfileSection extends React.Component {
     );
   }
 }
+
+ProfileSection.propTypes = {
+  profiles: PropTypes.array.isRequired,
+  appState: PropTypes.object.isRequired,
+  userData: PropTypes.object,
+  visibleNotifications: PropTypes.array.isRequired,
+  organizations: PropTypes.object,
+};
+
+ProfileSection.defaultProps = {
+  organizations: {},
+};
 
 export default ProfileSection;
