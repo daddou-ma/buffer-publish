@@ -87,13 +87,8 @@ class App extends React.Component {
         signature: PropTypes.string.isRequired,
         successActionStatus: PropTypes.string.isRequired,
       }).isRequired,
-      canStartProTrial: PropTypes.bool.isRequired,
       uses24hTime: PropTypes.bool.isRequired,
       weekStartsMonday: PropTypes.bool.isRequired,
-      isFreeUser: PropTypes.bool.isRequired,
-      hasCampaignsFlip: PropTypes.bool.isRequired,
-      hasUserTagFeature: PropTypes.bool.isRequired,
-      isBusinessUser: PropTypes.bool.isRequired,
       shouldAlwaysSkipEmptyTextAlert: PropTypes.bool.isRequired,
       profileGroups: PropTypes.arrayOf(
         PropTypes.shape({
@@ -220,9 +215,6 @@ class App extends React.Component {
     userData: {
       profileSchedulesSlots: undefined,
       onNewPublish: false,
-      canStartProTrial: false,
-      hasCampaignsFlip: false,
-      hasUserTagFeature: false,
     },
     options: {
       onSave: () => {},
@@ -434,7 +426,6 @@ class App extends React.Component {
         availableSchedulesSlotsForDay={this.state.availableSchedulesSlotsForDay}
         sentPost={this.props.options.sentPost}
         draftMode={this.props.draftMode}
-        hasCampaignsFlip={this.props.hasCampaignsFlip}
       />
     );
   }

@@ -155,16 +155,10 @@ const getNewUserData = data => ({
   s3UploadSignature: data.s3UploadSignature,
   uses24hTime: data.uses24hTime,
   profileGroups: data.profileGroups.map(getNewProfileGroup),
-  isFreeUser: data.isFreeUser,
-  isBusinessUser: data.isBusinessUser,
   weekStartsMonday: data.weekStartsMonday,
   shouldAlwaysSkipEmptyTextAlert: data.shouldAlwaysSkipEmptyTextAlert,
   profilesSchedulesSlots: data.profilesSchedulesSlots,
   onNewPublish: data.onNewPublish,
-  canStartProTrial: data.canStartProTrial,
-  hasShopgridFlip: data.hasShopgridFlip,
-  hasCampaignsFlip: data.hasCampaignsFlip,
-  hasUserTagFeature: data.hasUserTagFeature,
 });
 
 const getNewSubprofile = ({ avatar, id, name, isShared }) => ({

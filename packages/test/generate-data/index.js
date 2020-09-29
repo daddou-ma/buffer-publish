@@ -38,8 +38,6 @@ const buildUser = build('User', {
     email: fake(f => f.internet.email()),
     plan: 'business',
     planCode: 11,
-    isBusinessUser: true,
-    isFreeUser: false,
     features: [
       'instagram',
       'first_comment',
@@ -47,9 +45,7 @@ const buildUser = build('User', {
       'twitter-march-18-changes',
     ],
     loaded: true,
-    hasCampaignsFeature: true,
     hasTwentyFourHourTimeFormat: false,
-    hasUserTagFeature: true,
     week_starts_monday: true,
     skip_empty_text_alert: false,
     s3_upload_signature: {

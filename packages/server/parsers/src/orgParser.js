@@ -44,6 +44,9 @@ module.exports = orgData => ({
   hasShareNextFeature: orgData.planBase !== 'free',
   hasUserTagFeature: orgData.planBase !== 'free',
   hasPinterestFeature: orgData.planBase !== 'free',
+  hasCustomIgVideoCoverFeature: orgData.planBase !== 'free',
+  hasHashtagManagerFeature: orgData.planBase === 'business',
+  hasProfileGroupsFeature: orgData.planBase === 'business',
   hasAccessTeamPanel: orgData.planBase === 'business' && orgData.isAdmin,
 
   // Role Features
