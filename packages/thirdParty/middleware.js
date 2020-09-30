@@ -4,6 +4,7 @@ import {
   getPageNameFromPath,
   getChannelIfNeeded,
 } from '@bufferapp/publish-analytics-middleware/utils/Pathname';
+import { actionTypes as orgActionTypes } from '@bufferapp/publish-data-organizations';
 import { LOCATION_CHANGE } from 'connected-react-router';
 import { actions as modalReducers } from '@bufferapp/publish-modals/reducer';
 import * as FullStory from '@fullstory/browser';
@@ -26,8 +27,6 @@ export default ({ dispatch, getState }) => next => action => {
   next(action);
   switch (action.type) {
     case `user_${dataFetchActionTypes.FETCH_SUCCESS}`:
-      dispatch({ type: actionTypes.FULLSTORY, result: action.result });
-      dispatch({ type: actionTypes.APPCUES, result: action.result });
       dispatch({ type: actionTypes.BUGSNAG, result: action.result });
       break;
 
@@ -40,20 +39,28 @@ export default ({ dispatch, getState }) => next => action => {
       }
       break;
 
-    case actionTypes.FULLSTORY:
-      if (!action.result.isFreeUser && process.env.NODE_ENV === 'production') {
+    case orgActionTypes.ORGANIZATION_SELECTED:
+      dispatch({ type: actionTypes.FULLSTORY, result: action.selected });
+      dispatch({ type: actionTypes.APPCUES, result: action.selected });
+      break;
+
+    case actionTypes.FULLSTORY: {
+      const { id } = getState().user || {};
+      const { planBase } = action.result;
+      if (planBase !== 'free' && process.env.NODE_ENV === 'production') {
         FullStory.init({
           orgId: '9F6GW',
           debug: !!window.location.href.match(
             /(local\.buffer)|(dev\.buffer\.com)/
           ),
         });
-        const { id, planBase } = action.result;
+
         FullStory.identify(id, {
           pricingPlan_str: planBase,
         });
       }
       break;
+    }
 
     case actionTypes.APPCUES:
       if (window) {
@@ -66,18 +73,16 @@ export default ({ dispatch, getState }) => next => action => {
             });
           }
         } else if (window.Appcues) {
+          const { id, createdAt, canSeeOrgSwitcher, tags } =
+            getState().user || {};
           let { plan } = action.result;
           const {
-            id,
-            createdAt,
             planBase,
             planCode,
             trial,
-            orgUserCount,
-            profileCount,
-            tags,
-            canSeeOrgSwitcher,
-          } = action.result; // user
+            usersCount,
+            profilesCount,
+          } = action.result; // org selected data
           if (shouldIdentifyWithAppcues({ plan, tags })) {
             dispatch({
               type: actionTypes.APPCUES_LOADED,
@@ -96,8 +101,8 @@ export default ({ dispatch, getState }) => next => action => {
               onTrial: trial.onTrial,
               trialLength: trial.trialLength,
               trialTimeRemaining: trial.trialTimeRemaining,
-              orgUserCount, // Number of users (including the account owner)
-              profileCount, // Number of profiles _owned_ by the user
+              orgUserCount: usersCount, // Number of users (including the account owner)
+              profileCount: profilesCount, // Number of profiles _owned_ by the user
               canSeeOrgSwitcher,
               upgradedFromLegacyAwesomeToProPromotion: tags.includes(
                 'upgraded-to-pro-from-legacy-awesome'
