@@ -819,10 +819,7 @@ function getFormattedAPIData(serviceName, unformattedData) {
     }
 
     const { campaignId } = serviceDraft;
-    const { hasCampaignsFlip } = AppStore.getUserData();
-    if (hasCampaignsFlip) {
-      conditionalFields.campaign_id = campaignId;
-    }
+    conditionalFields.campaign_id = campaignId;
 
     if (hasEnabledRetweetAttachment) {
       const { retweet } = serviceDraft;
