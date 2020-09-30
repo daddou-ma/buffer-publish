@@ -191,9 +191,9 @@ events.on('saved-drafts', () => {
 });
 
 events.on('start-trial', ({ message, removeScope }) => {
-  // reformat new userData
-  const userData = DataImportUtils.formatUserData(null, { userData: message });
-  AppInitActionCreators.resetUserData(userData);
+  // reformat new organizationsData
+  const organizationsData = message;
+  AppInitActionCreators.resetOrganizationsData(organizationsData);
 
   if (removeScope) {
     NotificationActionCreators.removeAllNotificationsByScope(removeScope);

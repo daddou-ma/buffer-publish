@@ -16,7 +16,7 @@ const AppHooks = {
     events.emit('backdrop-clicked');
   },
 
-  // after a user starts a trial, send message with updated userData
+  // after a user starts a trial, send message with updated organizationsData
   handleStartTrial: ({ message, removeScope }) => {
     events.emit('start-trial', { message, removeScope });
   },
