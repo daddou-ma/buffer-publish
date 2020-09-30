@@ -33,11 +33,6 @@ module.exports = userData => ({
       'milestonesNotifications'
     ),
   },
-  hasOrgSwitcherFeature: userData.features.includes('org_switcher'),
-  hasPublishBeta: userData.features.includes('new_publish_beta'),
-  hasPublishBetaRedirect: userData.features.includes(
-    'new_publish_beta_redirect'
-  ),
 
   /* TEMPORARY. TO BE MOVED TO ORGS AFTER ORG SWITCHER ROLLOUT */
 

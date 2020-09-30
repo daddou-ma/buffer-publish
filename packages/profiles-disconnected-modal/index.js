@@ -12,19 +12,16 @@ export default connect(
         profile?.service === 'instagram' && profile?.service_type === 'profile'
     );
     const organizations = state.organizations?.list;
-    const hasOrgSwitcher = state.user.hasOrgSwitcherFeature;
 
-    const profiles = hasOrgSwitcher
-      ? disconnectedProfiles.reduce((accProfiles, profile) => {
-          const matchingOrg =
-            Array.isArray(organizations) &&
-            organizations.find(org => profile.organizationId === org.id);
+    const profiles = disconnectedProfiles.reduce((accProfiles, profile) => {
+      const matchingOrg =
+        Array.isArray(organizations) &&
+        organizations.find(org => profile.organizationId === org.id);
 
-          return matchingOrg
-            ? [...accProfiles, { ...profile, isAdmin: matchingOrg.isAdmin }]
-            : accProfiles;
-        }, [])
-      : disconnectedProfiles;
+      return matchingOrg
+        ? [...accProfiles, { ...profile, isAdmin: matchingOrg.isAdmin }]
+        : accProfiles;
+    }, []);
     return {
       ...state.profilesDisconnectedModal,
       displayExtraMessage: instagramPersonalProfiles?.length > 0,
