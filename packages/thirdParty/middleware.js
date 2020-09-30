@@ -28,7 +28,6 @@ export default ({ dispatch, getState }) => next => action => {
     case `user_${dataFetchActionTypes.FETCH_SUCCESS}`:
       dispatch({ type: actionTypes.FULLSTORY, result: action.result });
       dispatch({ type: actionTypes.APPCUES, result: action.result });
-      dispatch({ type: actionTypes.ITERATE, result: action.result });
       dispatch({ type: actionTypes.BUGSNAG, result: action.result });
       break;
 
@@ -38,25 +37,6 @@ export default ({ dispatch, getState }) => next => action => {
           id: action.result.id,
           adminLink: `https://buffer.com/admin/user/${action.result.id}`,
         };
-      }
-      break;
-
-    case actionTypes.ITERATE:
-      if (window && window.Iterate) {
-        const { result } = action;
-        window.Iterate('identify', {
-          first_name: result.name,
-          last_name: ' ',
-          email: result.email,
-          createdAt: result.createdAt,
-          plan: result.plan,
-          planCode: result.planCode,
-          onTrial: result.trial.onTrial,
-          trialLength: result.trial.trialLength,
-          trialTimeRemaining: result.trial.trialTimeRemaining,
-          orgUserCount: result.orgUserCount,
-          profileCount: result.profileCount,
-        });
       }
       break;
 
