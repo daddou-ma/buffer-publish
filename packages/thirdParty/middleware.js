@@ -32,7 +32,7 @@ export default ({ dispatch, getState }) => next => action => {
           we initialize the thirdParty apps on user fetch success. And vice versa.
       */
       const { user } = getState();
-      if (user) {
+      if (user && Object.keys(user).length > 0) {
         dispatch({
           type: actionTypes.FULLSTORY,
           organization: action.selected,
@@ -51,7 +51,10 @@ export default ({ dispatch, getState }) => next => action => {
       dispatch({ type: actionTypes.BUGSNAG, result: action.result });
 
       const selectedOrganization = getState()?.organizations?.selected;
-      if (selectedOrganization) {
+      if (
+        selectedOrganization &&
+        Object.keys(selectedOrganization).length > 0
+      ) {
         dispatch({
           type: actionTypes.FULLSTORY,
           user: action.result,
