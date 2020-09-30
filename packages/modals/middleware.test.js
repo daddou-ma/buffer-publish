@@ -1,5 +1,6 @@
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
+import { actionTypes as orgActionTypes } from '@bufferapp/publish-data-organizations';
 
 import middleware from './middleware';
 import { actions, actionTypes as modalsActionTypes } from './reducer';
@@ -123,8 +124,10 @@ describe('middleware', () => {
     const next = jest.fn();
     const dispatch = jest.fn();
     const action = {
-      type: `user_${dataFetchActionTypes.FETCH_SUCCESS}`,
-      result: { shouldShowProTrialExpiredModal: true },
+      type: orgActionTypes.ORGANIZATION_SELECTED,
+      selected: {
+        shouldShowProTrialExpiredModal: true,
+      },
     };
     middleware({ dispatch })(next)(action);
     expect(next).toBeCalledWith(action);

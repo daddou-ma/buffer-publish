@@ -1,4 +1,5 @@
 import deepFreeze from 'deep-freeze';
+import { actionTypes as orgActionTypes } from '@bufferapp/publish-data-organizations';
 import reducer, { actions, initialState, actionTypes } from './reducer';
 
 describe('reducer', () => {
@@ -15,7 +16,7 @@ describe('reducer', () => {
     expect(reducer(undefined, action)).toEqual(initialState);
   });
 
-  it('handles user_FETCH_SUCCESS action type and updates state', () => {
+  it('handles Org selected action type and updates state', () => {
     const stateBefore = {
       ...initialState,
       hasExpiredProTrial: null,
@@ -29,8 +30,8 @@ describe('reducer', () => {
       isPremiumBusiness: true,
     };
     const action = {
-      type: 'user_FETCH_SUCCESS',
-      result: {
+      type: orgActionTypes.ORGANIZATION_SELECTED,
+      selected: {
         shouldShowProTrialExpiredModal: false,
         shouldShowBusinessTrialExpiredModal: true,
         trial: {
