@@ -26,8 +26,6 @@ module.exports = method(
         ];
       })
       .then(([user, orgs]) => {
-        const hasOrgSwitcher =
-          user && user.features && user.features.includes('org_switcher');
         const orgSelected = (orgs && orgs.find(org => org.selected)) || orgs[0];
         if (orgSelected) {
           const {
@@ -66,21 +64,19 @@ module.exports = method(
             };
           }
           // Temporarily injecting org plan data in users. To be removed after org switcher rollout.
-          if (hasOrgSwitcher) {
-            return {
-              ...user,
-              plan,
-              planCode,
-              planBase,
-              features: ownerFeatures,
-              profileCount: profilesCount,
-              orgUserCount: usersCount,
-              isFreeUser: planBase === 'free',
-              analyzeCrossSale: user.analyzeCrossSale && isOwner,
-              canSeeOrgSwitcher: orgs && orgs.length >= 2,
-              ...orgTrialData,
-            };
-          }
+          return {
+            ...user,
+            plan,
+            planCode,
+            planBase,
+            features: ownerFeatures,
+            profileCount: profilesCount,
+            orgUserCount: usersCount,
+            isFreeUser: planBase === 'free',
+            analyzeCrossSale: user.analyzeCrossSale && isOwner,
+            canSeeOrgSwitcher: orgs && orgs.length >= 2,
+            ...orgTrialData,
+          };
         }
         return user;
       })
