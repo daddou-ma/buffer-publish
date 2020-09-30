@@ -7,6 +7,7 @@ import {
 import { LOCATION_CHANGE } from 'connected-react-router';
 import { actions as modalReducers } from '@bufferapp/publish-modals/reducer';
 import * as FullStory from '@fullstory/browser';
+import zendeskWidget from './zendesk-widget';
 
 import { actionTypes } from './reducer';
 
@@ -28,6 +29,7 @@ export default ({ dispatch, getState }) => next => action => {
     case `user_${dataFetchActionTypes.FETCH_SUCCESS}`:
       dispatch({ type: actionTypes.FULLSTORY, result: action.result });
       dispatch({ type: actionTypes.APPCUES, result: action.result });
+      dispatch({ type: actionTypes.ZENDESK_WIDGET, result: action.result });
       dispatch({ type: actionTypes.ITERATE, result: action.result });
       dispatch({ type: actionTypes.BUGSNAG, result: action.result });
       break;
@@ -155,6 +157,19 @@ export default ({ dispatch, getState }) => next => action => {
             window.Appcues.on('flow_aborted', dispatchAppcuesFinished);
           }
         }
+      }
+      break;
+
+    case actionTypes.ZENDESK_WIDGET:
+      if (window && window.zE) {
+        const { name, email } = action.result;
+        zendeskWidget.init();
+        zendeskWidget.prefillWidgetForm(name, email);
+
+        dispatch({
+          type: actionTypes.ZENDESK_WIDGET_LOADED,
+          loaded: true,
+        });
       }
       break;
 

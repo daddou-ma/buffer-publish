@@ -55,6 +55,7 @@ const merged = merge.strategy({
       NODE_ENV: 'development',
       STRIPE_PUBLISHABLE_KEY: 'pk_dGKqAIFsUQonSYGPBM9Rek71IHOcL',
       SEGMENT_KEY: 'qsP2UfgODyoJB3px9SDkGX5I6wDtdQ6a',
+      ZENDESK_WIDGET_KEY: '239a8cf1-de73-4ae3-9a30-801f0ba46faf',
     }),
   ],
   resolve: {

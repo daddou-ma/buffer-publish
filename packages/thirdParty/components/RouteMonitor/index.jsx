@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { getProfilesParams } from '@bufferapp/publish-routes';
+import { updateHelpCenterSuggestions } from '../../zendesk-widget';
 
-function RouteMonitor({ pathname, appCues }) {
+function RouteMonitor({ pathname, appCues, zendeskWidget }) {
   useEffect(() => {
     // Appcues triggers the display of content on page load.
     // Calling the Appcues.page() method will notify Appcues that
@@ -18,6 +19,11 @@ function RouteMonitor({ pathname, appCues }) {
       if (profilePageParams && profilePageParams.tabId === 'grid') {
         window.Appcues.track('Viewed Shop Grid Tab');
       }
+    }
+
+    // Let Zendesk Widget know when we've changed pages
+    if (zendeskWidget && zendeskWidget.loaded && window && window.zE) {
+      updateHelpCenterSuggestions(pathname);
     }
   }, [pathname]);
   return null;

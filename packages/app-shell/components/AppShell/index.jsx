@@ -5,6 +5,7 @@ import { AppShell as BDSAppShell } from '@bufferapp/ui';
 import { Gear, Return, Plus, People } from '@bufferapp/ui/Icon';
 import { gray } from '@bufferapp/ui/style/colors';
 import { useTranslation } from 'react-i18next';
+import ZendeskWidget from '@bufferapp/publish-thirdparty/zendesk-widget';
 
 const InvertedReturnIcon = () => (
   <span style={{ transform: 'scaleX(-1)', height: '16px' }}>
@@ -18,25 +19,32 @@ const helpMenuItems = t => {
       id: '1',
       title: t('app-shell.helpCenter'),
       onItemClick: () => {
-        window.location.assign('https://support.buffer.com/hc/en-us');
+        window.location.assign(
+          'https://support.buffer.com/hc/en-us/?utm_source=app&utm_medium=appshell&utm_campaign=appshell'
+        );
       },
     },
     {
       id: '2',
+      title: t('app-shell.quickHelp'),
+      onItemClick: () => ZendeskWidget.showWidget(),
+    },
+    {
+      id: '3',
       title: t('app-shell.status'),
       onItemClick: () => {
         window.location.assign('https://status.buffer.com/');
       },
     },
     {
-      id: '3',
+      id: '4',
       title: t('app-shell.pricingAndPlans'),
       onItemClick: () => {
         window.location.assign(`https://${getURL.getBaseURL()}/pricing`);
       },
     },
     {
-      id: '4',
+      id: '5',
       title: t('app-shell.wishlist'),
       onItemClick: () => {
         window.location.assign('https://buffer.com/feature-request');

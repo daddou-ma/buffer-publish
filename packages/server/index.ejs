@@ -223,6 +223,15 @@
     }}();
   </script>
 
+  <!-- Zendesk Widget: A -->
+  <script id="ze-snippet" src='https://static.zdassets.com/ekr/snippet.js?key=<%= process.env.ZENDESK_WIDGET_KEY %>'></script>
+  <script>
+    // stops the widget's icon flashing on screen before the rest of the Publish JS is loaded.
+    if (window && window.zE) {
+      window.zE('webWidget', 'hide');
+    }
+  </script>
+
   <!-- Iterate: P -->
   <% if (process.env.NODE_ENV === 'production') { %>
   <script>
