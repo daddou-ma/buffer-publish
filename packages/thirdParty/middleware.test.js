@@ -70,6 +70,9 @@ describe('middleware', () => {
     thirdparty: { appCues: { loaded: true } },
     modals: {},
     user: mockUser,
+    organizations: {
+      selected: mockOrganization,
+    },
   });
 
   it('always calls next()', () => {
@@ -92,7 +95,7 @@ describe('middleware', () => {
     });
   });
 
-  it('triggers dispatches for third party integrations when the organization is selected', () => {
+  it('triggers dispatches for third party integrations when the organization is selected and user data is available', () => {
     const action = {
       type: orgActionTypes.ORGANIZATION_SELECTED,
       selected: mockOrganization,
@@ -100,18 +103,91 @@ describe('middleware', () => {
     middleware({ dispatch, getState })(next)(action);
     expect(dispatch).toHaveBeenCalledWith({
       type: actionTypes.APPCUES,
-      result: mockOrganization,
+      organization: mockOrganization,
+      user: mockUser,
     });
     expect(dispatch).toHaveBeenCalledWith({
       type: actionTypes.FULLSTORY,
-      result: mockOrganization,
+      organization: mockOrganization,
+      user: mockUser,
+    });
+  });
+
+  it('triggers dispatches for third party integrations when the user data is fetched and there is one org selected', () => {
+    const action = {
+      type: `user_${dataFetchActionTypes.FETCH_SUCCESS}`,
+      result: mockUser,
+    };
+    middleware({ dispatch, getState })(next)(action);
+    expect(dispatch).toHaveBeenCalledWith({
+      type: actionTypes.APPCUES,
+      organization: mockOrganization,
+      user: mockUser,
+    });
+    expect(dispatch).toHaveBeenCalledWith({
+      type: actionTypes.FULLSTORY,
+      organization: mockOrganization,
+      user: mockUser,
+    });
+  });
+
+  it('does not trigger dispatches for third party integrations when the organization is selected but no user data is available', () => {
+    const action = {
+      type: orgActionTypes.ORGANIZATION_SELECTED,
+      selected: mockOrganization,
+    };
+
+    const getStateNoUser = () => ({
+      thirdparty: { appCues: { loaded: true } },
+      modals: {},
+      organizations: {
+        selected: mockOrganization,
+      },
+    });
+
+    middleware({ dispatch, getState: getStateNoUser })(next)(action);
+    expect(dispatch).not.toHaveBeenCalledWith({
+      type: actionTypes.APPCUES,
+      organization: mockOrganization,
+      user: mockUser,
+    });
+    expect(dispatch).not.toHaveBeenCalledWith({
+      type: actionTypes.FULLSTORY,
+      organization: mockOrganization,
+      user: mockUser,
+    });
+  });
+
+  it('does not trigger dispatches for third party integrations when the user data is fetched but no org selected', () => {
+    const action = {
+      type: `user_${dataFetchActionTypes.FETCH_SUCCESS}`,
+      result: mockUser,
+    };
+
+    const getStateNoOrgSelected = () => ({
+      thirdparty: { appCues: { loaded: true } },
+      modals: {},
+      user: mockUser,
+    });
+
+    middleware({ dispatch, getState: getStateNoOrgSelected })(next)(action);
+    expect(dispatch).not.toHaveBeenCalledWith({
+      type: actionTypes.APPCUES,
+      organization: mockOrganization,
+      user: mockUser,
+    });
+    expect(dispatch).not.toHaveBeenCalledWith({
+      type: actionTypes.FULLSTORY,
+      organization: mockOrganization,
+      user: mockUser,
     });
   });
 
   it('Fullstory does not collect free user data', () => {
     const action = {
       type: actionTypes.FULLSTORY,
-      result: mockFreeOrganization,
+      organization: mockFreeOrganization,
+      user: mockUser,
     };
     middleware({ dispatch, getState })(next)(action);
     expect(FullStory.identify).not.toHaveBeenCalled();
@@ -120,7 +196,8 @@ describe('middleware', () => {
   it('identifies the user with Fullstory', () => {
     const action = {
       type: actionTypes.FULLSTORY,
-      result: mockOrganization,
+      organization: mockOrganization,
+      user: mockUser,
     };
     middleware({ dispatch, getState })(next)(action);
     expect(FullStory.identify).toHaveBeenCalledWith(mockUser.id, {
@@ -131,7 +208,8 @@ describe('middleware', () => {
   it('does not interact with Appcues if user is not business or pro', () => {
     const action = {
       type: actionTypes.APPCUES,
-      result: mockFreeOrganization,
+      organization: mockFreeOrganization,
+      user: mockUser,
     };
     middleware({ dispatch, getState })(next)(action);
 
@@ -142,7 +220,8 @@ describe('middleware', () => {
   it('marks Appcues as loaded and identifies a B4B / Pro user with Appcues', () => {
     const action = {
       type: actionTypes.APPCUES,
-      result: mockOrganization,
+      organization: mockOrganization,
+      user: mockUser,
     };
     middleware({ dispatch, getState })(next)(action);
     expect(dispatch).toHaveBeenCalledWith({
@@ -167,20 +246,17 @@ describe('middleware', () => {
   });
 
   it('tells AppCues when the user has upgraded from legacy awesome to Pro', () => {
+    const tags = ['upgraded-to-pro-from-legacy-awesome'];
     const action = {
       type: actionTypes.APPCUES,
-      result: mockOrganization,
-    };
-    const tags = ['upgraded-to-pro-from-legacy-awesome'];
-    const getNewState = () => ({
-      thirdparty: { appCues: { loaded: true } },
-      modals: {},
+      organization: mockOrganization,
       user: {
         ...mockUser,
         tags,
       },
-    });
-    middleware({ dispatch, getState: getNewState })(next)(action);
+    };
+
+    middleware({ dispatch, getState })(next)(action);
     expect(global.Appcues.identify).toHaveBeenCalledWith(mockUser.id, {
       ...mockAppcuesIdentity,
       upgradedFromLegacyAwesomeToProPromotion: true,
@@ -192,20 +268,17 @@ describe('middleware', () => {
   });
 
   it('tells AppCues when the user has been migrated from legacy awesome to Pro', () => {
+    const tags = ['awesome-pro-forced-migration'];
     const action = {
       type: actionTypes.APPCUES,
-      result: mockOrganization,
-    };
-    const tags = ['awesome-pro-forced-migration'];
-    const getNewState = () => ({
-      thirdparty: { appCues: { loaded: true } },
-      modals: {},
+      organization: mockOrganization,
       user: {
         ...mockUser,
         tags,
       },
-    });
-    middleware({ dispatch, getState: getNewState })(next)(action);
+    };
+
+    middleware({ dispatch, getState })(next)(action);
     expect(global.Appcues.identify).toHaveBeenCalledWith(mockUser.id, {
       ...mockAppcuesIdentity,
       upgradedFromLegacyAwesomeToProPromotion: false,
@@ -217,20 +290,17 @@ describe('middleware', () => {
   });
 
   it('tells AppCues when a users team member has been migrated from legacy awesome to Pro', () => {
+    const tags = ['awesome-pro-forced-migration-team-member'];
     const action = {
       type: actionTypes.APPCUES,
-      result: mockOrganization,
-    };
-    const tags = ['awesome-pro-forced-migration-team-member'];
-    const getNewState = () => ({
-      thirdparty: { appCues: { loaded: true } },
-      modals: {},
+      organization: mockOrganization,
       user: {
         ...mockUser,
         tags,
       },
-    });
-    middleware({ dispatch, getState: getNewState })(next)(action);
+    };
+
+    middleware({ dispatch, getState })(next)(action);
     expect(global.Appcues.identify).toHaveBeenCalledWith(mockUser.id, {
       ...mockAppcuesIdentity,
       upgradedFromLegacyAwesomeToProPromotion: false,
@@ -242,20 +312,17 @@ describe('middleware', () => {
   });
 
   it('tells AppCues when a user has been migrated from legacy awesome to Pro batch 2', () => {
+    const tags = ['upgraded-awesome-to-pro-batch-2'];
     const action = {
       type: actionTypes.APPCUES,
-      result: mockOrganization,
-    };
-    const tags = ['upgraded-awesome-to-pro-batch-2'];
-    const getNewState = () => ({
-      thirdparty: { appCues: { loaded: true } },
-      modals: {},
+      organization: mockOrganization,
       user: {
         ...mockUser,
         tags,
       },
-    });
-    middleware({ dispatch, getState: getNewState })(next)(action);
+    };
+
+    middleware({ dispatch, getState })(next)(action);
     expect(global.Appcues.identify).toHaveBeenCalledWith(mockUser.id, {
       ...mockAppcuesIdentity,
       upgradedFromLegacyAwesomeToProPromotion: false,
@@ -267,20 +334,17 @@ describe('middleware', () => {
   });
 
   it('tells AppCues when a user has been migrated from legacy awesome to SBP', () => {
+    const tags = ['upgraded-awesome-to-small-business'];
     const action = {
       type: actionTypes.APPCUES,
-      result: mockOrganization,
-    };
-    const tags = ['upgraded-awesome-to-small-business'];
-    const getNewState = () => ({
-      thirdparty: { appCues: { loaded: true } },
-      modals: {},
+      organization: mockOrganization,
       user: {
         ...mockUser,
         tags,
       },
-    });
-    middleware({ dispatch, getState: getNewState })(next)(action);
+    };
+
+    middleware({ dispatch, getState })(next)(action);
     expect(global.Appcues.identify).toHaveBeenCalledWith(mockUser.id, {
       ...mockAppcuesIdentity,
       upgradedFromLegacyAwesomeToProPromotion: false,

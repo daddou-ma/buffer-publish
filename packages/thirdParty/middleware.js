@@ -26,9 +26,46 @@ const shouldIdentifyWithAppcues = ({ plan, tags }) => {
 export default ({ dispatch, getState }) => next => action => {
   next(action);
   switch (action.type) {
-    case `user_${dataFetchActionTypes.FETCH_SUCCESS}`:
-      dispatch({ type: actionTypes.BUGSNAG, result: action.result });
+    case orgActionTypes.ORGANIZATION_SELECTED: {
+      /*  AppCues and FullStory need both user and org selected data to initialize.
+          If when the org is selected there's no user data fetched yet,
+          we initialize the thirdParty apps on user fetch success. And vice versa.
+      */
+      const { user } = getState();
+      if (user) {
+        dispatch({
+          type: actionTypes.FULLSTORY,
+          organization: action.selected,
+          user,
+        });
+        dispatch({
+          type: actionTypes.APPCUES,
+          organization: action.selected,
+          user,
+        });
+      }
       break;
+    }
+
+    case `user_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+      dispatch({ type: actionTypes.BUGSNAG, result: action.result });
+
+      const selectedOrganization = getState()?.organizations?.selected;
+      if (selectedOrganization) {
+        dispatch({
+          type: actionTypes.FULLSTORY,
+          user: action.result,
+          organization: selectedOrganization,
+        });
+        dispatch({
+          type: actionTypes.APPCUES,
+          user: action.result,
+          organization: selectedOrganization,
+        });
+      }
+
+      break;
+    }
 
     case actionTypes.BUGSNAG:
       if (window && window.bugsnagClient) {
@@ -39,14 +76,9 @@ export default ({ dispatch, getState }) => next => action => {
       }
       break;
 
-    case orgActionTypes.ORGANIZATION_SELECTED:
-      dispatch({ type: actionTypes.FULLSTORY, result: action.selected });
-      dispatch({ type: actionTypes.APPCUES, result: action.selected });
-      break;
-
     case actionTypes.FULLSTORY: {
-      const { id } = getState().user || {};
-      const { planBase } = action.result;
+      const { id } = action.user;
+      const { planBase } = action.organization;
       if (planBase !== 'free' && process.env.NODE_ENV === 'production') {
         FullStory.init({
           orgId: '9F6GW',
@@ -73,16 +105,15 @@ export default ({ dispatch, getState }) => next => action => {
             });
           }
         } else if (window.Appcues) {
-          const { id, createdAt, canSeeOrgSwitcher, tags } =
-            getState().user || {};
-          let { plan } = action.result;
+          const { id, createdAt, canSeeOrgSwitcher, tags } = action.user;
+          let { plan } = action.organization;
           const {
             planBase,
             planCode,
             trial,
             usersCount,
             profilesCount,
-          } = action.result; // org selected data
+          } = action.organization; // org selected data
           if (shouldIdentifyWithAppcues({ plan, tags })) {
             dispatch({
               type: actionTypes.APPCUES_LOADED,
