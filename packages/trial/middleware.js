@@ -2,8 +2,9 @@ import {
   actions as dataFetchActions,
   actionTypes as dataFetchActionTypes,
 } from '@bufferapp/async-data-fetch';
+import { actionTypes as orgActionTypes } from '@bufferapp/publish-data-organizations';
 import { actions as notificationActions } from '@bufferapp/notifications/lib/';
-import { AppHooks } from '@bufferapp/publish-composer/composer/utils/LifecycleHooks';
+import AppHooks from '@bufferapp/publish-composer/composer/utils/LifecycleHooks';
 import { actionTypes } from './reducer';
 
 export default ({ dispatch, getState }) => next => action => {
@@ -27,9 +28,8 @@ export default ({ dispatch, getState }) => next => action => {
           message: 'Awesome! You’re now starting your free 7-day Pro trial',
         })
       );
-      dispatch({ type: 'INIT_USER' });
+      dispatch({ type: 'INIT_ORGANIZATIONS' });
       dispatch({ type: 'INIT_PROFILES' });
-      dispatch(dataFetchActions.fetch({ name: 'features' }));
 
       if (action.source === 'ig_first_comment') {
         const {
@@ -54,13 +54,13 @@ export default ({ dispatch, getState }) => next => action => {
         })
       );
       break;
-    case `user_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+    case orgActionTypes.ORGANIZATION_SELECTED: {
       const state = getState();
-      // only reset composer userData if the user just started a trial
+      // only reset composer organnizations Data if the user just started a trial
       if (state.trial.startedTrial) {
-        const { user } = state;
+        const { organizations } = state;
         AppHooks.handleStartTrial({
-          message: user,
+          message: organizations,
           removeScope: state.trial.scope,
         });
       }

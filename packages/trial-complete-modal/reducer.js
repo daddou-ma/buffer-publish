@@ -1,5 +1,5 @@
 import keyWrapper from '@bufferapp/keywrapper';
-import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
+import { actionTypes as orgActionTypes } from '@bufferapp/publish-data-organizations';
 
 export const actionTypes = keyWrapper('TRIAL_COMPLETE_MODAL', {
   CANCEL_TRIAL: 0,
@@ -14,15 +14,15 @@ export const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case `user_${dataFetchActionTypes.FETCH_SUCCESS}`:
+    case orgActionTypes.ORGANIZATION_SELECTED:
       return {
         ...state,
-        hasExpiredProTrial: action.result.shouldShowProTrialExpiredModal,
+        hasExpiredProTrial: action.selected.shouldShowProTrialExpiredModal,
         hasExpiredBusinessTrial:
-          action.result.shouldShowBusinessTrialExpiredModal,
+          action.selected.shouldShowBusinessTrialExpiredModal,
         isPremiumBusiness:
-          action.result.trial &&
-          action.result.trial.trialPlan === 'premium_business',
+          action.selected.trial &&
+          action.selected.trial.trialPlan === 'premium_business',
       };
     default:
       return state;

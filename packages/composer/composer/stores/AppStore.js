@@ -764,7 +764,8 @@ const setImageDimensionsKey = key => (state.imageDimensionsKey = key);
 const setMetaData = metaData => (state.metaData = metaData);
 const setOptions = options => (state.options = options);
 const setCsrfToken = csrfToken => (state.csrfToken = csrfToken);
-const setOrganizationsData = organizationsData => (state.organizationsData = organizationsData);
+const setOrganizationsData = organizationsData =>
+  (state.organizationsData = organizationsData);
 
 const setTwitterAutocompleteBootstrapData = (friends, profilesIds) => {
   state.appState.twitterAutocompleBootstrapData = getNewTwitterAutocompleteBootstrapData(
@@ -901,13 +902,9 @@ const markAppAsNotLoaded = () => {
   state.appState.isLoaded = false;
 };
 
-// There's a CORS error when trying to reset the s3UploadSignature. Leaving signature
-// as is until refresh
-const resetUserData = userData => {
-  Object.keys(userData).forEach(key => {
-    if (key !== 's3UploadSignature' || key !== 's3_upload_signature') {
-      state.userData[key] = userData[key];
-    }
+const resetOrganizationsData = organizationsData => {
+  Object.keys(organizationsData).forEach(key => {
+    state.organizationsData[key] = organizationsData[key];
   });
 };
 
@@ -1285,8 +1282,8 @@ const onDispatchedPayload = payload => {
       markAppAsNotLoaded();
       break;
 
-    case ActionTypes.RESET_USER_DATA:
-      resetUserData(action.userData);
+    case ActionTypes.RESET_ORGANIZATIONS_DATA:
+      resetOrganizationsData(action.organizationsData);
       break;
 
     /**
