@@ -32,6 +32,7 @@ export default ({ dispatch, getState }) => next => action => {
           we initialize the thirdParty apps on user fetch success. And vice versa.
       */
       const { user } = getState();
+      const { canSeeOrgSwitcher } = getState()?.organizations;
       if (user && Object.keys(user).length > 0) {
         dispatch({
           type: actionTypes.FULLSTORY,
@@ -40,7 +41,10 @@ export default ({ dispatch, getState }) => next => action => {
         });
         dispatch({
           type: actionTypes.APPCUES,
-          organization: action.selected,
+          organization: {
+            ...action.selected,
+            canSeeOrgSwitcher,
+          },
           user,
         });
       }
@@ -55,6 +59,7 @@ export default ({ dispatch, getState }) => next => action => {
         selectedOrganization &&
         Object.keys(selectedOrganization).length > 0
       ) {
+        const { canSeeOrgSwitcher } = getState()?.organizations;
         dispatch({
           type: actionTypes.FULLSTORY,
           user: action.result,
@@ -63,7 +68,10 @@ export default ({ dispatch, getState }) => next => action => {
         dispatch({
           type: actionTypes.APPCUES,
           user: action.result,
-          organization: selectedOrganization,
+          organization: {
+            ...selectedOrganization,
+            canSeeOrgSwitcher,
+          },
         });
       }
 
@@ -108,7 +116,7 @@ export default ({ dispatch, getState }) => next => action => {
             });
           }
         } else if (window.Appcues) {
-          const { id, createdAt, canSeeOrgSwitcher, tags } = action.user;
+          const { id, createdAt, tags } = action.user;
           let { plan } = action.organization;
           const {
             planBase,
@@ -116,6 +124,7 @@ export default ({ dispatch, getState }) => next => action => {
             trial,
             usersCount,
             profilesCount,
+            canSeeOrgSwitcher,
           } = action.organization; // org selected data
           if (shouldIdentifyWithAppcues({ plan, tags })) {
             dispatch({

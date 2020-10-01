@@ -62,7 +62,7 @@ module.exports = orgData => ({
 
   // Upgrade/ Trial Paths
   showUpgradeToProCta: orgData.planBase === 'free',
-  showUpgradeToBusinessCta: orgData.planBase === 'pro',
+  showUpgradeToBusinessCta: orgData.planBase === 'pro' && orgData.isOwner,
   shouldShowUpgradeButton:
     orgData.isOwner &&
     (orgData.planBase === 'free' ||
@@ -73,13 +73,15 @@ module.exports = orgData => ({
     orgData.trial &&
     orgData.trial.plan === 'pro' &&
     orgData.trial.onTrial &&
-    orgData.trial.isExpired,
+    orgData.trial.isExpired &&
+    orgData.isOwner,
   shouldShowBusinessTrialExpiredModal:
     orgData.trial &&
     orgData.trial.plan !== 'pro' &&
     orgData.trial.onTrial &&
     orgData.trial.isExpired &&
-    !orgData.trial.isDone,
+    !orgData.trial.isDone &&
+    orgData.isOwner,
   showBusinessTrialistsOnboarding:
     orgData.planBase === 'business' &&
     orgData.trial &&

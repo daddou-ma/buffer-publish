@@ -42,11 +42,13 @@ export default connect(
         isLockedProfile: state.profileSidebar.isLockedProfile,
         isDisconnectedProfile:
           state.profileSidebar.selectedProfile.isDisconnected,
-        analyzeCrossSale: state.user.analyzeCrossSale,
+        analyzeCrossSale:
+          state.user.analyzeCrossSale && state.organizations.selected?.isOwner, // Analyze doesn't support team members
         hasFirstCommentFlip:
           state.organizations.selected?.hasFirstCommentFeature,
         hasCampaignsFeature: state.organizations.selected?.hasCampaignsFeature,
-        hasShareAgainFeature: state.organizations.selected?.hasShareAgainFeature,
+        hasShareAgainFeature:
+          state.organizations.selected?.hasShareAgainFeature,
         has30DaySentPostsLimitFeature:
           state.organizations.selected?.has30DaySentPostsLimitFeature,
         hasBitlyFeature: state.organizations.selected?.hasBitlyFeature,
