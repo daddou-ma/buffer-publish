@@ -240,11 +240,11 @@ const AppActionCreators = {
           // Did we get an error because the user reached a limit and could upgrade?
           // Don't show it as an 'error' in that case
           if (unsuccessfulResponse.code === UpgradeErrorCodes.queueLimit) {
-            const organizations = AppStore.getOrganizationsData();
             const {
-              showUpgradeToBusinessCta,
-              showUpgradeToProCta,
-            } = organizations.selected;
+              showUpgradeToBusinessCta = false,
+              showUpgradeToProCta = false,
+            } = AppStore.getOrganizationsData()?.selected || {};
+
             const scope = `${NotificationScopes.PROFILE_QUEUE_LIMIT}-${unsuccessfulResponse.serviceName}`;
 
             NotificationActionCreators.queueInfo({
