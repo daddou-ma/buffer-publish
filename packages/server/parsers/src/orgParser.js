@@ -59,6 +59,8 @@ module.exports = orgData => ({
     orgData.trial && orgData.trial.canStartBusinessTrial && orgData.isOwner,
   canStartProTrial:
     orgData.trial && orgData.trial.canStartProTrial && orgData.isOwner,
+  // add temporary way for buffer admin to connect personal ig profile
+  canSeeIGPersonalProfileConnect: orgData.isAdmin,
 
   // Upgrade/ Trial Paths
   showUpgradeToProCta: orgData.planBase === 'free',

@@ -32,7 +32,4 @@ module.exports = userData => ({
   },
   analyzeCrossSale: userData.is_analyze_customer,
   features: userData.features, // these are user features only, for org features (owner features) check org parser
-
-  // add temporary way for buffer admin to connect personal ig profile
-  canSeeIGPersonalProfileConnect: userData.is_admin,
 });
