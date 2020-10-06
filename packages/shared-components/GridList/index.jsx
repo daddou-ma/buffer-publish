@@ -39,7 +39,7 @@ const imgWrapperStyle = thumbnail => ({
   position: 'relative',
   width: '100%',
   height: '281.66px',
-  background: 'no-repeat top',
+  background: 'no-repeat center',
   backgroundSize: 'cover',
   cursor: 'pointer',
   backgroundImage: `url(${thumbnail})`,
