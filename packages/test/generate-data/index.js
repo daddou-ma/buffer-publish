@@ -70,7 +70,6 @@ const buildOrganization = build('Organization', {
 const buildProfile = build('Profile', {
   fields: {
     id: sequence(s => `profile${s}`),
-    ownerId: fake(f => f.random.uuid()),
     organizationId: fake(f => f.random.uuid()),
     service: 'twitter',
     type: 'twitter',
