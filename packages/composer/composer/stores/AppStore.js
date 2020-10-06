@@ -128,7 +128,6 @@ const getNewProfile = data => ({
   selectedSubprofileId: null,
   serviceType: data.serviceType,
   serviceId: data.serviceId,
-  isBusinessProfile: data.isBusinessProfile,
   isContributor: data.isContributor,
   isManager: data.isManager,
   subprofilesOrignatedFromAPI: null,

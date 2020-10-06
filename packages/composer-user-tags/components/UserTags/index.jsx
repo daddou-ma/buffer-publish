@@ -89,9 +89,7 @@ const UserTags = ({
     }
     setShowInput(false);
     selectedChannels.forEach(channel => {
-      if (channel.isBusinessProfile) {
-        trackTag({ channel, username: inputValue });
-      }
+      trackTag({ channel, username: inputValue });
     });
     if (e) e.preventDefault();
   };
@@ -110,9 +108,7 @@ const UserTags = ({
     const globalTags = removeClientXY(tags);
     saveGlobalTags(globalTags);
     selectedChannels.forEach(channel => {
-      if (channel.isBusinessProfile) {
-        trackAllTags({ channel, tags });
-      }
+      trackAllTags({ channel, tags });
     });
   };
 
