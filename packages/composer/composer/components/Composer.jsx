@@ -499,30 +499,6 @@ class Composer extends React.Component {
     return hasInstagramSelected ? selectedInstagramDirectProfiles[0].id : null;
   };
 
-  isInstagramContributor = () => {
-    const selectedInstagramProfile = this.getSelectedInstagramProfiles();
-    const hasInstagramSelected =
-      selectedInstagramProfile && selectedInstagramProfile.length === 1;
-    return (
-      hasInstagramSelected &&
-      selectedInstagramProfile[0] &&
-      selectedInstagramProfile[0].isContributor
-    );
-  };
-
-  isInstagramManager = () => {
-    const selectedInstagramProfile = this.getSelectedInstagramProfiles();
-    const hasInstagramSelected =
-      selectedInstagramProfile && selectedInstagramProfile.length === 1;
-
-    return (
-      hasInstagramSelected &&
-      selectedInstagramProfile[0] &&
-      selectedInstagramProfile[0].isManager &&
-      selectedInstagramProfile[0].isBusinessProfile
-    );
-  };
-
   hasIGDirectPostingEnabled = () => {
     const selectedInstagramProfile = this.getSelectedInstagramProfiles();
     const hasInstagramSelected =
