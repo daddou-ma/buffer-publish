@@ -89,7 +89,6 @@ const buildProfile = build('Profile', {
     timezone: 'Europe/Madrid',
     avatar_https:
       'https://pbs.twimg.com/profile_images/1134013946929778693/DFqLN6GR_normal.png',
-    shouldShowGridPreview: true,
     shouldHideAdvancedAnalytics: false,
     shouldDisplayIGPersonalNotification: false,
   },
