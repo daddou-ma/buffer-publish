@@ -79,7 +79,6 @@ const buildProfile = build('Profile', {
     serviceId: '96414483',
     service_username: 'buffertest',
     isManager: true,
-    business: true,
     should_post_direct: true,
     formatted_username: '@buffertest',
     pausedSchedules: [],
@@ -136,7 +135,6 @@ const buildCampaignChannel = build('CampaignChannel', {
     serviceAvatar: 'https://fake-image.url',
     serviceUsername: 'BufferFB',
     isManager: true,
-    business: true,
     hasPushNotifications: true,
   },
 });

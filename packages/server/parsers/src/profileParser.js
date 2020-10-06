@@ -24,7 +24,6 @@ module.exports = profile => ({
   formatted_username: profile.formatted_username,
   subprofiles: profile.subprofiles,
   disabled: profile.disabled,
-  business: profile.business,
   default: profile.default,
   paused: profile.paused,
   open: false,
