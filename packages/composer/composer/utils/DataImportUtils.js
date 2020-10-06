@@ -142,7 +142,6 @@ const DataImportUtils = {
             : null,
         serviceType: importedProfile.service_type,
         serviceId: importedProfile.serviceId,
-        isBusinessProfile: importedProfile.business,
         isContributor:
           importedProfile.isContributor || importedProfile.is_contributor,
         isManager:

@@ -56,7 +56,6 @@ class App extends React.Component {
         disabledMessage: PropTypes.string,
         serviceType: PropTypes.string.isRequired,
         serviceId: PropTypes.string.isRequired,
-        isBusinessProfile: PropTypes.bool.isRequired,
         isContributor: PropTypes.bool,
         isManager: PropTypes.bool.isRequired,
         hasPushNotifications: PropTypes.bool.isRequired,

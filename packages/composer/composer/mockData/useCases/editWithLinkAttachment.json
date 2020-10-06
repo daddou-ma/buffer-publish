@@ -43,7 +43,6 @@
     {
       "id": "56dd47724c7d55a6551e85ef",
       "imagesAvatar": "/dashboard/safeimage?width=40&height=40&url=http%3A%2F%2Fs3.licdn.com%2Fscds%2Fcommon%2Fu%2Fimg%2Ficon%2Ficon_no_photo_no_border_60x60.png&hash=b4560a412e87b59fcaaea0b99cdcd5f3",
-      "isBusinessProfile": true,
       "isDisabled": false,
       "serviceFormattedUsername": "Joe Dohn",
       "serviceName": "linkedin",
