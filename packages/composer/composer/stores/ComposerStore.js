@@ -1844,9 +1844,8 @@ const copyDraftContents = ({
         }
 
         case AttachmentTypes.MEDIA: {
-          const {
-            hasCustomIgVideoCoverFeature,
-          } = AppStore.getOrganizationsData()?.selected;
+          const { hasCustomIgVideoCoverFeature = false } =
+            AppStore.getOrganizationsData()?.selected || {};
 
           if (!service.canHaveAttachmentType(enabledAttachmentType)) {
             const message = `${draft.service.formattedName} doesn't allow image attachments, so we removed the images for you!`;
