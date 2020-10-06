@@ -10,7 +10,6 @@ module.exports = profile => ({
   handle: profile.service_username,
   isManager: profile.organization_role === 1,
   ownerId: profile.user_id,
-  hasOrganizationMembers: profile.has_organization_members,
   pendingCount: profile.counts.pending,
   sentCount: profile.counts.sent,
   timezone: profile.timezone,
