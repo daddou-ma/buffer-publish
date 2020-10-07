@@ -162,7 +162,6 @@ TabContent.propTypes = {
   loadMore: PropTypes.func.isRequired,
   selectedProfile: PropTypes.shape({
     service: PropTypes.string,
-    business: PropTypes.bool,
     isManager: PropTypes.bool,
   }).isRequired,
   hasApprovalFeature: PropTypes.bool.isRequired,
@@ -277,7 +276,6 @@ ProfilePage.propTypes = {
   onChangeTab: PropTypes.func,
   selectedProfile: PropTypes.shape({
     service: PropTypes.string,
-    business: PropTypes.bool,
     isManager: PropTypes.bool,
   }),
   hasApprovalFeature: PropTypes.bool,

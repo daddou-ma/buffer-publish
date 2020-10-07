@@ -53,7 +53,7 @@ const moveProfileInArray = (arr, from, to) => {
 const handleProfileDropped = (
   profiles,
   action,
-  userId,
+  canReorderProfiles,
   hasPinterestFeature
 ) => {
   const { profileLimit, hoverIndex, dragIndex } = action;
@@ -71,7 +71,7 @@ const handleProfileDropped = (
       the same happens for pinterest accounts if the user is on a free plan:
       it goes to the blockedProfiles array. */
       if (
-        cur.ownerId !== userId ||
+        !canReorderProfiles ||
         (cur.service === 'pinterest' && !hasPinterestFeature)
       ) {
         return { ...acc, blockedProfiles: [...acc.blockedProfiles, cur] };
@@ -184,6 +184,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         organization: selectedOrganization,
+        canReorderProfiles: selectedOrganization.canReorderProfiles,
         hasPinterestFeature: selectedOrganization.hasPinterestFeature,
         profiles,
       };
@@ -241,7 +242,7 @@ export default (state = initialState, action) => {
           profiles: handleProfileDropped(
             state.profiles,
             action,
-            state.userId,
+            state.canReorderProfiles,
             state.hasPinterestFeature
           ),
         };

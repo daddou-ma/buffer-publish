@@ -89,7 +89,10 @@ const UserTags = ({
     }
     setShowInput(false);
     selectedChannels.forEach(channel => {
-      if (channel.isBusinessProfile) {
+      if (
+        channel.service?.name === 'instagram' &&
+        channel.serviceType === 'business'
+      ) {
         trackTag({ channel, username: inputValue });
       }
     });
@@ -110,7 +113,10 @@ const UserTags = ({
     const globalTags = removeClientXY(tags);
     saveGlobalTags(globalTags);
     selectedChannels.forEach(channel => {
-      if (channel.isBusinessProfile) {
+      if (
+        channel.service?.name === 'instagram' &&
+        channel.serviceType === 'business'
+      ) {
         trackAllTags({ channel, tags });
       }
     });

@@ -29,7 +29,7 @@ const store = storeFake({
   },
   profileSidebar: {
     selectedProfile: {
-      ownerId: 'id1',
+      id: 'id1',
     },
   },
 });

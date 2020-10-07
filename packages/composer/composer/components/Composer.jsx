@@ -141,7 +141,6 @@ class Composer extends React.Component {
       PropTypes.shape({
         id: PropTypes.string,
         instagramDirectEnabled: PropTypes.bool,
-        shouldShowGridPreview: PropTypes.bool,
         service: PropTypes.shape({
           canHaveMediaAttachmentType: PropTypes.func,
           canHaveSomeAttachmentType: PropTypes.func,
@@ -498,30 +497,6 @@ class Composer extends React.Component {
     const selectedInstagramDirectProfiles = this.getSelectedInstagramProfiles();
     const hasInstagramSelected = selectedInstagramDirectProfiles.length > 0;
     return hasInstagramSelected ? selectedInstagramDirectProfiles[0].id : null;
-  };
-
-  isInstagramContributor = () => {
-    const selectedInstagramProfile = this.getSelectedInstagramProfiles();
-    const hasInstagramSelected =
-      selectedInstagramProfile && selectedInstagramProfile.length === 1;
-    return (
-      hasInstagramSelected &&
-      selectedInstagramProfile[0] &&
-      selectedInstagramProfile[0].isContributor
-    );
-  };
-
-  isInstagramManager = () => {
-    const selectedInstagramProfile = this.getSelectedInstagramProfiles();
-    const hasInstagramSelected =
-      selectedInstagramProfile && selectedInstagramProfile.length === 1;
-
-    return (
-      hasInstagramSelected &&
-      selectedInstagramProfile[0] &&
-      selectedInstagramProfile[0].isManager &&
-      selectedInstagramProfile[0].isBusinessProfile
-    );
   };
 
   hasIGDirectPostingEnabled = () => {

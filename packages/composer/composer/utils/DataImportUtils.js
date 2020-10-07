@@ -142,13 +142,11 @@ const DataImportUtils = {
             : null,
         serviceType: importedProfile.service_type,
         serviceId: importedProfile.serviceId,
-        isBusinessProfile: importedProfile.business,
         isContributor:
           importedProfile.isContributor || importedProfile.is_contributor,
         isManager:
           importedProfile.isManager || importedProfile.organization_role === 1,
         instagramDirectEnabled: importedProfile.should_post_direct,
-        shouldShowGridPreview: importedProfile.shouldShowGridPreview,
         subprofiles,
         hasPushNotifications: importedProfile.hasPushNotifications,
         canPostComment: importedProfile.canPostComment,

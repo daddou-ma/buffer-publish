@@ -40,11 +40,7 @@ class ProfileSection extends React.Component {
     const { hasProfileGroupsFeature } = organizations?.selected || {};
     const { profileGroups, onNewPublish } = userData;
 
-    const hasBusinessProfiles = profiles.some(
-      profile => profile.isBusinessProfile
-    );
-    const shouldBeConsideredBusinessUser =
-      hasProfileGroupsFeature || hasBusinessProfiles;
+    const shouldBeConsideredBusinessUser = hasProfileGroupsFeature;
     const hasEnoughProfiles = profiles.length > 9;
 
     const selectedProfilesIds = this.props.profiles
