@@ -19,8 +19,9 @@ const helpMenuItems = t => {
       id: '1',
       title: t('app-shell.helpCenter'),
       onItemClick: () => {
-        window.location.assign(
-          'https://support.buffer.com/hc/en-us/?utm_source=app&utm_medium=appshell&utm_campaign=appshell'
+        window.open(
+          'https://support.buffer.com/hc/en-us/?utm_source=app&utm_medium=appshell&utm_campaign=appshell',
+          '_blank'
         );
       },
     },
