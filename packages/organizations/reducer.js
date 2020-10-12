@@ -14,6 +14,7 @@ export default (state = { loaded: false }, action) => {
         list: organizations,
         selected: selectedOrganization,
         loaded: true,
+        canSeeOrgSwitcher: organizations?.length >= 2,
       };
     }
     case actionTypes.ORGANIZATION_SELECTED: {

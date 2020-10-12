@@ -57,15 +57,7 @@ class ShopgridComposerBar extends React.Component {
       hasIGProfiles &&
       selectedInstagramProfiles.some(profile => profile.instagramDirectEnabled);
 
-    const isShopgridContributor =
-      hasIGProfiles &&
-      selectedInstagramProfiles.some(profile => profile.shouldShowGridPreview);
-
-    return (
-      hasInstagramSelected &&
-      isInstagram &&
-      (hasShopgridFlip || isShopgridContributor)
-    );
+    return hasInstagramSelected && isInstagram && hasShopgridFlip;
   }
 
   openHelp(e) {

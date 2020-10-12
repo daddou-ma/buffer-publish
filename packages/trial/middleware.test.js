@@ -6,7 +6,7 @@ import {
 import middleware from './middleware';
 
 describe('trial middleware', () => {
-  it('should fetch userData if startTrial is successful', () => {
+  it('should fetch organnizationsData if startTrial is successful', () => {
     const next = jest.fn();
     const dispatch = jest.fn();
     const action = {
@@ -16,7 +16,7 @@ describe('trial middleware', () => {
     expect(next).toBeCalledWith(action);
     expect(dispatch).toBeCalledWith(
       expect.objectContaining({
-        type: 'INIT_USER',
+        type: 'INIT_ORGANIZATIONS',
       })
     );
   });

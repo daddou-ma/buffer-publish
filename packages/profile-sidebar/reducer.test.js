@@ -23,7 +23,6 @@ describe('reducer', () => {
       hasTwitter: true,
       isSearchPopupVisible: false,
       searchText: null,
-      isOrganizationSwitcherEnabled: false,
       loaded: false,
       profileList: [],
     };
@@ -176,35 +175,12 @@ describe('reducer', () => {
       const stateAfter = {
         ...profileInitialState,
         userId: '1234',
-        isOrganizationSwitcherEnabled: false,
       };
 
       const action = {
         type: `user_${dataFetchActionTypes.FETCH_SUCCESS}`,
         result: {
           id: stateAfter.userId,
-          hasOrgSwitcherFeature: false,
-        },
-      };
-
-      deepFreeze(action);
-      expect(reducer(stateBefore, action)).toEqual(stateAfter);
-    });
-
-    it('should change isOrganizationSwitcherEnabled to true when feature is enabled and user fetched', () => {
-      const stateBefore = profileInitialState;
-
-      const stateAfter = {
-        ...profileInitialState,
-        userId: '1234',
-        isOrganizationSwitcherEnabled: true,
-      };
-
-      const action = {
-        type: `user_${dataFetchActionTypes.FETCH_SUCCESS}`,
-        result: {
-          id: stateAfter.userId,
-          hasOrgSwitcherFeature: true,
         },
       };
 

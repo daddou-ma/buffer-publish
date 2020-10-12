@@ -6,7 +6,6 @@ export const actionTypes = keyWrapper('thirdparty', {
   APPCUES_LOADED: 0,
   APPCUES_STARTED: 0,
   APPCUES_FINISHED: 0,
-  ITERATE: 0,
   BUGSNAG: 0,
   ZENDESK_WIDGET: 0,
   ZENDESK_WIDGET_LOADED: 0,

@@ -20,7 +20,6 @@ describe('TabNavigation', () => {
   const store = storeFake({
     profileSidebar: {
       selectedProfile: {
-        business: true,
         isManager: true,
         type: 'linkedin',
       },

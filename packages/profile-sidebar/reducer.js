@@ -31,7 +31,6 @@ export const initialState = {
   isSearchPopupVisible: false,
   searchText: null,
   userId: null,
-  isOrganizationSwitcherEnabled: false,
 };
 
 const moveProfileInArray = (arr, from, to) => {
@@ -54,7 +53,7 @@ const moveProfileInArray = (arr, from, to) => {
 const handleProfileDropped = (
   profiles,
   action,
-  userId,
+  canReorderProfiles,
   hasPinterestFeature
 ) => {
   const { profileLimit, hoverIndex, dragIndex } = action;
@@ -72,7 +71,7 @@ const handleProfileDropped = (
       the same happens for pinterest accounts if the user is on a free plan:
       it goes to the blockedProfiles array. */
       if (
-        cur.ownerId !== userId ||
+        !canReorderProfiles ||
         (cur.service === 'pinterest' && !hasPinterestFeature)
       ) {
         return { ...acc, blockedProfiles: [...acc.blockedProfiles, cur] };
@@ -167,11 +166,7 @@ export default (state = initialState, action) => {
         loading: false,
         loaded: true,
         profileList: action.result,
-        profiles: filterProfilesByOrg(
-          action.result,
-          state.organization,
-          state.isOrganizationSwitcherEnabled
-        ),
+        profiles: filterProfilesByOrg(action.result, state.organization),
         hasInstagram: action.result.some(p => p.service === 'instagram'),
         hasFacebook: action.result.some(p => p.service === 'facebook'),
         hasTwitter: action.result.some(p => p.service === 'twitter'),
@@ -183,16 +178,13 @@ export default (state = initialState, action) => {
 
       if (profiles) {
         const { profileList } = state;
-        profiles = filterProfilesByOrg(
-          profileList,
-          selectedOrganization,
-          state.isOrganizationSwitcherEnabled
-        );
+        profiles = filterProfilesByOrg(profileList, selectedOrganization);
       }
 
       return {
         ...state,
         organization: selectedOrganization,
+        canReorderProfiles: selectedOrganization.canReorderProfiles,
         hasPinterestFeature: selectedOrganization.hasPinterestFeature,
         profiles,
       };
@@ -218,9 +210,8 @@ export default (state = initialState, action) => {
       };
     case `singleProfile_${dataFetchActionTypes.FETCH_SUCCESS}`: {
       let { selectedProfile, profiles } = state;
-      const { organization, isOrganizationSwitcherEnabled } = state;
+      const { organization } = state;
       const isInCurrentOrganization =
-        isOrganizationSwitcherEnabled &&
         organization.id === action.result.organizationId;
 
       if (selectedProfile.id === action.result.id) {
@@ -234,7 +225,7 @@ export default (state = initialState, action) => {
           }
           return profile;
         });
-      } else if (!isOrganizationSwitcherEnabled || isInCurrentOrganization) {
+      } else if (isInCurrentOrganization) {
         profiles = [...profiles, action.result];
       }
 
@@ -251,7 +242,7 @@ export default (state = initialState, action) => {
           profiles: handleProfileDropped(
             state.profiles,
             action,
-            state.userId,
+            state.canReorderProfiles,
             state.hasPinterestFeature
           ),
         };
@@ -271,12 +262,6 @@ export default (state = initialState, action) => {
       return {
         ...state,
         userId: action.result.id,
-        isOrganizationSwitcherEnabled: action.result.hasOrgSwitcherFeature,
-        profiles: filterProfilesByOrg(
-          state.profileList,
-          state.organization,
-          action.result.hasOrgSwitcherFeature
-        ),
       };
     }
     default:

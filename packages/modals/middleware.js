@@ -2,6 +2,7 @@ import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch
 import { actionTypes as lockedProfileActionTypes } from '@bufferapp/publish-locked-profile-notification/reducer';
 import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
 import { actionTypes as storiesActionTypes } from '@bufferapp/publish-stories/reducer';
+import { actionTypes as orgActionTypes } from '@bufferapp/publish-data-organizations';
 import getCtaProperties from '@bufferapp/publish-analytics-middleware/utils/CtaStrings';
 import getCtaFromSource from '@bufferapp/publish-switch-plan-modal/utils/tracking';
 import { getPlanId } from '@bufferapp/publish-plans/utils/plans';
@@ -89,11 +90,11 @@ export default ({ dispatch, getState }) => next => action => {
       break;
     }
 
-    case `user_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+    case orgActionTypes.ORGANIZATION_SELECTED: {
       const {
         shouldShowProTrialExpiredModal,
         shouldShowBusinessTrialExpiredModal,
-      } = action.result; // userData
+      } = action.selected;
       if (
         shouldShowProTrialExpiredModal ||
         shouldShowBusinessTrialExpiredModal

@@ -52,12 +52,10 @@ class App extends React.Component {
         imagesAvatar: PropTypes.string.isRequired,
         timezone: PropTypes.string.isRequired,
         shouldBeAutoSelected: PropTypes.bool.isRequired,
-        shouldShowGridPreview: PropTypes.bool.isRequired,
         isDisabled: PropTypes.bool.isRequired,
         disabledMessage: PropTypes.string,
         serviceType: PropTypes.string.isRequired,
         serviceId: PropTypes.string.isRequired,
-        isBusinessProfile: PropTypes.bool.isRequired,
         isContributor: PropTypes.bool,
         isManager: PropTypes.bool.isRequired,
         hasPushNotifications: PropTypes.bool.isRequired,
@@ -209,6 +207,7 @@ class App extends React.Component {
       onSave: PropTypes.func,
       sentPost: PropTypes.bool,
     }).isRequired,
+    organizationsData: PropTypes.shape({}),
   };
 
   static defaultProps = {
@@ -225,6 +224,7 @@ class App extends React.Component {
       canPostComment: false,
       profileHasPostingSchedule: false,
     },
+    organizationsData: {},
   };
 
   constructor(props) {

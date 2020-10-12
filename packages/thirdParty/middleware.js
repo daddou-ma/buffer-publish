@@ -4,6 +4,7 @@ import {
   getPageNameFromPath,
   getChannelIfNeeded,
 } from '@bufferapp/publish-analytics-middleware/utils/Pathname';
+import { actionTypes as orgActionTypes } from '@bufferapp/publish-data-organizations';
 import { LOCATION_CHANGE } from 'connected-react-router';
 import { actions as modalReducers } from '@bufferapp/publish-modals/reducer';
 import * as FullStory from '@fullstory/browser';
@@ -26,13 +27,58 @@ const shouldIdentifyWithAppcues = ({ plan, tags }) => {
 export default ({ dispatch, getState }) => next => action => {
   next(action);
   switch (action.type) {
-    case `user_${dataFetchActionTypes.FETCH_SUCCESS}`:
-      dispatch({ type: actionTypes.FULLSTORY, result: action.result });
-      dispatch({ type: actionTypes.APPCUES, result: action.result });
-      dispatch({ type: actionTypes.ZENDESK_WIDGET, result: action.result });
-      dispatch({ type: actionTypes.ITERATE, result: action.result });
-      dispatch({ type: actionTypes.BUGSNAG, result: action.result });
+    case orgActionTypes.ORGANIZATION_SELECTED: {
+      /*  AppCues and FullStory need both user and org selected data to initialize.
+          If when the org is selected there's no user data fetched yet,
+          we initialize the thirdParty apps on user fetch success. And vice versa.
+      */
+      const { user } = getState();
+      const { canSeeOrgSwitcher } = getState()?.organizations || {};
+      if (user && Object.keys(user).length > 0) {
+        dispatch({
+          type: actionTypes.FULLSTORY,
+          organization: action.selected,
+          user,
+        });
+        dispatch({
+          type: actionTypes.APPCUES,
+          organization: {
+            ...action.selected,
+            canSeeOrgSwitcher,
+          },
+          user,
+        });
+      }
       break;
+    }
+
+    case `user_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+      dispatch({ type: actionTypes.BUGSNAG, result: action.result });
+      dispatch({ type: actionTypes.ZENDESK_WIDGET, result: action.result });
+
+      const selectedOrganization = getState()?.organizations?.selected;
+      if (
+        selectedOrganization &&
+        Object.keys(selectedOrganization).length > 0
+      ) {
+        const { canSeeOrgSwitcher } = getState()?.organizations || {};
+        dispatch({
+          type: actionTypes.FULLSTORY,
+          user: action.result,
+          organization: selectedOrganization,
+        });
+        dispatch({
+          type: actionTypes.APPCUES,
+          user: action.result,
+          organization: {
+            ...selectedOrganization,
+            canSeeOrgSwitcher,
+          },
+        });
+      }
+
+      break;
+    }
 
     case actionTypes.BUGSNAG:
       if (window && window.bugsnagClient) {
@@ -43,39 +89,23 @@ export default ({ dispatch, getState }) => next => action => {
       }
       break;
 
-    case actionTypes.ITERATE:
-      if (window && window.Iterate) {
-        const { result } = action;
-        window.Iterate('identify', {
-          first_name: result.name,
-          last_name: ' ',
-          email: result.email,
-          createdAt: result.createdAt,
-          plan: result.plan,
-          planCode: result.planCode,
-          onTrial: result.trial.onTrial,
-          trialLength: result.trial.trialLength,
-          trialTimeRemaining: result.trial.trialTimeRemaining,
-          orgUserCount: result.orgUserCount,
-          profileCount: result.profileCount,
-        });
-      }
-      break;
-
-    case actionTypes.FULLSTORY:
-      if (!action.result.isFreeUser && process.env.NODE_ENV === 'production') {
+    case actionTypes.FULLSTORY: {
+      const { id } = action.user;
+      const { planBase } = action.organization;
+      if (planBase !== 'free' && process.env.NODE_ENV === 'production') {
         FullStory.init({
           orgId: '9F6GW',
           debug: !!window.location.href.match(
             /(local\.buffer)|(dev\.buffer\.com)/
           ),
         });
-        const { id, planBase } = action.result;
+
         FullStory.identify(id, {
           pricingPlan_str: planBase,
         });
       }
       break;
+    }
 
     case actionTypes.APPCUES:
       if (window) {
@@ -88,18 +118,16 @@ export default ({ dispatch, getState }) => next => action => {
             });
           }
         } else if (window.Appcues) {
-          let { plan } = action.result;
+          const { id, createdAt, tags } = action.user;
+          let { plan } = action.organization;
           const {
-            id,
-            createdAt,
             planBase,
             planCode,
             trial,
-            orgUserCount,
-            profileCount,
-            tags,
+            usersCount,
+            profilesCount,
             canSeeOrgSwitcher,
-          } = action.result; // user
+          } = action.organization; // org selected data
           if (shouldIdentifyWithAppcues({ plan, tags })) {
             dispatch({
               type: actionTypes.APPCUES_LOADED,
@@ -118,8 +146,8 @@ export default ({ dispatch, getState }) => next => action => {
               onTrial: trial.onTrial,
               trialLength: trial.trialLength,
               trialTimeRemaining: trial.trialTimeRemaining,
-              orgUserCount, // Number of users (including the account owner)
-              profileCount, // Number of profiles _owned_ by the user
+              orgUserCount: usersCount, // Number of users (including the account owner)
+              profileCount: profilesCount, // Number of profiles _owned_ by the user
               canSeeOrgSwitcher,
               upgradedFromLegacyAwesomeToProPromotion: tags.includes(
                 'upgraded-to-pro-from-legacy-awesome'

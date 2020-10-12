@@ -52,6 +52,7 @@ module.exports = orgData => ({
   // Role Features
   canManageSocialAccounts: orgData.isAdmin,
   canSeeCampaignsReport: orgData.isOwner,
+  canReorderProfiles: orgData.isOwner,
   canModifyCampaigns: orgData.isAdmin,
   canSeeBillingInfo: orgData.isOwner,
   canReconnectChannels: orgData.isAdmin,
@@ -59,10 +60,12 @@ module.exports = orgData => ({
     orgData.trial && orgData.trial.canStartBusinessTrial && orgData.isOwner,
   canStartProTrial:
     orgData.trial && orgData.trial.canStartProTrial && orgData.isOwner,
+  // add temporary way for buffer admin to connect personal ig profile
+  canSeeIGPersonalProfileConnect: orgData.isAdmin,
 
   // Upgrade/ Trial Paths
   showUpgradeToProCta: orgData.planBase === 'free',
-  showUpgradeToBusinessCta: orgData.planBase === 'pro',
+  showUpgradeToBusinessCta: orgData.planBase === 'pro' && orgData.isOwner,
   shouldShowUpgradeButton:
     orgData.isOwner &&
     (orgData.planBase === 'free' ||
@@ -73,13 +76,15 @@ module.exports = orgData => ({
     orgData.trial &&
     orgData.trial.plan === 'pro' &&
     orgData.trial.onTrial &&
-    orgData.trial.isExpired,
+    orgData.trial.isExpired &&
+    orgData.isOwner,
   shouldShowBusinessTrialExpiredModal:
     orgData.trial &&
     orgData.trial.plan !== 'pro' &&
     orgData.trial.onTrial &&
     orgData.trial.isExpired &&
-    !orgData.trial.isDone,
+    !orgData.trial.isDone &&
+    orgData.isOwner,
   showBusinessTrialistsOnboarding:
     orgData.planBase === 'business' &&
     orgData.trial &&

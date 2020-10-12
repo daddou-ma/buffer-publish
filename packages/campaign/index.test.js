@@ -63,6 +63,7 @@ const initialState = {
   },
   organizations: {
     selected: {
+      id: 'organization1',
       hasAnalyticsOnPosts: false,
       hasTwitterImpressions: false,
       planBase: 'business',
