@@ -35,7 +35,7 @@ export default hot(
         }),
         showUpgradeToProCta: state.organizations.selected?.showUpgradeToProCta,
         canSeeIGPersonalProfileConnect:
-          state.organizations.selected?.canSeeIGPersonalProfileConnect,
+          state.user.canSeeIGPersonalProfileConnect,
       };
     },
     (dispatch, ownProps) => ({
