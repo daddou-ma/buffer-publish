@@ -59,8 +59,16 @@ const IGPersonalProfileNotification = ({
             newTab
           >
             {' '}
-            {t('instagram-personal-profile-notification.linkText')}
+            {t('instagram-personal-profile-notification.linkText1')}
+          </Link>{' '}
+          {t('instagram-personal-profile-notification.endText1')}
+          <Link
+            href="https://support.buffer.com/hc/en-us/articles/360052978413-Deprecating-Instagram-Personal-Profiles#h_01EGR8C37FVWSSMJM2PQG10EAK"
+            newTab
+          >
+            {t('instagram-personal-profile-notification.linkText2')}
           </Link>
+          {t('instagram-personal-profile-notification.endText2')}
         </TextWithStyles>
         <ButtonWithStyles
           type="primary"
