@@ -30,7 +30,6 @@ const plugins = [
     BUGSNAG_APP_VERSION: 'placeholder', // replaced in CI
     STRIPE_PUBLISHABLE_KEY: 'pk_qOmHaWApLCX5OoeWKQ3NrArhoyWEi',
     SEGMENT_KEY: '9Plsiyvw9NEgXEN7eSBwiAGlHD3DHp0A',
-    ZENDESK_WIDGET_KEY: '239a8cf1-de73-4ae3-9a30-801f0ba46faf',
   }),
 ];
 
