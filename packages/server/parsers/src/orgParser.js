@@ -27,7 +27,6 @@ module.exports = orgData => ({
 
   // Plan Features
   hasCampaignsFeature: orgData.planBase !== 'free',
-  hasAnalyticsFeature: orgData.planBase === 'business',
   hasBitlyFeature: orgData.planBase !== 'free',
   has30DaySentPostsLimitFeature: orgData.planBase === 'free', // profiles_controller updates_sent() returns only 30 days of sent posts for free users.
   hasCalendarFeature: orgData.planBase !== 'free',
@@ -35,7 +34,7 @@ module.exports = orgData => ({
   hasCustomizingUtmParamsFeature:
     orgData.planBase === 'business' && orgData.isOwner,
   hasApprovalFeature: orgData.planBase === 'business',
-  hasDraftsFeature: orgData.planBase !== 'free',
+  hasDraftsFeature: orgData.planBase === 'business',
   hasGridFeature: orgData.planBase === 'business',
   hasStoriesFeature: orgData.planBase === 'business',
   hasTwitterImpressions: orgData.planBase === 'business',
@@ -63,6 +62,7 @@ module.exports = orgData => ({
 
   // Upgrade/ Trial Paths
   showUpgradeToProCta: orgData.planBase === 'free',
+  showShowDraftsPaywall: orgData.planBase === 'pro',
   showUpgradeToBusinessCta: orgData.planBase === 'pro' && orgData.isOwner,
   shouldShowUpgradeButton:
     orgData.isOwner &&
