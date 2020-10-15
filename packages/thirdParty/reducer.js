@@ -7,10 +7,13 @@ export const actionTypes = keyWrapper('thirdparty', {
   APPCUES_STARTED: 0,
   APPCUES_FINISHED: 0,
   BUGSNAG: 0,
+  ZENDESK_WIDGET: 0,
+  ZENDESK_WIDGET_LOADED: 0,
 });
 
 const initialState = {
   appCues: { loaded: false, inProgress: false },
+  zendeskWidget: { loaded: false },
 };
 
 export default (state = initialState, action) => {
@@ -37,6 +40,12 @@ export default (state = initialState, action) => {
           ...state.appCues,
           inProgress: false,
         },
+      };
+
+    case actionTypes.ZENDESK_WIDGET_LOADED:
+      return {
+        ...state,
+        zendeskWidget: { loaded: action.loaded },
       };
 
     default:

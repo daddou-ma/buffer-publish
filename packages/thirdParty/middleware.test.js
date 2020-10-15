@@ -2,11 +2,13 @@
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 import { actionTypes as orgActionTypes } from '@bufferapp/publish-data-organizations';
 import * as FullStory from '@fullstory/browser';
+import zendeskWidget from './zendesk-widget';
 import { actionTypes } from './reducer';
 
 import middleware from './middleware';
 
 jest.mock('@fullstory/browser');
+jest.mock('./zendesk-widget');
 
 global.Appcues = {
   identify: jest.fn(),
@@ -14,8 +16,12 @@ global.Appcues = {
   on: jest.fn(),
 };
 
+global.zE = jest.fn();
+global.zESettings = jest.fn();
+
 const mockUser = {
   id: 'foo',
+  email: 'example@mock.com',
   createdAt: 'date',
   tags: [],
 };
@@ -123,6 +129,10 @@ describe('middleware', () => {
       type: actionTypes.APPCUES,
       organization: mockOrganization,
       user: mockUser,
+    });
+    expect(dispatch).toHaveBeenCalledWith({
+      type: actionTypes.ZENDESK_WIDGET,
+      result: mockUser,
     });
     expect(dispatch).toHaveBeenCalledWith({
       type: actionTypes.FULLSTORY,
@@ -362,5 +372,23 @@ describe('middleware', () => {
     };
     middleware({ dispatch, getState })(next)(action);
     expect(global.Appcues.track).toHaveBeenCalledWith('Created Post');
+  });
+
+  it('marks Zendesk as loaded and prefills widget with user information', () => {
+    const action = {
+      type: actionTypes.ZENDESK_WIDGET,
+      result: mockUser,
+    };
+    middleware({ dispatch })(next)(action);
+    expect(dispatch).toHaveBeenCalledWith({
+      type: actionTypes.ZENDESK_WIDGET_LOADED,
+      loaded: true,
+    });
+
+    expect(zendeskWidget.init).toHaveBeenCalled();
+    expect(zendeskWidget.prefillWidgetForm).toHaveBeenCalledWith(
+      mockUser.name,
+      mockUser.email
+    );
   });
 });
