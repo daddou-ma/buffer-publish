@@ -25,6 +25,7 @@ export default connect(
     canReconnectChannels: state.organizations.selected?.canReconnectChannels,
     hasApprovalFeature: state.organizations?.selected?.hasApprovalFeature,
     hasDraftsFeature: state.organizations?.selected?.hasDraftsFeature,
+    showShowDraftsPaywall: state.organizations?.selected?.showShowDraftsPaywall,
     hasGridFeature: state.organizations?.selected?.hasGridFeature,
     hasStoriesFeature: state.organizations?.selected?.hasStoriesFeature,
     isInstagramProfile:

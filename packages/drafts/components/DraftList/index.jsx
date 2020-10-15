@@ -60,14 +60,14 @@ const DraftList = ({
   hasFirstCommentFlip,
   onComposerOverlayClick,
   preserveComposerStateOnClose,
-  planBase,
+  showShowDraftsPaywall,
   shouldDisplayIGPersonalNotification,
 }) => {
   if (shouldDisplayIGPersonalNotification) {
     return <InstagramPersonalProfileNotification />;
   }
 
-  if (planBase === 'pro') {
+  if (showShowDraftsPaywall) {
     const startTrial = () =>
       window.location.assign(
         `${getURL.getStartTrialURL({
@@ -177,7 +177,7 @@ DraftList.propTypes = {
       text: PropTypes.string,
     })
   ),
-  planBase: PropTypes.string.isRequired,
+  showShowDraftsPaywall: PropTypes.bool,
   manager: PropTypes.bool.isRequired,
   onApproveClick: PropTypes.func.isRequired,
   onDeleteConfirmClick: PropTypes.func.isRequired,
@@ -199,6 +199,7 @@ DraftList.propTypes = {
 };
 
 DraftList.defaultProps = {
+  showShowDraftsPaywall: false,
   preserveComposerStateOnClose: true,
   loading: true,
   postLists: [],
