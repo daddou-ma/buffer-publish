@@ -6,6 +6,8 @@ import ProfileSidebar from '@bufferapp/publish-profile-sidebar';
 const Wrapper = styled.div`
   display: flex;
   flex-grow: 1;
+  height: 100%;
+  overflow: hidden;
 `;
 
 const ProfileSidebarStyle = styled.div`
