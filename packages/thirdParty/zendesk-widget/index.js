@@ -8,7 +8,7 @@ function getHelpCenterSuggestions(pathname) {
     stories: ['stories'],
     campaigns: ['campaigns'],
     analytics: ['analytics'],
-    grin: ['shop-grid'],
+    grid: ['shop-grid'],
     settings: ['publish-settings'],
     'settings/posting-schedule': ['posting-schedule'],
     'preferences/general': ['general'],
