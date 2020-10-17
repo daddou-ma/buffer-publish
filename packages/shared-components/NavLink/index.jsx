@@ -50,10 +50,11 @@ const NavLink = ({
   disabled,
   secondary,
   href,
+  hasSubMenu,
 }) => {
   const match = useRouteMatch({
     path: to,
-    exact: activeOnlyWhenExact,
+    exact: activeOnlyWhenExact || true,
   });
 
   const NavItem = href && !to ? NavExternalItem : NavRouteItem;
@@ -66,6 +67,7 @@ const NavLink = ({
         $secondary={secondary}
         to={to}
         href={href}
+        aria-haspopup={hasSubMenu ? true : undefined}
       >
         {children}
       </NavItem>
@@ -80,6 +82,7 @@ NavLink.propTypes = {
   disabled: PropTypes.bool,
   secondary: PropTypes.bool,
   href: PropTypes.string,
+  hasSubMenu: PropTypes.bool,
 };
 
 NavLink.defaultProps = {
@@ -88,6 +91,7 @@ NavLink.defaultProps = {
   activeOnlyWhenExact: true,
   disabled: false,
   secondary: false,
+  hasSubMenu: false,
 };
 
 export default NavLink;

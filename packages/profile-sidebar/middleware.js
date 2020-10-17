@@ -1,5 +1,4 @@
 import { getURL } from '@bufferapp/publish-server/formatters/src';
-import { actions as tabsActions } from '@bufferapp/publish-tabs/reducer';
 
 import {
   actionTypes as dataFetchActionTypes,
@@ -42,19 +41,15 @@ export default ({ dispatch, getState }) => next => action => {
           profile,
         })
       );
-      // When the page has just loaded or is refreshed,
-      // we want to be able to update the actual selected tab
-      if (
-        (action.tabId && getState().tabs.tabId !== action.tabId) ||
-        !profileFound
-      ) {
-        dispatch(
-          tabsActions.selectTab({
-            tabId: action.tabId,
+
+      dispatch(
+        dataFetchActions.fetch({
+          name: 'getCounts',
+          args: {
             profileId: profile.id,
-          })
-        );
-      }
+          },
+        })
+      );
       break;
     }
 

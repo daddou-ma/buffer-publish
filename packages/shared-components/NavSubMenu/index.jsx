@@ -3,25 +3,22 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Divider } from '@bufferapp/components';
 
-const NavList = styled.ul`
+const NavSubMenuList = styled.ul`
   margin: 0;
   padding: 0;
-  position: relative;
+  float: left;
+  width: 100%;
 `;
 
-const NavWrapper = styled.nav`
-  padding: 0 0.5rem;
-`;
-
-const Nav = ({ children }) => (
-  <NavWrapper>
-    <NavList>{children}</NavList>
+const NavSubMenu = ({ children }) => (
+  <NavSubMenuList>
+    {children}
     <Divider marginTop="0" marginBottom="0" />
-  </NavWrapper>
+  </NavSubMenuList>
 );
 
-Nav.propTypes = {
+NavSubMenu.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export default Nav;
+export default NavSubMenu;

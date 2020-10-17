@@ -21,6 +21,7 @@ export Example from './Example';
 export GridList from './GridList';
 export Nav from './Nav';
 export NavLink from './NavLink';
+export NavSubMenu from './NavSubMenu';
 export Notification from './Notification';
 export Post from './Post';
 export PostDragWrapper from './PostDragWrapper';
