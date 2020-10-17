@@ -26,7 +26,7 @@ export default ({ dispatch, getState }) => next => action => {
     case LOCATION_CHANGE:
       {
         const path = action.payload.location.pathname;
-        const { tabId } =
+        const { tabId, profileId } =
           getParams({ pathname: path, route: profileTabPages.route }) || {};
 
         const needsApproval =
@@ -38,7 +38,7 @@ export default ({ dispatch, getState }) => next => action => {
             dataFetchActions.fetch({
               name: 'draftPosts',
               args: {
-                profileId: action.profileId,
+                profileId,
                 isFetchingMore: false,
                 needsApproval,
                 clear: true,

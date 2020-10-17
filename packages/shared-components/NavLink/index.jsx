@@ -54,7 +54,7 @@ const NavLink = ({
 }) => {
   const match = useRouteMatch({
     path: to,
-    exact: activeOnlyWhenExact || true,
+    exact: activeOnlyWhenExact,
   });
 
   const NavItem = href && !to ? NavExternalItem : NavRouteItem;

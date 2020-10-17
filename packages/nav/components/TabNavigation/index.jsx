@@ -79,7 +79,7 @@ const TabNavigation = ({
             <NavLink
               to={profileChildTabPages.getRoute({
                 profileId,
-                tabId: 'settings',
+                tabId: 'analytics',
                 childTabId: 'overview',
               })}
               secondary
