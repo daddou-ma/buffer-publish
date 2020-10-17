@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link, useRouteMatch } from 'react-router-dom';
+import { NavLink as Link, useRouteMatch } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import { blue, grayDarker, grayDefault } from '@bufferapp/ui/style/colors';
 import {

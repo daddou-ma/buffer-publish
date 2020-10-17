@@ -68,7 +68,7 @@ const TabNavigation = ({
         </NavLink>
       )}
       {showNestedAnalyticsTab && (
-        <NavSubMenu aria-label="analytics submenu">
+        <NavSubMenu type="analytics">
           <NavLink
             to={profileTabPages.getRoute({ profileId, tabId: 'analytics' })}
             secondary
@@ -129,7 +129,7 @@ const TabNavigation = ({
         </NavLink>
       )}
       {showNestedSettingsTab && (
-        <NavSubMenu aria-label="settings submenu">
+        <NavSubMenu type="settings">
           <NavLink
             to={profileTabPages.getRoute({ profileId, tabId: 'settings' })}
             secondary
