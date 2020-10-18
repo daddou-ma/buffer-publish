@@ -30,7 +30,7 @@ export const profileTabPages = {
 };
 
 export const profileChildTabPages = {
-  route: '/profile/:profileId/tab/:tabId/:childTabId',
+  route: '/profile/:profileId/tab/:tabId/:childTabId?',
   getRoute: ({ profileId, tabId, childTabId }) =>
     `/profile/${profileId}/tab/${tabId}/${childTabId}`,
   goTo: ({ profileId, tabId, childTabId }) =>

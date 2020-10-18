@@ -1,13 +1,19 @@
 import { actionTypes as notificationActionTypes } from '@bufferapp/notifications';
-import { actionTypes as tabsActionTypes } from '@bufferapp/publish-tabs';
 import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
+import { LOCATION_CHANGE } from 'connected-react-router';
 import { actionTypes } from './reducer';
 import middleware from './middleware';
 
 describe('middleware', () => {
-  const next = jest.fn();
-  const dispatch = jest.fn();
+  let next;
+  let dispatch;
+
+  beforeEach(() => {
+    next = jest.fn();
+    dispatch = jest.fn();
+  });
+
   const state = {
     profileSidebar: {
       selectedProfileId: 'id1',
@@ -33,10 +39,8 @@ describe('middleware', () => {
 
   it('should fetch draftPosts', () => {
     const action = {
-      type: tabsActionTypes.SELECT_TAB,
-      profileId: 'id1',
-      tabId: 'drafts',
-      location: { pathname: '/preferences/test' },
+      type: LOCATION_CHANGE,
+      payload: { location: { pathname: '/profile/id1/tab/drafts' } },
     };
     middleware({ dispatch, getState })(next)(action);
     expect(next).toBeCalledWith(action);
@@ -44,7 +48,7 @@ describe('middleware', () => {
       dataFetchActions.fetch({
         name: 'draftPosts',
         args: {
-          profileId: action.profileId,
+          profileId: 'id1',
           isFetchingMore: false,
           needsApproval: false,
           clear: true,
@@ -243,6 +247,138 @@ describe('middleware', () => {
       expect(analyticsActions.trackEvent).toHaveBeenCalledWith(
         'Draft Approved',
         expectedTrackingObj
+      );
+    });
+  });
+
+  describe('counters', () => {
+    it('updates drafts counter when DRAFT_CREATED', () => {
+      const fakeState = () => ({
+        profileSidebar: {
+          selectedProfileId: 'id',
+        },
+      });
+      const action = {
+        type: actionTypes.DRAFT_CREATED,
+        draft: {
+          needsApproval: false,
+        },
+        profileId: 'id',
+      };
+
+      middleware({ dispatch, getState: fakeState })(next)(action);
+      expect(next).toBeCalledWith(action);
+      expect(dispatch).toBeCalledWith(
+        dataFetchActions.fetch({
+          name: 'getCounts',
+          args: {
+            profileId: 'id',
+          },
+        })
+      );
+    });
+
+    it('updates drafts counter when DRAFT_DELETED', () => {
+      const fakeState = () => ({
+        profileSidebar: {
+          selectedProfileId: 'id',
+        },
+      });
+      const action = {
+        type: actionTypes.DRAFT_DELETED,
+        draft: {
+          needsApproval: false,
+        },
+        profileId: 'id',
+      };
+
+      middleware({ dispatch, getState: fakeState })(next)(action);
+      expect(next).toBeCalledWith(action);
+      expect(dispatch).toBeCalledWith(
+        dataFetchActions.fetch({
+          name: 'getCounts',
+          args: {
+            profileId: 'id',
+          },
+        })
+      );
+    });
+
+    it('updates drafts counter when DRAFT_APPROVED', () => {
+      const fakeState = () => ({
+        profileSidebar: {
+          selectedProfileId: 'id',
+        },
+      });
+      const action = {
+        type: actionTypes.DRAFT_APPROVED,
+        draft: {
+          needsApproval: true,
+        },
+        profileId: 'id',
+      };
+
+      middleware({ dispatch, getState: fakeState })(next)(action);
+      expect(next).toBeCalledWith(action);
+      expect(dispatch).toBeCalledWith(
+        dataFetchActions.fetch({
+          name: 'getCounts',
+          args: {
+            profileId: 'id',
+          },
+        })
+      );
+    });
+
+    it('updates drafts counter when DRAFT_MOVED', () => {
+      const fakeState = () => ({
+        profileSidebar: {
+          selectedProfileId: 'id',
+        },
+      });
+      const action = {
+        type: actionTypes.DRAFT_MOVED,
+        draft: {
+          needsApproval: false,
+        },
+        profileId: 'id',
+      };
+
+      middleware({ dispatch, getState: fakeState })(next)(action);
+      expect(next).toBeCalledWith(action);
+      expect(dispatch).toBeCalledWith(
+        dataFetchActions.fetch({
+          name: 'getCounts',
+          args: {
+            profileId: 'id',
+          },
+        })
+      );
+    });
+
+    it('does not update drafts counter if draft profile Id is not the same as the selected profile', () => {
+      const fakeState = () => ({
+        profileSidebar: {
+          selectedProfileId: 'id1',
+        },
+      });
+      const action = {
+        type: actionTypes.DRAFT_CREATED,
+        draft: {
+          needsApproval: false,
+        },
+        profileId: 'id',
+      };
+
+      middleware({ dispatch, getState: fakeState })(next)(action);
+      expect(next).toBeCalledWith(action);
+      expect(dispatch).not.toBeCalledWith(
+        dataFetchActions.fetch({
+          name: 'getCounts',
+          args: {
+            profileId: 'id',
+          },
+        })
       );
     });
   });
