@@ -2,7 +2,7 @@ import keyWrapper from '@bufferapp/keywrapper';
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 import generateProfileTabs from './utils';
 
-export const actionTypes = keyWrapper('NAV', {
+export const actionTypes = keyWrapper('PROFILE_NAV', {
   GENERATE_PROFILE_TABS: 0,
 });
 

@@ -53,7 +53,7 @@ import closeComposerModalMiddleware from '@bufferapp/publish-close-composer-conf
 import temporaryBannerMiddleware from '@bufferapp/publish-temporary-banner/middleware';
 import storyPreviewMiddleware from '@bufferapp/publish-story-preview/middleware';
 import storyGroupComposerMiddleware from '@bufferapp/publish-story-group-composer/middleware';
-import navMiddleware from '@bufferapp/publish-nav/middleware';
+import profileNavMiddleware from '@bufferapp/publish-profile-nav/middleware';
 
 import actionsOnlyForAnalyzeMiddleware from '@bufferapp/publish-analytics/middleware';
 
@@ -118,7 +118,7 @@ const composedMiddlewares = history =>
       temporaryBannerMiddleware,
       storyPreviewMiddleware,
       storyGroupComposerMiddleware,
-      navMiddleware,
+      profileNavMiddleware,
 
       actionsOnlyForAnalyzeMiddleware('reveal'),
       // Dynamic middlware insertion point (for lazy-loaded components)

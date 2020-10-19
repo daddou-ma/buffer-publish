@@ -12,7 +12,7 @@ import PastReminders from '@bufferapp/publish-past-reminders';
 import DraftList from '@bufferapp/publish-drafts';
 import PostingSchedule from '@bufferapp/publish-posting-schedule';
 import GeneralSettings from '@bufferapp/publish-general-settings';
-import TabNavigation from '@bufferapp/publish-nav';
+import TabNavigation from '@bufferapp/publish-profile-nav';
 import Analytics from '@bufferapp/publish-analytics';
 import {
   ScrollableContainer,

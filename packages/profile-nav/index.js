@@ -17,7 +17,7 @@ export default connect(
     const { tabId } = params || {};
 
     return {
-      profileNavTabs: state.nav.profileNavTabs,
+      profileNavTabs: state.profileNav.profileNavTabs,
       profileId: state.profileSidebar.selectedProfile.id,
       showNestedAnalyticsTab:
         tabId === 'analytics' &&
@@ -29,8 +29,8 @@ export default connect(
       showReconnectButton:
         state.profileSidebar.selectedProfile.isDisconnected &&
         state.organizations.selected?.canReconnectChannels,
-      draftsNeedApprovalCount: state.nav.draftsNeedApprovalCount,
-      draftsCount: state.nav.draftsCount,
+      draftsNeedApprovalCount: state.profileNav.draftsNeedApprovalCount,
+      draftsCount: state.profileNav.draftsCount,
     };
   },
   dispatch => ({

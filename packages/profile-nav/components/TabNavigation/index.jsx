@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Nav, NavLink, NavSubMenu } from '@bufferapp/publish-shared-components';
+import {
+  Nav,
+  NavLink,
+  NavSubMenu,
+  NavTag,
+} from '@bufferapp/publish-shared-components';
 import { Button } from '@bufferapp/ui';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
 import {
@@ -9,7 +14,6 @@ import {
 } from '@bufferapp/publish-routes';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
-import TabTag from '../TabTag';
 
 const UpgradeButton = styled(Button)`
   transform: translate(0, 1px);
@@ -22,8 +26,8 @@ const UpgradeButton = styled(Button)`
 `;
 
 // eslint-disable-next-line react/prop-types
-const TabCounterTag = ({ labelName }) =>
-  labelName != null && <TabTag type="counter" labelName={labelName} />;
+const NavCounterTag = ({ labelName }) =>
+  labelName != null && <NavTag type="counter" labelName={labelName} />;
 
 const TabNavigation = ({
   profileNavTabs,
@@ -97,7 +101,7 @@ const TabNavigation = ({
           })}
         >
           {t('tabs.awaitingApproval')}
-          <TabCounterTag labelName={draftsNeedApprovalCount} />
+          <NavCounterTag labelName={draftsNeedApprovalCount} />
         </NavLink>
       )}
       {profileNavTabs.includes('pendingApproval') && (
@@ -105,13 +109,13 @@ const TabNavigation = ({
           to={profileTabPages.getRoute({ profileId, tabId: 'pendingApproval' })}
         >
           {t('tabs.pendingApproval')}
-          <TabCounterTag labelName={draftsNeedApprovalCount} />
+          <NavCounterTag labelName={draftsNeedApprovalCount} />
         </NavLink>
       )}
       {profileNavTabs.includes('drafts') && (
         <NavLink to={profileTabPages.getRoute({ profileId, tabId: 'drafts' })}>
           {t('tabs.drafts')}
-          <TabCounterTag labelName={draftsCount} />
+          <NavCounterTag labelName={draftsCount} />
         </NavLink>
       )}
       {profileNavTabs.includes('grid') && (

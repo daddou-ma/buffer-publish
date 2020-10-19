@@ -50,11 +50,11 @@ export default hot(
           loadingMore: currentQueue.loadingMore,
           moreToLoad: currentQueue.moreToLoad,
           page: currentQueue.page,
-          profileNavTabs: state.nav.profileNavTabs,
+          profileNavTabs: state.profileNav.profileNavTabs,
         };
       }
       return {
-        profileNavTabs: state.nav.profileNavTabs,
+        profileNavTabs: state.profileNav.profileNavTabs,
       };
     },
     dispatch => ({
