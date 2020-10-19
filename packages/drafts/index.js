@@ -151,7 +151,8 @@ export default connect(
           state.organizations?.selected?.canStartBusinessTrial,
         hasFirstCommentFlip:
           state.organizations?.selected?.hasFirstCommentFeature,
-        planBase: state.organizations?.selected?.planBase,
+        showShowDraftsPaywall:
+          state.organizations?.selected?.showShowDraftsPaywall,
         shouldDisplayIGPersonalNotification,
       };
     }

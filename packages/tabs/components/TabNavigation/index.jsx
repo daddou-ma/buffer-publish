@@ -41,6 +41,7 @@ class TabNavigation extends React.Component {
     const {
       hasApprovalFeature,
       hasDraftsFeature,
+      showShowDraftsPaywall,
       hasGridFeature,
       hasStoriesFeature,
       isInstagramProfile,
@@ -54,6 +55,7 @@ class TabNavigation extends React.Component {
         tabId,
         hasApprovalFeature,
         hasDraftsFeature,
+        showShowDraftsPaywall,
         hasGridFeature,
         hasStoriesFeature,
         isInstagramProfile,
@@ -192,6 +194,7 @@ TabNavigation.defaultProps = {
   canReconnectChannels: true,
   hasApprovalFeature: false,
   hasDraftsFeature: false,
+  showShowDraftsPaywall: false,
   hasGridFeature: false,
   hasStoriesFeature: false,
 };
@@ -200,6 +203,7 @@ TabNavigation.propTypes = {
   canReconnectChannels: PropTypes.bool,
   hasApprovalFeature: PropTypes.bool,
   hasDraftsFeature: PropTypes.bool,
+  showShowDraftsPaywall: PropTypes.bool,
   hasGridFeature: PropTypes.bool,
   hasStoriesFeature: PropTypes.bool,
   isManager: PropTypes.bool,

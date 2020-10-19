@@ -1,12 +1,8 @@
 import React, { lazy, Suspense } from 'react';
 import PropTypes from 'prop-types';
-
-import { BusinessTrialOrUpgradeCard } from '@bufferapp/publish-shared-components';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
 import InstagramPersonalProfileNotification from '@bufferapp/publish-ig-personal-profile-notification';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
-import { getURL } from '@bufferapp/publish-server/formatters/src';
-import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
 
 import Notification from '../Notification';
 import ProfileHeader from '../ProfileHeader';
@@ -25,8 +21,6 @@ const AnalyticsList = ({
   profile,
   isAnalyticsSupported,
   isLockedProfile,
-  canStartBusinessTrial,
-  hasAnalyticsFeature,
   hasBitlyFeature,
   isInstagramBusiness,
   fetchProfiles,
@@ -41,44 +35,6 @@ const AnalyticsList = ({
 
   if (isLockedProfile) {
     return <LockedProfileNotification />;
-  }
-
-  // org has analytics plan feature
-  if (!hasAnalyticsFeature) {
-    const startTrial = () =>
-      window.location.assign(
-        `${getURL.getStartTrialURL({
-          trialType: 'small',
-          cta: SEGMENT_NAMES.ANALYTICS_OVERVIEW_SBP_TRIAL,
-          nextUrl: 'https://publish.buffer.com',
-        })}`
-      );
-    const goToBilling = () =>
-      window.location.assign(
-        `${getURL.getBillingURL({
-          cta: SEGMENT_NAMES.ANALYTICS_OVERVIEW_BUSINESS_UPGRADE,
-        })}`
-      );
-    if (canStartBusinessTrial) {
-      return (
-        <BusinessTrialOrUpgradeCard
-          heading="Unlock Great Insights"
-          body="Gain a deeper understanding of how you are performing on social media with advanced analytics."
-          cta="Start a Free 14-Day Trial of the Business Plan"
-          onCtaClick={startTrial}
-          backgroundImage="circles"
-        />
-      );
-    }
-    return (
-      <BusinessTrialOrUpgradeCard
-        heading="Unlock Great Insights"
-        body="Gain a deeper understanding of how you are performing on social media with advanced analytics."
-        cta="Upgrade to Buffer for Business"
-        onCtaClick={goToBilling}
-        backgroundImage="circles"
-      />
-    );
   }
 
   if (isAnalyticsSupported) {
@@ -109,11 +65,9 @@ const AnalyticsList = ({
 
 AnalyticsList.propTypes = {
   hasBitlyFeature: PropTypes.bool.isRequired,
-  canStartBusinessTrial: PropTypes.bool.isRequired,
   isAnalyticsSupported: PropTypes.bool,
   profile: PropTypes.shape(ProfileHeader.propTypes),
   isLockedProfile: PropTypes.bool,
-  hasAnalyticsFeature: PropTypes.bool.isRequired,
   isInstagramBusiness: PropTypes.bool.isRequired,
   fetchProfiles: PropTypes.func.isRequired,
   selectProfile: PropTypes.func.isRequired,

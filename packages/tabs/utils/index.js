@@ -24,6 +24,7 @@ const getValidTab = ({
   childTabId,
   hasApprovalFeature,
   hasDraftsFeature,
+  showShowDraftsPaywall,
   hasGridFeature,
   hasStoriesFeature,
   isInstagramProfile,
@@ -58,7 +59,8 @@ const getValidTab = ({
       break;
     case 'drafts':
       /* Pro and up users or Team Members */
-      validTabId = hasDraftsFeature ? 'drafts' : 'queue';
+      validTabId =
+        hasDraftsFeature || showShowDraftsPaywall ? 'drafts' : 'queue';
       break;
     case 'grid':
       /* IG, Business users or Team Members */
