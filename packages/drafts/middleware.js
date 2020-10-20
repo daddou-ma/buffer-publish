@@ -1,6 +1,4 @@
-import { LOCATION_CHANGE } from 'connected-react-router';
 import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware/actions';
-import { getParams, profileTabPages } from '@bufferapp/publish-routes';
 
 import {
   actions as dataFetchActions,
@@ -23,33 +21,6 @@ export default ({ dispatch, getState }) => next => action => {
   const state = getState();
 
   switch (action.type) {
-    case LOCATION_CHANGE:
-      {
-        const path = action.payload.location.pathname;
-        const { tabId, profileId } =
-          getParams({ pathname: path, route: profileTabPages.route }) || {};
-
-        const needsApproval =
-          tabId === 'awaitingApproval' || tabId === 'pendingApproval';
-        const isDraft = needsApproval || tabId === 'drafts';
-
-        if (isDraft) {
-          dispatch(
-            dataFetchActions.fetch({
-              name: 'draftPosts',
-              args: {
-                profileId,
-                isFetchingMore: false,
-                needsApproval,
-                clear: true,
-              },
-            })
-          );
-        }
-      }
-
-      break;
-
     case actionTypes.DRAFT_CONFIRMED_DELETE: {
       dispatch(
         dataFetchActions.fetch({

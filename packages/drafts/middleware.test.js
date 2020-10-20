@@ -1,7 +1,6 @@
 import { actionTypes as notificationActionTypes } from '@bufferapp/notifications';
 import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
-import { LOCATION_CHANGE } from 'connected-react-router';
 import { actionTypes } from './reducer';
 import middleware from './middleware';
 
@@ -35,26 +34,6 @@ describe('middleware', () => {
 
   it('should export middleware', () => {
     expect(middleware).toBeDefined();
-  });
-
-  it('should fetch draftPosts', () => {
-    const action = {
-      type: LOCATION_CHANGE,
-      payload: { location: { pathname: '/profile/id1/tab/drafts' } },
-    };
-    middleware({ dispatch, getState })(next)(action);
-    expect(next).toBeCalledWith(action);
-    expect(dispatch).toBeCalledWith(
-      dataFetchActions.fetch({
-        name: 'draftPosts',
-        args: {
-          profileId: 'id1',
-          isFetchingMore: false,
-          needsApproval: false,
-          clear: true,
-        },
-      })
-    );
   });
 
   it('should fetch deletePost', () => {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
   QueueItems,
@@ -62,10 +62,18 @@ const DraftList = ({
   preserveComposerStateOnClose,
   showShowDraftsPaywall,
   shouldDisplayIGPersonalNotification,
+  fetchDrafts,
+  profileId,
 }) => {
   if (shouldDisplayIGPersonalNotification) {
     return <InstagramPersonalProfileNotification />;
   }
+
+  // Fetch the Data
+  useEffect(() => {
+    const needsApproval = tabId !== 'drafts';
+    fetchDrafts({ needsApproval });
+  }, [tabId, profileId]);
 
   if (showShowDraftsPaywall) {
     const startTrial = () =>
@@ -169,7 +177,6 @@ const DraftList = ({
 };
 
 DraftList.propTypes = {
-  features: PropTypes.object.isRequired, // eslint-disable-line
   canStartBusinessTrial: PropTypes.bool.isRequired,
   loading: PropTypes.bool,
   postLists: PropTypes.arrayOf(
@@ -196,6 +203,8 @@ DraftList.propTypes = {
   onComposerOverlayClick: PropTypes.func.isRequired,
   preserveComposerStateOnClose: PropTypes.bool,
   shouldDisplayIGPersonalNotification: PropTypes.bool,
+  fetchDrafts: PropTypes.func.isRequired,
+  profileId: PropTypes.string.isRequired,
 };
 
 DraftList.defaultProps = {
