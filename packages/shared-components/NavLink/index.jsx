@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link, useRouteMatch } from 'react-router-dom';
+import { NavLink as Link, useRouteMatch } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import { blue, grayDarker, grayDefault } from '@bufferapp/ui/style/colors';
 import {
@@ -50,6 +50,7 @@ const NavLink = ({
   disabled,
   secondary,
   href,
+  hasSubMenu,
 }) => {
   const match = useRouteMatch({
     path: to,
@@ -66,6 +67,7 @@ const NavLink = ({
         $secondary={secondary}
         to={to}
         href={href}
+        aria-haspopup={hasSubMenu ? true : undefined}
       >
         {children}
       </NavItem>
@@ -80,6 +82,7 @@ NavLink.propTypes = {
   disabled: PropTypes.bool,
   secondary: PropTypes.bool,
   href: PropTypes.string,
+  hasSubMenu: PropTypes.bool,
 };
 
 NavLink.defaultProps = {
@@ -88,6 +91,7 @@ NavLink.defaultProps = {
   activeOnlyWhenExact: true,
   disabled: false,
   secondary: false,
+  hasSubMenu: false,
 };
 
 export default NavLink;

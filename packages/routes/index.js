@@ -23,6 +23,7 @@ export const profilePages = {
 
 export const profileTabPages = {
   route: '/profile/:profileId/tab/:tabId',
+  getRoute: ({ profileId, tabId }) => `/profile/${profileId}/tab/${tabId}`,
   defaultRoute: '/profile/:profileId/tab/queue',
   goTo: ({ profileId, tabId = 'queue' }) =>
     push(`/profile/${profileId}/tab/${tabId}`),
@@ -30,6 +31,8 @@ export const profileTabPages = {
 
 export const profileChildTabPages = {
   route: '/profile/:profileId/tab/:tabId/:childTabId?',
+  getRoute: ({ profileId, tabId, childTabId }) =>
+    `/profile/${profileId}/tab/${tabId}/${childTabId}`,
   goTo: ({ profileId, tabId, childTabId }) =>
     push(`/profile/${profileId}/tab/${tabId}/${childTabId}`),
 };

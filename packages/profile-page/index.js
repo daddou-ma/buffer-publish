@@ -1,9 +1,8 @@
 // component vs. container https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0
 import { connect } from 'react-redux';
 import { hot } from 'react-hot-loader/root';
-import { getProfilesParams } from '@bufferapp/publish-routes';
+import { getProfilesParams, profileTabPages } from '@bufferapp/publish-routes';
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
-import { actions } from '@bufferapp/publish-tabs';
 import ProfilePage from './components/ProfilePage';
 
 const requestName = tabId =>
@@ -51,27 +50,19 @@ export default hot(
           loadingMore: currentQueue.loadingMore,
           moreToLoad: currentQueue.moreToLoad,
           page: currentQueue.page,
-          hasApprovalFeature: state.organizations?.selected?.hasApprovalFeature,
-          hasDraftsFeature: state.organizations?.selected?.hasDraftsFeature,
-          hasGridFeature: state.organizations?.selected?.hasGridFeature,
-          hasStoriesFeature: state.organizations?.selected?.hasStoriesFeature,
-          isInstagramProfile:
-            state.profileSidebar.selectedProfile.service === 'instagram',
-          isManager: state.profileSidebar.selectedProfile.isManager,
-          shouldHideAdvancedAnalytics:
-            state.profileSidebar.selectedProfile.type === 'linkedin' ||
-            state.profileSidebar.selectedProfile.type === 'pinterest' ||
-            state.profileSidebar.selectedProfile.shouldHideAdvancedAnalytics,
+          profileNavTabs: state.profileNav.profileNavTabs,
         };
       }
-      return {};
+      return {
+        profileNavTabs: state.profileNav.profileNavTabs,
+      };
     },
     dispatch => ({
-      onChangeTab: (tabId, profileId) => {
+      onChangeTab: ({ profileId }) => {
         dispatch(
-          actions.selectTab({
-            tabId,
+          profileTabPages.goTo({
             profileId,
+            tabId: 'queue',
           })
         );
       },

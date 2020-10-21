@@ -3,6 +3,7 @@ import {
   getDateString,
   isInThePast,
 } from '@bufferapp/publish-server/formatters/src';
+import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 import { actions as modalsActions } from '@bufferapp/publish-modals/reducer';
 
 import { actions } from './reducer';
@@ -154,11 +155,25 @@ export default connect(
         showShowDraftsPaywall:
           state.organizations?.selected?.showShowDraftsPaywall,
         shouldDisplayIGPersonalNotification,
+        profileId: ownProps.profileId,
       };
     }
     return {};
   },
   (dispatch, ownProps) => ({
+    fetchDrafts: ({ needsApproval }) => {
+      dispatch(
+        dataFetchActions.fetch({
+          name: 'draftPosts',
+          args: {
+            profileId: ownProps.profileId,
+            isFetchingMore: false,
+            needsApproval,
+            clear: true,
+          },
+        })
+      );
+    },
     onApproveClick: draft => {
       dispatch(
         actions.handleApproveClick({
