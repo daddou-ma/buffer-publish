@@ -105,7 +105,7 @@ export default connect(
         editMode: false,
         draftMode: null,
         selectedProfileId,
-        tabId: state.tabs.tabId,
+        tabId: state.profileNav.selectedTabId,
         campaigns: state.campaignsList.campaigns ?? [],
         ...options,
       };
