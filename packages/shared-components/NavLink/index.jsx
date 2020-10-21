@@ -56,6 +56,7 @@ const NavLink = ({
   href,
   hasSubMenu,
   forceSelect,
+  testId,
 }) => {
   const match = useRouteMatch({
     path: to,
@@ -84,6 +85,7 @@ const NavLink = ({
         $secondary={secondary}
         to={to}
         aria-haspopup={hasSubMenu ? true : undefined}
+        data-testid={testId}
       >
         {children}
       </NavRouteItem>
@@ -106,6 +108,7 @@ NavLink.propTypes = {
   href: PropTypes.string,
   hasSubMenu: PropTypes.bool,
   forceSelect: PropTypes.bool,
+  testId: PropTypes.string,
 };
 
 NavLink.defaultProps = {
@@ -116,6 +119,7 @@ NavLink.defaultProps = {
   secondary: false,
   hasSubMenu: false,
   forceSelect: false,
+  testId: undefined,
 };
 
 export default NavLink;
