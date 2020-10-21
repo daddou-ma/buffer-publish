@@ -34,7 +34,6 @@
     "@bufferapp/publish-queue": "2.0.0",
     "@bufferapp/publish-routes": "2.0.0",
     "@bufferapp/publish-sent": "2.0.0",
-    "@bufferapp/publish-tabs": "2.0.0",
     "@bufferapp/publish-two-factor-auth": "2.0.0",
     "@bufferapp/publish-switch-plan-modal": "2.0.0",
     "@bufferapp/publish-notifications-provider": "2.0.0",

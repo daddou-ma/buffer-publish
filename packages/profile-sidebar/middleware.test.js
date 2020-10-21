@@ -1,4 +1,3 @@
-import { actionTypes as tabsActionTypes } from '@bufferapp/publish-tabs';
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 import { actionTypes } from './reducer';
 import middleware from './middleware';

@@ -41,7 +41,6 @@ import campaignsListMiddleware from '@bufferapp/publish-campaigns-list/middlewar
 import deleteCampaignModalMiddleware from '@bufferapp/publish-delete-campaign-modal/middleware';
 import bookmarkletsMiddleware from '@bufferapp/publish-bookmarklets/middleware';
 import trialCompleteModalMiddleware from '@bufferapp/publish-trial-complete-modal/middleware';
-import tabsMiddleware from '@bufferapp/publish-tabs/middleware';
 import appShellMiddleware from '@bufferapp/publish-app-shell/middleware';
 import igFirstCommentProTrialModalMiddleware from '@bufferapp/publish-ig-first-comment-pro-trial-modal/middleware';
 import hashtagGroupsMiddleware from '@bufferapp/publish-hashtag-group-manager/middleware';
@@ -105,7 +104,6 @@ const composedMiddlewares = history =>
       campaignsListMiddleware,
       deleteCampaignModalMiddleware,
       trialCompleteModalMiddleware,
-      tabsMiddleware,
       appShellMiddleware,
       igFirstCommentProTrialModalMiddleware,
       hashtagGroupsMiddleware,
