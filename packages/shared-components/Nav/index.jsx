@@ -15,14 +15,24 @@ const NavWrapper = styled.nav`
   padding: 0 0.5rem;
 `;
 
-const Nav = ({ children }) => (
-  <NavWrapper>
+const Nav = ({ children, disabled }) => (
+  <NavWrapper
+    aria-label={
+      disabled ? 'Connect a social account to explore the tabs' : undefined
+    }
+    aria-disabled={disabled}
+  >
     <NavList>{children}</NavList>
   </NavWrapper>
 );
 
 Nav.propTypes = {
   children: PropTypes.node.isRequired,
+  disabled: PropTypes.bool,
+};
+
+Nav.defaultProps = {
+  disabled: false,
 };
 
 export default Nav;
