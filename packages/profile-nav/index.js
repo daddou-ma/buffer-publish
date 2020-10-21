@@ -1,29 +1,18 @@
 import { connect } from 'react-redux';
-import {
-  getParams,
-  profileTabPages,
-  plansPage,
-} from '@bufferapp/publish-routes';
+import { plansPage } from '@bufferapp/publish-routes';
 import TabNavigation from './components/TabNavigation';
 
 // default export = container
 export default connect(
   state => {
-    const params = getParams({
-      pathname: state.router.location.pathname,
-      route: profileTabPages.route,
-    });
-
-    const { tabId } = params || {};
-
     return {
       profileNavTabs: state.profileNav.profileNavTabs,
       profileId: state.profileSidebar.selectedProfile.id,
       showNestedAnalyticsTab:
-        tabId === 'analytics' &&
+        state.profileNav.selectedTabId === 'analytics' &&
         !state.profileSidebar.selectedProfile.isLockedProfile,
       showNestedSettingsTab:
-        tabId === 'settings' &&
+        state.profileNav.selectedTabId === 'settings' &&
         !state.profileSidebar.selectedProfile.isLockedProfile,
       showUpgradeButton: state.organizations.selected?.shouldShowUpgradeButton,
       showReconnectButton:
