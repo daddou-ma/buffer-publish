@@ -5,7 +5,6 @@ import { formatPostLists } from '@bufferapp/publish-queue/util';
 import {
   campaignEdit,
   campaignScheduled,
-  campaignSent,
   campaignCreate,
 } from '@bufferapp/publish-routes';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
@@ -35,7 +34,8 @@ export default connect(
       page: state.campaign.page,
       hasCampaignsFlip: state.organizations.selected?.hasCampaignsFeature,
       hasAnalyticsOnPosts: state.organizations.selected?.hasAnalyticsOnPosts,
-      hasTwitterImpressions: state.organizations.selected?.hasTwitterImpressions,
+      hasTwitterImpressions:
+        state.organizations.selected?.hasTwitterImpressions,
     };
   },
 
@@ -71,14 +71,6 @@ export default connect(
               from: ownProps.history.location.pathname,
             })
           );
-        }
-      },
-      onTabClick: ({ tabId, campaignId }) => {
-        if (tabId === 'scheduled') {
-          dispatch(campaignScheduled.goTo({ campaignId }));
-        }
-        if (tabId === 'sent') {
-          dispatch(campaignSent.goTo({ campaignId }));
         }
       },
       fetchCampaign: ({ campaignId, past }) => {
