@@ -90,10 +90,10 @@
     "text": "Are you sure you want to close the composer? You will lose any unsaved changes."
   },
   "default-page": {
-    "connectButton": "Connect Your Social Accounts",
+    "connectButton": "Connect Your Channels",
     "defaultTitle": "Let's get your account set up!",
     "permissionTitle": "You’ve joined {{name}}, but something’s missing...",
-    "permissionSubtitle": "It looks like you haven’t been given access to any of your organization’s social accounts. Request access from {{email}} or any other Admin.",
+    "permissionSubtitle": "It looks like you haven’t been given access to any of your organization’s channels. Request access from {{email}} or any other Admin.",
     "permissionCta": "Learn More About Permissions"
   },
   "example": {
