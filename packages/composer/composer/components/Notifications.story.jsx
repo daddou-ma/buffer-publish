@@ -13,7 +13,7 @@ const TWITTER_MAX_PROFILES = {
   cta: null,
   id: '5gxzbc',
   message:
-    'Due to recent changes with Twitter, you\'re only able to post to one Twitter profile at a time, so <b>you are only posting to @otter_es</b>. <a href="https://support.buffer.com/hc/en-us/articles/360037727174-Limitations-with-sharing-duplicate-content-on-Twitter" target="_blank">Learn more about the changes</a>.',
+    'Due to recent changes with Twitter, you\'re only able to post to one Twitter account at a time, so <b>you are only posting to @otter_es</b>. <a href="https://support.buffer.com/hc/en-us/articles/360037727174-Limitations-with-sharing-duplicate-content-on-Twitter" target="_blank">Learn more about the changes</a>.',
   showCloseIcon: true,
   showSoftAndHardCloseOptions: true,
   type: 'INFO',

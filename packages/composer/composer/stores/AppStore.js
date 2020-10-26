@@ -502,8 +502,8 @@ const selectProfile = (
       if (!state.appState.wasTwitterMaxOneProfileSelectedNotifClosedOnce) {
         const notifScope = NotificationScopes.TWITTER_MAX_ONE_PROFILE_SELECTED;
         const notifMessage = originatedFromGroupSelection
-          ? `Due to <a href="https://support.buffer.com/hc/en-us/articles/360037727174-Limitations-with-sharing-duplicate-content-on-Twitter" target="_blank">recent changes with Twitter</a>, you're only able to post to one Twitter profile at a time. <b>So we've only selected ${profile.service.formattedUsername} Twitter profile from your group. <a href="/app/edit_groups" target="_blank">Click here to edit your group.</a></b>`
-          : `Due to recent changes with Twitter, you're only able to post to one Twitter profile at a time, so <b>you are only posting to ${profile.service.formattedUsername}</b>. <a href="https://support.buffer.com/hc/en-us/articles/360037727174-Limitations-with-sharing-duplicate-content-on-Twitter" target="_blank">Learn more about the changes</a>.`;
+          ? `Due to <a href="https://support.buffer.com/hc/en-us/articles/360037727174-Limitations-with-sharing-duplicate-content-on-Twitter" target="_blank">recent changes with Twitter</a>, you're only able to post to one Twitter account at a time. <b>So we've only selected ${profile.service.formattedUsername} Twitter account from your group. <a href="/app/edit_groups" target="_blank">Click here to edit your group.</a></b>`
+          : `Due to recent changes with Twitter, you're only able to post to one Twitter account at a time, so <b>you are only posting to ${profile.service.formattedUsername}</b>. <a href="https://support.buffer.com/hc/en-us/articles/360037727174-Limitations-with-sharing-duplicate-content-on-Twitter" target="_blank">Learn more about the changes</a>.`;
 
         NotificationActionCreators.removeAllNotificationsByScope(notifScope);
         NotificationActionCreators.queueInfo({
