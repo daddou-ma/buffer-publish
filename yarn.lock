@@ -1472,6 +1472,9 @@
     moment-timezone "^0.5.25"
     react-highcharts "^16.0.2"
 
+"@bufferapp/app-shell@../app-shell":
+  version "1.0.0-alpha.0"
+
 "@bufferapp/async-data-fetch@0.5.36-beta01":
   version "0.5.36-beta01"
   resolved "https://registry.yarnpkg.com/@bufferapp/async-data-fetch/-/async-data-fetch-0.5.36-beta01.tgz#684504ddc303577c42b0ba350d854990d6bd1ad1"

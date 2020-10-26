@@ -1,3 +1,4 @@
+const path = require('path');
 const fs = require('fs');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
@@ -60,6 +61,8 @@ const merged = merge.strategy({
   resolve: {
     alias: {
       'react-dom': '@hot-loader/react-dom',
+      'styled-components': path.resolve('./node_modules/styled-components'),
+      react: path.resolve('./node_modules/react'),
     },
   },
 });
