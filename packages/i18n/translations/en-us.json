@@ -499,7 +499,7 @@
     "businessDescriptors": {
       "buttonText": "Subscribe to Small Business Plan",
       "left": {
-        "businessConnect": "Connect 25 social accounts",
+        "businessConnect": "Connect 25 social channels",
         "businessPosts": "Schedule 2,000 posts",
         "businessUsers": "Collaborate with 6 users"
       },
@@ -521,15 +521,15 @@
     "enterPaymentDetails": "Enter your payment details securely",
     "expirationMonth": "Expiration month",
     "expirationYear": "Expiration year",
-    "freeConnect": "Connect up to three social accounts",
+    "freeConnect": "Connect up to three social channels",
     "freePlan": "Free Plan",
     "freePostHistory": "No post history",
-    "freeSchedule": "Schedule up to 10 posts per account",
+    "freeSchedule": "Schedule up to 10 posts per social channel",
     "nameOnCard": "Name on card",
     "premiumDescriptors": {
       "buttonText": "Subscribe to Premium Plan",
       "left": {
-        "connect": "Connect 8 social accounts",
+        "connect": "Connect 8 social channels",
         "posts": "Schedule 2,000 posts",
         "users": "Collaborate with 2 users"
       },
@@ -548,12 +548,12 @@
     },
     "premiumSwitchHeader": "Switch to the Premium Plan!",
     "proCalendarView": "Get a calendar view of your publishing schedule",
-    "proConnect": "Connect up to eight social accounts including Pinterest",
+    "proConnect": "Connect up to eight social channels including Pinterest",
     "proDescriptors": {
       "buttonText": "Subscribe to Pro Plan",
       "left": {
         "calendar": "Get a calendar view of your publishing schedule",
-        "connect": "Connect 8 social accounts",
+        "connect": "Connect 8 social channels",
         "users": "1 user"
       },
       "nonprofitMonthlyPrice": "$7.50 per month",
@@ -577,19 +577,19 @@
     "proPlanMonthlyPrice": "$15 per month",
     "proPlanNonprofitMonthlyPrice": "$7.50 per month",
     "proPlanNonprofitYearlyPrice": "$72 per year",
-    "proPlanScheduling": "Schedule 100 posts per social account",
+    "proPlanScheduling": "Schedule 100 posts per social channel",
     "proPlanYearlyDescription": "Save 20% vs paying monthly",
     "proPlanYearlyPrice": "$144 per year",
     "proReviewHistory": "Review a 30-day history of your posts",
-    "proSchedule": "Schedule up to 100 posts per account",
-    "proTrialistSubCopy": "The Pro plan includes up to 8 social accounts, custom thumbnails for Instagram videos, Instagram first comment and more.",
+    "proSchedule": "Schedule up to 100 posts per social channel",
+    "proTrialistSubCopy": "The Pro plan includes up to 8 social channels, custom thumbnails for Instagram videos, Instagram first comment and more.",
     "proTrialistUpgradeHeader": "Complete your trial and upgrade to the Pro Plan!",
     "proUpgradeHeader": "Upgrade to the Pro Plan!",
     "securityCode": "Security code",
     "soloPremiumDescriptors": {
       "buttonText": "Subscribe to Premium Plan",
       "left": {
-        "connect": "Connect 8 social accounts",
+        "connect": "Connect 8 social channels",
         "posts": "Schedule 2,000 posts",
         "users": "1 user"
       },
