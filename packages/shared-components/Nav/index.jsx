@@ -17,9 +17,7 @@ const NavWrapper = styled.nav`
 
 const Nav = ({ children, disabled }) => (
   <NavWrapper
-    aria-label={
-      disabled ? 'Connect a social account to explore the tabs' : undefined
-    }
+    aria-label={disabled ? 'Connect a channel to explore the tabs' : undefined}
     aria-disabled={disabled}
   >
     <NavList>{children}</NavList>

@@ -18,7 +18,7 @@ const getNotificationCopy = (service, isInstagramBusiness) => {
   if (service === 'instagram' && !isInstagramBusiness) {
     return (
       <div>
-        Please convert your Instagram profile from a personal to Business
+        Please convert your Instagram account from a personal to business
         account to get advanced analytics.&nbsp;
         <Link
           href={
@@ -32,12 +32,12 @@ const getNotificationCopy = (service, isInstagramBusiness) => {
       </div>
     );
   }
-  return 'We only support Facebook, Instagram, & Twitter profiles in our analytics right now.';
+  return 'We only support Facebook, Instagram, & Twitter accounts in our analytics right now.';
 };
 
 const getTitleCopy = (service, isInstagramBusiness) => {
   if (service === 'instagram' && !isInstagramBusiness) {
-    return 'Instagram advanced analytics are only available on Instagram Business profiles';
+    return 'Instagram advanced analytics are only available on Instagram business accounts';
   }
   return "Sorry we don't support this network in our Analytics";
 };

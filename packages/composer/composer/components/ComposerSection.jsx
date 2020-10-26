@@ -144,8 +144,8 @@ class ComposerSection extends React.Component {
         {!hasEnabledDrafts && (
           <div className={styles.emptyState}>
             {composersHaveBeenExpanded
-              ? 'Your work has been saved. Please select a social account above to continue.'
-              : 'Please select a social account above to continue.'}
+              ? 'Your work has been saved. Please select a channel above to continue.'
+              : 'Please select a channel above to continue.'}
           </div>
         )}
 

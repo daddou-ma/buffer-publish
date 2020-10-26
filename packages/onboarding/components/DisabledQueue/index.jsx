@@ -122,7 +122,7 @@ const DisabledQueue = ({
           </NavLink>
           <TabWrapper>
             <Tooltip
-              label="Connect a social account to explore this tab"
+              label="Connect a channel to explore this tab"
               position="bottom"
             >
               <NavLink disabled>{translations.analyticsTab}</NavLink>
@@ -130,7 +130,7 @@ const DisabledQueue = ({
           </TabWrapper>
           <TabWrapper>
             <Tooltip
-              label="Connect a social account to explore this tab"
+              label="Connect a channel to explore this tab"
               position="bottom"
             >
               <NavLink disabled>{translations.awaitingTab}</NavLink>
@@ -138,7 +138,7 @@ const DisabledQueue = ({
           </TabWrapper>
           <TabWrapper>
             <Tooltip
-              label="Connect a social account to explore this tab"
+              label="Connect a channel to explore this tab"
               position="bottom"
             >
               <NavLink disabled>{translations.draftsTab}</NavLink>
@@ -146,7 +146,7 @@ const DisabledQueue = ({
           </TabWrapper>
           <TabWrapper>
             <Tooltip
-              label="Connect a social account to explore this tab"
+              label="Connect a channel to explore this tab"
               position="bottom"
             >
               <NavLink disabled>{translations.settingsTab}</NavLink>
@@ -158,7 +158,7 @@ const DisabledQueue = ({
         <TopBarContainer>
           <ComposerWrapper>
             <Tooltip
-              label="Connect a social account to start sharing content"
+              label="Connect a channel to start sharing content"
               position="bottom"
             >
               <ComposerInput
@@ -177,7 +177,7 @@ const DisabledQueue = ({
           </HeaderText>
           <div style={{ marginLeft: 'auto' }}>
             <Tooltip
-              label="Connect a social account to see calendar views of your posts"
+              label="Connect a channel to see calendar views of your posts"
               position="top"
             >
               <QueueButtonGroup

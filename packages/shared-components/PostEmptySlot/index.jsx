@@ -90,7 +90,7 @@ const HoverMessage = ({ service, customHoverMessage }) => {
 
   if (service === 'noProfile') {
     return (
-      <Message message="Connect a social account to schedule posts to your queue" />
+      <Message message="Connect a channel to schedule posts to your queue" />
     );
   }
 
