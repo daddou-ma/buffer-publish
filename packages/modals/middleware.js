@@ -11,7 +11,6 @@ import {
   shouldShowSwitchPlanModal,
   getSourceFromKey,
   shouldShowStealProfileModal,
-  shouldShowWelcomeModalPaidUsers,
   getShowModalValue,
   shouldShowInstagramFirstCommentModal,
 } from './util/showModal';
@@ -55,11 +54,6 @@ export default ({ dispatch, getState }) => next => action => {
             stealProfileUsername: getShowModalValue(),
           })
         );
-      }
-      if (shouldShowWelcomeModalPaidUsers()) {
-        dispatch(actions.showWelcomePaidModal());
-        // Don't overwhelm new users with lots of modals.
-        return;
       }
       if (shouldShowInstagramFirstCommentModal()) {
         dispatch(actions.showInstagramFirstCommentModal());
