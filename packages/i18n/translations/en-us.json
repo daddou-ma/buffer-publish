@@ -44,13 +44,13 @@
     "emptyState": {
       "createCampaign": "Create a Campaign",
       "imageTag": "Example of campaign with multiple posts scheduled.",
-      "item1": "Build entire campaigns across social channels.",
+      "item1": "Build entire campaigns across channels.",
       "item2": "See how they fit together in your schedule.",
       "item3": "Review campaign performance and hit your goals.",
       "learnMore": "Learn More",
       "subtext": "Keep track of multichannel campaigns and create a healthy mix of content on social media.",
       "title": "Get a clearer picture of your social media strategy",
-      "locked": "Your organization is currently on a plan that no longer supports team members, so these social channels are locked and Campaigns are not available. Please contact {{email}} about upgrading the plan.",
+      "locked": "Your organization is currently on a plan that no longer supports team members, so these channels are locked and Campaigns are not available. Please contact {{email}} about upgrading the plan.",
       "permission": "It looks like your organization doesn't have any campaigns yet, and only admin users can create them. Request access from {{email}} or any other Admin."
     },
     "viewCampaign": {
