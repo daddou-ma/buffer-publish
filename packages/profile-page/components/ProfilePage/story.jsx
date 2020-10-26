@@ -50,7 +50,7 @@ function createMockStore(profileList) {
     i18n: {
       translations: {
         'profile-sidebar': {
-          connectButton: 'Manage Social Accounts',
+          connectButton: 'Manage Channels',
         },
       },
     },
