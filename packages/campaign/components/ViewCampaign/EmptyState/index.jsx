@@ -38,36 +38,40 @@ const EmptyStateCampaign = ({
 
   return (
     <main id="main">
-      {displayEmptyCampaign && (
-        <EmptyCampaignWrapper>
-          <EmptyCampaignBanner onCreatePostClick={actions.onCreatePostClick} />
-          <ExamplePost />
-          <ExamplePost />
-        </EmptyCampaignWrapper>
-      )}
-      {displayEmptySentPosts && (
-        <EmptyState
-          height="100%"
-          title={t('campaigns.viewCampaign.emptySentPosts.title')}
-          subtitle={t('campaigns.viewCampaign.emptySentPosts.subtitle')}
-          heroImg="https://buffer-publish.s3.amazonaws.com/images/campaign-not-sent.png"
-        />
-      )}
-      {displayAllPostsSent && (
-        <EmptyState
-          height="100%"
-          title={t('campaigns.viewCampaign.allPostsSent.title')}
-          subtitle={t('campaigns.viewCampaign.allPostsSent.subtitle')}
-          heroImg="https://buffer-publish.s3.amazonaws.com/images/campaign-sent-1.png"
-          secondaryAction={{
-            label: t('campaigns.viewCampaign.allPostsSent.createPost'),
-            onClick: actions.onCreatePostClick,
-          }}
-          primaryAction={
-            hideAnalyzeReport ? teamMemberPrimaryAction : ownerPrimaryAction
-          }
-        />
-      )}
+      <EmptyCampaignWrapper>
+        {displayEmptyCampaign && (
+          <>
+            <EmptyCampaignBanner
+              onCreatePostClick={actions.onCreatePostClick}
+            />
+            <ExamplePost />
+            <ExamplePost />
+          </>
+        )}
+        {displayEmptySentPosts && (
+          <EmptyState
+            height="100%"
+            title={t('campaigns.viewCampaign.emptySentPosts.title')}
+            subtitle={t('campaigns.viewCampaign.emptySentPosts.subtitle')}
+            heroImg="https://buffer-publish.s3.amazonaws.com/images/campaign-not-sent.png"
+          />
+        )}
+        {displayAllPostsSent && (
+          <EmptyState
+            height="100%"
+            title={t('campaigns.viewCampaign.allPostsSent.title')}
+            subtitle={t('campaigns.viewCampaign.allPostsSent.subtitle')}
+            heroImg="https://buffer-publish.s3.amazonaws.com/images/campaign-sent-1.png"
+            secondaryAction={{
+              label: t('campaigns.viewCampaign.allPostsSent.createPost'),
+              onClick: actions.onCreatePostClick,
+            }}
+            primaryAction={
+              hideAnalyzeReport ? teamMemberPrimaryAction : ownerPrimaryAction
+            }
+          />
+        )}
+      </EmptyCampaignWrapper>
     </main>
   );
 };

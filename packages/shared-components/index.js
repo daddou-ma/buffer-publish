@@ -46,7 +46,5 @@ export {
 export Slider from './Slider';
 export StepList from './StepList';
 export StepNumber from './StepNumber';
-export Tab from './Tab';
-export Tabs from './Tabs';
 export UpdateTextContent from './UpdateTextContent';
 export UserDetails from './UserDetails';

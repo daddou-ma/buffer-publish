@@ -39,6 +39,10 @@ const NavRouteItem = styled(Link)`
   ${navItemStyles}
 `;
 
+const FakeItem = styled.span`
+  ${navItemStyles}
+`;
+
 const NavExternalItem = styled.a`
   ${navItemStyles}
 `;
@@ -51,26 +55,46 @@ const NavLink = ({
   secondary,
   href,
   hasSubMenu,
+  forceSelect,
+  testId,
 }) => {
   const match = useRouteMatch({
     path: to,
     exact: activeOnlyWhenExact,
   });
 
-  const NavItem = href && !to ? NavExternalItem : NavRouteItem;
-
-  return (
-    <NavItemWrapper selected={match}>
-      <NavItem
+  const NavItem = () => {
+    // NavItem opening external page
+    if (href && !to)
+      return (
+        <NavExternalItem $secondary={secondary} href={href}>
+          {children}
+        </NavExternalItem>
+      );
+    // Disabled/Fake NavItem, for disabled queue
+    if (disabled)
+      return (
+        <FakeItem selected={forceSelect} disabled={disabled}>
+          {children}
+        </FakeItem>
+      );
+    // Regular NavItem
+    return (
+      <NavRouteItem
         selected={match}
-        disabled={disabled}
         $secondary={secondary}
         to={to}
-        href={href}
         aria-haspopup={hasSubMenu ? true : undefined}
+        data-testid={testId}
       >
         {children}
-      </NavItem>
+      </NavRouteItem>
+    );
+  };
+
+  return (
+    <NavItemWrapper selected={forceSelect || match}>
+      <NavItem />
     </NavItemWrapper>
   );
 };
@@ -83,6 +107,8 @@ NavLink.propTypes = {
   secondary: PropTypes.bool,
   href: PropTypes.string,
   hasSubMenu: PropTypes.bool,
+  forceSelect: PropTypes.bool,
+  testId: PropTypes.string,
 };
 
 NavLink.defaultProps = {
@@ -92,6 +118,8 @@ NavLink.defaultProps = {
   disabled: false,
   secondary: false,
   hasSubMenu: false,
+  forceSelect: false,
+  testId: undefined,
 };
 
 export default NavLink;

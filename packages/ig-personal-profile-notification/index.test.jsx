@@ -22,9 +22,9 @@ describe('Instagram Personal Profile Notification', () => {
       profileSidebar: {
         selectedProfileId: '123',
       },
-      tabs: {
-        tabId: 'queue',
-      }
+      profileNav: {
+        selectedTabId: 'queue',
+      },
     });
     const wrapper = mount(
       <Provider store={store}>

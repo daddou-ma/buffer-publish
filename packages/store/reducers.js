@@ -1,6 +1,5 @@
 import { reducer as formReducer } from 'redux-form';
 
-import tabsReducer from '@bufferapp/publish-tabs/reducer';
 import queueReducer from '@bufferapp/publish-queue/reducer';
 import sentReducer from '@bufferapp/publish-sent/reducer';
 import gridReducer from '@bufferapp/publish-grid/reducer';
@@ -60,7 +59,6 @@ export default {
   stories: storiesReducer,
   pastReminders: pastRemindersReducer,
   i18n: i18nReducer,
-  tabs: tabsReducer,
   profileSidebar: profileSidebarReducer,
   clientAccess: clientAccessReducer,
   asyncDataFetch: asyncDataFetchReducer,

@@ -1,5 +1,7 @@
+import { LOCATION_CHANGE } from 'connected-react-router';
 import keyWrapper from '@bufferapp/keywrapper';
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
+import { getProfilesParams } from '@bufferapp/publish-routes';
 import generateProfileTabs from './utils';
 
 export const actionTypes = keyWrapper('PROFILE_NAV', {
@@ -10,6 +12,7 @@ export const initialState = {
   profileNavTabs: [],
   draftsNeedApprovalCount: 0,
   draftsCount: 0,
+  selectedTabId: null,
 };
 
 export default (state = initialState, action) => {
@@ -19,6 +22,15 @@ export default (state = initialState, action) => {
       return {
         ...state,
         profileNavTabs: generateProfileTabs({ profile, organization }),
+      };
+    }
+
+    case LOCATION_CHANGE: {
+      const { pathname } = action.payload.location || {};
+      const { tabId } = getProfilesParams({ pathname }) || {};
+      return {
+        ...state,
+        selectedTabId: tabId,
       };
     }
 

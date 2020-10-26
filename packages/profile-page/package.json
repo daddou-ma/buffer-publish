@@ -18,8 +18,7 @@
     "@bufferapp/publish-general-settings": "2.0.0",
     "@bufferapp/publish-posting-schedule": "2.0.0",
     "@bufferapp/publish-shared-components": "2.0.0",
-    "@bufferapp/publish-store": "2.0.0",
-    "@bufferapp/publish-tabs": "2.0.0"
+    "@bufferapp/publish-store": "2.0.0"
   },
   "devDependencies": {},
   "publishConfig": {

@@ -126,8 +126,8 @@ const campaignsListFields = async () => {
 };
 
 const campaignsQueueFields = async () => {
-  const scheduledLink = await screen.findByRole('link', { name: /scheduled/i });
-  const sentLink = await screen.findByRole('link', { name: /sent/i });
+  const scheduledLink = await screen.getByTestId('scheduled-tab');
+  const sentLink = await screen.getByTestId('sent-tab');
 
   return {
     scheduledLink,

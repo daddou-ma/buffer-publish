@@ -115,6 +115,7 @@ export const campaignScheduled = {
 
 export const campaignSent = {
   route: '/campaigns/:id/sent/',
+  getRoute: ({ campaignId }) => `/campaigns/${campaignId}/sent`,
   goTo: ({ campaignId }) => push(`/campaigns/${campaignId}/sent`),
 };
 

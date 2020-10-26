@@ -1,5 +1,6 @@
 import { actions as modalsActions } from '@bufferapp/publish-modals/reducer';
-import { openBillingWindow } from '@bufferapp/publish-tabs/utils';
+import { getURL } from '@bufferapp/publish-server/formatters/src';
+import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
 import { actionTypes } from './reducer';
 
 export default ({ getState, dispatch }) => next => action => {
@@ -24,7 +25,11 @@ export default ({ getState, dispatch }) => next => action => {
           })
         );
       } else if (organizations?.selected?.planBase === 'business') {
-        openBillingWindow();
+        window.location.assign(
+          `${getURL.getBillingURL({
+            cta: SEGMENT_NAMES.CTA_BANNER_BUSINESS_UPGRADE,
+          })}`
+        );
       } else {
         dispatch(
           modalsActions.showSwitchPlanModal({
