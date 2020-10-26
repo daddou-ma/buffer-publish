@@ -161,7 +161,7 @@ const PostingSchedule = ({
               <Text>
                 {paused
                   ? 'Your queue has been paused! '
-                  : 'Stop all posts from being sent on this Social Account? '}
+                  : 'Stop all posts from being sent on this channel? '}
                 <Link
                   newTab
                   href="https://support.buffer.com/hc/en-us/articles/360037966374-Pausing-your-Queue"
