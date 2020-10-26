@@ -416,11 +416,11 @@
   "profiles-disconnected-banner": {
     "body": "Please make sure that you're logged into this account on the same network, and we'll get you back in business in no time!",
     "permissionBody": "Reach out to {{email}} or any other Admin.",
-    "cta": "Reconnect Account",
+    "cta": "Reconnect Channel",
     "extraMessage": {
-      "instagram": "Due to recent changes to the Instagram API, your personal Instagram profiles will need to be reconnected."
+      "instagram": "Due to recent changes to the Instagram API, your personal Instagram account will need to be reconnected."
     },
-    "headline": "Uh-oh, we've lost access to this account! Let's reconnect."
+    "headline": "Uh-oh, we've lost access to this channel! Let's reconnect."
   },
   "retiring-profile-banner": {
     "title": "From October 2020, we will no longer be able to support Instagram accounts where direct scheduling is not enabled.",
