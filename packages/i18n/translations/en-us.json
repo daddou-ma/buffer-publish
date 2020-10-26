@@ -428,13 +428,13 @@
     "action": "Follow our guide here"
   },
   "profiles-disconnected-modal": {
-    "body1": "We’ve lost access to the following social accounts, in order for us to resume posting to these accounts you will need to reconnect them.",
-    "body2": "Note: You’ll need to be logged in to the same account on the network to successfully reconnect your social account.",
+    "body1": "We’ve lost access to the following channels, in order for us to resume posting to these channels you will need to reconnect them.",
+    "body2": "Note: You’ll need to be logged in to the correct account on the network to successfully reconnect a channel.",
     "cta": "Reconnect",
     "extraMessage": {
-      "instagram": "Due to recent changes to the Instagram API, your personal Instagram profiles will need to be reconnected."
+      "instagram": "Due to recent changes to the Instagram API, your personal Instagram accounts will need to be reconnected."
     },
-    "headline": "We’ve lost access to some of your social accounts",
+    "headline": "We’ve lost access to some of your channels",
     "reconnecting": "Please wait..."
   },
   "steal-profile-modal": {
