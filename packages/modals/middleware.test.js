@@ -80,24 +80,6 @@ describe('middleware', () => {
       actions.showStealProfileModal({ stealProfileUsername: 'Test Profile' })
     );
   });
-  it('should show welcome modal to paid users', () => {
-    window._showModal = {
-      key: 'welcome-modal-2',
-    };
-    const next = jest.fn();
-    const dispatch = jest.fn();
-    const getState = () => ({
-      user: {
-        plan: 'pro',
-      },
-    });
-    const action = {
-      type: 'INIT_MODALS',
-    };
-    middleware({ dispatch, getState })(next)(action);
-    expect(next).toBeCalledWith(action);
-    expect(dispatch).toBeCalledWith(actions.showWelcomePaidModal());
-  });
 
   it('should show profiles disconnected modal when one or more is disconnected', () => {
     const next = jest.fn();

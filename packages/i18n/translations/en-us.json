@@ -642,31 +642,5 @@
     "rightHeaderSubtext": "Click anywhere on the photo to tag a public user.",
     "tooltip": "View profile",
     "usernameError": "Oops! User already tagged"
-  },
-  "welcome-paid-modal": {
-    "step1": {
-      "body1": "It's the same Buffer you’ve come to love – now simpler and faster, with ",
-      "body2": "advanced Instagram features to help you grow your reach.",
-      "cta": "Learn More",
-      "headline": "A Better Buffer Experience"
-    },
-    "step2": {
-      "altText": "Instagram Grid Shop with custom URLs",
-      "body": "Seamlessly transition your Instagram audience to your online store by linking your profile to a shoppable page, powered by your Instagram grid.",
-      "cta": "Continue",
-      "headline": "Turn Instagram Posts Into Sales"
-    },
-    "step3": {
-      "altText": "Hashtag Manager for Instagram",
-      "body": "Optimize your reach by including a first comment on Instagram posts. Insert custom saved hashtag groups with Hashtag Manager.",
-      "cta": "Continue",
-      "headline": "Include a First Comment with Saved Hashtags"
-    },
-    "step4": {
-      "altText": "You can go back to classic Buffer from the top menu",
-      "body": "Feeling nostalgic? Switch back to classic Buffer at any time.",
-      "cta": "Sounds Good",
-      "headline": "Switch Back at Any Time"
-    }
   }
 }

@@ -93,19 +93,6 @@ describe('Modals | reducer', () => {
         Object.assign(initialState, { showProfilesDisconnectedModal: false })
       );
     });
-    it('should show welcome paid modal', () => {
-      expect(reducer(initialState, actions.showWelcomePaidModal())).toEqual(
-        Object.assign(initialState, { showWelcomePaidModal: true })
-      );
-    });
-    it('should hide welcome paid modal', () => {
-      const stateWithVisibleModal = Object.assign(initialState, {
-        showWelcomePaidModal: true,
-      });
-      expect(
-        reducer(stateWithVisibleModal, actions.hideWelcomePaidModal())
-      ).toEqual(Object.assign(initialState, { showWelcomePaidModal: false }));
-    });
     it('should show instagram first comment start trial modal', () => {
       expect(
         reducer(
