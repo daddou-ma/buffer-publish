@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
-import { AppShell as BDSAppShell } from '@bufferapp/ui';
+import BDSAppShell from '@bufferapp/app-shell';
 import { Gear, Return, Plus, People } from '@bufferapp/ui/Icon';
 import { gray } from '@bufferapp/ui/style/colors';
 import { useTranslation } from 'react-i18next';
