@@ -11,7 +11,7 @@
     "@bufferapp/async-data-fetch": "2.0.0",
     "@bufferapp/publish-server": "2.0.0",
     "@bufferapp/publish-data-organizations": "2.0.0",
-    "@bufferapp/app-shell": "../app-shell"
+    "@bufferapp/app-shell": "1.0.0"
   },
   "devDependencies": {},
   "publishConfig": {
