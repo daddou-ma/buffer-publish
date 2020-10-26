@@ -438,14 +438,14 @@
     "reconnecting": "Please wait..."
   },
   "steal-profile-modal": {
-    "body1": "Each social account can be tied to one Buffer account for security reasons. This Buffer account may be under a different email address that belongs to your organisation.",
+    "body1": "Each channel can be tied to one Buffer account for security reasons. This Buffer account may be under a different email address that belongs to your organisation.",
     "body2": "For us to connect",
     "body3": "to your",
     "body4": "Buffer account, it needs to be removed from the other account first.",
     "getInTouch": "Get in touch",
     "headline1": "Whoops, ",
     "headline2": "is already connected to another Buffer account.",
-    "notSureWhere": "Not sure where your social account has been added already?",
+    "notSureWhere": "Not sure where your channel has been added already?",
     "takeMeBack": "Take Me Back to Buffer"
   },
   "story-group-composer": {
