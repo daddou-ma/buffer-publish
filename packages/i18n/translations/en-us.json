@@ -404,14 +404,14 @@
     }
   },
   "profile-sidebar": {
-    "connectButton": "Manage Social Accounts",
-    "socialAccounts": "Social accounts",
+    "connectButton": "Manage Channels",
+    "socialAccounts": "Channels",
     "connectInstagram": "Connect Instagram",
     "connectFacebook": "Connect Facebook",
     "connectTwitter": "Connect Twitter",
     "searchProfiles": "Search Profiles",
-    "noProfilesFound": "No Profiles Found",
-    "permissionSubtitle": "It looks like you haven’t been given permission to add/manage social accounts. Request access from {{email}} or any other Admin."
+    "noProfilesFound": "No Channels Found",
+    "permissionSubtitle": "It looks like you haven’t been given permission to add/manage channels. Request access from {{email}} or any other Admin."
   },
   "profiles-disconnected-banner": {
     "body": "Please make sure that you're logged into this account on the same network, and we'll get you back in business in no time!",
