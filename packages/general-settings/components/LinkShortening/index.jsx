@@ -82,10 +82,6 @@ const LinkShortening = ({
           of our link shorteners or connect your own bit.ly account and Buffer
           will make sure that your links are shortened whenever you post.
         </Text>
-        <Text type="p">
-          Please note that due to the specific spam filter LinkedIn uses, we do
-          not support buff.ly for LinkedIn and will default to bit.ly.
-        </Text>
       </div>
     </LinkShorteningWrapper>
   );
