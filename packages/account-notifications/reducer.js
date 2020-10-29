@@ -10,6 +10,7 @@ export const initialState = {
   queue: null,
   newsletter: null,
   milestones: null,
+  postFailure: null,
 };
 
 export default (state = initialState, action) => {

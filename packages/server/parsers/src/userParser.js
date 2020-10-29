@@ -32,6 +32,9 @@ module.exports = userData => ({
     milestonesNotifications: userData.email_notifications.includes(
       'milestonesNotifications'
     ),
+    postFailureNotifications: userData.email_notifications.includes(
+      'postFailureNotifications'
+    ),
   },
   hasOrgSwitcherFeature: userData.features.includes('org_switcher'),
   hasPublishBeta: userData.features.includes('new_publish_beta'),
