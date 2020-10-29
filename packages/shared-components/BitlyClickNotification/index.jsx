@@ -12,7 +12,7 @@ const BitlyNotification = ({ marginAfter }) => {
     <Notification
       type="info"
       title="Issue Reporting Clicks"
-      body="We’re aware of an issue regarding reported clicks from shortened links and are actively working to resolve the situation. Our sincere apologies for this inconvenience!"
+      body="We are aware of an issue with missing click counts from shortened-links. However, there's good news! We are currently working on a permanent solution and hope to have it available in the next couple of months."
     />
   );
   return marginAfter ? (

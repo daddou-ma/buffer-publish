@@ -1,5 +1,4 @@
 import { getURL } from '@bufferapp/publish-server/formatters/src';
-import { actions as tabsActions } from '@bufferapp/publish-tabs/reducer';
 
 import {
   actionTypes as dataFetchActionTypes,
@@ -25,11 +24,9 @@ export default ({ dispatch, getState }) => next => action => {
     case actionTypes.PROFILE_ROUTE_LOADED: {
       const { selectedProfile = {} } = action;
       let profile = selectedProfile;
-      let profileFound = true;
 
       // force user redirection to valid profile if none exists
       if (!profile || !profile.id) {
-        profileFound = false;
         const { profileSidebar = {} } = getState();
         const { profiles } = profileSidebar;
         if (profiles && profiles.length > 0) {
@@ -42,19 +39,18 @@ export default ({ dispatch, getState }) => next => action => {
           profile,
         })
       );
-      // When the page has just loaded or is refreshed,
-      // we want to be able to update the actual selected tab
-      if (
-        (action.tabId && getState().tabs.tabId !== action.tabId) ||
-        !profileFound
-      ) {
-        dispatch(
-          tabsActions.selectTab({
-            tabId: action.tabId,
-            profileId: profile.id,
-          })
-        );
-      }
+      break;
+    }
+
+    case actionTypes.SELECT_PROFILE: {
+      dispatch(
+        dataFetchActions.fetch({
+          name: 'getCounts',
+          args: {
+            profileId: action.profile.id,
+          },
+        })
+      );
       break;
     }
 

@@ -19,15 +19,15 @@ const Tag = styled.span`
   background-color: ${({ type }) => (type === 'counter' ? grayLight : green)};
 `;
 
-const TabTag = ({ type, labelName }) => <Tag type={type}>{labelName}</Tag>;
+const NavTag = ({ type, labelName }) => <Tag type={type}>{labelName}</Tag>;
 
-TabTag.propTypes = {
+NavTag.propTypes = {
   type: PropTypes.oneOf(['counter', 'new']).isRequired,
   labelName: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
-TabTag.defaultProps = {
+NavTag.defaultProps = {
   labelName: 'New',
 };
 
-export default TabTag;
+export default NavTag;

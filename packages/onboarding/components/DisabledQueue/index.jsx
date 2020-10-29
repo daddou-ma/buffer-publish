@@ -6,8 +6,8 @@ import { Text, Tooltip } from '@bufferapp/ui';
 import { white, grayDark } from '@bufferapp/ui/style/colors';
 import { fontSize, fontWeight } from '@bufferapp/ui/style/fonts';
 import {
-  Tabs,
-  Tab,
+  Nav,
+  NavLink,
   QueueButtonGroup,
   PostEmptySlot,
   ComposerInput,
@@ -115,56 +115,50 @@ const DisabledQueue = ({
       />
     </ProfileSidebarWrapper>
     <Content>
-      <TabsWrapper id="tabs">
-        <Tabs selectedTabId="disabledTab" onTabClick={() => {}}>
-          <Tab tabId="disabledTab">{translations.queueTab}</Tab>
+      <TabsWrapper>
+        <Nav disabled>
+          <NavLink forceSelect disabled>
+            {translations.queueTab}
+          </NavLink>
           <TabWrapper>
             <Tooltip
-              label="Connect a social account to explore this tab"
+              label="Connect a channel to explore this tab"
               position="bottom"
             >
-              <Tab tabId="disabledTab2" disabled>
-                {translations.analyticsTab}
-              </Tab>
+              <NavLink disabled>{translations.analyticsTab}</NavLink>
             </Tooltip>
           </TabWrapper>
           <TabWrapper>
             <Tooltip
-              label="Connect a social account to explore this tab"
+              label="Connect a channel to explore this tab"
               position="bottom"
             >
-              <Tab tabId="disabledTab3" disabled>
-                {translations.awaitingTab}
-              </Tab>
+              <NavLink disabled>{translations.awaitingTab}</NavLink>
             </Tooltip>
           </TabWrapper>
           <TabWrapper>
             <Tooltip
-              label="Connect a social account to explore this tab"
+              label="Connect a channel to explore this tab"
               position="bottom"
             >
-              <Tab tabId="disabledTab4" disabled>
-                {translations.draftsTab}
-              </Tab>
+              <NavLink disabled>{translations.draftsTab}</NavLink>
             </Tooltip>
           </TabWrapper>
           <TabWrapper>
             <Tooltip
-              label="Connect a social account to explore this tab"
+              label="Connect a channel to explore this tab"
               position="bottom"
             >
-              <Tab tabId="disabledTab5" disabled>
-                {translations.settingsTab}
-              </Tab>
+              <NavLink disabled>{translations.settingsTab}</NavLink>
             </Tooltip>
           </TabWrapper>
-        </Tabs>
+        </Nav>
       </TabsWrapper>
       <Queue>
         <TopBarContainer>
           <ComposerWrapper>
             <Tooltip
-              label="Connect a social account to start sharing content"
+              label="Connect a channel to start sharing content"
               position="bottom"
             >
               <ComposerInput
@@ -183,7 +177,7 @@ const DisabledQueue = ({
           </HeaderText>
           <div style={{ marginLeft: 'auto' }}>
             <Tooltip
-              label="Connect a social account to see calendar views of your posts"
+              label="Connect a channel to see calendar views of your posts"
               position="top"
             >
               <QueueButtonGroup

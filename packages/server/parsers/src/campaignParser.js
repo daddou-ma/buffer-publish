@@ -115,7 +115,6 @@ const parseChannels = channels => {
       serviceAvatar: channel.service_avatar,
       serviceUsername: channel.service_username,
       isManager: channel.is_manager,
-      business: channel.business,
       hasPushNotifications: channel.has_push_notifications,
     };
   });

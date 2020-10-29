@@ -7,7 +7,7 @@ import { actions } from './reducer';
 
 export default connect(
   state => ({
-    profileLimit: state.user.profileLimit,
+    profileLimit: state.organizations.selected?.profileLimit,
     isOwner: state.organizations.selected?.isOwner,
     ownerEmail: state.organizations.selected?.ownerEmail,
     planBase: state.organizations.selected?.planBase,

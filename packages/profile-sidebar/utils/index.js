@@ -9,12 +9,8 @@ export const shouldGoToProfile = (profile, prevProps) => {
   );
 };
 
-export const filterProfilesByOrg = (
-  profiles,
-  organization,
-  isFeatureEnabled
-) => {
-  if (!isFeatureEnabled || !organization) {
+export const filterProfilesByOrg = (profiles, organization) => {
+  if (!organization) {
     return profiles;
   }
   return profiles?.filter(

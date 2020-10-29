@@ -1,4 +1,3 @@
-import { actionTypes as tabsActionTypes } from '@bufferapp/publish-tabs';
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 import { actionTypes } from './reducer';
 import middleware from './middleware';
@@ -32,7 +31,7 @@ describe('middleware', () => {
     expect(middleware).toBeDefined();
   });
 
-  it('should select a profile and a tab when PROFILE_ROUTE_LOADED', () => {
+  it('should select a profile and get count when PROFILE_ROUTE_LOADED', () => {
     const next = jest.fn();
     const dispatch = jest.fn();
     const action = {
@@ -51,16 +50,9 @@ describe('middleware', () => {
       profileId: 'id1',
     };
 
-    const selectTabAction = {
-      type: tabsActionTypes.SELECT_TAB,
-      tabId: 'queue',
-      profileId: 'id1',
-    };
-
     middleware({ dispatch, getState })(next)(action);
     expect(next).toBeCalledWith(action);
     expect(dispatch).toBeCalledWith(selectProfileAction);
-    expect(dispatch).toBeCalledWith(selectTabAction);
   });
 
   it('should redirect to a valid profile when PROFILE_ROUTE_LOADED doesnt find a match', () => {
@@ -81,16 +73,31 @@ describe('middleware', () => {
       profileId: '1234',
     };
 
-    const selectTabAction = {
-      type: tabsActionTypes.SELECT_TAB,
-      tabId: 'queue',
-      profileId: '1234',
+    middleware({ dispatch, getState })(next)(action);
+    expect(next).toBeCalledWith(action);
+    expect(dispatch).toBeCalledWith(selectProfileAction);
+  });
+
+  it('gets count when SELECT_PROFILE', () => {
+    const next = jest.fn();
+    const dispatch = jest.fn();
+    const action = {
+      type: actionTypes.SELECT_PROFILE,
+      profile: {
+        id: 'id',
+      },
     };
 
     middleware({ dispatch, getState })(next)(action);
     expect(next).toBeCalledWith(action);
-    expect(dispatch).toBeCalledWith(selectProfileAction);
-    expect(dispatch).toBeCalledWith(selectTabAction);
+    expect(dispatch).toBeCalledWith(
+      dataFetchActions.fetch({
+        name: 'getCounts',
+        args: {
+          profileId: 'id',
+        },
+      })
+    );
   });
 
   it('reorders profiles when PROFILE_DROPPED', () => {

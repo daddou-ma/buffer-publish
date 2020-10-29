@@ -38,7 +38,6 @@
     {
       "id": "563130de49318ffb41ee2f22",
       "imagesAvatar": "https://i.pinimg.com/avatars/cequibuzz_1331738379_75.jpg",
-      "isBusinessProfile": true,
       "isDisabled": false,
       "serviceFormattedUsername": "cequibuzz",
       "serviceName": "pinterest",
@@ -68,8 +67,6 @@
   ],
   "userData": {
     "id": "4f26d903512f7e4261000004",
-    "isBusinessUser": true,
-    "isFreeUser": false,
     "profileGroups": [
       {
         "id": "577d1354f97024eb448b4569",

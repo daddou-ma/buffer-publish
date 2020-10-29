@@ -142,13 +142,11 @@ const DataImportUtils = {
             : null,
         serviceType: importedProfile.service_type,
         serviceId: importedProfile.serviceId,
-        isBusinessProfile: importedProfile.business,
         isContributor:
           importedProfile.isContributor || importedProfile.is_contributor,
         isManager:
           importedProfile.isManager || importedProfile.organization_role === 1,
         instagramDirectEnabled: importedProfile.should_post_direct,
-        shouldShowGridPreview: importedProfile.shouldShowGridPreview,
         subprofiles,
         hasPushNotifications: importedProfile.hasPushNotifications,
         canPostComment: importedProfile.canPostComment,
@@ -165,8 +163,6 @@ const DataImportUtils = {
     let data = {};
 
     if (userData !== null) {
-      const hasFeature = (featureList, feature) =>
-        featureList && featureList.includes(feature);
       data = Object.assign(
         {
           id: userData.id,
@@ -183,13 +179,7 @@ const DataImportUtils = {
           },
           uses24hTime: userData.hasTwentyFourHourTimeFormat,
           weekStartsMonday: userData.week_starts_monday,
-          isFreeUser: userData.isFreeUser,
-          isBusinessUser: userData.isBusinessUser,
-          canStartProTrial: userData.canStartProTrial,
           shouldAlwaysSkipEmptyTextAlert: userData.skip_empty_text_alert,
-          hasShopgridFlip: hasFeature(userData.features, 'grid_preview'),
-          hasCampaignsFlip: userData.hasCampaignsFeature,
-          hasUserTagFeature: userData.hasUserTagFeature,
           profileGroups: userData.profile_groups
             ? userData.profile_groups.map(group => ({
                 name: group.name,

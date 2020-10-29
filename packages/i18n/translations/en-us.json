@@ -44,12 +44,13 @@
     "emptyState": {
       "createCampaign": "Create a Campaign",
       "imageTag": "Example of campaign with multiple posts scheduled.",
-      "item1": "Build entire campaigns across social channels.",
+      "item1": "Build entire campaigns across channels.",
       "item2": "See how they fit together in your schedule.",
       "item3": "Review campaign performance and hit your goals.",
       "learnMore": "Learn More",
       "subtext": "Keep track of multichannel campaigns and create a healthy mix of content on social media.",
       "title": "Get a clearer picture of your social media strategy",
+      "locked": "Your organization is currently on a plan that no longer supports team members, so these channels are locked and Campaigns are not available. Please contact {{email}} about upgrading the plan.",
       "permission": "It looks like your organization doesn't have any campaigns yet, and only admin users can create them. Request access from {{email}} or any other Admin."
     },
     "viewCampaign": {
@@ -89,10 +90,10 @@
     "text": "Are you sure you want to close the composer? You will lose any unsaved changes."
   },
   "default-page": {
-    "connectButton": "Connect Your Social Accounts",
+    "connectButton": "Connect Your Channels",
     "defaultTitle": "Let's get your account set up!",
     "permissionTitle": "You’ve joined {{name}}, but something’s missing...",
-    "permissionSubtitle": "It looks like you haven’t been given access to any of your organization’s social accounts. Request access from {{email}} or any other Admin.",
+    "permissionSubtitle": "It looks like you haven’t been given access to any of your organization’s channels. Request access from {{email}} or any other Admin.",
     "permissionCta": "Learn More About Permissions"
   },
   "example": {
@@ -129,7 +130,7 @@
     "imageAlt": "Publish your first comment directly to Instagram",
     "proTrialFeatures": {
       "connectAccounts": "Connect up to",
-      "connectAccountsBold": " 8 social accounts",
+      "connectAccountsBold": " 8 social channels",
       "firstComment": "Schedule first comments on Instagram posts",
       "integrations": "Utilize",
       "integrations2": " to connect with Zapier, IFTTT, Quuu, Pocket, Feedly, and more.",
@@ -137,7 +138,7 @@
       "report": "Optimize your content with a",
       "reportBold": " 30-day posting report",
       "schedulePosts": "Schedule up to",
-      "schedulePosts2": " per social account",
+      "schedulePosts2": " per social channel",
       "schedulePostsBold": " 100 posts",
       "support": "Access fast, helpful email and social media",
       "supportBold": " support"
@@ -145,9 +146,12 @@
   },
   "instagram-personal-profile-notification": {
     "title": "Please enable direct scheduling to continue using Buffer with this Instagram account.",
-    "body": "If you have a personal profile, you’ll need to convert it to a business account and enable direct scheduling. If you already have a business account, please enable direct scheduling to keep it connected to Buffer. If you don't enable direct scheduling this account will no longer appear in your dashboard. There’s no extra cost and it should only take a few minutes.",
+    "body": "If you have a personal Instagram account, you’ll need to convert it to a business account and enable direct scheduling. If you already have a business account, please enable direct scheduling to keep it connected to Buffer. If you don't enable direct scheduling this account will no longer appear in your dashboard. There’s no extra cost and it should only take a few minutes.",
     "buttonLabel": "Enable Direct Scheduling",
-    "linkText": "Follow our guide to get started.",
+    "linkText1": "Follow our guide",
+    "linkText2": "check out this step-by-step video",
+    "endText1": " or ",
+    "endText2": " to get started.",
     "altText": "Person measuring Instagram post analytics"
   },
   "language": "Language",
@@ -156,14 +160,14 @@
     "awaitingTab": "Awaiting Approval",
     "company": "Foster Coffee Company",
     "composerInput": "What would you like to share?",
-    "connectButton": "Manage Social Accounts",
+    "connectButton": "Manage Channels",
     "cta1": "You can also connect your",
     "cta2": "and",
     "cta3": "accounts.",
     "ctaChannel1": "Linkedin",
     "ctaChannel2": "Pinterest",
     "currentDay": "Today",
-    "description": "Connect a social account, so you can schedule your first post",
+    "description": "Connect a channel, so you can schedule your first post",
     "draftsTab": "Drafts",
     "name": "Justin Ozanich",
     "queueTab": "Queue",
@@ -190,7 +194,7 @@
         "Add unique links to Instagram posts, turning your grid into a shoppable page via a static link in bio."
       ],
       "features": [
-        "8 social accounts",
+        "8 social channels",
         "2 users",
         "Instagram Stories",
         "Instagram first comment",
@@ -219,7 +223,7 @@
         "Plan, preview, and schedule Instagram Stories on web and mobile."
       ],
       "features": [
-        "8 social accounts",
+        "8 social channels",
         "Instagram first comment",
         "Instagram user tagging",
         "Hashtag Manager",
@@ -245,7 +249,7 @@
         "Include first comment when you schedule Instagram posts"
       ],
       "features": [
-        "8 social accounts",
+        "8 social channels",
         "1 user",
         "Instagram first comment"
       ],
@@ -267,7 +271,7 @@
         "Tag Instagram users when you schedule Instagram posts"
       ],
       "features": [
-        "8 social accounts",
+        "8 social channels",
         "Instagram first comment",
         "Instagram user tagging"
       ],
@@ -288,7 +292,7 @@
       "buttonText": "Choose Plan",
       "cost": "$99",
       "features": [
-        "25 social accounts",
+        "25 social channels",
         "6 users",
         "Instagram Stories",
         "Instagram first comment",
@@ -326,7 +330,8 @@
     "returnToClassic": "Return to Classic",
     "startProTrial": "Start Pro Trial",
     "upgradetoPro": "Upgrade to Pro",
-    "helpCenter": "Help Center",
+    "helpCenter": "Visit Help Center",
+    "quickHelp": "Quick Help",
     "status": "Status",
     "pricingAndPlans": "Pricing & Plans",
     "wishlist": "Wishlist"
@@ -399,48 +404,48 @@
     }
   },
   "profile-sidebar": {
-    "connectButton": "Manage Social Accounts",
-    "socialAccounts": "Social accounts",
+    "connectButton": "Manage Channels",
+    "socialAccounts": "Channels",
     "connectInstagram": "Connect Instagram",
     "connectFacebook": "Connect Facebook",
     "connectTwitter": "Connect Twitter",
-    "searchProfiles": "Search Profiles",
-    "noProfilesFound": "No Profiles Found",
-    "permissionSubtitle": "It looks like you haven’t been given permission to add/manage social accounts. Request access from {{email}} or any other Admin."
+    "searchProfiles": "Search Channels",
+    "noProfilesFound": "No Channels Found",
+    "permissionSubtitle": "It looks like you haven’t been given permission to add/manage channels. Request access from {{email}} or any other Admin."
   },
   "profiles-disconnected-banner": {
     "body": "Please make sure that you're logged into this account on the same network, and we'll get you back in business in no time!",
     "permissionBody": "Reach out to {{email}} or any other Admin.",
-    "cta": "Reconnect Account",
+    "cta": "Reconnect Channel",
     "extraMessage": {
-      "instagram": "Due to recent changes to the Instagram API, your personal Instagram profiles will need to be reconnected."
+      "instagram": "Due to recent changes to the Instagram API, your personal Instagram account will need to be reconnected."
     },
-    "headline": "Uh-oh, we've lost access to this account! Let's reconnect."
+    "headline": "Uh-oh, we've lost access to this channel! Let's reconnect."
   },
   "retiring-profile-banner": {
     "title": "From October 2020, we will no longer be able to support Instagram accounts where direct scheduling is not enabled.",
-    "body": "Please note that starting in mid-September, your account will be locked until it is converted or removed. If you have a personal profile, you’ll need to convert it to a business account and enable direct scheduling. If you already have a business account, please enable direct scheduling to keep it connected to Buffer. There’s no extra cost and it should only take a few minutes.",
+    "body": "Please note that starting in mid-September, your account will be locked until it is converted or removed. If you have a personal Instagram account, you’ll need to convert it to a business account and enable direct scheduling. If you already have a business account, please enable direct scheduling to keep it connected to Buffer. There’s no extra cost and it should only take a few minutes.",
     "action": "Follow our guide here"
   },
   "profiles-disconnected-modal": {
-    "body1": "We’ve lost access to the following social accounts, in order for us to resume posting to these accounts you will need to reconnect them.",
-    "body2": "Note: You’ll need to be logged in to the same account on the network to successfully reconnect your social account.",
+    "body1": "We’ve lost access to the following channels, in order for us to resume posting to these channels you will need to reconnect them.",
+    "body2": "Note: You’ll need to be logged in to the correct account on the network to successfully reconnect a channel.",
     "cta": "Reconnect",
     "extraMessage": {
-      "instagram": "Due to recent changes to the Instagram API, your personal Instagram profiles will need to be reconnected."
+      "instagram": "Due to recent changes to the Instagram API, your personal Instagram accounts will need to be reconnected."
     },
-    "headline": "We’ve lost access to some of your social accounts",
+    "headline": "We’ve lost access to some of your channels",
     "reconnecting": "Please wait..."
   },
   "steal-profile-modal": {
-    "body1": "Each social account can be tied to one Buffer account for security reasons. This Buffer account may be under a different email address that belongs to your organisation.",
+    "body1": "Each channel can be tied to one Buffer account for security reasons. This Buffer account may be under a different email address that belongs to your organisation.",
     "body2": "For us to connect",
     "body3": "to your",
     "body4": "Buffer account, it needs to be removed from the other account first.",
     "getInTouch": "Get in touch",
     "headline1": "Whoops, ",
     "headline2": "is already connected to another Buffer account.",
-    "notSureWhere": "Not sure where your social account has been added already?",
+    "notSureWhere": "Not sure where your channel has been added already?",
     "takeMeBack": "Take Me Back to Buffer"
   },
   "story-group-composer": {
@@ -494,7 +499,7 @@
     "businessDescriptors": {
       "buttonText": "Subscribe to Small Business Plan",
       "left": {
-        "businessConnect": "Connect 25 social accounts",
+        "businessConnect": "Connect 25 social channels",
         "businessPosts": "Schedule 2,000 posts",
         "businessUsers": "Collaborate with 6 users"
       },
@@ -516,15 +521,15 @@
     "enterPaymentDetails": "Enter your payment details securely",
     "expirationMonth": "Expiration month",
     "expirationYear": "Expiration year",
-    "freeConnect": "Connect up to three social accounts",
+    "freeConnect": "Connect up to three social channels",
     "freePlan": "Free Plan",
     "freePostHistory": "No post history",
-    "freeSchedule": "Schedule up to 10 posts per account",
+    "freeSchedule": "Schedule up to 10 posts per social channel",
     "nameOnCard": "Name on card",
     "premiumDescriptors": {
       "buttonText": "Subscribe to Premium Plan",
       "left": {
-        "connect": "Connect 8 social accounts",
+        "connect": "Connect 8 social channels",
         "posts": "Schedule 2,000 posts",
         "users": "Collaborate with 2 users"
       },
@@ -543,12 +548,12 @@
     },
     "premiumSwitchHeader": "Switch to the Premium Plan!",
     "proCalendarView": "Get a calendar view of your publishing schedule",
-    "proConnect": "Connect up to eight social accounts including Pinterest",
+    "proConnect": "Connect up to eight social channels including Pinterest",
     "proDescriptors": {
       "buttonText": "Subscribe to Pro Plan",
       "left": {
         "calendar": "Get a calendar view of your publishing schedule",
-        "connect": "Connect 8 social accounts",
+        "connect": "Connect 8 social channels",
         "users": "1 user"
       },
       "nonprofitMonthlyPrice": "$7.50 per month",
@@ -572,19 +577,19 @@
     "proPlanMonthlyPrice": "$15 per month",
     "proPlanNonprofitMonthlyPrice": "$7.50 per month",
     "proPlanNonprofitYearlyPrice": "$72 per year",
-    "proPlanScheduling": "Schedule 100 posts per social account",
+    "proPlanScheduling": "Schedule 100 posts per social channel",
     "proPlanYearlyDescription": "Save 20% vs paying monthly",
     "proPlanYearlyPrice": "$144 per year",
     "proReviewHistory": "Review a 30-day history of your posts",
-    "proSchedule": "Schedule up to 100 posts per account",
-    "proTrialistSubCopy": "The Pro plan includes up to 8 social accounts, custom thumbnails for Instagram videos, Instagram first comment and more.",
+    "proSchedule": "Schedule up to 100 posts per social channel",
+    "proTrialistSubCopy": "The Pro plan includes up to 8 social channels, custom thumbnails for Instagram videos, Instagram first comment and more.",
     "proTrialistUpgradeHeader": "Complete your trial and upgrade to the Pro Plan!",
     "proUpgradeHeader": "Upgrade to the Pro Plan!",
     "securityCode": "Security code",
     "soloPremiumDescriptors": {
       "buttonText": "Subscribe to Premium Plan",
       "left": {
-        "connect": "Connect 8 social accounts",
+        "connect": "Connect 8 social channels",
         "posts": "Schedule 2,000 posts",
         "users": "1 user"
       },
@@ -637,31 +642,5 @@
     "rightHeaderSubtext": "Click anywhere on the photo to tag a public user.",
     "tooltip": "View profile",
     "usernameError": "Oops! User already tagged"
-  },
-  "welcome-paid-modal": {
-    "step1": {
-      "body1": "It's the same Buffer you’ve come to love – now simpler and faster, with ",
-      "body2": "advanced Instagram features to help you grow your reach.",
-      "cta": "Learn More",
-      "headline": "A Better Buffer Experience"
-    },
-    "step2": {
-      "altText": "Instagram Grid Shop with custom URLs",
-      "body": "Seamlessly transition your Instagram audience to your online store by linking your profile to a shoppable page, powered by your Instagram grid.",
-      "cta": "Continue",
-      "headline": "Turn Instagram Posts Into Sales"
-    },
-    "step3": {
-      "altText": "Hashtag Manager for Instagram",
-      "body": "Optimize your reach by including a first comment on Instagram posts. Insert custom saved hashtag groups with Hashtag Manager.",
-      "cta": "Continue",
-      "headline": "Include a First Comment with Saved Hashtags"
-    },
-    "step4": {
-      "altText": "You can go back to classic Buffer from the top menu",
-      "body": "Feeling nostalgic? Switch back to classic Buffer at any time.",
-      "cta": "Sounds Good",
-      "headline": "Switch Back at Any Time"
-    }
   }
 }

@@ -12,14 +12,13 @@ import PastReminders from '@bufferapp/publish-past-reminders';
 import DraftList from '@bufferapp/publish-drafts';
 import PostingSchedule from '@bufferapp/publish-posting-schedule';
 import GeneralSettings from '@bufferapp/publish-general-settings';
-import TabNavigation from '@bufferapp/publish-tabs';
+import TabNavigation from '@bufferapp/publish-profile-nav';
 import Analytics from '@bufferapp/publish-analytics';
 import {
   ScrollableContainer,
   BufferLoading,
 } from '@bufferapp/publish-shared-components';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
-import { getValidTab } from '@bufferapp/publish-tabs/utils';
 import PageWithSidebarWrapper from '@bufferapp/publish-app-pages/components/PageWithSidebarWrapper';
 
 const ErrorBoundary = getErrorBoundary(true);
@@ -34,79 +33,18 @@ const Main = styled.main`
   height: 100%;
 `;
 
-/**
- * Verifies if the user can access to the current tabId
- * and changes the tab only if validTabId is different from current tabId
- *
- * @param tabId
- * @param profileId
- * @param selectedProfile
- * @param onChangeTab method to change tab
- */
-const verifyTab = (
-  tabId,
-  profileId,
-  selectedProfile,
-  onChangeTab,
-  childTabId,
-  hasApprovalFeature,
-  hasDraftsFeature,
-  hasGridFeature,
-  hasStoriesFeature,
-  isInstagramProfile,
-  isManager,
-  shouldHideAdvancedAnalytics
-) => {
-  if (selectedProfile) {
-    const validTabId = getValidTab(
-      childTabId,
-      tabId,
-      hasApprovalFeature,
-      hasDraftsFeature,
-      hasGridFeature,
-      hasStoriesFeature,
-      isInstagramProfile,
-      isManager,
-      shouldHideAdvancedAnalytics
-    );
-
-    // if current tabId is not valid, redirect to the queue
-    if (tabId !== validTabId) {
-      onChangeTab(validTabId, profileId);
-    }
-  }
-};
-
 const TabContent = ({
   tabId,
   profileId,
   childTabId,
   loadMore,
-  selectedProfile,
-  hasApprovalFeature,
-  hasDraftsFeature,
-  hasGridFeature,
-  hasStoriesFeature,
-  isInstagramProfile,
-  isManager,
   onChangeTab,
-  shouldHideAdvancedAnalytics,
+  profileNavTabs,
 }) => {
   // if current tabId is not valid, redirect to the queue
-  verifyTab(
-    tabId,
-    profileId,
-    selectedProfile,
-    onChangeTab,
-    childTabId,
-    hasApprovalFeature,
-    hasDraftsFeature,
-    hasGridFeature,
-    hasStoriesFeature,
-    isInstagramProfile,
-    isManager,
-    shouldHideAdvancedAnalytics
-  );
+  if (profileNavTabs?.length > 0 && !profileNavTabs.includes(tabId)) {
+    onChangeTab({ profileId });
+  }
 
   switch (tabId) {
     case 'queue':
@@ -125,7 +63,6 @@ const TabContent = ({
       switch (childTabId) {
         case 'overview':
           return <Analytics profileId={profileId} />;
-        case 'posts':
         default:
           return (
             <SentPosts
@@ -137,11 +74,10 @@ const TabContent = ({
       }
     case 'settings':
       switch (childTabId) {
-        case 'posting-schedule':
+        case 'postingSchedule':
           return (
             <PostingSchedule profileId={profileId} childTabId={childTabId} />
           );
-        case 'general-settings':
         default:
           return (
             <ErrorBoundary>
@@ -160,23 +96,13 @@ TabContent.propTypes = {
   profileId: PropTypes.string.isRequired,
   onChangeTab: PropTypes.func.isRequired,
   loadMore: PropTypes.func.isRequired,
-  selectedProfile: PropTypes.shape({
-    service: PropTypes.string,
-    business: PropTypes.bool,
-    isManager: PropTypes.bool,
-  }).isRequired,
-  hasApprovalFeature: PropTypes.bool.isRequired,
-  hasDraftsFeature: PropTypes.bool.isRequired,
-  hasGridFeature: PropTypes.bool.isRequired,
-  hasStoriesFeature: PropTypes.bool.isRequired,
-  isManager: PropTypes.bool.isRequired,
-  isInstagramProfile: PropTypes.bool.isRequired,
-  shouldHideAdvancedAnalytics: PropTypes.bool.isRequired,
+  profileNavTabs: PropTypes.arrayOf(PropTypes.string),
 };
 
 TabContent.defaultProps = {
   tabId: '',
   childTabId: '',
+  profileNavTabs: [],
 };
 
 function ProfilePage({
@@ -187,15 +113,8 @@ function ProfilePage({
   loadingMore,
   moreToLoad,
   page,
-  selectedProfile,
   onChangeTab,
-  hasApprovalFeature,
-  hasDraftsFeature,
-  hasGridFeature,
-  hasStoriesFeature,
-  isInstagramProfile,
-  isManager,
-  shouldHideAdvancedAnalytics,
+  profileNavTabs,
 }) {
   const isQueueTab = tabId === 'queue' || tabId === 'stories';
   const isOtherPostsTab =
@@ -221,11 +140,7 @@ function ProfilePage({
 
   return (
     <PageWithSidebarWrapper profileId={profileId} tabId={tabId}>
-      <TabNavigation
-        profileId={profileId}
-        tabId={tabId}
-        childTabId={childTabId}
-      />
+      <TabNavigation />
       <ScrollableContainer
         profileId={profileId}
         tabId={tabId}
@@ -241,15 +156,8 @@ function ProfilePage({
             profileId={profileId}
             childTabId={childTabId}
             loadMore={onLoadMore}
-            selectedProfile={selectedProfile}
-            hasApprovalFeature={hasApprovalFeature}
-            hasDraftsFeature={hasDraftsFeature}
-            hasGridFeature={hasGridFeature}
-            hasStoriesFeature={hasStoriesFeature}
-            isInstagramProfile={isInstagramProfile}
-            isManager={isManager}
+            profileNavTabs={profileNavTabs}
             onChangeTab={onChangeTab}
-            shouldHideAdvancedAnalytics={shouldHideAdvancedAnalytics}
           />
           {loadingMore && (
             <div style={loadingAnimationStyle}>
@@ -275,18 +183,7 @@ ProfilePage.propTypes = {
   moreToLoad: PropTypes.bool,
   page: PropTypes.number,
   onChangeTab: PropTypes.func,
-  selectedProfile: PropTypes.shape({
-    service: PropTypes.string,
-    business: PropTypes.bool,
-    isManager: PropTypes.bool,
-  }),
-  hasApprovalFeature: PropTypes.bool,
-  hasDraftsFeature: PropTypes.bool,
-  hasGridFeature: PropTypes.bool,
-  hasStoriesFeature: PropTypes.bool,
-  isManager: PropTypes.bool,
-  isInstagramProfile: PropTypes.bool,
-  shouldHideAdvancedAnalytics: PropTypes.bool,
+  profileNavTabs: PropTypes.arrayOf(PropTypes.string),
 };
 
 ProfilePage.defaultProps = {
@@ -294,14 +191,7 @@ ProfilePage.defaultProps = {
   moreToLoad: false,
   page: 1,
   onChangeTab: () => {},
-  selectedProfile: null,
-  hasApprovalFeature: false,
-  hasDraftsFeature: false,
-  hasGridFeature: false,
-  hasStoriesFeature: false,
-  isManager: false,
-  isInstagramProfile: false,
-  shouldHideAdvancedAnalytics: false,
+  profileNavTabs: [],
 };
 
 export default ProfilePage;

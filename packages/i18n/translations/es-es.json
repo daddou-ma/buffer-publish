@@ -315,6 +315,7 @@
     "startProTrial": "Empezar prueba Pro",
     "upgradetoPro": "Subscribir al plan Pro",
     "helpCenter": "Centro de Ayuda",
+    "quickHelp": "Ayuda Rápida",
     "status": "Estatus",
     "pricingAndPlans": "Precios & Planes",
     "wishlist": "Lista de Deseos"
@@ -626,37 +627,5 @@
     "rightHeaderSubtext": "Haz click donde quieras en la imagen para etiquetar un usuario público.",
     "tooltip": "Ver perfil",
     "usernameError": "Ups! Ya has etiquetado a ese usuario"
-  },
-  "welcome-modal": {
-    "body1": "¡Hemos mejorado el aspecto del dashboard de Buffer!",
-    "body2": "Con todas tus publicaciones y contenido pero con una experiencia de uso más rápida y sencilla.",
-    "cta": "¡Vamos!",
-    "headline": "Hemos mejorado el aspecto de Buffer"
-  },
-  "welcome-paid-modal": {
-    "step1": {
-      "body1": "Es el mismo Buffer Publish que te gusta – ahora más sencillo y rápido, con ",
-      "body2": "funcionalidades avanzadas de Instagram para ayudarte a crecer.",
-      "cta": "Saber Más",
-      "headline": "Un mejor Buffer Publish"
-    },
-    "step2": {
-      "altText": "Tienda en Instagram con URL propia",
-      "body": "LLeva a tu audiencia e nInstagram a tu tienda online enlazando en tu perfil una página donde pueden comprar, con tus publicaciones ya hechas.",
-      "cta": "Continuar",
-      "headline": "De Publicaciones de Intagram a Ventas"
-    },
-    "step3": {
-      "altText": "Manager de Hashtags para Instagram",
-      "cta": "Continue",
-      "body": "Optimiza tus publicaciones incluyendo un primer comentario en publicaciones de Instagram. Inserta grupos de hashtags previamente guardados cone el Hashtag Manager.",
-      "headline": "Incluye un primer comentario con hashtags guardados"
-    },
-    "step4": {
-      "altText": "Puedes volver al Buffer clásico desde el menú de arriba",
-      "body": "¿Lo echas de menos? Puedes volver al Buffer clásico en cualquier momento.",
-      "cta": "Suena Bien",
-      "headline": "Vuelve en cualquier momento"
-    }
   }
 }

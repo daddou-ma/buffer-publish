@@ -38,8 +38,6 @@ const buildUser = build('User', {
     email: fake(f => f.internet.email()),
     plan: 'business',
     planCode: 11,
-    isBusinessUser: true,
-    isFreeUser: false,
     features: [
       'instagram',
       'first_comment',
@@ -47,16 +45,9 @@ const buildUser = build('User', {
       'twitter-march-18-changes',
     ],
     loaded: true,
-    hasCampaignsFeature: true,
     hasTwentyFourHourTimeFormat: false,
-    showBusinessTrialistsOnboarding: false,
-    hasUserTagFeature: true,
-    canStartProTrial: true,
-    canModifyCampaigns: true,
-    canSeeCampaignsReport: true,
     week_starts_monday: true,
     skip_empty_text_alert: false,
-    profileLimit: 50,
     s3_upload_signature: {
       algorithm: '',
       base64policy: '',
@@ -79,7 +70,6 @@ const buildOrganization = build('Organization', {
 const buildProfile = build('Profile', {
   fields: {
     id: sequence(s => `profile${s}`),
-    ownerId: fake(f => f.random.uuid()),
     organizationId: fake(f => f.random.uuid()),
     service: 'twitter',
     type: 'twitter',
@@ -89,7 +79,6 @@ const buildProfile = build('Profile', {
     serviceId: '96414483',
     service_username: 'buffertest',
     isManager: true,
-    business: true,
     should_post_direct: true,
     formatted_username: '@buffertest',
     pausedSchedules: [],
@@ -98,7 +87,6 @@ const buildProfile = build('Profile', {
     timezone: 'Europe/Madrid',
     avatar_https:
       'https://pbs.twimg.com/profile_images/1134013946929778693/DFqLN6GR_normal.png',
-    shouldShowGridPreview: true,
     shouldHideAdvancedAnalytics: false,
     shouldDisplayIGPersonalNotification: false,
   },
@@ -147,7 +135,6 @@ const buildCampaignChannel = build('CampaignChannel', {
     serviceAvatar: 'https://fake-image.url',
     serviceUsername: 'BufferFB',
     isManager: true,
-    business: true,
     hasPushNotifications: true,
   },
 });

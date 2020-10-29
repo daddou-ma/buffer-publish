@@ -48,7 +48,6 @@ class ShopgridComposerBar extends React.Component {
       isInstagram,
       hasShopgridFlip,
       selectedInstagramProfiles,
-      isBusinessUser,
     } = this.props;
 
     const hasIGProfiles =
@@ -58,15 +57,7 @@ class ShopgridComposerBar extends React.Component {
       hasIGProfiles &&
       selectedInstagramProfiles.some(profile => profile.instagramDirectEnabled);
 
-    const isShopgridContributor =
-      hasIGProfiles &&
-      selectedInstagramProfiles.some(profile => profile.shouldShowGridPreview);
-
-    return (
-      hasInstagramSelected &&
-      isInstagram &&
-      ((hasShopgridFlip && isBusinessUser) || isShopgridContributor)
-    );
+    return hasInstagramSelected && isInstagram && hasShopgridFlip;
   }
 
   openHelp(e) {
@@ -119,7 +110,6 @@ ShopgridComposerBar.propTypes = {
       instagramDirectEnabled: PropTypes.bool,
     })
   ).isRequired,
-  isBusinessUser: PropTypes.bool.isRequired,
 };
 
 ShopgridComposerBar.defaultProps = {

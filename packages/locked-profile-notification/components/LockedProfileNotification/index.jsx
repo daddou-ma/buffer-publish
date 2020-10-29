@@ -28,23 +28,23 @@ const renderParagraph = ({ type, profileLimit, ownerEmail }, paragraph) => {
   switch (type) {
     case 'teamMember':
       paragraphText = isFirstParagraph
-        ? 'Sorry, it looks like the owner of this social account has downgraded from a higher plan.'
-        : `We’re keeping this account safe and sound until ${ownerEmail} is ready to return!`;
+        ? 'Sorry, it looks like the owner of this channel has downgraded from a higher plan.'
+        : `We’re keeping this channel safe and sound until ${ownerEmail} is ready to return!`;
       break;
     case 'free':
       paragraphText = isFirstParagraph
-        ? `This social account is locked because you’re over your plan limit on the Free Plan. On this plan, you can have up to ${profileLimit} social accounts that you use in total.`
-        : 'To unlock your social accounts and manage up to 8 accounts, please consider upgrading to our Pro Plan.';
+        ? `This channel is locked because you’re over your plan limit on the Free Plan. On this plan, you can have up to ${profileLimit} channels that you use in total.`
+        : 'To unlock your channels and manage up to 8 channels, please consider upgrading to our Pro Plan.';
       break;
     case 'pro':
       paragraphText = isFirstParagraph
-        ? `This social account is locked because you’re over your plan limit on the Pro Plan. On this plan, you can have up to ${profileLimit} social accounts that you use in total.`
-        : 'To unlock your social accounts and manage up to 150 accounts, please consider upgrading to one of our Business Plans.';
+        ? `This channel is locked because you’re over your plan limit on the Pro Plan. On this plan, you can have up to ${profileLimit} channels that you use in total.`
+        : 'To unlock your channels and manage up to 150 channels, please consider upgrading to one of our Business Plans.';
       break;
     case 'business':
       paragraphText = isFirstParagraph
-        ? `This social account is locked because you’re over your plan limit on your Business Plan. On this plan, you can have up to ${profileLimit} social accounts that you use in total.`
-        : 'To unlock your social accounts, please consider upgrading to a higher Plan.';
+        ? `This channel is locked because you’re over your plan limit on your Business Plan. On this plan, you can have up to ${profileLimit} channels that you use in total.`
+        : 'To unlock your channels, please consider upgrading to a higher Plan.';
       break;
     default:
       return;
@@ -108,7 +108,7 @@ const LockedProfileNotification = ({
         <span style={iconStyle}>
           <WarningIcon />
         </span>
-        <Text type="h3">Whoops, this social account is locked</Text>
+        <Text type="h3">Whoops, this channel is locked</Text>
       </div>
       {renderParagraph({ type, profileLimit }, 'firstParagraph')}
       {renderParagraph({ type, ownerEmail }, 'secondParagraph')}

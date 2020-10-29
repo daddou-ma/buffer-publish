@@ -1,8 +1,11 @@
 import { connect } from 'react-redux';
 import { hot } from 'react-hot-loader/root';
 import { actions as modalActions } from '@bufferapp/publish-modals';
-import { actions as tabsActions } from '@bufferapp/publish-tabs';
-import { getMatch, campaignsPage } from '@bufferapp/publish-routes';
+import {
+  getMatch,
+  campaignsPage,
+  profileTabPages,
+} from '@bufferapp/publish-routes';
 import ProfileSidebar from './components/ProfileSidebar';
 import { shouldGoToProfile } from './utils';
 import { actions } from './reducer';
@@ -20,13 +23,14 @@ export default hot(
         selectedProfileId: ownProps.profileId,
         profiles: reorderProfilesByUnlocked(state.profileSidebar.profiles),
         translations: state.i18n.translations['profile-sidebar'],
-        profileLimit: state.user.profileLimit,
+        profileLimit: state.organizations.selected?.profileLimit,
         hasInstagram: state.profileSidebar.hasInstagram,
         hasFacebook: state.profileSidebar.hasFacebook,
         hasTwitter: state.profileSidebar.hasTwitter,
         isSearchPopupVisible: state.profileSidebar.isSearchPopupVisible,
-        hasCampaignsFlip: state.user.hasCampaignsFeature,
-        canManageSocialAccounts: state.user.canManageSocialAccounts,
+        hasCampaignsFlip: state.organizations.selected?.hasCampaignsFeature,
+        canManageSocialAccounts:
+          state.organizations.selected?.canManageSocialAccounts,
         ownerEmail: state.organizations.selected?.ownerEmail,
         isCampaignsSelected: !!getMatch({
           pathname: state.router?.location?.pathname,
@@ -41,9 +45,9 @@ export default hot(
       onProfileClick: profile => {
         if (shouldGoToProfile(profile, ownProps)) {
           dispatch(
-            tabsActions.selectTab({
-              tabId: ownProps.tabId ?? 'queue',
+            profileTabPages.goTo({
               profileId: profile.id,
+              tabId: ownProps.tabId,
             })
           );
           dispatch(

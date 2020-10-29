@@ -4,12 +4,10 @@ import Analytics from './components/Analytics';
 const mapStateToProps = state => ({
   profile: state.profileSidebar.selectedProfile,
   isLockedProfile: state.profileSidebar.isLockedProfile,
-  hasAnalyticsFeature: state.organizations.selected.hasAnalyticsFeature,
-  hasBitlyFeature: state.organizations.selected.hasBitlyFeature,
+  hasBitlyFeature: state.organizations.selected?.hasBitlyFeature,
   isInstagramBusiness: state.profileSidebar.selectedProfile.isInstagramBusiness,
   isAnalyticsSupported:
     state.profileSidebar.selectedProfile.isAnalyticsSupported,
-  canStartBusinessTrial: state.user.canStartBusinessTrial,
   linkShortening: state.generalSettings.linkShortening,
   hasBitlyPosts: !!state.sent.byProfileId[
     state.profileSidebar.selectedProfile.id

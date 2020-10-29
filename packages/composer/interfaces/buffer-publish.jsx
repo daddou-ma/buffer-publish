@@ -47,7 +47,7 @@ const ComposerWrapper = ({
   const saveButtons = getSaveButtons();
 
   // Add Share Next feature to all users except free.
-  const showShareNextFeature = userData.hasShareNextFeature;
+  const showShareNextFeature = organizations.selected?.hasShareNextFeature;
   if (showShareNextFeature && !editMode && !draftMode && !emptySlotMode) {
     saveButtons.splice(2, 2, 'SHARE_NEXT', 'SCHEDULE_POST');
   }
@@ -136,7 +136,6 @@ const ComposerWrapper = ({
       imageDimensionsKey={formattedData.imageDimensionsKey}
       options={options}
       onNewPublish
-      isFreeUser={formattedData.userData.isFreeUser}
       csrfToken={csrfToken}
       draftMode={draftMode}
     />
@@ -150,7 +149,6 @@ ComposerWrapper.propTypes = {
     hasTwentyFourHourTimeFormat: PropTypes.bool.isRequired,
     week_starts_monday: PropTypes.bool.isRequired,
     profile_groups: PropTypes.array,
-    isFreeUser: PropTypes.bool.isRequired,
     skip_empty_text_alert: PropTypes.bool.isRequired,
     hasShareNextFeature: PropTypes.bool.isRequired,
     imageDimensionsKey: PropTypes.string.isRequired,
@@ -193,9 +191,9 @@ events.on('saved-drafts', () => {
 });
 
 events.on('start-trial', ({ message, removeScope }) => {
-  // reformat new userData
-  const userData = DataImportUtils.formatUserData(null, { userData: message });
-  AppInitActionCreators.resetUserData(userData);
+  // reformat new organizationsData
+  const organizationsData = message;
+  AppInitActionCreators.resetOrganizationsData(organizationsData);
 
   if (removeScope) {
     NotificationActionCreators.removeAllNotificationsByScope(removeScope);

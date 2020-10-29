@@ -121,7 +121,6 @@ const getNewProfile = data => ({
   },
   timezone: data.timezone,
   shouldBeAutoSelected: data.shouldBeAutoSelected,
-  shouldShowGridPreview: data.shouldShowGridPreview,
   isSelected: false,
   isDisabled: data.isDisabled,
   disabledMessage: data.disabledMessage,
@@ -129,7 +128,6 @@ const getNewProfile = data => ({
   selectedSubprofileId: null,
   serviceType: data.serviceType,
   serviceId: data.serviceId,
-  isBusinessProfile: data.isBusinessProfile,
   isContributor: data.isContributor,
   isManager: data.isManager,
   subprofilesOrignatedFromAPI: null,
@@ -155,16 +153,10 @@ const getNewUserData = data => ({
   s3UploadSignature: data.s3UploadSignature,
   uses24hTime: data.uses24hTime,
   profileGroups: data.profileGroups.map(getNewProfileGroup),
-  isFreeUser: data.isFreeUser,
-  isBusinessUser: data.isBusinessUser,
   weekStartsMonday: data.weekStartsMonday,
   shouldAlwaysSkipEmptyTextAlert: data.shouldAlwaysSkipEmptyTextAlert,
   profilesSchedulesSlots: data.profilesSchedulesSlots,
   onNewPublish: data.onNewPublish,
-  canStartProTrial: data.canStartProTrial,
-  hasShopgridFlip: data.hasShopgridFlip,
-  hasCampaignsFlip: data.hasCampaignsFlip,
-  hasUserTagFeature: data.hasUserTagFeature,
 });
 
 const getNewSubprofile = ({ avatar, id, name, isShared }) => ({
@@ -510,8 +502,8 @@ const selectProfile = (
       if (!state.appState.wasTwitterMaxOneProfileSelectedNotifClosedOnce) {
         const notifScope = NotificationScopes.TWITTER_MAX_ONE_PROFILE_SELECTED;
         const notifMessage = originatedFromGroupSelection
-          ? `Due to <a href="https://support.buffer.com/hc/en-us/articles/360037727174-Limitations-with-sharing-duplicate-content-on-Twitter" target="_blank">recent changes with Twitter</a>, you're only able to post to one Twitter profile at a time. <b>So we've only selected ${profile.service.formattedUsername} Twitter profile from your group. <a href="/app/edit_groups" target="_blank">Click here to edit your group.</a></b>`
-          : `Due to recent changes with Twitter, you're only able to post to one Twitter profile at a time, so <b>you are only posting to ${profile.service.formattedUsername}</b>. <a href="https://support.buffer.com/hc/en-us/articles/360037727174-Limitations-with-sharing-duplicate-content-on-Twitter" target="_blank">Learn more about the changes</a>.`;
+          ? `Due to <a href="https://support.buffer.com/hc/en-us/articles/360037727174-Limitations-with-sharing-duplicate-content-on-Twitter" target="_blank">recent changes with Twitter</a>, you're only able to post to one Twitter account at a time. <b>So we've only selected ${profile.service.formattedUsername} Twitter account from your group. <a href="/app/edit_groups" target="_blank">Click here to edit your group.</a></b>`
+          : `Due to recent changes with Twitter, you're only able to post to one Twitter account at a time, so <b>you are only posting to ${profile.service.formattedUsername}</b>. <a href="https://support.buffer.com/hc/en-us/articles/360037727174-Limitations-with-sharing-duplicate-content-on-Twitter" target="_blank">Learn more about the changes</a>.`;
 
         NotificationActionCreators.removeAllNotificationsByScope(notifScope);
         NotificationActionCreators.queueInfo({
@@ -770,7 +762,8 @@ const setImageDimensionsKey = key => (state.imageDimensionsKey = key);
 const setMetaData = metaData => (state.metaData = metaData);
 const setOptions = options => (state.options = options);
 const setCsrfToken = csrfToken => (state.csrfToken = csrfToken);
-const setOrganizationsData = organizationsData => (state.organizationsData = organizationsData);
+const setOrganizationsData = organizationsData =>
+  (state.organizationsData = organizationsData);
 
 const setTwitterAutocompleteBootstrapData = (friends, profilesIds) => {
   state.appState.twitterAutocompleBootstrapData = getNewTwitterAutocompleteBootstrapData(
@@ -907,13 +900,9 @@ const markAppAsNotLoaded = () => {
   state.appState.isLoaded = false;
 };
 
-// There's a CORS error when trying to reset the s3UploadSignature. Leaving signature
-// as is until refresh
-const resetUserData = userData => {
-  Object.keys(userData).forEach(key => {
-    if (key !== 's3UploadSignature' || key !== 's3_upload_signature') {
-      state.userData[key] = userData[key];
-    }
+const resetOrganizationsData = organizationsData => {
+  Object.keys(organizationsData).forEach(key => {
+    state.organizationsData[key] = organizationsData[key];
   });
 };
 
@@ -1291,8 +1280,8 @@ const onDispatchedPayload = payload => {
       markAppAsNotLoaded();
       break;
 
-    case ActionTypes.RESET_USER_DATA:
-      resetUserData(action.userData);
+    case ActionTypes.RESET_ORGANIZATIONS_DATA:
+      resetOrganizationsData(action.organizationsData);
       break;
 
     /**

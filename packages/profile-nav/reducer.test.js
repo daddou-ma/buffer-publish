@@ -15,18 +15,19 @@ describe('reducer', () => {
     expect(reducer(undefined, action)).toEqual(initialState);
   });
 
-  it('handles SELECT_TAB action type', () => {
+  it('handles GENERATE_PROFILE_TABS action type', () => {
     const stateBefore = {
       ...initialState,
-      tabId: null,
+      profileNavTabs: [],
     };
     const stateAfter = {
       ...initialState,
-      tabId: 'drafts',
+      profileNavTabs: ['queue', 'analytics', 'settings', 'overview'],
     };
     const action = {
-      type: actionTypes.SELECT_TAB,
-      tabId: 'drafts',
+      type: actionTypes.GENERATE_PROFILE_TABS,
+      organization: { id: 'org1' },
+      profile: { id: 'id1' },
     };
 
     deepFreeze(stateBefore);
@@ -43,8 +44,8 @@ describe('reducer', () => {
     };
     const stateAfter = {
       ...initialState,
-      draftsNeedApprovalCount: null,
-      draftsCount: null,
+      draftsNeedApprovalCount: 0,
+      draftsCount: 0,
     };
     const action = {
       type: 'getCounts_FETCH_START',
@@ -65,8 +66,8 @@ describe('reducer', () => {
   it('handles getCounts_FETCH_SUCCESS action type', () => {
     const stateBefore = {
       ...initialState,
-      draftsNeedApprovalCount: null,
-      draftsCount: null,
+      draftsNeedApprovalCount: 0,
+      draftsCount: 0,
     };
     const stateAfter = {
       ...initialState,
@@ -91,15 +92,18 @@ describe('reducer', () => {
 
   // Test action creators:
   describe('action creators', () => {
-    it('creates a SELECT_TAB action', () => {
+    it('creates a GENERATE_PROFILE_TABS action', () => {
       const expectedAction = {
-        type: actionTypes.SELECT_TAB,
-        tabId: 'tab',
-        profileId: 'id',
+        type: actionTypes.GENERATE_PROFILE_TABS,
+        organization: { id: 'org1' },
+        profile: { id: 'id1' },
       };
-      expect(actions.selectTab({ tabId: 'tab', profileId: 'id' })).toEqual(
-        expectedAction
-      );
+      expect(
+        actions.generateProfileTabs({
+          profile: { id: 'id1' },
+          organization: { id: 'org1' },
+        })
+      ).toEqual(expectedAction);
     });
   });
 });

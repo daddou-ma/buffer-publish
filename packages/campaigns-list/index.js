@@ -6,18 +6,18 @@ import {
   campaignCreate,
   campaignScheduled,
 } from '@bufferapp/publish-routes';
-import { actions } from './reducer';
 import ListCampaigns from './components/ListCampaigns';
 
 export default connect(
   state => {
     return {
       campaigns: state.campaignsList.campaigns,
-      showCampaignActions: state.user.canModifyCampaigns,
-      hideAnalyzeReport: !state.user.canSeeCampaignsReport,
+      showCampaignActions: state.organizations.selected?.canModifyCampaigns,
+      hideAnalyzeReport: !state.organizations.selected?.canSeeCampaignsReport,
       isLoading: state.campaignsList.isLoading,
-      hasCampaignsFlip: state.user.hasCampaignsFeature,
+      hasCampaignsFlip: state.organizations.selected?.hasCampaignsFeature,
       ownerEmail: state.organizations.selected?.ownerEmail,
+      shouldDisplayLockedCopy: state.organizations.selected?.locked,
     };
   },
   (dispatch, ownProps) => ({
@@ -45,11 +45,8 @@ export default connect(
         );
       }
     },
-    fetchCampaignsIfNeeded: () => {
-      dispatch(actions.fetchCampaignsIfNeeded());
-    },
   })
 )(ListCampaigns);
 
-export reducer, { actions, actionTypes } from './reducer';
+export reducer from './reducer';
 export middleware from './middleware';

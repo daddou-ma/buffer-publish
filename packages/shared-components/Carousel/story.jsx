@@ -16,7 +16,6 @@ const storeFake = state => ({
 const profile = {
   id: 'abc',
   loading: false,
-  business: true,
   service: 'instagram',
   timezone: 'Europe/London',
   avatar_https:

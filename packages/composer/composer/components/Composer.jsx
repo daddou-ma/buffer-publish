@@ -35,7 +35,6 @@ import {
 import InstagramFeedback from './InstagramFeedback';
 import InstagramThumbnailButton from './InstagramThumbnailButton';
 import { isIE } from '../utils/DOMUtils';
-import { isManagerOrContributorForAnyProfile } from '../utils/profile-filtering';
 
 import styles from './css/Composer.css';
 
@@ -142,7 +141,6 @@ class Composer extends React.Component {
       PropTypes.shape({
         id: PropTypes.string,
         instagramDirectEnabled: PropTypes.bool,
-        shouldShowGridPreview: PropTypes.bool,
         service: PropTypes.shape({
           canHaveMediaAttachmentType: PropTypes.func,
           canHaveSomeAttachmentType: PropTypes.func,
@@ -164,10 +162,11 @@ class Composer extends React.Component {
       right: PropTypes.number,
     }),
     canStartProTrial: PropTypes.bool,
-    hasShopgridFlip: PropTypes.bool,
+    hasGridFeature: PropTypes.bool,
     hasUserTagFeature: PropTypes.bool,
-    isFreeUser: PropTypes.bool.isRequired,
-    isBusinessUser: PropTypes.bool.isRequired,
+    hasCustomIgVideoCoverFeature: PropTypes.bool,
+    hasFirstCommentFeature: PropTypes.bool,
+    hasHashtagManagerFeature: PropTypes.bool,
     draftMode: PropTypes.bool,
   };
 
@@ -176,7 +175,10 @@ class Composer extends React.Component {
     composerPosition: null,
     canStartProTrial: false,
     hasUserTagFeature: false,
-    hasShopgridFlip: false,
+    hasGridFeature: false,
+    hasCustomIgVideoCoverFeature: false,
+    hasFirstCommentFeature: false,
+    hasHashtagManagerFeature: false,
     profiles: [],
     expandedComposerId: null,
     selectedProfiles: [],
@@ -497,30 +499,6 @@ class Composer extends React.Component {
     return hasInstagramSelected ? selectedInstagramDirectProfiles[0].id : null;
   };
 
-  isInstagramContributor = () => {
-    const selectedInstagramProfile = this.getSelectedInstagramProfiles();
-    const hasInstagramSelected =
-      selectedInstagramProfile && selectedInstagramProfile.length === 1;
-    return (
-      hasInstagramSelected &&
-      selectedInstagramProfile[0] &&
-      selectedInstagramProfile[0].isContributor
-    );
-  };
-
-  isInstagramManager = () => {
-    const selectedInstagramProfile = this.getSelectedInstagramProfiles();
-    const hasInstagramSelected =
-      selectedInstagramProfile && selectedInstagramProfile.length === 1;
-
-    return (
-      hasInstagramSelected &&
-      selectedInstagramProfile[0] &&
-      selectedInstagramProfile[0].isManager &&
-      selectedInstagramProfile[0].isBusinessProfile
-    );
-  };
-
   hasIGDirectPostingEnabled = () => {
     const selectedInstagramProfile = this.getSelectedInstagramProfiles();
     const hasInstagramSelected =
@@ -572,10 +550,10 @@ class Composer extends React.Component {
    * @todo: It might make more sense to refactor this method into the
    * `FirstCommentComposerSection` component.
    */
-  onCommentClick = (e, profileIsProOrBusiness) => {
+  onCommentClick = (e, hasFirstCommentFeature) => {
     e.preventDefault();
     const { hasCheckedForFacebookPermission } = this.state;
-    if (profileIsProOrBusiness) {
+    if (hasFirstCommentFeature) {
       /** This will trigger, if necessary, a modal to re-auth facebook for the commenting permission */
       if (!hasCheckedForFacebookPermission) {
         AppActionCreators.triggerInteraction({
@@ -653,8 +631,10 @@ class Composer extends React.Component {
       shouldShowInlineSubprofileDropdown,
       composerPosition,
       hasUserTagFeature,
-      hasShopgridFlip,
-      draftMode,
+      hasCustomIgVideoCoverFeature,
+      hasFirstCommentFeature,
+      hasHashtagManagerFeature,
+      hasGridFeature,
     } = this.props;
 
     const composerFeedbackMessages = this.getComposerFeedbackMessages();
@@ -814,19 +794,12 @@ class Composer extends React.Component {
     const showComposerFbAutocompleteDisabledNotice =
       this.isExpanded() && hasComposerFbAutocompleteDisabledNotice;
 
-    const { isFreeUser } = this.props;
-    const profileIsBusiness = isManagerOrContributorForAnyProfile({
-      profiles: this.props.selectedProfiles,
-      service: 'instagram',
-    });
-    const profileIsProOrBusiness = !isFreeUser || profileIsBusiness;
-
     const shouldDisplayEditThumbnailBtn =
       this.isInstagram() &&
       this.hasVideo() &&
       this.isExpanded() &&
       this.hasIGDirectPostingEnabled() &&
-      profileIsProOrBusiness &&
+      hasCustomIgVideoCoverFeature &&
       composerFeedbackMessages.length < 1 && // don't allow user to edit thumbnail if can't add to queue
       draft.instagramFeedback.length < 1 && // don't allow user to edit thumbnail if post is reminder
       !appState.isOmniboxEnabled &&
@@ -852,7 +825,7 @@ class Composer extends React.Component {
         areAllSelectedProfilesIG() &&
         (hasSelectedSomeInstagramDirectProfiles &&
           this.isInstagram() &&
-          (profileIsProOrBusiness || canStartProTrial) &&
+          (hasFirstCommentFeature || canStartProTrial) &&
           this.isExpanded() &&
           !appState.isOmniboxEnabled)
       );
@@ -1189,10 +1162,10 @@ class Composer extends React.Component {
                   onToggleSidebarVisibility={this.onToggleSidebarVisibility}
                   onCommentChange={this.onCommentChange}
                   onCommentClick={e =>
-                    this.onCommentClick(e, profileIsProOrBusiness)
+                    this.onCommentClick(e, hasFirstCommentFeature)
                   }
-                  shouldDisplayProTag={!profileIsProOrBusiness}
-                  shouldDisplayHashtagManager={profileIsBusiness}
+                  shouldDisplayProTag={!hasFirstCommentFeature}
+                  shouldDisplayHashtagManager={hasHashtagManagerFeature}
                   shouldShowCommentCharacterCount={
                     shouldShowCommentCharacterCount
                   }
@@ -1202,8 +1175,7 @@ class Composer extends React.Component {
               <ShopgridComposerBar
                 isInstagram={this.isInstagram()}
                 selectedInstagramProfiles={this.getSelectedInstagramProfiles()}
-                hasShopgridFlip={hasShopgridFlip}
-                isBusinessUser={this.props.isBusinessUser}
+                hasShopgridFlip={hasGridFeature}
                 draft={draft}
                 draftId={draft.id}
                 shopgridLink={draft.shopgridLink}

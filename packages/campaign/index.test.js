@@ -63,9 +63,18 @@ const initialState = {
   },
   organizations: {
     selected: {
+      id: 'organization1',
       hasAnalyticsOnPosts: false,
       hasTwitterImpressions: false,
+      planBase: 'business',
+      isOwner: true,
+      hasCampaignsFeature: true,
+      canModifyCampaigns: true,
+      canSeeCampaignsReport: true,
     },
+  },
+  campaignsList: {
+    campaigns,
   },
 };
 
@@ -117,8 +126,8 @@ const campaignsListFields = async () => {
 };
 
 const campaignsQueueFields = async () => {
-  const scheduledLink = await screen.findByRole('link', { name: /scheduled/i });
-  const sentLink = await screen.findByRole('link', { name: /sent/i });
+  const scheduledLink = await screen.getByTestId('scheduled-tab');
+  const sentLink = await screen.getByTestId('sent-tab');
 
   return {
     scheduledLink,
@@ -176,9 +185,6 @@ describe('ViewCampaign | user interaction', () => {
     expect(totalScheduled).toBeInTheDocument();
     expect(totalSent).toBeInTheDocument();
 
-    expect(rpcCall).toHaveBeenCalledWith('getCampaignsList', {});
-    expect(rpcCall).toHaveBeenCalledTimes(1);
-
     /* Campaign queue assertions */
     userEvent.click(viewCampaignBtn);
 
@@ -214,6 +220,6 @@ describe('ViewCampaign | user interaction', () => {
       fullItems: true,
       past: false,
     });
-    expect(rpcCall).toHaveBeenCalledTimes(2);
+    expect(rpcCall).toHaveBeenCalledTimes(1);
   });
 });

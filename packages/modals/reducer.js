@@ -2,7 +2,6 @@ import keyWrapper from '@bufferapp/keywrapper';
 
 export const initialState = {
   showSwitchPlanModal: false,
-  showWelcomePaidModal: false,
   showProfilesDisconnectedModal: false,
   switchPlanModalSource: null,
   showStealProfileModal: false,
@@ -20,8 +19,6 @@ export const initialState = {
 export const actionTypes = keyWrapper('MODALS', {
   SHOW_SWITCH_PLAN_MODAL: 0,
   HIDE_SWITCH_PLAN_MODAL: 0,
-  SHOW_WELCOME_PAID_MODAL: 0,
-  HIDE_WELCOME_PAID_MODAL: 0,
   SHOW_PROFILES_DISCONNECTED_MODAL: 0,
   HIDE_PROFILES_DISCONNECTED_MODAL: 0,
   SHOW_STEAL_PROFILE_MODAL: 0,
@@ -69,16 +66,6 @@ export default (state = initialState, action) => {
         ...state,
         showInstagramFirstCommentModal: true,
         firstCommentIds: action.ids,
-      };
-    case actionTypes.SHOW_WELCOME_PAID_MODAL:
-      return {
-        ...state,
-        showWelcomePaidModal: true,
-      };
-    case actionTypes.HIDE_WELCOME_PAID_MODAL:
-      return {
-        ...state,
-        showWelcomePaidModal: false,
       };
     case actionTypes.HIDE_INSTAGRAM_FIRST_COMMENT_MODAL:
       return {
@@ -182,12 +169,6 @@ export const actions = {
     type: actionTypes.SHOW_INSTAGRAM_FIRST_COMMENT_MODAL,
     ids,
   }),
-  showWelcomePaidModal: () => ({
-    type: actionTypes.SHOW_WELCOME_PAID_MODAL,
-  }),
-  hideWelcomePaidModal: () => ({
-    type: actionTypes.HIDE_WELCOME_PAID_MODAL,
-  }),
   hideInstagramFirstCommentModal: () => ({
     type: actionTypes.HIDE_INSTAGRAM_FIRST_COMMENT_MODAL,
   }),
@@ -244,7 +225,6 @@ export const actions = {
       (modals.showProfilesDisconnectedModal ||
         modals.showSwitchPlanModal ||
         modals.showInstagramFirstCommentModal ||
-        modals.showWelcomePaidModal ||
         modals.showInstagramDirectPostingModal ||
         modals.showStealProfileModal ||
         modals.showTrialCompleteModal ||

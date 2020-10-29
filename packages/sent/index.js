@@ -1,6 +1,5 @@
 // component vs. container https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0
 import { connect } from 'react-redux';
-import { actions as campaignListActions } from '@bufferapp/publish-campaigns-list';
 import { formatPostLists } from '@bufferapp/publish-queue/util';
 // load the presentational component
 import { actions } from './reducer';
@@ -43,18 +42,21 @@ export default connect(
         isLockedProfile: state.profileSidebar.isLockedProfile,
         isDisconnectedProfile:
           state.profileSidebar.selectedProfile.isDisconnected,
-        analyzeCrossSale: state.user.analyzeCrossSale,
-        hasFirstCommentFlip: state.user.hasFirstCommentFeature,
-        hasCampaignsFeature: state.user.hasCampaignsFeature,
-        hasShareAgainFeature: state.organizations.selected.hasShareAgainFeature,
+        analyzeCrossSale:
+          state.user.analyzeCrossSale && state.organizations.selected?.isOwner, // Analyze doesn't support team members
+        hasFirstCommentFlip:
+          state.organizations.selected?.hasFirstCommentFeature,
+        hasCampaignsFeature: state.organizations.selected?.hasCampaignsFeature,
+        hasShareAgainFeature:
+          state.organizations.selected?.hasShareAgainFeature,
         has30DaySentPostsLimitFeature:
-          state.organizations.selected.has30DaySentPostsLimitFeature,
-        hasBitlyFeature: state.organizations.selected.hasBitlyFeature,
+          state.organizations.selected?.has30DaySentPostsLimitFeature,
+        hasBitlyFeature: state.organizations.selected?.hasBitlyFeature,
         linkShortening: state.generalSettings.linkShortening,
         hasBitlyPosts: currentProfile.hasBitlyPosts,
-        hasAnalyticsOnPosts: state.organizations.selected.hasAnalyticsOnPosts,
+        hasAnalyticsOnPosts: state.organizations.selected?.hasAnalyticsOnPosts,
         hasTwitterImpressions:
-          state.organizations.selected.hasTwitterImpressions,
+          state.organizations.selected?.hasTwitterImpressions,
         shouldDisplayIGPersonalNotification:
           profileData.shouldDisplayIGPersonalNotification,
       };
@@ -86,9 +88,6 @@ export default connect(
           profileId: ownProps.profileId,
         })
       );
-    },
-    fetchCampaignsIfNeeded: () => {
-      dispatch(campaignListActions.fetchCampaignsIfNeeded());
     },
   })
 )(SentPosts);

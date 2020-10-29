@@ -35,11 +35,6 @@ const ComposerComponent = ({
   shouldEnableFacebookAutocomplete,
   shouldShowInlineSubprofileDropdown,
   composerPosition,
-  canStartProTrial,
-  hasShopgridFlip,
-  hasUserTagFeature,
-  isFreeUser,
-  isBusinessUser,
   draftMode,
 }) => {
   const canUserPostToMultipleNetworks =
@@ -55,6 +50,15 @@ const ComposerComponent = ({
       isOmniboxEnabled={isOmniboxEnabled}
     />
   ) : null;
+
+  const {
+    hasCustomIgVideoCoverFeature,
+    hasFirstCommentFeature,
+    hasHashtagManagerFeature,
+    hasGridFeature,
+    canStartProTrial,
+    hasUserTagFeature,
+  } = organizations?.selected || {};
 
   // When focus should be forced, figure out *which* editor instance to force-focus
   const forceEditorInstanceFocus =
@@ -81,10 +85,11 @@ const ComposerComponent = ({
       composerPosition={composerPosition}
       forceEditorFocus={forceEditorInstanceFocus}
       canStartProTrial={canStartProTrial}
-      hasShopgridFlip={hasShopgridFlip}
+      hasGridFeature={hasGridFeature}
       hasUserTagFeature={hasUserTagFeature}
-      isFreeUser={isFreeUser}
-      isBusinessUser={isBusinessUser}
+      hasCustomIgVideoCoverFeature={hasCustomIgVideoCoverFeature}
+      hasFirstCommentFeature={hasFirstCommentFeature}
+      hasHashtagManagerFeature={hasHashtagManagerFeature}
       draftMode={draftMode}
     >
       {children}
@@ -122,11 +127,6 @@ class ComposerSection extends React.Component {
       shouldShowInlineSubprofileDropdown,
       isOmniboxEnabled,
       composerPosition,
-      isFreeUser,
-      isBusinessUser,
-      canStartProTrial,
-      hasShopgridFlip,
-      hasUserTagFeature,
       draftMode,
     } = this.props;
 
@@ -144,8 +144,8 @@ class ComposerSection extends React.Component {
         {!hasEnabledDrafts && (
           <div className={styles.emptyState}>
             {composersHaveBeenExpanded
-              ? 'Your work has been saved. Please select a social account above to continue.'
-              : 'Please select a social account above to continue.'}
+              ? 'Your work has been saved. Please select a channel above to continue.'
+              : 'Please select a channel above to continue.'}
           </div>
         )}
 
@@ -175,11 +175,6 @@ class ComposerSection extends React.Component {
               shouldEnableFacebookAutocomplete,
               shouldShowInlineSubprofileDropdown,
               composerPosition,
-              canStartProTrial,
-              hasShopgridFlip,
-              hasUserTagFeature,
-              isFreeUser,
-              isBusinessUser,
               draftMode,
             }}
           />
@@ -206,11 +201,6 @@ class ComposerSection extends React.Component {
                 shouldEnableFacebookAutocomplete,
                 shouldShowInlineSubprofileDropdown,
                 composerPosition,
-                canStartProTrial,
-                hasShopgridFlip,
-                hasUserTagFeature,
-                isFreeUser,
-                isBusinessUser,
                 draftMode,
               }}
             />
@@ -227,24 +217,18 @@ ComposerSection.propTypes = {
   shouldEnableFacebookAutocomplete: PropTypes.bool.isRequired,
   shouldShowInlineSubprofileDropdown: PropTypes.bool.isRequired,
   profiles: PropTypes.array,
+  organizations: PropTypes.object,
   selectedProfiles: PropTypes.array,
   isOmniboxEnabled: PropTypes.bool,
   composerPosition: PropTypes.object,
-  canStartProTrial: PropTypes.bool.isRequired,
-  isFreeUser: PropTypes.bool.isRequired,
-  hasShopgridFlip: PropTypes.bool,
-  hasUserTagFeature: PropTypes.bool,
-  isBusinessUser: PropTypes.bool,
   draftMode: PropTypes.bool,
 };
 
 ComposerSection.defaultProps = {
   isOmniboxEnabled: null,
   composerPosition: null,
-  hasShopgridFlip: false,
-  hasUserTagFeature: false,
-  isBusinessUser: false,
   draftMode: false,
+  organizations: {},
 };
 
 export default ComposerSection;

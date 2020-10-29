@@ -31,8 +31,6 @@ export const fakeUserData = {
   s3UploadSignature: {},
   uses24hTime: false,
   profileGroups: [],
-  isFreeUser: true,
-  isBusinessUser: false,
   weekStartsMonday: false,
   shouldAlwaysSkipEmptyTextAlert: false,
   profilesSchedulesSlots: [],
@@ -71,7 +69,6 @@ export const rawProfilesData = [
     imagesAvatar:
       'https://media.licdn.com/media/AAEAAQAAAAAAAAoDAAAAJGRmODFmYmY3LTkyZjMtNDZjYS1iMTlmLWM1YjQ3NzhkMDVkMw.jpg',
     instagramDirectEnabled: true,
-    isBusinessProfile: true,
     isDisabled: false,
     serviceFormattedUsername: 'Emily Plummer',
     serviceName: 'linkedin',
@@ -86,7 +83,6 @@ export const rawProfilesData = [
     imagesAvatar:
       'https://scontent.cdninstagram.com/vp/46a7600f131b5125e3a5976d9e214f26/5B19936A/t51.2885-19/s150x150/22639451_1711266118925014_5362926912903577600_n.jpg',
     instagramDirectEnabled: true,
-    isBusinessProfile: true,
     isDisabled: false,
     serviceFormattedUsername: 'emplumeria',
     hasPushNotifications: true,
@@ -101,7 +97,6 @@ export const rawProfilesData = [
     id: '59c420f583768201008b456b',
     imagesAvatar: 'http://via.placeholder.com/60x60',
     instagramDirectEnabled: true,
-    isBusinessProfile: true,
     isDisabled: false,
     serviceFormattedUsername: '@Buffer Admin',
     serviceName: 'twitter',
@@ -116,7 +111,6 @@ export const rawProfilesData = [
     imagesAvatar:
       'https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png',
     instagramDirectEnabled: true,
-    isBusinessProfile: true,
     isDisabled: false,
     serviceFormattedUsername: '@testemilytestte',
     serviceName: 'twitter',
@@ -131,7 +125,6 @@ export const rawProfilesData = [
     imagesAvatar:
       'https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png',
     instagramDirectEnabled: true,
-    isBusinessProfile: true,
     isDisabled: false,
     serviceFormattedUsername: 'Test Facebook Page',
     serviceName: 'facebook',

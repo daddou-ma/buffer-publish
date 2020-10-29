@@ -14,16 +14,13 @@ const SMALL_PLAN_ID = '10';
 
 // segment naming convention: APP-VIEW-LOCATION-BUTTON-VERSION
 // https://www.notion.so/buffer/CTA-Parameter-Conventions-Call-to-Action-WIP-0ae87bdd99574e3888afb2fe6b75035a
-const ANALYTICS_OVERVIEW_SBP_TRIAL =
-  'publish-analyticsOverview-trialCard-sbpTrial-1';
-const ANALYTICS_OVERVIEW_BUSINESS_UPGRADE =
-  'publish-analyticsOverview-upgradeCard-businessUpgrade-1';
 const APP_SHELL_PRO_UPGRADE = 'publish-appShell-menu-proUpgrade-1';
 const CAMPAIGNS_CREATE_CAMPAIGN =
   'publish-campaigns-createCampaignPage-createCampaign-1';
 const CTA_BANNER_PREMIUM_UPGRADE = 'publish-app-ctaBanner-premiumUpgrade-1';
 const CTA_BANNER_SMALL_UPGRADE = 'publish-app-ctaBanner-smallUpgrade-1';
 const CTA_BANNER_PRO_UPGRADE = 'publish-app-ctaBanner-proUpgrade-1';
+const CTA_BANNER_BUSINESS_UPGRADE = 'publish-app-ctaBanner-businessUpgrade-1';
 const DRAFTS_SBP_TRIAL = 'publish-drafts-trialCard-sbpTrial-1';
 const DRAFTS_BUSINESS_UPGRADE = 'publish-drafts-upgradeCard-businessUpgrade-1';
 const EXPIRED_TRIAL_PRO_UPGRADE = 'publish-app-expiredTrialModal-proUpgrade-1';
@@ -139,13 +136,12 @@ module.exports = {
     SMALL_PLAN_ID,
   },
   SEGMENT_NAMES: {
-    ANALYTICS_OVERVIEW_SBP_TRIAL,
-    ANALYTICS_OVERVIEW_BUSINESS_UPGRADE,
     APP_SHELL_PRO_UPGRADE,
     CAMPAIGNS_CREATE_CAMPAIGN,
     CTA_BANNER_PREMIUM_UPGRADE,
     CTA_BANNER_SMALL_UPGRADE,
     CTA_BANNER_PRO_UPGRADE,
+    CTA_BANNER_BUSINESS_UPGRADE,
     DRAFTS_SBP_TRIAL,
     DRAFTS_BUSINESS_UPGRADE,
     EXPIRED_TRIAL_PRO_UPGRADE,

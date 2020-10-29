@@ -1,6 +1,4 @@
-import { actionTypes as tabsActionTypes } from '@bufferapp/publish-tabs';
 import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware/actions';
-import { getProfilesParams } from '@bufferapp/publish-routes';
 
 import {
   actions as dataFetchActions,
@@ -21,30 +19,8 @@ const getTrackingData = ({ post = {}, channel = {} }) => ({
 export default ({ dispatch, getState }) => next => action => {
   next(action);
   const state = getState();
-  const path = getState().router.location.pathname;
-  const { tabId } = getProfilesParams({ pathname: path }) || {};
-  const needsApproval =
-    tabId === 'awaitingApproval' || tabId === 'pendingApproval';
-  const isDraft =
-    ['awaitingApproval', 'pendingApproval', 'drafts'].indexOf(action.tabId) !==
-    -1;
 
   switch (action.type) {
-    case tabsActionTypes.SELECT_TAB:
-      if (isDraft) {
-        dispatch(
-          dataFetchActions.fetch({
-            name: 'draftPosts',
-            args: {
-              profileId: action.profileId,
-              isFetchingMore: false,
-              needsApproval,
-              clear: true,
-            },
-          })
-        );
-      }
-      break;
     case actionTypes.DRAFT_CONFIRMED_DELETE: {
       dispatch(
         dataFetchActions.fetch({
@@ -136,6 +112,25 @@ export default ({ dispatch, getState }) => next => action => {
         })
       );
       break;
+
+    // Drafts pusher events trigger a draft counter update action
+    case actionTypes.DRAFT_CREATED:
+    case actionTypes.DRAFT_DELETED:
+    case actionTypes.DRAFT_APPROVED:
+    case actionTypes.DRAFT_MOVED: {
+      if (getState().profileSidebar.selectedProfileId === action.profileId) {
+        dispatch(
+          dataFetchActions.fetch({
+            name: 'getCounts',
+            args: {
+              profileId: action.profileId,
+            },
+          })
+        );
+      }
+      break;
+    }
+
     default:
       break;
   }

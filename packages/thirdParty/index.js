@@ -10,6 +10,7 @@ export default connect(state => {
 
   return {
     appCues: state.thirdparty.appCues,
+    zendeskWidget: state.thirdparty.zendeskWidget,
     modalsShowing,
     userId: state.user?.id,
   };

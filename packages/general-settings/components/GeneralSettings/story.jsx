@@ -18,7 +18,7 @@ const store = storeFake({
   },
   profileSidebar: {
     selectedProfile: {
-      ownerId: 'id2',
+      id: 'id2',
     },
   },
   organizations: {

@@ -15,8 +15,9 @@ export default connect(
     dismissible: state.switchPlanModal.dismissible,
     translations: state.i18n.translations['switch-plan-modal'],
     validating: state.stripe.validating,
-    isNonprofit: state.user.isNonprofit,
-    hasExpiredProTrial: state.user.shouldShowProTrialExpiredModal,
+    isNonprofit: state.organizations.selected?.isNonProfit,
+    hasExpiredProTrial:
+      state.organizations.selected?.shouldShowProTrialExpiredModal,
     setupIntentClientSecret: state.stripe.setupIntentClientSecret,
   }),
   dispatch => ({
@@ -25,9 +26,23 @@ export default connect(
     hideModal: () => dispatch(modalsActions.hideUpgradeModal()),
     cancelTrial: () => dispatch(actions.cancelTrial()),
     clearCardInfo: () => dispatch(actions.clearCardInfo()),
-    handleCardSetupRequest: (stripe, setupIntentClientSecret, source, plan, cycle) =>
-      dispatch(stripeActions.handleCardSetupRequest(stripe, setupIntentClientSecret, source, plan, cycle)),
-  }),
+    handleCardSetupRequest: (
+      stripe,
+      setupIntentClientSecret,
+      source,
+      plan,
+      cycle
+    ) =>
+      dispatch(
+        stripeActions.handleCardSetupRequest(
+          stripe,
+          setupIntentClientSecret,
+          source,
+          plan,
+          cycle
+        )
+      ),
+  })
 )(SwitchPlanModal);
 
 export reducer, { actions, actionTypes } from './reducer';

@@ -7,9 +7,7 @@
     "lint": "eslint . --ignore-pattern coverage node_modules"
   },
   "author": "ana@buffer.com",
-  "dependencies": {
-    "@bufferapp/publish-tabs": "2.0.0"
-  },
+  "dependencies": {},
   "devDependencies": {},
   "publishConfig": {
     "access": "public"

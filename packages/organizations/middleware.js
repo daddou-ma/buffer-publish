@@ -95,11 +95,6 @@ export default ({ dispatch, getState }) => next => action => {
       break;
     }
 
-    // Temporarily dispatch user data, to inject new org data in it. To be removed after org_switcher rollout
-    case `setCurrentOrganization_${dataFetchActionTypes.FETCH_SUCCESS}`:
-      dispatch({ type: 'INIT_USER' });
-      break;
-
     case `setCurrentOrganization_${dataFetchActionTypes.FETCH_FAIL}`:
       dispatch(
         notificationActions.createNotification({

@@ -3,6 +3,7 @@ import {
   getDateString,
   isInThePast,
 } from '@bufferapp/publish-server/formatters/src';
+import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 import { actions as modalsActions } from '@bufferapp/publish-modals/reducer';
 
 import { actions } from './reducer';
@@ -147,15 +148,32 @@ export default connect(
         editingPostId: state.drafts.editingPostId,
         isLockedProfile: state.profileSidebar.isLockedProfile,
         isDisconnectedProfile: isDisconnected,
-        canStartBusinessTrial: state.user.canStartBusinessTrial ?? true,
-        hasFirstCommentFlip: state.user.hasFirstCommentFeature,
-        planBase: state.organizations?.selected?.planBase,
+        canStartBusinessTrial:
+          state.organizations?.selected?.canStartBusinessTrial,
+        hasFirstCommentFlip:
+          state.organizations?.selected?.hasFirstCommentFeature,
+        showShowDraftsPaywall:
+          state.organizations?.selected?.showShowDraftsPaywall,
         shouldDisplayIGPersonalNotification,
+        profileId: ownProps.profileId,
       };
     }
     return {};
   },
   (dispatch, ownProps) => ({
+    fetchDrafts: ({ needsApproval }) => {
+      dispatch(
+        dataFetchActions.fetch({
+          name: 'draftPosts',
+          args: {
+            profileId: ownProps.profileId,
+            isFetchingMore: false,
+            needsApproval,
+            clear: true,
+          },
+        })
+      );
+    },
     onApproveClick: draft => {
       dispatch(
         actions.handleApproveClick({

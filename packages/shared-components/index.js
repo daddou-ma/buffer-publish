@@ -21,6 +21,8 @@ export Example from './Example';
 export GridList from './GridList';
 export Nav from './Nav';
 export NavLink from './NavLink';
+export NavSubMenu from './NavSubMenu';
+export NavTag from './NavTag';
 export Notification from './Notification';
 export Post from './Post';
 export PostDragWrapper from './PostDragWrapper';
@@ -44,7 +46,5 @@ export {
 export Slider from './Slider';
 export StepList from './StepList';
 export StepNumber from './StepNumber';
-export Tab from './Tab';
-export Tabs from './Tabs';
 export UpdateTextContent from './UpdateTextContent';
 export UserDetails from './UserDetails';

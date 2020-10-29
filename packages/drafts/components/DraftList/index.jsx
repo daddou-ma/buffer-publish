@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
   QueueItems,
@@ -60,14 +60,22 @@ const DraftList = ({
   hasFirstCommentFlip,
   onComposerOverlayClick,
   preserveComposerStateOnClose,
-  planBase,
+  showShowDraftsPaywall,
   shouldDisplayIGPersonalNotification,
+  fetchDrafts,
+  profileId,
 }) => {
   if (shouldDisplayIGPersonalNotification) {
     return <InstagramPersonalProfileNotification />;
   }
 
-  if (planBase === 'pro') {
+  // Fetch the Data
+  useEffect(() => {
+    const needsApproval = tabId !== 'drafts';
+    fetchDrafts({ needsApproval });
+  }, [tabId, profileId]);
+
+  if (showShowDraftsPaywall) {
     const startTrial = () =>
       window.location.assign(
         `${getURL.getStartTrialURL({
@@ -169,7 +177,6 @@ const DraftList = ({
 };
 
 DraftList.propTypes = {
-  features: PropTypes.object.isRequired, // eslint-disable-line
   canStartBusinessTrial: PropTypes.bool.isRequired,
   loading: PropTypes.bool,
   postLists: PropTypes.arrayOf(
@@ -177,7 +184,7 @@ DraftList.propTypes = {
       text: PropTypes.string,
     })
   ),
-  planBase: PropTypes.string.isRequired,
+  showShowDraftsPaywall: PropTypes.bool,
   manager: PropTypes.bool.isRequired,
   onApproveClick: PropTypes.func.isRequired,
   onDeleteConfirmClick: PropTypes.func.isRequired,
@@ -196,9 +203,12 @@ DraftList.propTypes = {
   onComposerOverlayClick: PropTypes.func.isRequired,
   preserveComposerStateOnClose: PropTypes.bool,
   shouldDisplayIGPersonalNotification: PropTypes.bool,
+  fetchDrafts: PropTypes.func.isRequired,
+  profileId: PropTypes.string.isRequired,
 };
 
 DraftList.defaultProps = {
+  showShowDraftsPaywall: false,
   preserveComposerStateOnClose: true,
   loading: true,
   postLists: [],

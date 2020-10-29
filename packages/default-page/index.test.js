@@ -19,31 +19,9 @@ describe('DefaultPage', () => {
             ownerEmail: 'ana@buffer.com',
           },
         },
-        user: { hasOrgSwitcherFeature: true, features: ['org_switcher'] },
       },
     });
     expect(screen.getByRole('heading')).toHaveTextContent(/joined Cool Org/i);
-  });
-
-  test('loads empty state for users without admin access but no feature flip', async () => {
-    render(<DefaultPage />, {
-      initialState: {
-        organizations: {
-          selected: {
-            isAdmin: false,
-            name: 'Cool Org',
-            ownerEmail: 'ana@buffer.com',
-          },
-        },
-        user: { features: [''] },
-      },
-    });
-    expect(screen.getByRole('heading')).not.toHaveTextContent(
-      /joined Cool Org/i
-    );
-    expect(screen.getByRole('heading')).toHaveTextContent(
-      "Let's get your account set up!"
-    );
   });
 
   test('loads empty state for users with admin access', async () => {

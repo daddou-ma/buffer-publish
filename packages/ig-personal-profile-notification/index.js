@@ -7,7 +7,7 @@ import InstagramNotification from './components/InstagramPersonalProfileNotifica
 export default connect(
   state => ({
     profileId: state.profileSidebar.selectedProfileId,
-    tabId: state.tabs.tabId,
+    tabId: state.profileNav.selectedTabId,
   }),
   dispatch => ({
     onDirectPostingClick: ({ profileId, tabId }) => {

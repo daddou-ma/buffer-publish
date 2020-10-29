@@ -13,7 +13,7 @@ const lotsOfProfiles = () =>
   [...Array(10)].reduce(p => [...p, ...profiles], []);
 
 const translations = {
-  connectButton: 'Manage Social Accounts',
+  connectButton: 'Manage Channels',
 };
 
 /* eslint-disable react/prop-types */

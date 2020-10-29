@@ -15,7 +15,6 @@ export default connect(
     const selectedOrgId = state.organizations?.selected?.id;
     const currentPath = state.router.location?.pathname;
     const profiles = state.profileSidebar.profileList;
-    const { hasOrgSwitcherFeature } = state.user;
 
     // Verify if it is an org route and get id param
     const orgRouteParams = getParams({
@@ -41,16 +40,14 @@ export default connect(
 
     const currentOrgId = orgIdFromRoute || selectedOrgId;
 
-    const filteredProfiles = filterProfilesByOrg(
-      profiles,
-      { id: currentOrgId },
-      hasOrgSwitcherFeature
-    );
+    const filteredProfiles = filterProfilesByOrg(profiles, {
+      id: currentOrgId,
+    });
 
     return {
       profiles: filteredProfiles,
       showBusinessTrialistsOnboarding:
-        state.user.showBusinessTrialistsOnboarding,
+        state.organizations.selected?.showBusinessTrialistsOnboarding,
       needsToSetCurrentOrg: selectedOrgId !== currentOrgId,
       currentOrgId,
     };

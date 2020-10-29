@@ -251,8 +251,7 @@ const ComposerStore = Object.assign({}, EventEmitter.prototype, {
 
         // Only validate videos if there is at least one IG business profile selected
         const shouldValidateVideoForInstagram =
-          draft.service.name === 'instagram' 
-          && hasSomeIGDirectProfilesSelected;
+          draft.service.name === 'instagram' && hasSomeIGDirectProfilesSelected;
 
         if (shouldValidateVideoForInstagram) {
           validationResultVideo = validateVideoForInstagram(draft.video);
@@ -775,7 +774,6 @@ const updateDraftCampaignId = monitorComposerLastInteractedWith(
     }
   }
 );
-
 
 const updateDraftScheduledAt = monitorComposerLastInteractedWith(
   (id, timestamp, isPinnedToSlot = false) => {
@@ -1846,7 +1844,8 @@ const copyDraftContents = ({
         }
 
         case AttachmentTypes.MEDIA: {
-          const { isFreeUser } = AppStore.getUserData();
+          const { hasCustomIgVideoCoverFeature = false } =
+            AppStore.getOrganizationsData()?.selected || {};
 
           if (!service.canHaveAttachmentType(enabledAttachmentType)) {
             const message = `${draft.service.formattedName} doesn't allow image attachments, so we removed the images for you!`;
@@ -1858,7 +1857,7 @@ const copyDraftContents = ({
             draftFrom.video !== null &&
             draftFrom.video.wasEdited &&
             !service.canEditVideoAttachment &&
-            isFreeUser
+            !hasCustomIgVideoCoverFeature
           ) {
             const message =
               '​​Please upgrade to our Pro plan to select a custom video thumbnail for Instagram.';
@@ -1869,7 +1868,7 @@ const copyDraftContents = ({
             draftFrom.video !== null &&
             draftFrom.video.wasEdited &&
             !service.canEditVideoAttachment &&
-            !isFreeUser
+            hasCustomIgVideoCoverFeature
           ) {
             // Confirmed that Instagram is currently the only service that can't edit video attachment
             const message =

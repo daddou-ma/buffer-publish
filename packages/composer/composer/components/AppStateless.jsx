@@ -194,7 +194,7 @@ class AppStateless extends React.Component {
     });
 
     const shouldDisplayCampaignHeader =
-      userData?.hasCampaignsFlip && !draftMode;
+      organizations?.selected?.hasCampaignsFeature && !draftMode;
     const campaignId = metaData.campaignDetails?.id ?? null;
     const campaigns = metaData.campaigns ?? [];
 
@@ -249,6 +249,7 @@ class AppStateless extends React.Component {
               appState={appState}
               profiles={profiles}
               userData={userData}
+              organizations={organizations}
               visibleNotifications={visibleNotifications}
             />
           ) : null}
@@ -268,12 +269,6 @@ class AppStateless extends React.Component {
               metaData.shouldEnableFacebookAutocomplete
             }
             composerPosition={position}
-            hasUserTagFeature={userData.hasUserTagFeature || false}
-            hasShopgridFlip={userData.hasShopgridFlip || false}
-            hasCampaignsFlip={userData.hasCampaignsFlip || false}
-            isFreeUser={userData.isFreeUser || false}
-            isBusinessUser={userData.isBusinessUser || false}
-            canStartProTrial={userData.canStartProTrial || false}
             draftMode={draftMode}
           />
 
@@ -338,7 +333,7 @@ AppStateless.propTypes = {
   isPinnedToSlot: PropTypes.bool,
   sentPost: PropTypes.bool,
   draftMode: PropTypes.bool,
-  hasCampaignsFlip: PropTypes.bool,
+  organizations: PropTypes.object, // eslint-disable-line react/forbid-prop-types
 };
 
 AppStateless.defaultProps = {
@@ -347,6 +342,7 @@ AppStateless.defaultProps = {
   isPinnedToSlot: false,
   sentPost: false,
   draftMode: false,
+  organizations: {},
 };
 
 export default AppStateless;

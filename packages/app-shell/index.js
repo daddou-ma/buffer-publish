@@ -19,8 +19,8 @@ export default connect(
     },
     bannerOptions: state.appShell.bannerOptions,
     bannerKey: state.appShell.bannerKey,
-    showSwitchPlan: state.user.showUpgradeToProCta,
-    showManageTeam: state.user.hasAccessTeamPanel,
+    showSwitchPlan: state.organizations.selected?.showUpgradeToProCta,
+    showManageTeam: state.organizations.selected?.hasAccessTeamPanel,
     hideAppShell:
       state.onboarding.canSeeOnboardingPage &&
       state.router.location.pathname === newBusinessTrialists.route,
@@ -30,7 +30,7 @@ export default connect(
      * Org Switcher
      * Needs organizations and profiles.
      */
-    canSeeOrgSwitcher: state.user.canSeeOrgSwitcher,
+    canSeeOrgSwitcher: state.organizations.canSeeOrgSwitcher,
     organizations: getOrgsAlfabeticalOrder(state.organizations.list) || [],
     selectedOrganizationId: state.organizations.selected?.id,
     profiles: state.profileSidebar.profileList,

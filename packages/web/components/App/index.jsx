@@ -28,6 +28,7 @@ const contentStyle = {
   width: '100vw',
   background: '#fff',
   height: '100%',
+  overflow: 'hidden',
 };
 
 // Can't use stateless function for App since then

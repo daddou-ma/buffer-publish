@@ -389,10 +389,10 @@ const AppInitActionCreators = {
     });
   },
 
-  resetUserData: userData => {
+  resetOrganizationsData: organizationsData => {
     AppDispatcher.handleViewAction({
-      actionType: ActionTypes.RESET_USER_DATA,
-      userData,
+      actionType: ActionTypes.RESET_ORGANIZATIONS_DATA,
+      organizationsData,
     });
   },
 

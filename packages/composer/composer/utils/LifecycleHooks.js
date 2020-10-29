@@ -4,9 +4,8 @@ import events from './Events';
 const AppHooks = {
   handleAppLoaded: () => {
     const { shouldDisplayHelpButton } = AppStore.getMetaData();
-    const { isFreeUser } = AppStore.getUserData();
 
-    events.emit('loaded', { isFreeUser, shouldDisplayHelpButton });
+    events.emit('loaded', { shouldDisplayHelpButton });
   },
 
   handleSavedDrafts: ({ message } = {}) => {
@@ -17,7 +16,7 @@ const AppHooks = {
     events.emit('backdrop-clicked');
   },
 
-  // after a user starts a trial, send message with updated userData
+  // after a user starts a trial, send message with updated organizationsData
   handleStartTrial: ({ message, removeScope }) => {
     events.emit('start-trial', { message, removeScope });
   },

@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { QueueItems, Tabs, Tab } from '@bufferapp/publish-shared-components';
+import { QueueItems, Nav, NavLink } from '@bufferapp/publish-shared-components';
+import { campaignScheduled, campaignSent } from '@bufferapp/publish-routes';
 import ComposerPopover from '@bufferapp/publish-composer-popover';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
 import { useTranslation } from 'react-i18next';
@@ -47,10 +48,6 @@ const ViewCampaign = ({
     }
   }, [campaignId, page]);
 
-  useEffect(() => {
-    actions.fetchCampaignsIfNeeded();
-  }, []);
-
   const { t } = useTranslation();
 
   // Conditions
@@ -71,17 +68,18 @@ const ViewCampaign = ({
         isLoading={isLoading && !hideSkeletonHeader}
       />
       {/* Navigation */}
-      <nav role="navigation">
-        <Tabs
-          selectedTabId={page}
-          onTabClick={tabId => actions.onTabClick({ tabId, campaignId })}
+
+      <Nav>
+        <NavLink
+          testId="scheduled-tab"
+          to={campaignScheduled.getRoute({ campaignId })}
         >
-          <Tab tabId="scheduled">
-            {t('campaigns.viewCampaign.scheduledTitle')}
-          </Tab>
-          <Tab tabId="sent">{t('campaigns.viewCampaign.sentTitle')}</Tab>
-        </Tabs>
-      </nav>
+          {t('campaigns.viewCampaign.scheduledTitle')}
+        </NavLink>
+        <NavLink testId="sent-tab" to={campaignSent.getRoute({ campaignId })}>
+          {t('campaigns.viewCampaign.sentTitle')}
+        </NavLink>
+      </Nav>
       {/* Content */}
       {isLoading && <SkeletonPosts />}
       <main id="main">
@@ -137,12 +135,10 @@ ViewCampaign.propTypes = {
     onCreatePostClick: PropTypes.func.isRequired,
     onDeleteCampaignClick: PropTypes.func.isRequired,
     onEditCampaignClick: PropTypes.func.isRequired,
-    onTabClick: PropTypes.func.isRequired,
     fetchCampaign: PropTypes.func.isRequired,
     goToAnalyzeReport: PropTypes.func.isRequired,
     onComposerCreateSuccess: PropTypes.func.isRequired,
     onComposerOverlayClick: PropTypes.func.isRequired,
-    fetchCampaignsIfNeeded: PropTypes.func.isRequired,
   }).isRequired,
   hasAnalyticsOnPosts: PropTypes.bool,
   hasTwitterImpressions: PropTypes.bool,

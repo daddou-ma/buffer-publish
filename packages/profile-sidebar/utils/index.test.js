@@ -20,21 +20,8 @@ describe('profile-sidebar utils', () => {
       id: organization1Id,
     };
 
-    it('returns all profiles if feature not enabled', () => {
-      const filteredProfiles = filterProfilesByOrg(
-        profiles,
-        organization,
-        false
-      );
-      expect(filteredProfiles).toEqual(profiles);
-    });
-
-    it('returns only the profiles in the organization if feature is enabled', () => {
-      const filteredProfiles = filterProfilesByOrg(
-        profiles,
-        organization,
-        true
-      );
+    it('returns only the profiles in the organization', () => {
+      const filteredProfiles = filterProfilesByOrg(profiles, organization);
       expect(filteredProfiles).toEqual([profiles[1]]);
     });
   });

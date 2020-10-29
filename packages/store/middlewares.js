@@ -41,7 +41,6 @@ import campaignsListMiddleware from '@bufferapp/publish-campaigns-list/middlewar
 import deleteCampaignModalMiddleware from '@bufferapp/publish-delete-campaign-modal/middleware';
 import bookmarkletsMiddleware from '@bufferapp/publish-bookmarklets/middleware';
 import trialCompleteModalMiddleware from '@bufferapp/publish-trial-complete-modal/middleware';
-import tabsMiddleware from '@bufferapp/publish-tabs/middleware';
 import appShellMiddleware from '@bufferapp/publish-app-shell/middleware';
 import igFirstCommentProTrialModalMiddleware from '@bufferapp/publish-ig-first-comment-pro-trial-modal/middleware';
 import hashtagGroupsMiddleware from '@bufferapp/publish-hashtag-group-manager/middleware';
@@ -53,6 +52,7 @@ import closeComposerModalMiddleware from '@bufferapp/publish-close-composer-conf
 import temporaryBannerMiddleware from '@bufferapp/publish-temporary-banner/middleware';
 import storyPreviewMiddleware from '@bufferapp/publish-story-preview/middleware';
 import storyGroupComposerMiddleware from '@bufferapp/publish-story-group-composer/middleware';
+import profileNavMiddleware from '@bufferapp/publish-profile-nav/middleware';
 
 import actionsOnlyForAnalyzeMiddleware from '@bufferapp/publish-analytics/middleware';
 
@@ -104,7 +104,6 @@ const composedMiddlewares = history =>
       campaignsListMiddleware,
       deleteCampaignModalMiddleware,
       trialCompleteModalMiddleware,
-      tabsMiddleware,
       appShellMiddleware,
       igFirstCommentProTrialModalMiddleware,
       hashtagGroupsMiddleware,
@@ -117,6 +116,7 @@ const composedMiddlewares = history =>
       temporaryBannerMiddleware,
       storyPreviewMiddleware,
       storyGroupComposerMiddleware,
+      profileNavMiddleware,
 
       actionsOnlyForAnalyzeMiddleware('reveal'),
       // Dynamic middlware insertion point (for lazy-loaded components)
