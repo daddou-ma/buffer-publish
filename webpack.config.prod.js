@@ -7,6 +7,11 @@ const webpack = require('webpack');
 
 const common = require('./webpack.config.common.js');
 
+const publicPath =
+  process.env.USE_PRECOMPILED_BUNDLES === 'true'
+    ? '/'
+    : 'https://static.buffer.com/publish/';
+
 const plugins = [
   new MiniCssExtractPlugin({
     /**
@@ -49,7 +54,7 @@ const merged = merge(common, {
   plugins,
   output: {
     filename: '[name].[contenthash].js',
-    publicPath: 'https://static.buffer.com/publish/',
+    publicPath,
   },
   performance: { hints: false }, // don't warn that the bundles are big, we know ;)
 });

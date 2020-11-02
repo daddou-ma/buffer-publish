@@ -1,9 +1,10 @@
 /* eslint no-console: "off" */
 
 const fs = require('fs');
-const { join } = require('path');
+const { join, extname } = require('path');
 const express = require('express');
 const https = require('https');
+const http = require('http');
 const cors = require('cors');
 const PublishAPI = require('../publishAPI');
 
@@ -153,6 +154,22 @@ function setStandaloneSessionMiddleware(req, res, next) {
 
 function serveStaticAssets(app) {
   app.use(cors());
+  app.use(function(req, res, next) {
+    const whitelist = [
+      /\/rpc\//,
+      /\/health-check/,
+      /\/maintenance/,
+      /pusher\/auth/,
+    ];
+    const isStaticAsset = extname(req.path).length > 0;
+    const isApiRequest = whitelist.some(r => req.path.match(r));
+    if (isApiRequest || isStaticAsset) {
+      return next();
+    }
+    // should force return `index.html` for any other request
+    req.url = '/index.html';
+    return next();
+  });
   app.use('/', express.static(paths.webpackAssets));
 }
 
@@ -187,10 +204,20 @@ async function onBoot({ usePrecompiledBundles }) {
   }
 }
 
+function setupHttpsRedirect() {
+  const app = express();
+  const server = http.createServer(app);
+  app.get('*', function(req, res) {
+    res.redirect(`https://${req.headers.host}${req.url}`);
+  });
+  server.listen(80);
+}
+
 module.exports = {
   loadEnv,
   createServer,
   setStandaloneSessionMiddleware,
   serveStaticAssets,
   onBoot,
+  setupHttpsRedirect,
 };

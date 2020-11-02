@@ -1,0 +1,49 @@
+name: Lighthouse CI (alpha)
+
+on: [push]
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v2
+
+      - name: Use Node.js 12.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+
+      - name: Install LHCI and Puppeteer packages
+        run: |
+          npm install -g @lhci/cli
+          npm install --save puppeteer
+
+      - name: Wait for bufferbotbrains/cicd-buffer-publish
+        id: wait-deploy
+        uses: hamstu/github-action-wait-for-commit-status@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          status-context: 'bufferbotbrains/cicd-buffer-publish'
+
+      - name: Wait for HTTP 200
+        env:
+          URL: ${{ fromJSON(steps.wait-deploy.outputs.status).target_url }}
+        run: |
+          until $(curl --output /dev/null --silent --head --fail $URL); do
+            printf '.'
+            sleep 5
+          done
+
+      - name: run Lighthouse CI
+        env:
+          LHCI_COLLECT_URL: ${{ fromJSON(steps.wait-deploy.outputs.status).target_url }}
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+          LHCI_PUBLISH_BUILD_TOKEN: ${{ secrets.LHCI_PUBLISH_BUILD_TOKEN }}
+          LHCI_BASIC_AUTH_USERNAME: ${{ secrets.LHCI_BASIC_AUTH_USERNAME }}
+          LHCI_BASIC_AUTH_PASSWORD: ${{ secrets.LHCI_BASIC_AUTH_PASSWORD }}
+          LHCI_SERVER_BASE_URL: ${{ secrets.LHCI_SERVER_BASE_URL }}
+          BUFFER_LUNA_SNEAKERS_EMAIL: ${{ secrets.BUFFER_LUNA_SNEAKERS_EMAIL }}
+          BUFFER_LUNA_SNEAKERS_PASSWORD: ${{ secrets.BUFFER_LUNA_SNEAKERS_PASSWORD }}
+        run: |
+          lhci autorun --collect.url="$LHCI_COLLECT_URL" --upload.token="$LHCI_PUBLISH_BUILD_TOKEN" --upload.githubAppToken="$LHCI_GITHUB_APP_TOKEN" --upload.basicAuth.username="$LHCI_BASIC_AUTH_USERNAME" --upload.basicAuth.password="$LHCI_BASIC_AUTH_PASSWORD" --upload.serverBaseUrl="$LHCI_SERVER_BASE_URL"
