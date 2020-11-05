@@ -243,8 +243,6 @@ const DataImportUtils = {
           update.id && Object.keys(update).length > 0;
         const defaultCampaignDetails = metaData.campaignDetails || null;
 
-        console.log('dataimport', update);
-
         meta = {
           ...metaData,
           isPrefillingExistingUpdate,

@@ -809,7 +809,6 @@ function getFormattedAPIData(serviceName, unformattedData) {
 
     if (serviceDraft.service.canHaveLocation) {
       const { isTaggingPageLocation } = serviceDraft;
-      console.log('getFormattedAPIData', { isTaggingPageLocation });
       if (isTaggingPageLocation) {
         conditionalFields.tagging_page_location = isTaggingPageLocation;
       }

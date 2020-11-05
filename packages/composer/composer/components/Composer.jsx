@@ -973,8 +973,6 @@ class Composer extends React.Component {
       ? styles.charCountNoMediaAttachment
       : styles.characterCountWrapper;
 
-    console.log({ isTaggingPageLocation: draft.isTaggingPageLocation });
-
     return (
       <div className={composerClassName} onClick={this.onComposerClick}>
         <div

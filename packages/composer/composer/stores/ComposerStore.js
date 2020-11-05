@@ -969,7 +969,6 @@ const updateShopgridLink = monitorComposerLastInteractedWith(
 const updateIsTaggingPageLocation = (id, isTaggingPageLocation) => {
   const draft = ComposerStore.getDraft(id);
   if (draft.service.name !== 'instagram') return;
-  console.log('updateIsTaggingPageLocation', { id, isTaggingPageLocation });
   draft.isTaggingPageLocation = isTaggingPageLocation;
 };
 

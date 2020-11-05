@@ -107,7 +107,10 @@ function LocationComposerBar({
         <CheckboxLabel type="button" onClick={handleClick}>
           Connected Facebook Page location{' '}
         </CheckboxLabel>
-        <LearnMoreLink newTab href="http://buffer.com">
+        <LearnMoreLink
+          newTab
+          href="https://support.buffer.com/hc/en-us/articles/360037886294-Scheduling-Instagram-posts#h_fe3e6b64-53db-43fe-98af-0d3947d6e9fb"
+        >
           Learn more
         </LearnMoreLink>
       </InputWrapper>

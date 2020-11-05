@@ -167,10 +167,7 @@ module.exports = post => {
 
   const isPastDue = isInThePast(post.scheduled_at);
 
-  console.log({ isTaggingPageLocation: post.tagging_page_location });
-
   return {
-    foo: 'bar',
     day: post.day,
     id: post.id,
     createdAt: post.created_at,
