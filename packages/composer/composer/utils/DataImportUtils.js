@@ -243,7 +243,10 @@ const DataImportUtils = {
           update.id && Object.keys(update).length > 0;
         const defaultCampaignDetails = metaData.campaignDetails || null;
 
-        meta = Object.assign({}, metaData, {
+        console.log('dataimport', update);
+
+        meta = {
+          ...metaData,
           isPrefillingExistingUpdate,
           existingUpdateProfileService: isPrefillingExistingUpdate
             ? update.profile_service
@@ -281,12 +284,13 @@ const DataImportUtils = {
             (update.media && update.media.video && update.media.thumbnail) ||
             null,
           retweet: update.retweet
-            ? Object.assign({}, update.retweet, {
+            ? {
+                ...update.retweet,
                 user_name: update.retweet.username,
                 display_name: update.retweet.profile_name,
                 avatar_https:
                   update.retweet.avatars && update.retweet.avatars.https,
-              })
+              }
             : null,
           sourceUrl: update.source_url || null,
           locationId: update.service_geolocation_id || null,
@@ -297,9 +301,10 @@ const DataImportUtils = {
           commentEnabled: update.commentEnabled,
           commentText: update.commentText || null,
           shopgridLink: update.shopgridLink || null,
+          isTaggingPageLocation: update.isTaggingPageLocation || false,
           tabId: metaData.tabId || null,
           emptySlotMode: metaData.emptySlotMode || false,
-        });
+        };
         break;
       }
 
@@ -404,6 +409,7 @@ const DataImportUtils = {
         commentEnabled: meta.commentEnabled,
         commentText: meta.commentText || null,
         shopgridLink: meta.shopgridLink || null,
+        isTaggingPageLocation: meta.isTaggingPageLocation || null,
         tabId: meta.tabId || null,
         emptySlotMode: meta.emptySlotMode || false,
         editMode: meta.editMode || false,

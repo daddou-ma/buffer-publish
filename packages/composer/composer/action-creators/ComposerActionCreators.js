@@ -140,6 +140,18 @@ const ComposerActionCreators = {
     });
   },
 
+  updateDraftIsTaggingPageLocation: (id, isTaggingPageLocation) => {
+    console.log('ComposerActionCreators.updateDraftIsTaggingPageLocation', {
+      id,
+      isTaggingPageLocation,
+    });
+    AppDispatcher.handleViewAction({
+      actionType: ActionTypes.COMPOSER_UPDATE_DRAFT_IS_TAGGING_PAGE_LOCATION,
+      id,
+      isTaggingPageLocation,
+    });
+  },
+
   updateToggleSidebarVisibility: (id, composerSidebarVisible) => {
     AppDispatcher.handleViewAction({
       actionType: ActionTypes.COMPOSER_UPDATE_TOGGLE_SIDEBAR,

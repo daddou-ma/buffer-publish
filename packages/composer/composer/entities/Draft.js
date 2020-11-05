@@ -35,6 +35,7 @@ class Draft {
     this.instagramFeedback = [];
     this.locationId = null;
     this.locationName = null;
+    this.isTaggingPageLocation = null;
   }
 
   isEmpty() {

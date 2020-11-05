@@ -966,6 +966,13 @@ const updateShopgridLink = monitorComposerLastInteractedWith(
   }
 );
 
+const updateIsTaggingPageLocation = (id, isTaggingPageLocation) => {
+  const draft = ComposerStore.getDraft(id);
+  if (draft.service.name !== 'instagram') return;
+  console.log('updateIsTaggingPageLocation', { id, isTaggingPageLocation });
+  draft.isTaggingPageLocation = isTaggingPageLocation;
+};
+
 const updateDraftCommentCharacterCount = monitorComposerLastInteractedWith(
   (id, didEditorStateChange) => {
     let draft;
@@ -2167,6 +2174,16 @@ const onDispatchedPayload = payload => {
 
     case ActionTypes.COMPOSER_UPDATE_DRAFT_SHOPGRID_LINK:
       updateShopgridLink(action.id, action.shopgridLink);
+      break;
+
+    case ActionTypes.COMPOSER_UPDATE_DRAFT_IS_TAGGING_PAGE_LOCATION:
+      updateIsTaggingPageLocation(action.id, action.isTaggingPageLocation);
+      break;
+
+    case ActionTypes.COMPOSER_UPDATE_DRAFTS_IS_TAGGING_PAGE_LOCATION:
+      state.drafts.forEach(draft =>
+        updateIsTaggingPageLocation(draft.id, action.isTaggingPageLocation)
+      );
       break;
 
     case ActionTypes.COMPOSER_UPDATE_DRAFTS_SHOPGRID_LINK:

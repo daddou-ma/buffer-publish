@@ -167,7 +167,10 @@ module.exports = post => {
 
   const isPastDue = isInThePast(post.scheduled_at);
 
+  console.log({ isTaggingPageLocation: post.tagging_page_location });
+
   return {
+    foo: 'bar',
     day: post.day,
     id: post.id,
     createdAt: post.created_at,
@@ -181,6 +184,7 @@ module.exports = post => {
     imageSrc: isVideo ? media.thumbnail : media.picture,
     imageUrls: getImageUrls(post),
     shopgridLink: post.link,
+    isTaggingPageLocation: post.tagging_page_location,
     links: canHaveLinks ? links : [],
     profileTimezone: post.profile_timezone,
     linkAttachment: {

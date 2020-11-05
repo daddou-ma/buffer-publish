@@ -58,6 +58,7 @@ class Composer extends React.Component {
       isEnabled: PropTypes.bool,
       isSaved: PropTypes.bool,
       hasSavingError: PropTypes.bool,
+      isTaggingPageLocation: PropTypes.bool,
       link: PropTypes.shape({
         availableThumbnails: PropTypes.array,
         thumbnail: PropTypes.shape({
@@ -972,6 +973,8 @@ class Composer extends React.Component {
       ? styles.charCountNoMediaAttachment
       : styles.characterCountWrapper;
 
+    console.log({ isTaggingPageLocation: draft.isTaggingPageLocation });
+
     return (
       <div className={composerClassName} onClick={this.onComposerClick}>
         <div
@@ -1182,15 +1185,10 @@ class Composer extends React.Component {
               />
 
               <LocationComposerBar
-                withMediaAttachment={!usesImageFirstLayout}
                 selectedProfiles={selectedProfiles}
                 isInstagram={this.isInstagram()}
-                hasVideo={this.hasVideo()}
                 draftId={draft.id}
-                locationName={locationName}
-                instagramProfileId={this.getSelectedInstagramProfileId()}
-                places={draft.places}
-                locationId={draft.locationId}
+                isTaggingPageLocation={draft.isTaggingPageLocation}
               />
             </div>
           )}
