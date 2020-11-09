@@ -60,6 +60,10 @@ const Checkbox = styled.button`
   padding: 0 1px;
   box-sizing: border-box;
   color: #fff;
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #2c4bff44;
+  }
 `;
 
 const CheckboxLabel = styled.button`
