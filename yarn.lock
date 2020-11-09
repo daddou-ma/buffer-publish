@@ -1472,10 +1472,10 @@
     moment-timezone "^0.5.25"
     react-highcharts "^16.0.2"
 
-"@bufferapp/app-shell@1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@bufferapp/app-shell/-/app-shell-1.0.1.tgz#1bb92e54ca7a034de65ad50b80ab7d8e2fb1b344"
-  integrity sha512-ZExEhFu0jxMF1wo8IrQJTd8gjorEt/PIpwMW2k28tP7F50/AxWm+s78DwCMscsF95KqMoF+yWu1hsctG2mGzUA==
+"@bufferapp/app-shell@1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@bufferapp/app-shell/-/app-shell-1.0.2.tgz#a5d7b841e7f1b364ba3fc92eeb187064d1290a5f"
+  integrity sha512-3oq77nEmnvGFlJHppm2Xo1gyjpWlnUks6Kdh7aQXkiWA85uCSv7pOZxIJzPDxR/ViK++ARMQONjFHOPSxaP4XQ==
 
 "@bufferapp/async-data-fetch@0.5.36-beta01":
   version "0.5.36-beta01"
