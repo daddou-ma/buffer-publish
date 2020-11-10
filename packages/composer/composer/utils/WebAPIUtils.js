@@ -10,7 +10,10 @@ import AppStore from '../stores/AppStore';
 import API from './API';
 import { observeStore } from '../utils/StoreUtils';
 import { extractSavedUpdatesIdsFromResponses } from '../utils/APIDataTransforms';
-import { getComposerSource, getSegmentCampaignMetadata } from '../utils/TrackingUtils';
+import {
+  getComposerSource,
+  getSegmentCampaignMetadata,
+} from '../utils/TrackingUtils';
 
 import getFacebookAutocompleteEntities from '../utils/draft-js-custom-plugins/autocomplete/utils/getFacebookAutocompleteEntities';
 
@@ -822,9 +825,11 @@ function getFormattedAPIData(serviceName, unformattedData) {
     }
 
     if (serviceDraft.service.canHaveLocation) {
-      const { locationId, locationName } = serviceDraft;
-      conditionalFields.service_geolocation_id = locationId;
-      conditionalFields.service_geolocation_name = locationName;
+      const { isTaggingPageLocation } = serviceDraft;
+      if (isTaggingPageLocation) {
+        conditionalFields.tagging_page_location = isTaggingPageLocation;
+      }
+      // conditionalFields.service_geolocation_name = locationName;
     }
 
     const { images } = serviceDraft;
@@ -873,37 +878,35 @@ function getFormattedAPIData(serviceName, unformattedData) {
     return conditionalFields;
   };
 
-  return Object.assign(
-    {
-      now: unformattedData.queueingType === QueueingTypes.NOW,
-      top:
-        unformattedData.queueingType === QueueingTypes.NEXT ||
-        unformattedData.queueingType === QueueingTypes.NEXT_DRAFT,
-      is_draft:
-        unformattedData.queueingType === QueueingTypes.ADD_DRAFT ||
-        unformattedData.queueingType === QueueingTypes.NEXT_DRAFT ||
-        unformattedData.queueingType === QueueingTypes.CUSTOM_DRAFT,
-      shorten: shouldShortenLinks,
-      // When editing updates, the API expects only the text field to be used (not fb_text)
-      text: serviceDraftText,
-      fb_text:
-        serviceName === 'facebook' && !isEditingUpdate ? serviceDraftText : '',
-      entities:
-        serviceName === 'facebook'
-          ? getFacebookAutocompleteEntities(serviceDraft.editorState)
-          : null,
-      profile_ids: serviceProfilesIds,
-      attachment: hasEnabledLinkAttachment,
-      via:
-        appMetaData.appEnvironment === AppEnvironments.EXTENSION
-          ? 'bookmarklet'
-          : null,
-      source: appMetaData.browser,
-      version: appMetaData.extensionVersion,
-    },
-    getConditionalFields(),
-    getFormattedMediaFields()
-  );
+  return {
+    now: unformattedData.queueingType === QueueingTypes.NOW,
+    top:
+      unformattedData.queueingType === QueueingTypes.NEXT ||
+      unformattedData.queueingType === QueueingTypes.NEXT_DRAFT,
+    is_draft:
+      unformattedData.queueingType === QueueingTypes.ADD_DRAFT ||
+      unformattedData.queueingType === QueueingTypes.NEXT_DRAFT ||
+      unformattedData.queueingType === QueueingTypes.CUSTOM_DRAFT,
+    shorten: shouldShortenLinks,
+    // When editing updates, the API expects only the text field to be used (not fb_text)
+    text: serviceDraftText,
+    fb_text:
+      serviceName === 'facebook' && !isEditingUpdate ? serviceDraftText : '',
+    entities:
+      serviceName === 'facebook'
+        ? getFacebookAutocompleteEntities(serviceDraft.editorState)
+        : null,
+    profile_ids: serviceProfilesIds,
+    attachment: hasEnabledLinkAttachment,
+    via:
+      appMetaData.appEnvironment === AppEnvironments.EXTENSION
+        ? 'bookmarklet'
+        : null,
+    source: appMetaData.browser,
+    version: appMetaData.extensionVersion,
+    ...getConditionalFields(),
+    ...getFormattedMediaFields(),
+  };
 }
 
 export default WebAPIUtils;

@@ -181,6 +181,7 @@ module.exports = post => {
     imageSrc: isVideo ? media.thumbnail : media.picture,
     imageUrls: getImageUrls(post),
     shopgridLink: post.link,
+    isTaggingPageLocation: post.tagging_page_location,
     links: canHaveLinks ? links : [],
     profileTimezone: post.profile_timezone,
     linkAttachment: {
