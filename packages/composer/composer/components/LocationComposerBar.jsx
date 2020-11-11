@@ -106,7 +106,7 @@ function LocationComposerBar({
       <InputWrapper>
         <Checkbox
           type="button"
-          checked={checked}
+          checked={shouldDisableLocationCheck ? false : checked}
           aria-label="Tag with connected Facebook Page location"
           onClick={handleClick}
           disabled={shouldDisableLocationCheck}
