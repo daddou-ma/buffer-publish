@@ -96,6 +96,10 @@ function LocationComposerBar({
     ComposerActionCreators.updateDraftIsTaggingPageLocation(draftId, !checked);
   };
 
+  const shouldDisableLocationCheck = !selectedProfiles.some(
+    profile => profile.canAssociateLocation
+  );
+
   return shouldShow ? (
     <Container>
       <LabelWrapper>Location</LabelWrapper>
@@ -105,10 +109,15 @@ function LocationComposerBar({
           checked={checked}
           aria-label="Tag with connected Facebook Page location"
           onClick={handleClick}
+          disabled={shouldDisableLocationCheck}
         >
           <Check />
         </Checkbox>
-        <CheckboxLabel type="button" onClick={handleClick}>
+        <CheckboxLabel
+          type="button"
+          onClick={handleClick}
+          disabled={shouldDisableLocationCheck}
+        >
           Connected Facebook Page location{' '}
         </CheckboxLabel>
         <LearnMoreLink
