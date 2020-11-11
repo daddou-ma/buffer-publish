@@ -38,6 +38,7 @@ module.exports = profile => ({
   isDisconnected: profile.oauth_broken,
   location: profile.location,
   shouldHideAdvancedAnalytics: profile.should_hide_advanced_analytics,
+  canAssociateLocation: profile.can_associate_location,
   // Remove when publish stops importing Analyze components
   organizationId: profile.organization_id,
   username: profile.service_username,

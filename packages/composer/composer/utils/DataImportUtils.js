@@ -150,6 +150,7 @@ const DataImportUtils = {
         subprofiles,
         hasPushNotifications: importedProfile.hasPushNotifications,
         canPostComment: importedProfile.canPostComment,
+        canAssociateLocation: importedProfile.canAssociateLocation,
         profileHasPostingSchedule: importedProfile.schedules.some(
           item => item.times.length > 0
         ),
