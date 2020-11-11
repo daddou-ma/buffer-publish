@@ -46,6 +46,7 @@ class App extends React.Component {
       PropTypes.shape({
         id: PropTypes.string.isRequired,
         canPostComment: PropTypes.bool,
+        canAssociateLocation: PropTypes.bool,
         serviceName: PropTypes.string.isRequired,
         serviceUsername: PropTypes.string.isRequired,
         serviceFormattedUsername: PropTypes.string.isRequired,
