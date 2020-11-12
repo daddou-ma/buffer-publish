@@ -88,7 +88,6 @@ const buildProfile = build('Profile', {
     avatar_https:
       'https://pbs.twimg.com/profile_images/1134013946929778693/DFqLN6GR_normal.png',
     shouldHideAdvancedAnalytics: false,
-    shouldDisplayIGPersonalNotification: false,
   },
 });
 

@@ -4,7 +4,6 @@ import { Divider, Text } from '@bufferapp/components';
 import styled from 'styled-components';
 import { QueueButtonGroup } from '@bufferapp/publish-shared-components';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
-import InstagramPersonalProfileNotification from '@bufferapp/publish-ig-personal-profile-notification';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 import ProfilesDisconnectedBanner from '@bufferapp/publish-profiles-disconnected-banner';
 import PastRemindersPosts from '../PastRemindersPosts';
@@ -59,16 +58,11 @@ const PastRemindersWrapper = props => {
     viewType,
     onToggleViewType,
     profileId,
-    shouldDisplayIGPersonalNotification,
   } = props;
 
   useEffect(() => {
     onToggleViewType('posts');
   }, [profileId]);
-
-  if (shouldDisplayIGPersonalNotification) {
-    return <InstagramPersonalProfileNotification />;
-  }
 
   if (isLockedProfile) {
     return <LockedProfileNotification />;
@@ -100,7 +94,6 @@ PastRemindersWrapper.propTypes = {
   isDisconnectedProfile: PropTypes.bool,
   onToggleViewType: PropTypes.func,
   profileId: PropTypes.string.isRequired,
-  shouldDisplayIGPersonalNotification: PropTypes.bool,
 };
 
 PastRemindersWrapper.defaultProps = {
@@ -109,7 +102,6 @@ PastRemindersWrapper.defaultProps = {
   isLockedProfile: false,
   isDisconnectedProfile: false,
   onToggleViewType: () => {},
-  shouldDisplayIGPersonalNotification: false,
 };
 
 export default PastRemindersWrapper;

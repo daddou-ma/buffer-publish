@@ -45,8 +45,6 @@ export default connect(
         userData: state.user,
         showStoryPreview: state.pastReminders.showStoryPreview,
         hasShareAgainFeature: state.organizations.selected?.hasShareAgainFeature,
-        shouldDisplayIGPersonalNotification:
-          profileData.shouldDisplayIGPersonalNotification,
       };
     }
     return {};

@@ -106,8 +106,6 @@ export default connect(
           !profileData.hasPushNotifications &&
           isInstagramProfile &&
           hasAtLeastOneReminderPost,
-        shouldDisplayIGPersonalNotification:
-          profileData.shouldDisplayIGPersonalNotification,
       };
     }
     return {

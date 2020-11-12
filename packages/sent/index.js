@@ -57,8 +57,6 @@ export default connect(
         hasAnalyticsOnPosts: state.organizations.selected?.hasAnalyticsOnPosts,
         hasTwitterImpressions:
           state.organizations.selected?.hasTwitterImpressions,
-        shouldDisplayIGPersonalNotification:
-          profileData.shouldDisplayIGPersonalNotification,
       };
     }
     return {};

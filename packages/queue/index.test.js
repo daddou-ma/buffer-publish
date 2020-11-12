@@ -147,39 +147,6 @@ describe('QueuedPosts | user interaction', () => {
     expect(slots.length).toBeGreaterThan(0);
   });
 
-  test('should render ig personal notification', () => {
-    const personalProfile = {
-      ...profile,
-      shouldDisplayIGPersonalNotification: true,
-    };
-    render(
-      <TestDragDropContainer>
-        <QueuedPosts profileId={profile.id} />
-      </TestDragDropContainer>,
-      {
-        initialState: {
-          ...initialState,
-          profileSidebar: {
-            ...initialState.profileSidebar,
-            selectedProfile: personalProfile,
-            profiles: [personalProfile],
-          },
-        },
-      }
-    );
-
-    const notificationHeading = screen.getByRole('heading', {
-      name: /Please enable direct scheduling to continue using Buffer with this Instagram account./i,
-    });
-
-    const directSchedulingBtn = screen.getByRole('button', {
-      name: /Enable Direct Scheduling/i,
-    });
-
-    expect(directSchedulingBtn).toBeInTheDocument();
-    expect(notificationHeading).toBeInTheDocument();
-  });
-
   test('should render queue with slots and posts', async () => {
     render(
       <TestDragDropContainer>

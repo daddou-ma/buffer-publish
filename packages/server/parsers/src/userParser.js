@@ -11,8 +11,6 @@ module.exports = userData => ({
   skip_empty_text_alert: userData.messages.includes(
     'remember_confirm_saving_modal'
   ),
-  // add temporary way for buffer admin to connect personal ig profile
-  canSeeIGPersonalProfileConnect: userData.is_admin,
   profile_groups: userData.profile_groups || [],
   s3_upload_signature: userData.s3_upload_signature,
   week_starts_monday: userData.week_starts_monday,

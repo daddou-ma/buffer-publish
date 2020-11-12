@@ -123,7 +123,6 @@ export default connect(
     const currentProfile = state.drafts.byProfileId[profileId];
     if (currentProfile) {
       const {
-        shouldDisplayIGPersonalNotification,
         isDisconnected,
         isManager,
       } = state.profileSidebar.selectedProfile;
@@ -154,7 +153,6 @@ export default connect(
           state.organizations?.selected?.hasFirstCommentFeature,
         showShowDraftsPaywall:
           state.organizations?.selected?.showShowDraftsPaywall,
-        shouldDisplayIGPersonalNotification,
         profileId: ownProps.profileId,
       };
     }
