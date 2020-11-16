@@ -34,6 +34,7 @@ const Header = ({
   } = timezoneItems;
   const { text, dayOfWeek, date, id } = item;
   const renderCalendarButtons = shouldRenderCalendarButtons && isFirstItem;
+  const formattedTimezone = profileTimezone?.replace('_', ' ');
 
   return (
     <HeaderWrapper
@@ -45,9 +46,10 @@ const Header = ({
       {shouldDisplayTimezone && isFirstItem && (
         <TimezoneWrapper>
           <Text type="p" color="grayDark">
-            {profileTimezone}
+            {formattedTimezone}
           </Text>
           <Button
+            as="a"
             type="text"
             onClick={onTimezoneClick}
             icon={<Gear />}
