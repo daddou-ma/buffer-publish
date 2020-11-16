@@ -122,7 +122,7 @@ function LocationComposerBar({
         </CheckboxLabel>
         <LearnMoreLink
           newTab
-          href="https://support.buffer.com/hc/en-us/articles/360037886294-Scheduling-Instagram-posts#h_fe3e6b64-53db-43fe-98af-0d3947d6e9fb"
+          href="https://support.buffer.com/hc/en-us/articles/360057110674-How-locations-work-when-scheduling-Instagram-posts-from-Buffer-Publish"
         >
           Learn more
         </LearnMoreLink>
