@@ -43,20 +43,24 @@ const Header = ({
       isFirstItem={isFirstItem}
     >
       <QueueHeader id={id} text={text} dayOfWeek={dayOfWeek} date={date} />
-      {shouldDisplayTimezone && isFirstItem && (
+      {isFirstItem && (
         <TimezoneWrapper>
-          <Text type="p" color="grayDark">
-            {formattedTimezone}
-          </Text>
-          <Button
-            as="a"
-            type="text"
-            onClick={onTimezoneClick}
-            icon={<Gear />}
-            hasIconOnly
-            label="Change Timezone"
-            size="small"
-          />
+          {shouldDisplayTimezone && (
+            <>
+              <Text type="p" color="grayDark">
+                {formattedTimezone}
+              </Text>
+              <Button
+                as="a"
+                type="text"
+                onClick={onTimezoneClick}
+                icon={<Gear />}
+                hasIconOnly
+                label="Change Timezone"
+                size="small"
+              />
+            </>
+          )}
 
           {renderCalendarButtons && (
             <CalendarButtons onCalendarClick={onCalendarClick} />
