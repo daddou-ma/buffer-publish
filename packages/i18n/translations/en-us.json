@@ -382,8 +382,10 @@
       "collaborationEmail": "Send me emails about contributions from team members. For example, if a post is awaiting approval.",
       "newsletter": "Newsletter",
       "newsletterEmail": "Send me emails with product updates, tips, and best practices.",
-      "queue": "Post & Queue",
-      "queueEmail": "Send me emails about changes to the status of my queue and scheduled posts. For example, if a post fails or if my queue becomes empty.",
+      "queue": "Queue Status Updates",
+      "queueEmail": "Send me emails about changes to the status of my queue and scheduled posts. For example, when a post successfully publishes or if my queue becomes empty. ",
+      "postFailure": "Post Failures",
+      "postFailureEmail": "Send me an email if a post in my queue fails to be published.",
       "celebrations": "Celebrations",
       "celebrationsEmail": "Send me emails celebrating my social media achievements with Buffer."
     },
