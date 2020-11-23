@@ -1,6 +1,9 @@
 name: Lighthouse CI (alpha)
 
-on: [push]
+on: 
+  push:
+    tags-ignore: 
+      - depfu
 
 jobs:
   lighthouse:
