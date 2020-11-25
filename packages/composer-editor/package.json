@@ -1,0 +1,19 @@
+{
+  "name": "@bufferapp/publish-composer-editor",
+  "version": "2.0.0",
+  "description": "Composer text editor",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint . --ignore-pattern coverage node_modules"
+  },
+  "author": "ana@buffer.com",
+  "dependencies": {
+    "slate": "0.59.0",
+    "slate-history": "0.59.0",
+    "slate-react": "0.59.0"
+  },
+  "devDependencies": {},
+  "publishConfig": {
+    "access": "public"
+  }
+}
