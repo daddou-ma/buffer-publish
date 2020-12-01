@@ -2,7 +2,13 @@ import './analytics.mock';
 import { actionTypes } from './actions';
 import middleware from './middleware';
 
-const state = {};
+const state = {
+  organizations: {
+    selected: {
+      globalOrgId: 'org1',
+    },
+  },
+};
 
 describe('middleware', () => {
   const next = jest.fn();
@@ -56,6 +62,7 @@ describe('middleware', () => {
       bar: 'bar',
       product: 'publish',
       clientName: 'publishWeb',
+      organizationId: 'org1',
     });
   });
 
