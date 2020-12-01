@@ -22,9 +22,6 @@ export default ({ dispatch, getState }) => next => action => {
           name: state.user.name,
           email: state.globalAccount.email,
           productSolutionName: state.globalAccount.productSolutionName || null,
-          createdAt: state.user.createdAt.toString(),
-          organizationId: state.organization.selected?.globalOrgId,
-          plan: state.organization.selected?.plan,
         })
       );
       break;
