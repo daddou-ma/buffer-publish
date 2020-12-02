@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import { grayDarker } from '@bufferapp/ui/style/colors';
 import { fontSize, fontFamily } from '@bufferapp/ui/style/fonts';
 
-import EmojiPicker from '../Plugins/EmojiPicker';
+import EmojiPicker from '../plugins/EmojiPicker';
 
 const initialValue = [
   {
