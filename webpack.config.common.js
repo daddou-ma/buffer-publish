@@ -47,12 +47,18 @@ module.exports = {
         },
       },
       {
-        test: /node_modules\/@bufferapp\/draft-js-emoji-plugin\/lib\/plugin\.css/,
-        loaders: ['style-loader', 'css-loader'],
+        test: [
+          /node_modules\/@bufferapp\/draft-js-emoji-plugin\/lib\/plugin\.css/,
+          /node_modules\/emoji-mart\/css\/emoji-mart\.css/,
+        ],
+        use: ['style-loader', 'css-loader'],
       },
       {
         test: /\.css$/,
-        exclude: /node_modules\/@bufferapp\/draft-js-emoji-plugin\/lib\/plugin\.css/,
+        exclude: [
+          /node_modules\/@bufferapp\/draft-js-emoji-plugin\/lib\/plugin\.css/,
+          /node_modules\/emoji-mart\/css\/emoji-mart\.css/,
+        ],
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
