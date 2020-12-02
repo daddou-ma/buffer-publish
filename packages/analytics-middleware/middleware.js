@@ -1,6 +1,6 @@
 import { actionTypes } from './actions';
 
-export default () => next => action => {
+export default ({ getState }) => next => action => {
   // eslint-disable-line no-unused-vars
   next(action);
   switch (action.type) {
@@ -14,6 +14,7 @@ export default () => next => action => {
         window.analytics.track(action.eventName, {
           product: window.PRODUCT_TRACKING_KEY,
           clientName: window.CLIENT_NAME,
+          organizationId: getState().organizations.selected?.globalOrgId,
           ...action.payload,
         });
       }
