@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import { Provider } from 'react-redux';
 import Onboarding, { reducer, actions, actionTypes, middleware } from './index';
 import OnboardingManager from './components/OnboardingManager';
@@ -11,7 +11,7 @@ const storeFake = state => ({
   getState: () => ({ ...state }),
 });
 
-describe('Component', () => {
+describe('Onboarding', () => {
   const state = {
     onboarding: {
       canSeeOnboardingPage: true,
@@ -28,19 +28,6 @@ describe('Component', () => {
       },
     },
   };
-  test('should render', () => {
-    const store = storeFake(state);
-    const wrapper = mount(
-      <Provider store={store}>
-        <Onboarding canSeeOnboardingPage translations="" />
-      </Provider>
-    );
-    expect(wrapper.find(OnboardingManager).length).toBe(1);
-    expect(wrapper.find(OnboardingManager).prop('canSeeOnboardingPage')).toBe(
-      true
-    );
-    wrapper.unmount();
-  });
 });
 
 describe('Onboarding', () => {

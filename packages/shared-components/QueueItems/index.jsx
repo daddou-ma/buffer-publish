@@ -12,6 +12,7 @@ const QueueItems = ({
   onEmptySlotClick,
   onCalendarClick,
   shouldRenderCalendarButtons,
+  timezoneItems,
   showAnalyzeBannerAfterFirstPost,
   ...propsForPosts
 }) => {
@@ -28,6 +29,7 @@ const QueueItems = ({
             item={rest}
             isFirstItem={index === 0}
             onCalendarClick={onCalendarClick}
+            timezoneItems={timezoneItems}
             shouldRenderCalendarButtons={shouldRenderCalendarButtons}
           />
         );

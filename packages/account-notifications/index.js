@@ -8,6 +8,7 @@ export default connect(
     queue: state.accountNotifications.queueNotifications,
     newsletter: state.accountNotifications.newsletterNotifications,
     milestones: state.accountNotifications.milestonesNotifications,
+    postFailure: state.accountNotifications.postFailureNotifications,
   }),
   dispatch => ({
     onToggleClick: (newToggleValue, type) => {

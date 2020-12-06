@@ -11,6 +11,7 @@ const Notifications = ({
   queue,
   newsletter,
   milestones,
+  postFailure,
 }) => {
   const { t } = useTranslation();
 
@@ -25,6 +26,14 @@ const Notifications = ({
         onToggleClick={onToggleClick}
         toggleIsEnabled={queue}
         type="queueNotifications"
+      />
+      <Divider />
+      <Notification
+        title={t('preferences.notifications.postFailure')}
+        description={t('preferences.notifications.postFailureEmail')}
+        onToggleClick={onToggleClick}
+        toggleIsEnabled={postFailure}
+        type="postFailureNotifications"
       />
       <Divider />
       <Notification
@@ -60,6 +69,7 @@ Notifications.propTypes = {
   queue: PropTypes.bool.isRequired,
   newsletter: PropTypes.bool.isRequired,
   milestones: PropTypes.bool.isRequired,
+  postFailure: PropTypes.bool.isRequired,
 };
 
 export default Notifications;

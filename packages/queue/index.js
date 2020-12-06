@@ -4,6 +4,7 @@ import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 import { actions as modalsActions } from '@bufferapp/publish-modals';
 import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
+import { profileChildTabPages } from '@bufferapp/publish-routes';
 
 import { actions } from './reducer';
 import {
@@ -106,6 +107,8 @@ export default connect(
           !profileData.hasPushNotifications &&
           isInstagramProfile &&
           hasAtLeastOneReminderPost,
+        shouldDisplayTimezone: profileData.isManager,
+        profileTimezone: profileData.timezone,
       };
     }
     return {
@@ -230,6 +233,15 @@ export default connect(
       if (weekOrMonth === 'week' || weekOrMonth === 'month') {
         openCalendarWindow(ownProps.profileId, weekOrMonth);
       }
+    },
+    onTimezoneClick: () => {
+      dispatch(
+        profileChildTabPages.goTo({
+          profileId: ownProps.profileId,
+          tabId: 'settings',
+          childTabId: 'postingSchedule',
+        })
+      );
     },
   })
 )(QueuedPosts);

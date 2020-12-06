@@ -29,6 +29,9 @@ module.exports = userData => ({
     milestonesNotifications: userData.email_notifications.includes(
       'milestonesNotifications'
     ),
+    postFailureNotifications: userData.email_notifications.includes(
+      'postFailureNotifications'
+    ),
   },
   analyzeCrossSale: userData.is_analyze_customer,
   features: userData.features, // these are user features only, for org features (owner features) check org parser

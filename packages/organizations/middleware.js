@@ -78,8 +78,7 @@ export default ({ dispatch, getState }) => next => action => {
       dispatch(
         analyticsActions.trackEvent('Organization Switched', {
           organizationId: selected.globalOrgId,
-          publishOrganizationSwitchedTo: organizationId,
-          publishOrganizationSwitchedFrom: selected.id,
+          previousOrganizationId: selected.id,
         })
       );
 

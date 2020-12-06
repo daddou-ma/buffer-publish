@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import {
@@ -71,6 +71,9 @@ const QueuedPosts = ({
   shouldDisplaySingleSlots,
   preserveComposerStateOnClose,
   shouldDisplayRemindersBanner,
+  shouldDisplayTimezone,
+  profileTimezone,
+  onTimezoneClick,
 }) => {
   if (loading) {
     return (
@@ -160,6 +163,11 @@ const QueuedPosts = ({
         onCampaignTagClick={onCampaignTagClick}
         hasCampaignsFeature={hasCampaignsFeature}
         shouldRenderCalendarButtons={hasCalendarFeature}
+        timezoneItems={{
+          shouldDisplayTimezone,
+          profileTimezone,
+          onTimezoneClick,
+        }}
         pinned={!shouldDisplaySingleSlots}
       />
     </ErrorBoundary>
@@ -213,10 +221,15 @@ QueuedPosts.propTypes = {
   hasCalendarFeature: PropTypes.bool,
   shouldDisplaySingleSlots: PropTypes.bool,
   preserveComposerStateOnClose: PropTypes.bool,
+  shouldDisplayTimezone: PropTypes.bool,
+  profileTimezone: PropTypes.string,
+  onTimezoneClick: PropTypes.func.isRequired,
 };
 
 QueuedPosts.defaultProps = {
   preserveComposerStateOnClose: true,
+  shouldDisplayTimezone: false,
+  profileTimezone: '',
   loading: true,
   moreToLoad: false,
   page: 1,
