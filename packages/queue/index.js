@@ -54,8 +54,6 @@ export default connect(
     if (queue && profileData) {
       const { isDisconnected } = state.profileSidebar.selectedProfile;
       const isInstagramProfile = profileData.type === 'instagram';
-      const shouldDisplayRetiringProfileBanner =
-        isInstagramProfile && !profileData.isInstagramBusiness;
 
       return {
         preserveComposerStateOnClose: state.queue.preserveComposerStateOnClose,
@@ -98,11 +96,8 @@ export default connect(
         hasCampaignsFeature: state.organizations.selected?.hasCampaignsFeature,
         hasCalendarFeature: state.organizations.selected?.hasCalendarFeature,
         shouldDisplaySingleSlots,
-        shouldDisplayDisconnectedBanner:
-          !shouldDisplayRetiringProfileBanner && isDisconnected,
-        shouldDisplayRetiringProfileBanner,
+        shouldDisplayDisconnectedBanner: isDisconnected,
         shouldDisplayRemindersBanner:
-          !shouldDisplayRetiringProfileBanner &&
           !isDisconnected &&
           !profileData.hasPushNotifications &&
           isInstagramProfile &&

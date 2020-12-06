@@ -21,7 +21,6 @@ import RPCClient from '@bufferapp/micro-rpc-client';
 import '@bufferapp/publish-web/components/i18n';
 
 import QueuedPosts from './index';
-import RetiringProfileBanner from './components/RetiringProfileBanner/index';
 
 const profile = buildProfile();
 const initialState = {
@@ -188,11 +187,5 @@ describe('QueuedPosts | user interaction', () => {
       updateId: post1.id,
     });
     expect(rpcCall).toHaveBeenCalledTimes(1);
-  });
-  test('a11y | retiring IG profile banner is accessible', async () => {
-    const { container } = render(<RetiringProfileBanner />);
-    const results = await axe(container);
-    expect(results).toHaveNoViolations();
-    cleanup();
   });
 });
