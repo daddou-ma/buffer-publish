@@ -9,14 +9,12 @@ import {
 } from '@bufferapp/publish-shared-components';
 import ComposerPopover from '@bufferapp/publish-composer-popover';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
-import InstagramPersonalProfileNotification from '@bufferapp/publish-ig-personal-profile-notification';
 import ProfilesDisconnectedBanner from '@bufferapp/publish-profiles-disconnected-banner';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 
 import InstagramDirectPostingBanner from '../InstagramDirectPostingBanner';
 import QueuePausedBar from '../QueuePausedBar';
 import RemindersBanner from '../RemindersBanner';
-import RetiringProfileBanner from '../RetiringProfileBanner';
 
 const ErrorBoundary = getErrorBoundary(true);
 
@@ -73,8 +71,6 @@ const QueuedPosts = ({
   shouldDisplaySingleSlots,
   preserveComposerStateOnClose,
   shouldDisplayRemindersBanner,
-  shouldDisplayRetiringProfileBanner,
-  shouldDisplayIGPersonalNotification,
   shouldDisplayTimezone,
   profileTimezone,
   onTimezoneClick,
@@ -95,18 +91,12 @@ const QueuedPosts = ({
     );
   }
 
-  if (shouldDisplayIGPersonalNotification) {
-    return <InstagramPersonalProfileNotification />;
-  }
-
   if (isLockedProfile) {
     return <LockedProfileNotification />;
   }
 
   return (
     <ErrorBoundary>
-      {/* temporary banner for retiring IG personal profiles. Will remove in October */}
-      {shouldDisplayRetiringProfileBanner && <RetiringProfileBanner />}
       {shouldDisplayDisconnectedBanner && <ProfilesDisconnectedBanner />}
       {shouldDisplayRemindersBanner && (
         <RemindersBanner onSetRemindersClick={onSetRemindersClick} />
@@ -221,7 +211,6 @@ QueuedPosts.propTypes = {
   isInstagramBusiness: PropTypes.bool,
   hasPushNotifications: PropTypes.bool,
   shouldDisplayRemindersBanner: PropTypes.bool,
-  shouldDisplayRetiringProfileBanner: PropTypes.bool,
   onDirectPostingClick: PropTypes.func.isRequired,
   isInstagramLoading: PropTypes.bool,
   isLockedProfile: PropTypes.bool,
@@ -232,7 +221,6 @@ QueuedPosts.propTypes = {
   hasCalendarFeature: PropTypes.bool,
   shouldDisplaySingleSlots: PropTypes.bool,
   preserveComposerStateOnClose: PropTypes.bool,
-  shouldDisplayIGPersonalNotification: PropTypes.bool,
   shouldDisplayTimezone: PropTypes.bool,
   profileTimezone: PropTypes.string,
   onTimezoneClick: PropTypes.func.isRequired,
@@ -254,7 +242,6 @@ QueuedPosts.defaultProps = {
   isInstagramBusiness: false,
   hasPushNotifications: true,
   shouldDisplayRemindersBanner: false,
-  shouldDisplayRetiringProfileBanner: false,
   isInstagramLoading: false,
   isLockedProfile: false,
   shouldDisplayDisconnectedBanner: false,
@@ -265,7 +252,6 @@ QueuedPosts.defaultProps = {
   hasCalendarFeature: false,
   shouldDisplaySingleSlots: false,
   onCampaignTagClick: () => {},
-  shouldDisplayIGPersonalNotification: false,
 };
 
 export default QueuedPosts;

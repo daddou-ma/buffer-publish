@@ -10,8 +10,7 @@
   "dependencies": {
     "@bufferapp/async-data-fetch": "2.0.0",
     "@bufferapp/publish-server": "2.0.0",
-    "@bufferapp/publish-locked-profile-notification": "2.0.0",
-    "@bufferapp/publish-ig-personal-profile-notification": "2.0.0"
+    "@bufferapp/publish-locked-profile-notification": "2.0.0"
   },
   "devDependencies": {},
   "publishConfig": {

@@ -21,7 +21,6 @@ import RPCClient from '@bufferapp/micro-rpc-client';
 import '@bufferapp/publish-web/components/i18n';
 
 import QueuedPosts from './index';
-import RetiringProfileBanner from './components/RetiringProfileBanner/index';
 
 const profile = buildProfile();
 const initialState = {
@@ -147,39 +146,6 @@ describe('QueuedPosts | user interaction', () => {
     expect(slots.length).toBeGreaterThan(0);
   });
 
-  test('should render ig personal notification', () => {
-    const personalProfile = {
-      ...profile,
-      shouldDisplayIGPersonalNotification: true,
-    };
-    render(
-      <TestDragDropContainer>
-        <QueuedPosts profileId={profile.id} />
-      </TestDragDropContainer>,
-      {
-        initialState: {
-          ...initialState,
-          profileSidebar: {
-            ...initialState.profileSidebar,
-            selectedProfile: personalProfile,
-            profiles: [personalProfile],
-          },
-        },
-      }
-    );
-
-    const notificationHeading = screen.getByRole('heading', {
-      name: /Please enable direct scheduling to continue using Buffer with this Instagram account./i,
-    });
-
-    const directSchedulingBtn = screen.getByRole('button', {
-      name: /Enable Direct Scheduling/i,
-    });
-
-    expect(directSchedulingBtn).toBeInTheDocument();
-    expect(notificationHeading).toBeInTheDocument();
-  });
-
   test('should render queue with slots and posts', async () => {
     render(
       <TestDragDropContainer>
@@ -221,11 +187,5 @@ describe('QueuedPosts | user interaction', () => {
       updateId: post1.id,
     });
     expect(rpcCall).toHaveBeenCalledTimes(1);
-  });
-  test('a11y | retiring IG profile banner is accessible', async () => {
-    const { container } = render(<RetiringProfileBanner />);
-    const results = await axe(container);
-    expect(results).toHaveNoViolations();
-    cleanup();
   });
 });

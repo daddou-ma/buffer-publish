@@ -14,9 +14,6 @@ export default connect(state => {
         remindersStatus
       )) ||
     false;
-  const shouldDisplayIGRetirementBanner = state.profileSidebar.profiles?.some(
-    profile => profile.service === 'instagram' && !profile.isInstagramBusiness
-  );
   let usernamesList = '';
   if (displayRemindersBanner) {
     usernamesList = getUsernamesOfProfilesWithRemindersAndNoPushNotifications(
@@ -26,7 +23,6 @@ export default connect(state => {
   return {
     enabledApplicationModes: state.temporaryBanner.enabledApplicationModes,
     displayRemindersBanner,
-    shouldDisplayIGRetirementBanner,
     usernamesRemindersList: usernamesList,
   };
 })(TemporaryDashboardBanner);

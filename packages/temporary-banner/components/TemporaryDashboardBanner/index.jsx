@@ -33,7 +33,6 @@ const TopBanner = ({
 const TemporaryDashboardBanner = ({
   enabledApplicationModes,
   displayRemindersBanner,
-  shouldDisplayIGRetirementBanner,
   usernamesRemindersList,
 }) => {
   const [hidden, hideBanner] = useState(false);
@@ -52,24 +51,6 @@ const TemporaryDashboardBanner = ({
       status: hidden,
       content,
       onCloseBanner: onCloseBannerClick,
-    });
-  }
-  // Displays temporary banner for Retiring IG personal profiles. Should remove in Oct.
-  if (shouldDisplayIGRetirementBanner) {
-    const actionButton = {
-      label: 'Follow Our Guide Here',
-      action: () => {
-        window.location.assign(
-          'https://support.buffer.com/hc/en-us/articles/360052978413-Deprecating-Instagram-Personal-Profiles'
-        );
-      },
-    };
-    return TopBanner({
-      status: hidden,
-      content:
-        'From October 2020, we will no longer be able to support Instagram accounts where direct scheduling is not enabled.',
-      onCloseBanner: onCloseBannerClick,
-      actionButton,
     });
   }
 
@@ -94,13 +75,11 @@ TemporaryDashboardBanner.propTypes = {
     PropTypes.objectOf(PropTypes.string)
   ),
   displayRemindersBanner: PropTypes.bool,
-  shouldDisplayIGRetirementBanner: PropTypes.bool,
   usernamesRemindersList: PropTypes.string,
 };
 
 TemporaryDashboardBanner.defaultProps = {
   enabledApplicationModes: [],
-  shouldDisplayIGRetirementBanner: false,
 };
 
 export default TemporaryDashboardBanner;
