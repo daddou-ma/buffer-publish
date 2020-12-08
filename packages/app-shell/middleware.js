@@ -5,31 +5,29 @@ import {
 
 import { actions, actionTypes } from './reducer';
 
-const TAG_DECEMBER2020_BILLING_MISMATCH = 'dec2020-billing-mismatch';
+const TAG_DECEMBER2020_BILLING_MISMATCH_DOWNGRADED =
+  'billing-mismatch-downgraded-to-free';
 
 export default ({ dispatch }) => next => action => {
   // eslint-disable-line
   next(action);
 
   switch (action.type) {
-    case 'INIT_APPSHELL':
-      /**
-       * @todo Clean up all this v1 to v2 stuff - commenting out fetch for now
-       *       See https://buffer.atlassian.net/browse/PUB-3172
-       */
-      // dispatch(dataFetchActions.fetch({ name: 'v1ToV2UpgradeDetails' }));
-      break;
     case `user_${dataFetchActionTypes.FETCH_SUCCESS}`: {
       const { tags = [], messages = [] } = action.result;
-      const hasTag = tags.includes(TAG_DECEMBER2020_BILLING_MISMATCH);
-      const hasClosed = messages.includes(TAG_DECEMBER2020_BILLING_MISMATCH);
+      const hasTag = tags.includes(
+        TAG_DECEMBER2020_BILLING_MISMATCH_DOWNGRADED
+      );
+      const hasClosed = messages.includes(
+        TAG_DECEMBER2020_BILLING_MISMATCH_DOWNGRADED
+      );
       if (hasTag && !hasClosed) {
         dispatch(
           actions.setBannerOptions({
-            key: TAG_DECEMBER2020_BILLING_MISMATCH,
+            key: TAG_DECEMBER2020_BILLING_MISMATCH_DOWNGRADED,
             themeColor: 'orange',
             customHTML: {
-              __html: `Heads up: You might lose access to a few features on Dec 8. <a href="https://support.buffer.com/hc/en-us/articles/360058006794" target="_blank" rel="noreferrer noopener">Learn more here</a>.`,
+              __html: `Heads up: Due to a billing error, your account has been moved to our Free plan. <a href="https://support.buffer.com/hc/en-us/articles/360058006794" target="_blank" rel="noreferrer noopener">Learn more</a>.`,
             },
           })
         );
@@ -52,12 +50,12 @@ export default ({ dispatch }) => next => action => {
       break;
     }
     case actionTypes.ON_CLOSE_BANNER:
-      if (action.key === TAG_DECEMBER2020_BILLING_MISMATCH) {
+      if (action.key === TAG_DECEMBER2020_BILLING_MISMATCH_DOWNGRADED) {
         dispatch(
           dataFetchActions.fetch({
             name: 'readMessage',
             args: {
-              message: TAG_DECEMBER2020_BILLING_MISMATCH,
+              message: TAG_DECEMBER2020_BILLING_MISMATCH_DOWNGRADED,
             },
           })
         );
