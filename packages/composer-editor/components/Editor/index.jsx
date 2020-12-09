@@ -1,12 +1,12 @@
 import React, { useMemo, useCallback, useState } from 'react';
-import { createEditor } from 'slate';
+import { Text, createEditor } from 'slate';
 import { withHistory } from 'slate-history';
-import { Slate, Editable, withReact } from 'slate-react';
+import { Slate, withReact } from 'slate-react';
+import twitterText from 'twitter-text';
 
-import styled from 'styled-components';
-import { grayDarker } from '@bufferapp/ui/style/colors';
-import { fontSize, fontFamily } from '@bufferapp/ui/style/fonts';
-
+import Editor from './styles';
+import renderLeaf from '../Leaf';
+import renderElement from '../Element';
 import EmojiPicker from '../plugins/EmojiPicker';
 
 const initialValue = [
@@ -18,26 +18,6 @@ const initialValue = [
     ],
   },
 ];
-
-const Editor = styled(Editable)`
-  color: ${grayDarker};
-  padding: 8px 60px 8px 8px;
-  position: relative;
-  line-height: 24px;
-  font-size: ${fontSize};
-  font-family: ${fontFamily};
-`;
-
-/* eslint-disable react/prop-types */
-const Element = props => {
-  const { attributes, children, element } = props;
-
-  switch (element.type) {
-    default:
-      return <p {...attributes}>{children}</p>;
-  }
-};
-/* eslint-enable react/prop-types */
 
 const ComposerEditor = () => {
   /**
@@ -51,10 +31,50 @@ const ComposerEditor = () => {
    */
   const editor = useMemo(() => withHistory(withReact(createEditor())), []);
 
-  /**
-   * Setup custom renderer for elements
-   */
-  const renderElement = useCallback(props => <Element {...props} />, []);
+  const decorate = useCallback(
+    ([node, path]) => {
+      const ranges = [];
+      const charLimit = 20; // Temporary static data
+      const { text } = node;
+
+      if (!Text.isText(node)) {
+        return ranges;
+      }
+
+      // Add text decorator to highlight words with links, hashtags and mentions
+      const linksArray = twitterText.extractUrlsWithIndices(text) || [];
+      const hashtagsArray = twitterText.extractHashtagsWithIndices(text) || [];
+      const mentionsArray = twitterText.extractMentionsWithIndices(text) || [];
+      const highlightsArray = [
+        ...linksArray,
+        ...hashtagsArray,
+        ...mentionsArray,
+      ];
+
+      highlightsArray.forEach(word => {
+        const startIndex = word.indices[0];
+        const endIndex = word.indices[1];
+
+        ranges.push({
+          highlighted: true,
+          anchor: { path, offset: startIndex },
+          focus: { path, offset: endIndex },
+        });
+      });
+
+      // Add text decorator after reaching characters limit
+      if (text?.length > charLimit) {
+        ranges.push({
+          overCharLimit: true,
+          anchor: { path, offset: charLimit },
+          focus: { path, offset: text.length },
+        });
+      }
+
+      return ranges;
+    },
+    [value]
+  );
 
   return (
     <Slate
@@ -68,6 +88,8 @@ const ComposerEditor = () => {
         className="editor"
         placeholder="What would you like to share?"
         renderElement={renderElement}
+        renderLeaf={renderLeaf}
+        decorate={decorate}
       />
       <EmojiPicker />
     </Slate>
