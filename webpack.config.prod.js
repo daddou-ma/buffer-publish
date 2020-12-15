@@ -35,6 +35,7 @@ const plugins = [
     BUGSNAG_APP_VERSION: 'placeholder', // replaced in CI
     STRIPE_PUBLISHABLE_KEY: 'pk_qOmHaWApLCX5OoeWKQ3NrArhoyWEi',
     SEGMENT_KEY: '9Plsiyvw9NEgXEN7eSBwiAGlHD3DHp0A',
+    GRAPHQL_API: JSON.stringify('https://graph.buffer.com'),
   }),
 ];
 
