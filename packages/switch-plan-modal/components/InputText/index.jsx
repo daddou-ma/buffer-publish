@@ -2,20 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Text } from '@bufferapp/ui';
+import { fontFamily, fontSize } from '@bufferapp/ui/style/fonts';
 
-import {
-  fontFamily,
-  fontSize,
-} from '@bufferapp/components/style/font';
-
-import {
-  curiousBlue,
-  geyser,
-} from '@bufferapp/components/style/color';
-
-import {
-  borderRadius,
-} from '@bufferapp/components/style/border';
+import { borderRadius } from '@bufferapp/ui/style/borders';
+import { redDark, blue, gray } from '@bufferapp/ui/style/colors';
 
 export const ExtraSmallText = styled(Text)`
   font-size: 0.5rem;
@@ -26,14 +16,13 @@ const formLabelStyle = {
   padding: '0 0 0.25rem 0',
 };
 
-const darkRed = '#9D2637';
 const ERROR = 'Required field';
 
 const getBorderColor = (focused, hasError) => {
-  if (focused) return curiousBlue;
-  if (hasError) return darkRed;
+  if (focused) return blue;
+  if (hasError) return redDark;
 
-  return geyser;
+  return gray;
 };
 
 const getInputStyle = (focused, hasError, backgroundStyle) => ({
@@ -94,7 +83,13 @@ class InputText extends React.Component {
           onKeyUp={ev => store(id, ev.target.value.trim())}
         />
         {note && <ExtraSmallText type="label">{note}</ExtraSmallText>}
-        {hasError && <div><Text hasError type="help">{ERROR}</Text></div>}
+        {hasError && (
+          <div>
+            <Text hasError type="help">
+              {ERROR}
+            </Text>
+          </div>
+        )}
       </div>
     );
   }

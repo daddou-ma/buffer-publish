@@ -1,23 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {
-  Text,
-} from '@bufferapp/ui';
-
-import {
-  fontFamily,
-  fontSize,
-} from '@bufferapp/components/style/font';
-
-import {
-  geyser,
-} from '@bufferapp/components/style/color';
-
-import {
-  borderRadius,
-  borderWidth,
-} from '@bufferapp/components/style/border';
+import { Text } from '@bufferapp/ui';
+import { fontFamily, fontSize } from '@bufferapp/ui/style/fonts';
+import { redDark, gray } from '@bufferapp/ui/style/colors';
+import { borderRadius } from '@bufferapp/ui/style/borders';
+import { borderWidth } from '@bufferapp/components/style/border';
 
 const formLabelStyle = {
   display: 'block',
@@ -25,12 +13,11 @@ const formLabelStyle = {
 };
 
 const ERROR = 'Required field';
-const darkRed = '#9D2637';
 
-const getBorderColor = (hasError) => {
-  if (hasError) return darkRed;
+const getBorderColor = hasError => {
+  if (hasError) return redDark;
 
-  return geyser;
+  return gray;
 };
 
 const getSelectStyle = hasError => ({
@@ -44,13 +31,7 @@ const getSelectStyle = hasError => ({
   height: '37px',
 });
 
-const Select = ({
-  id,
-  children,
-  label,
-  store,
-  hasError,
-}) => (
+const Select = ({ id, children, label, store, hasError }) => (
   <div>
     <label htmlFor={id} style={formLabelStyle}>
       <Text type="label">{label}</Text>
@@ -63,7 +44,11 @@ const Select = ({
     >
       {children}
     </select>
-    {hasError && <Text hasError type="help">{ERROR}</Text>}
+    {hasError && (
+      <Text hasError type="help">
+        {ERROR}
+      </Text>
+    )}
   </div>
 );
 
