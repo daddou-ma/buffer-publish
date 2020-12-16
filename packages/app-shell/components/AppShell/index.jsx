@@ -8,7 +8,6 @@ import helpMenuItems from '../helpMenuItems';
 
 const AppShell = ({
   children,
-  user,
   showSwitchPlan,
   showManageTeam,
   returnToClassic,
@@ -18,14 +17,11 @@ const AppShell = ({
   onCloseBanner,
   bannerKey,
   hideAppShell,
-  enabledProducts,
-  featureFlips,
   canSeeOrgSwitcher,
   organizations,
   selectedOrganizationId,
   profiles,
   switchOrganization,
-  isImpersonation,
 }) => {
   if (hideAppShell) {
     return children;
@@ -37,20 +33,15 @@ const AppShell = ({
     <BDSAppShell
       displaySkipLink
       content={children}
-      enabledProducts={enabledProducts}
-      featureFlips={featureFlips}
       activeProduct="publish"
-      user={{
-        ...user,
-        menuItems: generateUserMenuItems({
-          showSwitchPlan,
-          showManageTeam,
-          returnToClassic,
-          switchPlan,
-          openPreferences,
-          t,
-        }),
-      }}
+      user={generateUserMenuItems({
+        showSwitchPlan,
+        showManageTeam,
+        returnToClassic,
+        switchPlan,
+        openPreferences,
+        t,
+      })}
       helpMenuItems={helpMenuItems(t)}
       orgSwitcher={generateOrgSwitcherItems({
         canSeeOrgSwitcher,
@@ -67,7 +58,6 @@ const AppShell = ({
             }
           : null
       }
-      isImpersonation={isImpersonation}
     />
   );
 };
@@ -93,8 +83,6 @@ AppShell.propTypes = {
     }),
   }),
   hideAppShell: PropTypes.bool.isRequired,
-  enabledProducts: PropTypes.arrayOf(PropTypes.string).isRequired,
-  featureFlips: PropTypes.arrayOf(PropTypes.string).isRequired,
   canSeeOrgSwitcher: PropTypes.bool,
   organizations: PropTypes.arrayOf(
     PropTypes.shape({
@@ -114,7 +102,6 @@ AppShell.propTypes = {
     })
   ).isRequired,
   switchOrganization: PropTypes.func.isRequired,
-  isImpersonation: PropTypes.bool,
 };
 
 AppShell.defaultProps = {
@@ -123,7 +110,6 @@ AppShell.defaultProps = {
   showManageTeam: false,
   bannerOptions: null,
   bannerKey: null,
-  isImpersonation: false,
   selectedOrganizationId: null,
 };
 

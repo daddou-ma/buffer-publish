@@ -1,5 +1,4 @@
 import keyWrapper from '@bufferapp/keywrapper';
-import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 
 export const actionTypes = keyWrapper('APP_SHELL', {
   SET_BANNER_OPTIONS: 0,
@@ -16,17 +15,6 @@ export const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case `globalAccount_${dataFetchActionTypes.FETCH_SUCCESS}`: {
-      const productLinks = action.result.productlinks || [];
-      const enabledProducts = productLinks.map(product => product.productName);
-
-      return {
-        ...state,
-        enabledProducts,
-        featureFlips: action.result.featureFlips,
-        isImpersonation: action.result.isImpersonation,
-      };
-    }
     case actionTypes.SET_BANNER_OPTIONS:
       return {
         ...state,

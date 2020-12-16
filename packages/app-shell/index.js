@@ -13,10 +13,6 @@ import AppShell from './components/AppShell';
 
 export default connect(
   state => ({
-    user: {
-      email: state.user.email || '...',
-      name: state.user.name || '...',
-    },
     bannerOptions: state.appShell.bannerOptions,
     bannerKey: state.appShell.bannerKey,
     showSwitchPlan: state.organizations.selected?.showUpgradeToProCta,
@@ -24,8 +20,6 @@ export default connect(
     hideAppShell:
       state.onboarding.canSeeOnboardingPage &&
       state.router.location.pathname === newBusinessTrialists.route,
-    enabledProducts: state.appShell.enabledProducts,
-    featureFlips: state.appShell.featureFlips,
     /**
      * Org Switcher
      * Needs organizations and profiles.
@@ -34,7 +28,6 @@ export default connect(
     organizations: getOrgsAlfabeticalOrder(state.organizations.list) || [],
     selectedOrganizationId: state.organizations.selected?.id,
     profiles: state.profileSidebar.profileList,
-    isImpersonation: state.appShell.isImpersonation,
   }),
 
   dispatch => ({
