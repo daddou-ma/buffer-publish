@@ -19,7 +19,7 @@ const merged = merge.strategy({
     historyApiFallback: true,
     disableHostCheck: true,
     hot: true,
-    port: 8080,
+    port: 8888,
     host: 'publish.local.buffer.com',
     headers: { 'Access-Control-Allow-Origin': '*' },
     proxy: {
