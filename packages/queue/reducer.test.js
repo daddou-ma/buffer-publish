@@ -370,10 +370,6 @@ describe('reducer', () => {
   });
 
   it('handles ORGANIZATION_SELECTED action type, sets preserveComposerStateOnClose to false to force the composer to refetch profiles on org switcher ', () => {
-    const stateBefore = {
-      ...initialState,
-      preserveComposerStateOnClose: true,
-    };
     const stateAfter = {
       ...initialState,
       preserveComposerStateOnClose: false,
@@ -381,8 +377,9 @@ describe('reducer', () => {
 
     const action = {
       type: orgActionTypes.ORGANIZATION_SELECTED,
+      preserveComposerStateOnClose: false,
     };
 
-    expect(reducer(stateBefore, action)).toEqual(stateAfter);
+    expect(reducer(initialState, action)).toEqual(stateAfter);
   });
 });

@@ -390,7 +390,7 @@ export default (state = initialState, action) => {
     case orgActionTypes.ORGANIZATION_SELECTED:
       return {
         ...state,
-        preserveComposerStateOnClose: false,
+        preserveComposerStateOnClose: action.preserveComposerStateOnClose,
       };
 
     case actionTypes.OPEN_COMPOSER:
