@@ -407,18 +407,12 @@
   "profiles-disconnected-banner": {
     "body": "Por favor, asegúrate de que estás logueado/a en esta cuenta en la misma red social y solucionaremos esto en un momento.",
     "cta": "Reconectar Cuenta",
-    "extraMessage": {
-      "instagram": "Debido a cambios recientes en la API de Instagram, tus perfiles personales de Instagram necesitan ser reconectados."
-    },
     "headline": "Ups, hemos perdido acceso a esta cuenta. ¡Vamos a reconectarla!"
   },
   "profiles-disconnected-modal": {
     "body1": " Hemos perdido accesso a las siguientes redes sociales, para volver a publicar en ellas, encestamos que las reconectes.",
     "body2": "Importante: necesitas estar logueado/a en la misma cuenta de la red social para reconectarla correctamente.",
     "cta": "Reconectar",
-    "extraMessage": {
-      "instagram": "Debido a cambios recientes en la API de Instagram, tus perfiles personales de Instagram necesitan ser reconectados."
-    },
     "headline": "Hemos perdido el acceso a algunas de tus redes sociales",
     "reconnecting": "Por favor, espera..."
   },

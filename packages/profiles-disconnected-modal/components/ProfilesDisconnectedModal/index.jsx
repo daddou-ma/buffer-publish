@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { fontWeightBold } from '@bufferapp/ui/style/fonts';
 import { borderRadius } from '@bufferapp/ui/style/borders';
 import { grayLight } from '@bufferapp/ui/style/colors';
 import { Popover, Card } from '@bufferapp/components';
@@ -8,11 +7,6 @@ import { Text, Button } from '@bufferapp/ui';
 import Avatar from '@bufferapp/ui/Avatar';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
-
-const ExtraMessageWithStyles = styled(Text)`
-  margin: 0;
-  font-weight: ${fontWeightBold};
-`;
 
 const DisconnectedProfile = styled.div`
   display: flex;
@@ -51,7 +45,6 @@ const ProfilesDisconnectedModal = ({
   disconnectedProfiles,
   reconnectProfile,
   hideModal,
-  displayExtraMessage,
 }) => {
   const { t } = useTranslation();
   return (
@@ -60,11 +53,6 @@ const ProfilesDisconnectedModal = ({
         <Card reducedPadding>
           <ModalContainer>
             <Text type="h3">{t('profiles-disconnected-modal.headline')}</Text>
-            {displayExtraMessage && (
-              <ExtraMessageWithStyles type="p">
-                {t('profiles-disconnected-modal.extraMessage.instagram')}
-              </ExtraMessageWithStyles>
-            )}
             <Text type="p">{t('profiles-disconnected-modal.body1')}</Text>
             <Text type="p">{t('profiles-disconnected-modal.body2')}</Text>
             {disconnectedProfiles.map(p => (
@@ -116,11 +104,6 @@ ProfilesDisconnectedModal.propTypes = {
   ).isRequired,
   reconnectProfile: PropTypes.func.isRequired,
   hideModal: PropTypes.func.isRequired,
-  displayExtraMessage: PropTypes.bool,
-};
-
-ProfilesDisconnectedModal.defaultProps = {
-  displayExtraMessage: false,
 };
 
 export default ProfilesDisconnectedModal;

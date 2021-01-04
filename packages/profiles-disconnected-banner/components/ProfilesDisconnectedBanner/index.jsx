@@ -10,16 +10,10 @@ const TextWithStyles = styled(Text)`
   margin: 0;
 `;
 
-const ExtraMessageWithStyles = styled(Text)`
-  margin: 0;
-  font-weight: ${fontWeightBold};
-`;
-
 const ProfilesDisconnectedBanner = ({
   profileId,
   service,
   onReconnectProfileClick,
-  displayExtraMessage,
   canReconnectChannels,
   ownerEmail,
 }) => {
@@ -32,11 +26,6 @@ const ProfilesDisconnectedBanner = ({
         canReconnectChannels ? t('profiles-disconnected-banner.cta') : null
       }
     >
-      {displayExtraMessage && (
-        <ExtraMessageWithStyles type="p">
-          {t('profiles-disconnected-banner.extraMessage.instagram')}
-        </ExtraMessageWithStyles>
-      )}
       <TextWithStyles type="p">
         {canReconnectChannels
           ? t('profiles-disconnected-banner.body')
@@ -52,13 +41,11 @@ ProfilesDisconnectedBanner.propTypes = {
   canReconnectChannels: PropTypes.bool,
   profileId: PropTypes.string.isRequired,
   service: PropTypes.string.isRequired,
-  displayExtraMessage: PropTypes.bool,
   onReconnectProfileClick: PropTypes.func.isRequired,
   ownerEmail: PropTypes.string,
 };
 
 ProfilesDisconnectedBanner.defaultProps = {
-  displayExtraMessage: false,
   canReconnectChannels: true,
   ownerEmail: 'the owner',
 };

@@ -7,10 +7,6 @@ export default connect(
   state => {
     const disconnectedProfiles =
       state.profilesDisconnectedModal?.disconnectedProfiles;
-    const instagramPersonalProfiles = disconnectedProfiles.filter(
-      profile =>
-        profile?.service === 'instagram' && profile?.service_type === 'profile'
-    );
     const organizations = state.organizations?.list;
 
     const profiles = disconnectedProfiles.reduce((accProfiles, profile) => {
@@ -24,7 +20,6 @@ export default connect(
     }, []);
     return {
       ...state.profilesDisconnectedModal,
-      displayExtraMessage: instagramPersonalProfiles?.length > 0,
       disconnectedProfiles: profiles,
     };
   },

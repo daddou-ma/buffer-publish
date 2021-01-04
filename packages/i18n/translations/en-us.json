@@ -409,18 +409,12 @@
     "body": "Please make sure that you're logged into this account on the same network, and we'll get you back in business in no time!",
     "permissionBody": "Reach out to {{email}} or any other Admin.",
     "cta": "Reconnect Channel",
-    "extraMessage": {
-      "instagram": "Due to recent changes to the Instagram API, your personal Instagram account will need to be reconnected."
-    },
     "headline": "Uh-oh, we've lost access to this channel! Let's reconnect."
   },
   "profiles-disconnected-modal": {
     "body1": "We’ve lost access to the following channels, in order for us to resume posting to these channels you will need to reconnect them.",
     "body2": "Note: You’ll need to be logged in to the correct account on the network to successfully reconnect a channel.",
     "cta": "Reconnect",
-    "extraMessage": {
-      "instagram": "Due to recent changes to the Instagram API, your personal Instagram accounts will need to be reconnected."
-    },
     "headline": "We’ve lost access to some of your channels",
     "reconnecting": "Please wait..."
   },
