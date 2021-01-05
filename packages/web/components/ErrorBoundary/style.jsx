@@ -1,4 +1,4 @@
-import { fontFamily } from '@bufferapp/components/style/font';
+import { fontFamily } from '@bufferapp/ui/style/fonts';
 
 const errorBoundary = {
   fontFamily,
