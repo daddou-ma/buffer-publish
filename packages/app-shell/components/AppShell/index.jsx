@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import BDSAppShell from '@bufferapp/app-shell';
 import { useTranslation } from 'react-i18next';
-import generateOrgSwitcherItems from '../orgSwitcherItems';
 import generateUserMenuItems from '../userMenuItems';
 import helpMenuItems from '../helpMenuItems';
 
@@ -17,9 +16,6 @@ const AppShell = ({
   onCloseBanner,
   bannerKey,
   hideAppShell,
-  canSeeOrgSwitcher,
-  organizations,
-  selectedOrganizationId,
   profiles,
   switchOrganization,
 }) => {
@@ -34,7 +30,7 @@ const AppShell = ({
       displaySkipLink
       content={children}
       activeProduct="publish"
-      user={generateUserMenuItems({
+      menuItems={generateUserMenuItems({
         showSwitchPlan,
         showManageTeam,
         returnToClassic,
@@ -43,13 +39,13 @@ const AppShell = ({
         t,
       })}
       helpMenuItems={helpMenuItems(t)}
-      orgSwitcher={generateOrgSwitcherItems({
-        canSeeOrgSwitcher,
-        organizations,
-        selectedOrganizationId,
-        profiles,
-        switchOrganization,
-      })}
+      channels={profiles.map(profile => ({
+        id: profile.id,
+        name: profile.formatted_username,
+        organizationId: profile.organizationId,
+        service: profile.service,
+      }))}
+      onOrganizationSelected={switchOrganization}
       bannerOptions={
         bannerOptions
           ? {
@@ -83,19 +79,6 @@ AppShell.propTypes = {
     }),
   }),
   hideAppShell: PropTypes.bool.isRequired,
-  canSeeOrgSwitcher: PropTypes.bool,
-  organizations: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string,
-      locked: PropTypes.bool,
-      name: PropTypes.string,
-      ownerId: PropTypes.string,
-      ownerEmail: PropTypes.string,
-      planCode: PropTypes.number,
-      isAdmin: PropTypes.bool,
-    })
-  ).isRequired,
-  selectedOrganizationId: PropTypes.string,
   profiles: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,
@@ -105,12 +88,10 @@ AppShell.propTypes = {
 };
 
 AppShell.defaultProps = {
-  canSeeOrgSwitcher: false,
   showSwitchPlan: false,
   showManageTeam: false,
   bannerOptions: null,
   bannerKey: null,
-  selectedOrganizationId: null,
 };
 
 export default AppShell;
