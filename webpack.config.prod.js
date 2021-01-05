@@ -3,6 +3,7 @@ const merge = require('webpack-merge');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
+const HtmlRuntimePlugin = require('html-webpack-inline-runtime-plugin');
 const webpack = require('webpack');
 
 const common = require('./webpack.config.common.js');
@@ -35,8 +36,9 @@ const plugins = [
     BUGSNAG_APP_VERSION: 'placeholder', // replaced in CI
     STRIPE_PUBLISHABLE_KEY: 'pk_qOmHaWApLCX5OoeWKQ3NrArhoyWEi',
     SEGMENT_KEY: '9Plsiyvw9NEgXEN7eSBwiAGlHD3DHp0A',
-    GRAPHQL_API: JSON.stringify('https://graph.buffer.com'),
+    GRAPHQL_API: 'https://graph.buffer.com',
   }),
+  new HtmlRuntimePlugin(),
 ];
 
 let devtool = 'source-map';
