@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"@apollo/client@^3.3.4", "@apollo/client@^3.3.6":
+"@apollo/client@^3.3.6", "@apollo/client@latest":
   version "3.3.6"
   resolved "https://registry.yarnpkg.com/@apollo/client/-/client-3.3.6.tgz#f359646308167f38d5bc498dfc2344c888400093"
   integrity sha512-XSm/STyNS8aHdDigLLACKNMHwI0qaQmEHWHtTP+jHe/E1wZRnn66VZMMgwKLy2V4uHISHfmiZ4KpUKDPeJAKqg==
@@ -20,6 +20,13 @@
     ts-invariant "^0.6.0"
     tslib "^1.10.0"
     zen-observable "^0.8.14"
+
+"@apollo/react-hooks@^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@apollo/react-hooks/-/react-hooks-4.0.0.tgz#7bf7b320c90d276f637d9a84b503e17b840dd4e6"
+  integrity sha512-fCu0cbne3gbUl0QbA8X4L33iuuFVQbC5Jo2MIKRK8CyawR6PoxDpFdFA1kc6033ODZuZZ9Eo4RdeJFlFIIYcLA==
+  dependencies:
+    "@apollo/client" latest
 
 "@babel/code-frame@7.5.5":
   version "7.5.5"
@@ -1498,12 +1505,12 @@
     moment-timezone "^0.5.25"
     react-highcharts "^16.0.2"
 
-"@bufferapp/app-shell@1.1.0-alpha.44+02558fd":
-  version "1.1.0-alpha.44"
-  resolved "https://registry.yarnpkg.com/@bufferapp/app-shell/-/app-shell-1.1.0-alpha.44.tgz#8141f6f951e638d303ee3098825a3cca48c980a4"
-  integrity sha512-2yT8Ui+k57yN7cq3iDnlMyWaqk5q6+J0qDShh3peEw4f1wazorjxVwxlIMNQAQjoC9ZHfatp/tqbMtxysWHOZw==
+"@bufferapp/app-shell@~1.1.0-alpha.46":
+  version "1.1.0-rc.2"
+  resolved "https://registry.yarnpkg.com/@bufferapp/app-shell/-/app-shell-1.1.0-rc.2.tgz#7f9df3c3986f2d1b1ae0972ee6b729660669f1d0"
+  integrity sha512-zsXEE7TgYsOimvOYMbgFcVb34sDTa7g/4qHYPhQs6Aw0o7dtp5zD73VbY/RfLmpKB9W9SI26hTcKXZTN2c6RZg==
   dependencies:
-    "@apollo/client" "^3.3.4"
+    "@apollo/react-hooks" "^4.0.0"
     graphql-tag "^2.11.0"
 
 "@bufferapp/async-data-fetch@0.5.36-beta01":
