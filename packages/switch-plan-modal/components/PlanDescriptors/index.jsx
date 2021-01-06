@@ -17,7 +17,7 @@ const listItemStyle = {
   fontSize: '14px',
 };
 
-const getListItems = (list) => {
+const getListItems = list => {
   return Object.keys(list).map(key => (
     <li style={listItemStyle} key={key}>
       <Text>{list[key]}</Text>
@@ -28,20 +28,14 @@ const getListItems = (list) => {
 const PlanDescriptors = ({ left, right, plan }) => (
   <div>
     <div style={{ textAlign: 'center' }}>
-      <Text type="h2">
-        {plan}
-      </Text>
+      <Text type="h2">{plan}</Text>
     </div>
     <div style={{ display: 'flex' }}>
       <div style={{ flex: '1' }}>
-        <ul style={listStyleLeft}>
-          {getListItems(left)}
-        </ul>
+        <ul style={listStyleLeft}>{getListItems(left)}</ul>
       </div>
       <div style={{ flex: '1' }}>
-        <ul style={listStyle}>
-          {getListItems(right)}
-        </ul>
+        <ul style={listStyle}>{getListItems(right)}</ul>
       </div>
     </div>
   </div>
