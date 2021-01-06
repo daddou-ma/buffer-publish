@@ -6,7 +6,6 @@ import {
 } from '@bufferapp/publish-routes';
 import { actions as modalActions } from '@bufferapp/publish-modals';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
-import { getOrgsAlfabeticalOrder } from '@bufferapp/publish-data-organizations/utils/';
 
 import { actions } from './reducer';
 import AppShell from './components/AppShell';
@@ -22,11 +21,9 @@ export default connect(
       state.router.location.pathname === newBusinessTrialists.route,
     /**
      * Org Switcher
-     * Needs organizations and profiles.
+     * Needs profiles.
      */
     canSeeOrgSwitcher: state.organizations.canSeeOrgSwitcher,
-    organizations: getOrgsAlfabeticalOrder(state.organizations.list) || [],
-    selectedOrganizationId: state.organizations.selected?.id,
     profiles: state.profileSidebar.profileList,
   }),
 

@@ -1,8 +1,4 @@
-import {
-  getSelectedOrganization,
-  mapSelectedOrganization,
-  getOrgsAlfabeticalOrder,
-} from './index';
+import { getSelectedOrganization, mapSelectedOrganization } from './index';
 
 describe('organizations utils', () => {
   describe('getSelectedOrganization', () => {
@@ -35,41 +31,6 @@ describe('organizations utils', () => {
       ];
       const result = getSelectedOrganization(organizations);
       expect(result).toEqual(organizations[0]);
-    });
-  });
-
-  describe('getOrgsAlfabeticalOrder', () => {
-    it('sorts orgs by alphabetical order', () => {
-      const organizations = [
-        {
-          id: '123123123',
-          name: 'Org A',
-        },
-        {
-          id: '234234234234',
-          name: 'Org B',
-        },
-        {
-          id: '234234234235',
-          name: 'An Org',
-        },
-      ];
-      const expectedResult = [
-        {
-          id: '234234234235',
-          name: 'An Org',
-        },
-        {
-          id: '123123123',
-          name: 'Org A',
-        },
-        {
-          id: '234234234234',
-          name: 'Org B',
-        },
-      ];
-      const result = getOrgsAlfabeticalOrder(organizations);
-      expect(result).toEqual(expectedResult);
     });
   });
 
