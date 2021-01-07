@@ -1,4 +1,4 @@
-import ServiceLocation from '../../entities/ServiceLocation';
+import ServiceLocation from '../entities/ServiceLocation';
 
 // Example data for creating a service location object
 const id = '3123';

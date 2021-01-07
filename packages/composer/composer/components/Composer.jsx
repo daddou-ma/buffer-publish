@@ -21,7 +21,7 @@ import SuggestedMediaBox from './SuggestedMediaBox';
 import AttachmentGlance from './AttachmentGlance';
 import ComposerProfileTooltip from './ComposerProfileTooltip';
 import PinterestComposerBar from './PinterestComposerBar';
-import LocationComposerBar from './LocationComposerBar';
+import LocationComposerBar from './location-bar/LocationComposerBar';
 import ShopgridComposerBar from './ShopgridComposerBar';
 import FirstCommentComposerBar from './FirstCommentComposerBar';
 import TooltipList from './shared/TooltipList';
@@ -58,7 +58,6 @@ class Composer extends React.Component {
       isEnabled: PropTypes.bool,
       isSaved: PropTypes.bool,
       hasSavingError: PropTypes.bool,
-      isTaggingPageLocation: PropTypes.bool,
       link: PropTypes.shape({
         availableThumbnails: PropTypes.array,
         thumbnail: PropTypes.shape({
@@ -1183,10 +1182,15 @@ class Composer extends React.Component {
               />
 
               <LocationComposerBar
+                withMediaAttachment={!usesImageFirstLayout}
+                hasVideo={this.hasVideo()}
                 selectedProfiles={selectedProfiles}
                 isInstagram={this.isInstagram()}
                 draftId={draft.id}
-                isTaggingPageLocation={draft.isTaggingPageLocation}
+                locationName={locationName}
+                instagramProfileId={this.getSelectedInstagramProfileId()}
+                places={draft.places}
+                locationId={draft.locationId}
               />
             </div>
           )}

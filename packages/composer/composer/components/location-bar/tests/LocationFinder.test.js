@@ -1,9 +1,9 @@
 /* eslint-disable import/first */
 
-jest.mock('../../utils/API');
-import API from '../../utils/API';
-import ServiceLocation from '../../entities/ServiceLocation';
-import LocationFinder from '../../utils/LocationFinder';
+jest.mock('../../../utils/API');
+import API from '../../../utils/API';
+import ServiceLocation from '../entities/ServiceLocation';
+import LocationFinder from '../utils/LocationFinder';
 
 // Example data for creating a service location object
 const id = '3123';

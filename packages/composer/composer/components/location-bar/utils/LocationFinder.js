@@ -1,4 +1,4 @@
-import API from './API';
+import API from '../../../utils/API';
 import ServiceLocation from '../entities/ServiceLocation';
 
 class LocationFinder {

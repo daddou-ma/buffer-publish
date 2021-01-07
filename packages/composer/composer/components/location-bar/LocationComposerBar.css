@@ -1,0 +1,17 @@
+.locationFieldInput {
+    border-radius: 4px;
+    padding-left: 8px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-right: 50px;
+    margin-left: 4px;
+    border: 1px solid #E6EBEF;
+    box-sizing: border-box;
+    font-weight: 500;
+    font-size: 12px;
+    width: 100%;
+    outline: none;
+}
+.locationFieldInput:focus {
+    border: 1px solid #2d99ec;
+}

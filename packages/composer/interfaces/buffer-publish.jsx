@@ -100,7 +100,6 @@ const ComposerWrapper = ({
     commentEnabled: post.commentEnabled,
     commentText: post.commentText,
     shopgridLink: post.shopgridLink,
-    isTaggingPageLocation: post.isTaggingPageLocation,
     tabId,
     emptySlotMode,
     draftMode,
