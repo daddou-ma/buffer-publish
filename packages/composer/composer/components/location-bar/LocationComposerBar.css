@@ -15,3 +15,14 @@
 .locationFieldInput:focus {
     border: 1px solid #2d99ec;
 }
+
+.locationFieldRemoveInput {
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj4KPGcgaWQ9IkNhbnZhcyIgZmlsbD0ibm9uZSI+CjxnIGlkPSJYIj4KPGNpcmNsZSBpZD0iRWxsaXBzZSIgY3g9IjgiIGN5PSI4IiByPSI4IiBmaWxsPSIjMTkyNTM0Ii8+CjxnIGlkPSJHcm91cCI+CjxyZWN0IGlkPSJSZWN0YW5nbGUgMiIgd2lkdGg9IjEiIGhlaWdodD0iMTAiIHJ4PSIwLjUiIHRyYW5zZm9ybT0ibWF0cml4KDAuNzA3MTA3IC0wLjcwNzEwNyAwLjcwNzEwNyAwLjcwNzEwNyA0IDQuNzA3MTEpIiBmaWxsPSJ3aGl0ZSIvPgo8cmVjdCBpZD0iUmVjdGFuZ2xlIDIuMSIgd2lkdGg9IjEiIGhlaWdodD0iMTAiIHJ4PSIwLjUiIHRyYW5zZm9ybT0ibWF0cml4KC0wLjcwNzEwNyAtMC43MDcxMDcgLTAuNzA3MTA3IDAuNzA3MTA3IDExLjc3ODEgNC43MDcxMSkiIGZpbGw9IndoaXRlIi8+CjwvZz4KPC9nPgo8L2c+Cjwvc3ZnPgo=');
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  top: 10px;
+  right: 8px;
+  z-index: 1;
+  cursor: pointer;
+}

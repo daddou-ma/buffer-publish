@@ -1,0 +1,244 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Whole component renders correctly 1`] = `
+.c0 {
+  padding: 3px 10px 11px;
+  width: 100%;
+  box-sizing: border-box;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  float: left;
+}
+
+.c1 {
+  float: left;
+  padding-top: 1px;
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+}
+
+.c2 {
+  font-weight: 600;
+  font-size: 12px;
+  color: #3D3D3D;
+  width: 120px;
+  padding-top: 6px;
+}
+
+.c3 {
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+<div
+  className="c0"
+>
+  <div
+    className="c1"
+  >
+    <label
+      className="c2"
+    >
+      Location
+    </label>
+    <span
+      className="c3"
+    >
+      <span
+        className="locationFieldRemoveInput"
+        onClick={[Function]}
+      />
+      <div
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
+      >
+        <input
+          aria-autocomplete="list"
+          aria-expanded={false}
+          autoComplete="off"
+          className="locationFieldInput"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          placeholder="Start typing a location..."
+          role="combobox"
+          value="New York"
+        />
+      </div>
+    </span>
+  </div>
+</div>
+`;
+
+exports[`Whole component renders with cross to remove location when set 1`] = `
+.c0 {
+  padding: 3px 10px 11px;
+  width: 100%;
+  box-sizing: border-box;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  float: left;
+}
+
+.c1 {
+  float: left;
+  padding-top: 1px;
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+}
+
+.c2 {
+  font-weight: 600;
+  font-size: 12px;
+  color: #3D3D3D;
+  width: 120px;
+  padding-top: 6px;
+}
+
+.c3 {
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+<div
+  className="c0"
+>
+  <div
+    className="c1"
+  >
+    <label
+      className="c2"
+    >
+      Location
+    </label>
+    <span
+      className="c3"
+    >
+      <span
+        className="locationFieldRemoveInput"
+        onClick={[Function]}
+      />
+      <div
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
+      >
+        <input
+          aria-autocomplete="list"
+          aria-expanded={false}
+          autoComplete="off"
+          className="locationFieldInput"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          placeholder="Start typing a location..."
+          role="combobox"
+          value="New York"
+        />
+      </div>
+    </span>
+  </div>
+</div>
+`;
+
+exports[`Whole component renders with location name when set 1`] = `
+.c0 {
+  padding: 3px 10px 11px;
+  width: 100%;
+  box-sizing: border-box;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  float: left;
+}
+
+.c1 {
+  float: left;
+  padding-top: 1px;
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+}
+
+.c2 {
+  font-weight: 600;
+  font-size: 12px;
+  color: #3D3D3D;
+  width: 120px;
+  padding-top: 6px;
+}
+
+.c3 {
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+<div
+  className="c0"
+>
+  <div
+    className="c1"
+  >
+    <label
+      className="c2"
+    >
+      Location
+    </label>
+    <span
+      className="c3"
+    >
+      <span
+        className="locationFieldRemoveInput"
+        onClick={[Function]}
+      />
+      <div
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
+      >
+        <input
+          aria-autocomplete="list"
+          aria-expanded={false}
+          autoComplete="off"
+          className="locationFieldInput"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          placeholder="Start typing a location..."
+          role="combobox"
+          value="New York"
+        />
+      </div>
+    </span>
+  </div>
+</div>
+`;

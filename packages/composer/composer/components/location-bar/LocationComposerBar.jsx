@@ -9,7 +9,6 @@ import {
   Wrapper,
   Label,
   AutocompleteContainer,
-  RemoveInput,
   Menu,
   Row,
   Description,
@@ -82,7 +81,12 @@ const LocationComposerBar = ({
         <Wrapper>
           <Label>Location</Label>
           <AutocompleteContainer>
-            {isLocationSet() && <RemoveInput onClick={removeLocation} />}
+            {isLocationSet() && (
+              <span
+                className={styles.locationFieldRemoveInput}
+                onClick={removeLocation}
+              />
+            )}
             <Autocomplete
               wrapperStyle={{ width: '100%' }}
               value={locationName}
