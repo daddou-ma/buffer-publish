@@ -23,7 +23,6 @@ export default connect(
      * Org Switcher
      * Needs profiles.
      */
-    canSeeOrgSwitcher: state.organizations.canSeeOrgSwitcher,
     profiles: state.profileSidebar.profileList,
   }),
 
