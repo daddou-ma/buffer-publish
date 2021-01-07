@@ -299,7 +299,7 @@ const DataImportUtils = {
           facebookMentionEntities: update.entities || null,
           commentEnabled: update.commentEnabled,
           commentText: update.commentText || null,
-          shopgridLink: update.shopgridLink || null,\
+          shopgridLink: update.shopgridLink || null,
           tabId: metaData.tabId || null,
           emptySlotMode: metaData.emptySlotMode || false,
         };
