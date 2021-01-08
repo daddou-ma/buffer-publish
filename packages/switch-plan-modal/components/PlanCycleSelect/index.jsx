@@ -1,60 +1,67 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
-import {
-  Text,
-} from '@bufferapp/components';
+import { Text } from '@bufferapp/ui';
 
-import {
-  borderRadius,
-} from '@bufferapp/components/style/border';
+import { borderRadius } from '@bufferapp/ui/style/borders';
+import { blue, blueLighter, white } from '@bufferapp/ui/style/colors';
+import CheckmarkIcon from '@bufferapp/ui/Icon/Icons/Checkmark';
 
-import { CircleCheckmarkIcon } from '@bufferapp/components/Icon/Icons';
+const CheckmarkIconContainer = styled.div`
+  position: absolute;
+  color: ${white};
+  top: 50%;
+  left: 15px;
+  transform: translateY(-11px);
+`;
 
-const getPlanCycleStyle = (selected, first) => ({
-  display: 'block',
-  flex: '1',
-  padding: '0.8rem 0.25rem',
-  borderRadius,
-  cursor: 'pointer',
-  position: 'relative',
-  background: selected ? '#2C4BFF' : 'white',
-  border: selected ? '1px solid transparent' : '1px solid #ABB7FF',
-  marginRight: first ? '25px' : 0,
-  transition: 'all 0.5s',
-});
+const Button = styled.button`
+  display: block;
+  flex: 1;
+  padding: 0.8rem 0.25rem;
+  border-radius: ${borderRadius};
+  cursor: pointer;
+  position: relative;
+  background: ${props => (props.selected ? blue : white)};
+  border: ${props =>
+    props.selected ? '1px solid transparent' : `1px solid ${blueLighter}`};
+  margin-right: ${props => (props.first ? '25px' : 0)};
+  transition: all 0.5s;
 
-const checkmarkContainerStyle = {
-  position: 'absolute',
-  top: '50%',
-  left: '15px',
-  transform: 'translateY(-11px)',
-};
+  p {
+    margin: 0;
+  }
+`;
 
-const PlanCycleButton = ({ first, label, description, cycle, selectedCycle, selectCycle }) => {
+const PlanCycleButton = ({
+  first,
+  label,
+  description,
+  cycle,
+  selectedCycle,
+  selectCycle,
+}) => {
   const selected = selectedCycle === cycle;
   return (
-    <button style={getPlanCycleStyle(selected, first)} onClick={() => selectCycle(cycle)}>
-      <Text
-        size="large"
-        weight="bold"
-        color={selected ? 'white' : 'black'}
-      >
+    <Button
+      type="button"
+      selected={selected}
+      first={first}
+      onClick={() => selectCycle(cycle)}
+    >
+      <Text type="h3" as="p" color={selected ? 'white' : 'grayDark'}>
         {label}
       </Text>
-      <br />
-      <Text
-        size="small"
-        color={selected ? 'white' : 'black'}
-      >
+      <Text type="p" color={selected ? 'white' : 'grayDark'}>
         {description}
       </Text>
-      {selected &&
-        <div style={checkmarkContainerStyle}>
-          <CircleCheckmarkIcon color="white" size={{ width: '22px' }} />
-        </div>
-      }
-    </button>
+      {selected && (
+        <CheckmarkIconContainer>
+          <CheckmarkIcon size="large" />
+        </CheckmarkIconContainer>
+      )}
+    </Button>
   );
 };
 
@@ -71,19 +78,28 @@ PlanCycleButton.defaultProps = {
   first: false,
 };
 
-const getYearlyPlan = (isNonprofit, { nonprofitYearlyPrice, planYearlyPrice }) => (
-  isNonprofit ? nonprofitYearlyPrice : planYearlyPrice
-);
+const getYearlyPlan = (
+  isNonprofit,
+  { nonprofitYearlyPrice, planYearlyPrice }
+) => (isNonprofit ? nonprofitYearlyPrice : planYearlyPrice);
 
-const getMonthlyPlan = (isNonprofit, { nonprofitMonthlyPrice, planMonthlyPrice }) => (
-  isNonprofit ? nonprofitMonthlyPrice : planMonthlyPrice
-);
+const getMonthlyPlan = (
+  isNonprofit,
+  { nonprofitMonthlyPrice, planMonthlyPrice }
+) => (isNonprofit ? nonprofitMonthlyPrice : planMonthlyPrice);
 
-const getMonthlyPromoPlan = (isNonprofit, { nonprofitPromoMonthlyPrice, planPromoMonthlyPrice }) => (
-  isNonprofit ? nonprofitPromoMonthlyPrice : planPromoMonthlyPrice
-);
+const getMonthlyPromoPlan = (
+  isNonprofit,
+  { nonprofitPromoMonthlyPrice, planPromoMonthlyPrice }
+) => (isNonprofit ? nonprofitPromoMonthlyPrice : planPromoMonthlyPrice);
 
-const PlanCycleSelect = ({ translations, cycle, selectCycle, isNonprofit, isPromo }) => (
+const PlanCycleSelect = ({
+  translations,
+  cycle,
+  selectCycle,
+  isNonprofit,
+  isPromo,
+}) => (
   <div style={{ display: 'flex' }}>
     <PlanCycleButton
       first
@@ -93,7 +109,7 @@ const PlanCycleSelect = ({ translations, cycle, selectCycle, isNonprofit, isProm
           : getMonthlyPlan(isNonprofit, translations)
       }
       description={translations.planMonthlyDescription}
-      cycle={'month'}
+      cycle="month"
       selectedCycle={cycle}
       selectCycle={selectCycle}
     />
@@ -101,7 +117,7 @@ const PlanCycleSelect = ({ translations, cycle, selectCycle, isNonprofit, isProm
       <PlanCycleButton
         label={getYearlyPlan(isNonprofit, translations)}
         description={translations.planYearlyDescription}
-        cycle={'year'}
+        cycle="year"
         selectedCycle={cycle}
         selectCycle={selectCycle}
       />
