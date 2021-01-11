@@ -52,7 +52,6 @@ export default ({ dispatch, getState }) => next => action => {
         type: actionTypes.ORGANIZATION_SELECTED,
         organizations: action?.organizations,
         selected: action?.selectedOrganization,
-        preserveComposerStateOnClose: true,
       });
       break;
     }
@@ -72,7 +71,6 @@ export default ({ dispatch, getState }) => next => action => {
         type: actionTypes.ORGANIZATION_SELECTED,
         organizations: listMapped,
         selected: selectedOrg,
-        preserveComposerStateOnClose: false,
       });
 
       // Track the event

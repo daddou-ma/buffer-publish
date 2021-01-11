@@ -18,6 +18,7 @@ const ComposerPopover = ({
   onComposerOverlayClick,
   transparentOverlay,
   preserveComposerStateOnClose,
+  shouldResetComposerData,
   type,
   editMode,
 }) => (
@@ -33,6 +34,7 @@ const ComposerPopover = ({
       type={type}
       onSave={onSave}
       preserveStateOnClose={preserveComposerStateOnClose}
+      shouldResetComposerData={shouldResetComposerData}
     />
   </Popover>
 );

@@ -26,6 +26,7 @@ const ComposerWrapper = ({
   post,
   onSave,
   preserveStateOnClose,
+  shouldResetComposerData,
   csrfToken,
   onEvent,
   onInteraction,
@@ -60,9 +61,19 @@ const ComposerWrapper = ({
     events.subscribe('*', onEvent);
     bootstrappedListener = true;
   }
-
   // Get the 'preserve state' setting from the last time the composer was open
   const prevPreserveStateOnClose = AppStore.getOptions().preserveStateOnClose;
+
+  const preserveState = emptySlotMode ? false : preserveStateOnClose;
+  const prevPreserveState = AppStore.getOptions().preserveStateOnClose || false;
+
+  const shouldResetData = !preserveState || shouldResetComposerData;
+  const shouldResetDataOnInit =
+    prevPreserveState === false && preserveState !== prevPreserveState;
+  const shouldLoadInitialDataOnInit =
+    prevPreserveState !== true ||
+    preserveState === false ||
+    shouldResetComposerData;
 
   const options = {
     canSelectProfiles: !editMode && !emptySlotMode,
@@ -71,6 +82,9 @@ const ComposerWrapper = ({
     onSave,
     prevPreserveStateOnClose,
     preserveStateOnClose: emptySlotMode ? false : preserveStateOnClose,
+    shouldResetDataOnInit,
+    shouldResetData,
+    shouldLoadInitialDataOnInit,
     sentPost,
   };
 
