@@ -69,7 +69,9 @@ const ComposerWrapper = ({
 
   const shouldResetData = !preserveState || shouldResetComposerData;
   const shouldResetDataOnInit =
-    prevPreserveState === false && preserveState !== prevPreserveState;
+    prevPreserveState === false &&
+    preserveState !== prevPreserveState &&
+    !shouldResetData;
   const shouldLoadInitialDataOnInit =
     prevPreserveState !== true ||
     preserveState === false ||
@@ -184,6 +186,7 @@ ComposerWrapper.propTypes = {
   selectedProfileId: PropTypes.string,
   onInteraction: PropTypes.func,
   tabId: PropTypes.string.isRequired,
+  shouldResetComposerData: PropTypes.bool,
 };
 
 ComposerWrapper.defaultProps = {

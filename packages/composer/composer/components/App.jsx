@@ -234,7 +234,8 @@ class App extends React.Component {
 
     this.state = getState();
     this.isInitialized = false; // Ensure we load initial data and open web socket only once
-    if (this.props.options.shouldResetData) {
+    const { shouldResetData } = this.props.options;
+    if (shouldResetData) {
       AppInitActionCreators.resetData();
     }
   }
@@ -323,7 +324,6 @@ class App extends React.Component {
      * to compose a new one.)
      */
     if (shouldResetDataOnInit) {
-      console.log('calling reset data on INIT');
       AppInitActionCreators.resetData();
     }
 
@@ -335,7 +335,6 @@ class App extends React.Component {
      */
 
     if (shouldLoadInitialDataOnInit) {
-      console.log('calling load initial data on INIT');
       AppInitActionCreators.loadInitialData({
         profilesData,
         userData,
