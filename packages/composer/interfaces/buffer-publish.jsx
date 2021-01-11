@@ -61,17 +61,16 @@ const ComposerWrapper = ({
     events.subscribe('*', onEvent);
     bootstrappedListener = true;
   }
-  // Get the 'preserve state' setting from the last time the composer was open
-  const prevPreserveStateOnClose = AppStore.getOptions().preserveStateOnClose;
-
   const preserveState = emptySlotMode ? false : preserveStateOnClose;
+  // Get the 'preserve state' setting from the last time the composer was open
   const prevPreserveState = AppStore.getOptions().preserveStateOnClose || false;
 
+  // reset data on App constructor
   const shouldResetData = !preserveState || shouldResetComposerData;
   const shouldResetDataOnInit =
     prevPreserveState === false &&
     preserveState !== prevPreserveState &&
-    !shouldResetData;
+    !shouldResetData; // ensure we never call reset twice
   const shouldLoadInitialDataOnInit =
     prevPreserveState !== true ||
     preserveState === false ||
@@ -82,8 +81,6 @@ const ComposerWrapper = ({
     saveButtons,
     position: { margin: '0 auto' },
     onSave,
-    prevPreserveStateOnClose,
-    preserveStateOnClose: emptySlotMode ? false : preserveStateOnClose,
     shouldResetDataOnInit,
     shouldResetData,
     shouldLoadInitialDataOnInit,
