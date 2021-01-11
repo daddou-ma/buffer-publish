@@ -81,10 +81,11 @@ const ComposerWrapper = ({
     saveButtons,
     position: { margin: '0 auto' },
     onSave,
-    shouldResetDataOnInit,
-    shouldResetData,
-    shouldLoadInitialDataOnInit,
     sentPost,
+    preserveStateOnClose: preserveState,
+    shouldResetData,
+    shouldResetDataOnInit,
+    shouldLoadInitialDataOnInit,
   };
 
   const subprofileId = post ? post.subprofile_id : undefined;
