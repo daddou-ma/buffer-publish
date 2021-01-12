@@ -22,3 +22,33 @@ describe('constructor', () => {
     expect(sl.location).toBe(location);
   });
 });
+
+describe('formatsAddress', () => {
+  it('returns full address', () => {
+    const sl = new ServiceLocation(id, name, location);
+
+    expect(sl.formattedAddress).toBe(
+      `1 Hacker Way Menlo Park, CA United States`
+    );
+  });
+
+  it('returns city, state and country', () => {
+    const cityLocation = {
+      city: 'Menlo Park',
+      country: 'United States',
+      state: 'CA',
+    };
+    const sl = new ServiceLocation(id, name, cityLocation);
+
+    expect(sl.formattedAddress).toBe('Menlo Park, CA United States');
+  });
+  it('returns city and country', () => {
+    const cityLocation = {
+      city: 'Barcelona',
+      country: 'Spain',
+    };
+    const sl = new ServiceLocation(id, name, cityLocation);
+
+    expect(sl.formattedAddress).toBe('Barcelona, Spain');
+  });
+});
