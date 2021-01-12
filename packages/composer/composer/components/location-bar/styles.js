@@ -46,7 +46,7 @@ export const Menu = styled.div`
   margin-left: 5px;
   z-index: 100;
   font-size: ${fontSizeSmall};
-  max-height: 250px;
+  max-height: 225px;
 `;
 
 export const Row = styled.span`
