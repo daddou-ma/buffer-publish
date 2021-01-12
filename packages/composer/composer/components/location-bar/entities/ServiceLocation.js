@@ -1,31 +1,15 @@
 class ServiceLocation {
-  constructor(id, name, pictureUrl, checkins, address) {
+  constructor(id, name, location) {
     this.id = id;
     this.name = name;
 
-    if (pictureUrl.data && pictureUrl.data.url) {
-      this.pictureUrl = pictureUrl.data.url;
-    } else {
-      this.pictureUrl = pictureUrl;
-    }
-
-    this.checkins = checkins;
-    this.address = address;
+    this.location = location;
   }
 
-  get formattedAddressWithCheckins() {
-    if (this.checkins) {
-      const numbersInGroupsOf3 = /\B(?=(\d{3})+(?!\d))/g;
-      const formattedNumber = this.checkins
-        .toString()
-        .replace(numbersInGroupsOf3, ',');
-      const formattedCheckins = `${formattedNumber} people checked in here`;
-
-      if (this.address) {
-        return `${this.address} · ${formattedCheckins}`;
-      }
-
-      return formattedCheckins;
+  get formattedAddress() {
+    if (this.location) {
+      const { city, country, state, street } = this.location;
+      return `${street} ${city}, ${state} ${country}`;
     }
 
     return '';

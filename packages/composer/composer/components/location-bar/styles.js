@@ -31,29 +31,22 @@ export const AutocompleteContainer = styled.span`
   flex-grow: 1;
 `;
 
-export const Title = styled.p`
-  font-weight: bold;
+export const Name = styled.p`
+  font-weight: ${fontWeightSemiBold};
   padding: 0;
   margin: 0;
 `;
 
-export const Description = styled.div`
-  width: 75%;
-  float: left;
-  padding-left: 10px;
-`;
-
-export const Menu = styled.menu`
+export const Menu = styled.div`
   border-radius: 3px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 12px;
   background: ${white};
   overflow: auto;
   position: absolute;
   margin-left: 5px;
-  overflow: auto;
-  width: 600px;
   z-index: 100;
   font-size: ${fontSizeSmall};
+  max-height: 250px;
 `;
 
 export const Row = styled.span`
@@ -66,4 +59,9 @@ export const Row = styled.span`
     padding-top: 8px;
   }
   background-color: ${props => (props.highlighted ? grayLight : 'none')};
+
+  p {
+    padding: 0;
+    margin: 0 0 0 10px;
+  }
 `;

@@ -11,8 +11,7 @@ import {
   AutocompleteContainer,
   Menu,
   Row,
-  Description,
-  Title,
+  Name,
 } from './styles';
 
 import ComposerActionCreators from '../../action-creators/ComposerActionCreators';
@@ -104,10 +103,8 @@ const LocationComposerBar = ({
               renderMenu={children => <Menu>{children}</Menu>}
               renderItem={(item, highlighted) => (
                 <Row highlighted={highlighted} key={item.id}>
-                  <Description>
-                    <Title>{item.name}</Title>
-                    <p>{item.formattedAddressWithCheckins}</p>
-                  </Description>
+                  <Name>{item.name}</Name>
+                  <p>{item.formattedAddress}</p>
                 </Row>
               )}
             />
