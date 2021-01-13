@@ -69,7 +69,7 @@ const QueuedPosts = ({
   hasCampaignsFeature,
   hasCalendarFeature,
   shouldDisplaySingleSlots,
-  preserveComposerStateOnClose,
+  shouldResetComposerData,
   shouldDisplayRemindersBanner,
   shouldDisplayTimezone,
   profileTimezone,
@@ -106,7 +106,8 @@ const QueuedPosts = ({
           {showComposer && !editMode && (
             <ComposerPopover
               onSave={onComposerCreateSuccess}
-              preserveComposerStateOnClose={preserveComposerStateOnClose}
+              preserveComposerStateOnClose
+              shouldResetComposerData={shouldResetComposerData}
               type="queue"
               onComposerOverlayClick={onComposerOverlayClick}
               editMode={editMode}

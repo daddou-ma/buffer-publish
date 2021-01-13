@@ -56,7 +56,7 @@ export default connect(
       const isInstagramProfile = profileData.type === 'instagram';
 
       return {
-        preserveComposerStateOnClose: state.queue.preserveComposerStateOnClose,
+        shouldResetComposerData: state.queue.shouldResetComposerData,
         loading: queue.loading,
         loadingMore: queue.loadingMore,
         moreToLoad: queue.moreToLoad,

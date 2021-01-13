@@ -208,7 +208,7 @@ export default (state = initialState, action) => {
     case orgActionTypes.ORGANIZATION_SELECTED:
       return {
         ...state,
-        preserveComposerStateOnClose: false,
+        shouldResetComposerData: true,
       };
     case actionTypes.OPEN_COMPOSER:
       return {
@@ -220,7 +220,7 @@ export default (state = initialState, action) => {
     case actionTypes.HIDE_COMPOSER:
       return {
         ...state,
-        preserveComposerStateOnClose: true,
+        shouldResetComposerData: false,
         showComposer: false,
         editMode: false,
       };
