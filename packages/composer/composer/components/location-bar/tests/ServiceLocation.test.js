@@ -28,7 +28,7 @@ describe('formatsAddress', () => {
     const sl = new ServiceLocation(id, name, location);
 
     expect(sl.formattedAddress).toBe(
-      `1 Hacker Way Menlo Park, CA United States`
+      `1 Hacker Way Menlo Park, CA 94025 United States`
     );
   });
 
