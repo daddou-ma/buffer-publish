@@ -37,7 +37,6 @@ const LocationComposerBar = ({
   const getLocations = debounce(query => {
     LocationFinder.findLocations(instagramProfileId, query)
       .then(results => {
-        console.log('results', results);
         ComposerActionCreators.updateDraftListPlaces(draftId, results);
       })
       .catch(() => {
