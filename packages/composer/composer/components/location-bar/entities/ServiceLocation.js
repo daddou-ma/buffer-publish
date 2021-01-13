@@ -7,9 +7,9 @@ class ServiceLocation {
 
   get formattedAddress() {
     if (this.location) {
-      const { city, country, state, street } = this.location;
-      const formattedCity = city ? `${city},` : null;
-      const address = [street, formattedCity, state, country]
+      const { city, country, state, street, zip } = this.location;
+      const formattedCity = city && (state || country) ? `${city},` : city;
+      const address = [street, formattedCity, state, zip, country]
         .filter(Boolean)
         .join(' ');
 
