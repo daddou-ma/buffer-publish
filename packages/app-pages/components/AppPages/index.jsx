@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
@@ -15,7 +15,7 @@ import Preferences from '@bufferapp/publish-preferences';
 import Plans from '@bufferapp/publish-plans';
 import DefaultPage from '@bufferapp/default-page';
 import OnboardingManager from '@bufferapp/publish-onboarding';
-import { useOrgSwitcher } from '@bufferapp/app-shell';
+import { UserContext, useOrgSwitcher } from '@bufferapp/app-shell';
 
 const AppPages = ({
   profiles,
@@ -25,6 +25,8 @@ const AppPages = ({
   setCurrentOrganization,
   currentOrgId,
 }) => {
+  const user = useContext(UserContext);
+  console.log(user);
   const switchOrganization = useOrgSwitcher();
   const hasProfiles = profiles && profiles.length > 0;
   // If org coming from route doesn't match the last org stored, select and store the new value
