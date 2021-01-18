@@ -9,6 +9,7 @@ import {
   newConnection,
   campaignsPage,
 } from '@bufferapp/publish-routes';
+import { filterProfilesByOrg } from '@bufferapp/publish-profile-sidebar/utils';
 import PagesWithSidebar from '@bufferapp/publish-app-pages/components/PagesWithSidebar';
 import ProfilePages from '@bufferapp/publish-app-pages/components/ProfilePages';
 import Preferences from '@bufferapp/publish-preferences';
@@ -18,20 +19,27 @@ import OnboardingManager from '@bufferapp/publish-onboarding';
 import { UserContext, useOrgSwitcher } from '@bufferapp/app-shell';
 
 const AppPages = ({
-  profiles,
+  unfilteredProfiles,
   showBusinessTrialistsOnboarding,
   profileRouteLoaded,
-  needsToSetCurrentOrg,
   setCurrentOrganization,
-  currentOrgId,
+  orgIdFromRoute,
 }) => {
+  // Get current selected org from appshell
   const user = useContext(UserContext);
-  console.log(user);
+  const selectedOrgId = user?.currentOrganization?.id;
+  const currentOrgId = orgIdFromRoute || selectedOrgId;
+  const needsToSetNewCurrentOrg = selectedOrgId !== orgIdFromRoute;
+
+  // Filters profiles by current org selected
+  const profiles = filterProfilesByOrg(unfilteredProfiles, {
+    id: currentOrgId,
+  });
+
   const switchOrganization = useOrgSwitcher();
-  const hasProfiles = profiles && profiles.length > 0;
   // If org coming from route doesn't match the last org stored, select and store the new value
   useEffect(() => {
-    if (needsToSetCurrentOrg) {
+    if (needsToSetNewCurrentOrg) {
       switchOrganization(currentOrgId, {
         onCompleted: id => {
           console.info(`organization selected ${id}`);
@@ -47,6 +55,8 @@ const AppPages = ({
     const newPath = profilePages.getRoute({ profileId: selectedProfileId });
     return <Redirect to={newPath} />;
   };
+  const hasProfiles = profiles && profiles.length > 0;
+
   return (
     <Switch>
       <Route path={preferencesPage.route} component={Preferences} />
@@ -85,19 +95,19 @@ const AppPages = ({
 };
 
 AppPages.propTypes = {
-  profiles: PropTypes.arrayOf(PropTypes.object),
+  unfilteredProfiles: PropTypes.arrayOf(PropTypes.object),
   showBusinessTrialistsOnboarding: PropTypes.bool,
   profileRouteLoaded: PropTypes.func.isRequired,
   needsToSetCurrentOrg: PropTypes.bool,
-  currentOrgId: PropTypes.string,
+  orgIdFromRoute: PropTypes.string,
   setCurrentOrganization: PropTypes.func,
 };
 
 AppPages.defaultProps = {
   showBusinessTrialistsOnboarding: false,
-  profiles: [],
+  unfilteredProfiles: [],
   needsToSetCurrentOrg: false,
-  currentOrgId: null,
+  orgIdFromRoute: null,
   setCurrentOrganization: () => {},
 };
 
