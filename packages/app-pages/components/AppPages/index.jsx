@@ -15,6 +15,7 @@ import Preferences from '@bufferapp/publish-preferences';
 import Plans from '@bufferapp/publish-plans';
 import DefaultPage from '@bufferapp/default-page';
 import OnboardingManager from '@bufferapp/publish-onboarding';
+import { useOrgSwitcher } from '@bufferapp/app-shell';
 
 const AppPages = ({
   profiles,
@@ -24,11 +25,17 @@ const AppPages = ({
   setCurrentOrganization,
   currentOrgId,
 }) => {
+  const switchOrganization = useOrgSwitcher();
   const hasProfiles = profiles && profiles.length > 0;
   // If org coming from route doesn't match the last org stored, select and store the new value
   useEffect(() => {
     if (needsToSetCurrentOrg) {
-      setCurrentOrganization(currentOrgId);
+      switchOrganization(currentOrgId, {
+        onCompleted: id => {
+          console.info(`organization selected ${id}`);
+          setCurrentOrganization(currentOrgId);
+        },
+      });
     }
   }, [currentOrgId]);
 
