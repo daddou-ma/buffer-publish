@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { actions as modalsActions } from '@bufferapp/publish-modals/reducer';
+import { getURL } from '@bufferapp/publish-server/formatters/src';
 import { actions } from './reducer';
 import ProfilesDisconnectedModal from './components/ProfilesDisconnectedModal';
 
@@ -12,6 +13,9 @@ export default connect(
         profile?.service === 'instagram' && profile?.service_type === 'profile'
     );
     const organizations = state.organizations?.list;
+    const shouldRedirectToAccountChannels = state.globalAccount.featureFlips.includes(
+      'sharedChannels'
+    );
 
     const profiles = disconnectedProfiles.reduce((accProfiles, profile) => {
       const matchingOrg =
@@ -26,12 +30,17 @@ export default connect(
       ...state.profilesDisconnectedModal,
       displayExtraMessage: instagramPersonalProfiles?.length > 0,
       disconnectedProfiles: profiles,
+      shouldRedirectToAccountChannels,
     };
   },
   dispatch => ({
     hideModal: () => dispatch(modalsActions.hideProfilesDisconnectedModal()),
-    reconnectProfile: ({ id, service }) =>
-      dispatch(actions.reconnectProfile({ id, service })),
+    reconnectProfile: ({ shouldRedirectToAccountChannels, id, service }) => {
+      if (shouldRedirectToAccountChannels) {
+        window.location = getURL.getAccountChannelsURL();
+      }
+      dispatch(actions.reconnectProfile({ id, service }));
+    },
   })
 )(ProfilesDisconnectedModal);
 

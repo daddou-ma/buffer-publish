@@ -8,6 +8,7 @@ export default (state = {}, action) => {
         email: action.result.email,
         _id: action.result._id,
         productSolutionName: action.result.productSolutionName,
+        featureFlips: action.result.featureFlips || [],
       };
     default:
       return state;

@@ -22,6 +22,7 @@ export default ({ dispatch, getState }) => next => action => {
           name: state.user.name,
           email: state.globalAccount.email,
           productSolutionName: state.globalAccount.productSolutionName || null,
+          featureFlips: state.globalAccount.featureFlips || [],
         })
       );
       break;

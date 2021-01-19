@@ -52,6 +52,7 @@ const ProfilesDisconnectedModal = ({
   reconnectProfile,
   hideModal,
   displayExtraMessage,
+  shouldRedirectToAccountChannels,
 }) => {
   const { t } = useTranslation();
   return (
@@ -87,9 +88,13 @@ const ProfilesDisconnectedModal = ({
                 ) : (
                   <Button
                     disabled={p.reconnecting}
-                    onClick={() =>
-                      reconnectProfile({ id: p.id, service: p.service })
-                    }
+                    onClick={() => {
+                      reconnectProfile({
+                        shouldRedirectToAccountChannels,
+                        id: p.id,
+                        service: p.service,
+                      });
+                    }}
                     size="small"
                     type="primary"
                     label={
