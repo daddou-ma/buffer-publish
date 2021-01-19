@@ -70,11 +70,10 @@ const LocationComposerBar = ({
 
   const removeLocation = e => {
     e.preventDefault();
-    resetInput();
+    resetData();
   };
 
   const isLocationSet = () => locationId !== null;
-
   return (
     shouldShowLocationBar() && (
       <Container>
