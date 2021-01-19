@@ -88,12 +88,16 @@ export default ({ dispatch, getState }) => next => action => {
       const {
         shouldShowProTrialExpiredModal,
         shouldShowBusinessTrialExpiredModal,
+        shouldShowEngagementPromoModal,
       } = action.selected;
       if (
         shouldShowProTrialExpiredModal ||
         shouldShowBusinessTrialExpiredModal
       ) {
         dispatch(actions.showTrialCompleteModal());
+      }
+      if (shouldShowEngagementPromoModal) {
+        dispatch(actions.showEngagementPromoModal());
       }
       break;
     }
