@@ -61,7 +61,8 @@ module.exports = orgData => ({
     orgData.trial && orgData.trial.canStartProTrial && orgData.isOwner,
 
   // Upgrade/ Trial Paths
-  shouldShowEngagementPromoModal: orgData.planBase === 'free',
+  shouldShowEngagementPromoModal:
+    orgData.planBase === 'free' && orgData.isOwner,
   showUpgradeToProCta: orgData.planBase === 'free',
   showShowDraftsPaywall: orgData.planBase === 'pro',
   showUpgradeToBusinessCta: orgData.planBase === 'pro' && orgData.isOwner,
