@@ -24,15 +24,21 @@ const showLocationBar = {
   withMediaAttachment: false,
 };
 
+const id = '3123';
+const name = 'Los Angeles';
+const location = {
+  city: 'Menlo Park',
+  country: 'United States',
+  latitude: 37.483183,
+  longitude: -122.149999,
+  state: 'CA',
+  street: '1 Hacker Way',
+  zip: '94025',
+};
+
 describe('Whole component', () => {
   it('renders correctly', () => {
-    const sl = new ServiceLocation(
-      '3123',
-      'Los Angeles',
-      'https://example.com/image.jpeg',
-      123,
-      'LA, USA'
-    );
+    const sl = new ServiceLocation(id, name, location);
 
     const tree = renderer
       .create(
@@ -135,13 +141,7 @@ describe('Autocomplete element', () => {
   });
 
   it('has correct properties', () => {
-    const sl = new ServiceLocation(
-      '3123',
-      'Los Angeles',
-      'https://example.com/image.jpeg',
-      123,
-      'LA, USA'
-    );
+    const sl = new ServiceLocation(id, name, location);
     const { wrapper } = setup({
       locationName: 'Los Angeles Test',
       places: [sl],
@@ -183,13 +183,7 @@ describe('Autocomplete actions', () => {
   it('updates draft location when changed', () => {
     const { wrapper } = setup({ draftId: '1234', instagramProfileId: '676' });
     const autocompleteProps = wrapper.find(Autocomplete).props();
-    const place = new ServiceLocation(
-      '3123',
-      'Los Angeles',
-      'https://example.com/image.jpeg',
-      123,
-      'LA, USA'
-    );
+    const place = new ServiceLocation(id, name, location);
 
     autocompleteProps.onSelect(null, place);
 
