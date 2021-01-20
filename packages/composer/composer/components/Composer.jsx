@@ -1182,8 +1182,6 @@ class Composer extends React.Component {
               />
 
               <LocationComposerBar
-                withMediaAttachment={!usesImageFirstLayout}
-                hasVideo={this.hasVideo()}
                 selectedProfiles={selectedProfiles}
                 isInstagram={this.isInstagram()}
                 draftId={draft.id}
