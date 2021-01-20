@@ -25,14 +25,13 @@ const LocationComposerBar = ({
   selectedProfiles,
   isInstagram,
 }) => {
-  const resetData = () => {
+  const resetInput = () => {
     ComposerActionCreators.updateDraftLocation(draftId, null, '');
-    ComposerActionCreators.updateDraftListPlaces(draftId, []);
   };
 
   const onMenuVisibilityChange = isOpen => {
     if (!isOpen && locationId === null && locationName !== '') {
-      resetData();
+      resetInput();
     }
   };
 
@@ -70,7 +69,8 @@ const LocationComposerBar = ({
 
   const removeLocation = e => {
     e.preventDefault();
-    resetData();
+    resetInput();
+    ComposerActionCreators.updateDraftListPlaces(draftId, []);
   };
 
   const isLocationSet = () => locationId !== null;
