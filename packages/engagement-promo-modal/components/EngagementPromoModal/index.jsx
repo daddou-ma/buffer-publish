@@ -41,19 +41,23 @@ const ButtonContainer = styled.div`
   }
 `;
 
-const EngagementPromoModal = ({ dismissModal }) => {
+const EngagementPromoModal = ({
+  dismissModal,
+  startTrial,
+  alreadySawModal,
+}) => {
+  if (alreadySawModal) return;
   return (
-    <Modal background="url('https://s3.amazonaws.com/buffer-publish/images/engagement-promo-modal.jpg') no-repeat">
+    <Modal background="url('https://s3.amazonaws.com/buffer-publish/images/engagement-promo-modal.png') no-repeat">
       <TextContainer>
         <Title type="h2">New! Reply to Instagram comments</Title>
         <Text type="p">
           Every time an Instagram comment goes unanswered, an opportunity to
           create a lifelong customer is lost. With our brand-new engagement
-          features, you can reply to every Instagram comment without leaving
-          Buffer.
+          tool, you can reply to every Instagram comment without leaving Buffer.
         </Text>
         <Note type="p">
-          Buffer’s engagement features are including on all paid plans.
+          Comes included with all paid plans, starting at $15/month.
         </Note>
       </TextContainer>
       <Footer>
@@ -61,11 +65,7 @@ const EngagementPromoModal = ({ dismissModal }) => {
           <Button
             fullWidth
             type="primary"
-            onClick={() => {
-              window.location.assign(
-                'https://login.buffer.com/signup?product=publish=pro&cycle=month&cta=publish-engagementPromoModal-buttonBottom-publishPro-1'
-              );
-            }}
+            onClick={() => startTrial()}
             label="Start 14-day Free Trial"
           />
           <Button
@@ -86,7 +86,13 @@ const EngagementPromoModal = ({ dismissModal }) => {
 };
 
 EngagementPromoModal.propTypes = {
+  alreadySawModal: PropTypes.bool,
+  startTrial: PropTypes.func.isRequired,
   dismissModal: PropTypes.func.isRequired,
+};
+
+EngagementPromoModal.defaultProps = {
+  alreadySawModal: false,
 };
 
 export default EngagementPromoModal;
