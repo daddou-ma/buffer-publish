@@ -2,7 +2,7 @@
 /* eslint-disable import/first */
 
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import renderer from 'react-test-renderer';
 import Autocomplete from 'react-autocomplete';
 import debounce from 'lodash.debounce';
@@ -95,7 +95,7 @@ const setup = propOverrides => {
     propOverrides
   );
 
-  const wrapper = shallow(
+  const wrapper = mount(
     <LocationComposerBar {...props} {...showLocationBar} />
   );
 
@@ -108,21 +108,20 @@ const setup = propOverrides => {
 describe('Cross remove button', () => {
   it('is shown when locationId is set', () => {
     const { wrapper } = setup({ locationId: '123123' });
-    expect(wrapper.find('.locationFieldRemoveInput').length).toBe(1);
+
+    expect(wrapper.find('button').length).toBe(1);
   });
 
   it('is hidden when locationId is not set', () => {
     const { wrapper } = setup({ locationId: null });
-    expect(wrapper.find('.locationFieldRemoveInput').length).toBe(0);
+    expect(wrapper.find('button').length).toBe(0);
   });
 
   it('resets input content when clicked on', () => {
     ComposerActionCreators.updateDraftLocation.mockReturnValue(true);
     const { wrapper } = setup({ locationId: '123', draftId: '1234' });
 
-    wrapper
-      .find('span.locationFieldRemoveInput')
-      .simulate('click', { preventDefault() {} });
+    wrapper.find('button').simulate('click', { preventDefault() {} });
 
     expect(ComposerActionCreators.updateDraftLocation).toHaveBeenCalledWith(
       '1234',
