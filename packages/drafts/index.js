@@ -127,7 +127,7 @@ export default connect(
         isManager,
       } = state.profileSidebar.selectedProfile;
       return {
-        preserveComposerStateOnClose: state.drafts.preserveComposerStateOnClose,
+        shouldResetComposerData: state.drafts.shouldResetComposerData,
         manager: isManager,
         drafts: currentProfile.drafts,
         postLists: formatPostLists(

@@ -26,6 +26,7 @@ const ComposerWrapper = ({
   post,
   onSave,
   preserveStateOnClose,
+  shouldResetComposerData,
   csrfToken,
   onEvent,
   onInteraction,
@@ -60,18 +61,31 @@ const ComposerWrapper = ({
     events.subscribe('*', onEvent);
     bootstrappedListener = true;
   }
-
+  const preserveState = emptySlotMode ? false : preserveStateOnClose;
   // Get the 'preserve state' setting from the last time the composer was open
-  const prevPreserveStateOnClose = AppStore.getOptions().preserveStateOnClose;
+  const prevPreserveState = AppStore.getOptions().preserveStateOnClose || false;
+
+  // reset data on App constructor
+  const shouldResetData = !preserveState || shouldResetComposerData;
+  const shouldResetDataOnInit =
+    prevPreserveState === false &&
+    preserveState !== prevPreserveState &&
+    !shouldResetData; // ensure we never call reset twice
+  const shouldLoadInitialDataOnInit =
+    prevPreserveState !== true ||
+    preserveState === false ||
+    shouldResetComposerData;
 
   const options = {
     canSelectProfiles: !editMode && !emptySlotMode,
     saveButtons,
     position: { margin: '0 auto' },
     onSave,
-    prevPreserveStateOnClose,
-    preserveStateOnClose: emptySlotMode ? false : preserveStateOnClose,
     sentPost,
+    preserveStateOnClose: preserveState,
+    shouldResetData,
+    shouldResetDataOnInit,
+    shouldLoadInitialDataOnInit,
   };
 
   const subprofileId = post ? post.subprofile_id : undefined;
@@ -169,6 +183,7 @@ ComposerWrapper.propTypes = {
   selectedProfileId: PropTypes.string,
   onInteraction: PropTypes.func,
   tabId: PropTypes.string.isRequired,
+  shouldResetComposerData: PropTypes.bool,
 };
 
 ComposerWrapper.defaultProps = {
