@@ -46,7 +46,7 @@ const EngagementPromoModal = ({
   startTrial,
   alreadySawModal,
 }) => {
-  if (alreadySawModal) return;
+  if (alreadySawModal) return null;
   return (
     <Modal background="url('https://s3.amazonaws.com/buffer-publish/images/engagement-promo-modal.png') no-repeat">
       <TextContainer>

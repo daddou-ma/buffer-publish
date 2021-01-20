@@ -6,7 +6,10 @@ import EngagementPromoModal from './components/EngagementPromoModal';
 
 export default connect(
   state => ({
-    alreadySawModal: state.user.messages.includes('user_saw_engagement_promo'),
+    alreadySawModal:
+      Object.keys(state.user).length > 0
+        ? state.user.messages?.includes('user_saw_engagement_promo')
+        : true,
   }),
   dispatch => ({
     dismissModal: () => {
