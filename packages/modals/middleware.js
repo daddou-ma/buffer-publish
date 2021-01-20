@@ -91,11 +91,6 @@ export default ({ dispatch, getState }) => next => action => {
         shouldShowEngagementPromoModal,
       } = action.selected;
 
-      const { profiles } = getState().profileSidebar;
-      const showingProfilesDisconnectedModalFirst = profiles.some(
-        profile => profile.isDisconnected
-      );
-
       if (
         shouldShowProTrialExpiredModal ||
         shouldShowBusinessTrialExpiredModal
@@ -103,6 +98,10 @@ export default ({ dispatch, getState }) => next => action => {
         dispatch(actions.showTrialCompleteModal());
       }
       if (shouldShowEngagementPromoModal) {
+        const { profiles } = getState().profileSidebar;
+        const showingProfilesDisconnectedModalFirst = profiles.some(
+          profile => profile.isDisconnected
+        );
         if (showingProfilesDisconnectedModalFirst) {
           dispatch(
             actions.saveModalToShowLater({
