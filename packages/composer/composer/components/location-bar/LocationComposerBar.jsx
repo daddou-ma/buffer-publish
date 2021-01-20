@@ -2,6 +2,7 @@ import React from 'react';
 import Autocomplete from 'react-autocomplete';
 import debounce from 'lodash.debounce';
 import PropTypes from 'prop-types';
+import CrossIcon from '@bufferapp/ui/Icon/Icons/Cross';
 import LocationFinder from './utils/LocationFinder';
 import styles from './LocationComposerBar.css';
 import {
@@ -12,6 +13,7 @@ import {
   Menu,
   Row,
   Name,
+  Button,
 } from './styles';
 
 import ComposerActionCreators from '../../action-creators/ComposerActionCreators';
@@ -67,7 +69,7 @@ const LocationComposerBar = ({
     );
   };
 
-  const removeLocation = e => {
+  const onRemoveLocation = e => {
     e.preventDefault();
     resetInput();
     ComposerActionCreators.updateDraftListPlaces(draftId, []);
@@ -80,12 +82,6 @@ const LocationComposerBar = ({
         <Wrapper>
           <Label>Location</Label>
           <AutocompleteContainer>
-            {isLocationSet() && (
-              <span
-                className={styles.locationFieldRemoveInput}
-                onClick={removeLocation}
-              />
-            )}
             <Autocomplete
               wrapperStyle={{ width: '100%' }}
               value={locationName}
@@ -108,6 +104,11 @@ const LocationComposerBar = ({
                 </Row>
               )}
             />
+            {isLocationSet() && (
+              <Button onClick={onRemoveLocation} aria-label="Remove location">
+                <CrossIcon />
+              </Button>
+            )}
           </AutocompleteContainer>
         </Wrapper>
       </Container>

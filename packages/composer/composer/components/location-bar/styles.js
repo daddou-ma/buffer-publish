@@ -65,3 +65,21 @@ export const Row = styled.span`
     margin: 0 0 0 10px;
   }
 `;
+
+export const Button = styled.button`
+  position: absolute;
+  cursor: pointer;
+  top: 8px;
+  right: -2px;
+  border: 0;
+  background: none;
+  color: #b8b8b8;
+
+  &:hover {
+    color: #333;
+  }
+
+  &:focus {
+    outline: none;
+  }
+`;
