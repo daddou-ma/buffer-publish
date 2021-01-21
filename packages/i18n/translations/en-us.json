@@ -238,11 +238,7 @@
         "",
         "Include first comment when you schedule Instagram posts"
       ],
-      "features": [
-        "8 social channels",
-        "1 user",
-        "Instagram first comment"
-      ],
+      "features": ["8 social channels", "1 user", "Instagram first comment"],
       "monthly": "/mo",
       "nonProfitCost": "$7.50",
       "plan": "pro",
@@ -597,9 +593,6 @@
     "validating": "One moment...",
     "zipCode": "Zip code",
     "zipLeaveBlank": "Leave blank for non-US cards"
-  },
-  "tag-badge": {
-    "new": "New"
   },
   "trial-complete-modal": {
     "cancelTrial": "Cancel Trial",

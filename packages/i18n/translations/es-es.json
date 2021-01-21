@@ -596,9 +596,6 @@
     "zipCode": "Código postal",
     "zipLeaveBlank": "Dejar en blanco para tarjetas fuera de USA"
   },
-  "tag-badge": {
-    "new": "Nuevo"
-  },
   "trial-complete-modal": {
     "cancelTrial": "Cancelar Prueba",
     "completeAndUpgrade": "Completar y Mejorar Plan",

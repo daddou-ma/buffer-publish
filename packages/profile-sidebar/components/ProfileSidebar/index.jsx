@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Divider } from '@bufferapp/components';
 import { Button, SidebarListItem, Tooltip } from '@bufferapp/ui';
-import { NavTag } from '@bufferapp/publish-shared-components';
 import { offWhite, mystic } from '@bufferapp/components/style/color';
 import { borderWidth } from '@bufferapp/components/style/border';
 import styled from 'styled-components';
@@ -136,7 +135,6 @@ const ProfileSidebar = ({
                   title={t('campaigns.common.title')}
                   onItemClick={onCampaignsButtonClick}
                   selected={isCampaignsSelected}
-                  badges={<NavTag type="new" labelName={t('tag-badge.new')} />}
                 />
               </ButtonWrapper>
               <ProfileListTitle>
