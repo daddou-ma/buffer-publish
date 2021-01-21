@@ -509,7 +509,7 @@ function getTwitterACPublicSearchHashtagSuggestions(search) {
   )
     .then(response => response.json())
     .then(response =>
-      response.hashtags.map(({ hashtag }) => [hashtag, { name: hashtag }])
+      response.topics.map(({ topic }) => [topic, { name: topic }])
     )
     .catch(error => {
       if (
