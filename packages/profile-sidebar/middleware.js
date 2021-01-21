@@ -67,10 +67,7 @@ export default ({ dispatch, getState }) => next => action => {
       );
       break;
     case actionTypes.MANAGE_SOCIAL_ACCOUNT: {
-      const { featureFlips } = getState().globalAccount;
-      const shouldRedirectToAccountChannels = featureFlips.includes(
-        'sharedChannels'
-      );
+      const { shouldRedirectToAccountChannels } = getState().globalAccount;
       const redirectURL = shouldRedirectToAccountChannels
         ? getURL.getAccountChannelsURL()
         : getURL.getManageSocialAccountURL();

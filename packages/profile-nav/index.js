@@ -6,9 +6,6 @@ import TabNavigation from './components/TabNavigation';
 // default export = container
 export default connect(
   state => {
-    const shouldRedirectToAccountChannels = state.globalAccount.featureFlips.includes(
-      'sharedChannels'
-    );
     return {
       profileNavTabs: state.profileNav.profileNavTabs,
       profileId: state.profileSidebar.selectedProfile.id,
@@ -24,7 +21,7 @@ export default connect(
         state.organizations.selected?.canReconnectChannels,
       draftsNeedApprovalCount: state.profileNav.draftsNeedApprovalCount,
       draftsCount: state.profileNav.draftsCount,
-      reconnectURL: shouldRedirectToAccountChannels
+      reconnectURL: state.globalAccount.shouldRedirectToAccountChannels
         ? getURL.getAccountChannelsURL()
         : getURL.getManageSocialAccountURL(),
     };

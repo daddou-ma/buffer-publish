@@ -108,6 +108,7 @@ const ProfileSidebar = ({
   showUpgradeToProCta,
 }) => {
   const { t } = useTranslation();
+  const ACCOUNT_CHANNELS_URL = getURL.getAccountChannelsURL();
 
   const ManageAccountsWrapper = ({ children }) =>
     canManageSocialAccounts ? (
@@ -172,7 +173,7 @@ const ProfileSidebar = ({
                 <ProfileConnectShortcut
                   label={t('profile-sidebar.connectInstagram')}
                   network="instagram"
-                  url={`https://${getURL.getBaseURL()}/oauth/instagram/choose_business?cta=publish-app-sidebar-addProfile-1`}
+                  url={ACCOUNT_CHANNELS_URL}
                   profileLimit={profileLimit}
                   profiles={profiles}
                   showSwitchPlanModal={showSwitchPlanModal}
@@ -184,7 +185,7 @@ const ProfileSidebar = ({
                 <ProfileConnectShortcut
                   label={t('profile-sidebar.connectFacebook')}
                   network="facebook"
-                  url={`https://${getURL.getBaseURL()}/oauth/facebook/choose?cta=publish-app-sidebar-addProfile-1`}
+                  url={ACCOUNT_CHANNELS_URL}
                   profileLimit={profileLimit}
                   profiles={profiles}
                   showSwitchPlanModal={showSwitchPlanModal}
@@ -196,7 +197,7 @@ const ProfileSidebar = ({
                 <ProfileConnectShortcut
                   label={t('profile-sidebar.connectTwitter')}
                   network="twitter"
-                  url={`https://${getURL.getBaseURL()}/oauth/twitter?cta=publish-app-sidebar-addProfile-1`}
+                  url={ACCOUNT_CHANNELS_URL}
                   profileLimit={profileLimit}
                   profiles={profiles}
                   showSwitchPlanModal={showSwitchPlanModal}

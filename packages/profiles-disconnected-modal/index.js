@@ -13,9 +13,7 @@ export default connect(
         profile?.service === 'instagram' && profile?.service_type === 'profile'
     );
     const organizations = state.organizations?.list;
-    const shouldRedirectToAccountChannels = state.globalAccount.featureFlips.includes(
-      'sharedChannels'
-    );
+    const { shouldRedirectToAccountChannels } = state.globalAccount;
 
     const profiles = disconnectedProfiles.reduce((accProfiles, profile) => {
       const matchingOrg =

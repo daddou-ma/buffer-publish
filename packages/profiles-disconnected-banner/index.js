@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { actions as profilesDisconnectedModalActions } from '@bufferapp/publish-profiles-disconnected-modal/reducer';
+import { getURL } from '@bufferapp/publish-server/formatters/src';
 import ProfilesDisconnectedBanner from './components/ProfilesDisconnectedBanner';
 
 export default connect(
@@ -19,11 +20,20 @@ export default connect(
       service: selectedProfile?.service,
       displayExtraMessage,
       canReconnectChannels: state.organizations.selected?.canReconnectChannels,
+      shouldRedirectToAccountChannels:
+        state.globalAccount.shouldRedirectToAccountChannels,
       ownerEmail: state.organizations.selected?.ownerEmail,
     };
   },
   dispatch => ({
-    onReconnectProfileClick: ({ id, service }) => {
+    onReconnectProfileClick: ({
+      id,
+      service,
+      shouldRedirectToAccountChannels,
+    }) => {
+      if (shouldRedirectToAccountChannels) {
+        window.location = getURL.getAccountChannelsURL();
+      }
       dispatch(
         profilesDisconnectedModalActions.reconnectProfile({
           id,

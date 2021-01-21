@@ -122,6 +122,7 @@ ProfilesDisconnectedModal.propTypes = {
   reconnectProfile: PropTypes.func.isRequired,
   hideModal: PropTypes.func.isRequired,
   displayExtraMessage: PropTypes.bool,
+  shouldRedirectToAccountChannels: PropTypes.bool.isRequired,
 };
 
 ProfilesDisconnectedModal.defaultProps = {
