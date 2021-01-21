@@ -33,7 +33,7 @@ export default connect(
         })
       );
       window.location.assign(
-        'https://login.buffer.com/signup?product=publish=pro&cycle=month&cta=publish-engagementPromoModal-buttonBottom-publishPro-1'
+        'https://login.buffer.com/signup?product=publish&plan=pro&cycle=month&cta=publish-engagementPromoModal-buttonBottom-publishPro-1'
       );
     },
   })
