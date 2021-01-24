@@ -7,7 +7,6 @@ import { offWhite, mystic } from '@bufferapp/components/style/color';
 import { borderWidth } from '@bufferapp/components/style/border';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
-import { getURL } from '@bufferapp/publish-server/formatters/src';
 
 import LoadingProfileListItem from '../LoadingProfileListItem';
 import ProfileListItem from '../ProfileListItem';
@@ -106,9 +105,9 @@ const ProfileSidebar = ({
   onCampaignsButtonClick,
   isCampaignsSelected,
   showUpgradeToProCta,
+  connectURL,
 }) => {
   const { t } = useTranslation();
-  const ACCOUNT_CHANNELS_URL = getURL.getAccountChannelsURL();
 
   const ManageAccountsWrapper = ({ children }) =>
     canManageSocialAccounts ? (
@@ -173,7 +172,7 @@ const ProfileSidebar = ({
                 <ProfileConnectShortcut
                   label={t('profile-sidebar.connectInstagram')}
                   network="instagram"
-                  url={ACCOUNT_CHANNELS_URL}
+                  url={connectURL}
                   profileLimit={profileLimit}
                   profiles={profiles}
                   showSwitchPlanModal={showSwitchPlanModal}
@@ -185,7 +184,7 @@ const ProfileSidebar = ({
                 <ProfileConnectShortcut
                   label={t('profile-sidebar.connectFacebook')}
                   network="facebook"
-                  url={ACCOUNT_CHANNELS_URL}
+                  url={connectURL}
                   profileLimit={profileLimit}
                   profiles={profiles}
                   showSwitchPlanModal={showSwitchPlanModal}
@@ -197,7 +196,7 @@ const ProfileSidebar = ({
                 <ProfileConnectShortcut
                   label={t('profile-sidebar.connectTwitter')}
                   network="twitter"
-                  url={ACCOUNT_CHANNELS_URL}
+                  url={connectURL}
                   profileLimit={profileLimit}
                   profiles={profiles}
                   showSwitchPlanModal={showSwitchPlanModal}
@@ -250,6 +249,7 @@ ProfileSidebar.propTypes = {
   onCampaignsButtonClick: PropTypes.func,
   ownerEmail: PropTypes.string,
   showUpgradeToProCta: PropTypes.bool,
+  connectURL: PropTypes.string.isRequired,
 };
 
 ProfileSidebar.defaultProps = {

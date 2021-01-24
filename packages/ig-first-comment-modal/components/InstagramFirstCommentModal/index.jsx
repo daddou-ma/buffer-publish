@@ -219,6 +219,7 @@ class InstagramFirstCommentModal extends React.Component {
       );
     }
     if (this.state.canRequestMorePermission) {
+      const { shouldRedirectToAccountChannels } = this.props;
       return (
         <div
           style={{
@@ -250,7 +251,10 @@ class InstagramFirstCommentModal extends React.Component {
                   </BDSButton>
                   <BDSButton
                     onClick={() =>
-                      launchRequestMorePermission(missingPermisisonProfile.id)
+                      launchRequestMorePermission({
+                        id: missingPermisisonProfile.id,
+                        shouldRedirectToAccountChannels,
+                      })
                     }
                   >
                     {translations.continue}
@@ -385,6 +389,7 @@ InstagramFirstCommentModal.propTypes = {
     canPostComment: PropTypes.bool,
   }),
   appId: PropTypes.string.isRequired,
+  shouldRedirectToAccountChannels: PropTypes.bool.isRequired,
 };
 
 InstagramFirstCommentModal.defaultProps = {

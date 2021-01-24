@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { hot } from 'react-hot-loader/root';
 import { actions as modalActions } from '@bufferapp/publish-modals';
+import { getURL } from '@bufferapp/publish-server/formatters/src';
 import {
   getMatch,
   campaignsPage,
@@ -37,6 +38,9 @@ export default hot(
           route: campaignsPage.route,
         }),
         showUpgradeToProCta: state.organizations.selected?.showUpgradeToProCta,
+        connectURL: state.globalAccount.shouldRedirectToAccountChannels
+          ? getURL.getAccountChannelsURL()
+          : getURL.getManageSocialAccountURL(),
       };
     },
     (dispatch, ownProps) => ({
