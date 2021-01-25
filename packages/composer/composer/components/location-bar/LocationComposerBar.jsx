@@ -120,7 +120,7 @@ LocationComposerBar.propTypes = {
   draftId: PropTypes.string.isRequired,
   locationName: PropTypes.string,
   locationId: PropTypes.string,
-  places: PropTypes.arrayOf({}),
+  places: PropTypes.arrayOf(PropTypes.shape({})),
   instagramProfileId: PropTypes.string,
   selectedProfiles: PropTypes.arrayOf(
     PropTypes.shape({
