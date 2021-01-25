@@ -310,13 +310,6 @@ const loadInitialMetaData = metaData => {
     });
   }
 
-  if (metaData.isTaggingPageLocation) {
-    AppDispatcher.handleViewAction({
-      actionType: ActionTypes.COMPOSER_UPDATE_DRAFTS_IS_TAGGING_PAGE_LOCATION,
-      isTaggingPageLocation: metaData.isTaggingPageLocation,
-    });
-  }
-
   if (metaData.images) {
     const dispatches = metaData.images.map(image =>
       dispatchAutoUploadedImage(image)

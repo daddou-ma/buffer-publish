@@ -1,4 +1,4 @@
-import API from './API';
+import API from '../../../utils/API';
 import ServiceLocation from '../entities/ServiceLocation';
 
 class LocationFinder {
@@ -15,14 +15,7 @@ class LocationFinder {
       .then(response => {
         const locations = response.locations.data;
         return locations.map(
-          l =>
-            new ServiceLocation(
-              l.id,
-              l.name,
-              l.picture,
-              l.checkins,
-              l.single_line_address
-            )
+          l => new ServiceLocation(l.id, l.name, l.location)
         );
       });
   }

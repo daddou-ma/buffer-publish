@@ -1,16 +1,22 @@
 /* eslint-disable import/first */
 
-jest.mock('../../utils/API');
-import API from '../../utils/API';
-import ServiceLocation from '../../entities/ServiceLocation';
-import LocationFinder from '../../utils/LocationFinder';
+jest.mock('../../../utils/API');
+import API from '../../../utils/API';
+import ServiceLocation from '../entities/ServiceLocation';
+import LocationFinder from '../utils/LocationFinder';
 
 // Example data for creating a service location object
 const id = '3123';
 const name = 'Los Angeles';
-const pictureUrl = 'https://example.com/image.jpeg';
-const checkins = 1312322333;
-const address = 'LA, USA';
+const location = {
+  city: 'Menlo Park',
+  country: 'United States',
+  latitude: 37.483183,
+  longitude: -122.149999,
+  state: 'CA',
+  street: '1 Hacker Way',
+  zip: '94025',
+};
 
 describe('When LocationFinder requests locations and response is ok', () => {
   beforeEach(() => {
@@ -30,9 +36,7 @@ describe('When LocationFinder requests locations and response is ok', () => {
             {
               id,
               name,
-              picture: pictureUrl,
-              checkins,
-              single_line_address: address,
+              location,
             },
           ],
         },
@@ -45,13 +49,7 @@ describe('When LocationFinder requests locations and response is ok', () => {
   afterEach(() => jest.resetAllMocks());
 
   it('creates service location objects ', () => {
-    const serviceLocation = new ServiceLocation(
-      id,
-      name,
-      pictureUrl,
-      checkins,
-      address
-    );
+    const serviceLocation = new ServiceLocation(id, name, location);
 
     LocationFinder.findLocations('3123', 'New York').then(locations => {
       expect(locations).toEqual([serviceLocation]);

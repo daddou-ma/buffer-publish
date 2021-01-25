@@ -300,7 +300,6 @@ const DataImportUtils = {
           commentEnabled: update.commentEnabled,
           commentText: update.commentText || null,
           shopgridLink: update.shopgridLink || null,
-          isTaggingPageLocation: update.isTaggingPageLocation || false,
           tabId: metaData.tabId || null,
           emptySlotMode: metaData.emptySlotMode || false,
         };
@@ -408,7 +407,6 @@ const DataImportUtils = {
         commentEnabled: meta.commentEnabled,
         commentText: meta.commentText || null,
         shopgridLink: meta.shopgridLink || null,
-        isTaggingPageLocation: meta.isTaggingPageLocation || null,
         tabId: meta.tabId || null,
         emptySlotMode: meta.emptySlotMode || false,
         editMode: meta.editMode || false,
