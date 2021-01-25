@@ -77,8 +77,8 @@ export default ({ dispatch, getState }) => next => action => {
         return;
       }
 
-      if (modalToShow.id === actionTypes.SHOW_SHOP_GRID_PROMO_MODAL) {
-        dispatch(actions.showShopGridPromoModal());
+      if (modalToShow.id === actionTypes.SHOW_ENGAGEMENT_PROMO_MODAL) {
+        dispatch(actions.showEngagementPromoModal());
       }
 
       break;
@@ -88,12 +88,36 @@ export default ({ dispatch, getState }) => next => action => {
       const {
         shouldShowProTrialExpiredModal,
         shouldShowBusinessTrialExpiredModal,
+        shouldShowEngagementPromoModal,
       } = action.selected;
+
       if (
         shouldShowProTrialExpiredModal ||
         shouldShowBusinessTrialExpiredModal
       ) {
         dispatch(actions.showTrialCompleteModal());
+      }
+
+      // Show modal only after official engage release
+      const currentDate = new Date();
+      const releaseDate = new Date('January 26, 2021 14:50:00 GMT+0000');
+      const deprecationDate = new Date('February 16, 2021 14:50:00 GMT+0000');
+      const engageIsReleased = deprecationDate > currentDate > releaseDate;
+
+      if (shouldShowEngagementPromoModal && engageIsReleased) {
+        const { profiles } = getState().profileSidebar;
+        const showingProfilesDisconnectedModalFirst = profiles.some(
+          profile => profile.isDisconnected
+        );
+        if (showingProfilesDisconnectedModalFirst) {
+          dispatch(
+            actions.saveModalToShowLater({
+              modalId: actionTypes.SHOW_ENGAGEMENT_PROMO_MODAL,
+            })
+          );
+        } else {
+          dispatch(actions.showEngagementPromoModal());
+        }
       }
       break;
     }
