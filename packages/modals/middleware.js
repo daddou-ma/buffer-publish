@@ -97,7 +97,14 @@ export default ({ dispatch, getState }) => next => action => {
       ) {
         dispatch(actions.showTrialCompleteModal());
       }
-      if (shouldShowEngagementPromoModal) {
+
+      // Show modal only after official engage release
+      const currentDate = new Date();
+      const releaseDate = new Date('January 26, 2021 14:50:00 GMT+0000');
+      const deprecationDate = new Date('February 16, 2021 14:50:00 GMT+0000');
+      const engageIsReleased = deprecationDate > currentDate > releaseDate;
+
+      if (shouldShowEngagementPromoModal && engageIsReleased) {
         const { profiles } = getState().profileSidebar;
         const showingProfilesDisconnectedModalFirst = profiles.some(
           profile => profile.isDisconnected
