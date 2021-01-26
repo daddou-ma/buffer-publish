@@ -5,10 +5,10 @@ import {
 } from '@bufferapp/publish-test-utils/utils/custom-render';
 import userEvent from '@testing-library/user-event';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
+import { selectedProfile } from '@bufferapp/publish-profile-sidebar/mockData/profiles';
 import '@bufferapp/publish-web/components/i18n';
 import { axe } from 'jest-axe';
 import ProfilesDisconnectedModal from './index';
-import { selectedProfile } from '../profile-sidebar/mockData/profiles';
 
 describe('ProfilesDisconnectedModal', () => {
   const profile = [
