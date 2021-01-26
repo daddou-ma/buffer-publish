@@ -83,6 +83,9 @@ const renderLoadingProfiles = () => (
   </Wrapper>
 );
 
+const getEnabledProfiles = profiles =>
+  profiles.filter(profile => !profile.disabled);
+
 const ProfileSidebar = ({
   loading,
   selectedProfileId,
@@ -106,6 +109,7 @@ const ProfileSidebar = ({
   showUpgradeToProCta,
 }) => {
   const { t } = useTranslation();
+  const enabledProfiles = getEnabledProfiles(profiles);
 
   const ManageAccountsWrapper = ({ children }) =>
     canManageSocialAccounts ? (
@@ -124,7 +128,7 @@ const ProfileSidebar = ({
   return (
     <ProfileSidebarStyle>
       {loading && renderLoadingProfiles()}
-      {profiles.length > 0 && (
+      {enabledProfiles.length > 0 && (
         <ProfileListStyle data-hide-scrollbar>
           {hasCampaignsFlip && (
             <>
@@ -142,9 +146,9 @@ const ProfileSidebar = ({
               <Divider marginTop="0" marginBottom="1rem" />
             </>
           )}
-          {profiles.length > 9 && (
+          {enabledProfiles.length > 9 && (
             <ProfileSearch
-              profiles={profiles}
+              profiles={enabledProfiles}
               onSearchProfileChange={onSearchProfileChange}
               isSearchPopupVisible={isSearchPopupVisible}
               handleSubmit={({ selectedProfile }) =>
@@ -154,7 +158,7 @@ const ProfileSidebar = ({
           )}
           <ProfileList
             selectedProfileId={selectedProfileId}
-            profiles={profiles}
+            profiles={enabledProfiles}
             onProfileClick={onProfileClick}
             profileLimit={profileLimit}
           />

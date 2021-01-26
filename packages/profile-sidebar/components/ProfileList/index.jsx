@@ -8,28 +8,23 @@ const ProfileList = ({
   onProfileClick,
   profileLimit,
 }) =>
-  profiles.map((profile, index) => {
-    if (!profile.disabled) {
-      return (
-        <ProfileListItem
-          avatarUrl={profile.avatarUrl}
-          type={profile.type}
-          handle={profile.handle}
-          pendingCount={profile.pendingCount}
-          selected={profile.id === selectedProfileId}
-          locked={profile.disabled}
-          disconnected={profile.isDisconnected}
-          onClick={() => onProfileClick(profile)}
-          profileLimit={profileLimit}
-          id={profile.id}
-          index={index}
-          key={profile.id}
-          location={profile.location}
-        />
-      );
-    }
-    return null;
-  });
+  profiles.map((profile, index) => (
+    <ProfileListItem
+      avatarUrl={profile.avatarUrl}
+      type={profile.type}
+      handle={profile.handle}
+      pendingCount={profile.pendingCount}
+      selected={profile.id === selectedProfileId}
+      locked={profile.disabled}
+      disconnected={profile.isDisconnected}
+      onClick={() => onProfileClick(profile)}
+      profileLimit={profileLimit}
+      id={profile.id}
+      index={index}
+      key={profile.id}
+      location={profile.location}
+    />
+  ));
 
 ProfileList.propTypes = {
   onProfileClick: PropTypes.func.isRequired,
