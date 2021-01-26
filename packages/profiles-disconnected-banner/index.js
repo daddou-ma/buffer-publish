@@ -32,7 +32,7 @@ export default connect(
       shouldRedirectToAccountChannels,
     }) => {
       if (shouldRedirectToAccountChannels) {
-        window.location = getURL.getAccountChannelsURL();
+        window.location.assign(getURL.getAccountChannelsURL());
       }
       dispatch(
         profilesDisconnectedModalActions.reconnectProfile({

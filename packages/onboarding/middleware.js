@@ -21,7 +21,7 @@ export default ({ dispatch, getState }) => next => action => {
       const redirectURL = shouldRedirectToAccountChannels
         ? getURL.getAccountChannelsURL()
         : getURL.getManageSocialAccountURL();
-      window.location = redirectURL;
+      window.location.assign(redirectURL);
       break;
     }
     case actionTypes.CONNECT_SOCIAL_ACCOUNT_SIDEBAR:

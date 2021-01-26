@@ -35,7 +35,7 @@ export default connect(
     hideModal: () => dispatch(modalsActions.hideProfilesDisconnectedModal()),
     reconnectProfile: ({ shouldRedirectToAccountChannels, id, service }) => {
       if (shouldRedirectToAccountChannels) {
-        window.location = getURL.getAccountChannelsURL();
+        window.location.assign(getURL.getAccountChannelsURL());
       }
       dispatch(actions.reconnectProfile({ id, service }));
     },

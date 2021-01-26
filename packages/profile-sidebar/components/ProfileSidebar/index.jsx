@@ -7,6 +7,7 @@ import { offWhite, mystic } from '@bufferapp/components/style/color';
 import { borderWidth } from '@bufferapp/components/style/border';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
+import { getURL } from '@bufferapp/publish-server/formatters/src';
 
 import LoadingProfileListItem from '../LoadingProfileListItem';
 import ProfileListItem from '../ProfileListItem';
@@ -105,7 +106,7 @@ const ProfileSidebar = ({
   onCampaignsButtonClick,
   isCampaignsSelected,
   showUpgradeToProCta,
-  connectURL,
+  manageSocialAccountURL,
 }) => {
   const { t } = useTranslation();
 
@@ -172,7 +173,7 @@ const ProfileSidebar = ({
                 <ProfileConnectShortcut
                   label={t('profile-sidebar.connectInstagram')}
                   network="instagram"
-                  url={connectURL}
+                  url={`https://${getURL.getBaseURL()}/oauth/instagram/choose_business?cta=publish-app-sidebar-addProfile-1`}
                   profileLimit={profileLimit}
                   profiles={profiles}
                   showSwitchPlanModal={showSwitchPlanModal}
@@ -184,7 +185,7 @@ const ProfileSidebar = ({
                 <ProfileConnectShortcut
                   label={t('profile-sidebar.connectFacebook')}
                   network="facebook"
-                  url={connectURL}
+                  url={`https://${getURL.getBaseURL()}/oauth/facebook/choose?cta=publish-app-sidebar-addProfile-1`}
                   profileLimit={profileLimit}
                   profiles={profiles}
                   showSwitchPlanModal={showSwitchPlanModal}
@@ -196,7 +197,7 @@ const ProfileSidebar = ({
                 <ProfileConnectShortcut
                   label={t('profile-sidebar.connectTwitter')}
                   network="twitter"
-                  url={connectURL}
+                  url={`https://${getURL.getBaseURL()}/oauth/twitter?cta=publish-app-sidebar-addProfile-1`}
                   profileLimit={profileLimit}
                   profiles={profiles}
                   showSwitchPlanModal={showSwitchPlanModal}
@@ -249,7 +250,6 @@ ProfileSidebar.propTypes = {
   onCampaignsButtonClick: PropTypes.func,
   ownerEmail: PropTypes.string,
   showUpgradeToProCta: PropTypes.bool,
-  connectURL: PropTypes.string.isRequired,
 };
 
 ProfileSidebar.defaultProps = {
