@@ -12,7 +12,6 @@ export const actionTypes = keyWrapper('PROFILE_SIDEBAR', {
   PUSHER_PROFILE_PAUSED_STATE: 0,
   CONNECT_SOCIAL_ACCOUNT: 0,
   MANAGE_SOCIAL_ACCOUNT: 0,
-  PROFILE_DROPPED: 0,
   HANDLE_SEARCH_PROFILE_CHANGE: 0,
   PROFILE_ROUTE_LOADED: 0,
 });
@@ -48,63 +47,6 @@ const moveProfileInArray = (arr, from, to) => {
     Array.prototype.splice.call(clone, fromIndex, 1)[0]
   );
   return clone;
-};
-
-const handleProfileDropped = (
-  profiles,
-  action,
-  canReorderProfiles,
-  hasPinterestFeature
-) => {
-  const { profileLimit, hoverIndex, dragIndex } = action;
-  const reorderedProfiles = moveProfileInArray(profiles, dragIndex, hoverIndex);
-  /* The reducer will return an object with 3 properties, each of them an array of profiles.
-  For each profile reduced, we will need to spread the ACC object,
-  changing only 1 property, i.e., adding the profile to only 1 array */
-  const {
-    enabledProfiles,
-    lockedProfiles,
-    blockedProfiles,
-  } = reorderedProfiles.reduce(
-    (acc, cur) => {
-      /* If the user is not the owner it can't be unlocked,
-      the same happens for pinterest accounts if the user is on a free plan:
-      it goes to the blockedProfiles array. */
-      if (
-        !canReorderProfiles ||
-        (cur.service === 'pinterest' && !hasPinterestFeature)
-      ) {
-        return { ...acc, blockedProfiles: [...acc.blockedProfiles, cur] };
-      }
-
-      /* If it's not a blocked profile, figure out if the enabledProfiles array
-      in ACC is already full i.e. if the user has surpassed the profile limit.
-      In that case, the profile must go into the lockedProfiles.
-      If not, then the profile belongs in the enabledProfiles. */
-      return acc.enabledProfiles.length >= profileLimit
-        ? {
-            ...acc,
-            lockedProfiles: [...acc.lockedProfiles, { ...cur, disabled: true }],
-          }
-        : {
-            ...acc,
-            enabledProfiles: [
-              ...acc.enabledProfiles,
-              { ...cur, disabled: false },
-            ],
-          };
-    },
-    { enabledProfiles: [], lockedProfiles: [], blockedProfiles: [] }
-  );
-
-  // Final list of profiles
-  const sortedProfiles = [
-    ...enabledProfiles,
-    ...lockedProfiles,
-    ...blockedProfiles,
-  ];
-
-  return sortedProfiles;
 };
 
 const profilesReducer = (state = [], action) => {
@@ -184,7 +126,6 @@ export default (state = initialState, action) => {
       return {
         ...state,
         organization: selectedOrganization,
-        canReorderProfiles: selectedOrganization.canReorderProfiles,
         hasPinterestFeature: selectedOrganization.hasPinterestFeature,
         profiles,
       };
@@ -235,20 +176,6 @@ export default (state = initialState, action) => {
         selectedProfile,
       };
     }
-    case actionTypes.PROFILE_DROPPED: {
-      if (!action.commit) {
-        return {
-          ...state,
-          profiles: handleProfileDropped(
-            state.profiles,
-            action,
-            state.canReorderProfiles,
-            state.hasPinterestFeature
-          ),
-        };
-      }
-      return state;
-    }
     case actionTypes.PROFILE_PAUSED:
     case actionTypes.PROFILE_UNPAUSED:
     case actionTypes.PUSHER_PROFILE_PAUSED_STATE:
@@ -288,13 +215,6 @@ export const actions = {
   }),
   handleConnectSocialAccount: () => ({
     type: actionTypes.CONNECT_SOCIAL_ACCOUNT,
-  }),
-  onDropProfile: ({ commit, dragIndex, hoverIndex, profileLimit }) => ({
-    type: actionTypes.PROFILE_DROPPED,
-    commit,
-    dragIndex,
-    hoverIndex,
-    profileLimit,
   }),
   handleSearchProfileChange: ({ value }) => ({
     type: actionTypes.HANDLE_SEARCH_PROFILE_CHANGE,

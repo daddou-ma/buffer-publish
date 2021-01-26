@@ -42,44 +42,6 @@ describe('reducer', () => {
     });
   });
 
-  it('should generate a profile dropped action', () => {
-    const props = { dragIndex: 1, hoverIndex: 0 };
-    expect(actions.onDropProfile(props)).toEqual({
-      type: actionTypes.PROFILE_DROPPED,
-      dragIndex: props.dragIndex,
-      hoverIndex: props.hoverIndex,
-    });
-  });
-
-  it('should reorder profiles with PROFILE_DROPPED', () => {
-    const dragIndex = 0;
-    const hoverIndex = 1;
-    const stateBefore = {
-      ...profileInitialState,
-      profiles,
-    };
-
-    const profilesAfter = profiles.slice();
-    [profilesAfter[dragIndex], profilesAfter[hoverIndex]] = [
-      profilesAfter[hoverIndex],
-      profilesAfter[dragIndex],
-    ];
-
-    const stateAfter = {
-      ...profileInitialState,
-      profiles: profilesAfter,
-    };
-
-    const action = {
-      type: actionTypes.PROFILE_DROPPED,
-      dragIndex,
-      hoverIndex,
-    };
-
-    deepFreeze(action);
-    expect(reducer(stateBefore, action)).toEqual(stateAfter);
-  });
-
   it('should set loading to true when it begins the fetch', () => {
     const action = {
       type: `profiles_${dataFetchActionTypes.FETCH_START}`,

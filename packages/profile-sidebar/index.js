@@ -10,10 +10,6 @@ import ProfileSidebar from './components/ProfileSidebar';
 import { shouldGoToProfile } from './utils';
 import { actions } from './reducer';
 
-const reorderProfilesByUnlocked = profiles =>
-  // orders unlocked profiles first, followed by locked
-  profiles.sort((a, b) => a.disabled - b.disabled);
-
 export default hot(
   connect(
     (state, ownProps) => {
@@ -21,7 +17,7 @@ export default hot(
         loading: state.profileSidebar.loading,
         selectedProfile: state.profileSidebar.selectedProfile,
         selectedProfileId: ownProps.profileId,
-        profiles: reorderProfilesByUnlocked(state.profileSidebar.profiles),
+        profiles: state.profileSidebar.profiles,
         translations: state.i18n.translations['profile-sidebar'],
         profileLimit: state.organizations.selected?.profileLimit,
         hasInstagram: state.profileSidebar.hasInstagram,
@@ -54,16 +50,6 @@ export default hot(
             })
           );
         }
-      },
-      onDropProfile: ({ commit, profileLimit, dragIndex, hoverIndex }) => {
-        dispatch(
-          actions.onDropProfile({
-            commit,
-            profileLimit,
-            dragIndex,
-            hoverIndex,
-          })
-        );
       },
       onManageSocialAccountClick: () => {
         dispatch(actions.handleManageSocialAccountClick());

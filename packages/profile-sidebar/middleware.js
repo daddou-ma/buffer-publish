@@ -98,21 +98,6 @@ export default ({ dispatch, getState }) => next => action => {
         );
       }
       break;
-    case actionTypes.PROFILE_DROPPED: {
-      if (action.commit) {
-        const { profiles } = getState().profileSidebar;
-        const orderedIds = profiles.map(profile => profile.id);
-        dispatch(
-          dataFetchActions.fetch({
-            name: 'reorderProfiles',
-            args: {
-              order: orderedIds,
-            },
-          })
-        );
-      }
-      break;
-    }
     default:
       break;
   }

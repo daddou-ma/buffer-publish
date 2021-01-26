@@ -99,24 +99,4 @@ describe('middleware', () => {
       })
     );
   });
-
-  it('reorders profiles when PROFILE_DROPPED', () => {
-    const next = jest.fn();
-    const dispatch = jest.fn();
-    const action = {
-      type: actionTypes.PROFILE_DROPPED,
-      commit: true,
-    };
-
-    middleware({ dispatch, getState })(next)(action);
-    expect(next).toBeCalledWith(action);
-    expect(dispatch).toBeCalledWith(
-      dataFetchActions.fetch({
-        name: 'reorderProfiles',
-        args: {
-          order: ['1234', '12345'],
-        },
-      })
-    );
-  });
 });

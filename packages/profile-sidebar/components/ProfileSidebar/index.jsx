@@ -88,7 +88,6 @@ const ProfileSidebar = ({
   selectedProfileId,
   profiles,
   onProfileClick,
-  onDropProfile,
   onManageSocialAccountClick,
   profileLimit,
   showSwitchPlanModal,
@@ -157,7 +156,6 @@ const ProfileSidebar = ({
             selectedProfileId={selectedProfileId}
             profiles={profiles}
             onProfileClick={onProfileClick}
-            onDropProfile={onDropProfile}
             profileLimit={profileLimit}
           />
         </ProfileListStyle>
@@ -235,7 +233,6 @@ ProfileSidebar.propTypes = {
   selectedProfileId: ProfileList.propTypes.selectedProfileId,
   profiles: PropTypes.arrayOf(PropTypes.shape(ProfileListItem.propTypes)),
   profileLimit: PropTypes.number,
-  onDropProfile: PropTypes.func,
   hasInstagram: PropTypes.bool.isRequired,
   hasFacebook: PropTypes.bool.isRequired,
   hasTwitter: PropTypes.bool.isRequired,
@@ -256,7 +253,6 @@ ProfileSidebar.defaultProps = {
   onSearchProfileChange: PropTypes.func,
   isSearchPopupVisible: false,
   showSwitchPlanModal: () => {},
-  onDropProfile: () => {},
   onCampaignsButtonClick: () => {},
   profileLimit: 0,
   canManageSocialAccounts: true,

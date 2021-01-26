@@ -27,7 +27,6 @@ storiesOf('ProfileList', module)
       profiles={profiles}
       selectedProfileId={'1234'}
       onProfileClick={action('profile click')}
-      onDropProfile={action('onDropProfile')}
       profileLimit={3}
     />
   ));

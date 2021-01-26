@@ -51,7 +51,6 @@ module.exports = orgData => ({
   // Role Features
   canManageSocialAccounts: orgData.isAdmin,
   canSeeCampaignsReport: orgData.isOwner,
-  canReorderProfiles: orgData.isOwner,
   canModifyCampaigns: orgData.isAdmin,
   canSeeBillingInfo: orgData.isOwner,
   canReconnectChannels: orgData.isAdmin,
