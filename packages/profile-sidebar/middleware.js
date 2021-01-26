@@ -66,9 +66,14 @@ export default ({ dispatch, getState }) => next => action => {
         })
       );
       break;
-    case actionTypes.MANAGE_SOCIAL_ACCOUNT:
-      window.location = getURL.getManageSocialAccountURL();
+    case actionTypes.MANAGE_SOCIAL_ACCOUNT: {
+      const { shouldRedirectToAccountChannels } = getState().globalAccount;
+      const redirectURL = shouldRedirectToAccountChannels
+        ? getURL.getAccountChannelsURL()
+        : getURL.getManageSocialAccountURL();
+      window.location.assign(redirectURL);
       break;
+    }
     case actionTypes.CONNECT_SOCIAL_ACCOUNT:
       window.location = getURL.getConnectSocialAccountURL();
       break;

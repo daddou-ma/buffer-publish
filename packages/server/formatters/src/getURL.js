@@ -101,4 +101,10 @@ module.exports = {
     }
     return `https://analyze.buffer.com/campaigns/${campaignId}`;
   },
+  getAccountChannelsURL: () => {
+    if (window.location.hostname === 'publish.local.buffer.com') {
+      return 'https://account.local.buffer.com/channels';
+    }
+    return 'https://account.buffer.com/channels';
+  },
 };
