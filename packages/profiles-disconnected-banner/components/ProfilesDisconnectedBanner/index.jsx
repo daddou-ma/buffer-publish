@@ -22,12 +22,19 @@ const ProfilesDisconnectedBanner = ({
   displayExtraMessage,
   canReconnectChannels,
   ownerEmail,
+  shouldRedirectToAccountChannels,
 }) => {
   const { t } = useTranslation();
   return (
     <ErrorBanner
       title={t('profiles-disconnected-banner.headline')}
-      onClick={() => onReconnectProfileClick({ id: profileId, service })}
+      onClick={() =>
+        onReconnectProfileClick({
+          id: profileId,
+          service,
+          shouldRedirectToAccountChannels,
+        })
+      }
       actionLabel={
         canReconnectChannels ? t('profiles-disconnected-banner.cta') : null
       }
@@ -55,6 +62,7 @@ ProfilesDisconnectedBanner.propTypes = {
   displayExtraMessage: PropTypes.bool,
   onReconnectProfileClick: PropTypes.func.isRequired,
   ownerEmail: PropTypes.string,
+  shouldRedirectToAccountChannels: PropTypes.bool.isRequired,
 };
 
 ProfilesDisconnectedBanner.defaultProps = {

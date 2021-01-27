@@ -107,6 +107,7 @@ const ProfileSidebar = ({
   onCampaignsButtonClick,
   isCampaignsSelected,
   showUpgradeToProCta,
+  manageSocialAccountURL,
 }) => {
   const { t } = useTranslation();
   const enabledProfiles = getEnabledProfiles(profiles);

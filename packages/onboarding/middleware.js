@@ -2,7 +2,7 @@ import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
 import { actionTypes } from './reducer';
 
-export default ({ dispatch }) => next => action => {
+export default ({ dispatch, getState }) => next => action => {
   next(action);
   switch (action.type) {
     case actionTypes.CONNECT_SOCIAL_ACCOUNT_ONBOARDING:
@@ -16,9 +16,14 @@ export default ({ dispatch }) => next => action => {
         })
       );
       break;
-    case actionTypes.MANAGE_SOCIAL_ACCOUNT:
-      window.location = getURL.getManageSocialAccountURL();
+    case actionTypes.MANAGE_SOCIAL_ACCOUNT: {
+      const { shouldRedirectToAccountChannels } = getState().globalAccount;
+      const redirectURL = shouldRedirectToAccountChannels
+        ? getURL.getAccountChannelsURL()
+        : getURL.getManageSocialAccountURL();
+      window.location.assign(redirectURL);
       break;
+    }
     case actionTypes.CONNECT_SOCIAL_ACCOUNT_SIDEBAR:
       window.location = getURL.getConnectSocialAccountURL();
       break;
