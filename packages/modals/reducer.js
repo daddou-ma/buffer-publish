@@ -6,7 +6,6 @@ export const initialState = {
   switchPlanModalSource: null,
   showStealProfileModal: false,
   stealProfileUsername: null,
-  showInstagramDirectPostingModal: false,
   showInstagramFirstCommentModal: false,
   showTrialCompleteModal: false,
   showInstagramFirstCommentProTrialModal: false,
@@ -24,8 +23,6 @@ export const actionTypes = keyWrapper('MODALS', {
   HIDE_PROFILES_DISCONNECTED_MODAL: 0,
   SHOW_STEAL_PROFILE_MODAL: 0,
   HIDE_STEAL_PROFILE_MODAL: 0,
-  SHOW_IG_DIRECT_POSTING_MODAL: 0,
-  HIDE_IG_DIRECT_POSTING_MODAL: 0,
   SHOW_TRIAL_COMPLETE_MODAL: 0,
   HIDE_TRIAL_COMPLETE_MODAL: 0,
   SHOW_INSTAGRAM_FIRST_COMMENT_MODAL: 0,
@@ -96,17 +93,6 @@ export default (state = initialState, action) => {
       return {
         ...state,
         showStealProfileModal: false,
-      };
-    case actionTypes.SHOW_IG_DIRECT_POSTING_MODAL:
-      return {
-        ...state,
-        showInstagramDirectPostingModal: true,
-        modalToShowLater: null,
-      };
-    case actionTypes.HIDE_IG_DIRECT_POSTING_MODAL:
-      return {
-        ...state,
-        showInstagramDirectPostingModal: false,
       };
     case actionTypes.SAVE_MODAL_TO_SHOW_LATER:
       return {
@@ -203,13 +189,6 @@ export const actions = {
   }),
   hideStealProfileModal: () => ({
     type: actionTypes.HIDE_STEAL_PROFILE_MODAL,
-  }),
-  showInstagramDirectPostingModal: ({ profileId }) => ({
-    type: actionTypes.SHOW_IG_DIRECT_POSTING_MODAL,
-    profileId,
-  }),
-  hideInstagramDirectPostingModal: () => ({
-    type: actionTypes.HIDE_IG_DIRECT_POSTING_MODAL,
   }),
   saveModalToShowLater: ({ modalId, profileId }) => ({
     type: actionTypes.SAVE_MODAL_TO_SHOW_LATER,
