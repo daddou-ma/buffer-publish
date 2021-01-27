@@ -30,8 +30,6 @@ export const initialState = {
   editMode: false,
   emptySlotMode: false,
   editingPostId: '',
-  isBusinessOnInstagram: null,
-  isInstagramLoading: false,
 };
 
 const profileInitialState = {
@@ -74,13 +72,6 @@ const getPostUpdateId = action => {
   if (action.draft) {
     return action.draft.id;
   }
-};
-
-const handleInstagramLoading = action => {
-  if (action.args.recheck && action.result.is_business) {
-    return true;
-  }
-  return false;
 };
 
 /**
@@ -369,24 +360,6 @@ export default (state = initialState, action) => {
       }
       return state;
     }
-    case `checkInstagramBusiness_${dataFetchActionTypes.FETCH_START}`:
-      return {
-        ...state,
-        isInstagramLoading: true,
-      };
-    case `checkInstagramBusiness_${dataFetchActionTypes.FETCH_SUCCESS}`:
-      return {
-        ...state,
-        isBusinessOnInstagram: action.result.is_business,
-        isInstagramLoading: handleInstagramLoading(action),
-      };
-    case `checkInstagramBusiness_${dataFetchActionTypes.FETCH_FAIL}`:
-      return {
-        ...state,
-        isBusinessOnInstagram: false,
-        isInstagramLoading: false,
-      };
-
     case orgActionTypes.ORGANIZATION_SELECTED:
       return {
         ...state,
