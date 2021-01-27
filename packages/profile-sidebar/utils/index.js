@@ -1,7 +1,5 @@
 import { getURL } from '@bufferapp/publish-server/formatters/src';
 
-const cta = 'publish-app-sidebar-addProfile-1';
-
 function isADifferentProfile(profile, prevProps) {
   return profile.id !== prevProps.profileId;
 }
@@ -22,7 +20,7 @@ export const filterProfilesByOrg = (profiles, organization) => {
   );
 };
 
-export const getConnectShortcutURLs = accountChannelsURL => ({
+export const getConnectDirectURLs = ({ cta, accountChannelsURL }) => ({
   facebook:
     accountChannelsURL ||
     `https://${getURL.getBaseURL()}/oauth/facebook/choose?cta=${cta}`,
@@ -32,4 +30,10 @@ export const getConnectShortcutURLs = accountChannelsURL => ({
   twitter:
     accountChannelsURL ||
     `https://${getURL.getBaseURL()}/oauth/twitter?cta=${cta}`,
+  linkedin:
+    accountChannelsURL ||
+    `https://${getURL.getBaseURL()}/oauth/linkedin?cta=${cta}`,
+  pinterest:
+    accountChannelsURL ||
+    `https://${getURL.getBaseURL()}/oauth/pinterest?cta=${cta}`,
 });

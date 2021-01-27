@@ -6,9 +6,9 @@ import {
 import { getURL } from '@bufferapp/publish-server/formatters/src';
 import userEvent from '@testing-library/user-event';
 import TestBackend from 'react-dnd-test-backend';
+import { getConnectDirectURLs } from '@bufferapp/publish-profile-sidebar/utils';
 import { DragDropContext } from 'react-dnd';
 import Onboarding, { reducer, actions, actionTypes, middleware } from './index';
-import getDirectConnectionURLs from './utils/index';
 import {
   profiles,
   selectedProfile,
@@ -37,7 +37,9 @@ describe('Onboarding', () => {
 
   test('opens network connect url when user clicks on profile connect shortcut', () => {
     const hostname = 'publish.local.buffer.com';
-    const expectedURL = getDirectConnectionURLs().twitter;
+    const expectedURL = getConnectDirectURLs({
+      cta: 'publish-app-onboarding-addProfile-1',
+    }).twitter;
 
     window.location.assign = jest.fn();
     window.location.hostname = hostname;

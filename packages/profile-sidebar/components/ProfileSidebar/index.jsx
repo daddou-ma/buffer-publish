@@ -104,7 +104,7 @@ const ProfileSidebar = ({
   showUpgradeToProCta,
   manageChannelsURL,
   connectChannelsURL,
-  connectShortcutURLs,
+  connectDirectURLs,
 }) => {
   const { t } = useTranslation();
 
@@ -170,7 +170,7 @@ const ProfileSidebar = ({
                 <ProfileConnectShortcut
                   label={t('profile-sidebar.connectInstagram')}
                   network="instagram"
-                  url={connectShortcutURLs.instagram}
+                  url={connectDirectURLs.instagram}
                   profileLimit={profileLimit}
                   profiles={profiles}
                   showSwitchPlanModal={showSwitchPlanModal}
@@ -182,7 +182,7 @@ const ProfileSidebar = ({
                 <ProfileConnectShortcut
                   label={t('profile-sidebar.connectFacebook')}
                   network="facebook"
-                  url={connectShortcutURLs.facebook}
+                  url={connectDirectURLs.facebook}
                   profileLimit={profileLimit}
                   profiles={profiles}
                   showSwitchPlanModal={showSwitchPlanModal}
@@ -194,7 +194,7 @@ const ProfileSidebar = ({
                 <ProfileConnectShortcut
                   label={t('profile-sidebar.connectTwitter')}
                   network="twitter"
-                  url={connectShortcutURLs.twitter}
+                  url={connectDirectURLs.twitter}
                   profileLimit={profileLimit}
                   profiles={profiles}
                   showSwitchPlanModal={showSwitchPlanModal}
@@ -231,7 +231,7 @@ ProfileSidebar.propTypes = {
   onProfileClick: ProfileList.propTypes.onProfileClick,
   manageChannelsURL: PropTypes.string.isRequired,
   connectChannelsURL: PropTypes.string.isRequired,
-  connectShortcutURLs: PropTypes.shape({
+  connectDirectURLs: PropTypes.shape({
     facebook: PropTypes.string,
     instagram: PropTypes.string,
     twitter: PropTypes.string,

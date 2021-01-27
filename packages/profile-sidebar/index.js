@@ -8,7 +8,7 @@ import {
   profileTabPages,
 } from '@bufferapp/publish-routes';
 import ProfileSidebar from './components/ProfileSidebar';
-import { shouldGoToProfile, getConnectShortcutURLs } from './utils';
+import { shouldGoToProfile, getConnectDirectURLs } from './utils';
 import { actions } from './reducer';
 
 const reorderProfilesByUnlocked = profiles =>
@@ -18,6 +18,7 @@ const reorderProfilesByUnlocked = profiles =>
 export default hot(
   connect(
     (state, ownProps) => {
+      const cta = 'publish-app-sidebar-addProfile-1';
       const { shouldRedirectToAccountChannels } = state.globalAccount;
       const accountChannelsURL =
         shouldRedirectToAccountChannels && getURL.getAccountChannelsURL();
@@ -41,7 +42,10 @@ export default hot(
           route: campaignsPage.route,
         }),
         showUpgradeToProCta: state.organizations.selected?.showUpgradeToProCta,
-        connectShortcutURLs: getConnectShortcutURLs(accountChannelsURL),
+        connectDirectURLs: getConnectDirectURLs({
+          cta,
+          accountChannelsURL,
+        }),
         manageChannelsURL:
           accountChannelsURL || getURL.getManageSocialAccountURL(),
         connectChannelsURL:

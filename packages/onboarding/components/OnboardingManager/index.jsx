@@ -11,7 +11,7 @@ const OnboardingManager = ({
   onSkipStep,
   manageChannelsURL,
   connectChannelsURL,
-  onboardingConnectURLs,
+  connectDirectURLs,
   translations,
 }) => (
   <>
@@ -20,7 +20,7 @@ const OnboardingManager = ({
         onConnectSocialAccountClick={onConnectSocialAccountOnboardingClick}
         onSkipStep={onSkipStep}
         translations={translations}
-        connectURLs={onboardingConnectURLs}
+        connectURLs={connectDirectURLs}
       />
     )}
     {!canSeeOnboardingPage && (
@@ -57,7 +57,7 @@ OnboardingManager.propTypes = {
     role: PropTypes.string,
     company: PropTypes.string,
   }).isRequired,
-  onboardingConnectURLs: PropTypes.shape({
+  connectDirectURLs: PropTypes.shape({
     facebook: PropTypes.string,
     instagram: PropTypes.string,
     twitter: PropTypes.string,

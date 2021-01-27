@@ -1,9 +1,11 @@
 import { connect } from 'react-redux';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
+import { getConnectDirectURLs } from '@bufferapp/publish-profile-sidebar/utils';
 import { actions } from './reducer';
-import getOnboardingConnectURLs from './utils/index';
 
 import OnboardingManager from './components/OnboardingManager';
+
+const cta = 'publish-app-onboarding-addProfile-1';
 
 export default connect(
   state => {
@@ -19,7 +21,7 @@ export default connect(
         accountChannelsURL || getURL.getConnectSocialAccountURL(),
       manageChannelsURL:
         accountChannelsURL || getURL.getManageSocialAccountURL(),
-      onboardingConnectURLs: getOnboardingConnectURLs(accountChannelsURL),
+      connectDirectURLs: getConnectDirectURLs({ cta, accountChannelsURL }),
     };
   },
   dispatch => ({
