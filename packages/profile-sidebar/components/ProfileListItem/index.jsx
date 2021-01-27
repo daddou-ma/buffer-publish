@@ -2,19 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { SidebarListItem } from '@bufferapp/ui';
-import { Warning, Locked } from '@bufferapp/ui/Icon';
-import {
-  grayLight,
-  grayDarker,
-  transparent,
-  red,
-} from '@bufferapp/ui/style/colors';
+import { Warning } from '@bufferapp/ui/Icon';
+import { transparent, red } from '@bufferapp/ui/style/colors';
 import { borderRadius } from '@bufferapp/ui/style/borders';
 
 const ListItemContainer = styled.div`
   margin: 0 0 8px;
   border-radius: ${borderRadius};
-  background-color: ${props => (props.locked ? grayLight : transparent)};
+  background-color: ${transparent};
 `;
 
 const getCount = ({ pendingCount }) => {
@@ -38,7 +33,6 @@ const ProfileListItem = ({
   type,
   pendingCount,
   handle,
-  locked,
   disconnected,
   selected,
   onClick,
@@ -54,20 +48,12 @@ const ProfileListItem = ({
 
   const title = location ? `${handle} ${location} ` : `${handle}`;
   return (
-    <ListItemContainer locked={locked}>
+    <ListItemContainer>
       <SidebarListItem
         title={title}
         onItemClick={() => handleClick({ onClick })}
         badges={`${getCount({ pendingCount })}`}
-        /* eslint-disable no-nested-ternary */
-        badgeIcon={
-          locked ? (
-            <Locked color={grayDarker} />
-          ) : disconnected ? (
-            <Warning color={red} />
-          ) : null
-        }
-        /* eslint-enable no-nested-ternary */
+        badgeIcon={disconnected ? <Warning color={red} /> : null}
         user={user}
         selected={selected}
       />
@@ -86,7 +72,6 @@ ProfileListItem.propTypes = {
     'pinterest',
   ]).isRequired,
   pendingCount: PropTypes.number,
-  locked: PropTypes.bool,
   disconnected: PropTypes.bool,
   selected: PropTypes.bool,
   location: PropTypes.string,
@@ -95,7 +80,6 @@ ProfileListItem.propTypes = {
 
 ProfileListItem.defaultProps = {
   avatarUrl: null,
-  locked: false,
   disconnected: false,
   pendingCount: null,
   selected: false,

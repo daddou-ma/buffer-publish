@@ -15,7 +15,6 @@ const ProfileList = ({
       handle={profile.handle}
       pendingCount={profile.pendingCount}
       selected={profile.id === selectedProfileId}
-      locked={profile.disabled}
       disconnected={profile.isDisconnected}
       onClick={() => onProfileClick(profile)}
       profileLimit={profileLimit}
