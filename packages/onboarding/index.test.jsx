@@ -19,6 +19,14 @@ describe('Onboarding', () => {
   const TestDragDropContainer = DragDropContext(TestBackend)(
     _TestContextContainer
   );
+  const initialState = {
+    organizations: {
+      selected: { canManageSocialAccounts: true, profileLimit: 10 },
+    },
+    globalAccount: { shouldRedirectToAccountChannels: true },
+    profileSidebar: { profiles, selectedProfile, loading: false },
+  };
+
   test('should export reducer', () => {
     expect(reducer).toBeDefined();
   });
@@ -50,11 +58,8 @@ describe('Onboarding', () => {
       </TestDragDropContainer>,
       {
         initialState: {
-          organizations: {
-            selected: { canManageSocialAccounts: true, profileLimit: 10 },
-          },
+          ...initialState,
           globalAccount: { shouldRedirectToAccountChannels: false },
-          profileSidebar: { profiles, selectedProfile, loading: false },
         },
       }
     );
@@ -76,15 +81,7 @@ describe('Onboarding', () => {
       <TestDragDropContainer>
         <Onboarding />
       </TestDragDropContainer>,
-      {
-        initialState: {
-          organizations: {
-            selected: { canManageSocialAccounts: true, profileLimit: 10 },
-          },
-          globalAccount: { shouldRedirectToAccountChannels: true },
-          profileSidebar: { profiles, selectedProfile, loading: false },
-        },
-      }
+      { initialState }
     );
     const connectLink = screen.getByRole('button', {
       name: /Twitter Connect a Twitter profile/i,

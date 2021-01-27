@@ -44,13 +44,13 @@ describe('middleware', () => {
     const newStore = {
       dispatch: jest.fn(),
       getState: () => ({
-        globalAccount: { shouldRedirectToAccountChannels: false },
+        globalAccount: { shouldRedirectToAccountChannels: true },
       }),
     };
     middleware(newStore)(next)(reconnectTwitterAction);
     expect(next).toBeCalled();
     expect(window.location.assign).toHaveBeenCalledWith(
-      'https://local.buffer.com/oauth/reconnect/twitter-id'
+      'https://account.local.buffer.com/channels'
     );
   });
 
