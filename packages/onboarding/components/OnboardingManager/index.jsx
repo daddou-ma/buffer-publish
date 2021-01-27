@@ -9,8 +9,9 @@ const OnboardingManager = ({
   profileLimit,
   onConnectSocialAccountOnboardingClick,
   onSkipStep,
-  onManageSocialAccountClick,
-  onConnectSocialAccountSidebarClick,
+  manageChannelsURL,
+  connectChannelsURL,
+  accountChannelsURL,
   translations,
 }) => (
   <>
@@ -19,6 +20,7 @@ const OnboardingManager = ({
         onConnectSocialAccountClick={onConnectSocialAccountOnboardingClick}
         onSkipStep={onSkipStep}
         translations={translations}
+        accountChannelsURL={accountChannelsURL}
       />
     )}
     {!canSeeOnboardingPage && (
@@ -26,8 +28,8 @@ const OnboardingManager = ({
         showUpgradeToProCta={showUpgradeToProCta}
         profileLimit={profileLimit}
         translations={translations}
-        onManageSocialAccountClick={onManageSocialAccountClick}
-        goToConnectSocialAccount={onConnectSocialAccountSidebarClick}
+        manageChannelsURL={manageChannelsURL}
+        connectChannelsURL={connectChannelsURL}
       />
     )}
   </>
@@ -38,8 +40,8 @@ OnboardingManager.propTypes = {
   profileLimit: PropTypes.number.isRequired,
   onConnectSocialAccountOnboardingClick: PropTypes.func.isRequired,
   onSkipStep: PropTypes.func.isRequired,
-  onManageSocialAccountClick: PropTypes.func.isRequired,
-  onConnectSocialAccountSidebarClick: PropTypes.func.isRequired,
+  manageChannelsURL: PropTypes.func.isRequired,
+  connectChannelsURL: PropTypes.func.isRequired,
   canSeeOnboardingPage: PropTypes.bool.isRequired,
   translations: PropTypes.shape({
     title: PropTypes.string,

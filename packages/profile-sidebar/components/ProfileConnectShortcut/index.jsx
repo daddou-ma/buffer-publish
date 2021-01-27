@@ -6,8 +6,11 @@ import { ProfileBadgeIcon } from '../ProfileBadge';
 const handleProfileLimitReached = (
   showUpgradeToProCta,
   showSwitchPlanModal,
-  goToConnectSocialAccount
-) => (showUpgradeToProCta ? showSwitchPlanModal() : goToConnectSocialAccount());
+  connectChannelsURL
+) =>
+  showUpgradeToProCta
+    ? showSwitchPlanModal()
+    : window.location.assign(connectChannelsURL);
 
 const handleClick = (
   network,
@@ -16,13 +19,13 @@ const handleClick = (
   profileLimit,
   showUpgradeToProCta,
   showSwitchPlanModal,
-  goToConnectSocialAccount
+  connectChannelsURL
 ) => {
   if (profiles.length >= profileLimit) {
     handleProfileLimitReached(
       showUpgradeToProCta,
       showSwitchPlanModal,
-      goToConnectSocialAccount
+      connectChannelsURL
     );
     return;
   }
@@ -76,7 +79,7 @@ class ProfileConnectShortcut extends React.Component {
       profileLimit,
       showUpgradeToProCta,
       showSwitchPlanModal,
-      goToConnectSocialAccount,
+      connectChannelsURL,
     } = this.props;
     return (
       <a
@@ -94,7 +97,7 @@ class ProfileConnectShortcut extends React.Component {
             profileLimit,
             showUpgradeToProCta,
             showSwitchPlanModal,
-            goToConnectSocialAccount
+            connectChannelsURL
           )
         }
       >
@@ -120,7 +123,7 @@ ProfileConnectShortcut.propTypes = {
   ).isRequired,
   profileLimit: PropTypes.number.isRequired,
   showUpgradeToProCta: PropTypes.bool.isRequired,
-  goToConnectSocialAccount: PropTypes.func.isRequired,
+  connectChannelsURL: PropTypes.func.isRequired,
   showSwitchPlanModal: PropTypes.func.isRequired,
 };
 

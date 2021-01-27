@@ -1,36 +1,23 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-import { Provider } from 'react-redux';
+import {
+  render,
+  screen,
+} from '@bufferapp/publish-test-utils/utils/custom-render';
+import { getURL } from '@bufferapp/publish-server/formatters/src';
+import userEvent from '@testing-library/user-event';
+import TestBackend from 'react-dnd-test-backend';
+import { DragDropContext } from 'react-dnd';
 import Onboarding, { reducer, actions, actionTypes, middleware } from './index';
-import OnboardingManager from './components/OnboardingManager';
-
-const storeFake = state => ({
-  default: () => {},
-  subscribe: () => {},
-  dispatch: () => {},
-  getState: () => ({ ...state }),
-});
+import {
+  profiles,
+  selectedProfile,
+} from '../profile-sidebar/mockData/profiles';
 
 describe('Onboarding', () => {
-  const state = {
-    onboarding: {
-      canSeeOnboardingPage: true,
-    },
-    i18n: {
-      translations: {
-        'onboarding-page': {},
-      },
-    },
-    organizations: {
-      selected: {
-        showUpgradeToProCta: false,
-        profileLimit: 8,
-      },
-    },
-  };
-});
-
-describe('Onboarding', () => {
+  const _TestContextContainer = ({ children }) => <>{children}</>;
+  const TestDragDropContainer = DragDropContext(TestBackend)(
+    _TestContextContainer
+  );
   test('should export reducer', () => {
     expect(reducer).toBeDefined();
   });

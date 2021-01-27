@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { hot } from 'react-hot-loader/root';
 import { actions as modalActions } from '@bufferapp/publish-modals';
+import { getURL } from '@bufferapp/publish-server/formatters/src';
 import {
   getMatch,
   campaignsPage,
@@ -17,6 +18,9 @@ const reorderProfilesByUnlocked = profiles =>
 export default hot(
   connect(
     (state, ownProps) => {
+      const { shouldRedirectToAccountChannels } = state.globalAccount;
+      const accountChannelsURL =
+        shouldRedirectToAccountChannels && getURL.getAccountChannelsURL();
       return {
         loading: state.profileSidebar.loading,
         selectedProfile: state.profileSidebar.selectedProfile,
@@ -37,6 +41,11 @@ export default hot(
           route: campaignsPage.route,
         }),
         showUpgradeToProCta: state.organizations.selected?.showUpgradeToProCta,
+        accountChannelsURL,
+        manageChannelsURL:
+          accountChannelsURL || getURL.getManageSocialAccountURL(),
+        connectChannelsURL:
+          accountChannelsURL || getURL.getConnectSocialAccountURL(),
       };
     },
     (dispatch, ownProps) => ({
@@ -65,9 +74,6 @@ export default hot(
           })
         );
       },
-      onManageSocialAccountClick: () => {
-        dispatch(actions.handleManageSocialAccountClick());
-      },
       showSwitchPlanModal: () => {
         dispatch(
           modalActions.showSwitchPlanModal({
@@ -75,9 +81,6 @@ export default hot(
             plan: 'pro',
           })
         );
-      },
-      goToConnectSocialAccount: () => {
-        dispatch(actions.handleConnectSocialAccount());
       },
       onSearchProfileChange: value => {
         dispatch(actions.handleSearchProfileChange({ value }));

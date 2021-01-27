@@ -11,7 +11,6 @@ export const actionTypes = keyWrapper('PROFILE_SIDEBAR', {
   PROFILE_PAUSED: 0,
   PUSHER_PROFILE_PAUSED_STATE: 0,
   CONNECT_SOCIAL_ACCOUNT: 0,
-  MANAGE_SOCIAL_ACCOUNT: 0,
   PROFILE_DROPPED: 0,
   HANDLE_SEARCH_PROFILE_CHANGE: 0,
   PROFILE_ROUTE_LOADED: 0,
@@ -282,9 +281,6 @@ export const actions = {
   onPauseClick: ({ profileId }) => ({
     type: actionTypes.PROFILE_PAUSED,
     profileId,
-  }),
-  handleManageSocialAccountClick: () => ({
-    type: actionTypes.MANAGE_SOCIAL_ACCOUNT,
   }),
   handleConnectSocialAccount: () => ({
     type: actionTypes.CONNECT_SOCIAL_ACCOUNT,

@@ -4,7 +4,9 @@ import middleware from './middleware';
 describe('middleware', () => {
   const store = {
     dispatch: jest.fn(),
-    getState: () => ({}),
+    getState: () => ({
+      globalAccount: { shouldRedirectToAccountChannels: false },
+    }),
   };
   const next = jest.fn();
   window.location.assign = jest.fn();

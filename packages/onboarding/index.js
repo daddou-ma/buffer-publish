@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { getURL } from '@bufferapp/publish-server/formatters/src';
 import { actions } from './reducer';
 
 import OnboardingManager from './components/OnboardingManager';
@@ -9,6 +10,15 @@ export default connect(
     canSeeOnboardingPage: state.onboarding.canSeeOnboardingPage,
     showUpgradeToProCta: state.organizations.selected?.showUpgradeToProCta,
     profileLimit: state.organizations.selected?.profileLimit,
+    connectChannelsURL: state.globalAccount.shouldRedirectToAccountChannels
+      ? getURL.getAccountChannelsURL()
+      : getURL.getConnectSocialAccountURL(),
+    manageChannelsURL: state.globalAccount.shouldRedirectToAccountChannels
+      ? getURL.getAccountChannelsURL()
+      : getURL.getManageSocialAccountURL(),
+    accountChannelsURL:
+      state.globalAccount.shouldRedirectToAccountChannels &&
+      getURL.getAccountChannelsURL(),
   }),
   dispatch => ({
     onConnectSocialAccountOnboardingClick: () => {
@@ -16,12 +26,6 @@ export default connect(
     },
     onSkipStep: () => {
       dispatch(actions.handleSkipStep());
-    },
-    onManageSocialAccountClick: () => {
-      dispatch(actions.handleManageSocialAccountClick());
-    },
-    onConnectSocialAccountSidebarClick: () => {
-      dispatch(actions.handleConnectSocialAccountSidebarClick());
     },
   })
 )(OnboardingManager);
