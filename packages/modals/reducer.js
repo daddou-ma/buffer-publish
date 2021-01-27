@@ -223,7 +223,6 @@ export const actions = {
       (modals.showProfilesDisconnectedModal ||
         modals.showSwitchPlanModal ||
         modals.showInstagramFirstCommentModal ||
-        modals.showInstagramDirectPostingModal ||
         modals.showStealProfileModal ||
         modals.showTrialCompleteModal ||
         modals.showInstagramFirstCommentProTrialModal ||
