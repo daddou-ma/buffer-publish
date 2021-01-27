@@ -8,7 +8,7 @@ import {
   profileTabPages,
 } from '@bufferapp/publish-routes';
 import ProfileSidebar from './components/ProfileSidebar';
-import { shouldGoToProfile } from './utils';
+import { shouldGoToProfile, getConnectShortcutURLs } from './utils';
 import { actions } from './reducer';
 
 const reorderProfilesByUnlocked = profiles =>
@@ -41,7 +41,7 @@ export default hot(
           route: campaignsPage.route,
         }),
         showUpgradeToProCta: state.organizations.selected?.showUpgradeToProCta,
-        accountChannelsURL,
+        connectShortcutURLs: getConnectShortcutURLs(accountChannelsURL),
         manageChannelsURL:
           accountChannelsURL || getURL.getManageSocialAccountURL(),
         connectChannelsURL:

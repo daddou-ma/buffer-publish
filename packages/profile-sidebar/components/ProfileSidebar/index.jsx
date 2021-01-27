@@ -6,7 +6,6 @@ import { offWhite, mystic } from '@bufferapp/components/style/color';
 import { borderWidth } from '@bufferapp/components/style/border';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
-import { getURL } from '@bufferapp/publish-server/formatters/src';
 
 import LoadingProfileListItem from '../LoadingProfileListItem';
 import ProfileListItem from '../ProfileListItem';
@@ -105,12 +104,8 @@ const ProfileSidebar = ({
   showUpgradeToProCta,
   manageChannelsURL,
   connectChannelsURL,
-  accountChannelsURL,
+  connectShortcutURLs,
 }) => {
-  const cta = 'publish-app-sidebar-addProfile-1';
-  const fbConnectURL = `https://${getURL.getBaseURL()}/oauth/facebook/choose?cta=${cta}`;
-  const igConnectURL = `https://${getURL.getBaseURL()}/oauth/instagram/choose_business?cta=${cta}`;
-  const twitterConnectURL = `https://${getURL.getBaseURL()}/oauth/twitter?cta=${cta}`;
   const { t } = useTranslation();
 
   const ManageAccountsWrapper = ({ children }) =>
@@ -175,7 +170,7 @@ const ProfileSidebar = ({
                 <ProfileConnectShortcut
                   label={t('profile-sidebar.connectInstagram')}
                   network="instagram"
-                  url={accountChannelsURL || igConnectURL}
+                  url={connectShortcutURLs.instagram}
                   profileLimit={profileLimit}
                   profiles={profiles}
                   showSwitchPlanModal={showSwitchPlanModal}
@@ -187,7 +182,7 @@ const ProfileSidebar = ({
                 <ProfileConnectShortcut
                   label={t('profile-sidebar.connectFacebook')}
                   network="facebook"
-                  url={accountChannelsURL || fbConnectURL}
+                  url={connectShortcutURLs.facebook}
                   profileLimit={profileLimit}
                   profiles={profiles}
                   showSwitchPlanModal={showSwitchPlanModal}
@@ -199,7 +194,7 @@ const ProfileSidebar = ({
                 <ProfileConnectShortcut
                   label={t('profile-sidebar.connectTwitter')}
                   network="twitter"
-                  url={accountChannelsURL || twitterConnectURL}
+                  url={connectShortcutURLs.twitter}
                   profileLimit={profileLimit}
                   profiles={profiles}
                   showSwitchPlanModal={showSwitchPlanModal}
@@ -236,7 +231,11 @@ ProfileSidebar.propTypes = {
   onProfileClick: ProfileList.propTypes.onProfileClick,
   manageChannelsURL: PropTypes.string.isRequired,
   connectChannelsURL: PropTypes.string.isRequired,
-  accountChannelsURL: PropTypes.string,
+  connectShortcutURLs: PropTypes.shape({
+    facebook: PropTypes.string,
+    instagram: PropTypes.string,
+    twitter: PropTypes.string,
+  }).isRequired,
   showSwitchPlanModal: PropTypes.func,
   selectedProfileId: ProfileList.propTypes.selectedProfileId,
   profiles: PropTypes.arrayOf(PropTypes.shape(ProfileListItem.propTypes)),

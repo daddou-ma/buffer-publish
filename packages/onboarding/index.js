@@ -1,25 +1,27 @@
 import { connect } from 'react-redux';
 import { getURL } from '@bufferapp/publish-server/formatters/src';
 import { actions } from './reducer';
+import getOnboardingConnectURLs from './utils/index';
 
 import OnboardingManager from './components/OnboardingManager';
 
 export default connect(
-  state => ({
-    translations: state.i18n.translations['onboarding-page'],
-    canSeeOnboardingPage: state.onboarding.canSeeOnboardingPage,
-    showUpgradeToProCta: state.organizations.selected?.showUpgradeToProCta,
-    profileLimit: state.organizations.selected?.profileLimit,
-    connectChannelsURL: state.globalAccount.shouldRedirectToAccountChannels
-      ? getURL.getAccountChannelsURL()
-      : getURL.getConnectSocialAccountURL(),
-    manageChannelsURL: state.globalAccount.shouldRedirectToAccountChannels
-      ? getURL.getAccountChannelsURL()
-      : getURL.getManageSocialAccountURL(),
-    accountChannelsURL:
-      state.globalAccount.shouldRedirectToAccountChannels &&
-      getURL.getAccountChannelsURL(),
-  }),
+  state => {
+    const { shouldRedirectToAccountChannels } = state.globalAccount;
+    const accountChannelsURL =
+      shouldRedirectToAccountChannels && getURL.getAccountChannelsURL();
+    return {
+      translations: state.i18n.translations['onboarding-page'],
+      canSeeOnboardingPage: state.onboarding.canSeeOnboardingPage,
+      showUpgradeToProCta: state.organizations.selected?.showUpgradeToProCta,
+      profileLimit: state.organizations.selected?.profileLimit,
+      connectChannelsURL:
+        accountChannelsURL || getURL.getConnectSocialAccountURL(),
+      manageChannelsURL:
+        accountChannelsURL || getURL.getManageSocialAccountURL(),
+      onboardingConnectURLs: getOnboardingConnectURLs(accountChannelsURL),
+    };
+  },
   dispatch => ({
     onConnectSocialAccountOnboardingClick: () => {
       dispatch(actions.handleConnectSocialAccountOnboardingClick());
