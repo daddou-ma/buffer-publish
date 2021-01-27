@@ -33,4 +33,66 @@ describe('Onboarding', () => {
   test('should export middleware', () => {
     expect(middleware).toBeDefined();
   });
+
+  test('opens network connect url when user clicks on profile connect shortcut', () => {
+    const hostname = 'publish.local.buffer.com';
+    const expectedURL =
+      'https://local.buffer.com/oauth/twitter?cta=publish-app-onboarding-addProfile-1';
+
+    window.location.assign = jest.fn();
+    window.location.hostname = hostname;
+
+    render(
+      <TestDragDropContainer>
+        <Onboarding />
+      </TestDragDropContainer>,
+      {
+        initialState: {
+          organizations: {
+            selected: { canManageSocialAccounts: true, profileLimit: 10 },
+          },
+          globalAccount: { shouldRedirectToAccountChannels: false },
+          profileSidebar: { profiles, selectedProfile, loading: false },
+        },
+      }
+    );
+    const connectLink = screen.getByRole('button', {
+      name: /Twitter Connect a Twitter profile/i,
+    });
+
+    userEvent.click(connectLink);
+
+    expect(window.location.assign).toHaveBeenCalledWith(expectedURL);
+    window.location.assign.mockRestore();
+  });
+  test('opens account channels when user clicks on profile connect shortcut', () => {
+    const hostname = 'publish.local.buffer.com';
+    window.location.assign = jest.fn();
+    window.location.hostname = hostname;
+
+    render(
+      <TestDragDropContainer>
+        <Onboarding />
+      </TestDragDropContainer>,
+      {
+        initialState: {
+          organizations: {
+            selected: { canManageSocialAccounts: true, profileLimit: 10 },
+          },
+          globalAccount: { shouldRedirectToAccountChannels: true },
+          profileSidebar: { profiles, selectedProfile, loading: false },
+        },
+      }
+    );
+    const connectLink = screen.getByRole('button', {
+      name: /Twitter Connect a Twitter profile/i,
+    });
+
+    userEvent.click(connectLink);
+
+    expect(window.location.assign).toHaveBeenCalledWith(
+      getURL.getAccountChannelsURL()
+    );
+    window.location.assign.mockRestore();
+  });
 });

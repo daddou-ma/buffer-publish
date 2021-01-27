@@ -161,7 +161,7 @@ const OnboardingPage = ({
       </RightColumn>
     </Wrapper>
   );
-}
+};
 
 OnboardingPage.propTypes = {
   onConnectSocialAccountClick: PropTypes.func.isRequired,

@@ -40,6 +40,20 @@ describe('middleware', () => {
     );
   });
 
+  it('should redirect to the account channels for a regular profile', () => {
+    const newStore = {
+      dispatch: jest.fn(),
+      getState: () => ({
+        globalAccount: { shouldRedirectToAccountChannels: false },
+      }),
+    };
+    middleware(newStore)(next)(reconnectTwitterAction);
+    expect(next).toBeCalled();
+    expect(window.location.assign).toHaveBeenCalledWith(
+      'https://local.buffer.com/oauth/reconnect/twitter-id'
+    );
+  });
+
   it('should load Instagram logout img and then redirect to the reconnect URL', () => {
     // This code ensures that we call the img.onerror right away for the sake of testing
     // (see the code in profiles-disconnected-modal/middleware.js)
