@@ -123,7 +123,7 @@ ProfileConnectShortcut.propTypes = {
   ).isRequired,
   profileLimit: PropTypes.number.isRequired,
   showUpgradeToProCta: PropTypes.bool.isRequired,
-  connectChannelsURL: PropTypes.func.isRequired,
+  connectChannelsURL: PropTypes.string.isRequired,
   showSwitchPlanModal: PropTypes.func.isRequired,
 };
 

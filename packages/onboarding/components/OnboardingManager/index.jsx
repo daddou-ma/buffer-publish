@@ -30,6 +30,7 @@ const OnboardingManager = ({
         translations={translations}
         manageChannelsURL={manageChannelsURL}
         connectChannelsURL={connectChannelsURL}
+        connectDirectURLs={connectDirectURLs}
       />
     )}
   </>
@@ -40,8 +41,8 @@ OnboardingManager.propTypes = {
   profileLimit: PropTypes.number.isRequired,
   onConnectSocialAccountOnboardingClick: PropTypes.func.isRequired,
   onSkipStep: PropTypes.func.isRequired,
-  manageChannelsURL: PropTypes.func.isRequired,
-  connectChannelsURL: PropTypes.func.isRequired,
+  manageChannelsURL: PropTypes.string.isRequired,
+  connectChannelsURL: PropTypes.string.isRequired,
   canSeeOnboardingPage: PropTypes.bool.isRequired,
   translations: PropTypes.shape({
     title: PropTypes.string,

@@ -102,6 +102,7 @@ const DisabledQueue = ({
   profileLimit,
   manageChannelsURL,
   connectChannelsURL,
+  connectDirectURLs,
 }) => (
   <ProfilePage>
     <ProfileSidebarWrapper>
@@ -109,12 +110,9 @@ const DisabledQueue = ({
         showUpgradeToProCta={showUpgradeToProCta}
         translations={translations}
         profileLimit={profileLimit}
-        onManageSocialAccountClick={() =>
-          window.location.assign(manageChannelsURL)
-        }
-        goToConnectSocialAccount={() =>
-          window.location.assign(connectChannelsURL)
-        }
+        manageChannelsURL={manageChannelsURL}
+        connectChannelsURL={connectChannelsURL}
+        connectDirectURLs={connectDirectURLs}
         loading={false}
       />
     </ProfileSidebarWrapper>
@@ -214,6 +212,11 @@ DisabledQueue.propTypes = {
   showUpgradeToProCta: PropTypes.bool.isRequired,
   manageChannelsURL: PropTypes.string.isRequired,
   connectChannelsURL: PropTypes.string.isRequired,
+  connectDirectURLs: PropTypes.shape({
+    facebook: PropTypes.string,
+    instagram: PropTypes.string,
+    twitter: PropTypes.string,
+  }).isRequired,
 };
 
 export default DisabledQueue;
