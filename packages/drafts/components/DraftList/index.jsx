@@ -10,7 +10,7 @@ import ComposerPopover from '@bufferapp/publish-composer-popover';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
 
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
-import { getURL } from '@bufferapp/publish-server/formatters/src';
+import { getURL } from '@bufferapp/publish-server/formatters';
 import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
 import ProfilesDisconnectedBanner from '@bufferapp/publish-profiles-disconnected-banner';
 

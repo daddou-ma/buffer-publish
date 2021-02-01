@@ -1,5 +1,5 @@
 import { actions as modalsActions } from '@bufferapp/publish-modals/reducer';
-import { getURL } from '@bufferapp/publish-server/formatters/src';
+import { getURL } from '@bufferapp/publish-server/formatters';
 import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
 import { actionTypes } from './reducer';
 

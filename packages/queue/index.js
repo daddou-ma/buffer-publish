@@ -3,7 +3,7 @@ import { actions as profileSidebarActions } from '@bufferapp/publish-profile-sid
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 import { actions as modalsActions } from '@bufferapp/publish-modals';
 import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
-import { getURL } from '@bufferapp/publish-server/formatters/src';
+import { getURL } from '@bufferapp/publish-server/formatters';
 import { profileChildTabPages } from '@bufferapp/publish-routes';
 
 import { actions } from './reducer';

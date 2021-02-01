@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { plansPage } from '@bufferapp/publish-routes';
-import { getURL } from '@bufferapp/publish-server/formatters/src';
+import { getURL } from '@bufferapp/publish-server/formatters';
 import TabNavigation from './components/TabNavigation';
 
 // default export = container

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Gear, Return, Plus, People } from '@bufferapp/ui/Icon';
 import { gray } from '@bufferapp/ui/style/colors';
-import { getURL } from '@bufferapp/publish-server/formatters/src';
+import { getURL } from '@bufferapp/publish-server/formatters';
 
 const InvertedReturnIcon = () => (
   <span style={{ transform: 'scaleX(-1)', height: '16px' }}>

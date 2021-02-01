@@ -1,4 +1,4 @@
-const { getDateString, isInThePast } = require('../../formatters/src');
+const { getDateString, isInThePast } = require('../formatters');
 const { parseTwitterLinks, parseFacebookEntities } = require('./linkParsing');
 
 const getImageUrls = post => {
@@ -42,7 +42,7 @@ const getPostActionString = ({ post }) => {
   return `This post ${post.sent_at ? 'was' : 'will be'} sent ${dateString}.`;
 };
 
-const getPostError = ({error, status}) => {
+const getPostError = ({ error, status }) => {
   if (status !== 'error') {
     return null;
   }
@@ -54,16 +54,17 @@ const getPostDetails = ({ post }) => ({
   postAction: getPostActionString({ post }),
   isRetweet: post.retweet !== undefined,
   error: getPostError({ error: post.error, status: post.status }),
-  errorLink: post.status === 'error' && post.error && post.error.link ? post.error.link : null,
-  isCustomScheduled: post.scheduled_at ? true : false,
+  errorLink:
+    post.status === 'error' && post.error && post.error.link
+      ? post.error.link
+      : null,
+  isCustomScheduled: !!post.scheduled_at,
   isInstagramReminder:
-    post.profile_service === 'instagram' && !post.can_send_direct
-      ? true
-      : false,
+    post.profile_service === 'instagram' && !post.can_send_direct,
 });
 
 const getRetweetProfileInfo = post => {
-  const retweet = post.retweet;
+  const { retweet } = post;
   if (!retweet) {
     return undefined;
   }
@@ -81,13 +82,17 @@ const getRetweetProfileInfo = post => {
 const getPostType = ({ post }) => {
   if (!post.media || post.retweet) {
     return 'text';
-  } else if (post.media && post.media.picture && !post.extra_media) {
+  }
+  if (post.media && post.media.picture && !post.extra_media) {
     return 'image';
-  } else if (post.media && post.media.picture && post.extra_media) {
+  }
+  if (post.media && post.media.picture && post.extra_media) {
     return 'multipleImage';
-  } else if (post.media && post.media.video) {
+  }
+  if (post.media && post.media.video) {
     return 'video';
-  } else if (post.media && post.media.link) {
+  }
+  if (post.media && post.media.link) {
     return 'link';
   }
   return 'text';
@@ -106,7 +111,7 @@ const getUser = post => {
 };
 
 const removeDuplicates = (arr, prop) => {
-  let obj = {};
+  const obj = {};
   return Object.keys(
     arr.reduce((prev, next) => {
       if (!obj[next[prop]]) obj[next[prop]] = next;

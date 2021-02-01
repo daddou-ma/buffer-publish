@@ -4,7 +4,7 @@ import {
   screen,
 } from '@bufferapp/publish-test-utils/utils/custom-render';
 import userEvent from '@testing-library/user-event';
-import { getURL } from '@bufferapp/publish-server/formatters/src';
+import { getURL } from '@bufferapp/publish-server/formatters';
 import { selectedProfile } from '@bufferapp/publish-profile-sidebar/mockData/profiles';
 import '@bufferapp/publish-web/components/i18n';
 import { axe } from 'jest-axe';

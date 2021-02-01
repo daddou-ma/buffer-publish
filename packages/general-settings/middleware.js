@@ -1,4 +1,4 @@
-import { getURL } from '@bufferapp/publish-server/formatters/src';
+import { getURL } from '@bufferapp/publish-server/formatters';
 import { actionTypes as profileActionTypes } from '@bufferapp/publish-profile-sidebar/reducer';
 import { actions as profilesActions } from '@bufferapp/publish-data-profiles/reducer';
 import { actions as notificationActions } from '@bufferapp/notifications';

@@ -3,7 +3,7 @@ import {
   render,
   screen,
 } from '@bufferapp/publish-test-utils/utils/custom-render';
-import { getURL } from '@bufferapp/publish-server/formatters/src';
+import { getURL } from '@bufferapp/publish-server/formatters';
 import userEvent from '@testing-library/user-event';
 import TestBackend from 'react-dnd-test-backend';
 import { DragDropContext } from 'react-dnd';

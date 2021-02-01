@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { actions as profilesDisconnectedModalActions } from '@bufferapp/publish-profiles-disconnected-modal/reducer';
-import { getURL } from '@bufferapp/publish-server/formatters/src';
+import { getURL } from '@bufferapp/publish-server/formatters';
 import ProfilesDisconnectedBanner from './components/ProfilesDisconnectedBanner';
 
 export default connect(

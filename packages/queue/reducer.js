@@ -2,7 +2,7 @@ import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch
 import { actionTypes as profileSidebarActionTypes } from '@bufferapp/publish-profile-sidebar/reducer';
 import { actionTypes as draftActionTypes } from '@bufferapp/publish-drafts/reducer';
 import { actionTypes as orgActionTypes } from '@bufferapp/publish-data-organizations';
-import { postParser } from '@bufferapp/publish-server/parsers/src';
+import { postParser } from '@bufferapp/publish-server/parsers';
 import keyWrapper from '@bufferapp/keywrapper';
 
 export const actionTypes = keyWrapper('QUEUE', {
