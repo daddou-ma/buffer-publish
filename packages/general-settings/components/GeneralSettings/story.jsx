@@ -39,7 +39,6 @@ storiesOf('GeneralSettings', module)
     <GeneralSettings
       isInstagramProfile={false}
       isInstagramBusiness={false}
-      onSetUpDirectPostingClick={action('onSetUpDirectPosting')}
       hasBitlyFeature
       onChangeUtmCampaign={action('onChangeUtmCampaign')}
       onChangeUtmSource={action('onChangeUtmSource')}
@@ -54,7 +53,6 @@ storiesOf('GeneralSettings', module)
     <GeneralSettings
       isInstagramProfile
       isInstagramBusiness
-      onSetUpDirectPostingClick={action('onSetUpDirectPosting')}
       hasBitlyFeature
       onChangeUtmCampaign={action('onChangeUtmCampaign')}
       onChangeUtmSource={action('onChangeUtmSource')}
@@ -71,7 +69,6 @@ storiesOf('GeneralSettings', module)
       isInstagramBusiness
       googleAnalyticsIsEnabled
       linkShorteningEnabled
-      onSetUpDirectPostingClick={action('onSetUpDirectPosting')}
       hasBitlyFeature
       onChangeUtmCampaign={action('onChangeUtmCampaign')}
       onChangeUtmSource={action('onChangeUtmSource')}
@@ -87,7 +84,6 @@ storiesOf('GeneralSettings', module)
     <GeneralSettings
       isInstagramProfile
       isInstagramBusiness
-      onSetUpDirectPostingClick={action('onSetUpDirectPosting')}
       hasBitlyFeature
       onChangeUtmCampaign={action('onChangeUtmCampaign')}
       onChangeUtmSource={action('onChangeUtmSource')}
@@ -104,7 +100,6 @@ storiesOf('GeneralSettings', module)
     <GeneralSettings
       isInstagramProfile
       isInstagramBusiness
-      onSetUpDirectPostingClick={action('onSetUpDirectPosting')}
       showGACustomizationForm
       googleAnalyticsIsEnabled
       hasBitlyFeature
@@ -122,7 +117,6 @@ storiesOf('GeneralSettings', module)
     <GeneralSettings
       isInstagramProfile={false}
       isInstagramBusiness={false}
-      onSetUpDirectPostingClick={action('onSetUpDirectPosting')}
       hasBitlyFeature
       onChangeUtmCampaign={action('onChangeUtmCampaign')}
       onChangeUtmSource={action('onChangeUtmSource')}

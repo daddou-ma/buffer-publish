@@ -30,7 +30,6 @@ const initialState = {
     showComposer: false,
     emptySlotMode: false,
     editingPostId: '',
-    isInstagramLoading: false,
   },
   profileSidebar: {
     selectedProfileId: profile.id,

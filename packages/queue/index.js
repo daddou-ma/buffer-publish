@@ -84,13 +84,9 @@ export default connect(
         editMode: state.queue.editMode,
         editingPostId: state.queue.editingPostId,
         subprofiles: profileData.subprofiles || [],
-        isInstagramProfile,
-        isInstagramBusiness: profileData.isInstagramBusiness,
         paused: profileData.paused,
         isManager: profileData.isManager,
         hasPushNotifications: profileData.hasPushNotifications,
-        isBusinessOnInstagram: state.queue.isBusinessOnInstagram,
-        isInstagramLoading: state.queue.isInstagramLoading,
         hasFirstCommentFlip:
           state.organizations.selected?.hasFirstCommentFeature,
         hasCampaignsFeature: state.organizations.selected?.hasCampaignsFeature,
@@ -176,33 +172,9 @@ export default connect(
     onComposerCreateSuccess: () => {
       dispatch(actions.handleComposerCreateSuccess());
     },
-    onDirectPostingClick: () => {
-      dispatch(
-        dataFetchActions.fetch({
-          name: 'checkInstagramBusiness',
-          args: {
-            profileId: ownProps.profileId,
-            callbackAction: modalsActions.showInstagramDirectPostingModal({
-              profileId: ownProps.profileId,
-            }),
-          },
-        })
-      );
-    },
     onComposerOverlayClick: () => {
       dispatch(
         modalsActions.showCloseComposerConfirmationModal({ page: 'queue' })
-      );
-    },
-    onCheckInstagramBusinessClick: () => {
-      dispatch(
-        dataFetchActions.fetch({
-          name: 'checkInstagramBusiness',
-          args: {
-            profileId: ownProps.profileId,
-            recheck: true,
-          },
-        })
       );
     },
     onHideInstagramModal: () => {
