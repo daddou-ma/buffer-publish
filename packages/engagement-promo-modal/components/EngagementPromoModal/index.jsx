@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import { fontWeightBold } from '@bufferapp/ui/style/fonts';
 import { Text, Button, Modal, Link } from '@bufferapp/ui';
+import { Cross } from '@bufferapp/ui/Icon';
 
 const Title = styled(Text)`
   margin: 320px 0 20px;
@@ -40,6 +41,12 @@ const ButtonContainer = styled.div`
   }
 `;
 
+const CloseButton = styled(Button)`
+  position: absolute;
+  right: 0;
+  top: 0;
+`;
+
 const EngagementPromoModal = ({
   dismissModal,
   startTrial,
@@ -48,6 +55,12 @@ const EngagementPromoModal = ({
   if (alreadySawModal) return null;
   return (
     <Modal background="url('https://s3.amazonaws.com/buffer-publish/images/engagement-promo-modal.png') no-repeat">
+      <CloseButton
+        type="text"
+        icon={<Cross size="large" />}
+        hasIconOnly
+        onClick={() => dismissModal()}
+      />
       <TextContainer>
         <Title type="h2">New! Reply to Instagram comments</Title>
         <Text type="p">

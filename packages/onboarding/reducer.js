@@ -4,8 +4,6 @@ import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch
 export const actionTypes = keyWrapper('ONBOARDING_MANAGER', {
   CONNECT_SOCIAL_ACCOUNT_ONBOARDING: 0,
   SKIP_STEP: 0,
-  MANAGE_SOCIAL_ACCOUNT: 0,
-  CONNECT_SOCIAL_ACCOUNT_SIDEBAR: 0,
 });
 
 export const initialState = {
@@ -37,11 +35,5 @@ export const actions = {
   }),
   handleSkipStep: () => ({
     type: actionTypes.SKIP_STEP,
-  }),
-  handleManageSocialAccountClick: () => ({
-    type: actionTypes.MANAGE_SOCIAL_ACCOUNT,
-  }),
-  handleConnectSocialAccountSidebarClick: () => ({
-    type: actionTypes.CONNECT_SOCIAL_ACCOUNT_SIDEBAR,
   }),
 };

@@ -52,7 +52,6 @@ const ProfilesDisconnectedModal = ({
   reconnectProfile,
   hideModal,
   displayExtraMessage,
-  shouldRedirectToAccountChannels,
 }) => {
   const { t } = useTranslation();
   return (
@@ -90,7 +89,6 @@ const ProfilesDisconnectedModal = ({
                     disabled={p.reconnecting}
                     onClick={() => {
                       reconnectProfile({
-                        shouldRedirectToAccountChannels,
                         id: p.id,
                         service: p.service,
                       });
@@ -122,7 +120,6 @@ ProfilesDisconnectedModal.propTypes = {
   reconnectProfile: PropTypes.func.isRequired,
   hideModal: PropTypes.func.isRequired,
   displayExtraMessage: PropTypes.bool,
-  shouldRedirectToAccountChannels: PropTypes.bool.isRequired,
 };
 
 ProfilesDisconnectedModal.defaultProps = {
