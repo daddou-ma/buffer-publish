@@ -44,9 +44,6 @@ const storeFake = state => ({
 
 function createMockStore(profileList) {
   return storeFake({
-    modals: {
-      showInstagramDirectPostingModal: false,
-    },
     i18n: {
       translations: {
         'profile-sidebar': {
@@ -56,8 +53,6 @@ function createMockStore(profileList) {
     },
     queue: {
       editMode: false,
-      isBusinessOnInstagram: false,
-      isInstagramLoading: false,
       editingPostId: null,
       byProfileId: {
         1234: selectedProfile,

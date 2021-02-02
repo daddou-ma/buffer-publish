@@ -1,5 +1,5 @@
 import RPCEndpoint from '.';
-import parsers from '../../../parsers/src';
+import parsers from '../../../parsers';
 
 const session = {
   publish: {

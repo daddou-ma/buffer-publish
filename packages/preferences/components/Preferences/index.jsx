@@ -13,7 +13,7 @@ import {
   preferencesNotifications,
   preferencesGeneral,
 } from '@bufferapp/publish-routes';
-import { getURL } from '@bufferapp/publish-server/formatters/src';
+import { getURL } from '@bufferapp/publish-server/formatters';
 import ManageAppsAndExtras from '@bufferapp/manage-apps-extras';
 import Notifications from '@bufferapp/publish-account-notifications';
 import ProfileSidebarComponent from '@bufferapp/publish-profile-sidebar/components/ProfileSidebar';

@@ -192,8 +192,9 @@ class App extends React.Component {
     onNewPublish: PropTypes.bool,
     options: PropTypes.shape({
       canSelectProfiles: PropTypes.bool.isRequired,
-      prevPreserveStateOnClose: PropTypes.bool.isRequired,
-      preserveStateOnClose: PropTypes.bool.isRequired,
+      shouldResetData: PropTypes.bool.isRequired,
+      shouldResetDataOnInit: PropTypes.bool.isRequired,
+      shouldLoadInitialDataOnInit: PropTypes.bool.isRequired,
       saveButtons: PropTypes.arrayOf(
         PropTypes.oneOf(Object.keys(SaveButtonTypes))
       ).isRequired,
@@ -233,8 +234,8 @@ class App extends React.Component {
 
     this.state = getState();
     this.isInitialized = false; // Ensure we load initial data and open web socket only once
-
-    if (!this.props.options.preserveStateOnClose) {
+    const { shouldResetData } = this.props.options;
+    if (shouldResetData) {
       AppInitActionCreators.resetData();
     }
   }
@@ -316,18 +317,13 @@ class App extends React.Component {
       options,
       onNewPublish,
     } = this.props;
-
-    const { preserveStateOnClose, prevPreserveStateOnClose = false } = options;
-
+    const { shouldResetDataOnInit, shouldLoadInitialDataOnInit } = options;
     /**
      * When `options.prevPreserveStateOnClose === false` let's reset the data.
      * (This ensures the state from editing a post doesn't remain when clicking
      * to compose a new one.)
      */
-    if (
-      prevPreserveStateOnClose === false &&
-      preserveStateOnClose !== prevPreserveStateOnClose
-    ) {
+    if (shouldResetDataOnInit) {
       AppInitActionCreators.resetData();
     }
 
@@ -337,10 +333,8 @@ class App extends React.Component {
      * initial data again if the previous instance had its stores reset on close, or if
      * this new instance had its stores reset on init.
      */
-    const shouldLoadInitialData =
-      prevPreserveStateOnClose !== true || preserveStateOnClose === false;
 
-    if (shouldLoadInitialData) {
+    if (shouldLoadInitialDataOnInit) {
       AppInitActionCreators.loadInitialData({
         profilesData,
         userData,

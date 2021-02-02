@@ -79,8 +79,6 @@ storiesOf('QueuedPosts', module)
       onComposerCreateSuccess={action('onComposerCreateSuccess')}
       onDropPost={action('onDropPost')}
       onSwapPosts={action('onSwapPosts')}
-      onSetUpDirectPostingClick={action('onSetUpDirectPostingClick')}
-      onDirectPostingClick={action('onDirectPostingClick')}
       onCalendarClick={action('onCalendarClick')}
       onEmptySlotClick={action('onEmptySlotClick')}
     />
@@ -101,8 +99,6 @@ storiesOf('QueuedPosts', module)
       onComposerCreateSuccess={action('onComposerCreateSuccess')}
       onDropPost={action('onDropPost')}
       onSwapPosts={action('onSwapPosts')}
-      onSetUpDirectPostingClick={action('onSetUpDirectPostingClick')}
-      onDirectPostingClick={action('onDirectPostingClick')}
       onCalendarClick={action('onCalendarClick')}
       onEmptySlotClick={action('onEmptySlotClick')}
     />
@@ -123,8 +119,6 @@ storiesOf('QueuedPosts', module)
       onComposerCreateSuccess={action('onComposerCreateSuccess')}
       onDropPost={action('onDropPost')}
       onSwapPosts={action('onSwapPosts')}
-      onSetUpDirectPostingClick={action('onSetUpDirectPostingClick')}
-      onDirectPostingClick={action('onDirectPostingClick')}
       onRequeueClick={action('onRequeueClick')}
       onCalendarClick={action('onCalendarClick')}
       onEmptySlotClick={action('onEmptySlotClick')}
@@ -145,8 +139,6 @@ storiesOf('QueuedPosts', module)
       onComposerCreateSuccess={action('onComposerCreateSuccess')}
       onDropPost={action('onDropPost')}
       onSwapPosts={action('onSwapPosts')}
-      onSetUpDirectPostingClick={action('onSetUpDirectPostingClick')}
-      onDirectPostingClick={action('onDirectPostingClick')}
       onRequeueClick={action('onRequeueClick')}
       onCalendarClick={action('onCalendarClick')}
       onEmptySlotClick={action('onEmptySlotClick')}
@@ -169,8 +161,6 @@ storiesOf('QueuedPosts', module)
       onComposerCreateSuccess={action('onComposerCreateSuccess')}
       onDropPost={action('onDropPost')}
       onSwapPosts={action('onSwapPosts')}
-      onSetUpDirectPostingClick={action('onSetUpDirectPostingClick')}
-      onDirectPostingClick={action('onDirectPostingClick')}
       onRequeueClick={action('onRequeueClick')}
       onCalendarClick={action('onCalendarClick')}
       onEmptySlotClick={action('onEmptySlotClick')}

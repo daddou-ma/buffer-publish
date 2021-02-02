@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { formatPostLists } from '@bufferapp/publish-queue/util';
 import { actions as previewActions } from '@bufferapp/publish-story-preview';
 import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
-import { getURL } from '@bufferapp/publish-server/formatters/src';
+import { getURL } from '@bufferapp/publish-server/formatters';
 import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
 import getCtaProperties from '@bufferapp/publish-analytics-middleware/utils/CtaStrings';
 

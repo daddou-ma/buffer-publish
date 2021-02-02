@@ -100,16 +100,6 @@
     "loggedIn": "Logged In...",
     "loggedOut": "Logged Out..."
   },
-  "instagram-direct-posting-modal": {
-    "cta1": "Yes! Let's do it!",
-    "cta2": "I've Converted to Business",
-    "description": "Direct scheduling allows you to post images and videos to Instagram directly from Buffer.",
-    "dismiss": "No thanks, I might do it later",
-    "headline": "Would you like to set up direct scheduling?",
-    "instructions1": "In order to set up direct scheduling, you’ll need to have an Instagram business account set up and properly connected to a Facebook page. ",
-    "instructions2": "Once you’ve completed these steps, click “I’ve converted to business” to continue.",
-    "learnMore": "Learn how to get set up here."
-  },
   "instagram-first-comment-modal": {
     "body": "We’ll walk you through this now – It will just take a moment.",
     "canRequestMorePermission": "We'll open up a window for you to grant us that permission now.",
@@ -238,11 +228,7 @@
         "",
         "Include first comment when you schedule Instagram posts"
       ],
-      "features": [
-        "8 social channels",
-        "1 user",
-        "Instagram first comment"
-      ],
+      "features": ["8 social channels", "1 user", "Instagram first comment"],
       "monthly": "/mo",
       "nonProfitCost": "$7.50",
       "plan": "pro",
@@ -597,9 +583,6 @@
     "validating": "One moment...",
     "zipCode": "Zip code",
     "zipLeaveBlank": "Leave blank for non-US cards"
-  },
-  "tag-badge": {
-    "new": "New"
   },
   "trial-complete-modal": {
     "cancelTrial": "Cancel Trial",

@@ -95,15 +95,6 @@
     "loggedIn": "Conectado...",
     "loggedOut": "Desconectado..."
   },
-  "instagram-direct-posting-modal": {
-    "cta1": "¡Sí, vamos!",
-    "cta2": "Lo he convertido a business",
-    "description": "\"Direct Scheduling\" te permite enviar imágenes y videos directamente a Instagram desde Buffer, como con cualquier otra red social.",
-    "dismiss": "No gracias, más adelante",
-    "headline": "¿Te gustaría activar \"Direct Scheduling\" para Instagram?",
-    "instructions": "Para activar \"Direct Scheduling, tienes que tener un perfil Business en Instagram. Puedes convertir cualquier cuenta en business a través de la aplicación de Instagram. ",
-    "learnMore": "Puedes encontrar la guía de Instagram aquí."
-  },
   "instagram-first-comment-modal": {
     "body": "Te guiaremos ahora, sólo será un momento.",
     "canRequestMorePermission": "Vamos a abrir una venta para que nos des permiso ahora.",
@@ -595,9 +586,6 @@
     "validating": "Un momento...",
     "zipCode": "Código postal",
     "zipLeaveBlank": "Dejar en blanco para tarjetas fuera de USA"
-  },
-  "tag-badge": {
-    "new": "Nuevo"
   },
   "trial-complete-modal": {
     "cancelTrial": "Cancelar Prueba",

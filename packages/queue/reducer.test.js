@@ -369,14 +369,15 @@ describe('reducer', () => {
     expect(reducer(stateBefore, action)).toEqual(stateAfter);
   });
 
-  it('handles ORGANIZATION_SELECTED action type, sets preserveComposerStateOnClose to false to force the composer to refetch profiles on org switcher ', () => {
+  it('handles ORGANIZATION_SELECTED action type, sets shouldResetComposerData to false to force the composer to refetch profiles on org switcher ', () => {
     const stateBefore = {
       ...initialState,
-      preserveComposerStateOnClose: true,
+      shouldResetComposerData: false,
     };
+
     const stateAfter = {
       ...initialState,
-      preserveComposerStateOnClose: false,
+      shouldResetComposerData: true,
     };
 
     const action = {

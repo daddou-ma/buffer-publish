@@ -4,6 +4,7 @@ import {
   screen,
 } from '@bufferapp/publish-test-utils/utils/custom-render';
 import userEvent from '@testing-library/user-event';
+import { getURL } from '@bufferapp/publish-server/formatters';
 import '@bufferapp/publish-web/components/i18n';
 import { axe } from 'jest-axe';
 import DefaultPage from './index';
@@ -44,6 +45,7 @@ describe('DefaultPage', () => {
     render(<DefaultPage />, {
       initialState: {
         organizations: { selected: { isAdmin: true } },
+        globalAccount: { shouldRedirectToAccountChannels: false },
       },
     });
     const connectButton = screen.getByRole('button');
@@ -51,6 +53,27 @@ describe('DefaultPage', () => {
     userEvent.click(connectButton);
 
     expect(window.location.assign).toHaveBeenCalledWith(url);
+    window.location.assign.mockRestore();
+  });
+
+  test('opens account channels when user clicks in manage social accounts', () => {
+    const hostname = 'publish.local.buffer.com';
+    window.location.assign = jest.fn();
+    window.location.hostname = hostname;
+
+    render(<DefaultPage />, {
+      initialState: {
+        organizations: { selected: { isAdmin: true } },
+        globalAccount: { shouldRedirectToAccountChannels: true },
+      },
+    });
+    const connectButton = screen.getByRole('button');
+
+    userEvent.click(connectButton);
+
+    expect(window.location.assign).toHaveBeenCalledWith(
+      getURL.getAccountChannelsURL()
+    );
     window.location.assign.mockRestore();
   });
 

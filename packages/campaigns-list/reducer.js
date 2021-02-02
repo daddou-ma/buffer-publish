@@ -1,6 +1,6 @@
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 import { actionTypes as campaignActionTypes } from '@bufferapp/publish-campaign';
-import { campaignParser } from '@bufferapp/publish-server/parsers/src';
+import { campaignParser } from '@bufferapp/publish-server/parsers';
 import { sortCampaignsByUpdatedAt } from '@bufferapp/publish-queue/reducer';
 
 export const initialState = {

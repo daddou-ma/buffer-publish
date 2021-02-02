@@ -1,4 +1,4 @@
-import parsers from '../../../parsers/src';
+import parsers from '../../../parsers';
 import RPCEndpoint from '.';
 
 const session = {

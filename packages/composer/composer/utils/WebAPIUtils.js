@@ -509,7 +509,7 @@ function getTwitterACPublicSearchHashtagSuggestions(search) {
   )
     .then(response => response.json())
     .then(response =>
-      response.hashtags.map(({ hashtag }) => [hashtag, { name: hashtag }])
+      response.topics.map(({ topic }) => [topic, { name: topic }])
     )
     .catch(error => {
       if (
@@ -825,11 +825,9 @@ function getFormattedAPIData(serviceName, unformattedData) {
     }
 
     if (serviceDraft.service.canHaveLocation) {
-      const { isTaggingPageLocation } = serviceDraft;
-      if (isTaggingPageLocation) {
-        conditionalFields.tagging_page_location = isTaggingPageLocation;
-      }
-      // conditionalFields.service_geolocation_name = locationName;
+      const { locationId, locationName } = serviceDraft;
+      conditionalFields.service_geolocation_id = locationId;
+      conditionalFields.service_geolocation_name = locationName;
     }
 
     const { images } = serviceDraft;

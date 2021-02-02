@@ -10,7 +10,7 @@ import ComposerPopover from '@bufferapp/publish-composer-popover';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
 
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
-import { getURL } from '@bufferapp/publish-server/formatters/src';
+import { getURL } from '@bufferapp/publish-server/formatters';
 import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
 import ProfilesDisconnectedBanner from '@bufferapp/publish-profiles-disconnected-banner';
 
@@ -58,7 +58,7 @@ const DraftList = ({
   canStartBusinessTrial,
   hasFirstCommentFlip,
   onComposerOverlayClick,
-  preserveComposerStateOnClose,
+  shouldResetComposerData,
   showShowDraftsPaywall,
   fetchDrafts,
   profileId,
@@ -129,7 +129,8 @@ const DraftList = ({
                 <ComposerPopover
                   type="drafts"
                   onSave={onComposerCreateSuccess}
-                  preserveComposerStateOnClose={preserveComposerStateOnClose}
+                  preserveComposerStateOnClose
+                  shouldResetComposerData={shouldResetComposerData}
                   onComposerOverlayClick={onComposerOverlayClick}
                   editMode={editMode}
                 />
@@ -195,14 +196,14 @@ DraftList.propTypes = {
   isDisconnectedProfile: PropTypes.bool,
   hasFirstCommentFlip: PropTypes.bool,
   onComposerOverlayClick: PropTypes.func.isRequired,
-  preserveComposerStateOnClose: PropTypes.bool,
+  shouldResetComposerData: PropTypes.bool,
   fetchDrafts: PropTypes.func.isRequired,
   profileId: PropTypes.string.isRequired,
 };
 
 DraftList.defaultProps = {
   showShowDraftsPaywall: false,
-  preserveComposerStateOnClose: true,
+  shouldResetComposerData: true,
   loading: true,
   postLists: [],
   showComposer: false,

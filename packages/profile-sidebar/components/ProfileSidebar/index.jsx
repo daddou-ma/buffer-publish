@@ -2,12 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Divider } from '@bufferapp/components';
 import { Button, SidebarListItem, Tooltip } from '@bufferapp/ui';
-import { NavTag } from '@bufferapp/publish-shared-components';
 import { offWhite, mystic } from '@bufferapp/components/style/color';
 import { borderWidth } from '@bufferapp/components/style/border';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
-import { getURL } from '@bufferapp/publish-server/formatters/src';
 
 import LoadingProfileListItem from '../LoadingProfileListItem';
 import ProfileListItem from '../ProfileListItem';
@@ -90,10 +88,8 @@ const ProfileSidebar = ({
   profiles,
   onProfileClick,
   onDropProfile,
-  onManageSocialAccountClick,
   profileLimit,
   showSwitchPlanModal,
-  goToConnectSocialAccount,
   onSearchProfileChange,
   isSearchPopupVisible,
   // Flags for showing connection shortcut buttons
@@ -106,6 +102,9 @@ const ProfileSidebar = ({
   onCampaignsButtonClick,
   isCampaignsSelected,
   showUpgradeToProCta,
+  manageChannelsURL,
+  connectChannelsURL,
+  connectDirectURLs,
 }) => {
   const { t } = useTranslation();
 
@@ -136,7 +135,6 @@ const ProfileSidebar = ({
                   title={t('campaigns.common.title')}
                   onItemClick={onCampaignsButtonClick}
                   selected={isCampaignsSelected}
-                  badges={<NavTag type="new" labelName={t('tag-badge.new')} />}
                 />
               </ButtonWrapper>
               <ProfileListTitle>
@@ -172,11 +170,11 @@ const ProfileSidebar = ({
                 <ProfileConnectShortcut
                   label={t('profile-sidebar.connectInstagram')}
                   network="instagram"
-                  url={`https://${getURL.getBaseURL()}/oauth/instagram/choose_business?cta=publish-app-sidebar-addProfile-1`}
+                  url={connectDirectURLs.instagram}
                   profileLimit={profileLimit}
                   profiles={profiles}
                   showSwitchPlanModal={showSwitchPlanModal}
-                  goToConnectSocialAccount={goToConnectSocialAccount}
+                  connectChannelsURL={connectChannelsURL}
                   showUpgradeToProCta={showUpgradeToProCta}
                 />
               )}
@@ -184,11 +182,11 @@ const ProfileSidebar = ({
                 <ProfileConnectShortcut
                   label={t('profile-sidebar.connectFacebook')}
                   network="facebook"
-                  url={`https://${getURL.getBaseURL()}/oauth/facebook/choose?cta=publish-app-sidebar-addProfile-1`}
+                  url={connectDirectURLs.facebook}
                   profileLimit={profileLimit}
                   profiles={profiles}
                   showSwitchPlanModal={showSwitchPlanModal}
-                  goToConnectSocialAccount={goToConnectSocialAccount}
+                  connectChannelsURL={connectChannelsURL}
                   showUpgradeToProCta={showUpgradeToProCta}
                 />
               )}
@@ -196,11 +194,11 @@ const ProfileSidebar = ({
                 <ProfileConnectShortcut
                   label={t('profile-sidebar.connectTwitter')}
                   network="twitter"
-                  url={`https://${getURL.getBaseURL()}/oauth/twitter?cta=publish-app-sidebar-addProfile-1`}
+                  url={connectDirectURLs.twitter}
                   profileLimit={profileLimit}
                   profiles={profiles}
                   showSwitchPlanModal={showSwitchPlanModal}
-                  goToConnectSocialAccount={goToConnectSocialAccount}
+                  connectChannelsURL={connectChannelsURL}
                   showUpgradeToProCta={showUpgradeToProCta}
                 />
               )}
@@ -217,7 +215,7 @@ const ProfileSidebar = ({
                 fullWidth
                 disabled={!canManageSocialAccounts}
                 onClick={() => {
-                  onManageSocialAccountClick();
+                  window.location.assign(manageChannelsURL);
                 }}
               />
             </ManageAccountsWrapper>
@@ -231,8 +229,13 @@ const ProfileSidebar = ({
 ProfileSidebar.propTypes = {
   loading: PropTypes.bool.isRequired,
   onProfileClick: ProfileList.propTypes.onProfileClick,
-  onManageSocialAccountClick: PropTypes.func.isRequired,
-  goToConnectSocialAccount: PropTypes.func.isRequired,
+  manageChannelsURL: PropTypes.string.isRequired,
+  connectChannelsURL: PropTypes.string.isRequired,
+  connectDirectURLs: PropTypes.shape({
+    facebook: PropTypes.string,
+    instagram: PropTypes.string,
+    twitter: PropTypes.string,
+  }).isRequired,
   showSwitchPlanModal: PropTypes.func,
   selectedProfileId: ProfileList.propTypes.selectedProfileId,
   profiles: PropTypes.arrayOf(PropTypes.shape(ProfileListItem.propTypes)),

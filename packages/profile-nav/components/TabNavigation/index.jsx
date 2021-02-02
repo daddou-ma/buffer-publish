@@ -7,7 +7,6 @@ import {
   NavTag,
 } from '@bufferapp/publish-shared-components';
 import { Button } from '@bufferapp/ui';
-import { getURL } from '@bufferapp/publish-server/formatters/src';
 import {
   profileTabPages,
   profileChildTabPages,
@@ -39,6 +38,7 @@ const TabNavigation = ({
   showNestedAnalyticsTab,
   showNestedSettingsTab,
   showReconnectButton,
+  reconnectURL,
 }) => {
   const [loading, setLoading] = useState(false);
   const { t } = useTranslation();
@@ -159,9 +159,7 @@ const TabNavigation = ({
                 onClick={e => {
                   e.preventDefault();
                   setLoading(true);
-                  window.location.assign(
-                    `${getURL.getManageSocialAccountURL()}`
-                  );
+                  window.location.assign(reconnectURL);
                 }}
               />
             </div>
@@ -203,6 +201,7 @@ TabNavigation.propTypes = {
   showNestedAnalyticsTab: PropTypes.bool,
   showNestedSettingsTab: PropTypes.bool,
   showReconnectButton: PropTypes.bool,
+  reconnectURL: PropTypes.string.isRequired,
 };
 
 export default TabNavigation;

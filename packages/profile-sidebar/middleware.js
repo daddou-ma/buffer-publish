@@ -1,5 +1,3 @@
-import { getURL } from '@bufferapp/publish-server/formatters/src';
-
 import {
   actionTypes as dataFetchActionTypes,
   actions as dataFetchActions,
@@ -65,12 +63,6 @@ export default ({ dispatch, getState }) => next => action => {
           },
         })
       );
-      break;
-    case actionTypes.MANAGE_SOCIAL_ACCOUNT:
-      window.location = getURL.getManageSocialAccountURL();
-      break;
-    case actionTypes.CONNECT_SOCIAL_ACCOUNT:
-      window.location = getURL.getConnectSocialAccountURL();
       break;
     case `pauseQueue_${dataFetchActionTypes.FETCH_SUCCESS}`:
       dispatch(

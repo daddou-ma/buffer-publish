@@ -11,7 +11,7 @@ import { actionTypes as campaignActionTypes } from '@bufferapp/publish-campaign/
 import {
   postParser,
   storyGroupParser,
-} from '@bufferapp/publish-server/parsers/src';
+} from '@bufferapp/publish-server/parsers';
 
 const PUSHER_APP_KEY = 'bd9ba9324ece3341976e';
 

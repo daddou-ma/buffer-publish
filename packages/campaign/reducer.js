@@ -6,7 +6,7 @@ import { actionTypes as draftActionTypes } from '@bufferapp/publish-drafts/reduc
 import {
   campaignParser,
   campaignItemParser,
-} from '@bufferapp/publish-server/parsers/src';
+} from '@bufferapp/publish-server/parsers';
 import {
   getParams,
   campaignScheduled,

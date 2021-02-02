@@ -1,0 +1,60 @@
+name: Cypress
+
+on:
+  push:
+    branches:
+      - '*'
+    tags-ignore:
+      - depfu
+
+jobs:
+  cypress:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v2
+
+      # cache NPM modules and Cypress binary folder
+      # we can use "package-lock.json" as the key file
+      # to make sure we use the precise Cypress version
+      # (which is important when using ^ version in package.json)
+      # see https://github.com/actions/cache
+      - name: Cache NPM and Cypress 📦
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cache/Cypress
+            node_modules
+          key: my-cache-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+
+      - name: Install Cypress 📥
+        run: npm i cypress @testing-library/cypress
+
+      - name: Wait for bufferbotbrains/cicd-buffer-publish
+        id: wait-deploy
+        uses: hamstu/github-action-wait-for-commit-status@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          status-context: 'bufferbotbrains/cicd-buffer-publish'
+
+      - name: Wait for HTTP 200
+        env:
+          URL: ${{ fromJSON(steps.wait-deploy.outputs.status).target_url }}
+        run: |
+          until $(curl --output /dev/null --silent --head --fail $URL); do
+            printf '.'
+            sleep 5
+          done
+
+      - name: Cypress Tests 🧪
+        uses: cypress-io/github-action@v2
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          CYPRESS_BASE_URL: ${{ fromJSON(steps.wait-deploy.outputs.status).target_url }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CYPRESS_PUBLISH_LOGIN_EMAIL: ${{ secrets.BUFFER_LUNA_SNEAKERS_EMAIL }}
+          CYPRESS_PUBLISH_LOGIN_PASSWORD: ${{ secrets.BUFFER_LUNA_SNEAKERS_PASSWORD }}
+          CYPRESS_LOGIN_URL: https://login.buffer.com/login
+        with:
+          record: true
+          install: false
