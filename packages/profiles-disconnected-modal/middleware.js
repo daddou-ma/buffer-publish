@@ -1,4 +1,4 @@
-// import { actionTypes as modalsActionTypes } from '@bufferapp/publish-modals';
+import { getURL } from '@bufferapp/publish-server/formatters';
 import { actionTypes } from './reducer';
 
 const getReconnectURL = id => {
@@ -8,11 +8,15 @@ const getReconnectURL = id => {
   return `https://buffer.com/oauth/reconnect/${id}`;
 };
 
-export default ({ getState, dispatch }) => next => action => {
+export default ({ getState }) => next => action => {
   // eslint-disable-line
   next(action);
   switch (action.type) {
     case actionTypes.RECONNECT_PROFILE: {
+      const { shouldRedirectToAccountChannels } = getState().globalAccount;
+      const reconnectURL = shouldRedirectToAccountChannels
+        ? getURL.getAccountChannelsURL()
+        : getReconnectURL(action.id);
       if (action.service === 'instagram') {
         /**
          * This silly looking code loads an 'img' with the
@@ -22,12 +26,12 @@ export default ({ getState, dispatch }) => next => action => {
          */
         const img = new Image();
         img.onerror = () => {
-          window.location.assign(getReconnectURL(action.id));
+          window.location.assign(reconnectURL);
         };
         img.src = 'https://www.instagram.com/accounts/logoutin';
         document.getElementsByTagName('head')[0].appendChild(img);
       } else {
-        window.location.assign(getReconnectURL(action.id));
+        window.location.assign(reconnectURL);
       }
       break;
     }

@@ -6,13 +6,13 @@ export const initialState = {
   switchPlanModalSource: null,
   showStealProfileModal: false,
   stealProfileUsername: null,
-  showInstagramDirectPostingModal: false,
   showInstagramFirstCommentModal: false,
   showTrialCompleteModal: false,
   showInstagramFirstCommentProTrialModal: false,
   showCloseComposerConfirmationModal: false,
   modalToShowLater: null,
   showDeleteCampaignModal: false,
+  showEngagementPromoModal: false,
   page: 'queue',
 };
 
@@ -23,8 +23,6 @@ export const actionTypes = keyWrapper('MODALS', {
   HIDE_PROFILES_DISCONNECTED_MODAL: 0,
   SHOW_STEAL_PROFILE_MODAL: 0,
   HIDE_STEAL_PROFILE_MODAL: 0,
-  SHOW_IG_DIRECT_POSTING_MODAL: 0,
-  HIDE_IG_DIRECT_POSTING_MODAL: 0,
   SHOW_TRIAL_COMPLETE_MODAL: 0,
   HIDE_TRIAL_COMPLETE_MODAL: 0,
   SHOW_INSTAGRAM_FIRST_COMMENT_MODAL: 0,
@@ -36,6 +34,8 @@ export const actionTypes = keyWrapper('MODALS', {
   SHOW_CLOSE_COMPOSER_CONFIRMATION_MODAL: 0,
   SHOW_DELETE_CAMPAIGN_MODAL: 0,
   HIDE_DELETE_CAMPAIGN_MODAL: 0,
+  SHOW_ENGAGEMENT_PROMO_MODAL: 0,
+  HIDE_ENGAGEMENT_PROMO_MODAL: 0,
 });
 
 export default (state = initialState, action) => {
@@ -94,17 +94,6 @@ export default (state = initialState, action) => {
         ...state,
         showStealProfileModal: false,
       };
-    case actionTypes.SHOW_IG_DIRECT_POSTING_MODAL:
-      return {
-        ...state,
-        showInstagramDirectPostingModal: true,
-        modalToShowLater: null,
-      };
-    case actionTypes.HIDE_IG_DIRECT_POSTING_MODAL:
-      return {
-        ...state,
-        showInstagramDirectPostingModal: false,
-      };
     case actionTypes.SAVE_MODAL_TO_SHOW_LATER:
       return {
         ...state,
@@ -143,6 +132,16 @@ export default (state = initialState, action) => {
       return {
         ...state,
         showDeleteCampaignModal: true,
+      };
+    case actionTypes.SHOW_ENGAGEMENT_PROMO_MODAL:
+      return {
+        ...state,
+        showEngagementPromoModal: true,
+      };
+    case actionTypes.HIDE_ENGAGEMENT_PROMO_MODAL:
+      return {
+        ...state,
+        showEngagementPromoModal: false,
       };
     default:
       return state;
@@ -191,13 +190,6 @@ export const actions = {
   hideStealProfileModal: () => ({
     type: actionTypes.HIDE_STEAL_PROFILE_MODAL,
   }),
-  showInstagramDirectPostingModal: ({ profileId }) => ({
-    type: actionTypes.SHOW_IG_DIRECT_POSTING_MODAL,
-    profileId,
-  }),
-  hideInstagramDirectPostingModal: () => ({
-    type: actionTypes.HIDE_IG_DIRECT_POSTING_MODAL,
-  }),
   saveModalToShowLater: ({ modalId, profileId }) => ({
     type: actionTypes.SAVE_MODAL_TO_SHOW_LATER,
     modalId,
@@ -219,13 +211,18 @@ export const actions = {
     type: actionTypes.SHOW_DELETE_CAMPAIGN_MODAL,
     campaign,
   }),
+  showEngagementPromoModal: () => ({
+    type: actionTypes.SHOW_ENGAGEMENT_PROMO_MODAL,
+  }),
+  hideEngagementPromoModal: () => ({
+    type: actionTypes.HIDE_ENGAGEMENT_PROMO_MODAL,
+  }),
   isShowingModals: ({ modals }) => {
     return (
       modals &&
       (modals.showProfilesDisconnectedModal ||
         modals.showSwitchPlanModal ||
         modals.showInstagramFirstCommentModal ||
-        modals.showInstagramDirectPostingModal ||
         modals.showStealProfileModal ||
         modals.showTrialCompleteModal ||
         modals.showInstagramFirstCommentProTrialModal ||

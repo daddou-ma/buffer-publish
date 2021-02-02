@@ -78,7 +78,7 @@ class SwitchPlanModal extends React.Component {
     } = this.props;
 
     return (
-      <Modal wide dismissible={dismissible}>
+      <Modal width="wide" dismissible={dismissible}>
         <div style={{ height: 'auto' }}>
           <div style={{ width: '600px', padding: '0px 20px 25px' }}>
             {isPro(plan) && (

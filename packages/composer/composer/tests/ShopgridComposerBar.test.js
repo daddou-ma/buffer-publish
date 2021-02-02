@@ -4,7 +4,6 @@ import renderer from 'react-test-renderer';
 import ShopgridComposerBar from '../components/ShopgridComposerBar';
 
 jest.mock('../action-creators/ComposerActionCreators');
-jest.mock('../utils/LocationFinder');
 jest.mock('lodash.debounce', () => jest.fn(fn => fn));
 
 const showShopgridBar = {

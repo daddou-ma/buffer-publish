@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Text, Select as UISelect } from '@bufferapp/ui';
-import { isInThePast } from '@bufferapp/publish-server/formatters/src';
+import { isInThePast } from '@bufferapp/publish-server/formatters';
 import DateTimeSlotPickerWrapper from '../DateTimeSlotPickerWrapper';
 import { getReadableDateFormat, getMomentTime } from '../../utils/AddStory';
 import {

@@ -88,17 +88,5 @@ describe('reducer', () => {
         type: actionTypes.SKIP_STEP,
       });
     });
-
-    it('triggers a MANAGE_SOCIAL_ACCOUNT action', () => {
-      expect(actions.handleManageSocialAccountClick()).toEqual({
-        type: actionTypes.MANAGE_SOCIAL_ACCOUNT,
-      });
-    });
-
-    it('triggers a CONNECT_SOCIAL_ACCOUNT_SIDEBAR action', () => {
-      expect(actions.handleConnectSocialAccountSidebarClick()).toEqual({
-        type: actionTypes.CONNECT_SOCIAL_ACCOUNT_SIDEBAR,
-      });
-    });
   });
 });

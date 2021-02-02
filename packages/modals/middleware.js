@@ -77,8 +77,8 @@ export default ({ dispatch, getState }) => next => action => {
         return;
       }
 
-      if (modalToShow.id === actionTypes.SHOW_SHOP_GRID_PROMO_MODAL) {
-        dispatch(actions.showShopGridPromoModal());
+      if (modalToShow.id === actionTypes.SHOW_ENGAGEMENT_PROMO_MODAL) {
+        dispatch(actions.showEngagementPromoModal());
       }
 
       break;
@@ -88,12 +88,30 @@ export default ({ dispatch, getState }) => next => action => {
       const {
         shouldShowProTrialExpiredModal,
         shouldShowBusinessTrialExpiredModal,
+        shouldShowEngagementPromoModal,
       } = action.selected;
+
       if (
         shouldShowProTrialExpiredModal ||
         shouldShowBusinessTrialExpiredModal
       ) {
         dispatch(actions.showTrialCompleteModal());
+      }
+
+      if (shouldShowEngagementPromoModal) {
+        const { profiles } = getState().profileSidebar;
+        const showingProfilesDisconnectedModalFirst = profiles.some(
+          profile => profile.isDisconnected
+        );
+        if (showingProfilesDisconnectedModalFirst) {
+          dispatch(
+            actions.saveModalToShowLater({
+              modalId: actionTypes.SHOW_ENGAGEMENT_PROMO_MODAL,
+            })
+          );
+        } else {
+          dispatch(actions.showEngagementPromoModal());
+        }
       }
       break;
     }

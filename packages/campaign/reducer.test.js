@@ -2,7 +2,7 @@ import deepFreeze from 'deep-freeze';
 import { LOCATION_CHANGE } from 'connected-react-router';
 import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 import { actionTypes as queueActionTypes } from '@bufferapp/publish-queue/reducer';
-import { campaignParser } from '@bufferapp/publish-server/parsers/src';
+import { campaignParser } from '@bufferapp/publish-server/parsers';
 import reducer, { actions, initialState, actionTypes } from './reducer';
 
 describe('reducer', () => {

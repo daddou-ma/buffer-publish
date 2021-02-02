@@ -1,4 +1,4 @@
-import { getURL } from '@bufferapp/publish-server/formatters/src';
+import { getURL } from '@bufferapp/publish-server/formatters';
 import ZendeskWidget from '@bufferapp/publish-thirdparty/zendesk-widget';
 
 const helpMenuItems = t => {

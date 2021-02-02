@@ -5,7 +5,7 @@ import { Text, Input, Button, Link } from '@bufferapp/ui';
 import { SimpleColorPicker } from '@bufferapp/publish-shared-components';
 import { borderRadius } from '@bufferapp/ui/style/borders';
 import { View } from '@bufferapp/ui/Icon';
-import { getURL } from '@bufferapp/publish-server/formatters/src';
+import { getURL } from '@bufferapp/publish-server/formatters';
 import { useTranslation } from 'react-i18next';
 import {
   grayLight,

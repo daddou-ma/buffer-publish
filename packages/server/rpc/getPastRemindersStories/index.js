@@ -1,7 +1,7 @@
 const { method } = require('@bufferapp/buffer-rpc');
 const rp = require('request-promise');
-const { storyGroupParser } = require('./../../parsers/src');
-const { buildPostMap } = require('./../../formatters/src');
+const { storyGroupParser } = require('./../../parsers');
+const { buildPostMap } = require('./../../formatters');
 
 module.exports = method(
   'getPastRemindersStories',

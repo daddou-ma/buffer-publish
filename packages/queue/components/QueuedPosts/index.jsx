@@ -12,7 +12,6 @@ import LockedProfileNotification from '@bufferapp/publish-locked-profile-notific
 import ProfilesDisconnectedBanner from '@bufferapp/publish-profiles-disconnected-banner';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 
-import InstagramDirectPostingBanner from '../InstagramDirectPostingBanner';
 import QueuePausedBar from '../QueuePausedBar';
 import RemindersBanner from '../RemindersBanner';
 
@@ -54,10 +53,6 @@ const QueuedPosts = ({
   draggingEnabled,
   onUnpauseClick,
   subprofiles,
-  isInstagramProfile,
-  isInstagramBusiness,
-  onDirectPostingClick,
-  isInstagramLoading,
   isLockedProfile,
   shouldDisplayDisconnectedBanner,
   isManager,
@@ -69,7 +64,7 @@ const QueuedPosts = ({
   hasCampaignsFeature,
   hasCalendarFeature,
   shouldDisplaySingleSlots,
-  preserveComposerStateOnClose,
+  shouldResetComposerData,
   shouldDisplayRemindersBanner,
   shouldDisplayTimezone,
   profileTimezone,
@@ -79,14 +74,6 @@ const QueuedPosts = ({
     return (
       <div style={loadingContainerStyle}>
         <BufferLoading size={64} />
-      </div>
-    );
-  }
-
-  if (isInstagramLoading) {
-    return (
-      <div style={loadingContainerStyle}>
-        <BufferLoading size={64} fullscreen dark />
       </div>
     );
   }
@@ -106,7 +93,8 @@ const QueuedPosts = ({
           {showComposer && !editMode && (
             <ComposerPopover
               onSave={onComposerCreateSuccess}
-              preserveComposerStateOnClose={preserveComposerStateOnClose}
+              preserveComposerStateOnClose
+              shouldResetComposerData={shouldResetComposerData}
               type="queue"
               onComposerOverlayClick={onComposerOverlayClick}
               editMode={editMode}
@@ -118,11 +106,6 @@ const QueuedPosts = ({
           />
         </div>
       </div>
-      {isInstagramProfile && !isInstagramBusiness && (
-        <InstagramDirectPostingBanner
-          onDirectPostingClick={onDirectPostingClick}
-        />
-      )}
       {!!paused && (
         <QueuePausedBar
           isManager={isManager}
@@ -207,12 +190,8 @@ QueuedPosts.propTypes = {
   draggingEnabled: PropTypes.bool,
   onUnpauseClick: PropTypes.func.isRequired,
   isManager: PropTypes.bool,
-  isInstagramProfile: PropTypes.bool,
-  isInstagramBusiness: PropTypes.bool,
   hasPushNotifications: PropTypes.bool,
   shouldDisplayRemindersBanner: PropTypes.bool,
-  onDirectPostingClick: PropTypes.func.isRequired,
-  isInstagramLoading: PropTypes.bool,
   isLockedProfile: PropTypes.bool,
   shouldDisplayDisconnectedBanner: PropTypes.bool,
   hasFirstCommentFlip: PropTypes.bool,
@@ -238,11 +217,8 @@ QueuedPosts.defaultProps = {
   editMode: false,
   paused: false,
   subprofiles: [],
-  isInstagramProfile: false,
-  isInstagramBusiness: false,
   hasPushNotifications: true,
   shouldDisplayRemindersBanner: false,
-  isInstagramLoading: false,
   isLockedProfile: false,
   shouldDisplayDisconnectedBanner: false,
   hasFirstCommentFlip: false,
