@@ -1,6 +1,6 @@
 const moment = require('moment-timezone');
 const postParser = require('./postParser');
-const { getDateString } = require('../../formatters/src/date');
+const { getDateString } = require('../formatters/date');
 
 const parseLastUpdated = updatedAt => {
   const updatedDate = new Date(updatedAt * 1000);

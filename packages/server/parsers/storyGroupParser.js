@@ -1,4 +1,4 @@
-const { getDateString, isInThePast } = require('../../formatters/src');
+const { getDateString, isInThePast } = require('../formatters');
 
 const getStoryAction = ({ scheduledAt, timezone, options }) => {
   const dateString = getDateString(scheduledAt, timezone, options);

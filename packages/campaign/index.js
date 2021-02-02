@@ -7,7 +7,7 @@ import {
   campaignScheduled,
   campaignCreate,
 } from '@bufferapp/publish-routes';
-import { getURL } from '@bufferapp/publish-server/formatters/src';
+import { getURL } from '@bufferapp/publish-server/formatters';
 import { actions } from './reducer';
 import ViewCampaign from './components/ViewCampaign';
 

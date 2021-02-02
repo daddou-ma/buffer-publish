@@ -1,5 +1,5 @@
 import RPCEndpoint from '.';
-import parsers from '../../../parsers/src';
+import parsers from '../../../parsers';
 import CAMPAIGNS_LIST from './listMock';
 
 const session = {

@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import {
   getDateString,
   isInThePast,
-} from '@bufferapp/publish-server/formatters/src';
+} from '@bufferapp/publish-server/formatters';
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 import { actions as modalsActions } from '@bufferapp/publish-modals/reducer';
 

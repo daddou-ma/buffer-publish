@@ -5,7 +5,7 @@ import {
   organization,
 } from '@bufferapp/publish-routes';
 import { actions as modalActions } from '@bufferapp/publish-modals';
-import { getURL } from '@bufferapp/publish-server/formatters/src';
+import { getURL } from '@bufferapp/publish-server/formatters';
 import { getOrgsAlfabeticalOrder } from '@bufferapp/publish-data-organizations/utils/';
 
 import { actions } from './reducer';

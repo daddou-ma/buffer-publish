@@ -1,4 +1,4 @@
-import postParser from '../src/postParser';
+import postParser from './postParser';
 
 describe('post parser', () => {
   describe('retweets', () => {

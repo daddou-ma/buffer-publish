@@ -1,7 +1,7 @@
 const { method } = require('@bufferapp/buffer-rpc');
 const rp = require('request-promise');
-const { postParser } = require('./../../parsers/src');
-const { buildPostMap } = require('./../../formatters/src');
+const { postParser } = require('./../../parsers');
+const { buildPostMap } = require('./../../formatters');
 
 module.exports = method(
   'shuffleQueue',

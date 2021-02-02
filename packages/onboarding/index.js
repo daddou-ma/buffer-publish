@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { getURL } from '@bufferapp/publish-server/formatters/src';
+import { getURL } from '@bufferapp/publish-server/formatters';
 import { getConnectDirectURLs } from '@bufferapp/publish-profile-sidebar/utils';
 import { actions } from './reducer';
 

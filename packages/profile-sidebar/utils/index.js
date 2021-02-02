@@ -1,4 +1,4 @@
-import { getURL } from '@bufferapp/publish-server/formatters/src';
+import { getURL } from '@bufferapp/publish-server/formatters';
 
 function isADifferentProfile(profile, prevProps) {
   return profile.id !== prevProps.profileId;

@@ -1,6 +1,6 @@
 import deepFreeze from 'deep-freeze';
 import { actionTypes as campaignActionTypes } from '@bufferapp/publish-campaign';
-import { campaignParser } from '@bufferapp/publish-server/parsers/src';
+import { campaignParser } from '@bufferapp/publish-server/parsers';
 import reducer, { actions, initialState, actionTypes } from './reducer';
 
 describe('reducer', () => {

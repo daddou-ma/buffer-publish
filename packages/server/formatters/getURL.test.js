@@ -1,5 +1,5 @@
 import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
-import getURL from '../src/getURL';
+import getURL from './getURL';
 
 describe('getURL', () => {
   const { IG_FIRST_COMMENT_PRO_TRIAL } = SEGMENT_NAMES;

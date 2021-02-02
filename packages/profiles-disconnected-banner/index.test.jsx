@@ -5,7 +5,7 @@ import {
   render,
   screen,
 } from '@bufferapp/publish-test-utils/utils/custom-render';
-import { getURL } from '@bufferapp/publish-server/formatters/src';
+import { getURL } from '@bufferapp/publish-server/formatters';
 import userEvent from '@testing-library/user-event';
 import translations from '@bufferapp/publish-i18n/translations/en-us.json';
 import ProfilesDisconnectedBanner from './index';

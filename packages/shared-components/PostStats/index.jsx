@@ -5,7 +5,7 @@ import { Tooltip } from '@bufferapp/ui';
 import InfoIcon from '@bufferapp/ui/Icon/Icons/Info';
 import { borderWidth } from '@bufferapp/components/style/border';
 import { SERVICE_NAMES } from '@bufferapp/publish-constants';
-import { abbreviateNumber } from '@bufferapp/publish-server/formatters/src';
+import { abbreviateNumber } from '@bufferapp/publish-server/formatters';
 import styled from 'styled-components';
 import { gray, grayDark, grayLight } from '@bufferapp/ui/style/colors';
 

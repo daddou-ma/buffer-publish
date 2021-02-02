@@ -29,7 +29,6 @@ import manageAppsMiddleware from '@bufferapp/manage-apps-extras/middleware';
 import twoFactorAuthMiddleware from '@bufferapp/publish-two-factor-auth/middleware';
 import dateTimePreferencesMiddleware from '@bufferapp/date-time-preferences/middleware';
 import maintenanceRedirectMiddleware from '@bufferapp/maintenance-redirect/middleware';
-import instagramDirectPostingModalMiddleware from '@bufferapp/publish-ig-direct-posting-modal/middleware';
 import notificationsProviderMiddleware from '@bufferapp/publish-notifications-provider/middleware';
 import profilesDisconnectedModalMiddleware from '@bufferapp/publish-profiles-disconnected-modal/middleware';
 import accountNotificationsMiddleware from '@bufferapp/publish-account-notifications/middleware';
@@ -90,7 +89,6 @@ const composedMiddlewares = history =>
       modalsMiddleware,
       twoFactorAuthMiddleware,
       dateTimePreferencesMiddleware,
-      instagramDirectPostingModalMiddleware,
       maintenanceRedirectMiddleware,
       draftsMiddleware,
       notificationsProviderMiddleware,

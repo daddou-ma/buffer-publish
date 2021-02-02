@@ -1,4 +1,4 @@
-import abbreviateNumber from '../src/abbreviateNumber';
+import abbreviateNumber from './abbreviateNumber';
 
 describe('number', () => {
   it('should abbreviate number with 1 decimal place', () => {

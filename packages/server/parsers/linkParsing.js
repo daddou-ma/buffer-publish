@@ -30,21 +30,24 @@ module.exports = {
             rawString: entity.url,
             url: entity.url,
           };
-        } else if (entity.hashtag) {
+        }
+        if (entity.hashtag) {
           return {
             displayString: `#${entity.hashtag}`,
             indices: entity.indices,
             rawString: `#${entity.hashtag}`,
             url: `https://twitter.com/#!/search?q=%23${entity.hashtag}`,
           };
-        } else if (entity.screenName) {
+        }
+        if (entity.screenName) {
           return {
             displayString: `@${entity.screenName}`,
             indices: entity.indices,
             rawString: `@${entity.screenName}`,
             url: `https://twitter.com/${entity.screenName}`,
           };
-        } else if (entity.cashtag) {
+        }
+        if (entity.cashtag) {
           return {
             displayString: `$${entity.cashtag}`,
             indices: entity.indices,
