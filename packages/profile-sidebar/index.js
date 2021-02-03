@@ -15,18 +15,32 @@ const reorderProfilesByUnlocked = profiles =>
   // orders unlocked profiles first, followed by locked
   profiles.sort((a, b) => a.disabled - b.disabled);
 
+const getEnabledProfiles = profiles =>
+  profiles.filter(profile => !profile.disabled);
+
 export default hot(
   connect(
     (state, ownProps) => {
       const cta = 'publish-app-sidebar-addProfile-1';
-      const { shouldRedirectToAccountChannels } = state.globalAccount;
+      const {
+        shouldRedirectToAccountChannels,
+        isLoadingGlobalAccount,
+      } = state.globalAccount;
       const accountChannelsURL =
         shouldRedirectToAccountChannels && getURL.getAccountChannelsURL();
+
+      const shouldHideLockedChannels =
+        shouldRedirectToAccountChannels || isLoadingGlobalAccount;
+
+      const profiles = shouldHideLockedChannels
+        ? getEnabledProfiles(state.profileSidebar.profiles)
+        : reorderProfilesByUnlocked(state.profileSidebar.profiles);
+
       return {
         loading: state.profileSidebar.loading,
         selectedProfile: state.profileSidebar.selectedProfile,
         selectedProfileId: ownProps.profileId,
-        profiles: reorderProfilesByUnlocked(state.profileSidebar.profiles),
+        profiles,
         translations: state.i18n.translations['profile-sidebar'],
         profileLimit: state.organizations.selected?.profileLimit,
         hasInstagram: state.profileSidebar.hasInstagram,
@@ -50,6 +64,7 @@ export default hot(
           accountChannelsURL || getURL.getManageSocialAccountURL(),
         connectChannelsURL:
           accountChannelsURL || getURL.getConnectSocialAccountURL(),
+        shouldHideLockedChannels,
       };
     },
     (dispatch, ownProps) => ({
