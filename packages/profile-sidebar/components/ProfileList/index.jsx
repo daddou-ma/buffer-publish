@@ -2,12 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ProfileListItem from '../ProfileListItem';
 
-const ProfileList = ({
-  profiles,
-  selectedProfileId,
-  onProfileClick,
-  profileLimit,
-}) =>
+const ProfileList = ({ profiles, selectedProfileId, onProfileClick }) =>
   profiles.map((profile, index) => (
     <ProfileListItem
       avatarUrl={profile.avatarUrl}
@@ -17,7 +12,6 @@ const ProfileList = ({
       selected={profile.id === selectedProfileId}
       disconnected={profile.isDisconnected}
       onClick={() => onProfileClick(profile)}
-      profileLimit={profileLimit}
       id={profile.id}
       index={index}
       key={profile.id}

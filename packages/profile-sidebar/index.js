@@ -11,6 +11,9 @@ import ProfileSidebar from './components/ProfileSidebar';
 import { shouldGoToProfile, getConnectDirectURLs } from './utils';
 import { actions } from './reducer';
 
+const getEnabledProfiles = profiles =>
+  profiles.filter(profile => !profile.disabled);
+
 export default hot(
   connect(
     (state, ownProps) => {
@@ -22,7 +25,7 @@ export default hot(
         loading: state.profileSidebar.loading,
         selectedProfile: state.profileSidebar.selectedProfile,
         selectedProfileId: ownProps.profileId,
-        profiles: state.profileSidebar.profiles,
+        profiles: getEnabledProfiles(state.profileSidebar.profiles),
         translations: state.i18n.translations['profile-sidebar'],
         profileLimit: state.organizations.selected?.profileLimit,
         hasInstagram: state.profileSidebar.hasInstagram,
