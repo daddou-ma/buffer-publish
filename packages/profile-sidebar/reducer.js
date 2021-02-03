@@ -145,7 +145,7 @@ const profilesReducer = (state = [], action) => {
   }
 };
 
-const getEnabledProfiles = profiles =>
+export const getEnabledProfiles = profiles =>
   profiles.filter(profile => !profile.disabled);
 
 export default (state = initialState, action) => {
