@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { QueueItems, Nav, NavLink } from '@bufferapp/publish-shared-components';
 import { campaignScheduled, campaignSent } from '@bufferapp/publish-routes';
 import ComposerPopover from '@bufferapp/publish-composer-popover';
-import { getURL } from '@bufferapp/publish-server/formatters/src';
+import { getURL } from '@bufferapp/publish-server/formatters';
 import { useTranslation } from 'react-i18next';
 import Header from './Header';
 import SkeletonPosts from './SkeletonPosts';

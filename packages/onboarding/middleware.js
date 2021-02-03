@@ -1,5 +1,4 @@
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
-import { getURL } from '@bufferapp/publish-server/formatters/src';
 import { actionTypes } from './reducer';
 
 export default ({ dispatch }) => next => action => {
@@ -15,12 +14,6 @@ export default ({ dispatch }) => next => action => {
           },
         })
       );
-      break;
-    case actionTypes.MANAGE_SOCIAL_ACCOUNT:
-      window.location = getURL.getManageSocialAccountURL();
-      break;
-    case actionTypes.CONNECT_SOCIAL_ACCOUNT_SIDEBAR:
-      window.location = getURL.getConnectSocialAccountURL();
       break;
     default:
       break;

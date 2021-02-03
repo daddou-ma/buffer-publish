@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Buffer Publish</title>
+  <title>Buffer</title>
   <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
   <link rel="preconnect" href="https://stats.pusher.com/">
   <link rel="preconnect" href="//icons.buffer.com/" crossorigin>
@@ -140,7 +140,7 @@
       color: #168eea;
     }
   </style>
-  
+
   <!-- Datadog RUM (Front-end Metrics) -->
   <% if (process.env.NODE_ENV === 'production') { %>
   <script src="https://www.datadoghq-browser-agent.com/datadog-rum-us.js"></script>
@@ -194,7 +194,7 @@
       <div style="position: absolute; inset: 0px; background-color: rgba(50, 59, 67, 0.8); z-index: 2000; opacity: 1;"></div>
     </div>
   </div>
-  
+
   <script type="text/javascript">
     var isIE11orLower = window.navigator.userAgent.match(/(MSIE|Trident)/);
     if (isIE11orLower) {
@@ -202,18 +202,18 @@
       message.style.display = 'block';
     }
   </script>
-  
+
   <!-- AppCues: P -->
   <% if (process.env.NODE_ENV === 'production') { %>
   <script id="appcues-js" src="//fast.appcues.com/49463.js" async></script>
   <% } %>
-  
+
   <!-- Stripe: A -->
   <script id="stripe-js" src="https://js.stripe.com/v3/" async></script>
   <script type="text/javascript">
     window.STRIPE_PUBLISHABLE_KEY = '<%= process.env.STRIPE_PUBLISHABLE_KEY %>';
   </script>
-  
+
   <!-- Segment: A -->
   <script>
     window.PRODUCT_TRACKING_KEY = 'publish';

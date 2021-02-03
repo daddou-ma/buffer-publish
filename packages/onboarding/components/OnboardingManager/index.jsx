@@ -9,8 +9,9 @@ const OnboardingManager = ({
   profileLimit,
   onConnectSocialAccountOnboardingClick,
   onSkipStep,
-  onManageSocialAccountClick,
-  onConnectSocialAccountSidebarClick,
+  manageChannelsURL,
+  connectChannelsURL,
+  connectDirectURLs,
   translations,
 }) => (
   <>
@@ -19,6 +20,7 @@ const OnboardingManager = ({
         onConnectSocialAccountClick={onConnectSocialAccountOnboardingClick}
         onSkipStep={onSkipStep}
         translations={translations}
+        connectURLs={connectDirectURLs}
       />
     )}
     {!canSeeOnboardingPage && (
@@ -26,8 +28,9 @@ const OnboardingManager = ({
         showUpgradeToProCta={showUpgradeToProCta}
         profileLimit={profileLimit}
         translations={translations}
-        onManageSocialAccountClick={onManageSocialAccountClick}
-        goToConnectSocialAccount={onConnectSocialAccountSidebarClick}
+        manageChannelsURL={manageChannelsURL}
+        connectChannelsURL={connectChannelsURL}
+        connectDirectURLs={connectDirectURLs}
       />
     )}
   </>
@@ -38,8 +41,8 @@ OnboardingManager.propTypes = {
   profileLimit: PropTypes.number.isRequired,
   onConnectSocialAccountOnboardingClick: PropTypes.func.isRequired,
   onSkipStep: PropTypes.func.isRequired,
-  onManageSocialAccountClick: PropTypes.func.isRequired,
-  onConnectSocialAccountSidebarClick: PropTypes.func.isRequired,
+  manageChannelsURL: PropTypes.string.isRequired,
+  connectChannelsURL: PropTypes.string.isRequired,
   canSeeOnboardingPage: PropTypes.bool.isRequired,
   translations: PropTypes.shape({
     title: PropTypes.string,
@@ -54,6 +57,13 @@ OnboardingManager.propTypes = {
     name: PropTypes.string,
     role: PropTypes.string,
     company: PropTypes.string,
+  }).isRequired,
+  connectDirectURLs: PropTypes.shape({
+    facebook: PropTypes.string,
+    instagram: PropTypes.string,
+    twitter: PropTypes.string,
+    linkedin: PropTypes.string,
+    pinterest: PropTypes.string,
   }).isRequired,
 };
 

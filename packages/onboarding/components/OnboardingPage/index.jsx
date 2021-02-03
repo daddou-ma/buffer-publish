@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Text, ProgressBar, SocialButton } from '@bufferapp/ui';
-import { getURL } from '@bufferapp/publish-server/formatters/src';
 
 import {
   Wrapper,
@@ -24,11 +23,11 @@ import {
   Footer,
 } from './style';
 
-const handleConnectSocialAccountClick = (
+const handleConnectSocialAccountClick = ({
   channel,
   url,
-  onConnectSocialAccountClick
-) => {
+  onConnectSocialAccountClick,
+}) => {
   if (channel === 'instagram') {
     /**
      * This silly looking code loads an 'img' with the
@@ -52,6 +51,7 @@ const OnboardingPage = ({
   onConnectSocialAccountClick,
   translations,
   onSkipStep,
+  connectURLs,
 }) => (
   <Wrapper>
     <LeftColumn>
@@ -71,56 +71,56 @@ const OnboardingPage = ({
             <SocialButton
               channel="instagram"
               onClick={() =>
-                handleConnectSocialAccountClick(
-                  'instagram',
-                  `https://${getURL.getBaseURL()}/oauth/instagram/choose_business?cta=publish-app-onboarding-addProfile-1`,
-                  onConnectSocialAccountClick
-                )
+                handleConnectSocialAccountClick({
+                  channel: 'instagram',
+                  url: connectURLs.instagram,
+                  onConnectSocialAccountClick,
+                })
               }
             />
             <SocialButton
               channel="facebook"
               onClick={() =>
-                handleConnectSocialAccountClick(
-                  'facebook',
-                  `https://${getURL.getBaseURL()}/oauth/facebook/choose?cta=publish-app-onboarding-addProfile-1`,
-                  onConnectSocialAccountClick
-                )
+                handleConnectSocialAccountClick({
+                  channel: 'facebook',
+                  url: connectURLs.facebook,
+                  onConnectSocialAccountClick,
+                })
               }
             />
             <SocialButton
               channel="twitter"
               onClick={() =>
-                handleConnectSocialAccountClick(
-                  'twitter',
-                  `https://${getURL.getBaseURL()}/oauth/twitter?cta=publish-app-onboarding-addProfile-1`,
-                  onConnectSocialAccountClick
-                )
+                handleConnectSocialAccountClick({
+                  channel: 'twitter',
+                  url: connectURLs.twitter,
+                  onConnectSocialAccountClick,
+                })
               }
             />
           </SocialButtonWrapper>
           <TextWithStyles type="p">
             {translations.cta1}
             <LinkWithStyles
-              type="link"
+              type="text"
               onClick={() =>
-                handleConnectSocialAccountClick(
-                  'linkedin',
-                  `https://${getURL.getBaseURL()}/oauth/linkedin?cta=publish-app-onboarding-addProfile-1`,
-                  onConnectSocialAccountClick
-                )
+                handleConnectSocialAccountClick({
+                  channel: 'linkedin',
+                  url: connectURLs.linkedin,
+                  onConnectSocialAccountClick,
+                })
               }
               label={translations.ctaChannel1}
             />
             {translations.cta2}
             <LinkWithStyles
-              type="link"
+              type="text"
               onClick={() =>
-                handleConnectSocialAccountClick(
-                  'pinterest',
-                  `https://${getURL.getBaseURL()}/oauth/pinterest?cta=publish-app-onboarding-addProfile-1`,
-                  onConnectSocialAccountClick
-                )
+                handleConnectSocialAccountClick({
+                  channel: 'pinterest',
+                  url: connectURLs.pinterest,
+                  onConnectSocialAccountClick,
+                })
               }
               label={translations.ctaChannel2}
             />
@@ -157,6 +157,13 @@ const OnboardingPage = ({
 OnboardingPage.propTypes = {
   onConnectSocialAccountClick: PropTypes.func.isRequired,
   onSkipStep: PropTypes.func.isRequired,
+  connectURLs: PropTypes.shape({
+    facebook: PropTypes.string,
+    instagram: PropTypes.string,
+    twitter: PropTypes.string,
+    linkedin: PropTypes.string,
+    pinterest: PropTypes.string,
+  }).isRequired,
   translations: PropTypes.shape({
     title: PropTypes.string,
     description: PropTypes.string,

@@ -2,7 +2,7 @@ import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch
 import { actionTypes as profileSidebarActionTypes } from '@bufferapp/publish-profile-sidebar/reducer';
 import { actionTypes as draftActionTypes } from '@bufferapp/publish-drafts/reducer';
 import { actionTypes as orgActionTypes } from '@bufferapp/publish-data-organizations';
-import { postParser } from '@bufferapp/publish-server/parsers/src';
+import { postParser } from '@bufferapp/publish-server/parsers';
 import keyWrapper from '@bufferapp/keywrapper';
 
 export const actionTypes = keyWrapper('QUEUE', {
@@ -30,8 +30,6 @@ export const initialState = {
   editMode: false,
   emptySlotMode: false,
   editingPostId: '',
-  isBusinessOnInstagram: null,
-  isInstagramLoading: false,
 };
 
 const profileInitialState = {
@@ -74,13 +72,6 @@ const getPostUpdateId = action => {
   if (action.draft) {
     return action.draft.id;
   }
-};
-
-const handleInstagramLoading = action => {
-  if (action.args.recheck && action.result.is_business) {
-    return true;
-  }
-  return false;
 };
 
 /**
@@ -369,28 +360,10 @@ export default (state = initialState, action) => {
       }
       return state;
     }
-    case `checkInstagramBusiness_${dataFetchActionTypes.FETCH_START}`:
-      return {
-        ...state,
-        isInstagramLoading: true,
-      };
-    case `checkInstagramBusiness_${dataFetchActionTypes.FETCH_SUCCESS}`:
-      return {
-        ...state,
-        isBusinessOnInstagram: action.result.is_business,
-        isInstagramLoading: handleInstagramLoading(action),
-      };
-    case `checkInstagramBusiness_${dataFetchActionTypes.FETCH_FAIL}`:
-      return {
-        ...state,
-        isBusinessOnInstagram: false,
-        isInstagramLoading: false,
-      };
-
     case orgActionTypes.ORGANIZATION_SELECTED:
       return {
         ...state,
-        preserveComposerStateOnClose: false,
+        shouldResetComposerData: true,
       };
 
     case actionTypes.OPEN_COMPOSER:
@@ -405,7 +378,7 @@ export default (state = initialState, action) => {
     case actionTypes.HIDE_COMPOSER:
       return {
         ...state,
-        preserveComposerStateOnClose: true,
+        shouldResetComposerData: false,
         showComposer: false,
         editMode: false,
         emptySlotMode: false,

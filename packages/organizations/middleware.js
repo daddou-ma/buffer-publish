@@ -66,7 +66,6 @@ export default ({ dispatch, getState }) => next => action => {
         organizations: list,
       });
       const selectedOrg = getSelectedOrganization(listMapped);
-
       // Select the org
       dispatch({
         type: actionTypes.ORGANIZATION_SELECTED,

@@ -53,29 +53,6 @@ describe('Modals | reducer', () => {
         reducer(stateWithVisibleModal, actions.hideStealProfileModal())
       ).toEqual(Object.assign(initialState, { showStealProfileModal: false }));
     });
-    it('should show instagram direct posting modal', () => {
-      expect(
-        reducer(
-          initialState,
-          actions.showInstagramDirectPostingModal({ profileId: 'id1' })
-        )
-      ).toEqual(
-        Object.assign(initialState, { showInstagramDirectPostingModal: true })
-      );
-    });
-    it('should hide instagram direct posting modal', () => {
-      const stateWithVisibleModal = Object.assign(initialState, {
-        showInstagramDirectPostingModal: true,
-      });
-      expect(
-        reducer(
-          stateWithVisibleModal,
-          actions.hideInstagramDirectPostingModal()
-        )
-      ).toEqual(
-        Object.assign(initialState, { showInstagramDirectPostingModal: false })
-      );
-    });
     it('should show profiles disconnected modal', () => {
       expect(
         reducer(initialState, actions.showProfilesDisconnectedModal())
@@ -122,7 +99,10 @@ describe('Modals | reducer', () => {
     });
     it('should show close composer confirmation modal', () => {
       expect(
-        reducer(initialState, actions.showCloseComposerConfirmationModal({ page: 'queue' }))
+        reducer(
+          initialState,
+          actions.showCloseComposerConfirmationModal({ page: 'queue' })
+        )
       ).toEqual(
         Object.assign(initialState, {
           showCloseComposerConfirmationModal: true,

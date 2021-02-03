@@ -1,4 +1,4 @@
-import { getURL } from '@bufferapp/publish-server/formatters/src';
+import { getURL } from '@bufferapp/publish-server/formatters';
 import { actions as notification } from '@bufferapp/notifications';
 import {
   actions as asyncDataFetchActions,

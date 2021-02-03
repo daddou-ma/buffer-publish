@@ -4,7 +4,6 @@ import { Divider } from '@bufferapp/components';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 import ProfilesDisconnectedBanner from '@bufferapp/publish-profiles-disconnected-banner';
-import InstagramDirectPosting from '../InstagramDirectPosting';
 import LinkShortening from '../LinkShortening';
 import GoogleAnalytics from '../GoogleAnalytics';
 import InstagramReminders from '../InstagramReminders';
@@ -29,7 +28,6 @@ const GeneralSettings = ({
   onDisconnectBitlyURLClick,
   isManager,
   hasBitlyFeature,
-  onDirectPostingClick,
   utmCampaign,
   onChangeUtmCampaign,
   utmSource,
@@ -55,9 +53,6 @@ const GeneralSettings = ({
     <ErrorBoundary>
       {isDisconnectedProfile && <ProfilesDisconnectedBanner />}
       <div>
-        {isInstagramProfile && !isInstagramBusiness && (
-          <InstagramDirectPosting onDirectPostingClick={onDirectPostingClick} />
-        )}
         {isInstagramProfile && isInstagramBusiness && (
           <InstagramReminders
             remindersAreEnabled={remindersAreEnabled}
@@ -163,7 +158,6 @@ GeneralSettings.propTypes = {
   onToggleGoogleAnalyticsClick: PropTypes.func.isRequired,
   onSaveGATrackingSettingsClick: PropTypes.func.isRequired,
   hasBitlyFeature: PropTypes.bool.isRequired,
-  onDirectPostingClick: PropTypes.func.isRequired,
   utmCampaign: PropTypes.string,
   onChangeUtmCampaign: PropTypes.func.isRequired,
   utmSource: PropTypes.string,

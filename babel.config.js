@@ -1,4 +1,11 @@
 module.exports = function(api) {
+  // Ignore babel config for Cypress runner
+  // workaround from https://github.com/cypress-io/cypress/issues/2945
+  if (api.cache.using(() => process.env.CYPRESS_INTERNAL_ENV)) {
+    return {};
+  }
+  // ---
+
   api.cache(true);
 
   return {

@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { EmptyState } from '@bufferapp/publish-shared-components';
-import { getURL } from '@bufferapp/publish-server/formatters/src';
 import { useTranslation } from 'react-i18next';
 
 const Container = styled.div`
@@ -18,7 +17,12 @@ const EmptyStateWrapper = styled.div`
   margin-top: 10vh;
 `;
 
-const DefaultPage = ({ orgName, ownerEmail, showPermissionsEmptyPage }) => {
+const DefaultPage = ({
+  orgName,
+  ownerEmail,
+  showPermissionsEmptyPage,
+  connectURL,
+}) => {
   const { t } = useTranslation();
   return (
     <Container>
@@ -46,7 +50,7 @@ const DefaultPage = ({ orgName, ownerEmail, showPermissionsEmptyPage }) => {
             primaryAction={{
               label: t('default-page.connectButton'),
               onClick: () => {
-                window.location.assign(getURL.getConnectSocialAccountURL());
+                window.location.assign(connectURL);
               },
             }}
           />
@@ -60,6 +64,7 @@ DefaultPage.propTypes = {
   orgName: PropTypes.string,
   ownerEmail: PropTypes.string,
   showPermissionsEmptyPage: PropTypes.bool,
+  connectURL: PropTypes.string.isRequired,
 };
 
 DefaultPage.defaultProps = {

@@ -4,7 +4,6 @@ import {
   actions as dataFetchActions,
   actionTypes as dataFetchActionTypes,
 } from '@bufferapp/async-data-fetch';
-import { actions as igDirectPostingActions } from '@bufferapp/publish-ig-direct-posting-modal/reducer';
 import { actions as notificationActions } from '@bufferapp/notifications';
 import { campaignScheduled, campaignSent } from '@bufferapp/publish-routes';
 import { actionTypes, actions } from './reducer';
@@ -70,30 +69,6 @@ export default ({ dispatch, getState }) => next => action => {
             message: "We've re-added this post to your queue!",
           })
         );
-      }
-      break;
-    case `checkInstagramBusiness_${dataFetchActionTypes.FETCH_SUCCESS}`:
-      if (action.args.recheck) {
-        if (action.result.is_business) {
-          dispatch(
-            igDirectPostingActions.handleSetUpDirectPostingClick({
-              profileId: action.args.profileId,
-            })
-          );
-        } else {
-          const message = `Oops! It looks like this account needs some additional setup 
-            before we can enable direct scheduling. Please refer to the guide in the banner.`;
-          dispatch(
-            notificationActions.createNotification({
-              notificationType: 'error',
-              message,
-            })
-          );
-        }
-      }
-
-      if (action.args.callbackAction) {
-        dispatch(action.args.callbackAction);
       }
       break;
     case `deletePost_${dataFetchActionTypes.FETCH_SUCCESS}`:

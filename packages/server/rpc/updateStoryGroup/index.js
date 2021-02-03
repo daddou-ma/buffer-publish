@@ -1,6 +1,6 @@
 const { method, createError } = require('@bufferapp/buffer-rpc');
 const rp = require('request-promise');
-const { storyGroupParser } = require('./../../parsers/src');
+const { storyGroupParser } = require('./../../parsers');
 
 module.exports = method(
   'updateStoryGroup',

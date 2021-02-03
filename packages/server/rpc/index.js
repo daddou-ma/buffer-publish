@@ -2,7 +2,7 @@ const { rpc } = require('@bufferapp/buffer-rpc');
 const recursiveReadDir = require('recursive-readdir');
 
 const PublishAPI = require('../publishAPI');
-const parsers = require('../parsers/src');
+const parsers = require('../parsers');
 
 async function loadMethods() {
   const methodModules = [];

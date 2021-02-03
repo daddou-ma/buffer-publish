@@ -1,7 +1,4 @@
 import { connect } from 'react-redux';
-import { profileTabPages } from '@bufferapp/publish-routes';
-import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
-import { actions as modalsActions } from '@bufferapp/publish-modals';
 import { actions } from './reducer';
 import GeneralSettings from './components/GeneralSettings';
 
@@ -32,22 +29,6 @@ export default connect(
     hasBitlyFeature: state.organizations.selected?.hasBitlyFeature,
   }),
   (dispatch, ownProps) => ({
-    onDirectPostingClick: () => {
-      dispatch(
-        profileTabPages.goTo({ profileId: ownProps.profileId, tabId: 'queue' })
-      );
-      dispatch(
-        dataFetchActions.fetch({
-          name: 'checkInstagramBusiness',
-          args: {
-            profileId: ownProps.profileId,
-            callbackAction: modalsActions.showInstagramDirectPostingModal({
-              profileId: ownProps.profileId,
-            }),
-          },
-        })
-      );
-    },
     onConnectBitlyURLClick: () => {
       dispatch(
         actions.handleConnectBitlyURLClick({

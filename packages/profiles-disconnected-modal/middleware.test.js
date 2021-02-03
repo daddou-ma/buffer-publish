@@ -4,7 +4,9 @@ import middleware from './middleware';
 describe('middleware', () => {
   const store = {
     dispatch: jest.fn(),
-    getState: () => ({}),
+    getState: () => ({
+      globalAccount: { shouldRedirectToAccountChannels: false },
+    }),
   };
   const next = jest.fn();
   window.location.assign = jest.fn();
@@ -35,6 +37,20 @@ describe('middleware', () => {
     expect(next).toBeCalled();
     expect(window.location.assign).toHaveBeenCalledWith(
       'https://local.buffer.com/oauth/reconnect/twitter-id'
+    );
+  });
+
+  it('should redirect to the account channels for a regular profile', () => {
+    const newStore = {
+      dispatch: jest.fn(),
+      getState: () => ({
+        globalAccount: { shouldRedirectToAccountChannels: true },
+      }),
+    };
+    middleware(newStore)(next)(reconnectTwitterAction);
+    expect(next).toBeCalled();
+    expect(window.location.assign).toHaveBeenCalledWith(
+      'https://account.local.buffer.com/channels'
     );
   });
 

@@ -4,7 +4,7 @@ import {
   ButtonWithSkeleton,
   TextWithSkeleton,
 } from '@bufferapp/publish-shared-components';
-import { getURL } from '@bufferapp/publish-server/formatters/src';
+import { getURL } from '@bufferapp/publish-server/formatters';
 import { borderRadius } from '@bufferapp/ui/style/borders';
 import { gray, white, grayShadow } from '@bufferapp/ui/style/colors';
 import styled from 'styled-components';
