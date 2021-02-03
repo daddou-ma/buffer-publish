@@ -102,7 +102,7 @@ const OnboardingPage = ({
           <TextWithStyles type="p">
             {translations.cta1}
             <LinkWithStyles
-              type="link"
+              type="text"
               onClick={() =>
                 handleConnectSocialAccountClick({
                   channel: 'linkedin',
@@ -114,7 +114,7 @@ const OnboardingPage = ({
             />
             {translations.cta2}
             <LinkWithStyles
-              type="link"
+              type="text"
               onClick={() =>
                 handleConnectSocialAccountClick({
                   channel: 'pinterest',
