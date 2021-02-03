@@ -15,9 +15,6 @@ const reorderProfilesByUnlocked = profiles =>
   // orders unlocked profiles first, followed by locked
   profiles.sort((a, b) => a.disabled - b.disabled);
 
-const getEnabledProfiles = profiles =>
-  profiles.filter(profile => !profile.disabled);
-
 export default hot(
   connect(
     (state, ownProps) => {
@@ -33,7 +30,7 @@ export default hot(
         shouldRedirectToAccountChannels || isLoadingGlobalAccount;
 
       const profiles = shouldHideLockedChannels
-        ? getEnabledProfiles(state.profileSidebar.profiles)
+        ? state.profileSidebar.profiles
         : reorderProfilesByUnlocked(state.profileSidebar.profiles);
 
       return {
