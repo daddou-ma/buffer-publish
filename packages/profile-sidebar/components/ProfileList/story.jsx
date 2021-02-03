@@ -25,8 +25,7 @@ storiesOf('ProfileList', module)
   .add('should display a list of profiles', () => (
     <ProfileList
       profiles={profiles}
-      selectedProfileId={'1234'}
+      selectedProfileId="1234"
       onProfileClick={action('profile click')}
-      profileLimit={3}
     />
   ));
