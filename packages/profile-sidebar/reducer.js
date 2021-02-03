@@ -163,16 +163,16 @@ export default (state = initialState, action) => {
       };
 
     case `profiles_${dataFetchActionTypes.FETCH_SUCCESS}`: {
-      const profiles = getEnabledProfiles(action.result);
+      const profileList = getEnabledProfiles(action.result);
       return {
         ...state,
         loading: false,
         loaded: true,
-        profileList: profiles,
-        profiles: filterProfilesByOrg(profiles, state.organization),
-        hasInstagram: profiles.some(p => p.service === 'instagram'),
-        hasFacebook: profiles.some(p => p.service === 'facebook'),
-        hasTwitter: profiles.some(p => p.service === 'twitter'),
+        profileList,
+        profiles: filterProfilesByOrg(profileList, state.organization),
+        hasInstagram: profileList.some(p => p.service === 'instagram'),
+        hasFacebook: profileList.some(p => p.service === 'facebook'),
+        hasTwitter: profileList.some(p => p.service === 'twitter'),
       };
     }
     case orgActionTypes.ORGANIZATION_SELECTED: {
