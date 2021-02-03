@@ -87,6 +87,9 @@ const profilesReducer = (state = [], action) => {
   }
 };
 
+const getEnabledProfiles = profiles =>
+  profiles.filter(profile => !profile.disabled);
+
 export default (state = initialState, action) => {
   let isSearchPopupVisible = false;
   let searchText = null;
@@ -102,15 +105,16 @@ export default (state = initialState, action) => {
       };
 
     case `profiles_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+      const profileList = getEnabledProfiles(action.result);
       return {
         ...state,
         loading: false,
         loaded: true,
-        profileList: action.result,
-        profiles: filterProfilesByOrg(action.result, state.organization),
-        hasInstagram: action.result.some(p => p.service === 'instagram'),
-        hasFacebook: action.result.some(p => p.service === 'facebook'),
-        hasTwitter: action.result.some(p => p.service === 'twitter'),
+        profileList,
+        profiles: filterProfilesByOrg(profileList, state.organization),
+        hasInstagram: profileList.some(p => p.service === 'instagram'),
+        hasFacebook: profileList.some(p => p.service === 'facebook'),
+        hasTwitter: profileList.some(p => p.service === 'twitter'),
       };
     }
     case orgActionTypes.ORGANIZATION_SELECTED: {
