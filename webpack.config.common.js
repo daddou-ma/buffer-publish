@@ -2,7 +2,6 @@ const path = require('path');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const HtmlRuntimePlugin = require('html-webpack-inline-runtime-plugin');
 
 const PostCSSImport = require('postcss-import');
 const PostCSSCustomProperties = require('postcss-custom-properties');
@@ -93,7 +92,6 @@ module.exports = {
       inject: true,
       favicon: PATH_FAVICON,
     }),
-    new HtmlRuntimePlugin(),
   ],
   optimization: {
     moduleIds: 'hashed',

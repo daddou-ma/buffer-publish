@@ -56,6 +56,7 @@ const merged = merge.strategy({
       NODE_ENV: 'development',
       STRIPE_PUBLISHABLE_KEY: 'pk_dGKqAIFsUQonSYGPBM9Rek71IHOcL',
       SEGMENT_KEY: 'qsP2UfgODyoJB3px9SDkGX5I6wDtdQ6a',
+      GRAPHQL_API: 'https://graph.local.buffer.com',
     }),
   ],
   resolve: {
