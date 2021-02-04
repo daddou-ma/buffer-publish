@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
@@ -16,7 +16,7 @@ import Preferences from '@bufferapp/publish-preferences';
 import Plans from '@bufferapp/publish-plans';
 import DefaultPage from '@bufferapp/default-page';
 import OnboardingManager from '@bufferapp/publish-onboarding';
-import { UserContext, useOrgSwitcher } from '@bufferapp/app-shell';
+import { useUser, useOrgSwitcher } from '@bufferapp/app-shell';
 
 const AppPages = ({
   unfilteredProfiles,
@@ -26,7 +26,7 @@ const AppPages = ({
   orgIdFromRoute,
 }) => {
   // Get current selected org from appshell
-  const user = useContext(UserContext);
+  const user = useUser();
   const selectedOrgId = user?.currentOrganization?.id;
   const currentOrgId = orgIdFromRoute || selectedOrgId;
   const needsToSetNewCurrentOrg = selectedOrgId !== orgIdFromRoute;
