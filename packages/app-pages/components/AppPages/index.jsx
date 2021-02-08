@@ -28,8 +28,10 @@ const AppPages = ({
   // Get current selected org from appshell
   const user = useUser();
   const selectedOrgId = user?.currentOrganization?.id;
+
+  // se nesta altura não houver resposta do pedido de graphql isto lixa-se tudo
   const currentOrgId = orgIdFromRoute || selectedOrgId;
-  const needsToSetNewCurrentOrg = selectedOrgId !== currentOrgId;
+  const needsToSetNewCurrentOrg = selectedOrgId !== orgIdFromRoute;
 
   // Filters profiles by current org selected
   const profiles = filterProfilesByOrg(unfilteredProfiles, {
@@ -37,6 +39,7 @@ const AppPages = ({
   });
 
   console.log({
+    user,
     selectedOrgId,
     currentOrgId,
     orgIdFromRoute,
@@ -55,9 +58,6 @@ const AppPages = ({
           setCurrentOrganization(currentOrgId);
         },
       });
-    } else {
-      console.log('same org', selectedOrgId);
-      setCurrentOrganization(selectedOrgId);
     }
   }, [currentOrgId]);
 
