@@ -29,7 +29,7 @@ const AppPages = ({
   const user = useUser();
   const selectedOrgId = user?.currentOrganization?.id;
   const currentOrgId = orgIdFromRoute || selectedOrgId;
-  const needsToSetNewCurrentOrg = selectedOrgId !== orgIdFromRoute;
+  const needsToSetNewCurrentOrg = selectedOrgId !== currentOrgId;
 
   // Filters profiles by current org selected
   const profiles = filterProfilesByOrg(unfilteredProfiles, {
@@ -47,7 +47,7 @@ const AppPages = ({
         },
       });
     } else {
-      console.log('same org');
+      console.log('same org', selectedOrgId);
       setCurrentOrganization(selectedOrgId);
     }
   }, [currentOrgId]);

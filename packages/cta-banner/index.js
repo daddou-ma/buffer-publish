@@ -6,8 +6,8 @@ import BillingUpdateCTABanner from './components/BillingUpgradeCTABanner';
 export default connect(
   state => ({
     trial: state.organizations?.selected?.trial,
-    plan: state.organizations?.selected.plan,
-    planBase: state.organizations?.selected.planBase,
+    plan: state.organizations?.selected?.plan,
+    planBase: state.organizations?.selected?.planBase,
     canSeeBillingInfo: state.organizations?.selected?.canSeeBillingInfo,
     profileCount: state.organizations?.selected?.profilesCount,
   }),

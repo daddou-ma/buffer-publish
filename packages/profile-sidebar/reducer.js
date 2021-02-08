@@ -20,6 +20,7 @@ export const initialState = {
   profiles: [],
   profileList: [],
   selectedProfileId: '',
+  organization: null,
   loading: false,
   loaded: false,
   selectedProfile: {},
