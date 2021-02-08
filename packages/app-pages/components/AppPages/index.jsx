@@ -36,6 +36,15 @@ const AppPages = ({
     id: currentOrgId,
   });
 
+  console.log({
+    selectedOrgId,
+    currentOrgId,
+    orgIdFromRoute,
+    needsToSetNewCurrentOrg,
+    unfilteredProfiles,
+    profiles,
+  });
+
   const switchOrganization = useOrgSwitcher();
   // If org coming from route doesn't match the last org stored, select and store the new value
   useEffect(() => {
