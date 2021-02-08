@@ -1899,16 +1899,16 @@
     "@bufferapp/nav-sidebar" "^1.11.0"
     numeral "2.0.6"
 
-"@bufferapp/ui@5.48.2":
-  version "5.48.2"
-  resolved "https://registry.yarnpkg.com/@bufferapp/ui/-/ui-5.48.2.tgz#96d86b5f98dc2c4a8e6c578b4d1ef1ee79794a52"
-  integrity sha512-ru1zg90kG0WOzICDFjz+u8wGXXlfgbgxmyLH8qf3CpwGsYC//umLQZk3PBmZGetTUEhubhEhYvrsVZPn2bjbOQ==
+"@bufferapp/ui@5.58.2":
+  version "5.58.2"
+  resolved "https://registry.yarnpkg.com/@bufferapp/ui/-/ui-5.58.2.tgz#046839b85f23dcf68bbb5f7ab9db1cd0b3518b6b"
+  integrity sha512-aTvPfRktdIRQSuoehZdoAqoTrvidzH5uraeJhX2in5TP8iKQOOT+kfVDw458HKFCxY4uWystMuzS+AE8cFdt5w==
   dependencies:
     "@reach/tooltip" "0.6.2"
     immutability-helper "^2.9.0"
-    react "16.8.6"
-    react-dom "16.8.6"
-    react-is "16.8.6"
+    react "^16.8.6"
+    react-dom "^16.8.6"
+    react-is "^16.8.6"
     styled-components "^5.1.1"
 
 "@bufferapp/ui@5.6.0":
@@ -16624,6 +16624,16 @@ react-dom@^16.8.3:
     prop-types "^15.6.2"
     scheduler "^0.19.1"
 
+react-dom@^16.8.6:
+  version "16.14.0"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.14.0.tgz#7ad838ec29a777fb3c75c3a190f661cf92ab8b89"
+  integrity sha512-1gCeQXDLoIqMgqD3IO2Ah9bnf0w9kzhwN5q4FGnHZ67hBm9yePzB5JJAIQCc8x3pFnNlwFq4RidZggNAAkzWWw==
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    prop-types "^15.6.2"
+    scheduler "^0.19.1"
+
 react-draggable@^4.0.3:
   version "4.4.2"
   resolved "https://registry.yarnpkg.com/react-draggable/-/react-draggable-4.4.2.tgz#f3cefecee25f467f865144cda0d066e5f05f94a0"
@@ -16770,11 +16780,6 @@ react-inspector@^4.0.0:
     "@babel/runtime" "^7.6.3"
     is-dom "^1.0.9"
     prop-types "^15.6.1"
-
-react-is@16.8.6:
-  version "16.8.6"
-  resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.8.6.tgz#5bbc1e2d29141c9fbdfed456343fe2bc430a6a16"
-  integrity sha512-aUk3bHfZ2bRSVFFbbeVS4i+lNPZr3/WM5jT2J5omUVV1zzcs1nAaf3l51ctA5FFvCRbhrH0bdAsRRQddFJZPtA==
 
 react-is@^16.12.0, react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.4, react-is@^16.8.6, react-is@^16.9.0:
   version "16.13.1"
@@ -17069,6 +17074,15 @@ react@^16.8.3:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react/-/react-16.13.1.tgz#2e818822f1a9743122c063d6410d85c1e3afe48e"
   integrity sha512-YMZQQq32xHLX0bz5Mnibv1/LHb3Sqzngu7xstSM+vrkE5Kzr9xE0yMByK5kMoTK30YVJE61WfbxIFFvfeDKT1w==
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    prop-types "^15.6.2"
+
+react@^16.8.6:
+  version "16.14.0"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.14.0.tgz#94d776ddd0aaa37da3eda8fc5b6b18a4c9a3114d"
+  integrity sha512-0X2CImDkJGApiAlcf0ODKIneSwBPhqJawOa5wCtKbu7ZECrmS26NvtSILynQ66cgkT/RJ4LidJOc3bUESwmU8g==
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
