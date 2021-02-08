@@ -1,12 +1,6 @@
-import {
-  actions as dataFetchActions,
-  actionTypes as dataFetchActionTypes,
-} from '@bufferapp/async-data-fetch';
-import { actions as notificationActions } from '@bufferapp/notifications';
-import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
+import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 
 import { actionTypes } from './reducer';
-import { getSelectedOrganization, mapSelectedOrganization } from './utils';
 
 export default ({ dispatch, getState }) => next => action => {
   next(action);
@@ -35,72 +29,17 @@ export default ({ dispatch, getState }) => next => action => {
       }
       break;
     }
-
-    case `organizations_${dataFetchActionTypes.FETCH_SUCCESS}`: {
-      const organizations = action.result;
-
-      dispatch({
-        type: actionTypes.INITIALIZED,
-        organizations,
-        selectedOrganization: getSelectedOrganization(organizations),
-      });
-      break;
-    }
-
-    case actionTypes.INITIALIZED: {
-      dispatch({
-        type: actionTypes.ORGANIZATION_SELECTED,
-        organizations: action?.organizations,
-        selected: action?.selectedOrganization,
-      });
-      break;
-    }
-
     case actionTypes.SET_CURRENT_ORGANIZATION: {
-      const {
-        organizations: { list, selected },
-      } = getState();
+      const { list } = getState().organizations || [];
       const { organizationId } = action;
-      const listMapped = mapSelectedOrganization({
-        id: organizationId,
-        organizations: list,
-      });
-      const selectedOrg = getSelectedOrganization(listMapped);
+      const selectedOrg = list?.filter(org => org.id === organizationId)[0];
       // Select the org
       dispatch({
         type: actionTypes.ORGANIZATION_SELECTED,
-        organizations: listMapped,
         selected: selectedOrg,
       });
-
-      // Track the event
-      dispatch(
-        analyticsActions.trackEvent('Organization Switched', {
-          organizationId: selected.globalOrgId,
-          previousOrganizationId: selected.id,
-        })
-      );
-
-      // Save current org preference
-      dispatch(
-        dataFetchActions.fetch({
-          name: 'setCurrentOrganization',
-          args: {
-            organizationId,
-          },
-        })
-      );
       break;
     }
-
-    case `setCurrentOrganization_${dataFetchActionTypes.FETCH_FAIL}`:
-      dispatch(
-        notificationActions.createNotification({
-          notificationType: 'error',
-          message: action.error,
-        })
-      );
-      break;
     default:
       break;
   }

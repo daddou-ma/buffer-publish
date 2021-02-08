@@ -43,6 +43,7 @@ export default connect(
     },
     switchOrganization(organizationId) {
       dispatch(organization.goTo({ orgId: organizationId }));
+      // ADD TRACKING HERE
     },
   })
 )(AppShell);

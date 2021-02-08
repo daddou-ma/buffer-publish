@@ -46,6 +46,9 @@ const AppPages = ({
           setCurrentOrganization(currentOrgId);
         },
       });
+    } else {
+      console.log('same org');
+      setCurrentOrganization(selectedOrgId);
     }
   }, [currentOrgId]);
 
