@@ -47,8 +47,6 @@ export default connect(
         hasFirstCommentFlip:
           state.organizations.selected?.hasFirstCommentFeature,
         hasCampaignsFeature: state.organizations.selected?.hasCampaignsFeature,
-        hasShareAgainFeature:
-          state.organizations.selected?.hasShareAgainFeature,
         has30DaySentPostsLimitFeature:
           state.organizations.selected?.has30DaySentPostsLimitFeature,
         hasBitlyFeature: state.organizations.selected?.hasBitlyFeature,
