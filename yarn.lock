@@ -1899,17 +1899,14 @@
     "@bufferapp/nav-sidebar" "^1.11.0"
     numeral "2.0.6"
 
-"@bufferapp/ui@5.48.2":
-  version "5.48.2"
-  resolved "https://registry.yarnpkg.com/@bufferapp/ui/-/ui-5.48.2.tgz#96d86b5f98dc2c4a8e6c578b4d1ef1ee79794a52"
-  integrity sha512-ru1zg90kG0WOzICDFjz+u8wGXXlfgbgxmyLH8qf3CpwGsYC//umLQZk3PBmZGetTUEhubhEhYvrsVZPn2bjbOQ==
+"@bufferapp/ui@5.58.1-beta.5c65b3a":
+  version "5.58.1-beta.5c65b3a"
+  resolved "https://registry.yarnpkg.com/@bufferapp/ui/-/ui-5.58.1-beta.5c65b3a.tgz#2b8c3a10c15ec0ca36ce92f71cb400bc0f0b14ce"
+  integrity sha512-HZ8UrRsmNl23RhgZo2XggurpSgwelFWuQRI6c0BYG1YIXox++6aOESqxebN0Z3hIgibQ+NOzbzB3ohAY5zNmVQ==
   dependencies:
     "@reach/tooltip" "0.6.2"
     immutability-helper "^2.9.0"
-    react "16.8.6"
-    react-dom "16.8.6"
-    react-is "16.8.6"
-    styled-components "^5.1.1"
+    react-is "^16.8.6"
 
 "@bufferapp/ui@5.6.0":
   version "5.6.0"
@@ -16779,11 +16776,6 @@ react-inspector@^4.0.0:
     is-dom "^1.0.9"
     prop-types "^15.6.1"
 
-react-is@16.8.6:
-  version "16.8.6"
-  resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.8.6.tgz#5bbc1e2d29141c9fbdfed456343fe2bc430a6a16"
-  integrity sha512-aUk3bHfZ2bRSVFFbbeVS4i+lNPZr3/WM5jT2J5omUVV1zzcs1nAaf3l51ctA5FFvCRbhrH0bdAsRRQddFJZPtA==
-
 react-is@^16.12.0, react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.4, react-is@^16.8.6, react-is@^16.9.0:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
@@ -19011,7 +19003,7 @@ style-loader@^0.20.3:
     loader-utils "^1.1.0"
     schema-utils "^0.4.5"
 
-styled-components@4.3.2, styled-components@5.1.1, styled-components@^5.1.1:
+styled-components@4.3.2, styled-components@5.1.1:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/styled-components/-/styled-components-5.1.1.tgz#96dfb02a8025794960863b9e8e365e3b6be5518d"
   integrity sha512-1ps8ZAYu2Husx+Vz8D+MvXwEwvMwFv+hqqUwhNlDN5ybg6A+3xyW1ECrAgywhvXapNfXiz79jJyU0x22z0FFTg==
