@@ -503,7 +503,6 @@ exports[`Storyshots Cards|Drafts/Draft default 1`] = `
   align-items: center;
   background: none transparent;
   border: 0;
-  border-radius: 4px;
   color: inherit;
   cursor: pointer;
   display: -webkit-box;
@@ -2071,7 +2070,6 @@ exports[`Storyshots Cards|Drafts/Draft manager 1`] = `
   align-items: center;
   background: none transparent;
   border: 0;
-  border-radius: 4px;
   color: inherit;
   cursor: pointer;
   display: -webkit-box;
@@ -2899,7 +2897,6 @@ exports[`Storyshots Cards|Drafts/Draft past due 1`] = `
   align-items: center;
   background: none transparent;
   border: 0;
-  border-radius: 4px;
   color: inherit;
   cursor: pointer;
   display: -webkit-box;
@@ -3805,7 +3802,6 @@ exports[`Storyshots Cards|Drafts/Draft retweet 1`] = `
   align-items: center;
   background: none transparent;
   border: 0;
-  border-radius: 4px;
   color: inherit;
   cursor: pointer;
   display: -webkit-box;
@@ -4514,7 +4510,6 @@ exports[`Storyshots Cards|Drafts/Draft retweet with comment 1`] = `
   align-items: center;
   background: none transparent;
   border: 0;
-  border-radius: 4px;
   color: inherit;
   cursor: pointer;
   display: -webkit-box;
@@ -5239,7 +5234,6 @@ exports[`Storyshots Cards|Drafts/Draft scheduled 1`] = `
   align-items: center;
   background: none transparent;
   border: 0;
-  border-radius: 4px;
   color: inherit;
   cursor: pointer;
   display: -webkit-box;
@@ -5869,7 +5863,6 @@ exports[`Storyshots Cards|Drafts/DraftFooter approval view: manager 1`] = `
   align-items: center;
   background: none transparent;
   border: 0;
-  border-radius: 4px;
   color: inherit;
   cursor: pointer;
   display: -webkit-box;
@@ -6394,7 +6387,6 @@ exports[`Storyshots Cards|Drafts/DraftFooter approval view: manager past due 1`]
   align-items: center;
   background: none transparent;
   border: 0;
-  border-radius: 4px;
   color: inherit;
   cursor: pointer;
   display: -webkit-box;
@@ -6863,7 +6855,6 @@ exports[`Storyshots Cards|Drafts/DraftFooter approval view: not a manager 1`] = 
   align-items: center;
   background: none transparent;
   border: 0;
-  border-radius: 4px;
   color: inherit;
   cursor: pointer;
   display: -webkit-box;
@@ -7258,7 +7249,6 @@ exports[`Storyshots Cards|Drafts/DraftFooter approval view: not a manager past d
   align-items: center;
   background: none transparent;
   border: 0;
-  border-radius: 4px;
   color: inherit;
   cursor: pointer;
   display: -webkit-box;
@@ -7931,7 +7921,6 @@ exports[`Storyshots Cards|Drafts/DraftFooter drafts view: manager - scheduled po
   align-items: center;
   background: none transparent;
   border: 0;
-  border-radius: 4px;
   color: inherit;
   cursor: pointer;
   display: -webkit-box;
@@ -8412,7 +8401,6 @@ exports[`Storyshots Cards|Drafts/DraftFooter drafts view: manager 1`] = `
   align-items: center;
   background: none transparent;
   border: 0;
-  border-radius: 4px;
   color: inherit;
   cursor: pointer;
   display: -webkit-box;
@@ -8839,7 +8827,6 @@ exports[`Storyshots Cards|Drafts/DraftFooter drafts view: manager past due 1`] =
   align-items: center;
   background: none transparent;
   border: 0;
-  border-radius: 4px;
   color: inherit;
   cursor: pointer;
   display: -webkit-box;
@@ -9379,7 +9366,6 @@ exports[`Storyshots Cards|Drafts/DraftFooter drafts view: not manager 1`] = `
   align-items: center;
   background: none transparent;
   border: 0;
-  border-radius: 4px;
   color: inherit;
   cursor: pointer;
   display: -webkit-box;
@@ -9806,7 +9792,6 @@ exports[`Storyshots Cards|Drafts/DraftFooter drafts view: not manager past due 1
   align-items: center;
   background: none transparent;
   border: 0;
-  border-radius: 4px;
   color: inherit;
   cursor: pointer;
   display: -webkit-box;
@@ -10594,7 +10579,6 @@ exports[`Storyshots Cards|Posts/Post Instragram post with Location 1`] = `
   align-items: center;
   background: none transparent;
   border: 0;
-  border-radius: 4px;
   color: inherit;
   cursor: pointer;
   display: -webkit-box;
@@ -11174,7 +11158,6 @@ exports[`Storyshots Cards|Posts/Post Instragram post without Location 1`] = `
   align-items: center;
   background: none transparent;
   border: 0;
-  border-radius: 4px;
   color: inherit;
   cursor: pointer;
   display: -webkit-box;
@@ -11697,7 +11680,6 @@ exports[`Storyshots Cards|Posts/Post Pinterest post with board and source URL 1`
   align-items: center;
   background: none transparent;
   border: 0;
-  border-radius: 4px;
   color: inherit;
   cursor: pointer;
   display: -webkit-box;
@@ -12311,7 +12293,6 @@ exports[`Storyshots Cards|Posts/Post Pinterest post with board only 1`] = `
   align-items: center;
   background: none transparent;
   border: 0;
-  border-radius: 4px;
   color: inherit;
   cursor: pointer;
   display: -webkit-box;
@@ -12909,7 +12890,6 @@ exports[`Storyshots Cards|Posts/Post error 1`] = `
   align-items: center;
   background: none transparent;
   border: 0;
-  border-radius: 4px;
   color: inherit;
   cursor: pointer;
   display: -webkit-box;
@@ -14006,7 +13986,6 @@ exports[`Storyshots Cards|Posts/Post queued post 1`] = `
   align-items: center;
   background: none transparent;
   border: 0;
-  border-radius: 4px;
   color: inherit;
   cursor: pointer;
   display: -webkit-box;
@@ -14529,7 +14508,6 @@ exports[`Storyshots Cards|Posts/Post retweet 1`] = `
   align-items: center;
   background: none transparent;
   border: 0;
-  border-radius: 4px;
   color: inherit;
   cursor: pointer;
   display: -webkit-box;
@@ -15165,7 +15143,6 @@ exports[`Storyshots Cards|Posts/Post retweet with comment 1`] = `
   align-items: center;
   background: none transparent;
   border: 0;
-  border-radius: 4px;
   color: inherit;
   cursor: pointer;
   display: -webkit-box;
@@ -16085,7 +16062,6 @@ exports[`Storyshots Cards|Posts/PostFooter dragging post 1`] = `
   align-items: center;
   background: none transparent;
   border: 0;
-  border-radius: 4px;
   color: inherit;
   cursor: pointer;
   display: -webkit-box;
@@ -16516,7 +16492,6 @@ exports[`Storyshots Cards|Posts/PostFooter has instagram comment 1`] = `
   align-items: center;
   background: none transparent;
   border: 0;
-  border-radius: 4px;
   color: inherit;
   cursor: pointer;
   display: -webkit-box;
@@ -17387,7 +17362,6 @@ exports[`Storyshots Cards|Posts/PostFooter post with error 1`] = `
   align-items: center;
   background: none transparent;
   border: 0;
-  border-radius: 4px;
   color: inherit;
   cursor: pointer;
   display: -webkit-box;
@@ -17854,7 +17828,6 @@ exports[`Storyshots Cards|Posts/PostFooter queued post 1`] = `
   align-items: center;
   background: none transparent;
   border: 0;
-  border-radius: 4px;
   color: inherit;
   cursor: pointer;
   display: -webkit-box;
@@ -18552,7 +18525,6 @@ exports[`Storyshots Cards|Stories/Story default 1`] = `
   align-items: center;
   background: none transparent;
   border: 0;
-  border-radius: 4px;
   color: inherit;
   cursor: pointer;
   display: -webkit-box;
@@ -19184,7 +19156,6 @@ exports[`Storyshots Cards|Stories/Story story with banner error message 1`] = `
   align-items: center;
   background: none transparent;
   border: 0;
-  border-radius: 4px;
   color: inherit;
   cursor: pointer;
   display: -webkit-box;
@@ -19802,7 +19773,6 @@ exports[`Storyshots Cards|Stories/Story story with banner message to download mo
   align-items: center;
   background: none transparent;
   border: 0;
-  border-radius: 4px;
   color: inherit;
   cursor: pointer;
   display: -webkit-box;
