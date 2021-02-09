@@ -7,7 +7,7 @@ import styled from 'styled-components';
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
-  height: 100%;
+  height: ${props => (props.height ? props.height : '100%')};
 `;
 
 export default function GlobalEmptyState({
@@ -17,9 +17,10 @@ export default function GlobalEmptyState({
   description,
   secondaryAction,
   primaryAction = null,
+  height = null,
 }) {
   return (
-    <Wrapper>
+    <Wrapper height={height}>
       <States>
         <States.Image src={imageSrc} alt={altText} />
         <States.Header>{header}</States.Header>
@@ -48,7 +49,7 @@ GlobalEmptyState.propTypes = {
   description: PropTypes.string.isRequired,
   imageSrc: PropTypes.string.isRequired,
   altText: PropTypes.string.isRequired,
-  // eslint-disable-next-line react/require-default-props
+  height: PropTypes.string,
   primaryAction: PropTypes.shape({
     onClick: PropTypes.func,
     label: PropTypes.string,
