@@ -1899,17 +1899,14 @@
     "@bufferapp/nav-sidebar" "^1.11.0"
     numeral "2.0.6"
 
-"@bufferapp/ui@5.58.2":
-  version "5.58.2"
-  resolved "https://registry.yarnpkg.com/@bufferapp/ui/-/ui-5.58.2.tgz#046839b85f23dcf68bbb5f7ab9db1cd0b3518b6b"
-  integrity sha512-aTvPfRktdIRQSuoehZdoAqoTrvidzH5uraeJhX2in5TP8iKQOOT+kfVDw458HKFCxY4uWystMuzS+AE8cFdt5w==
+"@bufferapp/ui@5.58.1-beta.5c65b3a":
+  version "5.58.1-beta.5c65b3a"
+  resolved "https://registry.yarnpkg.com/@bufferapp/ui/-/ui-5.58.1-beta.5c65b3a.tgz#2b8c3a10c15ec0ca36ce92f71cb400bc0f0b14ce"
+  integrity sha512-HZ8UrRsmNl23RhgZo2XggurpSgwelFWuQRI6c0BYG1YIXox++6aOESqxebN0Z3hIgibQ+NOzbzB3ohAY5zNmVQ==
   dependencies:
     "@reach/tooltip" "0.6.2"
     immutability-helper "^2.9.0"
-    react "^16.8.6"
-    react-dom "^16.8.6"
     react-is "^16.8.6"
-    styled-components "^5.1.1"
 
 "@bufferapp/ui@5.6.0":
   version "5.6.0"
@@ -16624,16 +16621,6 @@ react-dom@^16.8.3:
     prop-types "^15.6.2"
     scheduler "^0.19.1"
 
-react-dom@^16.8.6:
-  version "16.14.0"
-  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.14.0.tgz#7ad838ec29a777fb3c75c3a190f661cf92ab8b89"
-  integrity sha512-1gCeQXDLoIqMgqD3IO2Ah9bnf0w9kzhwN5q4FGnHZ67hBm9yePzB5JJAIQCc8x3pFnNlwFq4RidZggNAAkzWWw==
-  dependencies:
-    loose-envify "^1.1.0"
-    object-assign "^4.1.1"
-    prop-types "^15.6.2"
-    scheduler "^0.19.1"
-
 react-draggable@^4.0.3:
   version "4.4.2"
   resolved "https://registry.yarnpkg.com/react-draggable/-/react-draggable-4.4.2.tgz#f3cefecee25f467f865144cda0d066e5f05f94a0"
@@ -17074,15 +17061,6 @@ react@^16.8.3:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react/-/react-16.13.1.tgz#2e818822f1a9743122c063d6410d85c1e3afe48e"
   integrity sha512-YMZQQq32xHLX0bz5Mnibv1/LHb3Sqzngu7xstSM+vrkE5Kzr9xE0yMByK5kMoTK30YVJE61WfbxIFFvfeDKT1w==
-  dependencies:
-    loose-envify "^1.1.0"
-    object-assign "^4.1.1"
-    prop-types "^15.6.2"
-
-react@^16.8.6:
-  version "16.14.0"
-  resolved "https://registry.yarnpkg.com/react/-/react-16.14.0.tgz#94d776ddd0aaa37da3eda8fc5b6b18a4c9a3114d"
-  integrity sha512-0X2CImDkJGApiAlcf0ODKIneSwBPhqJawOa5wCtKbu7ZECrmS26NvtSILynQ66cgkT/RJ4LidJOc3bUESwmU8g==
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
@@ -19017,7 +18995,7 @@ style-loader@^0.20.3:
     loader-utils "^1.1.0"
     schema-utils "^0.4.5"
 
-styled-components@4.3.2, styled-components@5.1.1, styled-components@^5.1.1:
+styled-components@4.3.2, styled-components@5.1.1:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/styled-components/-/styled-components-5.1.1.tgz#96dfb02a8025794960863b9e8e365e3b6be5518d"
   integrity sha512-1ps8ZAYu2Husx+Vz8D+MvXwEwvMwFv+hqqUwhNlDN5ybg6A+3xyW1ECrAgywhvXapNfXiz79jJyU0x22z0FFTg==
