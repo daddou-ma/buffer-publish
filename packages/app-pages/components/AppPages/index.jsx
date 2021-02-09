@@ -24,12 +24,12 @@ const AppPages = ({
   profileRouteLoaded,
   setCurrentOrganization,
   orgIdFromRoute,
+  orgSelectedIdStoredInRedux,
 }) => {
   // Get current selected org from appshell
   const user = useUser();
   const selectedOrgId = user?.currentOrganization?.id;
 
-  // se nesta altura não houver resposta do pedido de graphql isto lixa-se tudo
   const currentOrgId = orgIdFromRoute || selectedOrgId;
   const needsToSetNewCurrentOrg = selectedOrgId !== orgIdFromRoute;
 
@@ -55,9 +55,13 @@ const AppPages = ({
       switchOrganization(currentOrgId, {
         onCompleted: id => {
           console.info(`organization selected ${id}`);
-          setCurrentOrganization(currentOrgId);
+          //setCurrentOrganization(currentOrgId);
         },
       });
+    }
+
+    if (orgSelectedIdStoredInRedux !== currentOrgId) {
+      setCurrentOrganization(currentOrgId);
     }
   }, [currentOrgId]);
 

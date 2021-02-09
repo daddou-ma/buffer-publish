@@ -17,6 +17,7 @@ export default connect(
       showBusinessTrialistsOnboarding:
         state.organizations.selected?.showBusinessTrialistsOnboarding,
       orgIdFromRoute,
+      orgSelectedIdStoredInRedux: state.organizations.selected?.id,
     };
   },
   dispatch => ({
