@@ -28,10 +28,11 @@ const AppPages = ({
 }) => {
   // Get current selected org from appshell
   const user = useUser();
-  const selectedOrgId = user?.currentOrganization?.id;
+  const selectedOrgInAppShell = user?.currentOrganization?.id;
 
-  const currentOrgId = orgIdFromRoute || selectedOrgId;
-  const needsToSetNewCurrentOrg = selectedOrgId !== orgIdFromRoute;
+  const currentOrgId = orgIdFromRoute || selectedOrgInAppShell;
+  const needsToSelectNewOrgInAppShell =
+    selectedOrgInAppShell !== orgIdFromRoute && !!orgIdFromRoute;
 
   // Filters profiles by current org selected
   const profiles = filterProfilesByOrg(unfilteredProfiles, {
@@ -39,30 +40,26 @@ const AppPages = ({
   });
 
   console.log({
-    user,
-    selectedOrgId,
+    selectedOrgInAppShell,
     currentOrgId,
     orgIdFromRoute,
-    needsToSetNewCurrentOrg,
-    unfilteredProfiles,
+    needsToSelectNewOrgInAppShell,
     profiles,
   });
 
   const switchOrganization = useOrgSwitcher();
   // If org coming from route doesn't match the last org stored, select and store the new value
   useEffect(() => {
-    if (needsToSetNewCurrentOrg) {
+    console.log(`currentOrgId changed to ${currentOrgId}`);
+    if (needsToSelectNewOrgInAppShell) {
       switchOrganization(currentOrgId, {
         onCompleted: id => {
           console.info(`organization selected ${id}`);
-          //setCurrentOrganization(currentOrgId);
+          // add tracking here;
         },
       });
     }
-
-    if (orgSelectedIdStoredInRedux !== currentOrgId) {
-      setCurrentOrganization(currentOrgId);
-    }
+    setCurrentOrganization(currentOrgId);
   }, [currentOrgId]);
 
   const redirectToQueue = () => {
