@@ -93,7 +93,7 @@ export default connect(
         dispatch(
           sentActions.handleShareAgainClick({
             post,
-            profileId: ownProps.profileId,
+            profileId: post.profileId,
           })
         );
       },
