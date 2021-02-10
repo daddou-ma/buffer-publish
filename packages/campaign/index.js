@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 import { actions as modalsActions } from '@bufferapp/publish-modals';
 import { actions as queueActions } from '@bufferapp/publish-queue';
-import { actions as sentActions } from '@bufferapp/publish-sent';
 import { formatPostLists } from '@bufferapp/publish-queue/util';
 import {
   campaignEdit,
@@ -89,9 +88,9 @@ export default connect(
         });
         window.location.assign(reminderUrl);
       },
-      onShareAgainClick: post => {
+      onShareAgainClick: ({ post }) => {
         dispatch(
-          sentActions.handleShareAgainClick({
+          actions.handleShareAgainClick({
             post,
             profileId: post.profileId,
           })
