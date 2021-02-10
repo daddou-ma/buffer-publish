@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
-  preferencesPage,
-  profilePages,
-  plansPage,
+  campaignsPage,
   newBusinessTrialists,
   newConnection,
-  campaignsPage,
+  plansPage,
+  preferencesPage,
+  profilePages,
 } from '@bufferapp/publish-routes';
 import { filterProfilesByOrg } from '@bufferapp/publish-profile-sidebar/utils';
 import PagesWithSidebar from '@bufferapp/publish-app-pages/components/PagesWithSidebar';
@@ -16,7 +16,7 @@ import Preferences from '@bufferapp/publish-preferences';
 import Plans from '@bufferapp/publish-plans';
 import DefaultPage from '@bufferapp/default-page';
 import OnboardingManager from '@bufferapp/publish-onboarding';
-import { useUser, useOrgSwitcher } from '@bufferapp/app-shell';
+import { useOrgSwitcher, useUser } from '@bufferapp/app-shell';
 
 const AppPages = ({
   unfilteredProfiles,
@@ -50,7 +50,6 @@ const AppPages = ({
   const switchOrganization = useOrgSwitcher();
   // If org coming from route doesn't match the last org stored, select and store the new value
   useEffect(() => {
-    console.log(`currentOrgId changed to ${currentOrgId}`);
     if (needsToSelectNewOrgInAppShell) {
       switchOrganization(currentOrgId, {
         onCompleted: id => {
@@ -59,8 +58,7 @@ const AppPages = ({
         },
       });
     }
-    setCurrentOrganization(currentOrgId);
-  }, [currentOrgId]);
+  }, [needsToSelectNewOrgInAppShell]);
 
   const redirectToQueue = () => {
     const selectedProfileId =
