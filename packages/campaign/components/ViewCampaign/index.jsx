@@ -103,6 +103,7 @@ const ViewCampaign = ({
             isSent={sentView}
             hasAnalyticsOnPosts={hasAnalyticsOnPosts}
             hasTwitterImpressions={hasTwitterImpressions}
+            onShareAgainClick={postActions.onShareAgainClick}
           />
         )}
       </main>
@@ -148,6 +149,7 @@ ViewCampaign.propTypes = {
     onSetRemindersClick: PropTypes.func.isRequired,
     onShareNowClick: PropTypes.func.isRequired,
     onRequeueClick: PropTypes.func.isRequired,
+    onShareAgainClick: PropTypes.func.isRequired,
   }).isRequired,
 };
 
