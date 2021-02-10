@@ -1580,10 +1580,10 @@
     moment-timezone "^0.5.25"
     react-highcharts "^16.0.2"
 
-"@bufferapp/app-shell@2.0.1-alpha.3+0cbb9e3":
-  version "2.0.1-alpha.3"
-  resolved "https://registry.yarnpkg.com/@bufferapp/app-shell/-/app-shell-2.0.1-alpha.3.tgz#ddf2f720a0ce3dbcb85b7684f6c55666fc0035fd"
-  integrity sha512-DQlQNWyW2FSZTrzrI9WilRF6rVGHFWGj8oOKZPWzLjPG+oI16f582ttlorG4orlwjiSbo2dXybfmN1guJER6jg==
+"@bufferapp/app-shell@2.0.1-alpha.4+4f990f7":
+  version "2.0.1-alpha.4"
+  resolved "https://registry.yarnpkg.com/@bufferapp/app-shell/-/app-shell-2.0.1-alpha.4.tgz#b3ccd3bd6a1946b8a5239017099966a159e05af9"
+  integrity sha512-gmUG4jG3MkM+MBlxrfvTeKv1IorsEo/X6EzYb0P3eY+TQgHY9QXoqHPPbAvZZWvdewoS1TSccTgBqm8j2PeybA==
   dependencies:
     "@apollo/client" "^3.3.4"
     graphql-tag "^2.11.0"
