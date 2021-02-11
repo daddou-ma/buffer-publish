@@ -43,7 +43,6 @@ storiesOf('PastRemindersPosts', module)
       showStoriesComposer={false}
       isDisconnectedProfile={false}
       onClosePreviewClick={action('onClosePreviewClick')}
-      hasShareAgainFeature
     />
   ))
   .add('loading', () => (
@@ -59,7 +58,6 @@ storiesOf('PastRemindersPosts', module)
       showStoriesComposer={false}
       isDisconnectedProfile={false}
       onClosePreviewClick={action('onClosePreviewClick')}
-      hasShareAgainFeature
     />
   ))
   .add('if Manager and in Business Account', () => (
@@ -75,7 +73,6 @@ storiesOf('PastRemindersPosts', module)
       showStoriesComposer={false}
       isDisconnectedProfile={false}
       onClosePreviewClick={action('onClosePreviewClick')}
-      hasShareAgainFeature
     />
   ))
   .add('if Contributor and in Business Account', () => (
@@ -91,6 +88,5 @@ storiesOf('PastRemindersPosts', module)
       showStoriesComposer={false}
       isDisconnectedProfile={false}
       onClosePreviewClick={action('onClosePreviewClick')}
-      hasShareAgainFeature
     />
   ));

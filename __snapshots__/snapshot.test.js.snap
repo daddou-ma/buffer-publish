@@ -761,6 +761,7 @@ exports[`Storyshots Cards|Drafts/Draft default 1`] = `
       <div
         className="c14"
         disabled={false}
+        loading={false}
         type="text"
       >
         <div
@@ -787,6 +788,7 @@ exports[`Storyshots Cards|Drafts/Draft default 1`] = `
       <div
         className="c19 c20"
         disabled={false}
+        loading={false}
         type="secondary"
       >
         <div
@@ -810,6 +812,7 @@ exports[`Storyshots Cards|Drafts/Draft default 1`] = `
       <div
         className="c21 c22"
         disabled={false}
+        loading={false}
         type="primary"
       >
         <div
@@ -2325,6 +2328,7 @@ exports[`Storyshots Cards|Drafts/Draft manager 1`] = `
       <div
         className="c14"
         disabled={false}
+        loading={false}
         type="text"
       >
         <div
@@ -2351,6 +2355,7 @@ exports[`Storyshots Cards|Drafts/Draft manager 1`] = `
       <div
         className="c19 c20"
         disabled={false}
+        loading={false}
         type="secondary"
       >
         <div
@@ -2374,6 +2379,7 @@ exports[`Storyshots Cards|Drafts/Draft manager 1`] = `
       <div
         className="c21 c22"
         disabled={false}
+        loading={false}
         type="primary"
       >
         <div
@@ -3188,6 +3194,7 @@ exports[`Storyshots Cards|Drafts/Draft past due 1`] = `
       <div
         className="c15"
         disabled={false}
+        loading={false}
         type="text"
       >
         <div
@@ -3214,6 +3221,7 @@ exports[`Storyshots Cards|Drafts/Draft past due 1`] = `
       <div
         className="c20 c21"
         disabled={false}
+        loading={false}
         type="secondary"
       >
         <div
@@ -3237,6 +3245,7 @@ exports[`Storyshots Cards|Drafts/Draft past due 1`] = `
       <div
         className="c22 c23"
         disabled={false}
+        loading={false}
         type="primary"
       >
         <div
@@ -4164,6 +4173,7 @@ exports[`Storyshots Cards|Drafts/Draft retweet 1`] = `
       <div
         className="c21"
         disabled={false}
+        loading={false}
         type="text"
       >
         <div
@@ -4190,6 +4200,7 @@ exports[`Storyshots Cards|Drafts/Draft retweet 1`] = `
       <div
         className="c26 c27"
         disabled={false}
+        loading={false}
         type="secondary"
       >
         <div
@@ -4213,6 +4224,7 @@ exports[`Storyshots Cards|Drafts/Draft retweet 1`] = `
       <div
         className="c28 c29"
         disabled={false}
+        loading={false}
         type="primary"
       >
         <div
@@ -4885,6 +4897,7 @@ exports[`Storyshots Cards|Drafts/Draft retweet with comment 1`] = `
       <div
         className="c21"
         disabled={false}
+        loading={false}
         type="text"
       >
         <div
@@ -4911,6 +4924,7 @@ exports[`Storyshots Cards|Drafts/Draft retweet with comment 1`] = `
       <div
         className="c26 c27"
         disabled={false}
+        loading={false}
         type="secondary"
       >
         <div
@@ -4934,6 +4948,7 @@ exports[`Storyshots Cards|Drafts/Draft retweet with comment 1`] = `
       <div
         className="c28 c29"
         disabled={false}
+        loading={false}
         type="primary"
       >
         <div
@@ -5531,6 +5546,7 @@ exports[`Storyshots Cards|Drafts/Draft scheduled 1`] = `
       <div
         className="c15"
         disabled={false}
+        loading={false}
         type="text"
       >
         <div
@@ -5557,6 +5573,7 @@ exports[`Storyshots Cards|Drafts/Draft scheduled 1`] = `
       <div
         className="c20 c21"
         disabled={false}
+        loading={false}
         type="secondary"
       >
         <div
@@ -5580,6 +5597,7 @@ exports[`Storyshots Cards|Drafts/Draft scheduled 1`] = `
       <div
         className="c22 c23"
         disabled={false}
+        loading={false}
         type="primary"
       >
         <div
@@ -5955,6 +5973,7 @@ exports[`Storyshots Cards|Drafts/DraftFooter approval view: manager 1`] = `
     <div
       className="c5"
       disabled={false}
+      loading={false}
       type="text"
     >
       <div
@@ -5981,6 +6000,7 @@ exports[`Storyshots Cards|Drafts/DraftFooter approval view: manager 1`] = `
     <div
       className="c10 c11"
       disabled={false}
+      loading={false}
       type="secondary"
     >
       <div
@@ -6004,6 +6024,7 @@ exports[`Storyshots Cards|Drafts/DraftFooter approval view: manager 1`] = `
     <div
       className="c10"
       disabled={false}
+      loading={false}
       type="secondary"
     >
       <div
@@ -6027,6 +6048,7 @@ exports[`Storyshots Cards|Drafts/DraftFooter approval view: manager 1`] = `
     <div
       className="c12 c13"
       disabled={false}
+      loading={false}
       type="primary"
     >
       <div
@@ -6514,6 +6536,7 @@ exports[`Storyshots Cards|Drafts/DraftFooter approval view: manager past due 1`]
     <div
       className="c6"
       disabled={false}
+      loading={false}
       type="text"
     >
       <div
@@ -6540,6 +6563,7 @@ exports[`Storyshots Cards|Drafts/DraftFooter approval view: manager past due 1`]
     <div
       className="c11 c12"
       disabled={false}
+      loading={false}
       type="secondary"
     >
       <div
@@ -6563,6 +6587,7 @@ exports[`Storyshots Cards|Drafts/DraftFooter approval view: manager past due 1`]
     <div
       className="c13 c14"
       disabled={false}
+      loading={false}
       type="primary"
     >
       <div
@@ -6932,6 +6957,7 @@ exports[`Storyshots Cards|Drafts/DraftFooter approval view: not a manager 1`] = 
     <div
       className="c5"
       disabled={false}
+      loading={false}
       type="text"
     >
       <div
@@ -6958,6 +6984,7 @@ exports[`Storyshots Cards|Drafts/DraftFooter approval view: not a manager 1`] = 
     <div
       className="c10"
       disabled={false}
+      loading={false}
       type="primary"
     >
       <div
@@ -7367,6 +7394,7 @@ exports[`Storyshots Cards|Drafts/DraftFooter approval view: not a manager past d
     <div
       className="c6"
       disabled={false}
+      loading={false}
       type="text"
     >
       <div
@@ -7393,6 +7421,7 @@ exports[`Storyshots Cards|Drafts/DraftFooter approval view: not a manager past d
     <div
       className="c11"
       disabled={false}
+      loading={false}
       type="secondary"
     >
       <div
@@ -7416,6 +7445,7 @@ exports[`Storyshots Cards|Drafts/DraftFooter approval view: not a manager past d
     <div
       className="c12 c13"
       disabled={false}
+      loading={false}
       type="primary"
     >
       <div
@@ -8055,6 +8085,7 @@ exports[`Storyshots Cards|Drafts/DraftFooter drafts view: manager - scheduled po
     <div
       className="c6"
       disabled={false}
+      loading={false}
       type="text"
     >
       <div
@@ -8081,6 +8112,7 @@ exports[`Storyshots Cards|Drafts/DraftFooter drafts view: manager - scheduled po
     <div
       className="c11 c12"
       disabled={false}
+      loading={false}
       type="secondary"
     >
       <div
@@ -8104,6 +8136,7 @@ exports[`Storyshots Cards|Drafts/DraftFooter drafts view: manager - scheduled po
     <div
       className="c13 c14"
       disabled={false}
+      loading={false}
       type="primary"
     >
       <div
@@ -8478,6 +8511,7 @@ exports[`Storyshots Cards|Drafts/DraftFooter drafts view: manager 1`] = `
     <div
       className="c5"
       disabled={false}
+      loading={false}
       type="text"
     >
       <div
@@ -8504,6 +8538,7 @@ exports[`Storyshots Cards|Drafts/DraftFooter drafts view: manager 1`] = `
     <div
       className="c10 c11"
       disabled={false}
+      loading={false}
       type="secondary"
     >
       <div
@@ -8527,6 +8562,7 @@ exports[`Storyshots Cards|Drafts/DraftFooter drafts view: manager 1`] = `
     <div
       className="c12 c13"
       disabled={false}
+      loading={false}
       type="primary"
     >
       <div
@@ -8940,6 +8976,7 @@ exports[`Storyshots Cards|Drafts/DraftFooter drafts view: manager past due 1`] =
     <div
       className="c6"
       disabled={false}
+      loading={false}
       type="text"
     >
       <div
@@ -8966,6 +9003,7 @@ exports[`Storyshots Cards|Drafts/DraftFooter drafts view: manager past due 1`] =
     <div
       className="c11 c12"
       disabled={false}
+      loading={false}
       type="secondary"
     >
       <div
@@ -8989,6 +9027,7 @@ exports[`Storyshots Cards|Drafts/DraftFooter drafts view: manager past due 1`] =
     <div
       className="c13 c14"
       disabled={false}
+      loading={false}
       type="primary"
     >
       <div
@@ -9437,6 +9476,7 @@ exports[`Storyshots Cards|Drafts/DraftFooter drafts view: not manager 1`] = `
     <div
       className="c5"
       disabled={false}
+      loading={false}
       type="text"
     >
       <div
@@ -9463,6 +9503,7 @@ exports[`Storyshots Cards|Drafts/DraftFooter drafts view: not manager 1`] = `
     <div
       className="c10 c11"
       disabled={false}
+      loading={false}
       type="secondary"
     >
       <div
@@ -9486,6 +9527,7 @@ exports[`Storyshots Cards|Drafts/DraftFooter drafts view: not manager 1`] = `
     <div
       className="c12 c13"
       disabled={false}
+      loading={false}
       type="primary"
     >
       <div
@@ -9899,6 +9941,7 @@ exports[`Storyshots Cards|Drafts/DraftFooter drafts view: not manager past due 1
     <div
       className="c6"
       disabled={false}
+      loading={false}
       type="text"
     >
       <div
@@ -9925,6 +9968,7 @@ exports[`Storyshots Cards|Drafts/DraftFooter drafts view: not manager past due 1
     <div
       className="c11 c12"
       disabled={false}
+      loading={false}
       type="secondary"
     >
       <div
@@ -9948,6 +9992,7 @@ exports[`Storyshots Cards|Drafts/DraftFooter drafts view: not manager past due 1
     <div
       className="c13 c14"
       disabled={false}
+      loading={false}
       type="primary"
     >
       <div
@@ -10774,6 +10819,7 @@ exports[`Storyshots Cards|Posts/Post Instragram post with Location 1`] = `
           <div
             className="c11"
             disabled={false}
+            loading={false}
             type="text"
           >
             <div
@@ -10800,6 +10846,7 @@ exports[`Storyshots Cards|Posts/Post Instragram post with Location 1`] = `
           <div
             className="c16 c17"
             disabled={false}
+            loading={false}
             type="secondary"
           >
             <div
@@ -10823,6 +10870,7 @@ exports[`Storyshots Cards|Posts/Post Instragram post with Location 1`] = `
           <div
             className="c18"
             disabled={false}
+            loading={false}
             type="primary"
           >
             <div
@@ -11293,6 +11341,7 @@ exports[`Storyshots Cards|Posts/Post Instragram post without Location 1`] = `
           <div
             className="c11"
             disabled={false}
+            loading={false}
             type="text"
           >
             <div
@@ -11319,6 +11368,7 @@ exports[`Storyshots Cards|Posts/Post Instragram post without Location 1`] = `
           <div
             className="c16 c17"
             disabled={false}
+            loading={false}
             type="secondary"
           >
             <div
@@ -11342,6 +11392,7 @@ exports[`Storyshots Cards|Posts/Post Instragram post without Location 1`] = `
           <div
             className="c18"
             disabled={false}
+            loading={false}
             type="primary"
           >
             <div
@@ -11903,6 +11954,7 @@ exports[`Storyshots Cards|Posts/Post Pinterest post with board and source URL 1`
           <div
             className="c11"
             disabled={false}
+            loading={false}
             type="text"
           >
             <div
@@ -11929,6 +11981,7 @@ exports[`Storyshots Cards|Posts/Post Pinterest post with board and source URL 1`
           <div
             className="c16 c17"
             disabled={false}
+            loading={false}
             type="secondary"
           >
             <div
@@ -11952,6 +12005,7 @@ exports[`Storyshots Cards|Posts/Post Pinterest post with board and source URL 1`
           <div
             className="c18"
             disabled={false}
+            loading={false}
             type="primary"
           >
             <div
@@ -12497,6 +12551,7 @@ exports[`Storyshots Cards|Posts/Post Pinterest post with board only 1`] = `
           <div
             className="c11"
             disabled={false}
+            loading={false}
             type="text"
           >
             <div
@@ -12523,6 +12578,7 @@ exports[`Storyshots Cards|Posts/Post Pinterest post with board only 1`] = `
           <div
             className="c16 c17"
             disabled={false}
+            loading={false}
             type="secondary"
           >
             <div
@@ -12546,6 +12602,7 @@ exports[`Storyshots Cards|Posts/Post Pinterest post with board only 1`] = `
           <div
             className="c18"
             disabled={false}
+            loading={false}
             type="primary"
           >
             <div
@@ -13068,6 +13125,7 @@ exports[`Storyshots Cards|Posts/Post error 1`] = `
           <div
             className="c12"
             disabled={false}
+            loading={false}
             type="text"
           >
             <div
@@ -13094,6 +13152,7 @@ exports[`Storyshots Cards|Posts/Post error 1`] = `
           <div
             className="c17 c18"
             disabled={false}
+            loading={false}
             type="secondary"
           >
             <div
@@ -13117,6 +13176,7 @@ exports[`Storyshots Cards|Posts/Post error 1`] = `
           <div
             className="c19"
             disabled={false}
+            loading={false}
             type="primary"
           >
             <div
@@ -14109,6 +14169,7 @@ exports[`Storyshots Cards|Posts/Post queued post 1`] = `
           <div
             className="c11"
             disabled={false}
+            loading={false}
             type="text"
           >
             <div
@@ -14135,6 +14196,7 @@ exports[`Storyshots Cards|Posts/Post queued post 1`] = `
           <div
             className="c16 c17"
             disabled={false}
+            loading={false}
             type="secondary"
           >
             <div
@@ -14158,6 +14220,7 @@ exports[`Storyshots Cards|Posts/Post queued post 1`] = `
           <div
             className="c18"
             disabled={false}
+            loading={false}
             type="primary"
           >
             <div
@@ -14741,6 +14804,7 @@ exports[`Storyshots Cards|Posts/Post retweet 1`] = `
           <div
             className="c18"
             disabled={false}
+            loading={false}
             type="text"
           >
             <div
@@ -14767,6 +14831,7 @@ exports[`Storyshots Cards|Posts/Post retweet 1`] = `
           <div
             className="c23 c24"
             disabled={false}
+            loading={false}
             type="secondary"
           >
             <div
@@ -14790,6 +14855,7 @@ exports[`Storyshots Cards|Posts/Post retweet 1`] = `
           <div
             className="c25"
             disabled={false}
+            loading={false}
             type="primary"
           >
             <div
@@ -15389,6 +15455,7 @@ exports[`Storyshots Cards|Posts/Post retweet with comment 1`] = `
           <div
             className="c18"
             disabled={false}
+            loading={false}
             type="text"
           >
             <div
@@ -15415,6 +15482,7 @@ exports[`Storyshots Cards|Posts/Post retweet with comment 1`] = `
           <div
             className="c23 c24"
             disabled={false}
+            loading={false}
             type="secondary"
           >
             <div
@@ -15438,6 +15506,7 @@ exports[`Storyshots Cards|Posts/Post retweet with comment 1`] = `
           <div
             className="c25"
             disabled={false}
+            loading={false}
             type="primary"
           >
             <div
@@ -16100,6 +16169,7 @@ exports[`Storyshots Cards|Posts/PostFooter dragging post 1`] = `
     <div
       className="c5"
       disabled={false}
+      loading={false}
       type="text"
     >
       <div
@@ -16126,6 +16196,7 @@ exports[`Storyshots Cards|Posts/PostFooter dragging post 1`] = `
     <div
       className="c10 c11"
       disabled={false}
+      loading={false}
       type="secondary"
     >
       <div
@@ -16149,6 +16220,7 @@ exports[`Storyshots Cards|Posts/PostFooter dragging post 1`] = `
     <div
       className="c12"
       disabled={false}
+      loading={false}
       type="primary"
     >
       <div
@@ -16558,6 +16630,7 @@ exports[`Storyshots Cards|Posts/PostFooter has instagram comment 1`] = `
     <div
       className="c7"
       disabled={false}
+      loading={false}
       type="text"
     >
       <div
@@ -16584,6 +16657,7 @@ exports[`Storyshots Cards|Posts/PostFooter has instagram comment 1`] = `
     <div
       className="c12 c13"
       disabled={false}
+      loading={false}
       type="secondary"
     >
       <div
@@ -16607,6 +16681,7 @@ exports[`Storyshots Cards|Posts/PostFooter has instagram comment 1`] = `
     <div
       className="c14"
       disabled={false}
+      loading={false}
       type="primary"
     >
       <div
@@ -17413,6 +17488,7 @@ exports[`Storyshots Cards|Posts/PostFooter post with error 1`] = `
     <div
       className="c6"
       disabled={false}
+      loading={false}
       type="text"
     >
       <div
@@ -17439,6 +17515,7 @@ exports[`Storyshots Cards|Posts/PostFooter post with error 1`] = `
     <div
       className="c11 c12"
       disabled={false}
+      loading={false}
       type="secondary"
     >
       <div
@@ -17462,6 +17539,7 @@ exports[`Storyshots Cards|Posts/PostFooter post with error 1`] = `
     <div
       className="c11"
       disabled={false}
+      loading={false}
       type="secondary"
     >
       <div
@@ -17485,6 +17563,7 @@ exports[`Storyshots Cards|Posts/PostFooter post with error 1`] = `
     <div
       className="c13 c14"
       disabled={false}
+      loading={false}
       type="primary"
     >
       <div
@@ -17856,6 +17935,7 @@ exports[`Storyshots Cards|Posts/PostFooter queued post 1`] = `
     <div
       className="c5"
       disabled={false}
+      loading={false}
       type="text"
     >
       <div
@@ -17882,6 +17962,7 @@ exports[`Storyshots Cards|Posts/PostFooter queued post 1`] = `
     <div
       className="c10 c11"
       disabled={false}
+      loading={false}
       type="secondary"
     >
       <div
@@ -17905,6 +17986,7 @@ exports[`Storyshots Cards|Posts/PostFooter queued post 1`] = `
     <div
       className="c12"
       disabled={false}
+      loading={false}
       type="primary"
     >
       <div
@@ -18648,6 +18730,7 @@ exports[`Storyshots Cards|Stories/Story default 1`] = `
       <div
         className="c7"
         disabled={false}
+        loading={false}
         type="secondary"
       >
         <div
@@ -18735,6 +18818,7 @@ exports[`Storyshots Cards|Stories/Story default 1`] = `
         <div
           className="c19"
           disabled={false}
+          loading={false}
           type="text"
         >
           <div
@@ -18761,6 +18845,7 @@ exports[`Storyshots Cards|Stories/Story default 1`] = `
         <div
           className="c7 c21"
           disabled={false}
+          loading={false}
           type="secondary"
         >
           <div
@@ -18784,6 +18869,7 @@ exports[`Storyshots Cards|Stories/Story default 1`] = `
         <div
           className="c22"
           disabled={false}
+          loading={false}
           type="primary"
         >
           <div
@@ -19300,6 +19386,7 @@ exports[`Storyshots Cards|Stories/Story story with banner error message 1`] = `
       <div
         className="c7"
         disabled={false}
+        loading={false}
         type="secondary"
       >
         <div
@@ -19348,6 +19435,7 @@ exports[`Storyshots Cards|Stories/Story story with banner error message 1`] = `
         <div
           className="c18"
           disabled={false}
+          loading={false}
           type="text"
         >
           <div
@@ -19374,6 +19462,7 @@ exports[`Storyshots Cards|Stories/Story story with banner error message 1`] = `
         <div
           className="c7 c20"
           disabled={false}
+          loading={false}
           type="secondary"
         >
           <div
@@ -19397,6 +19486,7 @@ exports[`Storyshots Cards|Stories/Story story with banner error message 1`] = `
         <div
           className="c21"
           disabled={false}
+          loading={false}
           type="primary"
         >
           <div
@@ -19925,6 +20015,7 @@ exports[`Storyshots Cards|Stories/Story story with banner message to download mo
       <div
         className="c7"
         disabled={false}
+        loading={false}
         type="secondary"
       >
         <div
@@ -20012,6 +20103,7 @@ exports[`Storyshots Cards|Stories/Story story with banner message to download mo
         <div
           className="c19"
           disabled={false}
+          loading={false}
           type="text"
         >
           <div
@@ -20038,6 +20130,7 @@ exports[`Storyshots Cards|Stories/Story story with banner message to download mo
         <div
           className="c7 c21"
           disabled={false}
+          loading={false}
           type="secondary"
         >
           <div
@@ -20061,6 +20154,7 @@ exports[`Storyshots Cards|Stories/Story story with banner message to download mo
         <div
           className="c22"
           disabled={false}
+          loading={false}
           type="primary"
         >
           <div

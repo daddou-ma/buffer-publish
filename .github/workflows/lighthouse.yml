@@ -1,10 +1,10 @@
 name: Lighthouse CI (alpha)
 
-on: 
+on:
   push:
-    branches: 
+    branches:
       - '*'
-    tags-ignore: 
+    tags-ignore:
       - depfu
 
 jobs:
@@ -22,7 +22,7 @@ jobs:
       - name: Install LHCI and Puppeteer packages
         run: |
           npm install -g @lhci/cli
-          npm install --save puppeteer
+          npm install --save puppeteer lighthouse
 
       - name: Wait for bufferbotbrains/cicd-buffer-publish
         id: wait-deploy

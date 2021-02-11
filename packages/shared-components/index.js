@@ -48,3 +48,4 @@ export StepList from './StepList';
 export StepNumber from './StepNumber';
 export UpdateTextContent from './UpdateTextContent';
 export UserDetails from './UserDetails';
+export GlobalEmptyState from './GlobalEmptyState';
