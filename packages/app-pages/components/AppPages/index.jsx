@@ -64,7 +64,14 @@ const AppPages = ({
     const selectedProfileId =
       Array.isArray(profiles) && !!profiles.length && profiles[0].id;
     const newPath = profilePages.getRoute({ profileId: selectedProfileId });
-    return <Redirect to={newPath} />;
+    return (
+      <Redirect
+        to={{
+          pathname: newPath,
+          state: { routeChangedFromAppShell },
+        }}
+      />
+    );
   };
   const hasProfiles = profiles && profiles.length > 0;
 
