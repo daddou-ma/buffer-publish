@@ -40,7 +40,6 @@ const initialState = {
     selected: {
       id: organization.id,
       hasCalendarFeature: true,
-      hasShareAgainFeature: true,
       hasApprovalFeature: true,
       hasDraftsFeature: true,
       hasGridFeature: true,
