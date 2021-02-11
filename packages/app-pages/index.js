@@ -8,6 +8,8 @@ import AppPages from './components/AppPages';
 export default connect(
   state => {
     const currentPath = state.router.location?.pathname;
+    const routeChangedFromAppShell =
+      state.router.location?.state?.routeChangedFromAppShell;
     const profiles = state.profileSidebar.profileList;
 
     const orgIdFromRoute = getOrgIdFromRoute({ currentPath, profiles });
@@ -17,7 +19,7 @@ export default connect(
       showBusinessTrialistsOnboarding:
         state.organizations.selected?.showBusinessTrialistsOnboarding,
       orgIdFromRoute,
-      orgSelectedIdStoredInRedux: state.organizations.selected?.id,
+      routeChangedFromAppShell,
     };
   },
   dispatch => ({

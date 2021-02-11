@@ -22,9 +22,8 @@ const AppPages = ({
   unfilteredProfiles,
   showBusinessTrialistsOnboarding,
   profileRouteLoaded,
-  setCurrentOrganization,
   orgIdFromRoute,
-  orgSelectedIdStoredInRedux,
+  routeChangedFromAppShell,
 }) => {
   // Get current selected org from appshell
   const user = useUser();
@@ -45,12 +44,13 @@ const AppPages = ({
     orgIdFromRoute,
     needsToSelectNewOrgInAppShell,
     profiles,
+    routeChangedFromAppShell,
   });
 
   const switchOrganization = useOrgSwitcher();
   // If org coming from route doesn't match the last org stored, select and store the new value
   useEffect(() => {
-    if (needsToSelectNewOrgInAppShell) {
+    if (needsToSelectNewOrgInAppShell && !routeChangedFromAppShell) {
       switchOrganization(currentOrgId, {
         onCompleted: id => {
           console.info(`organization selected ${id}`);

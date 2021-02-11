@@ -42,9 +42,12 @@ export default connect(
       dispatch(actions.onCloseBanner({ key }));
     },
     switchOrganization(organizationId) {
-      debugger;
-      console.log(`clicked on org switcher to select ${organizationId}`);
-      dispatch(organization.goTo({ orgId: organizationId }));
+      dispatch(
+        organization.goTo({
+          orgId: organizationId,
+          state: { routeChangedFromAppShell: true },
+        })
+      );
       // ADD TRACKING HERE
     },
   })
