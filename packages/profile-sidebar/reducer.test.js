@@ -20,11 +20,14 @@ describe('reducer', () => {
       isLockedProfile: false,
       hasInstagram: true,
       hasFacebook: true,
+      hasSharedChannelsFlip: false,
+      isLoadingGlobalAccount: true,
       hasTwitter: true,
       isSearchPopupVisible: false,
       searchText: null,
       loaded: false,
       profileList: [],
+      profilesUnfiltered: [],
     };
     const action = {
       type: 'INIT',
