@@ -19,9 +19,12 @@ export const actionTypes = keyWrapper('PROFILE_SIDEBAR', {
 export const initialState = {
   profiles: [],
   profileList: [],
+  profilesUnfiltered: [],
   selectedProfileId: '',
   loading: false,
   loaded: false,
+  isLoadingGlobalAccount: true,
+  hasSharedChannelsFlip: false,
   selectedProfile: {},
   isLockedProfile: false,
   hasInstagram: true,
@@ -162,13 +165,49 @@ export default (state = initialState, action) => {
         loading: true,
       };
 
+    case `globalAccount_${dataFetchActionTypes.FETCH_START}`:
+      return {
+        ...state,
+        isLoadingGlobalAccount: true,
+      };
+
+    case `globalAccount_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+      const featureFlips = action.result.featureFlips || [];
+      const hasSharedChannelsFlip = featureFlips.includes('sharedChannels');
+      const { profilesUnfiltered } = state;
+      const profileList = hasSharedChannelsFlip
+        ? getEnabledProfiles(profilesUnfiltered)
+        : profilesUnfiltered;
+
+      return {
+        ...state,
+        isLoadingGlobalAccount: false,
+        hasSharedChannelsFlip,
+        profileList,
+        profiles: filterProfilesByOrg(profileList, state.organization),
+      };
+    }
+
+    case `globalAccount_${dataFetchActionTypes.FETCH_FAIL}`:
+      return {
+        ...state,
+        isLoadingGlobalAccount: false,
+      };
+
     case `profiles_${dataFetchActionTypes.FETCH_SUCCESS}`: {
-      const profileList = getEnabledProfiles(action.result);
+      const { hasSharedChannelsFlip, isLoadingGlobalAccount } = state;
+      const shouldFilter = hasSharedChannelsFlip || isLoadingGlobalAccount;
+      const profiles = action.result;
+      const profileList = shouldFilter
+        ? getEnabledProfiles(profiles)
+        : profiles;
+
       return {
         ...state,
         loading: false,
         loaded: true,
         profileList,
+        profilesUnfiltered: filterProfilesByOrg(profiles, state.organization),
         profiles: filterProfilesByOrg(profileList, state.organization),
         hasInstagram: profileList.some(p => p.service === 'instagram'),
         hasFacebook: profileList.some(p => p.service === 'facebook'),
