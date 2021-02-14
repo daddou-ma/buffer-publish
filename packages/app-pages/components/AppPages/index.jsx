@@ -8,6 +8,7 @@ import {
   newBusinessTrialists,
   newConnection,
   campaignsPage,
+  missingAccessPage,
 } from '@bufferapp/publish-routes';
 import PagesWithSidebar from '@bufferapp/publish-app-pages/components/PagesWithSidebar';
 import ProfilePages from '@bufferapp/publish-app-pages/components/ProfilePages';
@@ -15,6 +16,7 @@ import Preferences from '@bufferapp/publish-preferences';
 import Plans from '@bufferapp/publish-plans';
 import DefaultPage from '@bufferapp/default-page';
 import OnboardingManager from '@bufferapp/publish-onboarding';
+import MissingAccessPage from '../../../missing-access-page/index';
 
 const AppPages = ({
   profiles,
@@ -25,6 +27,7 @@ const AppPages = ({
   currentOrgId,
 }) => {
   const hasProfiles = profiles && profiles.length > 0;
+  const hasAccess = false;
   // If org coming from route doesn't match the last org stored, select and store the new value
   useEffect(() => {
     if (needsToSetCurrentOrg) {
@@ -57,6 +60,10 @@ const AppPages = ({
         <Route path={newConnection.route} component={DefaultPage} />
       )}
       {!hasProfiles && <Redirect to={newConnection.route} />}
+
+      {!hasAccess && (
+        <Route path={missingAccessPage.route} component={MissingAccessPage} />
+      )}
 
       <Route path={campaignsPage.route} component={PagesWithSidebar} />
       <Route
