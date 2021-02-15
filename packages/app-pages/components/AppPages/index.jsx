@@ -47,12 +47,12 @@ const AppPages = ({
     needsToSelectNewOrgInAppShell,
     profiles,
     routeChangedFromAppShell,
-  });
+  }, new Date());
 
   const switchOrganization = useOrgSwitcher();
   // If org coming from route doesn't match the last org stored, select and store the new value
   useEffect(() => {
-    console.log('mudooooou');
+    console.log('mudooooou', new Date());
     if (needsToSelectNewOrgInAppShell && !routeChangedFromAppShell) {
       switchOrganization(currentOrgId, {
         onCompleted: id => {
