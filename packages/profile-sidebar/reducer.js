@@ -165,12 +165,14 @@ export default (state = initialState, action) => {
         loading: true,
       };
 
+    // TODO: remove this after full rollout of shared channels
     case `globalAccount_${dataFetchActionTypes.FETCH_START}`:
       return {
         ...state,
         isLoadingGlobalAccount: true,
       };
 
+    // TODO: remove this after full rollout of shared channels
     case `globalAccount_${dataFetchActionTypes.FETCH_SUCCESS}`: {
       const featureFlips = action.result.featureFlips || [];
       const hasSharedChannelsFlip = featureFlips.includes('sharedChannels');
@@ -188,6 +190,7 @@ export default (state = initialState, action) => {
       };
     }
 
+    // TODO: remove this after full rollout of shared channels
     case `globalAccount_${dataFetchActionTypes.FETCH_FAIL}`:
       return {
         ...state,
@@ -195,6 +198,7 @@ export default (state = initialState, action) => {
       };
 
     case `profiles_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+      // TODO: remove the feature flip check after full rollout of shared channels
       const { hasSharedChannelsFlip, isLoadingGlobalAccount } = state;
       const shouldFilter = hasSharedChannelsFlip || isLoadingGlobalAccount;
       const profiles = action.result;
