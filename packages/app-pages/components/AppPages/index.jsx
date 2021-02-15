@@ -24,6 +24,7 @@ const AppPages = ({
   profileRouteLoaded,
   orgIdFromRoute,
   routeChangedFromAppShell,
+  currentPath,
 }) => {
   // Get current selected org from appshell
   const user = useUser();
@@ -39,6 +40,7 @@ const AppPages = ({
   });
 
   console.log({
+    currentPath,
     selectedOrgInAppShell,
     currentOrgId,
     orgIdFromRoute,
@@ -50,6 +52,7 @@ const AppPages = ({
   const switchOrganization = useOrgSwitcher();
   // If org coming from route doesn't match the last org stored, select and store the new value
   useEffect(() => {
+    console.log('mudooooou');
     if (needsToSelectNewOrgInAppShell && !routeChangedFromAppShell) {
       switchOrganization(currentOrgId, {
         onCompleted: id => {
@@ -58,7 +61,7 @@ const AppPages = ({
         },
       });
     }
-  }, [needsToSelectNewOrgInAppShell]);
+  }, [currentPath]);
 
   const redirectToQueue = () => {
     const selectedProfileId =

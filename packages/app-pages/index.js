@@ -11,7 +11,6 @@ export default connect(
     const routeChangedFromAppShell =
       state.router.location?.state?.routeChangedFromAppShell;
     const profiles = state.profileSidebar.profileList;
-
     const orgIdFromRoute = getOrgIdFromRoute({ currentPath, profiles });
 
     return {
@@ -20,6 +19,7 @@ export default connect(
         state.organizations.selected?.showBusinessTrialistsOnboarding,
       orgIdFromRoute,
       routeChangedFromAppShell,
+      currentPath,
     };
   },
   dispatch => ({
