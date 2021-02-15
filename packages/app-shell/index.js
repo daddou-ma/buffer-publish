@@ -42,6 +42,7 @@ export default connect(
       dispatch(actions.onCloseBanner({ key }));
     },
     switchOrganization(organizationId) {
+      console.log('switching organization from app shell', organizationId)
       dispatch(
         organization.goTo({
           orgId: organizationId,
