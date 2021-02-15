@@ -2,10 +2,16 @@ import { actionTypes as asyncDataFetchActionTypes } from '@bufferapp/async-data-
 
 const initialState = {
   shouldRedirectToAccountChannels: false,
+  isLoadingGlobalAccount: false,
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case `globalAccount_${asyncDataFetchActionTypes.FETCH_START}`:
+      return {
+        ...state,
+        isLoadingGlobalAccount: true,
+      };
     case `globalAccount_${asyncDataFetchActionTypes.FETCH_SUCCESS}`: {
       const featureFlips = action.result.featureFlips || [];
       return {
@@ -16,8 +22,14 @@ export default (state = initialState, action) => {
         shouldRedirectToAccountChannels: featureFlips.includes(
           'sharedChannels'
         ),
+        isLoadingGlobalAccount: false,
       };
     }
+    case `globalAccount_${asyncDataFetchActionTypes.FETCH_FAIL}`:
+      return {
+        ...state,
+        isLoadingGlobalAccount: false,
+      };
     default:
       return state;
   }

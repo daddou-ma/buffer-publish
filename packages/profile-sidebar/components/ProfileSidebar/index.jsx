@@ -105,6 +105,7 @@ const ProfileSidebar = ({
   manageChannelsURL,
   connectChannelsURL,
   connectDirectURLs,
+  shouldHideLockedChannels,
 }) => {
   const { t } = useTranslation();
 
@@ -159,6 +160,7 @@ const ProfileSidebar = ({
             onProfileClick={onProfileClick}
             onDropProfile={onDropProfile}
             profileLimit={profileLimit}
+            shouldHideLockedChannels={shouldHideLockedChannels}
           />
         </ProfileListStyle>
       )}

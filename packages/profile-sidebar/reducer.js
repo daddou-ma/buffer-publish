@@ -19,9 +19,12 @@ export const actionTypes = keyWrapper('PROFILE_SIDEBAR', {
 export const initialState = {
   profiles: [],
   profileList: [],
+  profilesUnfiltered: [],
   selectedProfileId: '',
   loading: false,
   loaded: false,
+  isLoadingGlobalAccount: true,
+  hasSharedChannelsFlip: false,
   selectedProfile: {},
   isLockedProfile: false,
   hasInstagram: true,
@@ -145,6 +148,9 @@ const profilesReducer = (state = [], action) => {
   }
 };
 
+export const getEnabledProfiles = profiles =>
+  profiles.filter(profile => !profile.disabled);
+
 export default (state = initialState, action) => {
   let isSearchPopupVisible = false;
   let searchText = null;
@@ -159,16 +165,57 @@ export default (state = initialState, action) => {
         loading: true,
       };
 
+    // TODO: remove this after full rollout of shared channels
+    case `globalAccount_${dataFetchActionTypes.FETCH_START}`:
+      return {
+        ...state,
+        isLoadingGlobalAccount: true,
+      };
+
+    // TODO: remove this after full rollout of shared channels
+    case `globalAccount_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+      const featureFlips = action.result.featureFlips || [];
+      const hasSharedChannelsFlip = featureFlips.includes('sharedChannels');
+      const { profilesUnfiltered } = state;
+      const profileList = hasSharedChannelsFlip
+        ? getEnabledProfiles(profilesUnfiltered)
+        : profilesUnfiltered;
+
+      return {
+        ...state,
+        isLoadingGlobalAccount: false,
+        hasSharedChannelsFlip,
+        profileList,
+        profiles: filterProfilesByOrg(profileList, state.organization),
+      };
+    }
+
+    // TODO: remove this after full rollout of shared channels
+    case `globalAccount_${dataFetchActionTypes.FETCH_FAIL}`:
+      return {
+        ...state,
+        isLoadingGlobalAccount: false,
+      };
+
     case `profiles_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+      // TODO: remove the feature flip check after full rollout of shared channels
+      const { hasSharedChannelsFlip, isLoadingGlobalAccount } = state;
+      const shouldFilter = hasSharedChannelsFlip || isLoadingGlobalAccount;
+      const profiles = action.result;
+      const profileList = shouldFilter
+        ? getEnabledProfiles(profiles)
+        : profiles;
+
       return {
         ...state,
         loading: false,
         loaded: true,
-        profileList: action.result,
-        profiles: filterProfilesByOrg(action.result, state.organization),
-        hasInstagram: action.result.some(p => p.service === 'instagram'),
-        hasFacebook: action.result.some(p => p.service === 'facebook'),
-        hasTwitter: action.result.some(p => p.service === 'twitter'),
+        profileList,
+        profilesUnfiltered: filterProfilesByOrg(profiles, state.organization),
+        profiles: filterProfilesByOrg(profileList, state.organization),
+        hasInstagram: profileList.some(p => p.service === 'instagram'),
+        hasFacebook: profileList.some(p => p.service === 'facebook'),
+        hasTwitter: profileList.some(p => p.service === 'twitter'),
       };
     }
     case orgActionTypes.ORGANIZATION_SELECTED: {
