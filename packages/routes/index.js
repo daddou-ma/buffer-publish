@@ -122,9 +122,5 @@ export const campaignSent = {
 // Organization Routes
 export const organization = {
   route: '/org/:id/',
-  goTo: ({ orgId, state }) =>
-    push({
-      pathname: `/org/${orgId}`,
-      state,
-    }),
+  goTo: ({ orgId }) => push(`/org/${orgId}`),
 };

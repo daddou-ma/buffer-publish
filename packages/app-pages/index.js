@@ -11,7 +11,7 @@ export default connect(
     const profiles = state.profileSidebar.profileList;
     const orgIdFromRoute = getOrgIdFromRoute({ currentPath, profiles });
     const selectedOrgInAppShell =
-      window._appShell.user?.currentOrganization?.id;
+      window._appShell?.user?.currentOrganization?.id;
 
     const currentOrgId = orgIdFromRoute || selectedOrgInAppShell;
 
@@ -29,6 +29,7 @@ export default connect(
         selectedOrgInAppShell !== currentOrgId && !!selectedOrgInAppShell,
       selectedOrgInAppShell,
       orgIdFromRoute,
+      currentPath,
     };
   },
   dispatch => ({

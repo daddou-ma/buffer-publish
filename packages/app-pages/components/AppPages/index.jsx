@@ -26,6 +26,7 @@ const AppPages = ({
   selectedOrgInAppShell,
   switchOrganization,
   orgIdFromRoute,
+  currentPath,
 }) => {
   console.log(
     {
@@ -34,6 +35,7 @@ const AppPages = ({
       currentOrgId,
       selectedOrgInAppShell,
       orgIdFromRoute,
+      currentPath,
     },
     new Date()
   );
