@@ -8,6 +8,7 @@ import {
   plansPage,
   preferencesPage,
   profilePages,
+  profileTabPages,
 } from '@bufferapp/publish-routes';
 import PagesWithSidebar from '@bufferapp/publish-app-pages/components/PagesWithSidebar';
 import ProfilePages from '@bufferapp/publish-app-pages/components/ProfilePages';
@@ -24,6 +25,7 @@ const AppPages = ({
   currentOrgId,
   selectedOrgInAppShell,
   switchOrganization,
+  orgIdFromRoute,
 }) => {
   console.log(
     {
@@ -31,6 +33,7 @@ const AppPages = ({
       needsToSelectNewOrgInAppShell,
       currentOrgId,
       selectedOrgInAppShell,
+      orgIdFromRoute,
     },
     new Date()
   );
@@ -46,14 +49,8 @@ const AppPages = ({
   const redirectToQueue = () => {
     const selectedProfileId =
       Array.isArray(profiles) && !!profiles.length && profiles[0].id;
-    const newPath = profilePages.getRoute({ profileId: selectedProfileId });
-    return (
-      <Redirect
-        to={{
-          pathname: newPath,
-        }}
-      />
-    );
+    const newPath = profileTabPages.getRoute({ profileId: selectedProfileId });
+    return <Redirect to={newPath} />;
   };
   const hasProfiles = profiles && profiles.length > 0;
 

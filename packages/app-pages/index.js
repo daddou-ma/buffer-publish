@@ -28,6 +28,7 @@ export default connect(
       needsToSelectNewOrgInAppShell:
         selectedOrgInAppShell !== currentOrgId && !!selectedOrgInAppShell,
       selectedOrgInAppShell,
+      orgIdFromRoute,
     };
   },
   dispatch => ({
