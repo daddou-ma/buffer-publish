@@ -9,59 +9,39 @@ import {
   preferencesPage,
   profilePages,
 } from '@bufferapp/publish-routes';
-import { filterProfilesByOrg } from '@bufferapp/publish-profile-sidebar/utils';
 import PagesWithSidebar from '@bufferapp/publish-app-pages/components/PagesWithSidebar';
 import ProfilePages from '@bufferapp/publish-app-pages/components/ProfilePages';
 import Preferences from '@bufferapp/publish-preferences';
 import Plans from '@bufferapp/publish-plans';
 import DefaultPage from '@bufferapp/default-page';
 import OnboardingManager from '@bufferapp/publish-onboarding';
-import { useOrgSwitcher, useUser } from '@bufferapp/app-shell';
 
 const AppPages = ({
-  unfilteredProfiles,
+  profiles,
   showBusinessTrialistsOnboarding,
   profileRouteLoaded,
-  orgIdFromRoute,
-  routeChangedFromAppShell,
-  currentPath,
+  needsToSelectNewOrgInAppShell,
+  currentOrgId,
+  selectedOrgInAppShell,
+  switchOrganization,
 }) => {
-  // Get current selected org from appshell
-  const user = useUser();
-  const selectedOrgInAppShell = user?.currentOrganization?.id;
+  console.log(
+    {
+      profiles,
+      needsToSelectNewOrgInAppShell,
+      currentOrgId,
+      selectedOrgInAppShell,
+    },
+    new Date()
+  );
 
-  const currentOrgId = orgIdFromRoute || selectedOrgInAppShell;
-  const needsToSelectNewOrgInAppShell =
-    selectedOrgInAppShell !== orgIdFromRoute && !!orgIdFromRoute;
-
-  // Filters profiles by current org selected
-  const profiles = filterProfilesByOrg(unfilteredProfiles, {
-    id: currentOrgId,
-  });
-
-  console.log({
-    currentPath,
-    selectedOrgInAppShell,
-    currentOrgId,
-    orgIdFromRoute,
-    needsToSelectNewOrgInAppShell,
-    profiles,
-    routeChangedFromAppShell,
-  }, new Date());
-
-  const switchOrganization = useOrgSwitcher();
   // If org coming from route doesn't match the last org stored, select and store the new value
   useEffect(() => {
     console.log('mudooooou', new Date());
-    if (needsToSelectNewOrgInAppShell && !routeChangedFromAppShell) {
-      switchOrganization(currentOrgId, {
-        onCompleted: id => {
-          console.info(`organization selected ${id}`);
-          // add tracking here;
-        },
-      });
+    if (needsToSelectNewOrgInAppShell) {
+      switchOrganization(currentOrgId);
     }
-  }, [currentPath]);
+  }, [currentOrgId]);
 
   const redirectToQueue = () => {
     const selectedProfileId =
@@ -71,7 +51,6 @@ const AppPages = ({
       <Redirect
         to={{
           pathname: newPath,
-          state: { routeChangedFromAppShell },
         }}
       />
     );
@@ -121,7 +100,7 @@ AppPages.propTypes = {
   profileRouteLoaded: PropTypes.func.isRequired,
   needsToSetCurrentOrg: PropTypes.bool,
   orgIdFromRoute: PropTypes.string,
-  setCurrentOrganization: PropTypes.func,
+  switchOrganization: PropTypes.func,
 };
 
 AppPages.defaultProps = {
@@ -129,7 +108,7 @@ AppPages.defaultProps = {
   unfilteredProfiles: [],
   needsToSetCurrentOrg: false,
   orgIdFromRoute: null,
-  setCurrentOrganization: () => {},
+  switchOrganization: () => {},
 };
 
 export default AppPages;
