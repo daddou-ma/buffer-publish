@@ -49,7 +49,10 @@ const AppPages = ({
   const redirectToQueue = () => {
     const selectedProfileId =
       Array.isArray(profiles) && !!profiles.length && profiles[0].id;
-    const newPath = profileTabPages.getRoute({ profileId: selectedProfileId });
+    const newPath = profileTabPages.getRoute({
+      profileId: selectedProfileId,
+      tabId: 'queue',
+    });
     return <Redirect to={newPath} />;
   };
   const hasProfiles = profiles && profiles.length > 0;
