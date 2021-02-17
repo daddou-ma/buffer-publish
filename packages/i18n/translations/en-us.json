@@ -98,26 +98,26 @@
   },
   "missing-access-page": {
     "heading": "This organization is missing access to our publishing tools",
-    "altText": "Woman adding item to Instagram grid",
+    "altText": "Person adding post to Instagram grid",
     "accessTypes": {
-      "adminWithOtherOrgAccess": { 
-        "description": "Looks like your organization {{currentOrg}} doesn't have access to our publishing tools quite yet. To add this, sign up below or switch to your other organization {{orgWithAccess}} to gain access.",
-        "secondaryActionLabel": "Sign Up",
-        "primaryActionLabel": "Switch to {{orgWithAccess}}"
+      "adminWithOrgAccess": { 
+        "description": "Looks like your organization {{orgName}} doesn't have access to our publishing tools quite yet. To add this, sign up below or switch to your other organization {{orgNameWithAccess}} to gain access.",
+        "secondaryLabel": "Sign Up",
+        "primaryLabel": "Switch to {{orgNameWithAccess}}"
       },
       "admin": {
-        "description": "Your organization {{currentOrg}} has yet to sign up for our market leading publishing tools. Find out more or sign up today to get going!",
-        "secondaryActionLabel": "Learn More",
-        "primaryActionLabel": "Sign Up Today"
+        "description": "Your organization {{orgName}} has yet to sign up for our market leading publishing tools. Find out more or sign up today to get going!",
+        "secondaryLabel": "Learn More",
+        "primaryLabel": "Sign Up Today"
       },
-      "nonAdminWithOtherOrgAccess": {
-        "description": "Your organization {{currentOrg}} has yet to sign up for our market leading publishing tools, but your other organization {{orgWithAccess}} does.",
-        "secondaryActionLabel": "Learn More",
-        "primaryActionLabel": "Switch to {{orgWithAccess}}"
+      "nonAdminWithOrgAccess": {
+        "description": "Your organization {{orgName}} has yet to sign up for our market leading publishing tools, but your other organization {{orgNameWithAccess}} does.",
+        "secondaryLabel": "Learn More",
+        "primaryLabel": "Switch to {{orgNameWithAccess}}"
       },
-      "nonadmin": {
-        "description": "Your organization {{currentOrg}} doesn't have access to our publishing tools. The administrator {{email}} can add this feature. If you can't reach them, for whatever reason, get in touch with us.",
-        "secondaryActionLabel": "Contact Support"
+      "nonAdmin": {
+        "description": "Your organization {{orgName}} doesn't have access to our publishing tools. The administrator {{ownerEmail}} can add this feature. If you can't reach them, for whatever reason, get in touch with us.",
+        "secondaryLabel": "Contact Support"
       }
     }
   },

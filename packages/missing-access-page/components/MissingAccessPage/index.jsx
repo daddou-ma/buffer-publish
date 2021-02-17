@@ -4,26 +4,34 @@ import { GlobalEmptyState } from '@bufferapp/publish-shared-components';
 import { useTranslation } from 'react-i18next';
 import { getActions } from '../../utils';
 
-const { t } = useTranslation();
-
 const MissingAccessPage = ({
   accessType,
   orgName,
+  orgNameWithAccess = null,
+  orgIdWithAccess,
   ownerEmail,
-  orgWithAccess,
   switchOrganization,
 }) => {
-  const actions = getActions({ accessType, switchOrganization });
+  const { t } = useTranslation();
+  const actions = getActions({
+    accessType,
+    switchOrganization,
+    orgNameWithAccess,
+    orgIdWithAccess,
+  });
   return (
     <GlobalEmptyState
       imageSrc="https://buffer-publish.s3.amazonaws.com/images/campaign-sent-1.png"
-      altText={t('missingPageAccess.altText')}
-      header={t('missingPageAccess.header')}
-      description={t(`missingPageAccess[${accessType}].description`, {
-        currentOrg: orgName,
-        email: ownerEmail,
-        orgWithAccess,
-      })}
+      altText={t('missing-access-page.altText')}
+      header={t('missing-access-page.heading')}
+      description={t(
+        `missing-access-page.accessTypes.${accessType}.description`,
+        {
+          orgName,
+          orgNameWithAccess,
+          ownerEmail,
+        }
+      )}
       primaryAction={actions.primaryAction}
       secondaryAction={actions.secondaryAction}
     />
@@ -32,6 +40,10 @@ const MissingAccessPage = ({
 
 MissingAccessPage.propTypes = {
   accessType: PropTypes.string.isRequired,
+  orgName: PropTypes.string.isRequired,
+  orgNameWithAccess: PropTypes.string,
+  ownerEmail: PropTypes.string.isRequired,
+  switchOrganization: PropTypes.func.isRequired,
 };
 
 export default MissingAccessPage;

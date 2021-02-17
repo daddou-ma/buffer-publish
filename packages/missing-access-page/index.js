@@ -7,19 +7,20 @@ import MissingAccessPage from './components/MissingAccessPage';
 export default connect(
   state => {
     const isAdmin = state.organizations.selected?.role === 'admin';
-    const orgWithAccess = '';
+    const orgWithAccess = state.appShell.organizations?.find(
+      org => org.billing.canAccessPublishing
+    );
     return {
       orgName: state.organizations.selected?.name,
-      orgWithAccess: '',
-      orgWithAccessId: '',
+      orgNameWithAccess: orgWithAccess?.name,
+      orgIdWithAccess: orgWithAccess?.id,
       ownerEmail: state.organizations.selected?.ownerEmail,
-      accessType: getAccessType({ isAdmin, orgWithAccess }),
+      accessType: getAccessType({ isAdmin, hasOrgWithAccess: orgWithAccess }),
     };
   },
-  (dispatch, ownProps) => ({
-    switchOrganization() {
-      const organizationId = ownProps.orgWithAccessId;
-      dispatch(organization.goTo({ orgId: organizationId }));
+  dispatch => ({
+    switchOrganization(orgId) {
+      dispatch(organization.goTo({ orgId }));
     },
   })
 )(MissingAccessPage);
