@@ -113,35 +113,35 @@ describe('ComposerStore', () => {
   });
 
   it('does not add instagramFeedback when profile with Video is selected', () => {
-    AppDispatcher.dispatch(addUserData);
-    AppDispatcher.dispatch(actionAddProfiles);
-    AppDispatcher.dispatch(actionSelectProfile);
-    AppDispatcher.dispatch(actionEnableInstagramDraft);
-    AppDispatcher.dispatch(actionAddVideo);
-    AppDispatcher.dispatch(actionUpdateInstaState);
+    AppDispatcher.default.dispatch(addUserData);
+    AppDispatcher.default.dispatch(actionAddProfiles);
+    AppDispatcher.default.dispatch(actionSelectProfile);
+    AppDispatcher.default.dispatch(actionEnableInstagramDraft);
+    AppDispatcher.default.dispatch(actionAddVideo);
+    AppDispatcher.default.dispatch(actionUpdateInstaState);
     const draft = ComposerStore.default.getDraft('instagram');
     expect(draft.instagramFeedback.length).toEqual(0);
   });
 
   it('adds instagramFeedback when profile without video is selected', () => {
-    AppDispatcher.dispatch(addUserData);
-    AppDispatcher.dispatch(actionAddProfiles);
-    AppDispatcher.dispatch(actionSelectProfile);
-    AppDispatcher.dispatch(actionEnableInstagramDraft);
-    AppDispatcher.dispatch(actionAddVideo);
-    AppDispatcher.dispatch(actionUpdateInstaState);
+    AppDispatcher.default.dispatch(addUserData);
+    AppDispatcher.default.dispatch(actionAddProfiles);
+    AppDispatcher.default.dispatch(actionSelectProfile);
+    AppDispatcher.default.dispatch(actionEnableInstagramDraft);
+    AppDispatcher.default.dispatch(actionAddVideo);
+    AppDispatcher.default.dispatch(actionUpdateInstaState);
     const draft = ComposerStore.default.getDraft('instagram');
     draft.video = null;
     expect(draft.instagramFeedback.length).toEqual(0);
   });
 
   it('adds instagramFeedback for galleries', () => {
-    AppDispatcher.dispatch(actionAddProfiles);
-    AppDispatcher.dispatch(actionSelectProfile);
-    AppDispatcher.dispatch(actionEnableInstagramDraft);
-    AppDispatcher.dispatch(actionAddImage);
-    AppDispatcher.dispatch(actionAddImage);
-    AppDispatcher.dispatch(actionUpdateInstaState);
+    AppDispatcher.default.dispatch(actionAddProfiles);
+    AppDispatcher.default.dispatch(actionSelectProfile);
+    AppDispatcher.default.dispatch(actionEnableInstagramDraft);
+    AppDispatcher.default.dispatch(actionAddImage);
+    AppDispatcher.default.dispatch(actionAddImage);
+    AppDispatcher.default.dispatch(actionUpdateInstaState);
     const draft = ComposerStore.default.getDraft('instagram');
     expect(draft.instagramFeedback[0].message).toEqual(
       "Due to Instagram limitations, we can't post galleries on your behalf. You will receive a Reminder to post manually when the time comes!"
@@ -149,11 +149,11 @@ describe('ComposerStore', () => {
   });
 
   it('sets draft postDirectToInstagram to false when video is added', () => {
-    AppDispatcher.dispatch(actionAddProfiles);
-    AppDispatcher.dispatch(actionSelectProfile);
-    AppDispatcher.dispatch(actionEnableInstagramDraft);
-    AppDispatcher.dispatch(actionAddVideo);
-    AppDispatcher.dispatch(actionUpdateInstaState);
+    AppDispatcher.default.dispatch(actionAddProfiles);
+    AppDispatcher.default.dispatch(actionSelectProfile);
+    AppDispatcher.default.dispatch(actionEnableInstagramDraft);
+    AppDispatcher.default.dispatch(actionAddVideo);
+    AppDispatcher.default.dispatch(actionUpdateInstaState);
     const draft = ComposerStore.default.getDraft('instagram');
     expect(draft.postDirectToInstagram).toBeFalsy();
   });
@@ -161,11 +161,11 @@ describe('ComposerStore', () => {
   it('returns total amount of characters for caption', () => {
     const id = 'instagram';
     const text = 'Hello';
-    AppDispatcher.dispatch(actionAddProfiles);
-    AppDispatcher.dispatch(actionSelectProfile);
-    AppDispatcher.dispatch(actionEnableInstagramDraft);
-    AppDispatcher.dispatch(actionAddVideo);
-    AppDispatcher.dispatch(actionUpdateInstaState);
+    AppDispatcher.default.dispatch(actionAddProfiles);
+    AppDispatcher.default.dispatch(actionSelectProfile);
+    AppDispatcher.default.dispatch(actionEnableInstagramDraft);
+    AppDispatcher.default.dispatch(actionAddVideo);
+    AppDispatcher.default.dispatch(actionUpdateInstaState);
     const characterCount = ComposerStore.getDraftCharacterCount(id, text);
     expect(characterCount).toEqual(5);
   });
@@ -173,11 +173,11 @@ describe('ComposerStore', () => {
   it('returns total amount of characters for caption when no text', () => {
     const id = 'instagram';
     const text = null;
-    AppDispatcher.dispatch(actionAddProfiles);
-    AppDispatcher.dispatch(actionSelectProfile);
-    AppDispatcher.dispatch(actionEnableInstagramDraft);
-    AppDispatcher.dispatch(actionAddVideo);
-    AppDispatcher.dispatch(actionUpdateInstaState);
+    AppDispatcher.default.dispatch(actionAddProfiles);
+    AppDispatcher.default.dispatch(actionSelectProfile);
+    AppDispatcher.default.dispatch(actionEnableInstagramDraft);
+    AppDispatcher.default.dispatch(actionAddVideo);
+    AppDispatcher.default.dispatch(actionUpdateInstaState);
     const characterCount = ComposerStore.getDraftCharacterCount(id, text);
     expect(characterCount).toEqual(0);
   });
@@ -185,11 +185,11 @@ describe('ComposerStore', () => {
   it('returns total amount of characters for caption with newlines', () => {
     const id = 'instagram';
     const text = 'Hello\n';
-    AppDispatcher.dispatch(actionAddProfiles);
-    AppDispatcher.dispatch(actionSelectProfile);
-    AppDispatcher.dispatch(actionEnableInstagramDraft);
-    AppDispatcher.dispatch(actionAddVideo);
-    AppDispatcher.dispatch(actionUpdateInstaState);
+    AppDispatcher.default.dispatch(actionAddProfiles);
+    AppDispatcher.default.dispatch(actionSelectProfile);
+    AppDispatcher.default.dispatch(actionEnableInstagramDraft);
+    AppDispatcher.default.dispatch(actionAddVideo);
+    AppDispatcher.default.dispatch(actionUpdateInstaState);
     const characterCount = ComposerStore.getDraftCharacterCount(id, text);
     expect(characterCount).toEqual(7);
   });
@@ -197,12 +197,12 @@ describe('ComposerStore', () => {
   it('sets the comment text in the draft', () => {
     const id = 'instagram';
     const commentText = 'Comment';
-    AppDispatcher.dispatch(actionAddProfiles);
-    AppDispatcher.dispatch(actionSelectProfile);
-    AppDispatcher.dispatch(actionEnableInstagramDraft);
-    AppDispatcher.dispatch(actionAddImage);
-    AppDispatcher.dispatch(actionUpdateDraftComment(id, commentText));
-    AppDispatcher.dispatch(actionUpdateInstaState);
+    AppDispatcher.default.dispatch(actionAddProfiles);
+    AppDispatcher.default.dispatch(actionSelectProfile);
+    AppDispatcher.default.dispatch(actionEnableInstagramDraft);
+    AppDispatcher.default.dispatch(actionAddImage);
+    AppDispatcher.default.dispatch(actionUpdateDraftComment(id, commentText));
+    AppDispatcher.default.dispatch(actionUpdateInstaState);
     const draft = ComposerStore.default.getDraft('instagram');
     expect(draft.commentText).toEqual(commentText);
   });
@@ -210,12 +210,12 @@ describe('ComposerStore', () => {
   it('returns total amount of characters for comment', () => {
     const id = 'instagram';
     const commentText = 'Comment';
-    AppDispatcher.dispatch(actionAddProfiles);
-    AppDispatcher.dispatch(actionSelectProfile);
-    AppDispatcher.dispatch(actionEnableInstagramDraft);
-    AppDispatcher.dispatch(actionAddImage);
-    AppDispatcher.dispatch(actionUpdateDraftComment(id, commentText));
-    AppDispatcher.dispatch(actionUpdateInstaState);
+    AppDispatcher.default.dispatch(actionAddProfiles);
+    AppDispatcher.default.dispatch(actionSelectProfile);
+    AppDispatcher.default.dispatch(actionEnableInstagramDraft);
+    AppDispatcher.default.dispatch(actionAddImage);
+    AppDispatcher.default.dispatch(actionUpdateDraftComment(id, commentText));
+    AppDispatcher.default.dispatch(actionUpdateInstaState);
     const characterCommentCount = ComposerStore.getDraftCharacterCount(
       id,
       commentText
@@ -226,10 +226,10 @@ describe('ComposerStore', () => {
   it('returns total amount of characters for facebook draft', () => {
     const id = 'facebook';
 
-    AppDispatcher.dispatch(actionAddProfiles);
-    AppDispatcher.dispatch(actionSelectProfileFacebook);
-    AppDispatcher.dispatch(actionEnableFacebookDraft);
-    AppDispatcher.dispatch(actionAddImageFacebook);
+    AppDispatcher.default.dispatch(actionAddProfiles);
+    AppDispatcher.default.dispatch(actionSelectProfileFacebook);
+    AppDispatcher.default.dispatch(actionEnableFacebookDraft);
+    AppDispatcher.default.dispatch(actionAddImageFacebook);
 
     expect(
       ComposerStore.getDraftCharacterCount(id, 'Text with 23 characters')
@@ -240,11 +240,11 @@ describe('ComposerStore', () => {
 
   describe('soft reset state', () => {
     it('returns the drafts objects', () => {
-      AppDispatcher.dispatch(actionAddProfiles);
-      AppDispatcher.dispatch(actionSelectProfile);
-      AppDispatcher.dispatch(actionEnableInstagramDraft);
-      AppDispatcher.dispatch(actionAddImage);
-      AppDispatcher.dispatch(actionSoftReset);
+      AppDispatcher.default.dispatch(actionAddProfiles);
+      AppDispatcher.default.dispatch(actionSelectProfile);
+      AppDispatcher.default.dispatch(actionEnableInstagramDraft);
+      AppDispatcher.default.dispatch(actionAddImage);
+      AppDispatcher.default.dispatch(actionSoftReset);
       const draftsAfterReset = ComposerStore.default.getDrafts();
 
       expect(draftsAfterReset.length).toBeGreaterThan(0);
