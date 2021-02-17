@@ -25,9 +25,9 @@ const AppPages = ({
   needsToSetCurrentOrg,
   setCurrentOrganization,
   currentOrgId,
+  hasAccessToPublish = false,
 }) => {
   const hasProfiles = profiles && profiles.length > 0;
-  const hasAccess = false;
   // If org coming from route doesn't match the last org stored, select and store the new value
   useEffect(() => {
     if (needsToSetCurrentOrg) {
@@ -56,14 +56,17 @@ const AppPages = ({
         <Redirect to={newBusinessTrialists.route} />
       )}
 
-      {!hasProfiles && (
+      {!hasProfiles && hasAccessToPublish && (
         <Route path={newConnection.route} component={DefaultPage} />
       )}
-      {!hasProfiles && <Redirect to={newConnection.route} />}
+      {!hasProfiles && hasAccessToPublish && (
+        <Redirect to={newConnection.route} />
+      )}
 
-      {!hasAccess && (
+      {!hasAccessToPublish && (
         <Route path={missingAccessPage.route} component={MissingAccessPage} />
       )}
+      {!hasAccessToPublish && <Redirect to={missingAccessPage.route} />}
 
       <Route path={campaignsPage.route} component={PagesWithSidebar} />
       <Route

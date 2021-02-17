@@ -50,6 +50,7 @@ export default connect(
         state.organizations.selected?.showBusinessTrialistsOnboarding,
       needsToSetCurrentOrg: selectedOrgId !== currentOrgId,
       currentOrgId,
+      hasAccessToPublish: state.appShell.billing?.canAccessPublishing,
     };
   },
   dispatch => ({
