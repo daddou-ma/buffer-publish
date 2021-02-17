@@ -78,7 +78,7 @@ const AppPages = ({
   );
 };
 
-// TO-DO: Add this logic once global appshell pages are published
+// TO-DO: Add this logic once global appshell changes are published
 // {!hasProfiles && hasAccessToPublish && (
 //   <Route path={newConnection.route} component={DefaultPage} />
 // )}

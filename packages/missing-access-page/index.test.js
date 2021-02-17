@@ -11,6 +11,8 @@ import { URLS } from './utils';
 
 describe('Missing Access', () => {
   const hostname = 'publish.local.buffer.com';
+  window.location.assign = jest.fn();
+  window.location.hostname = hostname;
   const initialState = {
     organizations: {
       selected: {
@@ -28,8 +30,6 @@ describe('Missing Access', () => {
     },
   };
   test('opens publish pricing page with user clicks on sign up as an admin with other org access', () => {
-    window.location.assign = jest.fn();
-    window.location.hostname = hostname;
     const orgs = [
       {
         billing: { canAccessPublishing: true, name: 'Buffer', id: '123' },
@@ -50,8 +50,6 @@ describe('Missing Access', () => {
     window.location.assign.mockRestore();
   });
   test('opens support url when user clicks on learn more as a non-admin with org access', () => {
-    window.location.assign = jest.fn();
-    window.location.hostname = hostname;
     const orgs = [
       {
         billing: { canAccessPublishing: true, name: 'Buffer', id: '123' },
@@ -73,16 +71,12 @@ describe('Missing Access', () => {
       },
     });
     const secondaryButton = screen.getAllByRole('button')[0];
-
     userEvent.click(secondaryButton);
 
     expect(window.location.assign).toHaveBeenCalledWith(URLS.SUPPORT_URL);
     window.location.assign.mockRestore();
   });
   test('opens pricing url when user clicks on sign up as an admin', () => {
-    window.location.assign = jest.fn();
-    window.location.hostname = hostname;
-
     render(<MissingAccessPage />, {
       initialState,
     });
@@ -94,9 +88,6 @@ describe('Missing Access', () => {
     window.location.assign.mockRestore();
   });
   test('opens publish marketing url when user clicks on learn more as an admin', () => {
-    window.location.assign = jest.fn();
-    window.location.hostname = hostname;
-
     render(<MissingAccessPage />, {
       initialState,
     });
@@ -108,9 +99,6 @@ describe('Missing Access', () => {
     window.location.assign.mockRestore();
   });
   test('opens buffer support url when user clicks on contact support as non-admin', () => {
-    window.location.assign = jest.fn();
-    window.location.hostname = hostname;
-
     render(<MissingAccessPage />, {
       initialState: {
         ...initialState,
@@ -124,7 +112,6 @@ describe('Missing Access', () => {
       },
     });
     const secondaryButton = screen.getByRole('button');
-
     userEvent.click(secondaryButton);
 
     expect(window.location.assign).toHaveBeenCalledWith(
@@ -135,26 +122,7 @@ describe('Missing Access', () => {
 
   test('a11y | missing access page is accessible', async () => {
     const { container } = render(<MissingAccessPage />, {
-      initialState: {
-        organizations: {
-          selected: {
-            isAdmin: true,
-            name: 'AlpenGlow',
-            ownerEmail: 'test@buffer.com',
-          },
-        },
-        appShell: {
-          organizations: [
-            {
-              billing: {
-                canAccessPublishing: false,
-                name: 'Buffer',
-                id: '123',
-              },
-            },
-          ],
-        },
-      },
+      initialState,
     });
     const results = await axe(container);
     expect(results).toHaveNoViolations();

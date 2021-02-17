@@ -21,8 +21,9 @@ const getDescription = ({
 }) => {
   const key = `missing-access-page.accessTypes.${accessType}.description`;
   const emailLink = <Link href={`mailto:${ownerEmail}`}>{{ ownerEmail }}</Link>;
-  const boldOrgName = <BoldText>{{ orgNameWithAccess }}</BoldText>;
-  const markupContent = accessType === 'nonAdmin' ? emailLink : boldOrgName;
+  const boldOrgNameWithAccess = <BoldText>{{ orgNameWithAccess }}</BoldText>;
+  const markupContent =
+    accessType === 'nonAdmin' ? emailLink : boldOrgNameWithAccess;
   return (
     <Trans
       i18nKey={key}
