@@ -26,8 +26,7 @@ const getActionTypes = ({
         label: t(
           'missing-access-page.accessTypes.adminWithOrgAccess.secondaryLabel'
         ),
-        onClick: () =>
-          window.location.assign('https://buffer.com/pricing/publish'), // TO-DO: confirm
+        onClick: () => window.location.assign(URLS.SIGN_UP_URL),
       },
     },
     nonAdminWithOrgAccess: {
@@ -42,25 +41,23 @@ const getActionTypes = ({
         label: t(
           'missing-access-page.accessTypes.nonAdminWithOrgAccess.secondaryLabel'
         ),
-        onClick: () => window.location.assign(),
+        onClick: () => window.location.assign(URLS.SUPPORT_URL), // TO-DO: Waiting on Hannah to suggest a help article
       },
     },
     admin: {
       primaryAction: {
         label: t('missing-access-page.accessTypes.admin.primaryLabel'),
-        onClick: () =>
-          window.location.assign('https://buffer.com/pricing/publish'),
+        onClick: () => window.location.assign(URLS.SIGN_UP_URL),
       },
       secondaryAction: {
         label: t('missing-access-page.accessTypes.admin.secondaryLabel'),
-        onClick: () => window.location.assign('https://buffer.com/publish'),
+        onClick: () => window.location.assign(URLS.MARKETING_URL),
       },
     },
     nonAdmin: {
       secondaryAction: {
         label: t('missing-access-page.accessTypes.nonAdmin.secondaryLabel'),
-        onClick: () =>
-          window.location.assign('https://support.buffer.com/hc/en-us'),
+        onClick: () => window.location.assign(URLS.CONTACT_SUPPORT_URL),
       },
     },
   };
@@ -80,7 +77,7 @@ export const getActions = ({
   return actions[accessType];
 };
 
-export const getAccessType = (isAdmin, hasOrgWithAccess) => {
+export const getAccessType = ({ isAdmin, hasOrgWithAccess }) => {
   if (isAdmin) {
     return hasOrgWithAccess ? 'adminWithOrgAccess' : 'admin';
   }
