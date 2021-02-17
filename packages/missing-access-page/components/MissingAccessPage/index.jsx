@@ -60,7 +60,7 @@ const MissingAccessPage = ({
 
   return (
     <GlobalEmptyState
-      imageSrc="https://buffer-publish.s3.amazonaws.com/images/publish-ig-grid.png"
+      imageSrc="https://buffer-publish.s3.amazonaws.com/images/illustration-publishing.png"
       altText={t('missing-access-page.altText')}
       header={t('missing-access-page.heading')}
       description={description}

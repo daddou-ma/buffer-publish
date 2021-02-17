@@ -98,7 +98,7 @@
   },
   "missing-access-page": {
     "heading": "This organization is missing access to our publishing tools",
-    "altText": "Person adding post to Instagram grid",
+    "altText": "A person publishing a post",
     "accessTypes": {
       "adminWithOrgAccess": { 
         "description": "Looks like your organization <1>{{orgName}}</1> doesn't have access to our publishing tools quite yet. To add this, sign up below or switch to your other organization <3>{{orgNameWithAccess}}</3> to gain access.",

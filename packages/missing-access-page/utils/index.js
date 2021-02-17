@@ -1,5 +1,12 @@
 import { useTranslation } from 'react-i18next';
 
+export const URLS = {
+  SIGN_UP_URL: 'https://buffer.com/pricing/publish',
+  SUPPORT_URL: 'https://support.buffer.com/hc/en-us',
+  MARKETING_URL: 'https://buffer.com/publish',
+  CONTACT_SUPPORT_URL: 'https://support.buffer.com/hc/en-us/requests/new',
+};
+
 const getActionTypes = ({
   switchOrganization,
   orgNameWithAccess,
