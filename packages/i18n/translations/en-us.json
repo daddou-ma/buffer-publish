@@ -101,22 +101,22 @@
     "altText": "Person adding post to Instagram grid",
     "accessTypes": {
       "adminWithOrgAccess": { 
-        "description": "Looks like your organization {{orgName}} doesn't have access to our publishing tools quite yet. To add this, sign up below or switch to your other organization {{orgNameWithAccess}} to gain access.",
+        "description": "Looks like your organization <1>{{orgName}}</1> doesn't have access to our publishing tools quite yet. To add this, sign up below or switch to your other organization <3>{{orgNameWithAccess}}</3> to gain access.",
         "secondaryLabel": "Sign Up",
         "primaryLabel": "Switch to {{orgNameWithAccess}}"
       },
       "admin": {
-        "description": "Your organization {{orgName}} has yet to sign up for our market leading publishing tools. Find out more or sign up today to get going!",
+        "description": "Your organization <1>{{orgName}}</1> has yet to sign up for our market leading publishing tools. Find out more or sign up today to get going!",
         "secondaryLabel": "Learn More",
         "primaryLabel": "Sign Up Today"
       },
       "nonAdminWithOrgAccess": {
-        "description": "Your organization {{orgName}} has yet to sign up for our market leading publishing tools, but your other organization {{orgNameWithAccess}} does.",
+        "description": "Your organization <1>{{orgName}}</1> has yet to sign up for our market leading publishing tools, but your other organization <3>{{orgNameWithAccess}}</3> does.",
         "secondaryLabel": "Learn More",
         "primaryLabel": "Switch to {{orgNameWithAccess}}"
       },
       "nonAdmin": {
-        "description": "Your organization {{orgName}} doesn't have access to our publishing tools. The administrator {{ownerEmail}} can add this feature. If you can't reach them, for whatever reason, get in touch with us.",
+        "description": "Your organization <1>{{orgName}}</1> doesn't have access to our publishing tools. The administrator <3>{{ownerEmail}}</3> can add this feature. If you can't reach them, for whatever reason, get in touch with us.",
         "secondaryLabel": "Contact Support"
       }
     }
