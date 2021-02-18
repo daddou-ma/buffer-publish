@@ -25,7 +25,6 @@ const AppPages = ({
   needsToSetCurrentOrg,
   setCurrentOrganization,
   currentOrgId,
-  hasAccessToPublish = false,
 }) => {
   const hasProfiles = profiles && profiles.length > 0;
   // If org coming from route doesn't match the last org stored, select and store the new value
@@ -86,9 +85,7 @@ const AppPages = ({
 //   <Redirect to={newConnection.route} />
 // )}
 
-// {!hasAccessToPublish && (
-//   <Route path={missingAccessPage.route} component={MissingAccessPage} />
-// )}
+// <Route path={missingAccessPage.route} component={MissingAccessPage} />
 // {!hasAccessToPublish && <Redirect to={missingAccessPage.route} />}
 
 AppPages.propTypes = {

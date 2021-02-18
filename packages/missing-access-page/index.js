@@ -7,9 +7,7 @@ import MissingAccessPage from './components/MissingAccessPage';
 export default connect(
   state => {
     const { isAdmin } = state.organizations.selected;
-    const orgWithAccess = state.appShell.organizations?.find(
-      org => org.billing?.canAccessPublishing
-    );
+    const orgWithAccess = null; // TO-DO: update with global org switcher work
     return {
       orgName: state.organizations.selected?.name,
       orgNameWithAccess: orgWithAccess?.name,
