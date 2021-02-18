@@ -8,7 +8,7 @@ export default connect(
   state => {
     const { isAdmin } = state.organizations.selected;
     const orgWithAccess = state.appShell.organizations?.find(
-      org => org.billing.canAccessPublishing
+      org => org.billing?.canAccessPublishing
     );
     return {
       orgName: state.organizations.selected?.name,
