@@ -1043,6 +1043,10 @@ const parseDraftTextLinks = id => {
     ComposerActionCreators.updateDraftCharacterCount(id);
 };
 
+const ensureUrlProtocol = url => {
+  return !url.match(/https?:\/\//) ? `http://${url}` : url;
+};
+
 const isUrlOnBlocklist = url => {
   // https://github.com/bufferapp/buffer-scraper/blob/master/lib/blocklist.js
   const blockList = [
@@ -1057,8 +1061,16 @@ const isUrlOnBlocklist = url => {
    * Check in the `shortLinkLongLinkMap` to get the actual URL
    * in case we're dealing with a shortened one.
    */
-  const firstUrl = new URL(ComposerStore.getCanonicalUrl(url));
-  return blockList.some(blockedHost => blockedHost.test(firstUrl.host));
+  const canonical = ComposerStore.getCanonicalUrl(url);
+  const safeUrl = ensureUrlProtocol(canonical);
+  try {
+    const firstUrl = new URL(safeUrl);
+    return blockList.some(blockedHost => blockedHost.test(firstUrl.host));
+  } catch (e) {
+    // If we can't parse the URL for some reason then assume it's fine
+    console.warn(`Error parsing URL ${safeUrl}`, e); // eslint-disable-line no-console
+    return false;
+  }
 };
 
 const handleNewDraftLinks = (id, newUrls) => {
