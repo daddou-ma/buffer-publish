@@ -38,7 +38,19 @@ class App extends Component {
   render() {
     return (
       <div style={appStyle} className="notranslate">
-        <AppShell>
+        <AppShell
+          bannerOptions={{
+            text:
+              'We have had some troubles with a recent deploy; if your posts are in a failed state, please try reconnecting your channel!',
+            actionButton: {
+              label: 'Learn more',
+              action: () =>
+                window.location ===
+                'https://support.buffer.com/hc/en-us/articles/360038961173-Reconnecting-a-social-channel-in-Buffer-Publish',
+            },
+            themeColor: 'orange',
+          }}
+        >
           <div style={contentStyle}>
             <LoadingGate>
               <CTABanner />
