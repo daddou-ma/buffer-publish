@@ -45,8 +45,8 @@ class App extends Component {
             actionButton: {
               label: 'Learn more',
               action: () =>
-                window.location ===
-                'https://support.buffer.com/hc/en-us/articles/360038961173-Reconnecting-a-social-channel-in-Buffer-Publish',
+                (window.location =
+                  'https://support.buffer.com/hc/en-us/articles/360038961173-Reconnecting-a-social-channel-in-Buffer-Publish'),
             },
             themeColor: 'orange',
           }}
