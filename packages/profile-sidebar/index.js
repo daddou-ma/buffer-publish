@@ -18,6 +18,7 @@ export default hot(
       const { shouldRedirectToAccountChannels } = state.globalAccount;
       const accountChannelsURL =
         shouldRedirectToAccountChannels && getURL.getAccountChannelsURL();
+
       return {
         loading: state.profileSidebar.loading,
         selectedProfile: state.profileSidebar.selectedProfile,

@@ -8,6 +8,7 @@ import {
   newBusinessTrialists,
   newConnection,
   campaignsPage,
+  missingAccessPage,
 } from '@bufferapp/publish-routes';
 import PagesWithSidebar from '@bufferapp/publish-app-pages/components/PagesWithSidebar';
 import ProfilePages from '@bufferapp/publish-app-pages/components/ProfilePages';
@@ -15,6 +16,7 @@ import Preferences from '@bufferapp/publish-preferences';
 import Plans from '@bufferapp/publish-plans';
 import DefaultPage from '@bufferapp/default-page';
 import OnboardingManager from '@bufferapp/publish-onboarding';
+// import MissingAccessPage from '../../../missing-access-page/index';
 
 const AppPages = ({
   profiles,
@@ -74,6 +76,17 @@ const AppPages = ({
     </Switch>
   );
 };
+
+// TO-DO: Add this logic once global appshell changes are published
+// {!hasProfiles && hasAccessToPublish && (
+//   <Route path={newConnection.route} component={DefaultPage} />
+// )}
+// {!hasProfiles && hasAccessToPublish && (
+//   <Redirect to={newConnection.route} />
+// )}
+
+// <Route path={missingAccessPage.route} component={MissingAccessPage} />
+// {!hasAccessToPublish && <Redirect to={missingAccessPage.route} />}
 
 AppPages.propTypes = {
   profiles: PropTypes.arrayOf(PropTypes.object),

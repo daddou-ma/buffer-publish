@@ -18,6 +18,7 @@ export const actionTypes = keyWrapper('PROFILE_SIDEBAR', {
 export const initialState = {
   profiles: [],
   profileList: [],
+  profilesUnfiltered: [],
   selectedProfileId: '',
   loading: false,
   loaded: false,
@@ -29,23 +30,6 @@ export const initialState = {
   isSearchPopupVisible: false,
   searchText: null,
   userId: null,
-};
-
-const moveProfileInArray = (arr, from, to) => {
-  const clone = [...arr];
-
-  // Support passing `from` and `to` in non-sequential order (e.g., 4 and 1).
-  const fromIndex = from < to ? from : to;
-  const toIndex = to > from ? to : from;
-
-  // Generate the new array
-  Array.prototype.splice.call(
-    clone,
-    toIndex,
-    0,
-    Array.prototype.splice.call(clone, fromIndex, 1)[0]
-  );
-  return clone;
 };
 
 const profilesReducer = (state = [], action) => {
@@ -105,12 +89,15 @@ export default (state = initialState, action) => {
       };
 
     case `profiles_${dataFetchActionTypes.FETCH_SUCCESS}`: {
-      const profileList = getEnabledProfiles(action.result);
+      const profiles = action.result;
+      const profileList = getEnabledProfiles(profiles);
+
       return {
         ...state,
         loading: false,
         loaded: true,
         profileList,
+        profilesUnfiltered: filterProfilesByOrg(profiles, state.organization),
         profiles: filterProfilesByOrg(profileList, state.organization),
         hasInstagram: profileList.some(p => p.service === 'instagram'),
         hasFacebook: profileList.some(p => p.service === 'facebook'),

@@ -8,7 +8,17 @@ export const actionTypes = keyWrapper('APP_SHELL', {
 
 export const initialState = {
   bannerKey: null,
-  bannerOptions: undefined,
+  bannerOptions: {
+    text:
+      'We have had some troubles with a recent deploy; if your posts are in a failed state, please try reconnecting your channel!',
+    actionButton: {
+      label: 'Learn more',
+      action: () =>
+        (window.location =
+          'https://support.buffer.com/hc/en-us/articles/360038961173-Reconnecting-a-social-channel-in-Buffer-Publish'),
+    },
+    themeColor: 'orange',
+  },
   enabledProducts: [],
   featureFlips: [],
   isImpersonation: false,

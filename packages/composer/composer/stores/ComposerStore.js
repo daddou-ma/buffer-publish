@@ -197,7 +197,8 @@ const eventShowSwitchPlanModal = () => {
   events.trigger('show-switch-plan-modal');
 };
 
-const ComposerStore = Object.assign({}, EventEmitter.prototype, {
+const ComposerStore = {
+  ...EventEmitter.prototype,
   emitChange: () => ComposerStore.emit(CHANGE_EVENT),
   addChangeListener: callback => ComposerStore.on(CHANGE_EVENT, callback),
   removeChangeListener: callback =>
@@ -345,7 +346,7 @@ const ComposerStore = Object.assign({}, EventEmitter.prototype, {
       .getPlainText(),
 
   getDraftLinkUrl: id => {
-    const link = ComposerStore.getDraft(id).link;
+    const { link } = ComposerStore.getDraft(id);
     return link ? link.url : null;
   },
 
@@ -397,7 +398,7 @@ const ComposerStore = Object.assign({}, EventEmitter.prototype, {
    */
   // eslint-disable-next-line no-use-before-define
   _syncDispatch: payload => onDispatchedPayload(payload),
-});
+};
 
 // Should be used for composition with functions that are passed a draft id as first argument.
 // It would have been awesome to compose this as a decorator on top of non-class methods,
@@ -1042,16 +1043,50 @@ const parseDraftTextLinks = id => {
     ComposerActionCreators.updateDraftCharacterCount(id);
 };
 
+const ensureUrlProtocol = url => {
+  return !url.match(/https?:\/\//) ? `http://${url}` : url;
+};
+
+const isUrlOnBlocklist = url => {
+  // https://github.com/bufferapp/buffer-scraper/blob/master/lib/blocklist.js
+  const blockList = [
+    /^(\w+\.)?instagram\.com/i,
+    /^(\w+\.)?instagr.am/i,
+    /^(\w+\.)?facebook\.com/i,
+    /^(\w+\.)?fb\.com/i,
+    /^(\w+\.)?fb\.me/i,
+  ];
+
+  /**
+   * Check in the `shortLinkLongLinkMap` to get the actual URL
+   * in case we're dealing with a shortened one.
+   */
+  const canonical = ComposerStore.getCanonicalUrl(url);
+  const safeUrl = ensureUrlProtocol(canonical);
+  try {
+    const firstUrl = new URL(safeUrl);
+    return blockList.some(blockedHost => blockedHost.test(firstUrl.host));
+  } catch (e) {
+    // If we can't parse the URL for some reason then assume it's fine
+    console.warn(`Error parsing URL ${safeUrl}`, e); // eslint-disable-line no-console
+    return false;
+  }
+};
+
 const handleNewDraftLinks = (id, newUrls) => {
   const draft = ComposerStore.getDraft(id);
 
   // If link attachment is disabled, update it with first newly-added url
-  if (!ComposerStore.doesDraftHaveLinkAttachmentEnabled(id)) {
-    ComposerActionCreators.updateDraftLink(id, newUrls[0]);
+  // (As long as it's not on the blocklist)
+  const isBlocked = isUrlOnBlocklist(newUrls[0]);
+  if (!isBlocked) {
+    if (!ComposerStore.doesDraftHaveLinkAttachmentEnabled(id)) {
+      ComposerActionCreators.updateDraftLink(id, newUrls[0]);
 
-    // If no attachment is currently enabled, bring link attachment up with new link
-    if (!ComposerStore.doesDraftHaveAttachmentEnabled(id)) {
-      ComposerActionCreators.toggleAttachment(id, AttachmentTypes.LINK);
+      // If no attachment is currently enabled, bring link attachment up with new link
+      if (!ComposerStore.doesDraftHaveAttachmentEnabled(id)) {
+        ComposerActionCreators.toggleAttachment(id, AttachmentTypes.LINK);
+      }
     }
   }
 
@@ -1650,7 +1685,7 @@ const toggleDraftAttachment = monitorComposerLastInteractedWith(
 
 const replaceDraftLinkWithShortlink = (id, link, shortLink) => {
   const draft = ComposerStore.getDraft(id);
-  let editorState = draft.editorState;
+  let { editorState } = draft;
   const contentState = editorState.getCurrentContent();
 
   contentState.getBlockMap().forEach(contentBlock => {
@@ -1995,7 +2030,7 @@ const getReminderMessage = (selectedIgProfiles, mediaType) => {
       },
       mixed: {
         message: `Reminders aren’t set up for ${usernameList}. To post an image outside the range 4:5 to 1.91:1
-          to Instagram, you’ll need to set up Reminders. Finish scheduling your post, then visit the queue for 
+          to Instagram, you’ll need to set up Reminders. Finish scheduling your post, then visit the queue for
           ${usernameList} to set up Reminders!`,
         composerId: 'instagram',
         code: 'ASPECT_RATIO',
@@ -2392,8 +2427,8 @@ const onDispatchedPayload = payload => {
 
     case ActionTypes.COMPOSER_DRAFT_LINK_SHORTENED:
       monitorComposerLastInteractedWith(() => {
-        replaceDraftLinkWithShortlink(action.id, action.link, action.shortLink);
         mapShortLinkWithLongLink(action.id, action.shortLink, action.link);
+        replaceDraftLinkWithShortlink(action.id, action.link, action.shortLink);
       })();
       break;
 

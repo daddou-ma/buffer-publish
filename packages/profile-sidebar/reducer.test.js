@@ -25,6 +25,7 @@ describe('reducer', () => {
       searchText: null,
       loaded: false,
       profileList: [],
+      profilesUnfiltered: [],
     };
     const action = {
       type: 'INIT',
