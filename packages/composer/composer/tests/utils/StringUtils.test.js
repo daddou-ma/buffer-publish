@@ -1,4 +1,7 @@
-import { removeLinkFromErrorMessageText } from '../../utils/StringUtils';
+import {
+  removeLinkFromErrorMessageText,
+  isUrlOnBlocklist,
+} from '../../utils/StringUtils';
 
 describe('StringUtils', () => {
   describe('removeLinkFromErrorMessageText', () => {
@@ -29,6 +32,23 @@ describe('StringUtils', () => {
         'embedded-cta-link'
       );
       expect(fixedText).toEqual(messageText);
+    });
+  });
+
+  describe('isUrlOnBlocklist', () => {
+    it('blocks urls', () => {
+      expect(isUrlOnBlocklist('instagram.com')).toBe(true);
+      expect(isUrlOnBlocklist('https://instagram.com')).toBe(true);
+      expect(isUrlOnBlocklist('http://instagram.com')).toBe(true);
+      expect(isUrlOnBlocklist('instagr.am')).toBe(true);
+      expect(isUrlOnBlocklist('facebook.com')).toBe(true);
+      expect(isUrlOnBlocklist('https://fb.com')).toBe(true);
+      expect(isUrlOnBlocklist('http://fb.me')).toBe(true);
+    });
+    it('does not block similar urls', () => {
+      expect(isUrlOnBlocklist('myinstagram.com')).toBe(false);
+      expect(isUrlOnBlocklist('fb.ca')).toBe(false);
+      expect(isUrlOnBlocklist('insta-gram.ca')).toBe(false);
     });
   });
 });

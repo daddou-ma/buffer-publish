@@ -43,6 +43,7 @@ import {
   validateVideoForInstagram,
 } from '../lib/validation/ValidateDraft';
 import Draft from '../entities/Draft';
+import { isUrlOnBlocklist } from '../utils/StringUtils';
 
 // import { registerStore, sendToMonitor } from '../utils/devtools';
 
@@ -1043,42 +1044,12 @@ const parseDraftTextLinks = id => {
     ComposerActionCreators.updateDraftCharacterCount(id);
 };
 
-const ensureUrlProtocol = url => {
-  return !url.match(/https?:\/\//) ? `http://${url}` : url;
-};
-
-const isUrlOnBlocklist = url => {
-  // https://github.com/bufferapp/buffer-scraper/blob/master/lib/blocklist.js
-  const blockList = [
-    /^(\w+\.)?instagram\.com/i,
-    /^(\w+\.)?instagr.am/i,
-    /^(\w+\.)?facebook\.com/i,
-    /^(\w+\.)?fb\.com/i,
-    /^(\w+\.)?fb\.me/i,
-  ];
-
-  /**
-   * Check in the `shortLinkLongLinkMap` to get the actual URL
-   * in case we're dealing with a shortened one.
-   */
-  const canonical = ComposerStore.getCanonicalUrl(url);
-  const safeUrl = ensureUrlProtocol(canonical);
-  try {
-    const firstUrl = new URL(safeUrl);
-    return blockList.some(blockedHost => blockedHost.test(firstUrl.host));
-  } catch (e) {
-    // If we can't parse the URL for some reason then assume it's fine
-    console.warn(`Error parsing URL ${safeUrl}`, e); // eslint-disable-line no-console
-    return false;
-  }
-};
-
 const handleNewDraftLinks = (id, newUrls) => {
   const draft = ComposerStore.getDraft(id);
 
   // If link attachment is disabled, update it with first newly-added url
   // (As long as it's not on the blocklist)
-  const isBlocked = isUrlOnBlocklist(newUrls[0]);
+  const isBlocked = isUrlOnBlocklist(ComposerStore.getCanonicalUrl(newUrls[0]));
   if (!isBlocked) {
     if (!ComposerStore.doesDraftHaveLinkAttachmentEnabled(id)) {
       ComposerActionCreators.updateDraftLink(id, newUrls[0]);
