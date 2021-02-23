@@ -46,8 +46,8 @@
 }
 
 .buttonsWrapper {
-	position: relative;
-	float: right;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .buttonsWrapper > .button:first-child:not(:last-child) {
