@@ -309,4 +309,12 @@ export const actions = {
     type: actionTypes.POST_SHARE_NOW,
     updateId: post.id,
   }),
+  handleShareAgainClick: ({ post, profileId }) => {
+    return {
+      type: actionTypes.OPEN_COMPOSER,
+      updateId: post.id,
+      editMode: false,
+      profileId,
+    };
+  },
 };

@@ -88,6 +88,14 @@ export default connect(
         });
         window.location.assign(reminderUrl);
       },
+      onShareAgainClick: ({ post }) => {
+        dispatch(
+          actions.handleShareAgainClick({
+            post,
+            profileId: post.profileId,
+          })
+        );
+      },
       onEditClick: ({ post }) => {
         dispatch(
           actions.handleOpenComposer({

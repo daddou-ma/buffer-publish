@@ -47,7 +47,6 @@ export default connect(
           orgId: organizationId,
         })
       );
-      // ADD TRACKING HERE
     },
   })
 )(AppShell);

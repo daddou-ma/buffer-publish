@@ -1,35 +1,26 @@
+/* eslint-disable react/forbid-prop-types */
+
 /**
  * Component that displays a link attachment
  */
 
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import ComposerActionCreators from '../action-creators/ComposerActionCreators';
-import LinkAttachmentTextEditor from '../components/LinkAttachmentTextEditor';
-import LinkAttachmentThumbnailEditor from '../components/LinkAttachmentThumbnailEditor';
-import LinkAttachmentThumbnail from '../components/LinkAttachmentThumbnail';
-import CloseButton from '../components/shared/CloseButton';
-import A from '../components/shared/A';
+import LinkAttachmentTextEditor from './LinkAttachmentTextEditor';
+import LinkAttachmentThumbnailEditor from './LinkAttachmentThumbnailEditor';
+import LinkAttachmentThumbnail from './LinkAttachmentThumbnail';
+import CloseButton from './shared/CloseButton';
+import A from './shared/A';
 import { AttachmentTypes, LinkAttachmentTextFieldTypes } from '../AppConstants';
 import styles from './css/LinkAttachment.css';
-import { getAbsoluteUrl, getDomainFromUrl } from '../utils/StringUtils';
+import { getAbsoluteUrl } from '../utils/StringUtils';
 
 class LinkAttachment extends React.Component {
-  static propTypes = {
-    appState: PropTypes.object.isRequired,
-    draftId: PropTypes.string.isRequired,
-    link: PropTypes.object.isRequired,
-    service: PropTypes.object,
-    visibleNotifications: PropTypes.array,
-    filesUploadProgress: PropTypes.instanceOf(Map),
-    selectedProfiles: PropTypes.array,
-  };
-
   onCloseButtonClick = () => {
-    ComposerActionCreators.toggleAttachment(
-      this.props.draftId,
-      AttachmentTypes.LINK
-    );
+    const { draftId } = this.props;
+    ComposerActionCreators.toggleAttachment(draftId, AttachmentTypes.LINK);
   };
 
   // Facebook has specific logic to allow editing of link attachments, not everyone
@@ -42,6 +33,7 @@ class LinkAttachment extends React.Component {
       return {
         canEdit: service.canEditLinkAttachment,
         isResultCertain: true,
+        isLoading: false,
       };
     }
 
@@ -53,6 +45,7 @@ class LinkAttachment extends React.Component {
       return {
         canEdit: false,
         isResultCertain: true,
+        isLoading: false,
       };
     }
 
@@ -66,6 +59,7 @@ class LinkAttachment extends React.Component {
         canEdit: true,
         isResultCertain: false,
         hasNonPages: true,
+        isLoading: false,
       };
     }
 
@@ -77,6 +71,7 @@ class LinkAttachment extends React.Component {
       return {
         canEdit: true,
         isResultCertain: false,
+        isLoading: false,
       };
     }
 
@@ -90,6 +85,7 @@ class LinkAttachment extends React.Component {
       return {
         canEdit: true,
         isResultCertain: false,
+        isLoading: true,
       };
     }
 
@@ -101,6 +97,7 @@ class LinkAttachment extends React.Component {
       return {
         canEdit: true,
         isResultCertain: true,
+        isLoading: false,
       };
     }
 
@@ -119,12 +116,14 @@ class LinkAttachment extends React.Component {
       return {
         canEdit: true,
         isResultCertain: false,
+        isLoading: isSomeOwnershipDataBeingLoaded,
       };
     }
 
     return {
       canEdit: false,
       isResultCertain: true,
+      isLoading: false,
     };
   };
 
@@ -150,19 +149,17 @@ class LinkAttachment extends React.Component {
       canEdit: canEditLinkAttachment,
       isResultCertain,
       hasNonPages = false,
+      isLoading,
     } = this.canEditLinkAttachment();
-    const showFacebookLinkEditingMessage = !isResultCertain;
+    const showFacebookLinkEditingMessage = !isResultCertain && !isLoading;
 
     return (
       <div>
         {showFacebookLinkEditingMessage && (
           <p className={styles.facebookLinkEditingMessage}>
             {hasNonPages
-              ? `It looks like you've got a few Facebook accounts selected. Please note that Profiles
-              and Groups are not allowed to make changes to link previews, and some Pages may not
-              either.`
-              : `Heads up! We're unsure if all the Facebook Pages you've selected are allowed to make
-              changes to link previews.`}{' '}
+              ? `It looks like you've got a few Facebook accounts selected. Please note that Groups are not allowed to make changes to link previews, and some Pages may not either.`
+              : `Heads up! We're unsure if all the Facebook Pages you've selected are allowed to make changes to link previews.`}{' '}
             Please bear in mind that if you do make changes, the link attachment
             may look different once published on Facebook. You can read more
             about{' '}
@@ -170,7 +167,7 @@ class LinkAttachment extends React.Component {
               href="https://support.buffer.com/hc/en-us/articles/360038455554-Types-of-media-attachments-you-can-include-in-posts"
               target="_blank"
             >
-              Facebook's current link editing policies here
+              Facebook&apos;s current link editing policies here
             </A>
             .
           </p>
@@ -229,5 +226,21 @@ class LinkAttachment extends React.Component {
     );
   }
 }
+
+LinkAttachment.propTypes = {
+  appState: PropTypes.object.isRequired,
+  draftId: PropTypes.string.isRequired,
+  link: PropTypes.object.isRequired,
+  service: PropTypes.object.isRequired,
+  visibleNotifications: PropTypes.array,
+  filesUploadProgress: PropTypes.instanceOf(Map),
+  selectedProfiles: PropTypes.array,
+};
+
+LinkAttachment.defaultProps = {
+  visibleNotifications: [],
+  filesUploadProgress: null,
+  selectedProfiles: [],
+};
 
 export default LinkAttachment;

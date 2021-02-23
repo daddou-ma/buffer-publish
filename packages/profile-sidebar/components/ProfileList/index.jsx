@@ -3,15 +3,23 @@ import PropTypes from 'prop-types';
 import ProfileListItem from '../ProfileListItem';
 import ProfileDragWrapper from '../ProfileDragWrapper';
 
+const ProfileWrapper = ({ shouldHideLockedChannels, ...props }) =>
+  shouldHideLockedChannels ? (
+    <ProfileListItem {...props} />
+  ) : (
+    <ProfileDragWrapper {...props} />
+  );
+
 const ProfileList = ({
   profiles,
   selectedProfileId,
   onProfileClick,
   onDropProfile,
   profileLimit,
+  shouldHideLockedChannels,
 }) =>
   profiles.map((profile, index) => (
-    <ProfileDragWrapper
+    <ProfileWrapper
       avatarUrl={profile.avatarUrl}
       type={profile.type}
       handle={profile.handle}
@@ -26,6 +34,7 @@ const ProfileList = ({
       index={index}
       key={profile.id}
       location={profile.location}
+      shouldHideLockedChannels={shouldHideLockedChannels}
     />
   ));
 

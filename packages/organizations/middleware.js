@@ -29,7 +29,7 @@ export default ({ dispatch, getState }) => next => action => {
   next(action);
   switch (action.type) {
     case LOCATION_CHANGE: {
-      const { pathname } = action.payload.location;
+      const { pathname } = action.payload?.location;
       const { profiles } = getState().profileSidebar;
       const { organizations } = getState();
       selectOrganizationIfOrganizationRouteHasChanged(
@@ -41,7 +41,7 @@ export default ({ dispatch, getState }) => next => action => {
       break;
     }
     case `profiles_${dataFetchActionTypes.FETCH_SUCCESS}`: {
-      const { pathname } = action.payload.location;
+      const { pathname } = getState().router?.location;
       const profiles = action.result;
       const { organizations } = getState();
       selectOrganizationIfOrganizationRouteHasChanged(

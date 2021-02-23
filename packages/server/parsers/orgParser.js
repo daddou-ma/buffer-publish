@@ -30,7 +30,6 @@ module.exports = orgData => ({
   hasBitlyFeature: orgData.planBase !== 'free',
   has30DaySentPostsLimitFeature: orgData.planBase === 'free', // profiles_controller updates_sent() returns only 30 days of sent posts for free users.
   hasCalendarFeature: orgData.planBase !== 'free',
-  hasShareAgainFeature: orgData.planBase !== 'free',
   hasCustomizingUtmParamsFeature:
     orgData.planBase === 'business' && orgData.isOwner,
   hasApprovalFeature: orgData.planBase === 'business',

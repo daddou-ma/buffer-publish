@@ -105,11 +105,13 @@ describe('ComposerStore', () => {
 
   let AppDispatcher;
   let ComposerStore;
+  let getDraftCharacterCount;
 
   beforeEach(() => {
-    // need to recreate the dispatcher & store here each time
-    AppDispatcher = require('../dispatcher'); //eslint-disable-line
-    ComposerStore = require('../stores/ComposerStore'); //eslint-disable-line
+    AppDispatcher = require('../dispatcher').default; //eslint-disable-line
+    let ComposerStoreMod = require('../stores/ComposerStore'); //eslint-disable-line
+    ComposerStore = ComposerStoreMod.default;
+    getDraftCharacterCount = ComposerStoreMod.getDraftCharacterCount;
   });
 
   it('does not add instagramFeedback when profile with Video is selected', () => {
@@ -119,7 +121,7 @@ describe('ComposerStore', () => {
     AppDispatcher.dispatch(actionEnableInstagramDraft);
     AppDispatcher.dispatch(actionAddVideo);
     AppDispatcher.dispatch(actionUpdateInstaState);
-    const draft = ComposerStore.default.getDraft('instagram');
+    const draft = ComposerStore.getDraft('instagram');
     expect(draft.instagramFeedback.length).toEqual(0);
   });
 
@@ -130,7 +132,7 @@ describe('ComposerStore', () => {
     AppDispatcher.dispatch(actionEnableInstagramDraft);
     AppDispatcher.dispatch(actionAddVideo);
     AppDispatcher.dispatch(actionUpdateInstaState);
-    const draft = ComposerStore.default.getDraft('instagram');
+    const draft = ComposerStore.getDraft('instagram');
     draft.video = null;
     expect(draft.instagramFeedback.length).toEqual(0);
   });
@@ -142,7 +144,7 @@ describe('ComposerStore', () => {
     AppDispatcher.dispatch(actionAddImage);
     AppDispatcher.dispatch(actionAddImage);
     AppDispatcher.dispatch(actionUpdateInstaState);
-    const draft = ComposerStore.default.getDraft('instagram');
+    const draft = ComposerStore.getDraft('instagram');
     expect(draft.instagramFeedback[0].message).toEqual(
       "Due to Instagram limitations, we can't post galleries on your behalf. You will receive a Reminder to post manually when the time comes!"
     );
@@ -154,7 +156,7 @@ describe('ComposerStore', () => {
     AppDispatcher.dispatch(actionEnableInstagramDraft);
     AppDispatcher.dispatch(actionAddVideo);
     AppDispatcher.dispatch(actionUpdateInstaState);
-    const draft = ComposerStore.default.getDraft('instagram');
+    const draft = ComposerStore.getDraft('instagram');
     expect(draft.postDirectToInstagram).toBeFalsy();
   });
 
@@ -166,7 +168,7 @@ describe('ComposerStore', () => {
     AppDispatcher.dispatch(actionEnableInstagramDraft);
     AppDispatcher.dispatch(actionAddVideo);
     AppDispatcher.dispatch(actionUpdateInstaState);
-    const characterCount = ComposerStore.getDraftCharacterCount(id, text);
+    const characterCount = getDraftCharacterCount(id, text);
     expect(characterCount).toEqual(5);
   });
 
@@ -178,7 +180,7 @@ describe('ComposerStore', () => {
     AppDispatcher.dispatch(actionEnableInstagramDraft);
     AppDispatcher.dispatch(actionAddVideo);
     AppDispatcher.dispatch(actionUpdateInstaState);
-    const characterCount = ComposerStore.getDraftCharacterCount(id, text);
+    const characterCount = getDraftCharacterCount(id, text);
     expect(characterCount).toEqual(0);
   });
 
@@ -190,7 +192,7 @@ describe('ComposerStore', () => {
     AppDispatcher.dispatch(actionEnableInstagramDraft);
     AppDispatcher.dispatch(actionAddVideo);
     AppDispatcher.dispatch(actionUpdateInstaState);
-    const characterCount = ComposerStore.getDraftCharacterCount(id, text);
+    const characterCount = getDraftCharacterCount(id, text);
     expect(characterCount).toEqual(7);
   });
 
@@ -203,7 +205,7 @@ describe('ComposerStore', () => {
     AppDispatcher.dispatch(actionAddImage);
     AppDispatcher.dispatch(actionUpdateDraftComment(id, commentText));
     AppDispatcher.dispatch(actionUpdateInstaState);
-    const draft = ComposerStore.default.getDraft('instagram');
+    const draft = ComposerStore.getDraft('instagram');
     expect(draft.commentText).toEqual(commentText);
   });
 
@@ -216,10 +218,7 @@ describe('ComposerStore', () => {
     AppDispatcher.dispatch(actionAddImage);
     AppDispatcher.dispatch(actionUpdateDraftComment(id, commentText));
     AppDispatcher.dispatch(actionUpdateInstaState);
-    const characterCommentCount = ComposerStore.getDraftCharacterCount(
-      id,
-      commentText
-    );
+    const characterCommentCount = getDraftCharacterCount(id, commentText);
     expect(characterCommentCount).toEqual(7);
   });
 
@@ -231,11 +230,9 @@ describe('ComposerStore', () => {
     AppDispatcher.dispatch(actionEnableFacebookDraft);
     AppDispatcher.dispatch(actionAddImageFacebook);
 
-    expect(
-      ComposerStore.getDraftCharacterCount(id, 'Text with 23 characters')
-    ).toEqual(23);
-    expect(ComposerStore.getDraftCharacterCount(id, '')).toEqual(0);
-    expect(ComposerStore.getDraftCharacterCount(id, null)).toEqual(0);
+    expect(getDraftCharacterCount(id, 'Text with 23 characters')).toEqual(23);
+    expect(getDraftCharacterCount(id, '')).toEqual(0);
+    expect(getDraftCharacterCount(id, null)).toEqual(0);
   });
 
   describe('soft reset state', () => {
@@ -245,7 +242,7 @@ describe('ComposerStore', () => {
       AppDispatcher.dispatch(actionEnableInstagramDraft);
       AppDispatcher.dispatch(actionAddImage);
       AppDispatcher.dispatch(actionSoftReset);
-      const draftsAfterReset = ComposerStore.default.getDrafts();
+      const draftsAfterReset = ComposerStore.getDrafts();
 
       expect(draftsAfterReset.length).toBeGreaterThan(0);
       expect(draftsAfterReset[0].constructor.name).toEqual('Draft');
