@@ -10,39 +10,38 @@ import {
   profilePages,
   profileTabPages,
 } from '@bufferapp/publish-routes';
+import { filterProfilesByOrg } from '@bufferapp/publish-profile-sidebar/utils';
 import PagesWithSidebar from '@bufferapp/publish-app-pages/components/PagesWithSidebar';
 import ProfilePages from '@bufferapp/publish-app-pages/components/ProfilePages';
 import Preferences from '@bufferapp/publish-preferences';
 import Plans from '@bufferapp/publish-plans';
 import DefaultPage from '@bufferapp/default-page';
 import OnboardingManager from '@bufferapp/publish-onboarding';
+import { useOrgSwitcher, useUser } from '@bufferapp/app-shell';
 
 const AppPages = ({
-  profiles,
+  unfilteredProfiles,
   showBusinessTrialistsOnboarding,
   profileRouteLoaded,
-  needsToSelectNewOrgInAppShell,
-  currentOrgId,
-  selectedOrgInAppShell,
-  switchOrganization,
   orgIdFromRoute,
-  currentPath,
 }) => {
-  console.log(
-    {
-      profiles,
-      needsToSelectNewOrgInAppShell,
-      currentOrgId,
-      selectedOrgInAppShell,
-      orgIdFromRoute,
-      currentPath,
-    },
-    new Date()
-  );
+  // Get current selected org from appshell
+  const user = useUser();
+  const selectedOrgInAppShell = user?.currentOrganization?.id;
+
+  const currentOrgId = orgIdFromRoute || selectedOrgInAppShell;
+  const needsToSelectNewOrgInAppShell =
+    selectedOrgInAppShell !== orgIdFromRoute && !!orgIdFromRoute;
+
+  // Filters profiles by current org selected
+  const profiles = filterProfilesByOrg(unfilteredProfiles, {
+    id: currentOrgId,
+  });
+
+  const switchOrganization = useOrgSwitcher();
 
   // If org coming from route doesn't match the last org stored, select and store the new value
   useEffect(() => {
-    console.log('mudooooou', new Date());
     if (needsToSelectNewOrgInAppShell) {
       switchOrganization(currentOrgId);
     }
