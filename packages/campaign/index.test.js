@@ -3,6 +3,7 @@ import {
   render,
   screen,
 } from '@bufferapp/publish-test-utils/utils/custom-render';
+import { act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { getTime } from '@bufferapp/publish-utils/date';
 import {
@@ -151,17 +152,18 @@ describe('ViewCampaign | user interaction', () => {
 
   it('should render campaigns list and navigate to a campaign queue', async () => {
     mockApiCalls();
-
-    render(
-      <TestDragDropContainer>
-        <AppPages />
-      </TestDragDropContainer>,
-      {
-        route: '/campaigns',
-        initialState,
-      }
-    );
-
+    let rendered;
+    await act(async () => {
+      rendered = render(
+        <TestDragDropContainer>
+          <AppPages />
+        </TestDragDropContainer>,
+        {
+          route: '/campaigns',
+          initialState,
+        }
+      );
+    });
     /* List campaigns assertions */
     const {
       createCampaignBtn,
