@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import ReactTooltip from 'react-tooltip';
 import DragMe from '@bufferapp/dragme';
 import { AppEnvironments } from '@bufferapp/publish-constants';
+import WebSocket from '@bufferapp/publish-upload-zone/utils/WebSocket';
 import AppStore from '../stores/AppStore';
 import ComposerStore from '../stores/ComposerStore';
 import NotificationStore from '../stores/NotificationStore';
@@ -16,7 +17,6 @@ import {
 import AppActionCreators from '../action-creators/AppActionCreators';
 import AppInitActionCreators from '../action-creators/AppInitActionCreators';
 import ComposerActionCreators from '../action-creators/ComposerActionCreators';
-import WebSocket from '@bufferapp/publish-upload-zone/utils/WebSocket';
 import { observeStore } from '../utils/StoreUtils';
 import AppHooks from '../utils/LifecycleHooks';
 import AppStateless from './AppStateless';
@@ -372,6 +372,8 @@ class App extends React.Component {
       NotificationScopes.MC_ROLLOUT_INFO,
       NotificationScopes.TWITTER_MAX_ONE_PROFILE_SELECTED,
       NotificationScopes.TWITTER_DUPLICATE_CONTENT_WARNING,
+      NotificationScopes.COMPOSER_FACEBOOK_AUTOCOMPLETE_DISABLED,
+      NotificationScopes.FB_IG_URL_NO_LINK_PREVIEW,
       ...Services.map(
         service => `${NotificationScopes.PROFILE_QUEUE_LIMIT}-${service.name}`
       ),
@@ -386,7 +388,6 @@ class App extends React.Component {
         service =>
           `${NotificationScopes.COMPOSER_NOTICE_NOT_PREFILLED}-${service.name}`
       ),
-      NotificationScopes.COMPOSER_FACEBOOK_AUTOCOMPLETE_DISABLED,
     ];
 
     const areAllDraftsSaved = ComposerStore.areAllDraftsSaved();

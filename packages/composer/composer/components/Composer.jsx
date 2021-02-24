@@ -1,3 +1,4 @@
+/* eslint-disable react/destructuring-assignment */
 /**
  * Component that displays a composer
  */
@@ -39,163 +40,16 @@ import { isIE } from '../utils/DOMUtils';
 import styles from './css/Composer.css';
 
 class Composer extends React.Component {
-  static propTypes = {
-    appState: PropTypes.shape({
-      draftSaveQueueingType: PropTypes.string,
-      isOmniboxEnabled: PropTypes.bool,
-      composersWhichHaveBeenCollapsed: PropTypes.instanceOf(Set),
-      whatPreventsSaving: PropTypes.arrayOf(
-        PropTypes.shape({
-          composerId: PropTypes.string,
-          code: PropTypes.string,
-          message: PropTypes.string,
-        })
-      ),
-    }).isRequired,
-    draft: PropTypes.shape({
-      id: PropTypes.string,
-      instagramFeedback: PropTypes.array,
-      isEnabled: PropTypes.bool,
-      isSaved: PropTypes.bool,
-      hasSavingError: PropTypes.bool,
-      link: PropTypes.shape({
-        availableThumbnails: PropTypes.array,
-        thumbnail: PropTypes.shape({
-          url: PropTypes.string,
-        }),
-      }),
-      sourceLink: PropTypes.shape({
-        availableImages: PropTypes.string,
-        url: PropTypes.string,
-      }),
-      enabledAttachmentType: PropTypes.string,
-      images: PropTypes.arrayOf(
-        PropTypes.shape({
-          url: PropTypes.string,
-        })
-      ),
-      video: PropTypes.shape({
-        url: PropTypes.string,
-        thumbnail: PropTypes.string,
-      }),
-      gif: PropTypes.shape({
-        url: PropTypes.string,
-        stillGifUrl: PropTypes.string,
-      }),
-      service: PropTypes.shape({
-        canHaveMediaAttachmentType: PropTypes.func,
-        canHaveSomeAttachmentType: PropTypes.func,
-        shouldShowDuplicateContentWarning: PropTypes.bool,
-        isOmni: PropTypes.bool,
-        name: PropTypes.string,
-        charLimit: PropTypes.number,
-        usesImageFirstLayout: PropTypes.bool,
-        commentCharLimit: PropTypes.number,
-        maxAttachableImagesCount: PropTypes.number,
-      }),
-      retweet: PropTypes.shape({
-        avatarUrl: PropTypes.string,
-      }),
-      characterCount: PropTypes.number,
-      tempImage: PropTypes.string,
-      filesUploadProgress: PropTypes.instanceOf(Map),
-    }).isRequired,
-    enabledDrafts: PropTypes.arrayOf(
-      PropTypes.shape({
-        images: PropTypes.arrayOf(
-          PropTypes.shape({
-            url: PropTypes.string,
-          })
-        ),
-        video: PropTypes.shape({
-          url: PropTypes.string,
-          thumbnail: PropTypes.string,
-        }),
-        gif: PropTypes.shape({
-          url: PropTypes.string,
-          stillGifUrl: PropTypes.string,
-        }),
-      })
-    ).isRequired,
-    draftsSharedData: PropTypes.shape({
-      uploadedVideos: PropTypes.array,
-      uploadedImages: PropTypes.array,
-      uploadedGifs: PropTypes.array,
-    }).isRequired,
-    visibleNotifications: PropTypes.arrayOf(
-      PropTypes.shape({
-        message: PropTypes.string,
-        scope: PropTypes.string,
-        data: PropTypes.shape({
-          id: PropTypes.string,
-        }),
-      })
-    ).isRequired,
-    areAllDraftsSaved: PropTypes.bool.isRequired,
-    shouldEnableFacebookAutocomplete: PropTypes.bool.isRequired,
-    shouldShowInlineSubprofileDropdown: PropTypes.bool.isRequired,
-    forceEditorFocus: PropTypes.bool.isRequired,
-    profiles: PropTypes.arrayOf(PropTypes.shape({})),
-    expandedComposerId: PropTypes.string,
-    selectedProfiles: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.string,
-        instagramDirectEnabled: PropTypes.bool,
-        service: PropTypes.shape({
-          canHaveMediaAttachmentType: PropTypes.func,
-          canHaveSomeAttachmentType: PropTypes.func,
-          shouldShowDuplicateContentWarning: PropTypes.bool,
-          isOmni: PropTypes.bool,
-          name: PropTypes.string,
-          charLimit: PropTypes.number,
-          usesImageFirstLayout: PropTypes.bool,
-          commentCharLimit: PropTypes.number,
-          maxAttachableImagesCount: PropTypes.number,
-        }),
-      })
-    ),
-    children: PropTypes.node,
-    composerPosition: PropTypes.shape({
-      top: PropTypes.number,
-      bottom: PropTypes.number,
-      left: PropTypes.number,
-      right: PropTypes.number,
-    }),
-    canStartProTrial: PropTypes.bool,
-    hasGridFeature: PropTypes.bool,
-    hasUserTagFeature: PropTypes.bool,
-    hasCustomIgVideoCoverFeature: PropTypes.bool,
-    hasFirstCommentFeature: PropTypes.bool,
-    hasHashtagManagerFeature: PropTypes.bool,
-    draftMode: PropTypes.bool,
-  };
-
-  static defaultProps = {
-    children: null,
-    composerPosition: null,
-    canStartProTrial: false,
-    hasUserTagFeature: false,
-    hasGridFeature: false,
-    hasCustomIgVideoCoverFeature: false,
-    hasFirstCommentFeature: false,
-    hasHashtagManagerFeature: false,
-    profiles: [],
-    expandedComposerId: null,
-    selectedProfiles: [],
-    draftMode: false,
-  };
-
   constructor(props) {
     super(props);
+    this.state = {
+      didRenderOnce: false,
+      shouldAutoFocusEditor: false,
+      hasCheckedForFacebookPermission: false,
+    };
     this.onCommentClick = this.onCommentClick.bind(this);
     this.onToggleSidebarVisibility = this.onToggleSidebarVisibility.bind(this);
   }
-
-  state = {
-    didRenderOnce: false,
-    shouldAutoFocusEditor: false,
-    hasCheckedForFacebookPermission: false,
-  };
 
   componentWillReceiveProps(nextProps) {
     /**
@@ -794,6 +648,12 @@ class Composer extends React.Component {
     const showComposerFbAutocompleteDisabledNotice =
       this.isExpanded() && hasComposerFbAutocompleteDisabledNotice;
 
+    const showFbIgLinkPreviewNotice =
+      this.isExpanded() &&
+      visibleNotifications.some(
+        n => n.scope === NotificationScopes.FB_IG_URL_NO_LINK_PREVIEW
+      );
+
     const shouldDisplayEditThumbnailBtn =
       this.isInstagram() &&
       this.hasVideo() &&
@@ -1057,6 +917,15 @@ class Composer extends React.Component {
             />
           )}
 
+          {showFbIgLinkPreviewNotice && (
+            <NotificationContainer
+              visibleNotifications={visibleNotifications}
+              scope={NotificationScopes.FB_IG_URL_NO_LINK_PREVIEW}
+              classNames={noticeClassNames}
+              showCloseIcon
+            />
+          )}
+
           {!usesImageFirstLayout && (
             <div className={styles.editorMediaContainer}>
               {composerEditor}
@@ -1223,5 +1092,151 @@ class Composer extends React.Component {
     );
   }
 }
+
+Composer.propTypes = {
+  appState: PropTypes.shape({
+    draftSaveQueueingType: PropTypes.string,
+    isOmniboxEnabled: PropTypes.bool,
+    composersWhichHaveBeenCollapsed: PropTypes.instanceOf(Set),
+    whatPreventsSaving: PropTypes.arrayOf(
+      PropTypes.shape({
+        composerId: PropTypes.string,
+        code: PropTypes.string,
+        message: PropTypes.string,
+      })
+    ),
+  }).isRequired,
+  draft: PropTypes.shape({
+    id: PropTypes.string,
+    instagramFeedback: PropTypes.array,
+    isEnabled: PropTypes.bool,
+    isSaved: PropTypes.bool,
+    hasSavingError: PropTypes.bool,
+    link: PropTypes.shape({
+      availableThumbnails: PropTypes.array,
+      thumbnail: PropTypes.shape({
+        url: PropTypes.string,
+      }),
+    }),
+    sourceLink: PropTypes.shape({
+      availableImages: PropTypes.string,
+      url: PropTypes.string,
+    }),
+    enabledAttachmentType: PropTypes.string,
+    images: PropTypes.arrayOf(
+      PropTypes.shape({
+        url: PropTypes.string,
+      })
+    ),
+    video: PropTypes.shape({
+      url: PropTypes.string,
+      thumbnail: PropTypes.string,
+    }),
+    gif: PropTypes.shape({
+      url: PropTypes.string,
+      stillGifUrl: PropTypes.string,
+    }),
+    service: PropTypes.shape({
+      canHaveMediaAttachmentType: PropTypes.func,
+      canHaveSomeAttachmentType: PropTypes.func,
+      shouldShowDuplicateContentWarning: PropTypes.bool,
+      isOmni: PropTypes.bool,
+      name: PropTypes.string,
+      charLimit: PropTypes.number,
+      usesImageFirstLayout: PropTypes.bool,
+      commentCharLimit: PropTypes.number,
+      maxAttachableImagesCount: PropTypes.number,
+    }),
+    retweet: PropTypes.shape({
+      avatarUrl: PropTypes.string,
+    }),
+    characterCount: PropTypes.number,
+    tempImage: PropTypes.string,
+    filesUploadProgress: PropTypes.instanceOf(Map),
+  }).isRequired,
+  enabledDrafts: PropTypes.arrayOf(
+    PropTypes.shape({
+      images: PropTypes.arrayOf(
+        PropTypes.shape({
+          url: PropTypes.string,
+        })
+      ),
+      video: PropTypes.shape({
+        url: PropTypes.string,
+        thumbnail: PropTypes.string,
+      }),
+      gif: PropTypes.shape({
+        url: PropTypes.string,
+        stillGifUrl: PropTypes.string,
+      }),
+    })
+  ).isRequired,
+  draftsSharedData: PropTypes.shape({
+    uploadedVideos: PropTypes.array,
+    uploadedImages: PropTypes.array,
+    uploadedGifs: PropTypes.array,
+  }).isRequired,
+  visibleNotifications: PropTypes.arrayOf(
+    PropTypes.shape({
+      message: PropTypes.string,
+      scope: PropTypes.string,
+      data: PropTypes.shape({
+        id: PropTypes.string,
+      }),
+    })
+  ).isRequired,
+  areAllDraftsSaved: PropTypes.bool.isRequired,
+  shouldEnableFacebookAutocomplete: PropTypes.bool.isRequired,
+  shouldShowInlineSubprofileDropdown: PropTypes.bool.isRequired,
+  forceEditorFocus: PropTypes.bool.isRequired,
+  profiles: PropTypes.arrayOf(PropTypes.shape({})),
+  expandedComposerId: PropTypes.string,
+  selectedProfiles: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      instagramDirectEnabled: PropTypes.bool,
+      service: PropTypes.shape({
+        canHaveMediaAttachmentType: PropTypes.func,
+        canHaveSomeAttachmentType: PropTypes.func,
+        shouldShowDuplicateContentWarning: PropTypes.bool,
+        isOmni: PropTypes.bool,
+        name: PropTypes.string,
+        charLimit: PropTypes.number,
+        usesImageFirstLayout: PropTypes.bool,
+        commentCharLimit: PropTypes.number,
+        maxAttachableImagesCount: PropTypes.number,
+      }),
+    })
+  ),
+  children: PropTypes.node,
+  composerPosition: PropTypes.shape({
+    top: PropTypes.number,
+    bottom: PropTypes.number,
+    left: PropTypes.number,
+    right: PropTypes.number,
+  }),
+  canStartProTrial: PropTypes.bool,
+  hasGridFeature: PropTypes.bool,
+  hasUserTagFeature: PropTypes.bool,
+  hasCustomIgVideoCoverFeature: PropTypes.bool,
+  hasFirstCommentFeature: PropTypes.bool,
+  hasHashtagManagerFeature: PropTypes.bool,
+  draftMode: PropTypes.bool,
+};
+
+Composer.defaultProps = {
+  children: null,
+  composerPosition: null,
+  canStartProTrial: false,
+  hasUserTagFeature: false,
+  hasGridFeature: false,
+  hasCustomIgVideoCoverFeature: false,
+  hasFirstCommentFeature: false,
+  hasHashtagManagerFeature: false,
+  profiles: [],
+  expandedComposerId: null,
+  selectedProfiles: [],
+  draftMode: false,
+};
 
 export default Composer;
