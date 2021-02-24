@@ -2,6 +2,7 @@ import React from 'react';
 import { render as rtlRender } from '@testing-library/react';
 import { createStore, combineReducers } from 'redux';
 import { MockedProvider } from '@apollo/client/testing';
+import BDSAppShell from '@bufferapp/app-shell';
 import { gql } from '@apollo/client';
 import { Provider } from 'react-redux';
 import reducers from '@bufferapp/publish-store/reducers';
@@ -80,7 +81,9 @@ const customRender = (
   const Wrapper = ({ children }) => (
     <Provider store={store}>
       <MockedProvider mocks={mocks} addTypename={false}>
-        <Router history={history}>{children}</Router>
+        <Router history={history}>
+          <BDSAppShell>{children}</BDSAppShell>
+        </Router>
       </MockedProvider>
     </Provider>
   );
