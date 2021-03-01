@@ -1,9 +1,6 @@
 import React from 'react';
 import { render as rtlRender } from '@testing-library/react';
 import { createStore, combineReducers } from 'redux';
-import { MockedProvider } from '@apollo/client/testing';
-import BDSAppShell from '@bufferapp/app-shell';
-import { gql } from '@apollo/client';
 import { Provider } from 'react-redux';
 import reducers from '@bufferapp/publish-store/reducers';
 import composedMiddlewares from '@bufferapp/publish-store/middlewares';
@@ -12,7 +9,6 @@ import {
   ConnectedRouter as Router,
   connectRouter,
 } from 'connected-react-router';
-import { buildAccount } from '../generate-data';
 
 const historyMemory = createMemoryHistory();
 
@@ -30,42 +26,6 @@ const customStore = ({ initialState = undefined, history = historyMemory }) =>
     composedMiddlewares(history)
   );
 
-const QUERY_ACCOUNT = gql`
-  query GetAccount {
-    account {
-      id
-      email
-      featureFlips
-      isImpersonation
-      currentOrganization {
-        id
-        name
-        canEdit
-        role
-        createdAt
-      }
-      organizations {
-        id
-        name
-      }
-      products {
-        name
-        userId
-      }
-    }
-  }
-`;
-const mocks = [
-  {
-    request: {
-      query: QUERY_ACCOUNT,
-    },
-    result: {
-      data: buildAccount(),
-    },
-  },
-];
-
 const customRender = (
   ui,
   {
@@ -80,11 +40,7 @@ const customRender = (
 ) => {
   const Wrapper = ({ children }) => (
     <Provider store={store}>
-      <MockedProvider mocks={mocks} addTypename={false}>
-        <Router history={history}>
-          <BDSAppShell>{children}</BDSAppShell>
-        </Router>
-      </MockedProvider>
+      <Router history={history}>{children}</Router>
     </Provider>
   );
 
