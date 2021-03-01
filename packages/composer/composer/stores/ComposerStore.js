@@ -1059,6 +1059,21 @@ const handleNewDraftLinks = (id, newUrls) => {
         ComposerActionCreators.toggleAttachment(id, AttachmentTypes.LINK);
       }
     }
+  } else {
+    // If the first URL is blocked, show a notice about blocked URLs.
+    NotificationActionCreators.queueInfo({
+      scope: NotificationScopes.FB_IG_URL_NO_LINK_PREVIEW,
+      message: `Due to recent changes with Facebook’s Data Policy, we can no longer generate link previews for <br />
+      Facebook and Instagram links.
+      <a
+        rel="noopener noreferrer"
+        target="_blank"
+        href="https://support.buffer.com/hc/en-us/articles/1500002337761">
+        Learn more
+      </a>.`,
+      isUnique: true,
+      onlyCloseOnce: true,
+    });
   }
 
   // Shorten newly-added links if not unshortened before
