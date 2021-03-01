@@ -2070,10 +2070,10 @@
   resolved "https://registry.yarnpkg.com/@emotion/weak-memoize/-/weak-memoize-0.2.5.tgz#8eed982e2ee6f7f4e44c253e12962980791efd46"
   integrity sha512-6U71C2Wp7r5XtFtQzYrW5iKFT67OixrSxjI4MptCHzdSVlgabczzqLe0ZSgnub/5Kp4hSbpDB1tMytZY9pwxxA==
 
-"@fullstory/browser@^1.4.6":
-  version "1.4.6"
-  resolved "https://registry.yarnpkg.com/@fullstory/browser/-/browser-1.4.6.tgz#62e17ffe4ee724cf6478f1bd44a3af41e57fbd7a"
-  integrity sha512-tvm7zVsK3Zn2QW76+4dkmOGGhwkb+Srqm4tQExsJJzw5bhDaYiqNtOvmqiZ5Jp423yCREcqtEHZVSyVXkiWbvw==
+"@fullstory/browser@^1.4.7":
+  version "1.4.7"
+  resolved "https://registry.yarnpkg.com/@fullstory/browser/-/browser-1.4.7.tgz#53b355417d3f1afbd2bae208b5e57ddffd5f5854"
+  integrity sha512-ltFsyFqfl5BvJm5ff0bfaC8QAHNAXYp8xpZy0uRQYJ2uNUx+xP6jQfyPurL5uq5Du83qL036L7C0hWn9AHYzqg==
 
 "@graphql-typed-document-node/core@^3.0.0":
   version "3.1.0"

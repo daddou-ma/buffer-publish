@@ -72,7 +72,7 @@
     "@bufferapp/ui": "5.58.1-beta.5c65b3a",
     "@bugsnag/js": "^6.5.2",
     "@bugsnag/plugin-react": "^6.5.0",
-    "@fullstory/browser": "^1.4.6",
+    "@fullstory/browser": "^1.4.7",
     "@sheerun/mutationobserver-shim": "^0.3.3",
     "apollo-link-http": "^1.5.17",
     "babel-loader": "8.0.6",
