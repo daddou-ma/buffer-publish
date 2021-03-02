@@ -70,18 +70,22 @@ const AppPages = ({
 
       {!hasProfiles && (
         <Route
-          path={newBusinessTrialists.route}
+          path={newBusinessTrialists.getRoute(currentOrgId)}
           component={OnboardingManager}
         />
       )}
+
       {!hasProfiles && showBusinessTrialistsOnboarding && (
-        <Redirect to={newBusinessTrialists.route} />
+        <Redirect to={newBusinessTrialists.getRoute(currentOrgId)} />
       )}
 
       {!hasProfiles && (
-        <Route path={newConnection.route} component={DefaultPage} />
+        <Route
+          path={newConnection.getRoute(currentOrgId)}
+          component={DefaultPage}
+        />
       )}
-      {!hasProfiles && <Redirect to={newConnection.route} />}
+      {!hasProfiles && <Redirect to={newConnection.getRoute(currentOrgId)} />}
 
       <Route path={campaignsPage.route} component={PagesWithSidebar} />
       <Route
