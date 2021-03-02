@@ -32,6 +32,9 @@ const AppPages = ({
   const selectedOrgInAppShell = user?.currentOrganization?.id;
 
   const currentOrgId = orgIdFromRoute || selectedOrgInAppShell;
+  // We need to update the current org in the AppShell if it doesn't
+  // match the org from the user's route. This only applies if
+  // route has a valid org (not a null, undefined or empty value).
   const needsToSelectNewOrgInAppShell =
     selectedOrgInAppShell !== orgIdFromRoute && !!orgIdFromRoute;
 

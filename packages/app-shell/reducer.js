@@ -9,8 +9,6 @@ export const initialState = {
   bannerKey: null,
   bannerOptions: undefined,
   enabledProducts: [],
-  featureFlips: [],
-  isImpersonation: false,
 };
 
 export default (state = initialState, action) => {
