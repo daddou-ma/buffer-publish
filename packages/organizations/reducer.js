@@ -1,18 +1,19 @@
 import keyWrapper from '@bufferapp/keywrapper';
+import { actionTypes as dataFetchActionTypes } from '@bufferapp/async-data-fetch';
 
 export const actionTypes = keyWrapper('ORGS', {
-  INITIALIZED: 0,
   ORGANIZATION_SELECTED: 0,
   SET_CURRENT_ORGANIZATION: 0,
 });
 
 export default (state = { loaded: false }, action) => {
   switch (action.type) {
-    case actionTypes.INITIALIZED: {
-      const { organizations, selectedOrganization } = action;
+    case `organizations_${dataFetchActionTypes.FETCH_SUCCESS}`: {
+      const organizations = action.result;
+
       return {
         list: organizations,
-        selected: selectedOrganization,
+        selected: null,
         loaded: true,
         canSeeOrgSwitcher: organizations?.length >= 2,
       };
@@ -20,7 +21,6 @@ export default (state = { loaded: false }, action) => {
     case actionTypes.ORGANIZATION_SELECTED: {
       return {
         ...state,
-        list: action.organizations,
         selected: action.selected,
       };
     }
