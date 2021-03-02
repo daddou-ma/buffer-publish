@@ -296,25 +296,6 @@ const buildStoryGroup = build('StoryGroup', {
   },
 });
 
-const buildAccount = build('Account', {
-  fields: {
-    account: {
-      id: '123',
-      featureFlips: [],
-      email: 'test@buffer.com',
-      currentOrganization: {
-        id: 'organization1',
-        name: 'Buffer',
-        canEdit: true,
-        role: 'admin',
-        createdAt: '1234',
-      },
-      organizations: [{ id: 'organization1', name: 'Buffer' }],
-      products: [{ name: 'publish', userId: '123' }],
-    },
-  },
-});
-
 export {
   buildUser,
   buildProfile,
@@ -327,5 +308,4 @@ export {
   buildPostWithImage,
   buildOrganization,
   buildStoryGroup,
-  buildAccount,
 };

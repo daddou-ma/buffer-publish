@@ -1,68 +1,45 @@
 import React, { useEffect } from 'react';
-import { Redirect, Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
-  campaignsPage,
-  newBusinessTrialists,
-  newConnection,
-  plansPage,
   preferencesPage,
   profilePages,
-  profileTabPages,
+  plansPage,
+  newBusinessTrialists,
+  newConnection,
+  campaignsPage,
   missingAccessPage,
 } from '@bufferapp/publish-routes';
-import { filterProfilesByOrg } from '@bufferapp/publish-profile-sidebar/utils';
 import PagesWithSidebar from '@bufferapp/publish-app-pages/components/PagesWithSidebar';
 import ProfilePages from '@bufferapp/publish-app-pages/components/ProfilePages';
 import Preferences from '@bufferapp/publish-preferences';
 import Plans from '@bufferapp/publish-plans';
 import DefaultPage from '@bufferapp/default-page';
 import OnboardingManager from '@bufferapp/publish-onboarding';
-import { useOrgSwitcher, useUser } from '@bufferapp/app-shell';
 // import MissingAccessPage from '../../../missing-access-page/index';
 
 const AppPages = ({
-  unfilteredProfiles,
+  profiles,
   showBusinessTrialistsOnboarding,
   profileRouteLoaded,
-  orgIdFromRoute,
+  needsToSetCurrentOrg,
+  setCurrentOrganization,
+  currentOrgId,
 }) => {
-  // Get current selected org from appshell
-  const user = useUser();
-  const selectedOrgInAppShell = user?.currentOrganization?.id;
-
-  const currentOrgId = orgIdFromRoute || selectedOrgInAppShell;
-  // We need to update the current org in the AppShell if it doesn't
-  // match the org from the user's route. This only applies if
-  // route has a valid org (not a null, undefined or empty value).
-  const needsToSelectNewOrgInAppShell =
-    selectedOrgInAppShell !== orgIdFromRoute && !!orgIdFromRoute;
-
-  // Filters profiles by current org selected
-  const profiles = filterProfilesByOrg(unfilteredProfiles, {
-    id: currentOrgId,
-  });
-
-  const switchOrganization = useOrgSwitcher();
-
+  const hasProfiles = profiles && profiles.length > 0;
   // If org coming from route doesn't match the last org stored, select and store the new value
   useEffect(() => {
-    if (needsToSelectNewOrgInAppShell) {
-      switchOrganization(currentOrgId);
+    if (needsToSetCurrentOrg) {
+      setCurrentOrganization(currentOrgId);
     }
   }, [currentOrgId]);
 
   const redirectToQueue = () => {
     const selectedProfileId =
       Array.isArray(profiles) && !!profiles.length && profiles[0].id;
-    const newPath = profileTabPages.getRoute({
-      profileId: selectedProfileId,
-      tabId: 'queue',
-    });
+    const newPath = profilePages.getRoute({ profileId: selectedProfileId });
     return <Redirect to={newPath} />;
   };
-  const hasProfiles = profiles && profiles.length > 0;
-
   return (
     <Switch>
       <Route path={preferencesPage.route} component={Preferences} />
@@ -112,20 +89,20 @@ const AppPages = ({
 // {!hasAccessToPublish && <Redirect to={missingAccessPage.route} />}
 
 AppPages.propTypes = {
-  unfilteredProfiles: PropTypes.arrayOf(PropTypes.object),
+  profiles: PropTypes.arrayOf(PropTypes.object),
   showBusinessTrialistsOnboarding: PropTypes.bool,
   profileRouteLoaded: PropTypes.func.isRequired,
   needsToSetCurrentOrg: PropTypes.bool,
-  orgIdFromRoute: PropTypes.string,
-  switchOrganization: PropTypes.func,
+  currentOrgId: PropTypes.string,
+  setCurrentOrganization: PropTypes.func,
 };
 
 AppPages.defaultProps = {
   showBusinessTrialistsOnboarding: false,
-  unfilteredProfiles: [],
+  profiles: [],
   needsToSetCurrentOrg: false,
-  orgIdFromRoute: null,
-  switchOrganization: () => {},
+  currentOrgId: null,
+  setCurrentOrganization: () => {},
 };
 
 export default AppPages;

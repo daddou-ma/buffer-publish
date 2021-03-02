@@ -148,79 +148,78 @@ describe('ViewCampaign | user interaction', () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
-  // Commenting tests out for now to unblock org switcher. Will revisit in future
+
   it('should render campaigns list and navigate to a campaign queue', async () => {
-    expect(buildCampaign).toBeDefined();
-    //   mockApiCalls();
+    mockApiCalls();
 
-    //   render(
-    //     <TestDragDropContainer>
-    //       <AppPages />
-    //     </TestDragDropContainer>,
-    //     {
-    //       route: '/campaigns',
-    //       initialState,
-    //     }
-    //   );
+    render(
+      <TestDragDropContainer>
+        <AppPages />
+      </TestDragDropContainer>,
+      {
+        route: '/campaigns',
+        initialState,
+      }
+    );
 
-    //   /* List campaigns assertions */
-    //   const {
-    //     createCampaignBtn,
-    //     viewCampaignBtn,
-    //     campaignsHeading,
-    //   } = await campaignsListFields();
+    /* List campaigns assertions */
+    const {
+      createCampaignBtn,
+      viewCampaignBtn,
+      campaignsHeading,
+    } = await campaignsListFields();
 
-    //   expect(createCampaignBtn).toBeInTheDocument();
-    //   expect(campaignsHeading).toBeInTheDocument();
-    //   expect(viewCampaignBtn).toBeInTheDocument();
+    expect(createCampaignBtn).toBeInTheDocument();
+    expect(campaignsHeading).toBeInTheDocument();
+    expect(viewCampaignBtn).toBeInTheDocument();
 
-    //   const {
-    //     dateRange,
-    //     campaignName,
-    //     totalScheduled,
-    //     totalSent,
-    //   } = await campaignDetailsFields(campaign);
+    const {
+      dateRange,
+      campaignName,
+      totalScheduled,
+      totalSent,
+    } = await campaignDetailsFields(campaign);
 
-    //   expect(dateRange).toBeInTheDocument();
-    //   expect(campaignName).toBeInTheDocument();
-    //   expect(totalScheduled).toBeInTheDocument();
-    //   expect(totalSent).toBeInTheDocument();
+    expect(dateRange).toBeInTheDocument();
+    expect(campaignName).toBeInTheDocument();
+    expect(totalScheduled).toBeInTheDocument();
+    expect(totalSent).toBeInTheDocument();
 
-    //   /* Campaign queue assertions */
-    //   userEvent.click(viewCampaignBtn);
+    /* Campaign queue assertions */
+    userEvent.click(viewCampaignBtn);
 
-    //   const { scheduledLink, sentLink } = await campaignsQueueFields();
-    //   expect(scheduledLink).toBeInTheDocument();
-    //   expect(sentLink).toBeInTheDocument();
+    const { scheduledLink, sentLink } = await campaignsQueueFields();
+    expect(scheduledLink).toBeInTheDocument();
+    expect(sentLink).toBeInTheDocument();
 
-    //   const {
-    //     campaignName: viewCampaignName,
-    //     dateRange: viewDateRange,
-    //     totalScheduled: viewTotalScheduled,
-    //     totalSent: viewTotalSent,
-    //   } = await campaignDetailsFields(campaign);
+    const {
+      campaignName: viewCampaignName,
+      dateRange: viewDateRange,
+      totalScheduled: viewTotalScheduled,
+      totalSent: viewTotalSent,
+    } = await campaignDetailsFields(campaign);
 
-    //   expect(viewCampaignName).toBeInTheDocument();
-    //   expect(viewDateRange).toBeInTheDocument();
-    //   expect(viewTotalScheduled).toBeInTheDocument();
-    //   expect(viewTotalSent).toBeInTheDocument();
-    //   expect(screen.getAllByText(/create post/i)).toHaveLength(2);
-    //   expect(screen.getByText(/edit campaign/i)).toBeInTheDocument();
-    //   expect(screen.getByText(/delete campaign/i)).toBeInTheDocument();
-    //   expect(screen.getByText(/view report/i)).toBeInTheDocument();
-    //   expect(screen.getByText(profileTwitter.handle)).toBeInTheDocument();
-    //   expect(screen.getByText(campaignItem.postContent.text)).toBeInTheDocument();
-    //   expect(screen.getAllByRole('button', { name: /^delete/i })).toHaveLength(1);
-    //   expect(screen.getAllByRole('button', { name: /^edit/i })).toHaveLength(1);
-    //   expect(screen.getAllByRole('button', { name: /^share now/i })).toHaveLength(
-    //     1
-    //   );
+    expect(viewCampaignName).toBeInTheDocument();
+    expect(viewDateRange).toBeInTheDocument();
+    expect(viewTotalScheduled).toBeInTheDocument();
+    expect(viewTotalSent).toBeInTheDocument();
+    expect(screen.getAllByText(/create post/i)).toHaveLength(2);
+    expect(screen.getByText(/edit campaign/i)).toBeInTheDocument();
+    expect(screen.getByText(/delete campaign/i)).toBeInTheDocument();
+    expect(screen.getByText(/view report/i)).toBeInTheDocument();
+    expect(screen.getByText(profileTwitter.handle)).toBeInTheDocument();
+    expect(screen.getByText(campaignItem.postContent.text)).toBeInTheDocument();
+    expect(screen.getAllByRole('button', { name: /^delete/i })).toHaveLength(1);
+    expect(screen.getAllByRole('button', { name: /^edit/i })).toHaveLength(1);
+    expect(screen.getAllByRole('button', { name: /^share now/i })).toHaveLength(
+      1
+    );
 
-    //   expect(rpcCall).toHaveBeenCalledWith('getCampaign', {
-    //     campaignId: campaign.id,
-    //     fullItems: true,
-    //     past: false,
-    //   });
-    //   expect(rpcCall).toHaveBeenCalledTimes(1);
+    expect(rpcCall).toHaveBeenCalledWith('getCampaign', {
+      campaignId: campaign.id,
+      fullItems: true,
+      past: false,
+    });
+    expect(rpcCall).toHaveBeenCalledTimes(1);
   });
 });
