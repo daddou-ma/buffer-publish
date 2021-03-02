@@ -124,7 +124,7 @@ app.post(
 );
 
 if (!isProduction) {
-  // handle redirect from publish.local.buffer.com -> publish.local.buffer.com:8080
+  // handle redirect from publish.local.buffer.com -> publish.local.buffer.com:8888
   app.get('/', (req, res) => {
     res.redirect('https://publish.local.buffer.com:8888');
   });
