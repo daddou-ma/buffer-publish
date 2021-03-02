@@ -21,7 +21,6 @@ export const initialState = {
   profileList: [],
   profilesUnfiltered: [],
   selectedProfileId: '',
-  organization: null,
   loading: false,
   loaded: false,
   isLoadingGlobalAccount: true,

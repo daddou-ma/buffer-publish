@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
-import { useUser } from '@bufferapp/app-shell';
 import { BufferLoading } from '@bufferapp/publish-shared-components';
 
 const LoadingGateLoader = styled.div`
@@ -14,22 +13,14 @@ const LoadingGateLoader = styled.div`
   align-items: center;
 `;
 
-const LoadingGate = ({ ready, children }) => {
-  const user = useUser();
-  const orgSelectedLoaded = user && user.loading !== true;
-
-  return (
-    <>
-      {ready && orgSelectedLoaded ? (
-        children
-      ) : (
-        <LoadingGateLoader>
-          <BufferLoading size={64} />
-        </LoadingGateLoader>
-      )}
-    </>
+const LoadingGate = ({ ready, children }) =>
+  ready ? (
+    children
+  ) : (
+    <LoadingGateLoader>
+      <BufferLoading size={64} />
+    </LoadingGateLoader>
   );
-};
 
 LoadingGate.propTypes = {
   ready: PropTypes.bool,
