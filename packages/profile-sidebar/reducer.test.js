@@ -28,6 +28,7 @@ describe('reducer', () => {
       loaded: false,
       profileList: [],
       profilesUnfiltered: [],
+      organization: null,
     };
     const action = {
       type: 'INIT',
