@@ -7,7 +7,7 @@ import reducer, {
   actionTypes,
   initialState as profileInitialState,
 } from './reducer';
-import { profiles } from './mockData/profiles';
+import { profiles, enabledProfiles } from './mockData/profiles';
 
 describe('reducer', () => {
   it('should initialize default state', () => {
@@ -20,11 +20,15 @@ describe('reducer', () => {
       isLockedProfile: false,
       hasInstagram: true,
       hasFacebook: true,
+      hasSharedChannelsFlip: false,
+      isLoadingGlobalAccount: true,
       hasTwitter: true,
       isSearchPopupVisible: false,
       searchText: null,
       loaded: false,
       profileList: [],
+      profilesUnfiltered: [],
+      organization: null,
     };
     const action = {
       type: 'INIT',
@@ -94,7 +98,7 @@ describe('reducer', () => {
       result: profiles,
     };
     const { profiles: profilesInStore } = reducer(undefined, action);
-    expect(profilesInStore).toEqual(profiles);
+    expect(profilesInStore).toEqual(enabledProfiles);
   });
 
   it('should correctly set flags for connected accounts', () => {
@@ -107,7 +111,7 @@ describe('reducer', () => {
       action
     );
     expect(hasInstagram).toBe(false);
-    expect(hasFacebook).toBe(true);
+    expect(hasFacebook).toBe(false);
     expect(hasTwitter).toBe(true);
   });
 

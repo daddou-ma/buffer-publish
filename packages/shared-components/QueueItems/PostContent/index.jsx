@@ -217,14 +217,13 @@ const PostContent = ({
   analyzeCrossSale,
   onMobileClick,
   onShareAgainClick,
-  showShareAgainButton,
   showSendToMobile,
   shouldShowAnalyzeBanner,
   ...postProps
 }) => {
   const { isSent, isPastReminder, isManager } = postProps;
   const isPastPost = isSent || isPastReminder;
-  const shouldShowShareAgain = showShareAgainButton && isPastPost;
+  const shouldShowShareAgain = isPastPost;
   const shouldShowSendToMobile =
     showSendToMobile && isPastReminder && isManager;
 

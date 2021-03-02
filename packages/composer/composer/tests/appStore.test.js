@@ -42,10 +42,10 @@ describe('AppStore', () => {
   });
 
   it('only allows one twitter profile to be selected at a time', () => {
-    AppDispatcher.dispatch(actionSetMetaData);
-    AppDispatcher.dispatch(actionAddProfiles);
-    AppDispatcher.dispatch(actionSelectFirstProfile);
-    AppDispatcher.dispatch(actionSelectSecondProfile);
+    AppDispatcher.default.dispatch(actionSetMetaData);
+    AppDispatcher.default.dispatch(actionAddProfiles);
+    AppDispatcher.default.dispatch(actionSelectFirstProfile);
+    AppDispatcher.default.dispatch(actionSelectSecondProfile);
     const selectedTwitterProfiles = AppStore.default.getSelectedProfilesForService(
       'twitter'
     );
@@ -54,7 +54,7 @@ describe('AppStore', () => {
 
   describe('isExtension', () => {
     it('returns true if the current enviroment is the extension', () => {
-      AppDispatcher.dispatch({
+      AppDispatcher.default.dispatch({
         action: {
           actionType: ActionTypes.APP_RECEIVE_METADATA,
           metaData: {
@@ -66,7 +66,7 @@ describe('AppStore', () => {
     });
 
     it('returns false otherwise', () => {
-      AppDispatcher.dispatch(actionSetMetaData);
+      AppDispatcher.default.dispatch(actionSetMetaData);
       expect(AppStore.default.isExtension()).toBeFalsy();
     });
   });

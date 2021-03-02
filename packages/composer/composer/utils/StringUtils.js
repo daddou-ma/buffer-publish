@@ -78,6 +78,31 @@ const removeLinkFromErrorMessageText = (text, linkClass) => {
   return text.replace(rx, '');
 };
 
+const ensureUrlProtocol = url => {
+  return !url.match(/https?:\/\//) ? `http://${url}` : url;
+};
+
+const isUrlOnBlocklist = url => {
+  // https://github.com/bufferapp/buffer-scraper/blob/master/lib/blocklist.js
+  const blockList = [
+    /^(\w+\.)?instagram\.com/i,
+    /^(\w+\.)?instagr.am/i,
+    /^(\w+\.)?facebook\.com/i,
+    /^(\w+\.)?fb\.com/i,
+    /^(\w+\.)?fb\.me/i,
+  ];
+
+  const safeUrl = ensureUrlProtocol(url);
+  try {
+    const firstUrl = new URL(safeUrl);
+    return blockList.some(blockedHost => blockedHost.test(firstUrl.host));
+  } catch (e) {
+    // If we can't parse the URL for some reason then assume it's fine
+    console.warn(`Error parsing URL ${safeUrl}`, e); // eslint-disable-line no-console
+    return false;
+  }
+};
+
 export {
   getHumanReadableSize,
   getHumanReadableTime,
@@ -90,4 +115,5 @@ export {
   getDomainFromUrl,
   removeLinkFromErrorMessageText,
   getBaseUrl,
+  isUrlOnBlocklist,
 };

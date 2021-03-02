@@ -95,7 +95,7 @@ const ComposerActionCreators = {
           currentCanonicalUrl === canonicalUrl;
         if (!doesScrapedDataStillMatchSourceUrl) return;
 
-        const linkData = Object.assign({}, scrapedData, { url });
+        const linkData = { ...scrapedData, url };
         AppDispatcher.handleViewAction({
           actionType: ActionTypes.COMPOSER_UPDATE_DRAFT_SOURCE_LINK_DATA,
           id,
@@ -562,7 +562,7 @@ const ComposerActionCreators = {
         height,
       });
     },
-    uploadedDraftVideo: ({ id, uploaderInstance, uploadId, fileExtension }) => {
+    uploadedDraftVideo: ({ id, uploaderInstance, uploadId }) => {
       AppDispatcher.handleViewAction({
         actionType: ActionTypes.COMPOSER_ADD_DRAFT_UPLOADED_VIDEO,
         id,
@@ -635,12 +635,12 @@ const ComposerActionCreators = {
     const progressIterator = uploaderInstance.getProgressIterator();
     let item;
 
+    // eslint-disable-next-line no-cond-assign
     while (!(item = progressIterator.next()).done) {
-      // eslint-disable-line no-cond-assign
       const promisedProgress = item.value;
 
+      // eslint-disable-next-line no-await-in-loop
       await promisedProgress.then(progress => {
-        // eslint-disable-line no-await-in-loop
         AppDispatcher.handleViewAction({
           actionType: ActionTypes.COMPOSER_DRAFT_FILE_UPLOAD_PROGRESS,
           id,

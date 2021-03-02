@@ -43,6 +43,7 @@ import {
   validateVideoForInstagram,
 } from '../lib/validation/ValidateDraft';
 import Draft from '../entities/Draft';
+import { isUrlOnBlocklist } from '../utils/StringUtils';
 
 // import { registerStore, sendToMonitor } from '../utils/devtools';
 
@@ -197,7 +198,8 @@ const eventShowSwitchPlanModal = () => {
   events.trigger('show-switch-plan-modal');
 };
 
-const ComposerStore = Object.assign({}, EventEmitter.prototype, {
+const ComposerStore = {
+  ...EventEmitter.prototype,
   emitChange: () => ComposerStore.emit(CHANGE_EVENT),
   addChangeListener: callback => ComposerStore.on(CHANGE_EVENT, callback),
   removeChangeListener: callback =>
@@ -345,7 +347,7 @@ const ComposerStore = Object.assign({}, EventEmitter.prototype, {
       .getPlainText(),
 
   getDraftLinkUrl: id => {
-    const link = ComposerStore.getDraft(id).link;
+    const { link } = ComposerStore.getDraft(id);
     return link ? link.url : null;
   },
 
@@ -397,7 +399,7 @@ const ComposerStore = Object.assign({}, EventEmitter.prototype, {
    */
   // eslint-disable-next-line no-use-before-define
   _syncDispatch: payload => onDispatchedPayload(payload),
-});
+};
 
 // Should be used for composition with functions that are passed a draft id as first argument.
 // It would have been awesome to compose this as a decorator on top of non-class methods,
@@ -1046,13 +1048,32 @@ const handleNewDraftLinks = (id, newUrls) => {
   const draft = ComposerStore.getDraft(id);
 
   // If link attachment is disabled, update it with first newly-added url
-  if (!ComposerStore.doesDraftHaveLinkAttachmentEnabled(id)) {
-    ComposerActionCreators.updateDraftLink(id, newUrls[0]);
+  // (As long as it's not on the blocklist)
+  const isBlocked = isUrlOnBlocklist(ComposerStore.getCanonicalUrl(newUrls[0]));
+  if (!isBlocked) {
+    if (!ComposerStore.doesDraftHaveLinkAttachmentEnabled(id)) {
+      ComposerActionCreators.updateDraftLink(id, newUrls[0]);
 
-    // If no attachment is currently enabled, bring link attachment up with new link
-    if (!ComposerStore.doesDraftHaveAttachmentEnabled(id)) {
-      ComposerActionCreators.toggleAttachment(id, AttachmentTypes.LINK);
+      // If no attachment is currently enabled, bring link attachment up with new link
+      if (!ComposerStore.doesDraftHaveAttachmentEnabled(id)) {
+        ComposerActionCreators.toggleAttachment(id, AttachmentTypes.LINK);
+      }
     }
+  } else {
+    // If the first URL is blocked, show a notice about blocked URLs.
+    NotificationActionCreators.queueInfo({
+      scope: NotificationScopes.FB_IG_URL_NO_LINK_PREVIEW,
+      message: `Due to recent changes with Facebook’s Data Policy, we can no longer generate link previews for <br />
+      Facebook and Instagram links.
+      <a
+        rel="noopener noreferrer"
+        target="_blank"
+        href="https://support.buffer.com/hc/en-us/articles/1500002337761">
+        Learn more
+      </a>.`,
+      isUnique: true,
+      onlyCloseOnce: true,
+    });
   }
 
   // Shorten newly-added links if not unshortened before
@@ -1650,7 +1671,7 @@ const toggleDraftAttachment = monitorComposerLastInteractedWith(
 
 const replaceDraftLinkWithShortlink = (id, link, shortLink) => {
   const draft = ComposerStore.getDraft(id);
-  let editorState = draft.editorState;
+  let { editorState } = draft;
   const contentState = editorState.getCurrentContent();
 
   contentState.getBlockMap().forEach(contentBlock => {
@@ -1995,7 +2016,7 @@ const getReminderMessage = (selectedIgProfiles, mediaType) => {
       },
       mixed: {
         message: `Reminders aren’t set up for ${usernameList}. To post an image outside the range 4:5 to 1.91:1
-          to Instagram, you’ll need to set up Reminders. Finish scheduling your post, then visit the queue for 
+          to Instagram, you’ll need to set up Reminders. Finish scheduling your post, then visit the queue for
           ${usernameList} to set up Reminders!`,
         composerId: 'instagram',
         code: 'ASPECT_RATIO',
@@ -2392,8 +2413,8 @@ const onDispatchedPayload = payload => {
 
     case ActionTypes.COMPOSER_DRAFT_LINK_SHORTENED:
       monitorComposerLastInteractedWith(() => {
-        replaceDraftLinkWithShortlink(action.id, action.link, action.shortLink);
         mapShortLinkWithLongLink(action.id, action.shortLink, action.link);
+        replaceDraftLinkWithShortlink(action.id, action.link, action.shortLink);
       })();
       break;
 

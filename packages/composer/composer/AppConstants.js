@@ -432,6 +432,7 @@ const NotificationScopes = keyMirror({
   TWITTER_DUPLICATE_CONTENT_WARNING: null,
   COMPOSER_FACEBOOK_AUTOCOMPLETE_DISABLED: null,
   PROFILE_QUEUE_LIMIT: null,
+  FB_IG_URL_NO_LINK_PREVIEW: null,
 });
 
 /**

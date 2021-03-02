@@ -6,7 +6,7 @@ import {
   fontWeightMedium,
   lineHeight,
 } from '@bufferapp/ui/style/fonts';
-import { white } from '@bufferapp/ui/style/colors';
+import { white, blue } from '@bufferapp/ui/style/colors';
 import { Button, Text } from '@bufferapp/ui';
 
 export const mobileThreshold = '1250px';
@@ -46,6 +46,7 @@ export const LinkWithStyles = styled(Button)`
   display: inline-block;
   padding-left: 6px;
   padding-right: 6px;
+  color: ${blue};
 `;
 
 export const TextWithStyles = styled(Text)`
