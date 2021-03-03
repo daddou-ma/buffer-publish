@@ -8,7 +8,16 @@ export const actionTypes = keyWrapper('APP_SHELL', {
 
 export const initialState = {
   bannerKey: null,
-  bannerOptions: undefined,
+  bannerOptions: {
+    text: `We're currently experiencing issues posting updates to Twitter. We're investigating this and we'll update our status page once we have more information.`,
+    actionButton: {
+      label: 'Status page',
+      action: () => {
+        window.location = 'https://status.buffer.com';
+      },
+    },
+    themeColor: 'orange',
+  },
   enabledProducts: [],
   featureFlips: [],
   isImpersonation: false,
