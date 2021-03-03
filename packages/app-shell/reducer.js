@@ -9,7 +9,7 @@ export const actionTypes = keyWrapper('APP_SHELL', {
 export const initialState = {
   bannerKey: null,
   bannerOptions: {
-    text: `We're currently experiencing issues posting updates to Twitter via their API. Our engineering team are investigating this and we're working with Twitter to get a fix in place. We will continue to monitor this and update our status page with any new information we receive.`,
+    text: `We're currently experiencing issues posting updates to Twitter. We're investigating this and we'll update our status page once we have more information.`,
     actionButton: {
       label: 'Status page',
       action: () => {
