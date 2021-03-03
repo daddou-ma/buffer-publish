@@ -247,6 +247,18 @@ const ComposerStore = {
           draft.sourceLink === null ||
           twitterText.isValidUrl(draft.sourceLink.url, true, false);
 
+        const isPinterest = draft.service.name === 'pinterest';
+        const isPinterestSourceUrlUsingLinkShortener =
+          isPinterest &&
+          (draft.sourceLink?.url.includes('bit.ly') ||
+            draft.sourceLink?.url.includes('buff.ly'));
+
+        const contentText = contentState.getPlainText();
+        const linksInText = twitterText.extractUrls(contentText);
+
+        const hasPinterestLinkWithoutSourceUrl =
+          isPinterest && linksInText.length > 0 && !draft.sourceLink;
+
         const hasRequiredText = !draft.service.requiresText || hasText;
 
         let validationResultVideo = new ValidationSuccess();
@@ -269,7 +281,9 @@ const ComposerStore = {
           !hasRequiredText ||
           !isSourceUrlUnrequiredOrValid ||
           validationResultVideo.isInvalid() ||
-          validationResults.isInvalid();
+          validationResults.isInvalid() ||
+          hasPinterestLinkWithoutSourceUrl ||
+          isPinterestSourceUrlUsingLinkShortener;
 
         if (isInvalid) {
           let messages = [];
@@ -317,9 +331,13 @@ const ComposerStore = {
             messages.push('Please include at least some text or an attachment');
           }
 
-          if (!isSourceUrlUnrequiredOrValid) {
+          if (hasPinterestLinkWithoutSourceUrl) {
+            messages.push(`Please include a source url`);
+          } else if (!isSourceUrlUnrequiredOrValid) {
+            messages.push('Please include a valid source url');
+          } else if (isPinterestSourceUrlUsingLinkShortener) {
             messages.push(
-              'Please include a valid source url or leave the source url blank'
+              'Please include a source url without a link shortener'
             );
           }
 

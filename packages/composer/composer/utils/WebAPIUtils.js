@@ -1,7 +1,6 @@
 import fetchJsonp from 'fetch-jsonp';
 import partition from 'lodash.partition';
 import lruCache from 'lru-cache';
-import twitterText from 'twitter-text';
 import Request from '@bufferapp/buffer-js-request';
 import { AppEnvironments } from '@bufferapp/publish-constants';
 import AppActionCreators from '../action-creators/AppActionCreators';
@@ -800,28 +799,13 @@ function getFormattedAPIData(serviceName, unformattedData) {
 
     if (serviceDraft.service.canHaveSourceUrl) {
       const { sourceLink } = serviceDraft;
-      const hasPinterestWithoutSourceUrl =
-        sourceLink === null && serviceDraft.service.name === 'pinterest';
-      let sourceUrl = null;
 
       if (sourceLink !== null) {
-        sourceUrl = sourceLink.url;
-      }
+        let sourceUrl = sourceLink.url;
+        if (sourceUrl.indexOf('http') !== 0) sourceUrl = `http://${sourceUrl}`;
 
-      // If Pinterest has text description with links and without a source url,
-      // we need to define one of the links as a source to be able to post the description
-      if (hasPinterestWithoutSourceUrl) {
-        const linksInText = twitterText.extractUrls(serviceDraftText);
-        if (linksInText.length > 0) {
-          sourceUrl = linksInText[0];
-        }
+        conditionalFields.source_url = sourceUrl;
       }
-
-      if (sourceUrl && sourceUrl.indexOf('http') !== 0) {
-        sourceUrl = `http://${sourceUrl}`;
-      }
-
-      if (sourceUrl) conditionalFields.source_url = sourceUrl;
     }
 
     if (serviceDraft.service.canHaveLocation) {
