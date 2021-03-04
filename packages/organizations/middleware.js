@@ -1,30 +1,7 @@
-import {
-  actions as dataFetchActions,
-  actionTypes as dataFetchActionTypes,
-} from '@bufferapp/async-data-fetch';
-import { LOCATION_CHANGE } from 'connected-react-router';
-import getOrgIdFromRoute from '@bufferapp/publish-app-pages/utils/getOrgIdFromRoute';
+import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 
-import { actions, actionTypes } from './reducer';
+import { actionTypes } from './reducer';
 
-function selectOrganizationIfOrganizationRouteHasChanged(
-  pathname,
-  profiles,
-  organizations,
-  dispatch
-) {
-  const routeOrgId = getOrgIdFromRoute({
-    currentPath: pathname,
-    profiles,
-  });
-  if (
-    routeOrgId &&
-    routeOrgId !== organizations.selected &&
-    organizations.list?.length
-  ) {
-    dispatch(actions.setCurrentOrganization(routeOrgId));
-  }
-}
 export default ({ dispatch, getState }) => next => action => {
   next(action);
   switch (action.type) {
