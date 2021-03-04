@@ -28,30 +28,6 @@ function selectOrganizationIfOrganizationRouteHasChanged(
 export default ({ dispatch, getState }) => next => action => {
   next(action);
   switch (action.type) {
-    case LOCATION_CHANGE: {
-      const { pathname } = action.payload?.location;
-      const { profiles } = getState().profileSidebar;
-      const { organizations } = getState();
-      selectOrganizationIfOrganizationRouteHasChanged(
-        pathname,
-        profiles,
-        organizations,
-        dispatch
-      );
-      break;
-    }
-    case `profiles_${dataFetchActionTypes.FETCH_SUCCESS}`: {
-      const { pathname } = getState().router?.location;
-      const profiles = action.result;
-      const { organizations } = getState();
-      selectOrganizationIfOrganizationRouteHasChanged(
-        pathname,
-        profiles,
-        organizations,
-        dispatch
-      );
-      break;
-    }
     case 'INIT_ORGANIZATIONS': {
       if (
         typeof window !== 'undefined' &&

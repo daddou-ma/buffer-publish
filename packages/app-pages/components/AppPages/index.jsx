@@ -26,6 +26,7 @@ const AppPages = ({
   showBusinessTrialistsOnboarding,
   profileRouteLoaded,
   orgIdFromRoute,
+  storeSelectedOrg,
 }) => {
   // Get current selected org from appshell
   const user = useUser();
@@ -50,6 +51,7 @@ const AppPages = ({
     if (needsToSelectNewOrgInAppShell) {
       switchOrganization(currentOrgId);
     }
+    storeSelectedOrg(currentOrgId);
   }, [currentOrgId]);
 
   const redirectToQueue = () => {
@@ -70,18 +72,22 @@ const AppPages = ({
 
       {!hasProfiles && (
         <Route
-          path={newBusinessTrialists.route}
+          path={newBusinessTrialists.getRoute(currentOrgId)}
           component={OnboardingManager}
         />
       )}
+
       {!hasProfiles && showBusinessTrialistsOnboarding && (
-        <Redirect to={newBusinessTrialists.route} />
+        <Redirect to={newBusinessTrialists.getRoute(currentOrgId)} />
       )}
 
       {!hasProfiles && (
-        <Route path={newConnection.route} component={DefaultPage} />
+        <Route
+          path={newConnection.getRoute(currentOrgId)}
+          component={DefaultPage}
+        />
       )}
-      {!hasProfiles && <Redirect to={newConnection.route} />}
+      {!hasProfiles && <Redirect to={newConnection.getRoute(currentOrgId)} />}
 
       <Route path={campaignsPage.route} component={PagesWithSidebar} />
       <Route
@@ -118,6 +124,7 @@ AppPages.propTypes = {
   needsToSetCurrentOrg: PropTypes.bool,
   orgIdFromRoute: PropTypes.string,
   switchOrganization: PropTypes.func,
+  storeSelectedOrg: PropTypes.func.isRequired,
 };
 
 AppPages.defaultProps = {
