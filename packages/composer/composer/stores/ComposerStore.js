@@ -251,7 +251,8 @@ const ComposerStore = {
         const isPinterestSourceUrlUsingLinkShortener =
           isPinterest &&
           (draft.sourceLink?.url.includes('bit.ly/') ||
-            draft.sourceLink?.url.includes('buff.ly/'));
+            draft.sourceLink?.url.includes('buff.ly/') ||
+            draft.sourceLink?.url.includes('j.mp/'));
 
         const contentText = contentState.getPlainText();
         const linksInText = twitterText.extractUrls(contentText);
