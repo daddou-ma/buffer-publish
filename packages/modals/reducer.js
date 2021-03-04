@@ -12,7 +12,6 @@ export const initialState = {
   showCloseComposerConfirmationModal: false,
   modalToShowLater: null,
   showDeleteCampaignModal: false,
-  showEngagementPromoModal: false,
   page: 'queue',
 };
 
@@ -34,8 +33,6 @@ export const actionTypes = keyWrapper('MODALS', {
   SHOW_CLOSE_COMPOSER_CONFIRMATION_MODAL: 0,
   SHOW_DELETE_CAMPAIGN_MODAL: 0,
   HIDE_DELETE_CAMPAIGN_MODAL: 0,
-  SHOW_ENGAGEMENT_PROMO_MODAL: 0,
-  HIDE_ENGAGEMENT_PROMO_MODAL: 0,
 });
 
 export default (state = initialState, action) => {
@@ -133,16 +130,6 @@ export default (state = initialState, action) => {
         ...state,
         showDeleteCampaignModal: true,
       };
-    case actionTypes.SHOW_ENGAGEMENT_PROMO_MODAL:
-      return {
-        ...state,
-        showEngagementPromoModal: true,
-      };
-    case actionTypes.HIDE_ENGAGEMENT_PROMO_MODAL:
-      return {
-        ...state,
-        showEngagementPromoModal: false,
-      };
     default:
       return state;
   }
@@ -210,12 +197,6 @@ export const actions = {
   showDeleteCampaignModal: campaign => ({
     type: actionTypes.SHOW_DELETE_CAMPAIGN_MODAL,
     campaign,
-  }),
-  showEngagementPromoModal: () => ({
-    type: actionTypes.SHOW_ENGAGEMENT_PROMO_MODAL,
-  }),
-  hideEngagementPromoModal: () => ({
-    type: actionTypes.HIDE_ENGAGEMENT_PROMO_MODAL,
   }),
   isShowingModals: ({ modals }) => {
     return (
