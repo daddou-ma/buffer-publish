@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 
 export const URLS = {
   SIGN_UP_URL: 'https://buffer.com/pricing/publish',
-  SUPPORT_URL: 'https://support.buffer.com/hc/en-us',
+  SUPPORT_URL: 'https://support.buffer.com/hc/en-us/articles/360063417793',
   MARKETING_URL: 'https://buffer.com/publish',
   CONTACT_SUPPORT_URL: 'https://support.buffer.com/hc/en-us/requests/new',
 };
@@ -41,7 +41,7 @@ const getActionTypes = ({
         label: t(
           'missing-access-page.accessTypes.nonAdminWithOrgAccess.secondaryLabel'
         ),
-        onClick: () => window.location.assign(URLS.SUPPORT_URL), // TO-DO: Waiting on Hannah to suggest a help article
+        onClick: () => window.location.assign(URLS.SUPPORT_URL),
       },
     },
     admin: {
