@@ -1535,10 +1535,10 @@
     moment-timezone "^0.5.25"
     react-highcharts "^16.0.2"
 
-"@bufferapp/app-shell@2.0.1-orgswitcher.7+2393313":
-  version "2.0.1-orgswitcher.7"
-  resolved "https://registry.yarnpkg.com/@bufferapp/app-shell/-/app-shell-2.0.1-orgswitcher.7.tgz#5471b24a0634211c2cd29a039f4dad65374a2880"
-  integrity sha512-0LwSglUe0b5aCgUdF5lyUHTmEu80WnemIvDm8XYWbauyKevQthaWLndjUqIf7a5ocdVh20Gvbxdt7Oz1cHVpMA==
+"@bufferapp/app-shell@2.0.1-orgswitcher.9":
+  version "2.0.1-orgswitcher.9"
+  resolved "https://registry.yarnpkg.com/@bufferapp/app-shell/-/app-shell-2.0.1-orgswitcher.9.tgz#5984422f8a7a2c1abffae1d04da817b8492bf347"
+  integrity sha512-f6BYNxDSFHkuoHABLvQP4+B2cZpz/GRL4NosiUwXuLDpI5aa8iGMNFrXLqTdhWioX8BiCGXTOElJQyOZa3vMLQ==
 
 "@bufferapp/async-data-fetch@0.5.36-beta01":
   version "0.5.36-beta01"
