@@ -38,6 +38,9 @@ const AppPages = ({
   const needsToSelectNewOrgInAppShell =
     selectedOrgInAppShell !== orgIdFromRoute && !!orgIdFromRoute;
 
+  const canAccessPublishing =
+    user?.currentOrganization?.billing?.canAccessPublishing;
+
   // Filters profiles by current org selected
   const profiles = filterProfilesByOrg(unfilteredProfiles, {
     id: currentOrgId,
@@ -63,6 +66,10 @@ const AppPages = ({
     return <Redirect to={newPath} />;
   };
   const hasProfiles = profiles && profiles.length > 0;
+
+  if (!canAccessPublishing) {
+    return <MissingAccessPage />;
+  }
 
   return (
     <Switch>
