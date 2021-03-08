@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { actions as profileActions } from '@bufferapp/publish-profile-sidebar';
+import { actions as orgActions } from '@bufferapp/publish-data-organizations';
 import getOrgIdFromRoute from './utils/getOrgIdFromRoute';
 
 import AppPages from './components/AppPages';
@@ -25,6 +26,9 @@ export default connect(
           tabId,
         })
       );
+    },
+    storeSelectedOrg: currentOrgId => {
+      dispatch(orgActions.setCurrentOrganization(currentOrgId));
     },
   })
 )(AppPages);

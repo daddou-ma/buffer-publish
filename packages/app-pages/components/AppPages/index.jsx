@@ -26,6 +26,7 @@ const AppPages = ({
   showBusinessTrialistsOnboarding,
   profileRouteLoaded,
   orgIdFromRoute,
+  storeSelectedOrg,
 }) => {
   // Get current selected org from appshell
   const user = useUser();
@@ -50,6 +51,7 @@ const AppPages = ({
     if (needsToSelectNewOrgInAppShell) {
       switchOrganization(currentOrgId);
     }
+    storeSelectedOrg(currentOrgId);
   }, [currentOrgId]);
 
   const redirectToQueue = () => {
@@ -122,6 +124,7 @@ AppPages.propTypes = {
   needsToSetCurrentOrg: PropTypes.bool,
   orgIdFromRoute: PropTypes.string,
   switchOrganization: PropTypes.func,
+  storeSelectedOrg: PropTypes.func.isRequired,
 };
 
 AppPages.defaultProps = {
