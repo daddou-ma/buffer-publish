@@ -64,11 +64,6 @@ export const plansPage = {
   goTo: () => push('/plans'),
 };
 
-export const missingAccessPage = {
-  route: '/no-access',
-  goTo: () => push('/no-access'),
-};
-
 // Preferences routes
 export const preferencesPage = {
   route: '/preferences',

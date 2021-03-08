@@ -1,19 +1,14 @@
 import { connect } from 'react-redux';
 import { organization } from '@bufferapp/publish-routes';
-import { getAccessType } from './utils';
-
 import MissingAccessPage from './components/MissingAccessPage';
 
 export default connect(
   state => {
-    const { isAdmin } = state.organizations.selected;
-    const orgWithAccess = null; // TO-DO: update with global org switcher work
+    const isAdmin = state.organizations?.selected?.isAdmin;
     return {
       orgName: state.organizations.selected?.name,
-      orgNameWithAccess: orgWithAccess?.name,
-      orgIdWithAccess: orgWithAccess?.id,
       ownerEmail: state.organizations.selected?.ownerEmail,
-      accessType: getAccessType({ isAdmin, hasOrgWithAccess: !!orgWithAccess }),
+      isAdmin,
     };
   },
   dispatch => ({

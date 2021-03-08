@@ -5,8 +5,9 @@ import { Link } from '@bufferapp/ui';
 import { GlobalEmptyState } from '@bufferapp/publish-shared-components';
 import { useTranslation, Trans } from 'react-i18next';
 import { fontWeightMedium } from '@bufferapp/ui/style/fonts';
+import { useUser } from '@bufferapp/app-shell';
 
-import { getActions } from '../../utils';
+import { getActions, getAccessType } from '../../utils';
 
 const BoldText = styled.span`
   font-weight: ${fontWeightMedium};
@@ -38,14 +39,22 @@ const getDescription = ({
 };
 
 const MissingAccessPage = ({
-  accessType,
   orgName,
-  orgNameWithAccess = null,
-  orgIdWithAccess = null,
   ownerEmail,
   switchOrganization,
+  isAdmin,
 }) => {
   const { t } = useTranslation();
+  const user = useUser();
+  const orgWithAccess = user?.organizations?.find(
+    org => org.billing?.canAccessPublishing
+  );
+  const accessType = getAccessType({
+    isAdmin,
+    hasOrgWithAccess: !!orgWithAccess,
+  });
+  const orgNameWithAccess = orgWithAccess?.name;
+
   const description = getDescription({
     accessType,
     ownerEmail,
@@ -56,7 +65,7 @@ const MissingAccessPage = ({
     accessType,
     switchOrganization,
     orgNameWithAccess,
-    orgIdWithAccess,
+    orgIdWithAccess: orgWithAccess?.id,
   });
 
   return (
@@ -72,12 +81,10 @@ const MissingAccessPage = ({
 };
 
 MissingAccessPage.propTypes = {
-  accessType: PropTypes.string.isRequired,
   orgName: PropTypes.string.isRequired,
-  orgNameWithAccess: PropTypes.string,
-  orgIdWithAccess: PropTypes.string,
   ownerEmail: PropTypes.string.isRequired,
   switchOrganization: PropTypes.func.isRequired,
+  isAdmin: PropTypes.func.isRequired,
 };
 
 export default MissingAccessPage;
