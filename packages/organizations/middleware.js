@@ -30,14 +30,17 @@ export default ({ dispatch, getState }) => next => action => {
       break;
     }
     case actionTypes.SET_CURRENT_ORGANIZATION: {
-      const { list } = getState().organizations || [];
+      const { list = [], selected } = getState().organizations;
       const { organizationId } = action;
-      const selectedOrg = list?.filter(org => org.id === organizationId)[0];
-      // Select the org
-      dispatch({
-        type: actionTypes.ORGANIZATION_SELECTED,
-        selected: selectedOrg,
-      });
+      if (selected?.id !== organizationId) {
+        const selectedOrg = list?.filter(org => org.id === organizationId)[0];
+        // Select the org
+        dispatch({
+          type: actionTypes.ORGANIZATION_SELECTED,
+          selected: selectedOrg,
+        });
+      }
+
       break;
     }
     default:
