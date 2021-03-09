@@ -50,8 +50,8 @@ const AppPages = ({
   useEffect(() => {
     if (needsToSelectNewOrgInAppShell) {
       switchOrganization(currentOrgId);
+      storeSelectedOrg(currentOrgId);
     }
-    storeSelectedOrg(currentOrgId);
   }, [currentOrgId]);
 
   const redirectToQueue = () => {
