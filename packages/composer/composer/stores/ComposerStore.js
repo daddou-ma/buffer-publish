@@ -243,24 +243,6 @@ const ComposerStore = {
           (draft.service.requiredAttachmentType === AttachmentTypes.MEDIA &&
             hasMediaAttached);
 
-        const isSourceUrlUnrequiredOrValid =
-          !draft.service.canHaveSourceUrl ||
-          draft.sourceLink === null ||
-          twitterText.isValidUrl(draft.sourceLink.url, true, false);
-
-        const isPinterest = draft.service.name === 'pinterest';
-        const isPinterestSourceUrlUsingLinkShortener =
-          isPinterest &&
-          (draft.sourceLink?.url.includes('bit.ly/') ||
-            draft.sourceLink?.url.includes('buff.ly/') ||
-            draft.sourceLink?.url.includes('j.mp/'));
-
-        const contentText = contentState.getPlainText();
-        const linksInText = twitterText.extractUrls(contentText);
-
-        const hasPinterestLinkWithoutSourceUrl =
-          isPinterest && linksInText.length > 0 && !draft.sourceLink;
-
         const hasRequiredText = !draft.service.requiresText || hasText;
 
         let validationResultVideo = new ValidationSuccess();
@@ -281,11 +263,8 @@ const ComposerStore = {
           (!hasText && !hasAnyAttachment) ||
           !hasRequiredAttachmentAttached ||
           !hasRequiredText ||
-          !isSourceUrlUnrequiredOrValid ||
           validationResultVideo.isInvalid() ||
-          validationResults.isInvalid() ||
-          hasPinterestLinkWithoutSourceUrl ||
-          isPinterestSourceUrlUsingLinkShortener;
+          validationResults.isInvalid();
 
         if (isInvalid) {
           let messages = [];
@@ -331,17 +310,6 @@ const ComposerStore = {
             messages.push('Please include some text');
           } else if (!hasText && !hasAnyAttachment) {
             messages.push('Please include at least some text or an attachment');
-          }
-
-          if (
-            hasPinterestLinkWithoutSourceUrl ||
-            isPinterestSourceUrlUsingLinkShortener
-          ) {
-            messages.push(
-              `Please include a destination link without a link shortener`
-            );
-          } else if (!isSourceUrlUnrequiredOrValid) {
-            messages.push('Please include a valid destination link');
           }
 
           if (validationResultVideo.isInvalid()) {

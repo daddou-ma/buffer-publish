@@ -1,3 +1,4 @@
+import twitterText from 'twitter-text';
 import { isValidURL } from '@bufferapp/publish-grid/util';
 import ValidationSuccess from './ValidationSuccess';
 import ValidationFail from './ValidationFail';
@@ -55,6 +56,43 @@ function validateVideoForInstagram(video) {
 }
 
 const validateDraftFunctions = [
+  function isValidSourceUrl(draft) {
+    const isSourceUrlUnrequiredOrValid =
+      !draft.service.canHaveSourceUrl ||
+      draft.sourceLink === null ||
+      twitterText.isValidUrl(draft.sourceLink.url, true, false);
+    if (!isSourceUrlUnrequiredOrValid) {
+      return new ValidationFail(`Please include a valid destination link`);
+    }
+    return new ValidationSuccess();
+  },
+
+  function pinterestLinkWithoutSourceUrl(draft) {
+    const isPinterest = draft.service.name === 'pinterest';
+    if (isPinterest) {
+      const isPinterestSourceUrlUsingLinkShortener =
+        isPinterest &&
+        (draft.sourceLink?.url?.includes('bit.ly/') ||
+          draft.sourceLink?.url?.includes('buff.ly/') ||
+          draft.sourceLink?.url?.includes('j.mp/'));
+
+      const contentText = draft.editorState.getCurrentContent().getPlainText();
+      const linksInText = twitterText.extractUrls(contentText);
+
+      const hasPinterestLinkWithoutSourceUrl =
+        isPinterest && linksInText.length > 0 && !draft.sourceLink;
+      if (
+        hasPinterestLinkWithoutSourceUrl ||
+        isPinterestSourceUrlUsingLinkShortener
+      ) {
+        return new ValidationFail(
+          `Please include a destination link (without link shortener)`
+        );
+      }
+    }
+    return new ValidationSuccess();
+  },
+
   function maxHashtags(draft) {
     if (
       draft.service.maxHashtags !== null &&
