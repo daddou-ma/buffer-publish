@@ -51,12 +51,12 @@ export const generic = {
 };
 
 export const newConnection = {
-  route: '/org/:id/new-connection',
+  route: '/org/new-connection',
   goTo: () => push('/new-connection'),
 };
 
 export const newBusinessTrialists = {
-  route: '/org/:id/new-business-trialists',
+  route: '/org/new-business-trialists',
 };
 
 export const plansPage = {
