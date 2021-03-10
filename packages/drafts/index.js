@@ -236,6 +236,9 @@ export default connect(
         })
       );
     },
+    onUpgradeButtonClick: cta => {
+      dispatch(plansPage.goTo(cta));
+    },
   })
 )(DraftList);
 
