@@ -1,6 +1,6 @@
-const entitlements = require('../formatters/entitlements');
+import { CAMPAIGNS } from '../formatters/entitlements';
 
-module.exports = orgData => ({
+export default orgData => ({
   id: orgData.id,
   globalOrgId: orgData.globalOrgId,
   locked: orgData.locked,
@@ -28,7 +28,7 @@ module.exports = orgData => ({
   },
 
   // Plan Features
-  hasCampaignsFeature: orgData.entitlements.includes(entitlements.CAMPAIGNS),
+  hasCampaignsFeature: orgData.entitlements.includes(CAMPAIGNS),
   hasBitlyFeature: orgData.planBase !== 'free',
   has30DaySentPostsLimitFeature: orgData.planBase === 'free', // profiles_controller updates_sent() returns only 30 days of sent posts for free users.
   hasCalendarFeature: orgData.planBase !== 'free',
