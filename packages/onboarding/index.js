@@ -9,7 +9,7 @@ const cta = 'publish-app-onboarding-addProfile-1';
 
 export default connect(
   state => {
-    const { shouldRedirectToAccountChannels } = state.globalAccount;
+    const { shouldRedirectToAccountChannels } = state.organizations.selected;
     const accountChannelsURL =
       shouldRedirectToAccountChannels && getURL.getAccountChannelsURL();
     return {

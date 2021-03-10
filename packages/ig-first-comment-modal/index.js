@@ -24,7 +24,7 @@ export default connect(
       appId: state.clientAccess && state.clientAccess.appId,
       translations: state.i18n.translations['instagram-first-comment-modal'],
       shouldRedirectToAccountChannels:
-        state.globalAccount.shouldRedirectToAccountChannels,
+        state.organizations.selected?.shouldRedirectToAccountChannels,
     };
   },
   dispatch => ({
