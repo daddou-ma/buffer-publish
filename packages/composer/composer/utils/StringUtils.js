@@ -116,4 +116,5 @@ export {
   removeLinkFromErrorMessageText,
   getBaseUrl,
   isUrlOnBlocklist,
+  ensureUrlProtocol,
 };

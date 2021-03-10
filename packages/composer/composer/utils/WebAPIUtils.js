@@ -9,6 +9,7 @@ import AppStore from '../stores/AppStore';
 import API from './API';
 import { observeStore } from '../utils/StoreUtils';
 import { extractSavedUpdatesIdsFromResponses } from '../utils/APIDataTransforms';
+import { ensureUrlProtocol } from './StringUtils';
 import {
   getComposerSource,
   getSegmentCampaignMetadata,
@@ -801,9 +802,7 @@ function getFormattedAPIData(serviceName, unformattedData) {
       const { sourceLink } = serviceDraft;
 
       if (sourceLink !== null) {
-        let sourceUrl = sourceLink.url;
-        if (sourceUrl.indexOf('http') !== 0) sourceUrl = `http://${sourceUrl}`;
-
+        const sourceUrl = ensureUrlProtocol(sourceLink.url);
         conditionalFields.source_url = sourceUrl;
       }
     }
