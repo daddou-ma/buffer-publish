@@ -64,7 +64,8 @@ module.exports = orgData => ({
 
   // Upgrade/ Trial Paths
   showUpgradeToProCta: orgData.planBase === 'free',
-  showShowDraftsPaywall: orgData.planBase === 'pro',
+  showProPaywall: orgData.planBase === 'pro',
+  showFreePaywall: orgData.planBase === 'free',
   showUpgradeToBusinessCta: orgData.planBase === 'pro' && orgData.isOwner,
   shouldShowUpgradeButton:
     orgData.isOwner &&

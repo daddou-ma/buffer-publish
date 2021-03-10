@@ -5,6 +5,7 @@ import {
 } from '@bufferapp/publish-server/formatters';
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 import { actions as modalsActions } from '@bufferapp/publish-modals/reducer';
+import { plansPage } from '@bufferapp/publish-routes';
 
 import { actions } from './reducer';
 import DraftList from './components/DraftList';
@@ -151,8 +152,8 @@ export default connect(
           state.organizations?.selected?.canStartBusinessTrial,
         hasFirstCommentFlip:
           state.organizations?.selected?.hasFirstCommentFeature,
-        showShowDraftsPaywall:
-          state.organizations?.selected?.showShowDraftsPaywall,
+        showFreePaywall: state.organizations?.selected?.showFreePaywall,
+        showProPaywall: state.organizations?.selected?.showProPaywall,
         profileId: ownProps.profileId,
       };
     }

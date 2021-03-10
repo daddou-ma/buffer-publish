@@ -3,18 +3,16 @@ import PropTypes from 'prop-types';
 import {
   QueueItems,
   BufferLoading,
-  BusinessTrialOrUpgradeCard,
   ComposerInput,
 } from '@bufferapp/publish-shared-components';
 import ComposerPopover from '@bufferapp/publish-composer-popover';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
 
 import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
-import { getURL } from '@bufferapp/publish-server/formatters';
-import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
 import ProfilesDisconnectedBanner from '@bufferapp/publish-profiles-disconnected-banner';
 
 import Empty from '../Empty';
+import Paywall from '../Paywall';
 
 const ErrorBoundary = getErrorBoundary(true);
 
@@ -58,8 +56,10 @@ const DraftList = ({
   canStartBusinessTrial,
   hasFirstCommentFlip,
   onComposerOverlayClick,
+  onUpgradeButtonClick,
   shouldResetComposerData,
-  showShowDraftsPaywall,
+  showFreePaywall,
+  showProPaywall,
   fetchDrafts,
   profileId,
 }) => {
@@ -69,39 +69,12 @@ const DraftList = ({
     fetchDrafts({ needsApproval });
   }, [tabId, profileId]);
 
-  if (showShowDraftsPaywall) {
-    const startTrial = () =>
-      window.location.assign(
-        `${getURL.getStartTrialURL({
-          trialType: 'small',
-          cta: SEGMENT_NAMES.DRAFTS_SBP_TRIAL,
-          nextUrl: 'https://publish.buffer.com',
-        })}`
-      );
-    const goToBilling = () =>
-      window.location.assign(
-        `${getURL.getBillingURL({
-          cta: SEGMENT_NAMES.DRAFTS_BUSINESS_UPGRADE,
-        })}`
-      );
-    if (canStartBusinessTrial) {
-      return (
-        <BusinessTrialOrUpgradeCard
-          heading="Collaborate With Your Team"
-          body="Add your team to your Buffer account so you can collaborate and save even more time."
-          cta="Start a Free 14-Day Trial of the Business Plan"
-          onCtaClick={startTrial}
-          backgroundImage="squares"
-        />
-      );
-    }
+  if (showFreePaywall || showProPaywall) {
     return (
-      <BusinessTrialOrUpgradeCard
-        heading="Collaborate With Your Team"
-        body="Add your team to your Buffer account so you can collaborate and save even more time."
-        cta="Upgrade to Buffer for Business"
-        onCtaClick={goToBilling}
-        backgroundImage="squares"
+      <Paywall
+        onFreePlan={showFreePaywall}
+        canStartBusinessTrial={canStartBusinessTrial}
+        onUpgradeButtonClick={onUpgradeButtonClick}
       />
     );
   }
@@ -179,7 +152,8 @@ DraftList.propTypes = {
       text: PropTypes.string,
     })
   ),
-  showShowDraftsPaywall: PropTypes.bool,
+  showProPaywall: PropTypes.bool,
+  showFreePaywall: PropTypes.bool,
   manager: PropTypes.bool.isRequired,
   onApproveClick: PropTypes.func.isRequired,
   onDeleteConfirmClick: PropTypes.func.isRequired,
@@ -199,10 +173,12 @@ DraftList.propTypes = {
   shouldResetComposerData: PropTypes.bool,
   fetchDrafts: PropTypes.func.isRequired,
   profileId: PropTypes.string.isRequired,
+  onUpgradeButtonClick: PropTypes.func.isRequired,
 };
 
 DraftList.defaultProps = {
-  showShowDraftsPaywall: false,
+  showFreePaywall: false,
+  showProPaywall: false,
   shouldResetComposerData: true,
   loading: true,
   postLists: [],
