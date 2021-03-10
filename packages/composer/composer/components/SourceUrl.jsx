@@ -25,10 +25,10 @@ class SourceUrl extends React.Component {
   render() {
     return (
       <span className={styles.sourceUrlContainer}>
-        <span className={styles.sourceUrlLabel}>Destination URL: </span>
+        <span className={styles.sourceUrlLabel}>Destination link: </span>
         <Input
           value={this.props.sourceUrl}
-          placeholder="Enter destination URL..."
+          placeholder="Enter destination link..."
           onChange={this.saveSourceUrl}
           className={styles.sourceUrlInput}
         />

@@ -338,10 +338,10 @@ const ComposerStore = {
             isPinterestSourceUrlUsingLinkShortener
           ) {
             messages.push(
-              `Please include a source url without a link shortener`
+              `Please include a destination link without a link shortener`
             );
           } else if (!isSourceUrlUnrequiredOrValid) {
-            messages.push('Please include a valid source url');
+            messages.push('Please include a valid destination link');
           }
 
           if (validationResultVideo.isInvalid()) {
