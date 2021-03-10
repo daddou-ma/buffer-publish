@@ -42,7 +42,9 @@ describe('ProfileSidebar', () => {
 
     render(<ProfileSidebar />, {
       initialState: {
-        globalAccount: { shouldRedirectToAccountChannels: true },
+        organizations: {
+          selected: { shouldRedirectToAccountChannels: true },
+        },
       },
     });
     const connectButton = screen.getByRole('button');
@@ -61,7 +63,9 @@ describe('ProfileSidebar', () => {
 
     render(<ProfileSidebar />, {
       initialState: {
-        globalAccount: { shouldRedirectToAccountChannels: false },
+        organizations: {
+          selected: { shouldRedirectToAccountChannels: false },
+        },
       },
     });
     const connectButton = screen.getByRole('button');
@@ -88,9 +92,12 @@ describe('ProfileSidebar', () => {
       {
         initialState: {
           organizations: {
-            selected: { canManageSocialAccounts: true, profileLimit: 10 },
+            selected: {
+              canManageSocialAccounts: true,
+              profileLimit: 10,
+              shouldRedirectToAccountChannels: true,
+            },
           },
-          globalAccount: { shouldRedirectToAccountChannels: true },
           profileSidebar: { profiles, selectedProfile, loading: false },
         },
       }
@@ -121,9 +128,12 @@ describe('ProfileSidebar', () => {
       {
         initialState: {
           organizations: {
-            selected: { canManageSocialAccounts: true, profileLimit: 10 },
+            selected: {
+              canManageSocialAccounts: true,
+              profileLimit: 10,
+              shouldRedirectToAccountChannels: false,
+            },
           },
-          globalAccount: { shouldRedirectToAccountChannels: false },
           profileSidebar: { profiles, selectedProfile, loading: false },
         },
       }

@@ -19,10 +19,10 @@ export default hot(
   connect(
     (state, ownProps) => {
       const cta = 'publish-app-sidebar-addProfile-1';
-      const {
-        shouldRedirectToAccountChannels,
-        isLoadingGlobalAccount,
-      } = state.globalAccount;
+      const { isLoadingGlobalAccount } = state.globalAccount;
+
+      const { shouldRedirectToAccountChannels } = state.organizations.selected;
+
       const accountChannelsURL =
         shouldRedirectToAccountChannels && getURL.getAccountChannelsURL();
 

@@ -9,6 +9,7 @@ module.exports = orgData => ({
   ownerId: orgData.ownerId,
   ownerEmail: orgData.ownerEmail,
   ownerFeatures: orgData.ownerFeatures,
+  shouldRedirectToAccountChannels: orgData.hasSharedChannels,
   plan: orgData.planName,
   planBase: orgData.planBase,
   planCode: orgData.planCode,

@@ -21,7 +21,7 @@ export default connect(
         state.organizations.selected?.canReconnectChannels,
       draftsNeedApprovalCount: state.profileNav.draftsNeedApprovalCount,
       draftsCount: state.profileNav.draftsCount,
-      reconnectURL: state.globalAccount.shouldRedirectToAccountChannels
+      reconnectURL: state.organizations.selected?.shouldRedirectToAccountChannels
         ? getURL.getAccountChannelsURL()
         : getURL.getManageSocialAccountURL(),
     };

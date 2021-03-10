@@ -5,7 +5,7 @@ describe('middleware', () => {
   const store = {
     dispatch: jest.fn(),
     getState: () => ({
-      globalAccount: { shouldRedirectToAccountChannels: false },
+      organizations: { selected: { shouldRedirectToAccountChannels: false } },
     }),
   };
   const next = jest.fn();
@@ -44,7 +44,7 @@ describe('middleware', () => {
     const newStore = {
       dispatch: jest.fn(),
       getState: () => ({
-        globalAccount: { shouldRedirectToAccountChannels: true },
+        organizations: { selected: { shouldRedirectToAccountChannels: true } },
       }),
     };
     middleware(newStore)(next)(reconnectTwitterAction);
