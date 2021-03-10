@@ -7,8 +7,8 @@ describe('generateProfileTabs', () => {
       'queue',
       'analytics',
       'settings',
-      'overview',
       'drafts',
+      'overview',
     ]);
   });
 
@@ -28,9 +28,9 @@ describe('generateProfileTabs', () => {
       'queue',
       'analytics',
       'settings',
+      'drafts',
       'pastReminders',
       'awaitingApproval',
-      'drafts',
       'grid',
       'stories',
     ]);

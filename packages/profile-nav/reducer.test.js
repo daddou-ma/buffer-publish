@@ -22,7 +22,7 @@ describe('reducer', () => {
     };
     const stateAfter = {
       ...initialState,
-      profileNavTabs: ['queue', 'analytics', 'settings', 'overview'],
+      profileNavTabs: ['queue', 'analytics', 'settings', 'drafts', 'overview'],
     };
     const action = {
       type: actionTypes.GENERATE_PROFILE_TABS,
