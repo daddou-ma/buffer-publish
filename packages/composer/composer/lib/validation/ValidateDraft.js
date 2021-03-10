@@ -69,26 +69,24 @@ const validateDraftFunctions = [
 
   function pinterestLinkWithoutSourceUrl(draft) {
     const isPinterest = draft.service.name === 'pinterest';
-    if (isPinterest) {
-      const isPinterestSourceUrlUsingLinkShortener =
-        isPinterest &&
-        (draft.sourceLink?.url?.includes('bit.ly/') ||
-          draft.sourceLink?.url?.includes('buff.ly/') ||
-          draft.sourceLink?.url?.includes('j.mp/'));
+    const isPinterestSourceUrlUsingLinkShortener =
+      isPinterest &&
+      (draft.sourceLink?.url?.includes('bit.ly/') ||
+        draft.sourceLink?.url?.includes('buff.ly/') ||
+        draft.sourceLink?.url?.includes('j.mp/'));
 
-      const contentText = draft.editorState.getCurrentContent().getPlainText();
-      const linksInText = twitterText.extractUrls(contentText);
+    const contentText = draft.editorState.getCurrentContent().getPlainText();
+    const linksInText = twitterText.extractUrls(contentText);
 
-      const hasPinterestLinkWithoutSourceUrl =
-        isPinterest && linksInText.length > 0 && !draft.sourceLink;
-      if (
-        hasPinterestLinkWithoutSourceUrl ||
-        isPinterestSourceUrlUsingLinkShortener
-      ) {
-        return new ValidationFail(
-          `Please include a destination link (without link shortener)`
-        );
-      }
+    const hasPinterestLinkWithoutSourceUrl =
+      isPinterest && linksInText.length > 0 && !draft.sourceLink;
+    if (
+      hasPinterestLinkWithoutSourceUrl ||
+      isPinterestSourceUrlUsingLinkShortener
+    ) {
+      return new ValidationFail(
+        `Please include a destination link without link shortener`
+      );
     }
     return new ValidationSuccess();
   },
