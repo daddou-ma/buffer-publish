@@ -9,10 +9,9 @@ import helpMenuItems from '../helpMenuItems';
 const AppShell = ({
   children,
   user,
-  showSwitchPlan,
-  showManageTeam,
-  returnToClassic,
-  switchPlan,
+  manageChannelsURL,
+  showPlans,
+  shouldShowUpgradeButton,
   openPreferences,
   bannerOptions,
   onCloseBanner,
@@ -43,11 +42,10 @@ const AppShell = ({
       user={{
         ...user,
         menuItems: generateUserMenuItems({
-          showSwitchPlan,
-          showManageTeam,
-          returnToClassic,
-          switchPlan,
+          manageChannelsURL,
+          showPlans,
           openPreferences,
+          shouldShowUpgradeButton,
           t,
         }),
       }}
@@ -74,10 +72,9 @@ const AppShell = ({
 
 AppShell.propTypes = {
   children: PropTypes.node.isRequired,
-  showSwitchPlan: PropTypes.bool,
-  showManageTeam: PropTypes.bool,
-  returnToClassic: PropTypes.func.isRequired,
-  switchPlan: PropTypes.func.isRequired,
+  showPlans: PropTypes.func.isRequired,
+  manageChannelsURL: PropTypes.string.isRequired,
+  shouldShowUpgradeButton: PropTypes.bool,
   openPreferences: PropTypes.func.isRequired,
   user: PropTypes.shape({
     name: PropTypes.string.isRequired,
@@ -119,8 +116,7 @@ AppShell.propTypes = {
 
 AppShell.defaultProps = {
   canSeeOrgSwitcher: false,
-  showSwitchPlan: false,
-  showManageTeam: false,
+  shouldShowUpgradeButton: true,
   bannerOptions: null,
   bannerKey: null,
   isImpersonation: false,

@@ -69,7 +69,7 @@
     "@bufferapp/nav-sidebar": "1.11.0",
     "@bufferapp/react-images-loaded": "1.1.0-fork.0",
     "@bufferapp/react-simple-dropdown": "3.3.0",
-    "@bufferapp/ui": "5.58.1-beta.5c65b3a",
+    "@bufferapp/ui": "5.63.0",
     "@bugsnag/js": "^6.5.2",
     "@bugsnag/plugin-react": "^6.5.0",
     "@fullstory/browser": "^1.4.7",
