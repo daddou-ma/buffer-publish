@@ -2,7 +2,7 @@ const postParser = require('./postParser');
 const profileParser = require('./profileParser');
 const userParser = require('./userParser');
 const linkParsing = require('./linkParsing');
-const orgParser = require('./orgParser').default;
+const orgParser = require('./orgParser');
 const storyGroupParser = require('./storyGroupParser');
 const { campaignParser, campaignItemParser } = require('./campaignParser');
 
