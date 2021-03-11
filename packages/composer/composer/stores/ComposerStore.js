@@ -34,6 +34,7 @@ import {
 } from '../utils/draft-js-custom-plugins/prepopulated-autocomplete-hashtag';
 import { addImportedMention as addEditorImportedFacebookMention } from '../utils/draft-js-custom-plugins/imported-facebook-mention-entities';
 import removeFacebookAutocompleteEntities from '../utils/draft-js-custom-plugins/autocomplete/utils/removeFacebookAutocompleteEntities';
+import addUnshortenedLink from '../utils/draft-js-custom-plugins/unshortened-link/modifiers/addUnshortenedLink';
 import { resetEditorContents } from '../utils/draft-js-custom-plugins/editor-contents-reset';
 import events from '../utils/Events';
 
@@ -242,11 +243,6 @@ const ComposerStore = {
           (draft.service.requiredAttachmentType === AttachmentTypes.MEDIA &&
             hasMediaAttached);
 
-        const isSourceUrlUnrequiredOrValid =
-          !draft.service.canHaveSourceUrl ||
-          draft.sourceLink === null ||
-          twitterText.isValidUrl(draft.sourceLink.url, true, false);
-
         const hasRequiredText = !draft.service.requiresText || hasText;
 
         let validationResultVideo = new ValidationSuccess();
@@ -267,7 +263,6 @@ const ComposerStore = {
           (!hasText && !hasAnyAttachment) ||
           !hasRequiredAttachmentAttached ||
           !hasRequiredText ||
-          !isSourceUrlUnrequiredOrValid ||
           validationResultVideo.isInvalid() ||
           validationResults.isInvalid();
 
@@ -315,12 +310,6 @@ const ComposerStore = {
             messages.push('Please include some text');
           } else if (!hasText && !hasAnyAttachment) {
             messages.push('Please include at least some text or an attachment');
-          }
-
-          if (!isSourceUrlUnrequiredOrValid) {
-            messages.push(
-              'Please include a valid source url or leave the source url blank'
-            );
           }
 
           if (validationResultVideo.isInvalid()) {
@@ -1793,6 +1782,36 @@ const copyDraftMedia = (draftFrom, draftTo) => {
   }
 };
 
+const replaceDraftLinkWithUnshortenedLink = (
+  id,
+  unshortenedLink,
+  shortLink
+) => {
+  const draft = ComposerStore.getDraft(id);
+  let { editorState } = draft;
+  const contentState = editorState.getCurrentContent();
+
+  contentState.getBlockMap().forEach(contentBlock => {
+    const text = contentBlock.getText();
+    const parsedUrlsWithIndices = twitterText.extractUrlsWithIndices(text);
+    const parsedUrl = parsedUrlsWithIndices.find(
+      urlWithIndices => urlWithIndices.url === shortLink
+    );
+
+    if (!parsedUrl) return;
+
+    editorState = addUnshortenedLink(editorState, contentBlock, {
+      shortLink,
+      unshortenedLink,
+      indices: parsedUrl.indices,
+    });
+  });
+
+  draft.editorState = editorState;
+
+  ComposerActionCreators.parseDraftTextLinks(id);
+};
+
 const copyDraftTextData = (draftFrom, draftTo) => {
   const editorState =
     draftFrom.service.name === 'facebook' && draftTo.service.name !== 'facebook'
@@ -1800,6 +1819,19 @@ const copyDraftTextData = (draftFrom, draftTo) => {
       : draftFrom.editorState;
 
   setDraftEditorState(draftTo.id, editorState);
+  const unshortenedUrls = [];
+  if (draftTo.service.name === 'pinterest' && draftFrom?.urls.length > 0) {
+    draftFrom.urls.forEach(url => {
+      replaceDraftLinkWithUnshortenedLink(
+        draftTo.id,
+        ComposerStore.getCanonicalUrl(url),
+        url
+      );
+      unshortenedUrls.push(ComposerStore.getCanonicalUrl(url));
+    });
+    draftFrom.urls = unshortenedUrls;
+    draftFrom.unshortenedUrls = unshortenedUrls;
+  }
 
   draftTo.urls = draftFrom.urls;
   draftTo.unshortenedUrls = draftFrom.unshortenedUrls;
