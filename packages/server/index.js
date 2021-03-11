@@ -32,9 +32,9 @@ const {
   setRequestSessionMiddleware,
   validateSessionMiddleware,
 } = require('@bufferapp/session-manager');
-const { errorMiddleware } = require('@bufferapp/buffer-rpc');
 const helmet = require('helmet');
 
+const rpcErrorMiddleware = require('./lib/rpcErrorMiddleware');
 const apiError = require('./middlewares/apiError');
 const controller = require('./lib/controller');
 const makeRPCHandler = require('./rpc');
@@ -57,6 +57,7 @@ const server = isStandalone
   : http.createServer(app);
 
 app.set('isProduction', isProduction);
+app.set('isStandalone', isStandalone);
 
 if (isProduction && !isStandalone) {
   app.set('bugsnag', getBugsnagClient());
@@ -100,8 +101,10 @@ if (isStandalone) {
 // Setup our RPC handler
 (async () => {
   const rpcHandler = await makeRPCHandler();
-  app.post('/rpc/:method?', checkToken, rpcHandler, errorMiddleware);
-  app.use(apiError);
+  app.post('/rpc/:method?', checkToken, rpcHandler, rpcErrorMiddleware);
+  app.use(
+    apiError
+  ); /** @todo Does this `apiError` middleware ever get called? */
 
   // make sure we have a valid session
   if (!isStandalone) {
