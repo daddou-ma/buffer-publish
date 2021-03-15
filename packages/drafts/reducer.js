@@ -60,7 +60,8 @@ const getDraftUpdateId = action => {
 
 const determineIfMoreToLoad = (action, currentPosts) => {
   const currentPostCount = Object.keys(currentPosts).length;
-  const resultUpdatesCount = Object.keys(action.result.drafts).length;
+  const { drafts = {} } = action.result;
+  const resultUpdatesCount = Object.keys(drafts).length;
   return action.result.total > currentPostCount + resultUpdatesCount;
 };
 
@@ -92,7 +93,7 @@ const draftReducer = (state, action) => {
 const draftsReducer = (state = {}, action) => {
   switch (action.type) {
     case `draftPosts_${dataFetchActionTypes.FETCH_SUCCESS}`: {
-      const { drafts } = action.result;
+      const { drafts = {} } = action.result;
       if (
         action.args.isFetchingMore ||
         Object.keys(state).length > Object.keys(drafts).length
