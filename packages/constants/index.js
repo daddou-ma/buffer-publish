@@ -75,6 +75,7 @@ const STORIES_PREVIEW_COMPOSER_ADD_NOTE =
   'publish-stories-composerPreview-addNote-1';
 const STORIES_IMAGE_ASPECT_RATIO_UPLOADED =
   'publish-stories-composer-imageAspectRatioUploaded-1';
+const UPGRADE_PATH_DRAFTS_FREE = `publish-drafts-freeUserPaywall-upgrade-1`;
 
 const ImageDimensions = {
   large: {
@@ -178,6 +179,7 @@ module.exports = {
     STORIES_PREVIEW_COMPOSER_ADD_NOTE,
     STORIES_PREVIEW_QUEUE_ADD_NOTE,
     STORIES_IMAGE_ASPECT_RATIO_UPLOADED,
+    UPGRADE_PATH_DRAFTS_FREE,
   },
   MediaTypes,
   UploadTypes,

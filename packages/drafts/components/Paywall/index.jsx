@@ -52,6 +52,8 @@ const Paywall = ({
   );
 };
 
+export default Paywall;
+
 Paywall.propTypes = {
   onFreePlan: PropTypes.bool.isRequired,
   canStartBusinessTrial: PropTypes.bool.isRequired,

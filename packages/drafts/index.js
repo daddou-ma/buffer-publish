@@ -4,8 +4,10 @@ import {
   isInThePast,
 } from '@bufferapp/publish-server/formatters';
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
+import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
 import { actions as modalsActions } from '@bufferapp/publish-modals/reducer';
 import { plansPage } from '@bufferapp/publish-routes';
+import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
 
 import { actions } from './reducer';
 import DraftList from './components/DraftList';
@@ -236,8 +238,11 @@ export default connect(
         })
       );
     },
-    onUpgradeButtonClick: cta => {
-      dispatch(plansPage.goTo(cta));
+    onUpgradeButtonClick: () => {
+      analyticsActions.trackEvent('Upgrade Path Viewed', {
+        upgradePathName: SEGMENT_NAMES.UPGRADE_PATH_DRAFTS_FREE,
+      });
+      dispatch(plansPage.goTo());
     },
   })
 )(DraftList);
