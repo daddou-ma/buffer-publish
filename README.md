@@ -8,7 +8,7 @@
 [![Build Status](https://travis-ci.org/bufferapp/buffer-publish.svg?branch=master)](https://travis-ci.org/bufferapp/buffer-publish)
 
 Welcome to the Buffer Publish monorepo.
-<p>—<br><em>Formerly Project Donut</em>&nbsp; 🍩</p>
+<p>—<br><em>Formerly Project Donut</em>&nbsp;🍩</p>
 
 ## Table of contents
 
