@@ -5,7 +5,6 @@ import {
   organization,
   plansPage,
 } from '@bufferapp/publish-routes';
-import { actions as modalActions } from '@bufferapp/publish-modals';
 import { getURL } from '@bufferapp/publish-server/formatters';
 import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
 
@@ -29,9 +28,9 @@ export default connect(
         state.onboarding.canSeeOnboardingPage &&
         state.router.location.pathname === newBusinessTrialists.route,
       /**
-      * Org Switcher
-      * Needs profiles.
-      */
+       * Org Switcher
+       * Needs profiles.
+       */
       profiles: state.profileSidebar.profileList,
     };
   },

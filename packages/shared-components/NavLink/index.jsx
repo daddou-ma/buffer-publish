@@ -22,9 +22,11 @@ const NavItemWrapper = styled.li`
 `;
 
 const navItemStyles = css`
-  padding: ${props =>
-    props.$secondary ? '12px 13px 12px 13px' : '18px 13px 17px 13px'};
-  display: block;
+  height: ${props => (props.$secondary ? '38px' : '52px')};
+  padding: 0 13px;
+  justify-content: center;
+  display: flex;
+  align-items: center;
   text-decoration: none;
   pointer-events: ${props => (props.disabled ? 'none' : 'auto')};
   color: ${props => (props.selected ? grayDarker : grayDefault)};
