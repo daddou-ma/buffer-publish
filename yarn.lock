@@ -1626,10 +1626,10 @@
     moment-timezone "^0.5.25"
     react-highcharts "^16.0.2"
 
-"@bufferapp/app-shell@1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@bufferapp/app-shell/-/app-shell-1.1.1.tgz#eb7d8516ea12b7bbadbf69390511f7006b1d86a9"
-  integrity sha512-mIQIfJ4+xSdDSwY5wtqEZQ2h9YMDnMCJmGIVNS/Jakg9xHJV8/n2z4EPS9HqJJNESrkpbIYcZhGYFYLhWuFEiA==
+"@bufferapp/app-shell@2.1.0-orgswitcher.10":
+  version "2.1.0-orgswitcher.10"
+  resolved "https://registry.yarnpkg.com/@bufferapp/app-shell/-/app-shell-2.1.0-orgswitcher.10.tgz#269bd1164591ae9bdbfc8b4ea1831010d3d2adf1"
+  integrity sha512-ZqP6WqnA0j3VAMRLVgSa6ljb8nk+2oZmdWyj4Mbw5VYUDIQLDj5kchGwuH9jVonTZsSVR0f794ugb129i5E22A==
 
 "@bufferapp/async-data-fetch@0.5.36-beta01":
   version "0.5.36-beta01"
@@ -1945,15 +1945,6 @@
     "@bufferapp/nav-sidebar" "^1.11.0"
     numeral "2.0.6"
 
-"@bufferapp/ui@5.58.1-beta.5c65b3a":
-  version "5.58.1-beta.5c65b3a"
-  resolved "https://registry.yarnpkg.com/@bufferapp/ui/-/ui-5.58.1-beta.5c65b3a.tgz#2b8c3a10c15ec0ca36ce92f71cb400bc0f0b14ce"
-  integrity sha512-HZ8UrRsmNl23RhgZo2XggurpSgwelFWuQRI6c0BYG1YIXox++6aOESqxebN0Z3hIgibQ+NOzbzB3ohAY5zNmVQ==
-  dependencies:
-    "@reach/tooltip" "0.6.2"
-    immutability-helper "^2.9.0"
-    react-is "^16.8.6"
-
 "@bufferapp/ui@5.6.0":
   version "5.6.0"
   resolved "https://registry.yarnpkg.com/@bufferapp/ui/-/ui-5.6.0.tgz#ad515b2b3067aaf9131b099a173fdc87d2d59215"
@@ -1964,6 +1955,15 @@
     react "16.8.6"
     react-dom "16.8.6"
     styled-components "4.3.2"
+
+"@bufferapp/ui@5.63.0":
+  version "5.63.0"
+  resolved "https://registry.yarnpkg.com/@bufferapp/ui/-/ui-5.63.0.tgz#72ae663d8d14279abca289e8a5dbe210cede298d"
+  integrity sha512-4QhY9S5pG6dTIkLVwC2J9QdwQ89xGDG5DYsAV+hhyel1rR6of9NUQWnNKK0mV/kAubZh+tFi6M3xUAyES/Kcxw==
+  dependencies:
+    "@reach/tooltip" "0.6.2"
+    immutability-helper "^2.9.0"
+    react-is "^16.8.6"
 
 "@bufferapp/unauthorized-redirect@1.9.6":
   version "1.9.6"
