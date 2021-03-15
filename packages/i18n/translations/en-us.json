@@ -19,7 +19,8 @@
   "campaigns": {
     "common": {
       "title": "Campaigns",
-      "createCampaign": "Create a Campaign"
+      "createCampaign": "Create a Campaign",
+      "upgradePlan": "Upgrade Your Plan"
     },
     "campaignForm": {
       "cancel": "Cancel",

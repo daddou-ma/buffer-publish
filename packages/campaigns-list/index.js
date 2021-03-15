@@ -5,6 +5,7 @@ import {
   campaignEdit,
   campaignCreate,
   campaignScheduled,
+  plansPage,
 } from '@bufferapp/publish-routes';
 import ListCampaigns from './components/ListCampaigns';
 
@@ -44,6 +45,9 @@ export default connect(
           })
         );
       }
+    },
+    onUpgradeButtonClick: () => {
+      dispatch(plansPage.goTo());
     },
   })
 )(ListCampaigns);
