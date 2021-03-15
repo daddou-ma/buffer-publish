@@ -7,7 +7,7 @@ export const ColumnStyle = styled.div`
   box-shadow: 0px 0px 16px #00000014;
   border-radius: ${borderRadius};
   margin-right: 24px;
-  padding: 45px;
+  padding: 25px 45px;
   display: flex;
   flex-direction: column;
   margin-bottom: 25px;

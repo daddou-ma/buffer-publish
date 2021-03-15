@@ -195,9 +195,10 @@
         "",
         "",
         "Plan, preview, and schedule Instagram Stories on web and mobile.",
-        "Include the first comment when you schedule Instagram posts",
+        "Include the first comment when you schedule Instagram posts.",
         "Build a library of hashtag groups to use in Instagram first comments. Reuse top performers and optimize your reach.",
-        "Add unique links to Instagram posts, turning your grid into a shoppable page via a static link in bio."
+        "Add unique links to Instagram posts, turning your grid into a shoppable page via a static link in bio.",
+        "Build entire campaigns across channels."
       ],
       "features": [
         "8 social channels",
@@ -205,7 +206,8 @@
         "Instagram Stories",
         "Instagram first comment",
         "Hashtag Manager",
-        "Shop Grid"
+        "Shop Grid",
+        "Campaigns"
       ],
       "monthly": "/mo",
       "nonProfitCost": "$32.50",
@@ -222,11 +224,12 @@
       "cost": "$65",
       "featureTooltips": [
         "",
-        "Include the first comment when you schedule Instagram posts",
-        "Tag Instagram users when you schedule Instagram posts",
+        "Include the first comment when you schedule Instagram posts.",
+        "Tag Instagram users when you schedule Instagram posts.",
         "Build a library of hashtag groups to use in Instagram first comments. Reuse top performers and optimize your reach.",
         "Add unique links to Instagram posts, turning your grid into a shoppable page via a static link in bio.",
-        "Plan, preview, and schedule Instagram Stories on web and mobile."
+        "Plan, preview, and schedule Instagram Stories on web and mobile.",
+        "Build entire campaigns across channels."
       ],
       "features": [
         "8 social channels",
@@ -234,7 +237,8 @@
         "Instagram user tagging",
         "Hashtag Manager",
         "Shop Grid",
-        "Instagram Stories"
+        "Instagram Stories",
+        "Campaigns"
       ],
       "monthly": "/mo",
       "nonProfitCost": "$32.50",
@@ -252,9 +256,15 @@
       "featureTooltips": [
         "",
         "",
-        "Include first comment when you schedule Instagram posts"
+        "Include first comment when you schedule Instagram posts.",
+        "Build entire campaigns across channels."
       ],
-      "features": ["8 social channels", "1 user", "Instagram first comment"],
+      "features": [
+        "8 social channels",
+        "1 user",
+        "Instagram first comment",
+        "Campaigns"
+      ],
       "monthly": "/mo",
       "nonProfitCost": "$7.50",
       "plan": "pro",
@@ -269,13 +279,15 @@
       "cost": "$15",
       "featureTooltips": [
         "",
-        "Include first comment when you schedule Instagram posts",
-        "Tag Instagram users when you schedule Instagram posts"
+        "Include first comment when you schedule Instagram posts.",
+        "Tag Instagram users when you schedule Instagram posts.",
+        "Build entire campaigns across channels."
       ],
       "features": [
         "8 social channels",
         "Instagram first comment",
-        "Instagram user tagging"
+        "Instagram user tagging",
+        "Campaigns"
       ],
       "monthly": "/mo",
       "nonProfitCost": "$7.50",
@@ -299,7 +311,8 @@
         "Instagram Stories",
         "Instagram first comment",
         "Hashtag Manager",
-        "Shop Grid"
+        "Shop Grid",
+        "Campaigns"
       ],
       "monthly": "/mo",
       "nonProfitCost": "$49.50",
