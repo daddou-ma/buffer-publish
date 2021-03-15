@@ -1,3 +1,5 @@
+const entitlements = require('../formatters/entitlements');
+
 module.exports = orgData => ({
   id: orgData.id,
   globalOrgId: orgData.globalOrgId,
@@ -7,6 +9,7 @@ module.exports = orgData => ({
   ownerId: orgData.ownerId,
   ownerEmail: orgData.ownerEmail,
   ownerFeatures: orgData.ownerFeatures,
+  shouldRedirectToAccountChannels: orgData.hasSharedChannels,
   plan: orgData.planName,
   planBase: orgData.planBase,
   planCode: orgData.planCode,
@@ -26,7 +29,7 @@ module.exports = orgData => ({
   },
 
   // Plan Features
-  hasCampaignsFeature: orgData.planBase !== 'free',
+  hasCampaignsFeature: orgData.entitlements.includes(entitlements.CAMPAIGNS),
   hasBitlyFeature: orgData.planBase !== 'free',
   has30DaySentPostsLimitFeature: orgData.planBase === 'free', // profiles_controller updates_sent() returns only 30 days of sent posts for free users.
   hasCalendarFeature: orgData.planBase !== 'free',
@@ -60,8 +63,6 @@ module.exports = orgData => ({
     orgData.trial && orgData.trial.canStartProTrial && orgData.isOwner,
 
   // Upgrade/ Trial Paths
-  shouldShowEngagementPromoModal:
-    orgData.planBase === 'free' && orgData.isOwner,
   showUpgradeToProCta: orgData.planBase === 'free',
   showShowDraftsPaywall: orgData.planBase === 'pro',
   showUpgradeToBusinessCta: orgData.planBase === 'pro' && orgData.isOwner,

@@ -44,8 +44,9 @@ describe('DefaultPage', () => {
 
     render(<DefaultPage />, {
       initialState: {
-        organizations: { selected: { isAdmin: true } },
-        globalAccount: { shouldRedirectToAccountChannels: false },
+        organizations: {
+          selected: { isAdmin: true, shouldRedirectToAccountChannels: false },
+        },
       },
     });
     const connectButton = screen.getByRole('button');
@@ -63,8 +64,9 @@ describe('DefaultPage', () => {
 
     render(<DefaultPage />, {
       initialState: {
-        organizations: { selected: { isAdmin: true } },
-        globalAccount: { shouldRedirectToAccountChannels: true },
+        organizations: {
+          selected: { isAdmin: true, shouldRedirectToAccountChannels: true },
+        },
       },
     });
     const connectButton = screen.getByRole('button');

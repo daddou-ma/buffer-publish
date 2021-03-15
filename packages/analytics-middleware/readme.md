@@ -16,7 +16,7 @@ You'll want to work with the data team when planning out a new event. You can do
 [Here is a great example](https://paper.dropbox.com/doc/Writeup-Implementing-the-Churn-Survey-Completed-Event--AiFrc1XIQsFN4TiqjyVM4epkAg-K6hwGXHhGYIOmU5j5q7xk) of implementing a new event from an end-to-end perspective.
 
 ## Tracking in Publish
-```
+```js
 import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
 
 const metadata = {
@@ -30,7 +30,8 @@ dispatch(analyticsActions.trackEvent('Draft Approved', metadata);
 ```
 ## Tracking in the Composer
 The composer uses Flux which leads to the store working a bit differently than in publish. Because of this, we need to use the `AppActionCreators.triggerInteraction` method to track an event. In the composer-popover package, we have an `onInteraction` method that calls the `trackEvent` analytics action.
-```
+
+```js
 // All you need to do is trigger the interaction in the composer
 
 AppActionCreators.triggerInteraction({

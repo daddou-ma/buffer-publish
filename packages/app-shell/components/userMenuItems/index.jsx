@@ -1,32 +1,31 @@
 import React from 'react';
-import { Gear, Return, Plus, People } from '@bufferapp/ui/Icon';
-import { gray } from '@bufferapp/ui/style/colors';
+import { Gear, Flash, People, Channels } from '@bufferapp/ui/Icon';
+import { gray, purpleLighter, purple } from '@bufferapp/ui/style/colors';
 import { getURL } from '@bufferapp/publish-server/formatters';
 
-const InvertedReturnIcon = () => (
-  <span style={{ transform: 'scaleX(-1)', height: '16px' }}>
-    <Return color={gray} />
-  </span>
-);
-
 function generateUserMenuItems({
-  showSwitchPlan,
-  returnToClassic,
-  switchPlan,
+  manageChannelsURL,
+  showPlans,
   openPreferences,
-  showManageTeam,
+  shouldShowUpgradeButton,
   t,
 }) {
-  const userMenuItems = {
-    top: [
-      {
-        id: 'preferences',
-        title: t('app-shell.preferences'),
-        icon: <Gear color={gray} />,
-        onItemClick: openPreferences,
+  return [
+    {
+      id: 'preferences',
+      title: t('app-shell.preferences'),
+      icon: <Gear color={gray} />,
+      onItemClick: openPreferences,
+    },
+    {
+      id: 'channels',
+      title: t('app-shell.channels'),
+      icon: <Channels color={gray} />,
+      onItemClick: () => {
+        window.location.assign(manageChannelsURL);
       },
-    ],
-    manageTeam: {
+    },
+    {
       id: 'openTeam',
       title: t('app-shell.team'),
       icon: <People color={gray} />,
@@ -34,28 +33,16 @@ function generateUserMenuItems({
         window.location.assign(`${getURL.getManageTeamURL()}`);
       },
     },
-    returnToClassic: {
-      id: 'returnToClassic',
-      title: t('app-shell.returnToClassic'),
-      icon: <InvertedReturnIcon />,
+    shouldShowUpgradeButton && {
+      id: 'upgrade',
+      /** @todo use purpleDarker when in ui */
+      colors: { title: purple, iconHover: purple },
+      title: t('app-shell.upgrade'),
+      icon: <Flash color={purpleLighter} />,
       hasDivider: true,
-      onItemClick: returnToClassic,
+      onItemClick: showPlans,
     },
-    switchPlan: {
-      id: 'switchPlan',
-      title: t('app-shell.upgradetoPro'),
-      icon: <Plus color={gray} />,
-      onItemClick: switchPlan,
-    },
-  };
-  const extraItems = [];
-  if (showManageTeam) {
-    extraItems.push(userMenuItems.manageTeam);
-  }
-  if (showSwitchPlan) {
-    extraItems.push(userMenuItems.switchPlan);
-  }
-  return [...userMenuItems.top, ...extraItems];
+  ].filter(Boolean);
 }
 
 export default generateUserMenuItems;

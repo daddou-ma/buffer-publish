@@ -13,7 +13,9 @@ export default ({ getState }) => next => action => {
   next(action);
   switch (action.type) {
     case actionTypes.RECONNECT_PROFILE: {
-      const { shouldRedirectToAccountChannels } = getState().globalAccount;
+      const {
+        shouldRedirectToAccountChannels,
+      } = getState().organizations.selected;
       const reconnectURL = shouldRedirectToAccountChannels
         ? getURL.getAccountChannelsURL()
         : getReconnectURL(action.id);

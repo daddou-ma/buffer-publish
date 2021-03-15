@@ -21,7 +21,7 @@ export default connect(
       displayExtraMessage,
       canReconnectChannels: state.organizations.selected?.canReconnectChannels,
       shouldRedirectToAccountChannels:
-        state.globalAccount.shouldRedirectToAccountChannels,
+        state.organizations.selected?.shouldRedirectToAccountChannels,
       ownerEmail: state.organizations.selected?.ownerEmail,
     };
   },

@@ -640,6 +640,9 @@ class Editor extends React.Component {
   shouldEnableHashtagAutocomplete = () =>
     this.props.draft.service.name === 'twitter';
 
+  shouldDisabledShortenLinks = () =>
+    this.props.draft.service.name === 'pinterest';
+
   render() {
     const {
       draft,
@@ -753,7 +756,7 @@ class Editor extends React.Component {
             onLinkUnshortened={this.onLinkUnshortened}
           />
         )}
-        {isComposerExpanded && (
+        {isComposerExpanded && !this.shouldDisabledShortenLinks && (
           <UnshortenedLinkTooltip
             classNames={textZoneTooltipClassNames}
             onLinkReshortened={this.onLinkReshortened}

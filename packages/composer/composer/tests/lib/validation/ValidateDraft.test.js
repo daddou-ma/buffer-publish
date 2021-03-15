@@ -320,6 +320,38 @@ describe('validateDraft', () => {
     });
   });
 
+  describe('validateSourceUrlforPinterest', () => {
+    it('returns ValidationFail if source url is an invalid link', () => {
+      const service = Services.get('pinterest');
+
+      const draft = new Draft(service, EditorState.createEmpty());
+
+      draft.sourceLink = 'blabla';
+
+      const results = validateDraft(draft);
+
+      expect(results.isInvalid()).toBeTruthy();
+      expect(results.getErrorMessages()).toContain(
+        'Please include a valid destination link'
+      );
+    });
+
+    it('returns ValidationFail if source url has link shortened', () => {
+      const service = Services.get('pinterest');
+
+      const draft = new Draft(service, EditorState.createEmpty());
+
+      draft.sourceLink = { url: 'bit.ly/aa' };
+
+      const results = validateDraft(draft);
+
+      expect(results.isInvalid()).toBeTruthy();
+      expect(results.getErrorMessages()).toContain(
+        'Please include a destination link without link shortener'
+      );
+    });
+  });
+
   describe('characters validation', () => {
     // draft.characterCommentCount is updated in the ComposerStore when the text changes
     // in updateDraftCommentCharacterCount but we can force the value

@@ -100,7 +100,7 @@
     "heading": "This organization is missing access to our publishing tools",
     "altText": "A person publishing a post",
     "accessTypes": {
-      "adminWithOrgAccess": { 
+      "adminWithOrgAccess": {
         "description": "Looks like your organization <1>{{orgName}}</1> doesn't have access to our publishing tools quite yet. To add this, sign up below or switch to your other organization <3>{{orgNameWithAccess}}</3> to gain access.",
         "secondaryLabel": "Sign Up",
         "primaryLabel": "Switch to {{orgNameWithAccess}}"
@@ -326,9 +326,10 @@
     "reconnect": "Reconnect"
   },
   "app-shell": {
-    "preferences": "Preferences",
+    "preferences": "My Preferences",
     "team": "Team",
-    "returnToClassic": "Return to Classic",
+    "channels": "Channels",
+    "upgrade": "Upgrade",
     "startProTrial": "Start Pro Trial",
     "upgradetoPro": "Upgrade to Pro",
     "helpCenter": "Visit Help Center",

@@ -7,10 +7,9 @@ import helpMenuItems from '../helpMenuItems';
 
 const AppShell = ({
   children,
-  showSwitchPlan,
-  showManageTeam,
-  returnToClassic,
-  switchPlan,
+  manageChannelsURL,
+  showPlans,
+  shouldShowUpgradeButton,
   openPreferences,
   bannerOptions,
   onCloseBanner,
@@ -31,11 +30,10 @@ const AppShell = ({
       content={children}
       activeProduct="publish"
       menuItems={generateUserMenuItems({
-        showSwitchPlan,
-        showManageTeam,
-        returnToClassic,
-        switchPlan,
+        manageChannelsURL,
+        showPlans,
         openPreferences,
+        shouldShowUpgradeButton,
         t,
       })}
       helpMenuItems={helpMenuItems(t)}
@@ -60,10 +58,9 @@ const AppShell = ({
 
 AppShell.propTypes = {
   children: PropTypes.node.isRequired,
-  showSwitchPlan: PropTypes.bool,
-  showManageTeam: PropTypes.bool,
-  returnToClassic: PropTypes.func.isRequired,
-  switchPlan: PropTypes.func.isRequired,
+  showPlans: PropTypes.func.isRequired,
+  manageChannelsURL: PropTypes.string.isRequired,
+  shouldShowUpgradeButton: PropTypes.bool,
   openPreferences: PropTypes.func.isRequired,
   user: PropTypes.shape({
     name: PropTypes.string.isRequired,
@@ -88,8 +85,7 @@ AppShell.propTypes = {
 };
 
 AppShell.defaultProps = {
-  showSwitchPlan: false,
-  showManageTeam: false,
+  shouldShowUpgradeButton: true,
   bannerOptions: null,
   bannerKey: null,
 };

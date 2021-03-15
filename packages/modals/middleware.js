@@ -76,11 +76,6 @@ export default ({ dispatch, getState }) => next => action => {
       if (!modalToShow) {
         return;
       }
-
-      if (modalToShow.id === actionTypes.SHOW_ENGAGEMENT_PROMO_MODAL) {
-        dispatch(actions.showEngagementPromoModal());
-      }
-
       break;
     }
 
@@ -88,7 +83,6 @@ export default ({ dispatch, getState }) => next => action => {
       const {
         shouldShowProTrialExpiredModal,
         shouldShowBusinessTrialExpiredModal,
-        shouldShowEngagementPromoModal,
       } = action.selected;
 
       if (
@@ -96,22 +90,6 @@ export default ({ dispatch, getState }) => next => action => {
         shouldShowBusinessTrialExpiredModal
       ) {
         dispatch(actions.showTrialCompleteModal());
-      }
-
-      if (shouldShowEngagementPromoModal) {
-        const { profiles } = getState().profileSidebar;
-        const showingProfilesDisconnectedModalFirst = profiles.some(
-          profile => profile.isDisconnected
-        );
-        if (showingProfilesDisconnectedModalFirst) {
-          dispatch(
-            actions.saveModalToShowLater({
-              modalId: actionTypes.SHOW_ENGAGEMENT_PROMO_MODAL,
-            })
-          );
-        } else {
-          dispatch(actions.showEngagementPromoModal());
-        }
       }
       break;
     }

@@ -15,9 +15,11 @@ describe('ProfilesDisconnectedModal', () => {
     { ...selectedProfile, isAdmin: true, organizationId: '123' },
   ];
   const initialState = {
-    organizations: { list: [{ isAdmin: true, id: '123' }] },
+    organizations: {
+      list: [{ isAdmin: true, id: '123' }],
+      selected: { shouldRedirectToAccountChannels: true },
+    },
     profilesDisconnectedModal: { disconnectedProfiles: profile },
-    globalAccount: { shouldRedirectToAccountChannels: true },
   };
 
   test('opens account channels when user clicks on reconnect', () => {

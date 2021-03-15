@@ -27,15 +27,16 @@ const store = storeFake({
   user: {
     canReconnectChannels: true,
   },
-  organizations: {},
+  organizations: {
+    selected: {
+      shouldRedirectToAccountChannels: true,
+    },
+  },
   i18n: {
     translations: {
       'profiles-disconnected-banner':
         translations['profiles-disconnected-banner'],
     },
-  },
-  globalAccount: {
-    shouldRedirectToAccountChannels: true,
   },
 });
 
@@ -55,7 +56,7 @@ describe('ProfilesDisconnectedBanner', () => {
 
     render(<ProfilesDisconnectedBanner />, {
       initialState: {
-        globalAccount: { shouldRedirectToAccountChannels: true },
+        organizations: { selected: { shouldRedirectToAccountChannels: true } },
       },
     });
     const reconnectButton = screen.getByRole('button');
