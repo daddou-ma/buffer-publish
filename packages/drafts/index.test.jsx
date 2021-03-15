@@ -48,7 +48,7 @@ describe('Drafts', () => {
   it('should export middleware', () => {
     expect(middleware).toBeDefined();
   });
-  it('shows free paywall for org on free plan', async () => {
+  it('shows free paywall for org on free plan', () => {
     render(<Drafts tabId="drafts" profileId="1234" />, {
       initialState,
     });
@@ -57,7 +57,7 @@ describe('Drafts', () => {
     });
     expect(primaryButton).toBeInTheDocument();
   });
-  it('redirects to billing when clicking button on pro paywall', async () => {
+  it('redirects to billing when clicking button on pro paywall', () => {
     render(<Drafts tabId="drafts" profileId="1234" />, {
       initialState: {
         ...initialState,
@@ -84,7 +84,7 @@ describe('Drafts', () => {
     expect(window.location.assign).toHaveBeenCalledWith(BILLING_URL);
     window.location.assign.mockRestore();
   });
-  it('redirects to trial url when clicking button on pro paywall with business trial cta', async () => {
+  it('redirects to trial url when clicking button on pro paywall with business trial cta', () => {
     render(<Drafts tabId="drafts" profileId="1234" />, {
       initialState: {
         ...initialState,

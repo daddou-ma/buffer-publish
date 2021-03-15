@@ -12,6 +12,7 @@ const startTrial = () =>
       nextUrl: 'https://publish.buffer.com',
     })}`
   );
+
 const goToBilling = () =>
   window.location.assign(
     `${getURL.getBillingURL({
@@ -52,10 +53,10 @@ const Paywall = ({
   );
 };
 
-export default Paywall;
-
 Paywall.propTypes = {
   onFreePlan: PropTypes.bool.isRequired,
   canStartBusinessTrial: PropTypes.bool.isRequired,
   onUpgradeButtonClick: PropTypes.func.isRequired,
 };
+
+export default Paywall;
