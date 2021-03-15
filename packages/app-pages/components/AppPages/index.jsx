@@ -1,45 +1,70 @@
 import React, { useEffect } from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
-  preferencesPage,
-  profilePages,
-  plansPage,
+  campaignsPage,
   newBusinessTrialists,
   newConnection,
-  campaignsPage,
+  plansPage,
+  preferencesPage,
+  profilePages,
+  profileTabPages,
   missingAccessPage,
 } from '@bufferapp/publish-routes';
+import { filterProfilesByOrg } from '@bufferapp/publish-profile-sidebar/utils';
 import PagesWithSidebar from '@bufferapp/publish-app-pages/components/PagesWithSidebar';
 import ProfilePages from '@bufferapp/publish-app-pages/components/ProfilePages';
 import Preferences from '@bufferapp/publish-preferences';
 import Plans from '@bufferapp/publish-plans';
 import DefaultPage from '@bufferapp/default-page';
 import OnboardingManager from '@bufferapp/publish-onboarding';
+import { useOrgSwitcher, useUser } from '@bufferapp/app-shell';
 // import MissingAccessPage from '../../../missing-access-page/index';
 
 const AppPages = ({
-  profiles,
+  unfilteredProfiles,
   showBusinessTrialistsOnboarding,
   profileRouteLoaded,
-  needsToSetCurrentOrg,
-  setCurrentOrganization,
-  currentOrgId,
+  orgIdFromRoute,
+  storeSelectedOrg,
 }) => {
-  const hasProfiles = profiles && profiles.length > 0;
+  // Get current selected org from appshell
+  const user = useUser();
+  const selectedOrgInAppShell = user?.currentOrganization?.id;
+
+  const currentOrgId = orgIdFromRoute || selectedOrgInAppShell;
+  // We need to update the current org in the AppShell if it doesn't
+  // match the org from the user's route. This only applies if
+  // route has a valid org (not a null, undefined or empty value).
+  const needsToSelectNewOrgInAppShell =
+    selectedOrgInAppShell !== orgIdFromRoute && !!orgIdFromRoute;
+
+  // Filters profiles by current org selected
+  const profiles = filterProfilesByOrg(unfilteredProfiles, {
+    id: currentOrgId,
+  });
+
+  const switchOrganization = useOrgSwitcher();
+
   // If org coming from route doesn't match the last org stored, select and store the new value
   useEffect(() => {
-    if (needsToSetCurrentOrg) {
-      setCurrentOrganization(currentOrgId);
+    if (needsToSelectNewOrgInAppShell) {
+      switchOrganization(currentOrgId);
+      storeSelectedOrg(currentOrgId);
     }
   }, [currentOrgId]);
 
   const redirectToQueue = () => {
     const selectedProfileId =
       Array.isArray(profiles) && !!profiles.length && profiles[0].id;
-    const newPath = profilePages.getRoute({ profileId: selectedProfileId });
+    const newPath = profileTabPages.getRoute({
+      profileId: selectedProfileId,
+      tabId: 'queue',
+    });
     return <Redirect to={newPath} />;
   };
+  const hasProfiles = profiles && profiles.length > 0;
+
   return (
     <Switch>
       <Route path={preferencesPage.route} component={Preferences} />
@@ -51,6 +76,7 @@ const AppPages = ({
           component={OnboardingManager}
         />
       )}
+
       {!hasProfiles && showBusinessTrialistsOnboarding && (
         <Redirect to={newBusinessTrialists.route} />
       )}
@@ -89,20 +115,21 @@ const AppPages = ({
 // {!hasAccessToPublish && <Redirect to={missingAccessPage.route} />}
 
 AppPages.propTypes = {
-  profiles: PropTypes.arrayOf(PropTypes.object),
+  unfilteredProfiles: PropTypes.arrayOf(PropTypes.object),
   showBusinessTrialistsOnboarding: PropTypes.bool,
   profileRouteLoaded: PropTypes.func.isRequired,
   needsToSetCurrentOrg: PropTypes.bool,
-  currentOrgId: PropTypes.string,
-  setCurrentOrganization: PropTypes.func,
+  orgIdFromRoute: PropTypes.string,
+  switchOrganization: PropTypes.func,
+  storeSelectedOrg: PropTypes.func.isRequired,
 };
 
 AppPages.defaultProps = {
   showBusinessTrialistsOnboarding: false,
-  profiles: [],
+  unfilteredProfiles: [],
   needsToSetCurrentOrg: false,
-  currentOrgId: null,
-  setCurrentOrganization: () => {},
+  orgIdFromRoute: null,
+  switchOrganization: () => {},
 };
 
 export default AppPages;

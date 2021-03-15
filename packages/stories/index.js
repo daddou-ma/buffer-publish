@@ -17,7 +17,7 @@ export default connect(
       p => p.id === ownProps.profileId
     );
 
-    if (currentProfile) {
+    if (currentProfile && profileData) {
       return {
         loading: currentProfile.loading,
         loadingMore: currentProfile.loadingMore,
