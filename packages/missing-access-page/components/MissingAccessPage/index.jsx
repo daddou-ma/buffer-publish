@@ -53,19 +53,19 @@ const MissingAccessPage = ({
     isAdmin,
     hasOrgWithAccess: !!orgWithAccess,
   });
-  const orgNameWithAccess = orgWithAccess?.name;
+  const { id, name } = orgWithAccess || {};
   const description = getDescription({
     accessType,
     ownerEmail,
-    orgNameWithAccess,
-    orgIdWithAccess: orgWithAccess?.id,
+    orgNameWithAccess: name,
+    orgIdWithAccess: id,
     orgName,
   });
   const actions = getActions({
     accessType,
     switchOrganization,
-    orgNameWithAccess,
-    orgIdWithAccess,
+    orgNameWithAccess: name,
+    orgIdWithAccess: id,
   });
 
   return (
