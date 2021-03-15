@@ -6,6 +6,8 @@ import TabNavigation from './components/TabNavigation';
 // default export = container
 export default connect(
   state => {
+    const { showProPaywall, showFreePaywall } =
+      state.organizations.selected || {};
     return {
       profileNavTabs: state.profileNav.profileNavTabs,
       profileId: state.profileSidebar.selectedProfile.id,
@@ -24,6 +26,7 @@ export default connect(
       reconnectURL: state.organizations.selected?.shouldRedirectToAccountChannels
         ? getURL.getAccountChannelsURL()
         : getURL.getManageSocialAccountURL(),
+      showPaywallTag: showProPaywall || showFreePaywall,
     };
   },
   dispatch => ({
