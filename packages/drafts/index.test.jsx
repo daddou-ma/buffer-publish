@@ -12,17 +12,14 @@ import reducer, { actions, actionTypes } from './reducer';
 import Drafts from './index';
 
 describe('Drafts', () => {
-  const hostname = 'publish.local.buffer.com';
-  window.location.assign = jest.fn();
-  window.location.hostname = hostname;
   const initialState = {
     organizations: {
       selected: {
         isAdmin: true,
         name: 'AlpenGlow',
         ownerEmail: 'test@buffer.com',
-        showFreePaywall: true,
-        canStartBusinessTrial: false,
+        hasDraftsFeature: false,
+        showStartBusinessTrialCta: false,
       },
     },
     drafts: {
@@ -57,34 +54,10 @@ describe('Drafts', () => {
     });
     expect(primaryButton).toBeInTheDocument();
   });
-  it('redirects to billing when clicking button on pro paywall', () => {
-    render(<Drafts tabId="drafts" profileId="1234" />, {
-      initialState: {
-        ...initialState,
-        organizations: {
-          selected: {
-            isAdmin: true,
-            name: 'AlpenGlow',
-            ownerEmail: 'test@buffer.com',
-            showFreePaywall: false,
-            showProPaywall: true,
-            canStartBusinessTrial: false,
-          },
-        },
-      },
-    });
-    const primaryButton = screen.getByRole('button', {
-      name: 'Upgrade to Buffer for Business',
-    });
-    expect(primaryButton).toBeInTheDocument();
-    userEvent.click(primaryButton);
-    const BILLING_URL = `${getURL.getBillingURL({
-      cta: SEGMENT_NAMES.DRAFTS_BUSINESS_UPGRADE,
-    })}`;
-    expect(window.location.assign).toHaveBeenCalledWith(BILLING_URL);
-    window.location.assign.mockRestore();
-  });
   it('redirects to trial url when clicking button on pro paywall with business trial cta', () => {
+    const hostname = 'publish.local.buffer.com';
+    window.location.assign = jest.fn();
+    window.location.hostname = hostname;
     render(<Drafts tabId="drafts" profileId="1234" />, {
       initialState: {
         ...initialState,
@@ -93,9 +66,8 @@ describe('Drafts', () => {
             isAdmin: true,
             name: 'AlpenGlow',
             ownerEmail: 'test@buffer.com',
-            showFreePaywall: false,
-            showProPaywall: true,
-            canStartBusinessTrial: true,
+            hasDraftsFeature: false,
+            showStartBusinessTrialCta: true,
           },
         },
       },
