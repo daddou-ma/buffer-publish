@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { actions as modalsActions } from '@bufferapp/publish-modals/reducer';
 import { actions as campaignActions } from '@bufferapp/publish-campaign/reducer';
 import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
+import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
 import {
   campaignEdit,
   campaignCreate,
@@ -50,7 +51,7 @@ export default connect(
     onUpgradeButtonClick: () => {
       dispatch(
         analyticsActions.trackEvent('Upgrade Path Viewed', {
-          upgradePathName: 'campaigns-emptyState-upgrade',
+          upgradePathName: SEGMENT_NAMES.CAMPAIGNS_UPGRADE,
         })
       );
       dispatch(plansPage.goTo());

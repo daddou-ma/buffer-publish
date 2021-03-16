@@ -17,6 +17,7 @@ const SMALL_PLAN_ID = '10';
 const APP_SHELL_PRO_UPGRADE = 'publish-appShell-menu-proUpgrade-1';
 const CAMPAIGNS_CREATE_CAMPAIGN =
   'publish-campaigns-createCampaignPage-createCampaign-1';
+const CAMPAIGNS_UPGRADE = 'publish-campaigns-emptyState-upgrade-1';
 const CTA_BANNER_PREMIUM_UPGRADE = 'publish-app-ctaBanner-premiumUpgrade-1';
 const CTA_BANNER_SMALL_UPGRADE = 'publish-app-ctaBanner-smallUpgrade-1';
 const CTA_BANNER_PRO_UPGRADE = 'publish-app-ctaBanner-proUpgrade-1';
@@ -138,6 +139,7 @@ module.exports = {
   SEGMENT_NAMES: {
     APP_SHELL_PRO_UPGRADE,
     CAMPAIGNS_CREATE_CAMPAIGN,
+    CAMPAIGNS_UPGRADE,
     CTA_BANNER_PREMIUM_UPGRADE,
     CTA_BANNER_SMALL_UPGRADE,
     CTA_BANNER_PRO_UPGRADE,
