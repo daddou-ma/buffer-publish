@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import {
   getDateString,
   isInThePast,
+  getURL,
 } from '@bufferapp/publish-server/formatters';
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
 import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
@@ -129,6 +130,11 @@ export default connect(
         isDisconnected,
         isManager,
       } = state.profileSidebar.selectedProfile;
+      const {
+        hasFirstCommentFeature,
+        showStartBusinessTrialCta,
+        hasDraftsFeature,
+      } = state.organizations.selected || {};
       return {
         shouldResetComposerData: state.drafts.shouldResetComposerData,
         manager: isManager,
@@ -150,12 +156,9 @@ export default connect(
         editingPostId: state.drafts.editingPostId,
         isLockedProfile: state.profileSidebar.isLockedProfile,
         isDisconnectedProfile: isDisconnected,
-        canStartBusinessTrial:
-          state.organizations?.selected?.canStartBusinessTrial,
-        hasFirstCommentFlip:
-          state.organizations?.selected?.hasFirstCommentFeature,
-        showFreePaywall: state.organizations?.selected?.showFreePaywall,
-        showProPaywall: state.organizations?.selected?.showProPaywall,
+        showStartBusinessTrialCta,
+        hasFirstCommentFlip: hasFirstCommentFeature,
+        showPaywall: !hasDraftsFeature,
         profileId: ownProps.profileId,
       };
     }
@@ -243,6 +246,15 @@ export default connect(
         upgradePathName: SEGMENT_NAMES.UPGRADE_PATH_DRAFTS_FREE,
       });
       dispatch(plansPage.goTo());
+    },
+    onStartTrialClick: () => {
+      window.location.assign(
+        `${getURL.getStartTrialURL({
+          trialType: 'small',
+          cta: SEGMENT_NAMES.DRAFTS_SBP_TRIAL,
+          nextUrl: 'https://publish.buffer.com',
+        })}`
+      );
     },
   })
 )(DraftList);

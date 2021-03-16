@@ -21,6 +21,7 @@ const CTA_BANNER_PREMIUM_UPGRADE = 'publish-app-ctaBanner-premiumUpgrade-1';
 const CTA_BANNER_SMALL_UPGRADE = 'publish-app-ctaBanner-smallUpgrade-1';
 const CTA_BANNER_PRO_UPGRADE = 'publish-app-ctaBanner-proUpgrade-1';
 const CTA_BANNER_BUSINESS_UPGRADE = 'publish-app-ctaBanner-businessUpgrade-1';
+const DRAFTS_PAYWALL_UPGRADE = `publish-drafts-paywall-upgrade-1`;
 const DRAFTS_SBP_TRIAL = 'publish-drafts-trialCard-sbpTrial-1';
 const DRAFTS_BUSINESS_UPGRADE = 'publish-drafts-upgradeCard-businessUpgrade-1';
 const EXPIRED_TRIAL_PRO_UPGRADE = 'publish-app-expiredTrialModal-proUpgrade-1';
@@ -75,7 +76,6 @@ const STORIES_PREVIEW_COMPOSER_ADD_NOTE =
   'publish-stories-composerPreview-addNote-1';
 const STORIES_IMAGE_ASPECT_RATIO_UPLOADED =
   'publish-stories-composer-imageAspectRatioUploaded-1';
-const UPGRADE_PATH_DRAFTS_FREE = `publish-drafts-freeUserPaywall-upgrade-1`;
 
 const ImageDimensions = {
   large: {
@@ -143,8 +143,9 @@ module.exports = {
     CTA_BANNER_SMALL_UPGRADE,
     CTA_BANNER_PRO_UPGRADE,
     CTA_BANNER_BUSINESS_UPGRADE,
-    DRAFTS_SBP_TRIAL,
     DRAFTS_BUSINESS_UPGRADE,
+    DRAFTS_PAYWALL_UPGRADE,
+    DRAFTS_SBP_TRIAL,
     EXPIRED_TRIAL_PRO_UPGRADE,
     EXPIRED_TRIAL_PREMIUM_UPGRADE,
     EXPIRED_TRIAL_BUSINESS_UPGRADE,
@@ -179,7 +180,6 @@ module.exports = {
     STORIES_PREVIEW_COMPOSER_ADD_NOTE,
     STORIES_PREVIEW_QUEUE_ADD_NOTE,
     STORIES_IMAGE_ASPECT_RATIO_UPLOADED,
-    UPGRADE_PATH_DRAFTS_FREE,
   },
   MediaTypes,
   UploadTypes,

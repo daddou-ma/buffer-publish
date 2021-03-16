@@ -4,6 +4,7 @@ import {
   QueueItems,
   BufferLoading,
   ComposerInput,
+  BusinessTrialOrUpgradeCard,
 } from '@bufferapp/publish-shared-components';
 import ComposerPopover from '@bufferapp/publish-composer-popover';
 import LockedProfileNotification from '@bufferapp/publish-locked-profile-notification';
@@ -12,7 +13,6 @@ import getErrorBoundary from '@bufferapp/publish-web/components/ErrorBoundary';
 import ProfilesDisconnectedBanner from '@bufferapp/publish-profiles-disconnected-banner';
 
 import Empty from '../Empty';
-import Paywall from '../Paywall';
 
 const ErrorBoundary = getErrorBoundary(true);
 
@@ -53,13 +53,13 @@ const DraftList = ({
   tabId,
   isLockedProfile,
   isDisconnectedProfile,
-  canStartBusinessTrial,
+  showStartBusinessTrialCta,
   hasFirstCommentFlip,
   onComposerOverlayClick,
   onUpgradeButtonClick,
+  onStartTrialClick,
   shouldResetComposerData,
-  showFreePaywall,
-  showProPaywall,
+  showPaywall,
   fetchDrafts,
   profileId,
 }) => {
@@ -69,12 +69,20 @@ const DraftList = ({
     fetchDrafts({ needsApproval });
   }, [tabId, profileId]);
 
-  if (showFreePaywall || showProPaywall) {
+  if (showPaywall) {
     return (
-      <Paywall
-        onFreePlan={showFreePaywall}
-        canStartBusinessTrial={canStartBusinessTrial}
-        onUpgradeButtonClick={onUpgradeButtonClick}
+      <BusinessTrialOrUpgradeCard
+        heading="Collaborate With Your Team"
+        body="Add your team to your Buffer account so you can collaborate and save even more time."
+        cta={
+          showStartBusinessTrialCta
+            ? 'Start a Free 14-Day Trial of the Business Plan'
+            : 'Upgrade'
+        }
+        onCtaClick={
+          showStartBusinessTrialCta ? onStartTrialClick : onUpgradeButtonClick
+        }
+        backgroundImage="squares"
       />
     );
   }
@@ -145,15 +153,14 @@ const DraftList = ({
 };
 
 DraftList.propTypes = {
-  canStartBusinessTrial: PropTypes.bool.isRequired,
+  showStartBusinessTrialCta: PropTypes.bool.isRequired,
   loading: PropTypes.bool,
   postLists: PropTypes.arrayOf(
     PropTypes.shape({
       text: PropTypes.string,
     })
   ),
-  showProPaywall: PropTypes.bool,
-  showFreePaywall: PropTypes.bool,
+  showPaywall: PropTypes.bool.isRequired,
   manager: PropTypes.bool.isRequired,
   onApproveClick: PropTypes.func.isRequired,
   onDeleteConfirmClick: PropTypes.func.isRequired,
@@ -174,11 +181,10 @@ DraftList.propTypes = {
   fetchDrafts: PropTypes.func.isRequired,
   profileId: PropTypes.string.isRequired,
   onUpgradeButtonClick: PropTypes.func.isRequired,
+  onStartTrialClick: PropTypes.func.isRequired,
 };
 
 DraftList.defaultProps = {
-  showFreePaywall: false,
-  showProPaywall: false,
   shouldResetComposerData: true,
   loading: true,
   postLists: [],
