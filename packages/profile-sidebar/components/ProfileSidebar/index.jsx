@@ -6,6 +6,7 @@ import { offWhite, mystic } from '@bufferapp/components/style/color';
 import { borderWidth } from '@bufferapp/components/style/border';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
+import { NavTag } from '@bufferapp/publish-shared-components';
 
 import LoadingProfileListItem from '../LoadingProfileListItem';
 import ProfileListItem from '../ProfileListItem';
@@ -128,22 +129,22 @@ const ProfileSidebar = ({
       {loading && renderLoadingProfiles()}
       {profiles.length > 0 && (
         <ProfileListStyle data-hide-scrollbar>
-          {hasCampaignsFlip && (
-            <>
-              <ButtonWrapper>
-                <SidebarListItem
-                  id="campaigns"
-                  title={t('campaigns.common.title')}
-                  onItemClick={onCampaignsButtonClick}
-                  selected={isCampaignsSelected}
-                />
-              </ButtonWrapper>
-              <ProfileListTitle>
-                {t('profile-sidebar.socialAccounts')}
-              </ProfileListTitle>
-              <Divider marginTop="0" marginBottom="1rem" />
-            </>
-          )}
+          <>
+            <ButtonWrapper>
+              <SidebarListItem
+                id="campaigns"
+                title={t('campaigns.common.title')}
+                onItemClick={onCampaignsButtonClick}
+                selected={isCampaignsSelected}
+                badges={hasCampaignsFlip ? null : <NavTag type="paywall" />}
+              />
+            </ButtonWrapper>
+            <ProfileListTitle>
+              {t('profile-sidebar.socialAccounts')}
+            </ProfileListTitle>
+            <Divider marginTop="0" marginBottom="1rem" />
+          </>
+
           {profiles.length > 9 && (
             <ProfileSearch
               profiles={profiles}
