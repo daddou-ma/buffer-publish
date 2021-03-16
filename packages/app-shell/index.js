@@ -7,6 +7,7 @@ import {
 } from '@bufferapp/publish-routes';
 import { getURL } from '@bufferapp/publish-server/formatters';
 import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
+import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
 
 import { actions } from './reducer';
 import AppShell from './components/AppShell';
@@ -41,7 +42,7 @@ export default connect(
     showPlans() {
       dispatch(
         analyticsActions.trackEvent('Upgrade Path Viewed', {
-          upgradePathName: 'app-shell-userMenu-upgrade',
+          upgradePathName: SEGMENT_NAMES.APP_SHELL_USER_MENU_UPGRADE,
         })
       );
       dispatch(plansPage.goTo());
