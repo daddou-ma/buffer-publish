@@ -13,6 +13,7 @@ import ProfileListItem from '../ProfileListItem';
 import ProfileList from '../ProfileList';
 import ProfileConnectShortcut from '../ProfileConnectShortcut';
 import ProfileSearch from '../ProfileSearch';
+import AddChannelButton from '../AddChannelButton';
 
 const ProfileSidebarStyle = styled.div`
   display: flex;
@@ -90,11 +91,12 @@ const ProfileSidebar = ({
   onProfileClick,
   onDropProfile,
   profileLimit,
-  showSwitchPlanModal,
   onSearchProfileChange,
   isSearchPopupVisible,
   // Flags for showing connection shortcut buttons
   canManageSocialAccounts,
+  reachedChannelLimit,
+  onAddChannelUpgradeClick,
   ownerEmail,
   hasInstagram,
   hasFacebook,
@@ -102,9 +104,7 @@ const ProfileSidebar = ({
   hasCampaignsFlip,
   onCampaignsButtonClick,
   isCampaignsSelected,
-  showUpgradeToProCta,
   manageChannelsURL,
-  connectChannelsURL,
   connectDirectURLs,
   shouldHideLockedChannels,
 }) => {
@@ -169,40 +169,30 @@ const ProfileSidebar = ({
         <SocialButtonsWrapperStyle>
           {canManageSocialAccounts && (
             <>
-              {!hasInstagram && (
+              {reachedChannelLimit && (
+                <AddChannelButton
+                  onAddChannelUpgradeClick={onAddChannelUpgradeClick}
+                />
+              )}
+              {!hasInstagram && !reachedChannelLimit && (
                 <ProfileConnectShortcut
                   label={t('profile-sidebar.connectInstagram')}
                   network="instagram"
                   url={connectDirectURLs.instagram}
-                  profileLimit={profileLimit}
-                  profiles={profiles}
-                  showSwitchPlanModal={showSwitchPlanModal}
-                  connectChannelsURL={connectChannelsURL}
-                  showUpgradeToProCta={showUpgradeToProCta}
                 />
               )}
-              {!hasFacebook && (
+              {!hasFacebook && !reachedChannelLimit && (
                 <ProfileConnectShortcut
                   label={t('profile-sidebar.connectFacebook')}
                   network="facebook"
                   url={connectDirectURLs.facebook}
-                  profileLimit={profileLimit}
-                  profiles={profiles}
-                  showSwitchPlanModal={showSwitchPlanModal}
-                  connectChannelsURL={connectChannelsURL}
-                  showUpgradeToProCta={showUpgradeToProCta}
                 />
               )}
-              {!hasTwitter && (
+              {!hasTwitter && !reachedChannelLimit && (
                 <ProfileConnectShortcut
                   label={t('profile-sidebar.connectTwitter')}
                   network="twitter"
                   url={connectDirectURLs.twitter}
-                  profileLimit={profileLimit}
-                  profiles={profiles}
-                  showSwitchPlanModal={showSwitchPlanModal}
-                  connectChannelsURL={connectChannelsURL}
-                  showUpgradeToProCta={showUpgradeToProCta}
                 />
               )}
             </>
@@ -233,13 +223,11 @@ ProfileSidebar.propTypes = {
   loading: PropTypes.bool.isRequired,
   onProfileClick: ProfileList.propTypes.onProfileClick,
   manageChannelsURL: PropTypes.string.isRequired,
-  connectChannelsURL: PropTypes.string.isRequired,
   connectDirectURLs: PropTypes.shape({
     facebook: PropTypes.string,
     instagram: PropTypes.string,
     twitter: PropTypes.string,
   }).isRequired,
-  showSwitchPlanModal: PropTypes.func,
   selectedProfileId: ProfileList.propTypes.selectedProfileId,
   profiles: PropTypes.arrayOf(PropTypes.shape(ProfileListItem.propTypes)),
   profileLimit: PropTypes.number,
@@ -254,7 +242,8 @@ ProfileSidebar.propTypes = {
   isCampaignsSelected: PropTypes.bool,
   onCampaignsButtonClick: PropTypes.func,
   ownerEmail: PropTypes.string,
-  showUpgradeToProCta: PropTypes.bool,
+  onAddChannelUpgradeClick: PropTypes.func.isRequired,
+  reachedChannelLimit: PropTypes.bool,
 };
 
 ProfileSidebar.defaultProps = {
@@ -263,7 +252,6 @@ ProfileSidebar.defaultProps = {
   profiles: [],
   onSearchProfileChange: PropTypes.func,
   isSearchPopupVisible: false,
-  showSwitchPlanModal: () => {},
   onDropProfile: () => {},
   onCampaignsButtonClick: () => {},
   profileLimit: 0,
@@ -271,7 +259,7 @@ ProfileSidebar.defaultProps = {
   hasCampaignsFlip: false,
   isCampaignsSelected: false,
   ownerEmail: 'the owner',
-  showUpgradeToProCta: true,
+  reachedChannelLimit: false,
 };
 
 export default ProfileSidebar;
