@@ -2,9 +2,13 @@ import { connect } from 'react-redux';
 import {
   getDateString,
   isInThePast,
+  getURL,
 } from '@bufferapp/publish-server/formatters';
 import { actions as dataFetchActions } from '@bufferapp/async-data-fetch';
+import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
 import { actions as modalsActions } from '@bufferapp/publish-modals/reducer';
+import { plansPage } from '@bufferapp/publish-routes';
+import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
 
 import { actions } from './reducer';
 import DraftList from './components/DraftList';
@@ -126,6 +130,11 @@ export default connect(
         isDisconnected,
         isManager,
       } = state.profileSidebar.selectedProfile;
+      const {
+        hasFirstCommentFeature,
+        showStartBusinessTrialCta,
+        hasDraftsFeature,
+      } = state.organizations.selected || {};
       return {
         shouldResetComposerData: state.drafts.shouldResetComposerData,
         manager: isManager,
@@ -147,12 +156,9 @@ export default connect(
         editingPostId: state.drafts.editingPostId,
         isLockedProfile: state.profileSidebar.isLockedProfile,
         isDisconnectedProfile: isDisconnected,
-        canStartBusinessTrial:
-          state.organizations?.selected?.canStartBusinessTrial,
-        hasFirstCommentFlip:
-          state.organizations?.selected?.hasFirstCommentFeature,
-        showShowDraftsPaywall:
-          state.organizations?.selected?.showShowDraftsPaywall,
+        showStartBusinessTrialCta,
+        hasFirstCommentFlip: hasFirstCommentFeature,
+        showPaywall: !hasDraftsFeature,
         profileId: ownProps.profileId,
       };
     }
@@ -233,6 +239,21 @@ export default connect(
         modalsActions.showCloseComposerConfirmationModal({
           page: ownProps.tabId || 'drafts',
         })
+      );
+    },
+    onUpgradeButtonClick: () => {
+      analyticsActions.trackEvent('Upgrade Path Viewed', {
+        upgradePathName: SEGMENT_NAMES.UPGRADE_PATH_DRAFTS_FREE,
+      });
+      dispatch(plansPage.goTo());
+    },
+    onStartTrialClick: () => {
+      window.location.assign(
+        `${getURL.getStartTrialURL({
+          trialType: 'small',
+          cta: SEGMENT_NAMES.DRAFTS_SBP_TRIAL,
+          nextUrl: 'https://publish.buffer.com',
+        })}`
       );
     },
   })
