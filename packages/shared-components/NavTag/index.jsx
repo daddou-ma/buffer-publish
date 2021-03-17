@@ -8,7 +8,7 @@ import {
   green,
   grayDarker,
   grayLight,
-  purpleDarker,
+  purple,
   purpleLighter,
 } from '@bufferapp/ui/style/colors';
 
@@ -33,7 +33,7 @@ const Tag = styled.span`
 
 const NavTag = ({ type, labelName }) => (
   <Tag type={type}>
-    {type === 'paywall' ? <Flash color={purpleDarker} /> : labelName}
+    {type === 'paywall' ? <Flash color={purple} /> : labelName}
   </Tag>
 );
 
