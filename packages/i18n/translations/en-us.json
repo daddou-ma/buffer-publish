@@ -427,6 +427,7 @@
     "connectInstagram": "Connect Instagram",
     "connectFacebook": "Connect Facebook",
     "connectTwitter": "Connect Twitter",
+    "addChannels": "Add Channels",
     "searchProfiles": "Search Channels",
     "noProfilesFound": "No Channels Found",
     "permissionSubtitle": "It looks like you haven’t been given permission to add/manage channels. Request access from {{email}} or any other Admin."

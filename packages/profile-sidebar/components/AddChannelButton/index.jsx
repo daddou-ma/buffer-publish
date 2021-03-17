@@ -9,11 +9,11 @@ import {
   StyledAddIcon,
 } from './style';
 
-const AddChannelButton = ({ onAddChannelUpgradeClick }) => {
+const AddChannelButton = ({ onAddChannelUpgradeClick, label }) => {
   return (
     <ListItemContainer>
       <SidebarItem
-        title="Add Channels"
+        title={label}
         onItemClick={() => onAddChannelUpgradeClick()}
         /* eslint-disable no-nested-ternary */
         badges={<NavTag type="paywall" />}
@@ -30,6 +30,11 @@ const AddChannelButton = ({ onAddChannelUpgradeClick }) => {
 
 AddChannelButton.propTypes = {
   onAddChannelUpgradeClick: PropTypes.func.isRequired,
+  label: PropTypes.string,
+};
+
+AddChannelButton.defaultProps = {
+  label: 'Add Channels',
 };
 
 export default AddChannelButton;

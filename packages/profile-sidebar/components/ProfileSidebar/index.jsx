@@ -171,6 +171,7 @@ const ProfileSidebar = ({
             <>
               {reachedChannelLimit && (
                 <AddChannelButton
+                  label={t('profile-sidebar.addChannels')}
                   onAddChannelUpgradeClick={onAddChannelUpgradeClick}
                 />
               )}
