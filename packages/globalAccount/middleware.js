@@ -25,6 +25,9 @@ export default ({ dispatch, getState }) => next => action => {
         })
       );
       break;
+    case `globalAccount_${dataFetchActionTypes.FETCH_FAILURE}`:
+      console.log('state.globalAccount', action, state.globalAccount);
+      break;
     default:
       break;
   }
