@@ -67,10 +67,6 @@ const AppPages = ({
   };
   const hasProfiles = profiles && profiles.length > 0;
 
-  if (!canAccessPublishing) {
-    return <MissingAccessPage />;
-  }
-
   return (
     <Switch>
       <Route path={preferencesPage.route} component={Preferences} />
