@@ -7,6 +7,7 @@ import { getURL } from '@bufferapp/publish-server/formatters';
 import userEvent from '@testing-library/user-event';
 import TestBackend from 'react-dnd-test-backend';
 import { DragDropContext } from 'react-dnd';
+import '@bufferapp/publish-web/components/i18n';
 
 import ProfileSidebar, {
   reducer,
@@ -144,5 +145,43 @@ describe('ProfileSidebar', () => {
 
     expect(window.location.assign).toHaveBeenCalledWith(expectedURL);
     window.location.assign.mockRestore();
+  });
+
+  test('has Add Channels paywall if reached channel limit', () => {
+    const TestDragDropContainer = DragDropContext(TestBackend)(
+      _TestContextContainer
+    );
+
+    render(
+      <TestDragDropContainer>
+        <ProfileSidebar />
+      </TestDragDropContainer>,
+      {
+        initialState: {
+          organizations: {
+            selected: {
+              canManageSocialAccounts: true,
+              profileLimit: 5,
+              profilesCount: 5,
+            },
+          },
+          profileSidebar: {
+            profiles,
+            selectedProfile,
+            loading: false,
+            hasInstagram: false,
+          },
+        },
+      }
+    );
+
+    const paywall = screen.getByText('Add Channels');
+    expect(paywall).toBeInTheDocument();
+
+    // Connect shortcuts are hidden
+    const connectLink = screen.queryByRole('link', {
+      name: 'Connect Instagram',
+    });
+    expect(connectLink).not.toBeInTheDocument();
   });
 });

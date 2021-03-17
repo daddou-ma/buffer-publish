@@ -1,11 +1,13 @@
 import { connect } from 'react-redux';
 import { hot } from 'react-hot-loader/root';
-import { actions as modalActions } from '@bufferapp/publish-modals';
 import { getURL } from '@bufferapp/publish-server/formatters';
+import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
+import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
 import {
   getMatch,
   campaignsPage,
   profileTabPages,
+  plansPage,
 } from '@bufferapp/publish-routes';
 import ProfileSidebar from './components/ProfileSidebar';
 import { shouldGoToProfile, getConnectDirectURLs } from './utils';
@@ -33,6 +35,10 @@ export default hot(
         ? state.profileSidebar.profiles
         : reorderProfilesByUnlocked(state.profileSidebar.profiles);
 
+      const reachedChannelLimit =
+        state.organizations.selected?.profileLimit <=
+        state.organizations.selected?.profilesCount;
+
       return {
         loading: state.profileSidebar.loading,
         selectedProfile: state.profileSidebar.selectedProfile,
@@ -52,15 +58,13 @@ export default hot(
           pathname: state.router?.location?.pathname,
           route: campaignsPage.route,
         }),
-        showUpgradeToProCta: state.organizations.selected?.showUpgradeToProCta,
+        reachedChannelLimit,
         connectDirectURLs: getConnectDirectURLs({
           cta,
           accountChannelsURL,
         }),
         manageChannelsURL:
           accountChannelsURL || getURL.getManageSocialAccountURL(),
-        connectChannelsURL:
-          accountChannelsURL || getURL.getConnectSocialAccountURL(),
         shouldHideLockedChannels,
       };
     },
@@ -90,19 +94,19 @@ export default hot(
           })
         );
       },
-      showSwitchPlanModal: () => {
-        dispatch(
-          modalActions.showSwitchPlanModal({
-            source: 'app_header',
-            plan: 'pro',
-          })
-        );
-      },
       onSearchProfileChange: value => {
         dispatch(actions.handleSearchProfileChange({ value }));
       },
       onCampaignsButtonClick: () => {
         dispatch(campaignsPage.goTo());
+      },
+      onAddChannelUpgradeClick: () => {
+        dispatch(
+          analyticsActions.trackEvent('Upgrade Path Viewed', {
+            upgradePathName: SEGMENT_NAMES.PROFILE_LIMIT_SIDEBAR_UPGRADE,
+          })
+        );
+        dispatch(plansPage.goTo());
       },
     })
   )(ProfileSidebar)

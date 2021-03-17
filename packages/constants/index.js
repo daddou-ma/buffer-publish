@@ -43,6 +43,8 @@ const LOCKED_PROFILE_BUSINESS_UPGRADE =
   'publish-profiles-lockedProfileUpgradeCard-businessUpgrade-1';
 const PROFILE_LIMIT_PRO_UPGRADE =
   'publish-orgAdminConnect-profileLimitUpgrade-proUpgrade-1';
+const PROFILE_LIMIT_SIDEBAR_UPGRADE =
+  'publish-profileSidebar-addChannelButton-upgrade-1';
 const QUEUE_LIMIT_PRO_TRIAL =
   'publish-composer-queueLimitNotification-proTrial-1';
 const QUEUE_LIMIT_PRO_UPGRADE =
@@ -173,6 +175,7 @@ module.exports = {
     PLANS_SMALL_UPGRADE,
     PLANS_SMALL_DOWNGRADE,
     PREFERENCES_TAB_BILLING,
+    PROFILE_LIMIT_SIDEBAR_UPGRADE,
     STORIES_PREVIEW_COMPOSER,
     STORIES_PREVIEW_QUEUE,
     PROFILE_LIMIT_PRO_UPGRADE,
