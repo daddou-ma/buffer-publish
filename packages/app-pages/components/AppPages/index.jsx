@@ -102,7 +102,6 @@ const AppPages = ({
 
 AppPages.propTypes = {
   unfilteredProfiles: PropTypes.arrayOf(PropTypes.object),
-  showBusinessTrialistsOnboarding: PropTypes.bool,
   profileRouteLoaded: PropTypes.func.isRequired,
   needsToSetCurrentOrg: PropTypes.bool,
   orgIdFromRoute: PropTypes.string,
@@ -111,7 +110,6 @@ AppPages.propTypes = {
 };
 
 AppPages.defaultProps = {
-  showBusinessTrialistsOnboarding: false,
   unfilteredProfiles: [],
   needsToSetCurrentOrg: false,
   orgIdFromRoute: null,
