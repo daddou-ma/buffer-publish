@@ -35,7 +35,6 @@ import deleteCampaignModalReducer from '@bufferapp/publish-delete-campaign-modal
 import igFirstCommentProTrialModalReducer from '@bufferapp/publish-ig-first-comment-pro-trial-modal/reducer';
 import trialReducer from '@bufferapp/publish-trial/reducer';
 import hashtagGroupsReducer from '@bufferapp/publish-hashtag-group-manager/reducer';
-import onboardingReducer from '@bufferapp/publish-onboarding/reducer';
 import globalAccountReducer from '@bufferapp/global-account/reducer';
 import closeComposerModalReducer from '@bufferapp/publish-close-composer-confirmation-modal/reducer';
 import storyPreviewReducer from '@bufferapp/publish-story-preview/reducer';
