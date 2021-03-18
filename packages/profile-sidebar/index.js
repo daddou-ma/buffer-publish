@@ -10,7 +10,7 @@ import {
   plansPage,
 } from '@bufferapp/publish-routes';
 import ProfileSidebar from './components/ProfileSidebar';
-import { shouldGoToProfile, getConnectDirectURLs } from './utils';
+import { shouldGoToProfile } from './utils';
 import { actions } from './reducer';
 
 const reorderProfilesByUnlocked = profiles =>
@@ -20,7 +20,6 @@ const reorderProfilesByUnlocked = profiles =>
 export default hot(
   connect(
     (state, ownProps) => {
-      const cta = 'publish-app-sidebar-addProfile-1';
       const { isLoadingGlobalAccount } = state.globalAccount;
 
       const { shouldRedirectToAccountChannels } = state.organizations.selected;
@@ -46,9 +45,6 @@ export default hot(
         profiles,
         translations: state.i18n.translations['profile-sidebar'],
         profileLimit: state.organizations.selected?.profileLimit,
-        hasInstagram: state.profileSidebar.hasInstagram,
-        hasFacebook: state.profileSidebar.hasFacebook,
-        hasTwitter: state.profileSidebar.hasTwitter,
         isSearchPopupVisible: state.profileSidebar.isSearchPopupVisible,
         hasCampaignsFlip: state.organizations.selected?.hasCampaignsFeature,
         canManageSocialAccounts:
@@ -59,10 +55,6 @@ export default hot(
           route: campaignsPage.route,
         }),
         reachedChannelLimit,
-        connectDirectURLs: getConnectDirectURLs({
-          cta,
-          accountChannelsURL,
-        }),
         manageChannelsURL:
           accountChannelsURL || getURL.getManageSocialAccountURL(),
         shouldHideLockedChannels,

@@ -11,7 +11,6 @@ import { NavTag } from '@bufferapp/publish-shared-components';
 import LoadingProfileListItem from '../LoadingProfileListItem';
 import ProfileListItem from '../ProfileListItem';
 import ProfileList from '../ProfileList';
-import ProfileConnectShortcut from '../ProfileConnectShortcut';
 import ProfileSearch from '../ProfileSearch';
 import AddChannelButton from '../AddChannelButton';
 
@@ -98,14 +97,10 @@ const ProfileSidebar = ({
   reachedChannelLimit,
   onAddChannelUpgradeClick,
   ownerEmail,
-  hasInstagram,
-  hasFacebook,
-  hasTwitter,
   hasCampaignsFlip,
   onCampaignsButtonClick,
   isCampaignsSelected,
   manageChannelsURL,
-  connectDirectURLs,
   shouldHideLockedChannels,
 }) => {
   const { t } = useTranslation();
@@ -167,36 +162,11 @@ const ProfileSidebar = ({
       )}
       <ManageSocialAccountsStyle>
         <SocialButtonsWrapperStyle>
-          {canManageSocialAccounts && (
-            <>
-              {reachedChannelLimit && (
-                <AddChannelButton
-                  label={t('profile-sidebar.addChannels')}
-                  onAddChannelUpgradeClick={onAddChannelUpgradeClick}
-                />
-              )}
-              {!hasInstagram && !reachedChannelLimit && (
-                <ProfileConnectShortcut
-                  label={t('profile-sidebar.connectInstagram')}
-                  network="instagram"
-                  url={connectDirectURLs.instagram}
-                />
-              )}
-              {!hasFacebook && !reachedChannelLimit && (
-                <ProfileConnectShortcut
-                  label={t('profile-sidebar.connectFacebook')}
-                  network="facebook"
-                  url={connectDirectURLs.facebook}
-                />
-              )}
-              {!hasTwitter && !reachedChannelLimit && (
-                <ProfileConnectShortcut
-                  label={t('profile-sidebar.connectTwitter')}
-                  network="twitter"
-                  url={connectDirectURLs.twitter}
-                />
-              )}
-            </>
+          {canManageSocialAccounts && reachedChannelLimit && (
+            <AddChannelButton
+              label={t('profile-sidebar.addChannels')}
+              onAddChannelUpgradeClick={onAddChannelUpgradeClick}
+            />
           )}
           <BottomSectionStyle>
             <ButtonDividerStyle>
@@ -233,9 +203,6 @@ ProfileSidebar.propTypes = {
   profiles: PropTypes.arrayOf(PropTypes.shape(ProfileListItem.propTypes)),
   profileLimit: PropTypes.number,
   onDropProfile: PropTypes.func,
-  hasInstagram: PropTypes.bool.isRequired,
-  hasFacebook: PropTypes.bool.isRequired,
-  hasTwitter: PropTypes.bool.isRequired,
   onSearchProfileChange: () => {},
   canManageSocialAccounts: PropTypes.bool,
   isSearchPopupVisible: PropTypes.bool,
