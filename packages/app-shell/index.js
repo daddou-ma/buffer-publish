@@ -25,9 +25,6 @@ export default connect(
         : getURL.getManageSocialAccountURL(),
       shouldShowUpgradeButton:
         state.organizations.selected?.shouldShowUpgradeButton,
-      hideAppShell:
-        state.onboarding.canSeeOnboardingPage &&
-        state.router.location.pathname === newBusinessTrialists.route,
       /**
        * Org Switcher
        * Needs profiles.

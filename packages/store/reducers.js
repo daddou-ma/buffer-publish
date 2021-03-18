@@ -85,7 +85,6 @@ export default {
   deleteCampaignModal: deleteCampaignModalReducer,
   igFirstCommentProTrialModal: igFirstCommentProTrialModalReducer,
   trial: trialReducer,
-  onboarding: onboardingReducer,
   hashtagGroups: hashtagGroupsReducer,
   globalAccount: globalAccountReducer,
   closeComposerModal: closeComposerModalReducer,

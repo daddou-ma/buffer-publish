@@ -14,14 +14,9 @@ const AppShell = ({
   bannerOptions,
   onCloseBanner,
   bannerKey,
-  hideAppShell,
   profiles,
   switchOrganization,
 }) => {
-  if (hideAppShell) {
-    return children;
-  }
-
   const { t } = useTranslation();
 
   return (
@@ -75,7 +70,6 @@ AppShell.propTypes = {
       __html: PropTypes.string,
     }),
   }),
-  hideAppShell: PropTypes.bool.isRequired,
   profiles: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,

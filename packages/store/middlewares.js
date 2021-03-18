@@ -106,7 +106,6 @@ const composedMiddlewares = history =>
       hashtagGroupsMiddleware,
       trialMiddleware,
       segmentTrackingMiddleware,
-      onboardingMiddleware,
       globalAccountMiddleware,
       closeComposerModalMiddleware,
       storiesMiddleware,
