@@ -217,9 +217,6 @@ export default ({ dispatch }) => {
         }
         break;
       }
-      case `getGlobalOrganizationId_${dataFetchActionTypes.FETCH_FAILURE}`: {
-        console.log('failure action', action);
-      }
       default:
         break;
     }

@@ -19,7 +19,7 @@ const LoadingGate = ({ ready, children, storeSelectedOrg }) => {
   const user = useUser();
   const orgSelectedLoaded = user && user.loading !== true;
   const selectedOrgInAppShell = user?.currentOrganization?.id;
-
+  console.log({ user, orgSelectedLoaded, selectedOrgInAppShell });
   if (ready && orgSelectedLoaded && selectedOrgInAppShell) {
     storeSelectedOrg(selectedOrgInAppShell);
   }

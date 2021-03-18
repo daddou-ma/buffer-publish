@@ -66,7 +66,7 @@ const AppPages = ({
     return <Redirect to={newPath} />;
   };
   const hasProfiles = profiles && profiles.length > 0;
-
+  console.log({ user, canAccessPublishing });
   if (!canAccessPublishing) {
     return <MissingAccessPage />;
   }
