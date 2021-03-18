@@ -402,6 +402,9 @@
   "profile-sidebar": {
     "connectButton": "Manage Channels",
     "socialAccounts": "Channels",
+    "connectInstagram": "Connect Instagram",
+    "connectFacebook": "Connect Facebook",
+    "connectTwitter": "Connect Twitter",
     "addChannels": "Add Channels",
     "searchProfiles": "Search Channels",
     "noProfilesFound": "No Channels Found",
