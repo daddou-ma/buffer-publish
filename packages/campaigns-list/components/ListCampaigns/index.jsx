@@ -4,7 +4,6 @@ import {
   ButtonWithSkeleton,
   TextWithSkeleton,
 } from '@bufferapp/publish-shared-components';
-import { getURL } from '@bufferapp/publish-server/formatters';
 import { borderRadius } from '@bufferapp/ui/style/borders';
 import { gray, white, grayShadow } from '@bufferapp/ui/style/colors';
 import styled from 'styled-components';
@@ -56,21 +55,22 @@ const ListCampaigns = ({
   isLoading,
   ownerEmail,
   shouldDisplayLockedCopy,
+  onUpgradeButtonClick,
 }) => {
-  if (!hasCampaignsFlip) {
-    window.location = getURL.getPublishUrl();
-    return null;
-  }
-
   const { t } = useTranslation();
 
-  if (!isLoading && (!campaigns || campaigns.length === 0)) {
+  if (
+    (!isLoading && (!campaigns || campaigns.length === 0)) ||
+    !hasCampaignsFlip
+  ) {
     return (
       <EmptyState
         onOpenCreateCampaignClick={onOpenCreateCampaignClick}
         showCampaignActions={showCampaignActions}
         ownerEmail={ownerEmail}
         shouldDisplayLockedCopy={shouldDisplayLockedCopy}
+        shouldDisplayPaywall={!hasCampaignsFlip}
+        onUpgradeButtonClick={onUpgradeButtonClick}
       />
     );
   }
@@ -128,6 +128,7 @@ ListCampaigns.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   ownerEmail: PropTypes.string,
   shouldDisplayLockedCopy: PropTypes.bool.isRequired,
+  onUpgradeButtonClick: PropTypes.func.isRequired,
 };
 
 ListCampaigns.defaultProps = {

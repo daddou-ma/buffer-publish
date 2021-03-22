@@ -3,32 +3,7 @@ import PropTypes from 'prop-types';
 import { Text } from '@bufferapp/components';
 import { ProfileBadgeIcon } from '../ProfileBadge';
 
-const handleProfileLimitReached = (
-  showUpgradeToProCta,
-  showSwitchPlanModal,
-  connectChannelsURL
-) =>
-  showUpgradeToProCta
-    ? showSwitchPlanModal()
-    : window.location.assign(connectChannelsURL);
-
-const handleClick = (
-  network,
-  url,
-  profiles,
-  profileLimit,
-  showUpgradeToProCta,
-  showSwitchPlanModal,
-  connectChannelsURL
-) => {
-  if (profiles.length >= profileLimit) {
-    handleProfileLimitReached(
-      showUpgradeToProCta,
-      showSwitchPlanModal,
-      connectChannelsURL
-    );
-    return;
-  }
+const handleClick = (network, url) => {
   if (network === 'instagram') {
     /**
      * This silly looking code loads an 'img' with the
@@ -71,16 +46,7 @@ class ProfileConnectShortcut extends React.Component {
   }
 
   render() {
-    const {
-      label,
-      network,
-      url,
-      profiles,
-      profileLimit,
-      showUpgradeToProCta,
-      showSwitchPlanModal,
-      connectChannelsURL,
-    } = this.props;
+    const { label, network, url } = this.props;
     return (
       <a
         onMouseEnter={() => this.setState({ hovered: true })}
@@ -89,17 +55,7 @@ class ProfileConnectShortcut extends React.Component {
         href="#"
         key={`${network}-connect`}
         notifications=""
-        onClick={() =>
-          handleClick(
-            network,
-            url,
-            profiles,
-            profileLimit,
-            showUpgradeToProCta,
-            showSwitchPlanModal,
-            connectChannelsURL
-          )
-        }
+        onClick={() => handleClick(network, url)}
       >
         <ProfileBadgeIcon type={network} />
         <span style={{ marginLeft: '8px' }}>
@@ -116,15 +72,6 @@ ProfileConnectShortcut.propTypes = {
   label: PropTypes.string.isRequired,
   network: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
-  profiles: PropTypes.arrayOf(
-    PropTypes.shape({
-      type: PropTypes.string,
-    })
-  ).isRequired,
-  profileLimit: PropTypes.number.isRequired,
-  showUpgradeToProCta: PropTypes.bool.isRequired,
-  connectChannelsURL: PropTypes.string.isRequired,
-  showSwitchPlanModal: PropTypes.func.isRequired,
 };
 
 export default ProfileConnectShortcut;

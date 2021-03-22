@@ -15,7 +15,7 @@ export default connect(
       p => p.id === ownProps.profileId
     );
 
-    if (currentProfile) {
+    if (currentProfile && profileData) {
       return {
         header,
         subHeader,

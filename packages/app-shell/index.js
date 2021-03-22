@@ -5,9 +5,9 @@ import {
   organization,
   plansPage,
 } from '@bufferapp/publish-routes';
-import { getOrgsAlfabeticalOrder } from '@bufferapp/publish-data-organizations/utils/';
 import { getURL } from '@bufferapp/publish-server/formatters';
 import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
+import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
 
 import { actions } from './reducer';
 import AppShell from './components/AppShell';
@@ -16,36 +16,22 @@ export default connect(
   state => {
     const shouldRedirectToAccountChannels =
       state.organizations.selected?.shouldRedirectToAccountChannels;
-    const manageChannelsURL = shouldRedirectToAccountChannels
-      ? getURL.getAccountChannelsURL()
-      : getURL.getManageSocialAccountURL();
+
     return {
-      user: {
-        email: state.user.email || '...',
-        name: state.user.name || '...',
-      },
       bannerOptions: state.appShell.bannerOptions,
       bannerKey: state.appShell.bannerKey,
+      manageChannelsURL: shouldRedirectToAccountChannels
+        ? getURL.getAccountChannelsURL()
+        : getURL.getManageSocialAccountURL(),
       shouldShowUpgradeButton:
         state.organizations.selected?.shouldShowUpgradeButton,
-      manageChannelsURL,
-      hideAppShell:
-        state.onboarding.canSeeOnboardingPage &&
-        state.router.location.pathname === newBusinessTrialists.route,
-      enabledProducts: state.appShell.enabledProducts,
-      featureFlips: state.appShell.featureFlips,
       /**
        * Org Switcher
-       * Needs organizations and profiles.
+       * Needs profiles.
        */
-      canSeeOrgSwitcher: state.organizations.canSeeOrgSwitcher,
-      organizations: getOrgsAlfabeticalOrder(state.organizations.list) || [],
-      selectedOrganizationId: state.organizations.selected?.id,
       profiles: state.profileSidebar.profileList,
-      isImpersonation: state.appShell.isImpersonation,
     };
   },
-
   dispatch => ({
     openPreferences() {
       dispatch(preferencesGeneral.goTo());
@@ -53,7 +39,7 @@ export default connect(
     showPlans() {
       dispatch(
         analyticsActions.trackEvent('Upgrade Path Viewed', {
-          upgradePathName: 'app-shell-userMenu-upgrade',
+          upgradePathName: SEGMENT_NAMES.APP_SHELL_USER_MENU_UPGRADE,
         })
       );
       dispatch(plansPage.goTo());
@@ -62,7 +48,11 @@ export default connect(
       dispatch(actions.onCloseBanner({ key }));
     },
     switchOrganization(organizationId) {
-      dispatch(organization.goTo({ orgId: organizationId }));
+      dispatch(
+        organization.goTo({
+          orgId: organizationId,
+        })
+      );
     },
   })
 )(AppShell);

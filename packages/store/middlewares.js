@@ -45,7 +45,6 @@ import igFirstCommentProTrialModalMiddleware from '@bufferapp/publish-ig-first-c
 import hashtagGroupsMiddleware from '@bufferapp/publish-hashtag-group-manager/middleware';
 import trialMiddleware from '@bufferapp/publish-trial/middleware';
 import segmentTrackingMiddleware from '@bufferapp/publish-analytics-middleware/middleware';
-import onboardingMiddleware from '@bufferapp/publish-onboarding/middleware';
 import globalAccountMiddleware from '@bufferapp/global-account/middleware';
 import closeComposerModalMiddleware from '@bufferapp/publish-close-composer-confirmation-modal/middleware';
 import temporaryBannerMiddleware from '@bufferapp/publish-temporary-banner/middleware';
@@ -107,7 +106,6 @@ const composedMiddlewares = history =>
       hashtagGroupsMiddleware,
       trialMiddleware,
       segmentTrackingMiddleware,
-      onboardingMiddleware,
       globalAccountMiddleware,
       closeComposerModalMiddleware,
       storiesMiddleware,

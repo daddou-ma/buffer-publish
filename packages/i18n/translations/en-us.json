@@ -19,7 +19,8 @@
   "campaigns": {
     "common": {
       "title": "Campaigns",
-      "createCampaign": "Create a Campaign"
+      "createCampaign": "Create a Campaign",
+      "upgradePlan": "Upgrade Your Plan"
     },
     "campaignForm": {
       "cancel": "Cancel",
@@ -160,28 +161,6 @@
     }
   },
   "language": "Language",
-  "onboarding-page": {
-    "analyticsTab": "Analytics",
-    "awaitingTab": "Awaiting Approval",
-    "company": "Foster Coffee Company",
-    "composerInput": "What would you like to share?",
-    "connectButton": "Manage Channels",
-    "cta1": "You can also connect your",
-    "cta2": "and",
-    "cta3": "accounts.",
-    "ctaChannel1": "Linkedin",
-    "ctaChannel2": "Pinterest",
-    "currentDay": "Today",
-    "description": "Connect a channel, so you can schedule your first post",
-    "draftsTab": "Drafts",
-    "name": "Justin Ozanich",
-    "queueTab": "Queue",
-    "role": "Marketing Manager",
-    "settingsTab": "Settings",
-    "skipStep": "Or skip this step",
-    "testemonial": "Publish helps us build a better model of content that generates more engagement.",
-    "title": "Your account has been set up!"
-  },
   "plans-page": {
     "buttonDashboardText": "Back to Dashboard",
     "headerText": "Choose your Buffer Publish plan",
@@ -194,9 +173,10 @@
         "",
         "",
         "Plan, preview, and schedule Instagram Stories on web and mobile.",
-        "Include the first comment when you schedule Instagram posts",
+        "Include the first comment when you schedule Instagram posts.",
         "Build a library of hashtag groups to use in Instagram first comments. Reuse top performers and optimize your reach.",
-        "Add unique links to Instagram posts, turning your grid into a shoppable page via a static link in bio."
+        "Add unique links to Instagram posts, turning your grid into a shoppable page via a static link in bio.",
+        "Build entire campaigns across channels."
       ],
       "features": [
         "8 social channels",
@@ -204,7 +184,8 @@
         "Instagram Stories",
         "Instagram first comment",
         "Hashtag Manager",
-        "Shop Grid"
+        "Shop Grid",
+        "Campaigns"
       ],
       "monthly": "/mo",
       "nonProfitCost": "$32.50",
@@ -221,11 +202,12 @@
       "cost": "$65",
       "featureTooltips": [
         "",
-        "Include the first comment when you schedule Instagram posts",
-        "Tag Instagram users when you schedule Instagram posts",
+        "Include the first comment when you schedule Instagram posts.",
+        "Tag Instagram users when you schedule Instagram posts.",
         "Build a library of hashtag groups to use in Instagram first comments. Reuse top performers and optimize your reach.",
         "Add unique links to Instagram posts, turning your grid into a shoppable page via a static link in bio.",
-        "Plan, preview, and schedule Instagram Stories on web and mobile."
+        "Plan, preview, and schedule Instagram Stories on web and mobile.",
+        "Build entire campaigns across channels."
       ],
       "features": [
         "8 social channels",
@@ -233,7 +215,8 @@
         "Instagram user tagging",
         "Hashtag Manager",
         "Shop Grid",
-        "Instagram Stories"
+        "Instagram Stories",
+        "Campaigns"
       ],
       "monthly": "/mo",
       "nonProfitCost": "$32.50",
@@ -251,9 +234,15 @@
       "featureTooltips": [
         "",
         "",
-        "Include first comment when you schedule Instagram posts"
+        "Include first comment when you schedule Instagram posts.",
+        "Build entire campaigns across channels."
       ],
-      "features": ["8 social channels", "1 user", "Instagram first comment"],
+      "features": [
+        "8 social channels",
+        "1 user",
+        "Instagram first comment",
+        "Campaigns"
+      ],
       "monthly": "/mo",
       "nonProfitCost": "$7.50",
       "plan": "pro",
@@ -268,13 +257,15 @@
       "cost": "$15",
       "featureTooltips": [
         "",
-        "Include first comment when you schedule Instagram posts",
-        "Tag Instagram users when you schedule Instagram posts"
+        "Include first comment when you schedule Instagram posts.",
+        "Tag Instagram users when you schedule Instagram posts.",
+        "Build entire campaigns across channels."
       ],
       "features": [
         "8 social channels",
         "Instagram first comment",
-        "Instagram user tagging"
+        "Instagram user tagging",
+        "Campaigns"
       ],
       "monthly": "/mo",
       "nonProfitCost": "$7.50",
@@ -298,7 +289,8 @@
         "Instagram Stories",
         "Instagram first comment",
         "Hashtag Manager",
-        "Shop Grid"
+        "Shop Grid",
+        "Campaigns"
       ],
       "monthly": "/mo",
       "nonProfitCost": "$49.50",
@@ -413,6 +405,7 @@
     "connectInstagram": "Connect Instagram",
     "connectFacebook": "Connect Facebook",
     "connectTwitter": "Connect Twitter",
+    "addChannels": "Add Channels",
     "searchProfiles": "Search Channels",
     "noProfilesFound": "No Channels Found",
     "permissionSubtitle": "It looks like you haven’t been given permission to add/manage channels. Request access from {{email}} or any other Admin."

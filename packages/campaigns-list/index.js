@@ -1,10 +1,13 @@
 import { connect } from 'react-redux';
 import { actions as modalsActions } from '@bufferapp/publish-modals/reducer';
 import { actions as campaignActions } from '@bufferapp/publish-campaign/reducer';
+import { actions as analyticsActions } from '@bufferapp/publish-analytics-middleware';
+import { SEGMENT_NAMES } from '@bufferapp/publish-constants';
 import {
   campaignEdit,
   campaignCreate,
   campaignScheduled,
+  plansPage,
 } from '@bufferapp/publish-routes';
 import ListCampaigns from './components/ListCampaigns';
 
@@ -44,6 +47,14 @@ export default connect(
           })
         );
       }
+    },
+    onUpgradeButtonClick: () => {
+      dispatch(
+        analyticsActions.trackEvent('Upgrade Path Viewed', {
+          upgradePathName: SEGMENT_NAMES.CAMPAIGNS_UPGRADE,
+        })
+      );
+      dispatch(plansPage.goTo());
     },
   })
 )(ListCampaigns);

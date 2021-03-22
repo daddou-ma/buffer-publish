@@ -3,7 +3,13 @@ import generateProfileTabs from './index';
 describe('generateProfileTabs', () => {
   it('renders basic list of tabs if no especial features', () => {
     const result = generateProfileTabs({});
-    expect(result).toEqual(['queue', 'analytics', 'settings', 'overview']);
+    expect(result).toEqual([
+      'queue',
+      'analytics',
+      'settings',
+      'drafts',
+      'overview',
+    ]);
   });
 
   it('renders complete list of tabs if features', () => {
@@ -14,7 +20,6 @@ describe('generateProfileTabs', () => {
     };
     const organization = {
       hasApprovalFeature: true,
-      hasDraftsFeature: true,
       hasGridFeature: true,
       hasStoriesFeature: true,
     };
@@ -23,19 +28,12 @@ describe('generateProfileTabs', () => {
       'queue',
       'analytics',
       'settings',
+      'drafts',
       'pastReminders',
       'awaitingApproval',
-      'drafts',
       'grid',
       'stories',
     ]);
-  });
-  it('includes drafts in the list, to display a paywall page', () => {
-    const organization = {
-      showShowDraftsPaywall: true,
-    };
-    const result = generateProfileTabs({ organization });
-    expect(result).toEqual(expect.arrayContaining(['drafts']));
   });
   it('includes pending approval in the list for non managers', () => {
     const profile = {

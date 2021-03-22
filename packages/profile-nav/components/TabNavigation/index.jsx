@@ -28,6 +28,13 @@ const UpgradeButton = styled(Button)`
 const NavCounterTag = ({ labelName }) =>
   labelName != null && <NavTag type="counter" labelName={labelName} />;
 
+const Tag = ({ showPaywallTag, labelName }) =>
+  showPaywallTag ? (
+    <NavTag type="paywall" />
+  ) : (
+    <NavCounterTag labelName={labelName} />
+  );
+
 const TabNavigation = ({
   profileNavTabs,
   profileId,
@@ -39,6 +46,7 @@ const TabNavigation = ({
   showNestedSettingsTab,
   showReconnectButton,
   reconnectURL,
+  showPaywallTag,
 }) => {
   const [loading, setLoading] = useState(false);
   const { t } = useTranslation();
@@ -115,7 +123,7 @@ const TabNavigation = ({
       {profileNavTabs.includes('drafts') && (
         <NavLink to={profileTabPages.getRoute({ profileId, tabId: 'drafts' })}>
           {t('tabs.drafts')}
-          <NavCounterTag labelName={draftsCount} />
+          <Tag showPaywallTag={showPaywallTag} labelName={draftsCount} />
         </NavLink>
       )}
       {profileNavTabs.includes('grid') && (
@@ -189,6 +197,7 @@ TabNavigation.defaultProps = {
   showNestedAnalyticsTab: false,
   showNestedSettingsTab: false,
   showReconnectButton: false,
+  showPaywallTag: false,
 };
 
 TabNavigation.propTypes = {
@@ -202,6 +211,7 @@ TabNavigation.propTypes = {
   showNestedSettingsTab: PropTypes.bool,
   showReconnectButton: PropTypes.bool,
   reconnectURL: PropTypes.string.isRequired,
+  showPaywallTag: PropTypes.bool,
 };
 
 export default TabNavigation;

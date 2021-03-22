@@ -10,11 +10,11 @@ export default connect(
   (state, ownProps) => {
     const { profileId } = ownProps;
     const currentProfile = state.sent.byProfileId[profileId];
-    if (currentProfile) {
-      const profileData = state.profileSidebar.profiles.find(
-        p => p.id === profileId
-      );
+    const profileData = state.profileSidebar.profiles.find(
+      p => p.id === profileId
+    );
 
+    if (currentProfile && profileData) {
       return {
         header: currentProfile.header,
         loading: currentProfile.loading,

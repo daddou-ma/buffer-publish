@@ -42,6 +42,8 @@ const EmptyState = ({
   showCampaignActions,
   ownerEmail,
   shouldDisplayLockedCopy,
+  shouldDisplayPaywall,
+  onUpgradeButtonClick,
 }) => {
   const { t } = useTranslation();
   const nonActionCopy = shouldDisplayLockedCopy
@@ -65,8 +67,16 @@ const EmptyState = ({
               <Button
                 type="primary"
                 size="large"
-                label={t('campaigns.common.createCampaign')}
-                onClick={onOpenCreateCampaignClick}
+                label={
+                  shouldDisplayPaywall
+                    ? t('campaigns.common.upgradePlan')
+                    : t('campaigns.common.createCampaign')
+                }
+                onClick={
+                  shouldDisplayPaywall
+                    ? onUpgradeButtonClick
+                    : onOpenCreateCampaignClick
+                }
               />
               <LinkWithStyles
                 href="https://support.buffer.com/hc/en-us/articles/360046266313-creating-and-managing-campaigns"
@@ -93,6 +103,8 @@ EmptyState.propTypes = {
   showCampaignActions: PropTypes.bool.isRequired,
   shouldDisplayLockedCopy: PropTypes.bool.isRequired,
   ownerEmail: PropTypes.string,
+  onUpgradeButtonClick: PropTypes.func.isRequired,
+  shouldDisplayPaywall: PropTypes.bool.isRequired,
 };
 
 EmptyState.defaultProps = {

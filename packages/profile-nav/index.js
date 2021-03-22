@@ -6,6 +6,11 @@ import TabNavigation from './components/TabNavigation';
 // default export = container
 export default connect(
   state => {
+    const {
+      hasDraftsFeature,
+      shouldRedirectToAccountChannels,
+      shouldShowUpgradeButton,
+    } = state.organizations.selected || {};
     return {
       profileNavTabs: state.profileNav.profileNavTabs,
       profileId: state.profileSidebar.selectedProfile.id,
@@ -15,15 +20,16 @@ export default connect(
       showNestedSettingsTab:
         state.profileNav.selectedTabId === 'settings' &&
         !state.profileSidebar.selectedProfile.isLockedProfile,
-      showUpgradeButton: state.organizations.selected?.shouldShowUpgradeButton,
+      showUpgradeButton: shouldShowUpgradeButton,
       showReconnectButton:
         state.profileSidebar.selectedProfile.isDisconnected &&
         state.organizations.selected?.canReconnectChannels,
       draftsNeedApprovalCount: state.profileNav.draftsNeedApprovalCount,
       draftsCount: state.profileNav.draftsCount,
-      reconnectURL: state.organizations.selected?.shouldRedirectToAccountChannels
+      reconnectURL: shouldRedirectToAccountChannels
         ? getURL.getAccountChannelsURL()
         : getURL.getManageSocialAccountURL(),
+      showPaywallTag: !hasDraftsFeature,
     };
   },
   dispatch => ({

@@ -1,7 +1,7 @@
 import deepFreeze from 'deep-freeze';
 import { actionTypes as campaignActionTypes } from '@bufferapp/publish-campaign';
 import { campaignParser } from '@bufferapp/publish-server/parsers';
-import reducer, { actions, initialState, actionTypes } from './reducer';
+import reducer, { initialState } from './reducer';
 
 describe('reducer', () => {
   // Tests the default case in the reducer switch statement
