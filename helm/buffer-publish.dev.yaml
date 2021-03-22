@@ -9,7 +9,7 @@ ingress:
     kubernetes.io/ingress.class: nginx
 env:
   - name: AUTH_SVC_ADDR
-    value: http://authentication-service.core
+    value: http://authentication-service-dev.core-dev
   - name: API_ADDR
     value: http://publish-api-dev.dev:443
   - name: DD_AGENT_HOST
