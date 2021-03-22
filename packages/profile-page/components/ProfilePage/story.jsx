@@ -62,9 +62,6 @@ function createMockStore(profileList) {
       selectedProfile,
       isLockedProfile: false,
       profiles: profileList,
-      hasInstagram: false,
-      hasTwitter: true,
-      hasFacebook: true,
     },
     user: {
       canStartProTrial: true,
