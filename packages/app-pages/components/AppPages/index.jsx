@@ -3,7 +3,6 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
   campaignsPage,
-  newBusinessTrialists,
   newConnection,
   plansPage,
   preferencesPage,
@@ -16,7 +15,6 @@ import ProfilePages from '@bufferapp/publish-app-pages/components/ProfilePages';
 import Preferences from '@bufferapp/publish-preferences';
 import Plans from '@bufferapp/publish-plans';
 import DefaultPage from '@bufferapp/default-page';
-import OnboardingManager from '@bufferapp/publish-onboarding';
 import { useOrgSwitcher, useUser } from '@bufferapp/app-shell';
 // import MissingAccessPage from '../../../missing-access-page/index';
 
@@ -70,13 +68,6 @@ const AppPages = ({
     <Switch>
       <Route path={preferencesPage.route} component={Preferences} />
       <Route path={plansPage.route} component={Plans} />
-
-      {!hasProfiles && (
-        <Route
-          path={newBusinessTrialists.route}
-          component={OnboardingManager}
-        />
-      )}
 
       {!hasProfiles && (
         <Route path={newConnection.route} component={DefaultPage} />

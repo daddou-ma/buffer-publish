@@ -55,10 +55,6 @@ export const newConnection = {
   goTo: () => push('/new-connection'),
 };
 
-export const newBusinessTrialists = {
-  route: '/new-business-trialists',
-};
-
 export const plansPage = {
   route: '/plans',
   goTo: () => push('/plans'),

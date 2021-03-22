@@ -105,9 +105,4 @@ module.exports = orgData => ({
     orgData.trial.isExpired &&
     !orgData.trial.isDone &&
     orgData.isOwner,
-  showBusinessTrialistsOnboarding:
-    orgData.planBase === 'business' &&
-    orgData.trial &&
-    orgData.trial.onTrial &&
-    orgData.isAdmin,
 });
