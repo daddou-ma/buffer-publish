@@ -13,8 +13,6 @@ export default connect(
 
     return {
       unfilteredProfiles: profiles,
-      showBusinessTrialistsOnboarding:
-        state.organizations.selected?.showBusinessTrialistsOnboarding,
       orgIdFromRoute,
     };
   },

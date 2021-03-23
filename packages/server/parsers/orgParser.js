@@ -73,7 +73,7 @@ module.exports = orgData => ({
   canSeeCampaignsReport: orgData.isOwner,
   canReorderProfiles: orgData.isOwner,
   canModifyCampaigns: orgData.isAdmin,
-  canSeeBillingInfo: orgData.isOwner,
+  canSeeBillingInfo: orgData.isOwner && !orgData.isOneBufferOrganization,
   canReconnectChannels: orgData.isAdmin,
   canStartProTrial:
     orgData.trial && orgData.trial.canStartProTrial && orgData.isOwner,
@@ -105,9 +105,4 @@ module.exports = orgData => ({
     orgData.trial.isExpired &&
     !orgData.trial.isDone &&
     orgData.isOwner,
-  showBusinessTrialistsOnboarding:
-    orgData.planBase === 'business' &&
-    orgData.trial &&
-    orgData.trial.onTrial &&
-    orgData.isAdmin,
 });

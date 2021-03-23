@@ -175,7 +175,9 @@ class InstagramFirstCommentModal extends React.Component {
       hideModal,
       profile,
       launchRequestMorePermission,
+      shouldRedirectToAccountChannels,
     } = this.props;
+
     const canPostComment = this.canPostComment();
 
     if (typeof canPostComment === 'undefined' || canPostComment) {
@@ -219,7 +221,6 @@ class InstagramFirstCommentModal extends React.Component {
       );
     }
     if (this.state.canRequestMorePermission) {
-      const { shouldRedirectToAccountChannels } = this.props;
       return (
         <div
           style={{
@@ -252,7 +253,7 @@ class InstagramFirstCommentModal extends React.Component {
                   <BDSButton
                     onClick={() =>
                       launchRequestMorePermission({
-                        id: missingPermisisonProfile.id,
+                        profileId: missingPermisisonProfile.id,
                         shouldRedirectToAccountChannels,
                       })
                     }
@@ -316,7 +317,10 @@ class InstagramFirstCommentModal extends React.Component {
                   </BDSButton>
                   <BDSButton
                     onClick={() =>
-                      launchRequestMorePermission(missingPermisisonProfile.id)
+                      launchRequestMorePermission({
+                        profileId: missingPermisisonProfile.id,
+                        shouldRedirectToAccountChannels,
+                      })
                     }
                   >
                     {translations.continue}
@@ -359,7 +363,10 @@ class InstagramFirstCommentModal extends React.Component {
                 </BDSButton>
                 <BDSButton
                   onClick={() =>
-                    launchRequestMorePermission(missingPermisisonProfile.id)
+                    launchRequestMorePermission({
+                      profileId: missingPermisisonProfile.id,
+                      shouldRedirectToAccountChannels,
+                    })
                   }
                 >
                   {translations.continue}

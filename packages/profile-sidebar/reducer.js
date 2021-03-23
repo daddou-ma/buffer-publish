@@ -28,9 +28,6 @@ export const initialState = {
   hasSharedChannelsFlip: false,
   selectedProfile: {},
   isLockedProfile: false,
-  hasInstagram: true,
-  hasFacebook: true,
-  hasTwitter: true,
   isSearchPopupVisible: false,
   searchText: null,
   userId: null,
@@ -214,9 +211,6 @@ export default (state = initialState, action) => {
         profileList,
         profilesUnfiltered: filterProfilesByOrg(profiles, state.organization),
         profiles: filterProfilesByOrg(profileList, state.organization),
-        hasInstagram: profileList.some(p => p.service === 'instagram'),
-        hasFacebook: profileList.some(p => p.service === 'facebook'),
-        hasTwitter: profileList.some(p => p.service === 'twitter'),
       };
     }
     case orgActionTypes.ORGANIZATION_SELECTED: {

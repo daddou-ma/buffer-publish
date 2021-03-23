@@ -78,74 +78,6 @@ describe('ProfileSidebar', () => {
     );
     window.location.assign.mockRestore();
   });
-  test('opens account channels when user clicks on profile connect shortcut', () => {
-    const hostname = 'publish.local.buffer.com';
-    window.location.assign = jest.fn();
-    window.location.hostname = hostname;
-    const TestDragDropContainer = DragDropContext(TestBackend)(
-      _TestContextContainer
-    );
-
-    render(
-      <TestDragDropContainer>
-        <ProfileSidebar />
-      </TestDragDropContainer>,
-      {
-        initialState: {
-          organizations: {
-            selected: {
-              canManageSocialAccounts: true,
-              profileLimit: 10,
-              shouldRedirectToAccountChannels: true,
-            },
-          },
-          profileSidebar: { profiles, selectedProfile, loading: false },
-        },
-      }
-    );
-    const connectLink = screen.getAllByRole('link')[1];
-
-    userEvent.click(connectLink);
-
-    expect(window.location.assign).toHaveBeenCalledWith(
-      getURL.getAccountChannelsURL()
-    );
-    window.location.assign.mockRestore();
-  });
-  test('opens network connect url when user clicks on profile connect shortcut', () => {
-    const hostname = 'publish.local.buffer.com';
-    const expectedURL =
-      'https://local.buffer.com/oauth/facebook/choose?cta=publish-app-sidebar-addProfile-1';
-    window.location.assign = jest.fn();
-    window.location.hostname = hostname;
-    const TestDragDropContainer = DragDropContext(TestBackend)(
-      _TestContextContainer
-    );
-
-    render(
-      <TestDragDropContainer>
-        <ProfileSidebar />
-      </TestDragDropContainer>,
-      {
-        initialState: {
-          organizations: {
-            selected: {
-              canManageSocialAccounts: true,
-              profileLimit: 10,
-              shouldRedirectToAccountChannels: false,
-            },
-          },
-          profileSidebar: { profiles, selectedProfile, loading: false },
-        },
-      }
-    );
-    const connectLink = screen.getAllByRole('link')[1];
-
-    userEvent.click(connectLink);
-
-    expect(window.location.assign).toHaveBeenCalledWith(expectedURL);
-    window.location.assign.mockRestore();
-  });
 
   test('has Add Channels paywall if reached channel limit', () => {
     const TestDragDropContainer = DragDropContext(TestBackend)(
@@ -169,7 +101,6 @@ describe('ProfileSidebar', () => {
             profiles,
             selectedProfile,
             loading: false,
-            hasInstagram: false,
           },
         },
       }
@@ -177,11 +108,5 @@ describe('ProfileSidebar', () => {
 
     const paywall = screen.getByText('Add Channels');
     expect(paywall).toBeInTheDocument();
-
-    // Connect shortcuts are hidden
-    const connectLink = screen.queryByRole('link', {
-      name: 'Connect Instagram',
-    });
-    expect(connectLink).not.toBeInTheDocument();
   });
 });

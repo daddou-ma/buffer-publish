@@ -45,9 +45,6 @@ storiesOf('ProfileSidebar', module)
       loading={false}
       showSwitchPlanModal={action('showSwitchPlanModal')}
       onDropProfile={action('onDropProfile')}
-      hasInstagram={false}
-      hasFacebook={false}
-      hasTwitter={false}
     />
   ))
   .add('should display a long list of profiles', () => (
@@ -62,8 +59,5 @@ storiesOf('ProfileSidebar', module)
       loading={false}
       showSwitchPlanModal={action('showSwitchPlanModal')}
       onDropProfile={action('onDropProfile')}
-      hasInstagram={false}
-      hasFacebook={false}
-      hasTwitter={false}
     />
   ));

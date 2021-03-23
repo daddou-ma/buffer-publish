@@ -243,7 +243,7 @@ export default connect(
     },
     onUpgradeButtonClick: () => {
       analyticsActions.trackEvent('Upgrade Path Viewed', {
-        upgradePathName: SEGMENT_NAMES.UPGRADE_PATH_DRAFTS_FREE,
+        upgradePathName: SEGMENT_NAMES.DRAFTS_PAYWALL_UPGRADE,
       });
       dispatch(plansPage.goTo());
     },

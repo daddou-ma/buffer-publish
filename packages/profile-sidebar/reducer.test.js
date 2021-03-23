@@ -18,11 +18,8 @@ describe('reducer', () => {
       userId: null,
       selectedProfile: {},
       isLockedProfile: false,
-      hasInstagram: true,
-      hasFacebook: true,
       hasSharedChannelsFlip: false,
       isLoadingGlobalAccount: true,
-      hasTwitter: true,
       isSearchPopupVisible: false,
       searchText: null,
       loaded: false,
@@ -99,20 +96,6 @@ describe('reducer', () => {
     };
     const { profiles: profilesInStore } = reducer(undefined, action);
     expect(profilesInStore).toEqual(enabledProfiles);
-  });
-
-  it('should correctly set flags for connected accounts', () => {
-    const action = {
-      type: `profiles_${dataFetchActionTypes.FETCH_SUCCESS}`,
-      result: profiles,
-    };
-    const { hasInstagram, hasFacebook, hasTwitter } = reducer(
-      undefined,
-      action
-    );
-    expect(hasInstagram).toBe(false);
-    expect(hasFacebook).toBe(false);
-    expect(hasTwitter).toBe(true);
   });
 
   describe('profiles', () => {
