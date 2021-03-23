@@ -1626,10 +1626,14 @@
     moment-timezone "^0.5.25"
     react-highcharts "^16.0.2"
 
-"@bufferapp/app-shell@3.0.0-orgswitcher.11":
-  version "3.0.0-orgswitcher.11"
-  resolved "https://registry.yarnpkg.com/@bufferapp/app-shell/-/app-shell-3.0.0-orgswitcher.11.tgz#34c74f8232c8fe187c7b053dfa0d90fe326d76f4"
-  integrity sha512-2QLVI2KiuiXBJe+OxlspXPkIbbthvu2hphbucElnag4zjVCGt9KhA79FGMUX2hDlWaZigWHCQwjt5WViLBNFCA==
+"@bufferapp/app-shell@2.5.0":
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/@bufferapp/app-shell/-/app-shell-2.5.0.tgz#8f2ec7060f23f21daaaa0eb2f3dfcb26b4c6232d"
+  integrity sha512-dNfc2OZSli3rBAkaEDPJiuAsDpLIavPdKMsLK9hy1vWqxV9ILIXCDUh30+g+Rh1M8RALvkgfy0vxt4IfajqrAg==
+  dependencies:
+    "@stripe/react-stripe-js" "^1.3.0"
+    "@stripe/stripe-js" "^1.13.0"
+    graphql-tag "^2.11.0"
 
 "@bufferapp/async-data-fetch@0.5.36-beta01":
   version "0.5.36-beta01"
@@ -3228,6 +3232,18 @@
     store2 "^2.7.1"
     telejson "^3.2.0"
     util-deprecate "^1.0.2"
+
+"@stripe/react-stripe-js@^1.3.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@stripe/react-stripe-js/-/react-stripe-js-1.4.0.tgz#a67e72202297fc409dc2c8c4f3fb98e0b61fa06d"
+  integrity sha512-Pz5QmG8PgJ3pi8gOWxlngk+ns63p2L1Ds192fn55ykZNRKfGz3G6sfssUVThHn/NAt2Hp1eCEsy/hvlKnXJI6g==
+  dependencies:
+    prop-types "^15.7.2"
+
+"@stripe/stripe-js@^1.13.0":
+  version "1.13.2"
+  resolved "https://registry.yarnpkg.com/@stripe/stripe-js/-/stripe-js-1.13.2.tgz#bb2f561085b5dd091355df871d432b8e1fd467f6"
+  integrity sha512-fycUk7ECukNc31lD5apcrUgdRC1BfiIacs+CpacoCjOgo3ablolnWCvDQWMmVWtODYa8bBv2dlBla+Edc5OvZg==
 
 "@svgr/babel-plugin-add-jsx-attribute@^4.2.0":
   version "4.2.0"
@@ -10829,6 +10845,11 @@ graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2, graceful-fs@^4.1.6
   version "4.2.4"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.4.tgz#2256bde14d3632958c465ebc96dc467ca07a29fb"
   integrity sha512-WjKPNJF79dtJAVniUlGGWHYGz2jWxT6VhN/4m1NdkbZ2nOsEF+cI1Edgql5zCRhs/VsQYRvrXctxktVXZUkixw==
+
+graphql-tag@^2.11.0:
+  version "2.11.0"
+  resolved "https://registry.yarnpkg.com/graphql-tag/-/graphql-tag-2.11.0.tgz#1deb53a01c46a7eb401d6cb59dec86fa1cccbffd"
+  integrity sha512-VmsD5pJqWJnQZMUeRwrDhfgoyqcfwEkvtpANqcoUG8/tOLkwNgU9mzub/Mc78OJMhHjx7gfAMTxzdG43VGg3bA==
 
 graphql-tag@^2.12.0:
   version "2.12.1"
