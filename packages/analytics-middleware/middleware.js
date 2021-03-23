@@ -1,7 +1,7 @@
 import { actionTypes as orgActionTypes } from '@bufferapp/publish-data-organizations';
 import { actions, actionTypes } from './actions';
 
-const eventQueue = [];
+let eventQueue = [];
 
 export default ({ dispatch, getState }) => next => action => {
   // eslint-disable-line no-unused-vars
@@ -14,28 +14,30 @@ export default ({ dispatch, getState }) => next => action => {
       break;
     case actionTypes.TRACK_EVENT: {
       const orgId = getState().organizations.selected?.globalOrgId;
-      if (!orgId) {
-        eventQueue.push(action);
-      }
-      if (orgId && window.analytics) {
-        window.analytics.track(action.eventName, {
+
+      if (orgId) {
+        window.analytics && window.analytics.track(action.eventName, {
+          ...action.payload,
           product: window.PRODUCT_TRACKING_KEY,
           clientName: window.CLIENT_NAME,
-          organizationId: orgId,
-          ...action.payload,
+          organizationId: orgId
         });
+      } else {
+        eventQueue.push(action);
       }
+
       break;
     }
     case orgActionTypes.ORGANIZATION_SELECTED: {
-      const orgId = getState().organizations.selected?.globalOrgId;
       eventQueue.forEach(event => {
         dispatch(
           actions.trackEvent(event.eventName, {
-            ...event.payload,
+            ...event.payload
           })
         );
       });
+
+      eventQueue = [];
       break;
     }
     case actionTypes.PAGE_CHANGE:
